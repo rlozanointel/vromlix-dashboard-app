@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VROMLIX | Mis Oraciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: hsl(230, 20%, 6%);
+            --bg-card: hsla(230, 20%, 12%, 0.45);
+            --bg-card-hover: hsla(230, 20%, 16%, 0.6);
+            --border-color: hsla(230, 20%, 30%, 0.15);
+            --border-hover: hsla(230, 20%, 50%, 0.3);
+            --accent-primary: hsl(190, 100%, 50%); /* Neon Cyan */
+            --accent-secondary: hsl(270, 95%, 65%); /* Neon Purple */
+            --accent-success: hsl(145, 80%, 45%); /* Emerald Green */
+            
+            --font-sans: 'Inter', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --grad-text: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --grad-glow: radial-gradient(circle at 50% -20%, hsla(190, 100%, 50%, 0.15), transparent 70%);
+            
+            --radius-lg: 14px;
+            --radius-md: 8px;
+            --radius-sm: 6px;
+            --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: var(--grad-glow);
+            background-attachment: fixed;
+            color: hsl(220, 15%, 85%);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+
+        .app-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            margin-top: 10px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: var(--grad-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: hsl(220, 10%, 60%);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .search-wrapper {
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+            margin-bottom: 15px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 1rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            background: hsla(230, 20%, 10%, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            color: #fff;
+            font-family: var(--font-sans);
+            outline: none;
+            transition: var(--transition-normal);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px hsla(190, 100%, 50%, 0.2), 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Barra de Pestañas de Categoría (Tabs Scroll Horizontal) */
+        .tabs-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex: 0 0 auto;
+            padding: 8px 14px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: hsl(220, 10%, 75%);
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .tab-btn:active {
+            transform: scale(0.97);
+        }
+
+        .tab-btn.active {
+            background: var(--grad-text);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px hsla(270, 95%, 65%, 0.25);
+        }
+
+        .prayers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .prayer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition-normal);
+        }
+
+        .prayer-card:active {
+            transform: scale(0.98);
+        }
+
+        .card-header {
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: hsl(220, 15%, 95%);
+            transition: var(--transition-normal);
+        }
+
+        .prayer-card.expanded .card-title {
+            color: var(--accent-primary);
+        }
+
+        .chevron {
+            width: 18px;
+            height: 18px;
+            color: hsl(220, 10%, 50%);
+            transition: transform var(--transition-normal);
+        }
+
+        .prayer-card.expanded .chevron {
+            transform: rotate(180deg);
+            color: var(--accent-primary);
+        }
+
+        .card-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-normal);
+        }
+
+        .card-content {
+            padding: 0 20px 20px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: 15px;
+        }
+
+        .prayer-text {
+            font-size: 1.08rem;
+            color: hsl(220, 10%, 94%);
+            white-space: pre-wrap;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .btn-copy {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.03);
+            color: hsl(220, 15%, 90%);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            outline: none;
+            transition: var(--transition-normal);
+        }
+
+        .btn-copy:active {
+            transform: scale(0.97);
+        }
+
+        .btn-copy.copied {
+            background: var(--accent-success);
+            border-color: var(--accent-success);
+            color: #fff;
+            box-shadow: 0 0 10px hsla(145, 80%, 45%, 0.3);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: hsl(220, 10%, 50%);
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .footer-info {
+            text-align: center;
+            font-size: 0.75rem;
+            color: hsl(220, 10%, 40%);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">VROMLIX</div>
+            <div class="subtitle">Colección de Oraciones</div>
+        </header>
+
+        <div class="search-wrapper">
+            <input type="text" id="search-bar" class="search-input" placeholder="Buscar oración..." autocomplete="off">
+        </div>
+
+        <!-- Categorías Superiores (Category Pills Tabs) -->
+        <div id="tabs-container" class="tabs-container"></div>
+
+        <main id="prayers-container" class="prayers-list">
+            <!-- Las oraciones se inyectan dinámicamente -->
+        </main>
+
+        <div id="empty-state" class="empty-state">
+            Ninguna oración coincide con la búsqueda.
+        </div>
+
+        <div class="footer-info">
+            Funcionamiento 100% Offline • Puebla, México
+        </div>
+    </div>
+
+    <script>
+        const prayersData = [{"title": "💡 Guía de Estructura Modular", "body": "Para que te sea más fácil memorizar, todas las oraciones en español siguen exactamente la misma estructura gramatical. Solo necesitas aprender una plantilla y adaptar las palabras finales según la clase o reunión.\n\n### Plantilla de Inicio (Apertura)\n> **Querido Padre Celestial:**\n> Te damos gracias [hoy / en esta tarde] por la oportunidad de reunirnos en esta clase de **[Clase/Reunión]** y por Tu guía constante en nuestras vidas.\n> Te pedimos que Tu Santo Espíritu nos acompañe hoy, que ilumines nuestras mentes para comprender los principios que estudiaremos, y que nos des la fortaleza para **[Acción de la Clase]**.\n> Lo pedimos en el nombre de Jesucristo.\n> Amén.\n\n### Plantilla de Fin (Cierre)\n> **Querido Padre Celestial:**\n> Te agradecemos por las enseñanzas y el espíritu que hemos compartido hoy en esta clase de **[Clase/Reunión]**.\n> Te pedimos que nos bendigas para recordar lo aprendido, que pongamos estos principios en práctica en nuestros hogares, y nos acompañes de regreso a salvo.\n> Lo pedimos en el nombre de Jesucristo.\n> Amén.\n\n---"}, {"title": "Entrevistas y Reuniones Generales", "body": "*(Para entrevistas personales con el Obispo, presidencia de quórum o reuniones generales)*\n\n### Inicio\nQuerido Padre Celestial:\nTe damos gracias hoy por la oportunidad de reunirnos en esta reunión y por Tu guía constante en nuestras vidas.\nTe pedimos que Tu Santo Espíritu nos acompañe hoy, que ilumines nuestras mentes para guiar nuestras decisiones, y que nos concedas un entendimiento mutuo basado en la paz, el respeto y la sabiduría.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n### Fin\nQuerido Padre Celestial:\nTe agradecemos por la paz, las enseñanzas y los acuerdos que hemos compartido durante esta reunión.\nTe pedimos que nos bendigas para poner estos principios en práctica, cumplir nuestros compromisos con fe, y acompañarnos de regreso a salvo.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n---"}, {"title": "Escuela Dominical", "body": "*(Clase dominical del evangelio)*\n\n### Inicio\nQuerido Padre Celestial:\nTe damos gracias hoy por la oportunidad de reunirnos en esta clase de Escuela Dominical y por Tu guía constante en nuestras vidas.\nTe pedimos que Tu Santo Espíritu nos acompañe hoy, que ilumines nuestras mentes para comprender Tus escrituras, y que nos des la fortaleza para edificar nuestra fe y hacer Tu voluntad.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n### Fin\nQuerido Padre Celestial:\nTe agradecemos por las enseñanzas y el espíritu que hemos compartido hoy en esta clase de Escuela Dominical.\nTe pedimos que nos bendigas para recordar lo aprendido, que pongamos estos principios en práctica en nuestros hogares, y nos acompañes de regreso a salvo.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n---"}, {"title": "Inglés", "body": "*(EnglishConnect 1 - Apertura y Cierre en Inglés)*\n\n### Opening Prayer (Inicio)\nHeavenly Father,\nWe thank Thee for the opportunity to gather today for this English class.\nWe ask Thee to bless our minds so we can learn, practice, and speak English with confidence, clarity, and ease.\nPlease let Thy Holy Spirit be with us to guide our study today.\nIn the name of Jesus Christ, amen.\n\n### Closing Prayer (Fin)\nHeavenly Father,\nWe thank Thee for everything we have learned and shared in our class today.\nPlease bless us to remember and practice these lessons in our daily lives.\nWe ask Thee to protect us and guide us safely back to our homes.\nIn the name of Jesus Christ, amen.\n\n---"}, {"title": "Ministración y Citas Misionales", "body": "*(Para visitas de ministración en hogares, recibir a los Élderes o acompañarlos a dar clases)*\n\n### Inicio\nQuerido Padre Celestial:\nTe damos gracias hoy por la oportunidad de reunirnos en este hogar junto a Tus siervos para ministrarnos mutuamente y por Tu guía constante en nuestras vidas.\nTe pedimos que Tu Santo Espíritu nos acompañe hoy, que ilumines nuestras mentes y abras nuestros corazones para compartir Tu mensaje con amor, paz y entendimiento.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n### Fin\nQuerido Padre Celestial:\nTe agradecemos por las enseñanzas, la fe y el espíritu de hermandad que hemos compartido hoy en esta visita.\nTe pedimos que nos bendigas para recordar lo aprendido, que bendigas abundantemente a esta familia con paz y bienestar, y que acompañes y protejas a los élderes en su sagrada labor misional.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n---"}, {"title": "Quórum de Élderes", "body": "*(Clase dominical del Sacerdocio)*\n\n### Inicio\nQuerido Padre Celestial:\nTe damos gracias hoy por la oportunidad de reunirnos en esta clase del Quórum de Élderes y por Tu guía constante en nuestras vidas.\nTe pedimos que Tu Santo Espíritu nos acompañe hoy, que ilumines nuestras mentes para comprender nuestro deber, y que nos des la fortaleza para servir al prójimo con amor sincero.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n### Fin\nQuerido Padre Celestial:\nTe agradecemos por las enseñanzas y el espíritu que hemos compartido hoy en esta clase del Quórum de Élderes.\nTe pedimos que nos bendigas para recordar lo aprendido, que pongamos estos principios en práctica en nuestros hogares, y nos acompañes de regreso a salvo.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n---"}, {"title": "Resiliencia", "body": "*(Curso de Autosuficiencia / Talleres de Bienestar)*\n\n### Inicio\nQuerido Padre Celestial:\nTe damos gracias hoy por la oportunidad de reunirnos en esta clase de resiliencia emocional y por Tu guía constante en nuestras vidas.\nTe pedimos que Tu Santo Espíritu nos acompañe hoy, que ilumines nuestras mentes para comprender los principios que estudiaremos, y que nos des la fortaleza para superar nuestros desafíos y estrés diarios con fe activa.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n### Fin\nQuerido Padre Celestial:\nTe agradecemos por las enseñanzas y el espíritu que hemos compartido hoy en esta clase de resiliencia emocional.\nTe pedimos que nos bendigas para recordar lo aprendido, que pongamos estos principios en práctica en nuestros hogares, y nos acompañes de regreso a salvo.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n---"}, {"title": "Reunión Sacramental", "body": "*(Reunión dominical principal)*\n\n### Inicio\nQuerido Padre Celestial:\nTe damos gracias hoy por la oportunidad de reunirnos en esta reunión sacramental y por Tu guía constante en nuestras vidas.\nTe pedimos que Tu Santo Espíritu nos acompañe hoy, y prepare nuestros corazones para participar dignamente de la Santa Cena y recordar siempre a Tu Hijo Jesucristo.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n### Fin\nQuerido Padre Celestial:\nTe agradecemos por las enseñanzas y el espíritu que hemos compartido hoy en esta reunión sacramental.\nTe pedimos que nos bendigas para recordar y guardar los sagrados convenios que hoy renovamos, y nos acompañes de regreso a salvo.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n---"}, {"title": "Servicios Bautismales", "body": "*(Para servicios de bautismo — Apertura y Cierre)*\n\n### Inicio\nQuerido Padre Celestial:\nTe damos gracias hoy por la oportunidad de reunirnos en este servicio bautismal y por Tu guía constante en nuestras vidas.\nTe pedimos que Tu Santo Espíritu nos acompañe hoy, de manera muy especial sobre **[Valeria Ketzalli / Hno. Jesús Márquez / Nombre]**, quien entra a las aguas del bautismo. Bendícele para que al ser sumergido(a) en el agua sea limpio(a) de todo pecado, reciba la compañía del Espíritu Santo y tenga la fortaleza para recordar sus convenios y perseverar con fe.\nLo pedimos en el nombre de Jesucristo.\nAmén.\n\n### Fin\nQuerido Padre Celestial:\nTe agradecemos por las enseñanzas, la paz y el espíritu de testimonio que hemos compartido hoy en este servicio bautismal.\nTe pedimos que nos bendigas para recordar lo aprendido, que bendigas a **[Valeria Ketzalli / Hno. Jesús Márquez / Nombre]** en su nuevo andar como miembro de Tu Iglesia, y nos acompañes de regreso a salvo.\nLo pedimos en el nombre de Jesucristo.\nAmén."}];
+
+        const prayersContainer = document.getElementById('prayers-container');
+        const searchBar = document.getElementById('search-bar');
+        const emptyState = document.getElementById('empty-state');
+        const tabsContainer = document.getElementById('tabs-container');
+
+        function renderCategoryTabs() {
+            tabsContainer.innerHTML = '';
+            
+            const allBtn = document.createElement('button');
+            allBtn.className = 'tab-btn active';
+            allBtn.innerText = 'Todas';
+            allBtn.onclick = () => filterByCategory('Todas', allBtn);
+            tabsContainer.appendChild(allBtn);
+
+            prayersData.forEach(p => {
+                const btn = document.createElement('button');
+                btn.className = 'tab-btn';
+                btn.innerText = p.title;
+                btn.onclick = () => filterByCategory(p.title, btn);
+                tabsContainer.appendChild(btn);
+            });
+        }
+
+        function filterByCategory(title, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            searchBar.value = '';
+
+            if (title === 'Todas') {
+                renderPrayers(prayersData);
+            } else {
+                const filtered = prayersData.filter(p => p.title === title);
+                renderPrayers(filtered);
+                // Expandir automáticamente la oración seleccionada
+                setTimeout(() => {
+                    const firstCard = prayersContainer.querySelector('.prayer-card');
+                    if (firstCard) {
+                        const cardHeader = firstCard.querySelector('.card-header');
+                        if (cardHeader) toggleCard(cardHeader);
+                    }
+                }, 100);
+            }
+        }
+
+        function renderPrayers(prayers) {
+            prayersContainer.innerHTML = '';
+            
+            if (prayers.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            } else {
+                emptyState.style.display = 'none';
+            }
+
+            prayers.forEach((prayer, index) => {
+                const card = document.createElement('div');
+                card.className = 'prayer-card';
+                card.dataset.index = index;
+
+                if (prayer.body.includes('###')) {
+                    let subSectionsHTML = '';
+                    const parts = prayer.body.split(/###\s+/);
+                    parts.forEach(part => {
+                        const lines = part.trim().split('\n');
+                        const subTitle = lines[0].trim();
+                        const subBody = lines.slice(1).join('\n').trim();
+                        
+                        if (subTitle && subBody) {
+                            subSectionsHTML += `
+                                <div class="prayer-sub-section" style="margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px;">
+                                    <h4 style="color: var(--accent-color); font-size: 0.9rem; margin-top: 0; margin-bottom: 8px;">${escapeHTML(subTitle)}</h4>
+                                    <div class="prayer-text" style="font-size: 0.85rem; line-height: 1.4; color: #d0d0d0; white-space: pre-line; margin-bottom: 8px;">${escapeHTML(subBody)}</div>
+                                    <button class="btn-copy" onclick="copyPrayer(this, \`${escapeJS(subBody)}\`)">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                        Copiar ${escapeHTML(subTitle)}
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    });
+
+                    card.innerHTML = `
+                        <div class="card-header" onclick="toggleCard(this)">
+                            <span class="card-title">${escapeHTML(prayer.title)}</span>
+                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content" style="padding-top: 10px;">
+                                ${subSectionsHTML}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <div class="card-header" onclick="toggleCard(this)">
+                            <span class="card-title">${escapeHTML(prayer.title)}</span>
+                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <div class="prayer-text" style="white-space: pre-line;">${escapeHTML(prayer.body)}</div>
+                                <button class="btn-copy" onclick="copyPrayer(this, \`${escapeJS(prayer.body)}\`)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    Copiar Texto
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+                prayersContainer.appendChild(card);
+            });
+        }
+
+        function toggleCard(headerElement) {
+            const card = headerElement.parentElement;
+            const body = card.querySelector('.card-body');
+            
+            document.querySelectorAll('.prayer-card.expanded').forEach(openCard => {
+                if (openCard !== card) {
+                    openCard.classList.remove('expanded');
+                    openCard.querySelector('.card-body').style.maxHeight = null;
+                }
+            });
+
+            if (card.classList.contains('expanded')) {
+                body.style.maxHeight = body.scrollHeight + "px";
+                body.offsetHeight; // force reflow
+                card.classList.remove('expanded');
+                body.style.maxHeight = null;
+            } else {
+                card.classList.add('expanded');
+                body.style.maxHeight = body.scrollHeight + "px";
+                const onTransitionEnd = () => {
+                    if (card.classList.contains('expanded')) {
+                        body.style.maxHeight = 'none';
+                    }
+                    body.removeEventListener('transitionend', onTransitionEnd);
+                };
+                body.addEventListener('transitionend', onTransitionEnd);
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            }
+        }
+
+        function copyPrayer(button, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    ¡Oración Copiada!
+                `;
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = `
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copiar Texto
+                    `;
+                }, 2000);
+            }).catch(err => {
+                alert('No se pudo copiar el texto. Inténtalo de nuevo.');
+            });
+        }
+
+        searchBar.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const filtered = prayersData.filter(prayer => {
+                const normTitle = prayer.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const normBody = prayer.body.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                return normTitle.includes(query) || normBody.includes(query);
+            });
+            renderPrayers(filtered);
+        });
+
+        function escapeHTML(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function escapeJS(str) {
+            return str
+                .replace(/\\/g, '\\\\')
+                .replace(/`/g, '\\`')
+                .replace(/\$/g, '\\$')
+                .replace(/"/g, '\\"');
+        }
+
+        renderPrayers(prayersData);
+        renderCategoryTabs();
+    </script>
+</body>
+</html>

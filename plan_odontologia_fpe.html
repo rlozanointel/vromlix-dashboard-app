@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Estratégico Integral: UPAEP vs. UVP y Financiamiento FPE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --accent: #0284c7;
+            --accent-bg: #e0f2fe;
+            --success: #15803d;
+            --success-bg: #f0fdf4;
+            --warning: #b45309;
+            --warning-bg: #fffbeb;
+            --danger: #b91c1c;
+            --danger-bg: #fef2f2;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 940px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0369a1 100%);
+            color: #ffffff;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 15px;
+            color: #e0f2fe;
+            font-weight: 300;
+        }
+
+        .badge-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .content {
+            padding: 35px 30px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 14px;
+            font-size: 15px;
+            color: #334155;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-highlight {
+            border-left: 4px solid var(--primary-light);
+            background: #f8fafc;
+        }
+
+        .card-success {
+            border-left: 4px solid var(--success);
+            background: var(--success-bg);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #f1f5f9;
+            color: var(--primary);
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: #334155;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* TOGGLE BUTTONS FOR SIMULATOR MODES */
+        .mode-toggle-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-mode {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #bae6fd;
+            background: #ffffff;
+            color: #0369a1;
+            font-weight: 700;
+            font-size: 14.5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-mode.active {
+            background: #0284c7;
+            color: #ffffff;
+            border-color: #0284c7;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+        }
+
+        /* SIMULATOR STYLES WITH DYNAMIC STATUS BADGES */
+        .simulator-box {
+            background: #f0f9ff;
+            border: 2px solid #bae6fd;
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+            transition: border-color 0.3s ease;
+        }
+
+        .sim-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0369a1;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sim-legend-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+            font-size: 12px;
+            flex-wrap: wrap;
+            background: #ffffff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+
+        .sim-inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .sim-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .sim-input-num {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #0f172a;
+            outline: none;
+        }
+
+        .sim-input-num:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        .sim-group {
+            margin-bottom: 18px;
+        }
+
+        .sim-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-pill {
+            font-size: 11.5px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .status-green {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+
+        .status-red {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+
+        .status-yellow {
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fde047;
+        }
+
+        .sim-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #cbd5e1;
+            transition: background 0.3s ease;
+        }
+
+        .sim-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0284c7;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .sim-results {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #bae6fd;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(3, 105, 161, 0.08);
+        }
+
+        .sim-res-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            font-size: 14.5px;
+        }
+
+        .sim-res-row:last-child {
+            border-bottom: none;
+        }
+
+        .grid-two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .sim-box-family {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .sim-box-future {
+            background: #f0f9ff;
+            border: 1px solid #7dd3fc;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .box-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .box-val {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 25px;
+            margin: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background: var(--primary-light);
+        }
+
+        .timeline-step {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin: 2px 0 6px 0;
+            color: var(--text-dark);
+        }
+
+        .footer {
+            background: #f1f5f9;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 13.5px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Plan Estratégico Integral: UPAEP vs. UVP y Financiamiento FPE</h1>
+        <p>Análisis Comparativo de Opciones Universitarias y Financiamiento Educativo de la Iglesia</p>
+        <div class="badge-bar">
+            <span class="badge">Ingreso Objetivo: Enero 2027</span>
+            <span class="badge">Programa FPE México</span>
+            <span class="badge">UPAEP (#1 Prestigio) vs. UVP (#2 Calidad y Cobertura 100%)</span>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- INTRODUCCIÓN -->
+        <div class="section">
+            <p>Estimada familia: Se presenta este informe comparativo de alto nivel enfocado en las <strong>dos mejores universidades privadas en calidad académica e infraestructura para Odontología en Puebla</strong>: la <strong>UPAEP (Opción #1 en Prestigio)</strong> y la <strong>UVP (Opción #2 en Calidad y 100% Viable por Presupuesto)</strong>.</p>
+        </div>
+
+        <!-- SECCIÓN 1: MASTER COMPARATIVO COMPLETO -->
+        <div class="section">
+            <div class="section-title">
+                <span>📋</span> 1. Resumen Maestro Comparativo: UPAEP vs. UVP y Apoyos FPE
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concepto / Criterio de Evaluación</th>
+                        <th>🥇 UPAEP (Opción #1 Prestigio)</th>
+                        <th>🥈 UVP (Opción #2 Calidad y 100% FPE)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Nombre del Título Oficial</strong></td>
+                        <td><em>Lic. en Médico Cirujano Odontólogo</em></td>
+                        <td><em>Lic. en Cirujano Dentista</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duración de la Carrera</strong></td>
+                        <td>9 semestres (4.5 años)</td>
+                        <td><strong>8 semestres (4.0 años) - 1 semestre menos</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha Objetivo de Ingreso</strong></td>
+                        <td><strong>Enero 2027 (Semestre Primavera)</strong></td>
+                        <td><strong>Enero 2027 (Semestre Primavera)</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Infraestructura y Clínicas</strong></td>
+                        <td>Simuladores CAD/CAM y Clínica propia</td>
+                        <td><strong>4 Clínicas Dentales propias y Lab de Rayos X</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Práctica con Pacientes Reales</strong></td>
+                        <td>Semestres intermedios</td>
+                        <td><strong>Desde el 2º Semestre (Práctica Temprana)</strong></td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>Esquema Tripartito de Financiamiento</strong></td>
+                        <td>FPE + Beca UPAEP (30%) + Aportación Familiar Menor</td>
+                        <td><strong>FPE (100% Cubierto) + Beca UVP + $0 Aportación Familiar</strong></td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>🎁 Beca Regalo FPE (25% Automática)</strong></td>
+                        <td><strong>-$75,000 MXN REGALADOS (No se devuelve)</strong></td>
+                        <td><strong>-$65,000 MXN REGALADOS (No se devuelve)</strong></td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>🎓 Premio por Graduación FPE (30% Condonado)</strong></td>
+                        <td><strong>-$67,500 MXN CONDONADOS al titularse</strong></td>
+                        <td><strong>-$58,500 MXN CONDONADOS al titularse</strong></td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>🚌 Apoyo de Pasajes, Equipo e Instrumental</strong></td>
+                        <td><strong>Ayudas Asistenciales sin deuda (Obispo)</strong></td>
+                        <td><strong>Ayudas Asistenciales sin deuda (Obispo)</strong></td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>⏳ Plazo de Devolución Favorable</strong></td>
+                        <td><strong>10 Años (Cero pagos mientras estudia)</strong></td>
+                        <td><strong>10 Años (Cero pagos mientras estudia)</strong></td>
+                    </tr>
+                    <tr style="background: #e0f2fe;">
+                        <td><strong>💳 Cuota Fija Mensual tras Graduarse</strong></td>
+                        <td><strong>~$1,521 MXN / mes a 10 años</strong></td>
+                        <td><strong>~$1,318 MXN / mes a 10 años</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECCIÓN 2: SIMULADOR INTERACTIVO CON MODO UPAEP VS UVP -->
+        <div class="section">
+            <div class="section-title">
+                <span>🧮</span> 2. Simulador Financiero Interactivo (Seleccione Universidad)
+            </div>
+
+            <div class="mode-toggle-bar">
+                <div class="btn-mode active" id="btnUpaep" onclick="setSimMode('upaep')">🏛️ Simular UPAEP (#1 Prestigio)</div>
+                <div class="btn-mode" id="btnUvp" onclick="setSimMode('uvp')">🏥 Simular UVP (#2 Calidad y 100% FPE)</div>
+            </div>
+
+            <div class="simulator-box" id="simContainer">
+                <div class="sim-title" id="simTitleHeader">
+                    <span>🧮</span> Simulador Financiero: UPAEP (#1 Prestigio - 9 Semestres)
+                </div>
+
+                <!-- LEYENDA DEL SEMÁFORO INTEGRADAS DENTRO DEL SIMULADOR -->
+                <div class="sim-legend-bar">
+                    <div class="legend-item"><span style="color: #15803d;">🟢 Verde:</span> Rango Estándar (Alta Probabilidad)</div>
+                    <div class="legend-item"><span style="color: #b91c1c;">🔴 Rojo:</span> Excepción Especial (Baja Probabilidad >50%)</div>
+                    <div class="legend-item"><span style="color: #b45309;">🟡 Amarillo:</span> Rango Mínimo</div>
+                </div>
+
+                <div class="sim-inputs-grid">
+                    <div class="sim-field">
+                        <label class="sim-label" style="font-size: 13px;">Colegiatura Mensual ($/mes):</label>
+                        <input type="number" id="inputColegiatura" class="sim-input-num" value="28000" step="1000" oninput="updateSim()">
+                    </div>
+                    <div class="sim-field">
+                        <label class="sim-label" style="font-size: 13px;">Inscripción Semestral ($):</label>
+                        <input type="number" id="inputInscripcion" class="sim-input-num" value="8500" step="500" oninput="updateSim()">
+                    </div>
+                </div>
+
+                <div class="sim-group">
+                    <div class="sim-label">
+                        <span>Beca Institucional por Promedio: <strong id="becaVal">30%</strong></span>
+                        <span id="becaBadge" class="status-pill status-green">🟢 Rango Estándar (Promedio 8.5–9.5)</span>
+                    </div>
+                    <input type="range" min="0" max="60" step="5" value="30" class="sim-slider" id="becaSlider" oninput="updateSim()">
+                </div>
+
+                <div class="sim-group">
+                    <div class="sim-label">
+                        <span>Monto de Préstamo Aprobado FPE: <strong id="loanVal">$300,000 MXN</strong></span>
+                        <span id="loanBadge" class="status-pill status-green">🟢 Tope Estándar FPE México</span>
+                    </div>
+                    <input type="range" min="100000" max="400000" step="10000" value="300000" class="sim-slider" id="loanSlider" oninput="updateSim()">
+                </div>
+
+                <div class="sim-results">
+                    <div class="sim-res-row">
+                        <span>Costo Total Estimado Carrera:</span>
+                        <strong id="resTotalCost">$1,084,500 MXN</strong>
+                    </div>
+                    <div class="sim-res-row">
+                        <span>Descuento Beca Institucional por Promedio:</span>
+                        <strong id="resUpaepDesc">-$325,350 MXN</strong>
+                    </div>
+                    <div class="sim-res-row">
+                        <span>Beca Regalo Inmediata FPE (25% No Reembolsable):</span>
+                        <strong id="resBecaGift" style="color: var(--success);-">$75,000 MXN</strong>
+                    </div>
+                    <div class="sim-res-row">
+                        <span>Premio por Graduación a Tiempo FPE (30% Condonado):</span>
+                        <strong id="resGradRebate" style="color: var(--success);-">$67,500 MXN</strong>
+                    </div>
+                    <div class="sim-res-row">
+                        <span><strong>Total Neto a Devolver a la Iglesia:</strong></span>
+                        <strong id="resNetDebt" style="color: var(--primary);">$157,500 MXN</strong>
+                    </div>
+
+                    <div class="grid-two">
+                        <div class="sim-box-family">
+                            <div class="box-title" style="color: #b45309;">Aportación Familiar Durante Estudios</div>
+                            <div class="box-val" style="color: #b45309;" id="resFamilyMonthly">$10,203 MXN / mes</div>
+                            <div style="font-size: 11px; color: #78350f; margin-top: 3px;" id="semText">(Durante clases)</div>
+                        </div>
+
+                        <div class="sim-box-future">
+                            <div class="box-title" style="color: #0369a1;">Cuota Mensual tras Graduarse (10 Años)</div>
+                            <div class="box-val" style="color: #0284c7;" id="resMonthlyPay">$1,521 MXN / mes</div>
+                            <div style="font-size: 11px; color: #0369a1; margin-top: 3px;">(120 meses con título y empleo)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: FECHAS Y CRONOGRAMA DE 4 FASES -->
+        <div class="section">
+            <div class="section-title">
+                <span>🗓️</span> 3. Cronograma de Ingreso Realista: Enero 2027
+            </div>
+            <p>Ingresar en <strong>Agosto de 2026 es inviable</strong> debido a que los procesos de enseñanza misional, bautismo, curso de autosuficiencia y dictamen del comité del FPE toman entre <strong>4 y 5 meses</strong>. El objetivo perfecto y sin presiones es el <strong>Semestre de Primavera (Ingreso en Enero de 2027)</strong>.</p>
+
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="timeline-date">Fase 1 | Agosto – Septiembre 2026</div>
+                    <div class="timeline-title">Consuelo Espiritual y Lecciones Misionales</div>
+                    <p>Los Élderes (misioneros) visitan a la joven para brindarle consuelo por el resultado de la BUAP, enseñarle las lecciones del evangelio y acompañarla en su preparación espiritual hacia el <strong>Bautismo (Septiembre)</strong>.</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-date">Fase 2 | Septiembre – Octubre 2026</div>
+                    <div class="timeline-title">Taller de Autosuficiencia</div>
+                    <p>Como miembro bautizada, cursa el taller <em>"Educación para un Mejor Empleo"</em> (duración: 4 a 5 semanas) y obtiene su <strong>Certificado oficial firmado por el Obispo</strong>.</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-date">Fase 3 | Octubre – Diciembre 2026</div>
+                    <div class="timeline-title">Trámite FPE y Solicitud de Beca (UPAEP o UVP)</div>
+                    <p>Se tramita la cotización oficial en UPAEP o UVP. Se ingresa la <em>Propuesta Personalizada de Programa</em> en el portal <code>educa-sion.org</code>. El Comité de la Iglesia evalúa y aprueba el presupuesto (duración: 6 a 8 semanas).</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-date">Fase 4 | Enero 2027</div>
+                    <div class="timeline-title">Ingreso Formal a la Universidad</div>
+                    <p>Con los fondos del FPE aprobados, la estudiante inicia formalmente sus estudios de <strong>Cirujano Dentista en Enero de 2027 (Semestre Primavera)</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESUMEN FINAL -->
+        <div class="card card-highlight" style="text-align: center; padding: 25px;">
+            <h3 style="color: var(--primary); margin-bottom: 10px;">Conclusión y Recomendación Estratégica</h3>
+            <p>Si la prioridad de la familia es el máximo prestigio institucional, <strong>UPAEP (#1)</strong> es la mejor opción combinando Beca UPAEP + FPE + Apoyo Familiar. Si la prioridad es que el FPE cubra el 100% de los estudios sin que la familia pague mensualidades durante la carrera, la <strong>UVP (#2)</strong> es la alternativa perfecta con clínicas propias de excelente calidad.</p>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Documento informativo generado para acompañamiento y orientación educativa | Proyecto de Autosuficiencia FPE 2026-2027
+    </div>
+</div>
+
+<script>
+var currentMode = 'upaep';
+
+function setSimMode(mode) {
+    currentMode = mode;
+    document.getElementById('btnUpaep').className = (mode === 'upaep') ? 'btn-mode active' : 'btn-mode';
+    document.getElementById('btnUvp').className = (mode === 'uvp') ? 'btn-mode active' : 'btn-mode';
+
+    if (mode === 'upaep') {
+        document.getElementById('simTitleHeader').innerText = '🧮 Simulador Financiero: UPAEP (#1 Prestigio - 9 Semestres)';
+        document.getElementById('inputColegiatura').value = 28000;
+        document.getElementById('inputInscripcion').value = 8500;
+        document.getElementById('becaSlider').value = 30;
+        document.getElementById('loanSlider').value = 300000;
+    } else {
+        document.getElementById('simTitleHeader').innerText = '🧮 Simulador Financiero: UVP (#2 Calidad - 8 Semestres / 100% FPE)';
+        document.getElementById('inputColegiatura').value = 7500;
+        document.getElementById('inputInscripcion').value = 6000;
+        document.getElementById('becaSlider').value = 20;
+        document.getElementById('loanSlider').value = 260000;
+    }
+    updateSim();
+}
+
+function updateSim() {
+    var colegiatura = parseFloat(document.getElementById('inputColegiatura').value) || (currentMode === 'upaep' ? 28000 : 7500);
+    var inscripcion = parseFloat(document.getElementById('inputInscripcion').value) || (currentMode === 'upaep' ? 8500 : 6000);
+    var loan = parseFloat(document.getElementById('loanSlider').value);
+    var becaUpaep = parseFloat(document.getElementById('becaSlider').value);
+    var numSemestres = (currentMode === 'upaep') ? 9 : 8;
+
+    document.getElementById('loanVal').innerText = '$' + loan.toLocaleString('es-MX') + ' MXN';
+    document.getElementById('becaVal').innerText = becaUpaep + '%';
+
+    // DYNAMIC COLOR & STATUS BADGES UPDATE
+    var becaBadge = document.getElementById('becaBadge');
+    var becaSlider = document.getElementById('becaSlider');
+
+    if (becaUpaep > 50) {
+        becaBadge.className = 'status-pill status-red';
+        becaBadge.innerText = '🔴 Excepción Especial (Baja Probabilidad - Promedio > 9.5)';
+        becaSlider.style.background = 'linear-gradient(to right, #22c55e 0%, #22c55e 83%, #ef4444 83%, #ef4444 100%)';
+    } else if (becaUpaep >= 20) {
+        becaBadge.className = 'status-pill status-green';
+        becaBadge.innerText = '🟢 Escenario Esperado (Alta Probabilidad)';
+        becaSlider.style.background = 'linear-gradient(to right, #22c55e ' + ((becaUpaep/60)*100) + '%, #cbd5e1 ' + ((becaUpaep/60)*100) + '%)';
+    } else {
+        becaBadge.className = 'status-pill status-yellow';
+        becaBadge.innerText = '🟡 Escenario Mínimo';
+        becaSlider.style.background = '#cbd5e1';
+    }
+
+    var loanBadge = document.getElementById('loanBadge');
+    var loanSlider = document.getElementById('loanSlider');
+
+    if (loan > 350000) {
+        loanBadge.className = 'status-pill status-red';
+        loanBadge.innerText = '🔴 Techo Excepcional FPE (Evaluación Especial)';
+        loanSlider.style.background = 'linear-gradient(to right, #22c55e 0%, #22c55e 83%, #ef4444 83%, #ef4444 100%)';
+    } else if (loan >= 200000) {
+        loanBadge.className = 'status-pill status-green';
+        loanBadge.innerText = '🟢 Tope Estándar FPE México';
+        var pct = ((loan - 100000) / 300000) * 100;
+        loanSlider.style.background = 'linear-gradient(to right, #22c55e ' + pct + '%, #cbd5e1 ' + pct + '%)';
+    } else {
+        loanBadge.className = 'status-pill status-yellow';
+        loanBadge.innerText = '🟡 Préstamo Conservador';
+        loanSlider.style.background = '#cbd5e1';
+    }
+
+    // CALCULATIONS
+    var costPerSemester = inscripcion + (colegiatura * 4);
+    var totalCost = costPerSemester * numSemestres;
+    
+    var upaepDesc = totalCost * (becaUpaep / 100);
+    var costAfterUpaep = totalCost - upaepDesc;
+    
+    var familyRemTotal = Math.max(0, costAfterUpaep - loan);
+    var monthsOfStudy = numSemestres * 5;
+    var familyMonthly = Math.round(familyRemTotal / monthsOfStudy);
+
+    var fpeGift = loan * 0.25;
+    var remLoan = loan - fpeGift;
+    var gradRebate = remLoan * 0.30;
+    var netDebt = remLoan - gradRebate;
+    
+    var r = 0.0025;
+    var n = 120;
+    var monthlyPay = Math.round(netDebt * (r * Math.pow(1+r, n)) / (Math.pow(1+r, n) - 1));
+
+    document.getElementById('resTotalCost').innerText = '$' + totalCost.toLocaleString('es-MX') + ' MXN (' + numSemestres + ' semestres)';
+    document.getElementById('resUpaepDesc').innerText = '-$' + upaepDesc.toLocaleString('es-MX') + ' MXN';
+    document.getElementById('resBecaGift').innerText = '-$' + fpeGift.toLocaleString('es-MX') + ' MXN';
+    document.getElementById('resGradRebate').innerText = '-$' + gradRebate.toLocaleString('es-MX') + ' MXN';
+    document.getElementById('resNetDebt').innerText = '$' + netDebt.toLocaleString('es-MX') + ' MXN';
+    document.getElementById('resMonthlyPay').innerText = '$' + monthlyPay.toLocaleString('es-MX') + ' MXN / mes';
+    document.getElementById('resFamilyMonthly').innerText = '$' + familyMonthly.toLocaleString('es-MX') + ' MXN / mes';
+    document.getElementById('semText').innerText = '(Durante ' + numSemestres + ' semestres de clases)';
+}
+updateSim();
+</script>
+
+</body>
+</html>

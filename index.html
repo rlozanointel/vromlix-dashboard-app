@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00f0ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>VROMLIX | Dashboard Local</title>
+    <link rel="manifest" href="manifest.json">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260908_1730">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- HEADER -->
+        <header class="dashboard-header">
+            <div class="header-logo">
+                <span class="logo-accent">VROMLIX</span>
+                <span class="logo-sub">OS</span>
+            </div>
+            <div class="header-datetime">
+                <!-- RELOJ BINARIO ALINEADO (6 bits por fila) -->
+                <div class="binary-clock-wrapper" title="Reloj Binario (Hora Puebla / CDMX)">
+                    <div class="binary-row" id="binary-hours">
+                        <span class="row-label">H</span>
+                        <div class="bit" data-col="1" data-val="32"></div>
+                        <div class="bit" data-col="2" data-val="16"></div>
+                        <div class="bit" data-col="3" data-val="8"></div>
+                        <div class="bit" data-col="4" data-val="4"></div>
+                        <div class="bit" data-col="5" data-val="2"></div>
+                        <div class="bit" data-col="6" data-val="1"></div>
+                    </div>
+                    <div class="binary-row" id="binary-minutes">
+                        <span class="row-label">M</span>
+                        <div class="bit" data-col="1" data-val="32"></div>
+                        <div class="bit" data-col="2" data-val="16"></div>
+                        <div class="bit" data-col="3" data-val="8"></div>
+                        <div class="bit" data-col="4" data-val="4"></div>
+                        <div class="bit" data-col="5" data-val="2"></div>
+                        <div class="bit" data-col="6" data-val="1"></div>
+                    </div>
+                    <div class="binary-row" id="binary-seconds">
+                        <span class="row-label">S</span>
+                        <div class="bit" data-col="1" data-val="32"></div>
+                        <div class="bit" data-col="2" data-val="16"></div>
+                        <div class="bit" data-col="3" data-val="8"></div>
+                        <div class="bit" data-col="4" data-val="4"></div>
+                        <div class="bit" data-col="5" data-val="2"></div>
+                        <div class="bit" data-col="6" data-val="1"></div>
+                    </div>
+                </div>
+                <span id="current-date">Cargando fecha...</span>
+            </div>
+        </header>
+
+        <!-- MAIN NAVIGATION BAR (PÁGINAS / MENÚS UNIFICADOS) -->
+        <nav class="main-nav-bar">
+            <button class="nav-tab-btn active" data-view="view-principal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Principal</span>
+            </button>
+            <button class="nav-tab-btn" data-view="view-iglesia">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+                <span>Iglesia</span>
+            </button>
+            <button class="nav-tab-btn" data-view="view-multimedia">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                <span>Multimedia</span>
+            </button>
+            <button class="nav-tab-btn" data-view="view-herramientas">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                <span>Herramientas</span>
+            </button>
+        
+            <button class="nav-tab-btn" data-view="view-carisma">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                <span>Mente</span>
+            </button>
+        </nav>
+
+        <!-- MAIN LAYOUT VVIEWS -->
+        <main class="dashboard-main-flow">
+            
+            <!-- VISTA 1: PRINCIPAL -->
+            <div id="view-principal" class="dashboard-view active">
+                <!-- PLANIFICADOR SEMANAL -->
+                <section class="weekly-section-full">
+                    <div class="section-card weekly-planner-card">
+                        <div class="card-header">
+                            <div class="header-title-group">
+                                <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                <h2>Pizarrón Semanal</h2>
+                            </div>
+                        </div>
+                        <div class="card-content weekly-grid">
+                            <div class="weekly-column" data-day="lunes">
+                                <div class="column-title">Lunes</div>
+                                <div class="weekly-task-list"></div>
+                                <input type="text" class="weekly-input" placeholder="+ añadir tarea">
+                            </div>
+                            <div class="weekly-column" data-day="martes">
+                                <div class="column-title">Martes</div>
+                                <div class="weekly-task-list"></div>
+                                <input type="text" class="weekly-input" placeholder="+ añadir tarea">
+                            </div>
+                            <div class="weekly-column" data-day="miercoles">
+                                <div class="column-title">Miércoles</div>
+                                <div class="weekly-task-list"></div>
+                                <input type="text" class="weekly-input" placeholder="+ añadir tarea">
+                            </div>
+                            <div class="weekly-column" data-day="jueves">
+                                <div class="column-title">Jueves</div>
+                                <div class="weekly-task-list"></div>
+                                <input type="text" class="weekly-input" placeholder="+ añadir tarea">
+                            </div>
+                            <div class="weekly-column" data-day="viernes">
+                                <div class="column-title">Viernes</div>
+                                <div class="weekly-task-list"></div>
+                                <input type="text" class="weekly-input" placeholder="+ añadir tarea">
+                            </div>
+                            <div class="weekly-column" data-day="sabado">
+                                <div class="column-title">Sábado</div>
+                                <div class="weekly-task-list"></div>
+                                <input type="text" class="weekly-input" placeholder="+ añadir tarea">
+                            </div>
+                            <div class="weekly-column" data-day="domingo">
+                                <div class="column-title">Domingo</div>
+                                <div class="weekly-task-list"></div>
+                                <input type="text" class="weekly-input" placeholder="+ añadir tarea">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROYECTOS, METAS & PENDIENTES GENERALES -->
+                <section class="antigravity-section-full">
+                    <div class="section-card antigravity-planner-card">
+                        <div class="card-header">
+                            <div class="header-title-group">
+                                <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                <h2>Proyectos, Metas & Pendientes Generales</h2>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="weekly-column antigravity-column" data-day="antigravity" style="min-height: 120px;">
+                                <div class="weekly-task-list"></div>
+                                <input type="text" class="weekly-input" placeholder="+ añadir nuevo proyecto / meta general y presionar Enter...">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- VISTA 2: IGLESIA Y FE -->
+            <div id="view-iglesia" class="dashboard-view">
+                <!-- CLASES Y APUNTES -->
+                <div class="section-card classes-card">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+                            <h2>Apuntes y Tareas de Clases</h2>
+                        </div>
+                    </div>
+                    <div class="card-content scrollable-content" style="max-height: 550px;">
+                        <div class="tab-selectors-container">
+                            <div class="tab-selectors" id="dashboard-class-tabs">
+                                <!-- Tabs injected dynamically -->
+                            </div>
+                        </div>
+                        <div id="class-notes-container" class="class-notes-grid">
+                            <!-- Cards injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ORACIONES SUD -->
+                <div class="section-card prayers-card">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/><path d="M2 12h20"/></svg>
+                            <h2>Oraciones SUD (Clic para copiar)</h2>
+                        </div>
+                        <div class="search-box">
+                            <input type="text" id="prayer-search" placeholder="Buscar oración...">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div id="prayers-list" class="prayers-grid">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISTA 3: MULTIMEDIA -->
+            <div id="view-multimedia" class="dashboard-view">
+                <!-- PELÍCULAS Y SERIES -->
+                <div class="section-card media-card">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                            <h2>Películas y Series</h2>
+                        </div>
+                        <div class="media-controls-toolbar">
+                            <label class="filter-checkbox-label" id="movies-filter-container">
+                                <input type="checkbox" id="show-recent-checkbox"> Mostrar Recientes
+                            </label>
+                            <button id="toggle-hidden-media-btn" class="btn-text-action" title="Mostrar/Ocultar títulos que has escondido">Mostrar Ocultos</button>
+                            
+                            <div class="tab-selectors">
+                                <button class="tab-btn active" data-tab="tab-movies">Películas</button>
+                                <button class="tab-btn" data-tab="tab-series">Series</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content scrollable-content" style="max-height: 550px;">
+                        <div id="tab-movies" class="tab-panel active">
+                            <div class="media-grid" id="movies-container">
+                                <!-- Loaded dynamically -->
+                            </div>
+                        </div>
+                        <div id="tab-series" class="tab-panel">
+                            <div class="media-grid" id="series-container">
+                                <!-- Loaded dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISTA 4: HERRAMIENTAS Y ARCHIVOS -->
+            <div id="view-herramientas" class="dashboard-view">
+
+
+                <!-- CHATS DE ANTIGRAVITY -->
+                <div class="section-card chats-card">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            <h2>Chats de Antigravity (Clic para copiar ID)</h2>
+                        </div>
+                        <div class="header-action-group" style="display: flex; gap: 8px; align-items: center;">
+                            <div class="search-box">
+                                <input type="text" id="chat-search-input" placeholder="Buscar en los 60+ chats (ej: playlist, serie, script)...">
+                            </div>
+                            <button id="refresh-chats-btn" class="btn-icon" title="Actualizar lista de chats">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 11-.57-8.38l5.67-5.67"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content scrollable-content" style="max-height: 400px;">
+                        <div id="chats-container" class="chats-list">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROMPTS DE INICIALIZACIÓN DEL SISTEMA (10 DOMINIOS) -->
+                <div class="section-card prompts-card">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            <h2>Prompts de Inicialización del Sistema (10 Dominios)</h2>
+                        </div>
+                        <div class="header-action-group" style="display: flex; gap: 8px; align-items: center;">
+                            <div class="search-box">
+                                <input type="text" id="prompt-search-input" placeholder="Buscar en los 10 dominios (ej: Capital One, Resiliencia, Cine)...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div id="prompts-container" class="prompts-list">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL DE DETALLE Y APUNTES DE TAREAS -->
+    <div id="task-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title-container">
+                    <span class="modal-category-badge" id="modal-task-category">Pizarrón</span>
+                    <h3 id="modal-task-title">Detalle del Pendiente</h3>
+                </div>
+                <button id="close-task-modal-btn" class="modal-close-btn" title="Cerrar ventana">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid-2col" style="display: grid; grid-template-columns: 1fr 2.5fr; gap: 12px;">
+                    <div class="form-group">
+                        <label class="modal-label">1. Horario (24h):</label>
+                        <input type="text" id="modal-task-time-input" class="modal-input" placeholder="Ej: 10:30">
+                    </div>
+                    <div class="form-group">
+                        <label class="modal-label">2. Título de la Actividad:</label>
+                        <input type="text" id="modal-task-title-input" class="modal-input" placeholder="Ej: Resiliencia Emocional">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="modal-label">3. Detalles / Ubicación / Descripción:</label>
+                    <textarea id="modal-task-details-input" class="modal-textarea" rows="3" placeholder="Ej: Clase presencial con la Hna. Alma en la Capilla..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="modal-label" style="color: var(--accent-warning); font-weight: 700;">4. Tareas, Pendientes o Acciones Específicas (Cambia color a ALERTA):</label>
+                    <textarea id="modal-task-actions-input" class="modal-textarea" rows="3" placeholder="Ej: Revisar tarea y asignación semanal con el Hno. Roger Morales..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="delete-modal-task-btn" class="btn-danger-light">Eliminar Tarea</button>
+                <button id="save-modal-task-btn" class="btn-primary">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
+    
+        <!-- VISTA: CARISMA Y COMUNICACION -->
+        <div id="view-carisma" class="dashboard-view">
+            <div class="section-card carisma-hero-card">
+                <div class="card-header">
+                    <div class="header-title-group">
+                        <svg class="header-icon carisma-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                        <div>
+                            <h2>Guía Práctica de Carisma, Psicología Conversacional & Arquetipos</h2>
+                            <p class="subtitle-text">Basado en Vanessa Van Edwards (Captivate & Cues) — Frases de Alto Impacto, Conexión Emocional y Lenguaje No Verbal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BARRA DE BUSQUEDA Y FILTROS -->
+                <div class="carisma-filter-bar">
+                    <div class="search-input-wrapper">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="carisma-search-input" class="carisma-search" placeholder="Buscar frases, música de concentración, preguntas o palabras clave (ej: synthwave, python, rompehielos)...">
+                    </div>
+                    <div class="carisma-chip-group">
+                        <button class="carisma-chip active" data-filter="all">Todas</button>
+                        <button class="carisma-chip" data-filter="musica">🎧 Música & Focus</button>
+                        <button class="carisma-chip" data-filter="rompehielos">🚀 Rompehielos</button>
+                        <button class="carisma-chip" data-filter="quimica">🔥 Química & Conexión</button>
+                        <button class="carisma-chip" data-filter="chispas">✨ Chispas Verbales</button>
+                        <button class="carisma-chip" data-filter="arquetipos">👥 5 Arquetipos</button>
+                        <button class="carisma-chip" data-filter="noverbal">🖐️ No Verbal</button>
+                        <button class="carisma-chip" data-filter="monologos">🎭 Monólogos</button>
+                        <button class="carisma-chip" data-filter="salidas">🚪 Salidas Elegantes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR DE TARJETAS DE FRASES Y HERRAMIENTAS -->
+            <div class="carisma-grid">
+                
+                <!-- SECCION MÚSICA & FOCUS PARA PROGRAMAR Y PROMPTS -->
+                <div class="carisma-section-title" data-cat="musica">
+                    <h3>🎧 Búsquedas Rápidas de Música para Programar y Prompts (1-Click YouTube Music)</h3>
+                    <p>Copia con un clic el término ideal o ábrelo directamente en YouTube Music según tu tipo de tarea prolongada.</p>
+                </div>
+
+                <!-- Tarjeta 1: Python Larga Duración -->
+                <div class="carisma-card" data-cat="musica" data-keywords="python programar codigo synthwave 120 bpm horas continuo">
+                    <div class="carisma-card-badge badge-musica">🐍 Programación en Python (Varias Horas)</div>
+                    <div class="carisma-phrase">"Synthwave for Coding"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Ritmo continuo a ~120 BPM con sintetizadores ochenteros y cero palabras. Ideal para escribir funciones y estructuras lógicas sin distracción.</div>
+                    <div class="music-actions-group">
+                        <button class="copy-phrase-btn" onclick="copyMusicQuery(this, 'Synthwave for Coding')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            Copiar Búsqueda
+                        </button>
+                        <button class="btn-yt-music" onclick="openYtMusic('Synthwave for Coding')">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Abrir en YouTube Music
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Generación de Prompts e IA -->
+                <div class="carisma-card" data-cat="musica" data-keywords="prompts ai inteligencia artificial cyberpunk horas alta energia radio">
+                    <div class="carisma-card-badge badge-musica">⚡ Generación de Prompts & AI (Varias Horas)</div>
+                    <div class="carisma-phrase">"Cyberpunk 2077 Instrumental Radio"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Radio continua en vivo de texturas electrónicas futuristas que aumentan la dopamina durante la iteración de prompts.</div>
+                    <div class="music-actions-group">
+                        <button class="copy-phrase-btn" onclick="copyMusicQuery(this, 'Cyberpunk 2077 Instrumental Radio')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            Copiar Búsqueda
+                        </button>
+                        <button class="btn-yt-music" onclick="openYtMusic('Cyberpunk 2077 Instrumental Radio')">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Abrir en YouTube Music
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3: Debugging Difícil / Errores Complex -->
+                <div class="carisma-card" data-cat="musica" data-keywords="debugging bugs errores guitarras rock post rock linkin park potencia">
+                    <div class="carisma-card-badge badge-musica">🐛 Depuración & Bug Fixing (Guitarras / Rock)</div>
+                    <div class="carisma-phrase">"Heavy Focus Instrumental Rock"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Guitarras y batería intensa sin voces. Alternativa limpia al Grunge / Linkin Park para superar un bug persistente.</div>
+                    <div class="music-actions-group">
+                        <button class="copy-phrase-btn" onclick="copyMusicQuery(this, 'Heavy Focus Instrumental Rock')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            Copiar Búsqueda
+                        </button>
+                        <button class="btn-yt-music" onclick="openYtMusic('Heavy Focus Instrumental Rock')">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Abrir en YouTube Music
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 4: Estado de Flow de 3+ Horas -->
+                <div class="carisma-card" data-cat="musica" data-keywords="flow continuo 3 horas dnb liquid drum and bass velocidad suave">
+                    <div class="carisma-card-badge badge-musica">🌊 Estado de Flow Ininterrumpido (3+ Horas)</div>
+                    <div class="carisma-phrase">"Liquid DnB for Focus"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Ritmos veloces a 170 BPM con sonidos envueltos en baja frecuencia para hiperconcentración fluida sin interrupciones.</div>
+                    <div class="music-actions-group">
+                        <button class="copy-phrase-btn" onclick="copyMusicQuery(this, 'Liquid DnB for Focus')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            Copiar Búsqueda
+                        </button>
+                        <button class="btn-yt-music" onclick="openYtMusic('Liquid DnB for Focus')">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Abrir en YouTube Music
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 5: Análisis Orgánico / Lectura Profunda -->
+                <div class="carisma-card" data-cat="musica" data-keywords="analisis lectura documentacion tycho retrowave orgánico">
+                    <div class="carisma-card-badge badge-musica">📖 Análisis & Lectura de Documentación</div>
+                    <div class="carisma-phrase">"Retrowave Instrumental Focus"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Melodías retro estilo Tycho que permiten leer PDFs o arquitectura de código por horas sin cansancio.</div>
+                    <div class="music-actions-group">
+                        <button class="copy-phrase-btn" onclick="copyMusicQuery(this, 'Retrowave Instrumental Focus')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            Copiar Búsqueda
+                        </button>
+                        <button class="btn-yt-music" onclick="openYtMusic('Retrowave Instrumental Focus')">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Abrir en YouTube Music
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 6: Math Rock Complejo -->
+                <div class="carisma-card" data-cat="musica" data-keywords="math rock chon toe dopamina complejidad ritmo bajo guitarra">
+                    <div class="carisma-card-badge badge-musica">🎸 Dopamina & Lógica Compleja (Math Rock)</div>
+                    <div class="carisma-phrase">"Japanese Math Rock Instrumental"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Rock instrumental técnico (Toe, Chon) para ejercitar la agilidad mental en problemas complejos.</div>
+                    <div class="music-actions-group">
+                        <button class="copy-phrase-btn" onclick="copyMusicQuery(this, 'Japanese Math Rock Instrumental')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            Copiar Búsqueda
+                        </button>
+                        <button class="btn-yt-music" onclick="openYtMusic('Japanese Math Rock Instrumental')">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Abrir en YouTube Music
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SECCION 1: FRASES PARA ROMPER EL HIELO -->
+                <div class="carisma-section-title" data-cat="rompehielos">
+                    <h3>🚀 Frases para Romper el Hielo (Reemplazo de Charlas Aburridas)</h3>
+                    <p>Sustituye preguntas piloto automático ("¿A qué te dedicas?") por detonadores de dopamina.</p>
+                </div>
+
+                <div class="carisma-card" data-cat="rompehielos" data-keywords="proyecto idea emocionante trabajo divertido">
+                    <div class="carisma-card-badge badge-rompehielos">Rompehielos Nivel 2</div>
+                    <div class="carisma-phrase">"¿En qué proyecto o idea divertida estás trabajando últimamente?"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Evita la rutina estresante del trabajo y enfoca la atención en sus pasiones y creatividad.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, '¿En qué proyecto o idea divertida estás trabajando últimamente?')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Frase
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="rompehielos" data-keywords="semana mejor momento divertido cumbre">
+                    <div class="carisma-card-badge badge-rompehielos">Rompehielos Nivel 2</div>
+                    <div class="carisma-phrase">"¿Qué ha sido lo mejor o el momento más divertido de tu semana?"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Obliga al cerebro a buscar recuerdos felices y sonrisas de forma inmediata.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, '¿Qué ha sido lo mejor o el momento más divertido de tu semana?')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Frase
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="rompehielos" data-keywords="fin de semana plan emocione divertido">
+                    <div class="carisma-card-badge badge-rompehielos">Rompehielos Nivel 2</div>
+                    <div class="carisma-phrase">"¿Tienes algún plan emocionante o divertido para este fin de semana?"</div>
+                    <div class="carisma-explanation">💡 <b>Por mejo funciona:</b> Activa la anticipación al futuro (Future Cue) y abre oportunidades para futuros planes.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, '¿Tienes algún plan emocionante o divertido para este fin de semana?')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Frase
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="rompehielos" data-keywords="lugar favorito mundo volver viajes">
+                    <div class="carisma-card-badge badge-rompehielos">Rompehielos Nivel 2</div>
+                    <div class="carisma-phrase">"¿Cuál es tu lugar favorito en el mundo al que siempre tienes ganas de volver?"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Despierta recuerdos nostálgicos y vivencias de viaje con alta carga emocional positiva.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, '¿Cuál es tu lugar favorito en el mundo al que siempre tienes ganas de volver?')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Frase
+                    </button>
+                </div>
+
+                <!-- SECCION 2: QUIMICA Y CONEXION PROFUNDA -->
+                <div class="carisma-section-title" data-cat="quimica">
+                    <h3>🔥 Frases de Química & Conexión Emocional Profunda</h3>
+                    <p>Ideales para citas y charlas donde buscas salir de la superficie y generar atracción genuina.</p>
+                </div>
+
+                <div class="carisma-card" data-cat="quimica" data-keywords="pasion energia vibra cumplido">
+                    <div class="carisma-card-badge badge-quimica">Química & Conexión</div>
+                    <div class="carisma-phrase">"Se nota que le pones mucha pasión a eso. ¿De dónde viene esa energía?"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Es un cumplido profundo a su esencia y aura, no solo un comentario superficial a su aspecto físico.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, 'Se nota que le pones mucha pasión a eso. ¿De dónde viene esa energía?')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Frase
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="quimica" data-keywords="coincidencias camino razon suerte destino">
+                    <div class="carisma-card-badge badge-quimica">Química & Conexión</div>
+                    <div class="carisma-phrase">"¿Crees más en las coincidencias o en que las personas se cruzan en el camino por alguna razón?"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Pregunta de Nivel 3 con un tono coqueto e intriga filosófica sobre el destino compartido.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, '¿Crees más en las coincidencias o en que las personas se cruzan en el camino por alguna razón?')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Frase
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="quimica" data-keywords="sueño proyecto secreto tiempo postergado">
+                    <div class="carisma-card-badge badge-quimica">Química & Conexión</div>
+                    <div class="carisma-phrase">"¿Cuál es ese sueño o proyecto secreto en el que te encantaría trabajar pero no has tenido tiempo?"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Invita a la complicidad y a compartir deseos que no le cuenta a todo el mundo.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, '¿Cuál es ese sueño o proyecto secreto en el que te encantaría trabajar pero no has tenido tiempo?')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Frase
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="quimica" data-keywords="sonrisa historia observacion detalle">
+                    <div class="carisma-card-badge badge-quimica">Química & Conexión</div>
+                    <div class="carisma-phrase">"Te noté una sonrisa especial cuando dijiste eso... ¿cuál es la historia detrás de eso?"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Demuestra presencia absoluta y lectura sutil del lenguaje corporal.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, 'Te noté una sonrisa especial cuando dijiste eso... ¿cuál es la historia detrás de eso?')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Frase
+                    </button>
+                </div>
+
+                <!-- SECCION 3: CHISPAS VERBALES -->
+                <div class="carisma-section-title" data-cat="chispas">
+                    <h3>✨ Chispas Verbales (Palabras de Carga Sensorial)</h3>
+                    <p>Incorpóralas mientras escuchas para mantener alta la energía y atención de la conversación.</p>
+                </div>
+
+                <div class="carisma-sparkles-container" data-cat="chispas">
+                    <button class="sparkle-pill" onclick="copyPhrase(this, 'Fascinante...')">✨ "Fascinante..."</button>
+                    <button class="sparkle-pill" onclick="copyPhrase(this, 'Me encanta la forma en que ves las cosas.')">✨ "Me encanta la forma en que ves las cosas."</button>
+                    <button class="sparkle-pill" onclick="copyPhrase(this, 'Cuéntame más sobre eso, me dejaste intrigado.')">✨ "Cuéntame más sobre eso, me dejaste intrigado."</button>
+                    <button class="sparkle-pill" onclick="copyPhrase(this, 'Eso suena como un verdadero cambio de juego.')">✨ "Eso suena como un verdadero cambio de juego."</button>
+                    <button class="sparkle-pill" onclick="copyPhrase(this, 'Me obsesiona totalmente esa idea.')">✨ "Me obsesiona totalmente esa idea."</button>
+                    <button class="sparkle-pill" onclick="copyPhrase(this, 'Qué increíble punto, no lo había pensado de esa manera.')">✨ "Qué increíble punto..."</button>
+                </div>
+
+                <!-- SECCION 4: LOS 5 ARQUETIPOS NARRATIVOS -->
+                <div class="carisma-section-title" data-cat="arquetipos">
+                    <h3>👥 Los 5 Arquetipos Narrativos (Roles de Vanessa Van Edwards)</h3>
+                    <p>Identifica la forma en que la otra persona ve su propia historia para resonar al instante.</p>
+                </div>
+
+                <div class="archetypes-grid" data-cat="arquetipos">
+                    <div class="archetype-card">
+                        <div class="archetype-header">
+                            <span class="archetype-icon">🦸‍♂️</span>
+                            <div>
+                                <h4>1. El Héroe Ambicioso (*The Ambitious Hero*)</h4>
+                                <span class="archetype-tag tag-hero">Narrativa de Redención & Conquista</span>
+                            </div>
+                        </div>
+                        <p class="archetype-desc">Ve la vida como metas y montañas por superar. Busca crecimiento, optimización y logros futuros.</p>
+                        <div class="archetype-box">
+                            <b>🎯 Disparador de Dopamina:</b> Hablar de metas futuras, proyectos de alto nivel y récords personales.<br>
+                            <b>💬 Frase para conectar:</b> <i>"¿Cuál es la gran meta que te quita el sueño de la emoción este año?"</i><br>
+                            <b>⚠️ Qué evitar:</b> Decirle que "se relaje" o restar valor a sus ambiciones.
+                        </div>
+                    </div>
+
+                    <div class="archetype-card">
+                        <div class="archetype-header">
+                            <span class="archetype-icon">🧘‍♂️</span>
+                            <div>
+                                <h4>2. El Pragmático Satisfecho (*The Contented Pragmatist*)</h4>
+                                <span class="archetype-tag tag-pragmatist">Narrativa de Mantenimiento & Estabilidad</span>
+                            </div>
+                        </div>
+                        <p class="archetype-desc">Valora la estabilidad, el equilibrio y la eficiencia. Quiere que las cosas funcionen con tranquilidad y sin dramas.</p>
+                        <div class="archetype-box">
+                            <b>🎯 Disparador de Dopamina:</b> Soluciones prácticas, pasatiempos tranquilos y rutinas efectivas.<br>
+                            <b>💬 Frase para conectar:</b> <i>"Qué paz da ver a alguien que disfruta lo que tiene. ¿Qué rutina estás disfrutando más hoy?"</i><br>
+                            <b>⚠️ Qué evitar:</b> Forzar discursos hiper-competitivos o estresarlo con ambiciones innecesarias.
+                        </div>
+                    </div>
+
+                    <div class="archetype-card">
+                        <div class="archetype-header">
+                            <span class="archetype-icon">🤝</span>
+                            <div>
+                                <h4>3. El Ayudante Desinteresado (*The Selfless Helper*)</h4>
+                                <span class="archetype-tag tag-helper">Narrativa de Servicio & Cuidado</span>
+                            </div>
+                        </div>
+                        <p class="archetype-desc">Su identidad está en cuidar de su equipo, familia o amigos. Siente que hablar de sí mismo es "quitar".</p>
+                        <div class="archetype-box">
+                            <b>🎯 Disparador de Dopamina:</b> Sentirse verdaderamente visto, apreciado y validado en su esfuerzo invisible.<br>
+                            <b>💬 Frase para conectar:</b> <i>"Siempre cuidas de todos. Hoy quiero saber: ¿cómo estás TÚ realmente y qué te haría feliz a ti?"</i><br>
+                            <b>⚠️ Qué evitar:</b> Acaparar la conversación sin devolverle el micrófono a sus necesidades.
+                        </div>
+                    </div>
+
+                    <div class="archetype-card">
+                        <div class="archetype-header">
+                            <span class="archetype-icon">🎨</span>
+                            <div>
+                                <h4>4. El Disruptor Creativo (*The Creative Disruptor*)</h4>
+                                <span class="archetype-tag tag-disruptor">Narrativa de Subversión & Innovación</span>
+                            </div>
+                        </div>
+                        <p class="archetype-desc">Cuestiona las normas y odia el status quo. Le gusta romper lo establecido y plantear ideas radicales.</p>
+                        <div class="archetype-box">
+                            <b>🎯 Disparador de Dopamina:</b> Debates acalorados, cuestionar lo tradicional e innovación libre.<br>
+                            <b>💬 Frase para conectar:</b> <i>"Sé que odias las respuestas típicas. ¿Cuál es tu postura impopular sobre este tema?"</i><br>
+                            <b>⚠️ Qué evitar:</b> Imponer reglas rígidas o usar argumentos de autoridad tradicional.
+                        </div>
+                    </div>
+
+                    <div class="archetype-card">
+                        <div class="archetype-header">
+                            <span class="archetype-icon">🌧️</span>
+                            <div>
+                                <h4>5. El Luchador Desafortunado (*The Unlucky Struggler*)</h4>
+                                <span class="archetype-tag tag-struggler">Narrativa de Contaminación & Victimización</span>
+                            </div>
+                        </div>
+                        <p class="archetype-desc">Siente que la mala suerte arruina sus planes (humor negro a lo George Costanza). Alta empatía pero baja autoestima.</p>
+                        <div class="archetype-box">
+                            <b>🎯 Disparador de Dopamina:</b> Humor autodespreciativo compartido y empatía sincera sin sermones.<br>
+                            <b>💬 Frase para conectar:</b> <i>"Admiro cómo, a pesar de todo, mantienes ese sentido del humor tan fino. Aquí estoy para lo que sea."</i><br>
+                            <b>⚠️ Qué evitar:</b> Aplicar positividad tóxica o regañarlo intentando "arreglarlo".
+                        </div>
+                    </div>
+                </div>
+
+                
+                <!-- SECCION 5: LENGUAJE NO VERBAL (CUES) -->
+                <div class="carisma-section-title" data-cat="noverbal">
+                    <h3>🖐️ Lenguaje No Verbal & Señales Micro-Conductuales (Cues)</h3>
+                    <p>Dominio del cuerpo, voz y presencia para proyectar Calidez + Competencia al instante (Vanessa Van Edwards - <i>Cues</i>).</p>
+                </div>
+
+                <div class="carisma-card" data-cat="noverbal" data-keywords="vocal drop caida vocal hola experiment exhalar tono grave autoridad calidez">
+                    <div class="carisma-card-badge badge-noverbal">Lenguaje No Verbal</div>
+                    <div class="carisma-phrase">"Exhala al saludar y baja el tono al final de tu frase hacia tu registro grave natural (Vocal Drop)"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Evita la inflexión ascendente de pregunta (*Question Inflection*) que suena a duda o petición de aprobación. Exhalar al hablar transmite autoridad relajada y calidez instantánea.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, 'Exhala al saludar y baja el tono al final de tu frase hacia tu registro grave natural (Vocal Drop)')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Ejercicio
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="noverbal" data-keywords="manos visibilidad distancia de confianza evolucion intencion seguridad">
+                    <div class="carisma-card-badge badge-noverbal">Lenguaje No Verbal</div>
+                    <div class="carisma-phrase">"Mantén tus manos siempre visibles sobre la mesa o gesticulando suavemente a la altura del pecho"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Las manos son el detector biológico primario de intención. Esconder las manos activa alertas subconscientes de amenaza; mostrarlas desactiva defensas y genera confianza.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, 'Mantén tus manos siempre visibles sobre la mesa o gesticulando suavemente a la altura del pecho')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Ejercicio
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="noverbal" data-keywords="triple cabeceo nod escucha activa tiempo flujo apertura">
+                    <div class="carisma-card-badge badge-noverbal">Lenguaje No Verbal</div>
+                    <div class="carisma-phrase">"Realiza 3 inclinaciones de cabeza lentas y pausadas (nod... nod... nod...) mientras la otra persona habla"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Le indica al cerebro del interlocutor que estás escuchando con interés real. Las investigaciones muestran que hace que la persona hable <b>de 3 a 4 veces más tiempo</b>.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, 'Realiza 3 inclinaciones de cabeza lentas y pausadas (nod... nod... nod...) mientras la otra persona habla')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Ejercicio
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="noverbal" data-keywords="cejas eyebrow raise reconocimiento saludo apertura curiosidad">
+                    <div class="carisma-card-badge badge-noverbal">Lenguaje No Verbal</div>
+                    <div class="carisma-phrase">"Levanta sutilmente las cejas por una fracción de segundo al hacer contacto visual o escuchar una idea"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Es la micro-señal biológica universal de reconocimiento positivo y apertura: <i>"Te veo, me agradas y estoy abierto a escucharte"</i>.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, 'Levanta sutilmente las cejas por una fracción de segundo al hacer contacto visual o escuchar una idea')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Ejercicio
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="noverbal" data-keywords="cabeza inclinacion head tilt empatia calidez escucha sincera">
+                    <div class="carisma-card-badge badge-noverbal">Lenguaje No Verbal</div>
+                    <div class="carisma-phrase">"Inclina ligeramente la cabeza hacia un lado cuando la otra persona comparta algo emocional o importante"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Señal no verbal universal de máxima calidez y empatía. Expose el cuello de forma sutil, lo que transmite cero agresividad y atención dedicada.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, 'Inclina ligeramente la cabeza hacia un lado cuando la otra persona comparta algo emocional o importante')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Ejercicio
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="noverbal" data-keywords="torso fronting orientacion presencia respeto alineacion">
+                    <div class="carisma-card-badge badge-noverbal">Lenguaje No Verbal</div>
+                    <div class="carisma-phrase">"Apunta con tu torso, corazón y pies directamente hacia la persona con la que estás hablando (Fronting)"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Transmite presencia total. Girar solo el cuello mientras el cuerpo apunta hacia la salida indica ganas de irse o desinterés.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, 'Apunta con tu torso, corazón y pies directamente hacia la persona con la que estás hablando (Fronting)')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Ejercicio
+                    </button>
+                </div>
+
+                <div class="carisma-card" data-cat="noverbal" data-keywords="parpado entrecerrar enfoque squint evaluacion concentracion">
+                    <div class="carisma-card-badge badge-noverbal">Lenguaje No Verbal</div>
+                    <div class="carisma-phrase">"Entrecierra levemente los párpados inferiores sin fruncir el ceño para evaluar una idea compleja"</div>
+                    <div class="carisma-explanation">💡 <b>Por qué funciona:</b> Señal micro-conductual de concentración analítica, enfoque profundo e interés serio en el contenido que te comparten.</div>
+                    <button class="copy-phrase-btn" onclick="copyPhrase(this, 'Entrecierra levemente los párpados inferiores sin fruncir el ceño para evaluar una idea compleja')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copiar Ejercicio
+                    </button>
+                </div>
+
+                <!-- SECCION 5: SIMULADOR DE SALIDAS ELEGANTES -->
+                
+                <!-- SECCIÓN MONÓLOGO DE HAMLET -->
+                <div class="carisma-section-title" data-cat="monologos">
+                    <h3>🎭 Monólogo Maestro de Oratoria: Hamlet ("To be or not to be")</h3>
+                    <p>Guía de estudio interactiva — Interpretación definitiva de Kenneth Branagh (1996) con guía fonética, pausas y memorización.</p>
+                </div>
+
+                <div class="monologo-interactive-wrapper" data-cat="monologos">
+                    <!-- BARRA DE ACCIONES PRINCIPAL -->
+                    <div class="monologo-toolbar">
+                        <button class="monologo-btn btn-yt-search" onclick="openYtVideo('https://www.youtube.com/watch?v=SjuZq-8PUw0')">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            🎬 Ver Video (Branagh 1996)
+                        </button>
+                        <button class="monologo-btn btn-toggle-mode" id="btn-toggle-english" onclick="toggleMonologoMode('english')">
+                            👁️ Ocultar/Mostrar Inglés
+                        </button>
+                        <button class="monologo-btn btn-toggle-mode" id="btn-toggle-spanish" onclick="toggleMonologoMode('spanish')">
+                            🇪🇸 Ocultar/Mostrar Traducción
+                        </button>
+                        <button class="monologo-btn btn-copy-full" onclick="copyFullMonologoText()">
+                            📋 Copiar Monólogo Completo
+                        </button>
+                    </div>
+
+                    <!-- TARJETAS RETRÁCTILES POR BLOQUE DE TIEMPO -->
+                    <div class="monologo-accordion">
+                        
+                        <!-- PARTE 1 -->
+                        <details class="monologo-card" open>
+                            <summary class="monologo-card-header">
+                                <div class="header-left">
+                                    <span class="part-badge">PARTE 1</span>
+                                    <span class="part-time">⏱️ 0:00 - 0:35</span>
+                                    <span class="part-title">La Pregunta e Intimidad Inicial</span>
+                                </div>
+                                <span class="tag-technique">Susurro Resonante</span>
+                            </summary>
+                            <div class="monologo-card-body">
+                                <div class="english-box" id="block-1-en">
+                                    <p class="line">To be, or not to be, that is the question:</p>
+                                    <p class="line">Whether 'tis nobler in the mind to suffer</p>
+                                    <p class="line">The slings and arrows of outrageous fortune,</p>
+                                    <p class="line">Or to take arms against a sea of troubles</p>
+                                    <p class="line">And by opposing end them.</p>
+                                </div>
+                                <div class="phonetic-box" id="block-1-phonetic">
+                                    <div class="box-subtitle">🎙️ Pronunciación Fonética y Ritmo (Énfasis y Pausas):</div>
+                                    <div class="phonetic-lines">
+                                        • tu <b>BÍ</b> / or <b>NOT</b> tu <b>BÍ</b> // <b>DAT</b> is de <b>CUES-chan</b>:<br>
+                                        • <b>WUE-der</b> tis <b>NOU-bler</b> in de <b>MAIND</b> tu <b>SA-fer</b><br>
+                                        • de <b>SLINGS</b> and <b>A-rous</b> ov aut-<b>RÉI-djas</b> <b>FOR-tiun</b> /<br>
+                                        • or tu <b>TEIK ARMS</b> a-<b>GEINST</b> a <b>SÍ</b> ov <b>TRA-bals</b> /<br>
+                                        • and bai o-<b>POU-sing</b> <b>END</b> dem.
+                                    </div>
+                                </div>
+                                <div class="spanish-box">
+                                    <div class="box-subtitle">🇪🇸 Traducción al Español:</div>
+                                    <p class="spanish-text">Ser o no ser, esa es la cuestión: si es más noble para el alma soportar las pedradas y flechazos de la áspera fortuna, o armarse contra un mar de adversidades y, oponiéndose a ellas, darles fin.</p>
+                                </div>
+                                <div class="acting-tip-box">
+                                    🎭 <b>Indicación Escénica:</b> Voz en susurro resonante muy cerca del espejo. Marcar con nitidez las consonantes <code>T</code> y <code>P</code>. Mirada fija en tus propios ojos.
+                                </div>
+                                <div class="card-footer-actions">
+                                    <button class="mini-btn" onclick="copyTextFromElement('block-1-en')">📋 Copiar Texto Inglés</button>
+                                    <button class="mini-btn" onclick="copyTextFromElement('block-1-phonetic')">🎙️ Copiar Fonética</button>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- PARTE 2 -->
+                        <details class="monologo-card">
+                            <summary class="monologo-card-header">
+                                <div class="header-left">
+                                    <span class="part-badge">PARTE 2</span>
+                                    <span class="part-time">⏱️ 0:35 - 1:10</span>
+                                    <span class="part-title">El Anhelo de Descanso</span>
+                                </div>
+                                <span class="tag-technique">Melancolía & Exhalación</span>
+                            </summary>
+                            <div class="monologo-card-body">
+                                <div class="english-box" id="block-2-en">
+                                    <p class="line">To die—to sleep,</p>
+                                    <p class="line">No more; and by a sleep to say we end</p>
+                                    <p class="line">The heart-ache and the thousand natural shocks</p>
+                                    <p class="line">That flesh is heir to: 'tis a consummation</p>
+                                    <p class="line">Devoutly to be wish'd.</p>
+                                </div>
+                                <div class="phonetic-box" id="block-2-phonetic">
+                                    <div class="box-subtitle">🎙️ Pronunciación Fonética y Ritmo:</div>
+                                    <div class="phonetic-lines">
+                                        • tu <b>DÁI</b> // tu <b>SLÍP</b> /<br>
+                                        • <b>nou MOR</b> // and bai a <b>SLÍP</b> tu <b>SÉI</b> wi <b>END</b><br>
+                                        • de <b>HART-eik</b> and de <b>TAU-zand</b> <b>NA-tchu-ral</b> <b>SHOKS</b><br>
+                                        • dat <b>FLESH</b> is <b>ÉAR</b> tu // tis a con-sa-<b>MÉI-shan</b><br>
+                                        • di-<b>VAUT-li</b> tu bi <b>WISHT</b>.
+                                    </div>
+                                </div>
+                                <div class="spanish-box">
+                                    <div class="box-subtitle">🇪🇸 Traducción al Español:</div>
+                                    <p class="spanish-text">Morir... dormir, nada más; y decir que con un sueño ponemos fin al dolor del corazón y a los mil golpes naturales que hereda la carne, es una consumación deseada con devoción.</p>
+                                </div>
+                                <div class="acting-tip-box">
+                                    🎭 <b>Indicación Escénica:</b> Exhalación melancólica. Baja suavemente el tono de voz. Eleva la mano hacia el pecho al pensar en la daga.
+                                </div>
+                                <div class="card-footer-actions">
+                                    <button class="mini-btn" onclick="copyTextFromElement('block-2-en')">📋 Copiar Texto Inglés</button>
+                                    <button class="mini-btn" onclick="copyTextFromElement('block-2-phonetic')">🎙️ Copiar Fonética</button>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- PARTE 3 -->
+                        <details class="monologo-card">
+                            <summary class="monologo-card-header">
+                                <div class="header-left">
+                                    <span class="part-badge">PARTE 3</span>
+                                    <span class="part-time">⏱️ 1:10 - 1:45</span>
+                                    <span class="part-title">El Giro Dramático / El Obstáculo</span>
+                                </div>
+                                <span class="tag-technique alert-tag">Pausa Total & Revelación</span>
+                            </summary>
+                            <div class="monologo-card-body">
+                                <div class="english-box" id="block-3-en">
+                                    <p class="line">To die, to sleep;</p>
+                                    <p class="line">To sleep, perchance to dream—ay, there's the rub:</p>
+                                    <p class="line">For in that sleep of death what dreams may come</p>
+                                    <p class="line">When we have shuffled off this mortal coil,</p>
+                                    <p class="line">Must give us pause.</p>
+                                </div>
+                                <div class="phonetic-box" id="block-3-phonetic">
+                                    <div class="box-subtitle">🎙️ Pronunciación Fonética y Ritmo:</div>
+                                    <div class="phonetic-lines">
+                                        • tu <b>DÁI</b> / tu <b>SLÍP</b> //<br>
+                                        • tu <b>SLÍP</b> / per-<b>CHANS</b> tu <b>DRÍM</b> // <b>ÁI</b> / ders de <b>RAB</b> //<br>
+                                        • for in <b>DAT</b> slíp ov <b>DET</b> / wuat <b>DRÍMS</b> mei <b>KAM</b><br>
+                                        • huen wi hav <b>SHA-fald</b> <b>OF</b> dis <b>MOR-tal</b> <b>COIL</b> /<br>
+                                        • mast <b>GIV</b> as <b>POS</b>.
+                                    </div>
+                                </div>
+                                <div class="spanish-box">
+                                    <div class="box-subtitle">🇪🇸 Traducción al Español:</div>
+                                    <p class="spanish-text">Morir, dormir; dormir, tal vez soñar. Sí, ahí está el obstáculo: porque en ese sueño de la muerte, qué sueños podrán venir cuando hayamos abandonado esta envoltura mortal, eso nos detiene.</p>
+                                </div>
+                                <div class="acting-tip-box">
+                                    🎭 <b>Indicación Escénica:</b> Congelamiento total en <i>"Ay, there's the rub"</i>. Abre los ojos con la fría duda de que la muerte no borra los sufrimientos.
+                                </div>
+                                <div class="card-footer-actions">
+                                    <button class="mini-btn" onclick="copyTextFromElement('block-3-en')">📋 Copiar Texto Inglés</button>
+                                    <button class="mini-btn" onclick="copyTextFromElement('block-3-phonetic')">🎙️ Copiar Fonética</button>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- PARTE 4 -->
+                        <details class="monologo-card">
+                            <summary class="monologo-card-header">
+                                <div class="header-left">
+                                    <span class="part-badge">PARTE 4</span>
+                                    <span class="part-time">⏱️ 1:45 - 2:30</span>
+                                    <span class="part-title">La Calamidad y la Pregunta Final</span>
+                                </div>
+                                <span class="tag-technique gold-tag">Proyección & Clímax</span>
+                            </summary>
+                            <div class="monologo-card-body">
+                                <div class="english-box" id="block-4-en">
+                                    <p class="line">There's the respect</p>
+                                    <p class="line">That makes calamity of so long life;</p>
+                                    <p class="line">For who would bear the whips and scorns of time,</p>
+                                    <p class="line">The oppressor's wrong, the proud man's contumely,</p>
+                                    <p class="line">The pangs of disprized love, the law's delay,</p>
+                                    <p class="line">The insolence of office, and the spurns</p>
+                                    <p class="line">That patient merit of the unworthy takes,</p>
+                                    <p class="line">When he himself might his quietus make</p>
+                                    <p class="line">With a bare bodkin?</p>
+                                </div>
+                                <div class="phonetic-box" id="block-4-phonetic">
+                                    <div class="box-subtitle">🎙️ Pronunciación Fonética y Ritmo:</div>
+                                    <div class="phonetic-lines">
+                                        • ders de <b>ris-PEKT</b> /<br>
+                                        • dat <b>MEIKS</b> ca-<b>LA-mi-ti</b> ov sou <b>LONG</b> <b>LAIF</b> //<br>
+                                        • for <b>HU</b> wuld <b>BÉAR</b> de <b>HUIPS</b> and <b>SCORNS</b> ov <b>TAIM</b> /<br>
+                                        • di o-<b>PRE-sors</b> <b>RONG</b> / de <b>PRAUD</b> mans <b>CON-tiu-mi-li</b> /<br>
+                                        • de <b>PANGS</b> ov dis-<b>PRAIZD</b> <b>LAV</b> / de <b>LOS</b> di-<b>LÉI</b> /<br>
+                                        • di <b>IN-so-lens</b> ov <b>O-fis</b> / and de <b>SPURNS</b><br>
+                                        • dat <b>PÉI-shent</b> <b>ME-rit</b> ov di un-<b>HWER-di</b> <b>TEIKS</b> /<br>
+                                        • huen <b>HI</b> him-<b>SELF</b> mait his cuai-<b>Í-tas</b> <b>MEIK</b><br>
+                                        • huith a <b>BÉR</b> <b>BOD-kin</b>?
+                                    </div>
+                                </div>
+                                <div class="spanish-box">
+                                    <div class="box-subtitle">🇪🇸 Traducción al Español:</div>
+                                    <p class="spanish-text">Ahí está la razón que hace tan larga la vida de la calamidad. ¿Quién aguantaría los azotes y burlas del tiempo, las injurias del opresor, las afrentas del soberbio, los dolores del amor desdeñado, las tardanzas de la ley, la insolencia del poder y los desdenes que el mérito paciente recibe de los indignos, cuando uno mismo podría darse el remate con una simple daga?</p>
+                                </div>
+                                <div class="acting-tip-box">
+                                    🎭 <b>Indicación Escénica:</b> Aumenta la proyección vocal. Confronta con la mirada directamente al espectador en vivo.
+                                </div>
+                                <div class="card-footer-actions">
+                                    <button class="mini-btn" onclick="copyTextFromElement('block-4-en')">📋 Copiar Texto Inglés</button>
+                                    <button class="mini-btn" onclick="copyTextFromElement('block-4-phonetic')">🎙️ Copiar Fonética</button>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- PLAN DE ENTRENAMIENTO -->
+                        <details class="monologo-card training-card">
+                            <summary class="monologo-card-header">
+                                <div class="header-left">
+                                    <span class="part-badge gold-badge">MÉTODO</span>
+                                    <span class="part-title">Plan de Entrenamiento en 4 Fases para Presentación en Vivo</span>
+                                </div>
+                                <span class="tag-technique gold-tag">Guía de Estudio</span>
+                            </summary>
+                            <div class="monologo-card-body">
+                                <div class="training-steps-grid">
+                                    <div class="step-box">
+                                        <div class="step-num">1</div>
+                                        <div class="step-content"><b>Fase 1 (Oído a 0.75x):</b> Escucha a Kenneth Branagh a velocidad reducida siguiendo la línea fonética con pausas marcadas.</div>
+                                    </div>
+                                    <div class="step-box">
+                                        <div class="step-num">2</div>
+                                        <div class="step-content"><b>Fase 2 (Muscular la Boca):</b> Lee en voz alta exagerando el movimiento de tus labios en las palabras en <b>NEGRITA MAYÚSCULA</b>.</div>
+                                    </div>
+                                    <div class="step-box">
+                                        <div class="step-num">3</div>
+                                        <div class="step-content"><b>Fase 3 (Modo Memorización):</b> Haz clic en el botón <i>"Ocultar Inglés"</i> arriba y trata de decir el monólogo de memoria.</div>
+                                    </div>
+                                    <div class="step-box">
+                                        <div class="step-num">4</div>
+                                        <div class="step-content"><b>Fase 4 (En Vivo ante un Grupo):</b> Inicia en un susurro atrapante, mantén contacto visual y usa pausas dramáticas.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                    </div>
+                </div>
+
+
+                <div class="carisma-section-title" data-cat="salidas">
+                    <h3>🚪 Simulador de Salida Elegante (*The Graceful Exit*)</h3>
+                    <p>Aplica la regla psicológica del <b>Peak-End Effect</b>: <code>Señal Futura + Cumplido/Acción</code>.</p>
+                </div>
+
+                <div class="graceful-exit-card" data-cat="salidas">
+                    <div class="exit-form-group">
+                        <label>Selecciona el Contexto de la Conversación:</label>
+                        <select id="exit-context-select" class="modal-input" onchange="generateExitFormula()">
+                            <option value="cita">🥂 Cita o Salida Casual (Dejar ganas de más)</option>
+                            <option value="fiesta">🎉 Fiesta / Evento Social</option>
+                            <option value="trabajo">💼 Networking / Evento Profesional</option>
+                        </select>
+                    </div>
+                    <div id="exit-output-box" class="exit-output-box">
+                        <!-- Generado dinámicamente por JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="initial_data.js"></script>
+    <script src="app.js?v=20260908_1730"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registrado:', reg.scope))
+                    .catch(err => console.log('Error registrando Service Worker:', err));
+            });
+        }
+    </script>
+</body>
+</html>
