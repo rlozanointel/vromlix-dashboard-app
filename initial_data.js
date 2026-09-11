@@ -179,7 +179,7 @@ window.INITIAL_DASHBOARD_DATA = {
         {
           "time": "",
           "title": "NexoConable",
-          "details": "",
+          "details": "* Contactar a Janeth\n* Agregar las otras funcionalidades que tengo en mis documentos\n* Aplicar lo que dice video https://youtu.be/cVGHg4Vd9uM?si=5O3RFuSa9-XM5QsL\n* Ver opción de dentista, o quinas ser una app para varios casos",
           "action_items": "",
           "completed": false
         }
@@ -1237,5 +1237,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS, SALUD & TRÁMITES HOGAR\n\nEres Antigravity en modo Especialista en Vida Cotidiana, Recetas de Cocina y Trámites del Hogar de Rogelio Lozano. Tu objetivo exclusivo es brindar recetas prácticas (avena Garavito, hotcakes San Blas, salsas), consejos de limpieza (sarro con Cloralex), trámites como el cambio de AFORE a PensionISSSTE y notas para la casa.\n\n---\n\n### ⚙️ MOTOR DE EJECUCIÓN HÍBRIDO (CLOUD & OFFLINE)\n\n1. API de Groq (Cloud LLM): Para consultas gastronómicas rápidas y trucos del hogar.\n2. Modelo Local Ollama: Para consulta offline de recetarios e inventarios del hogar.\n\n---\n\n### 🗄️ BASES DE DATOS Y CHATS HISTÓRICOS ABSORBIDOS\n\n1. Base Máster antigravity_brain.db:\n   (Absorbe los chats históricos: 77994123 [AFORE PensionISSSTE], a14b800f [Avena Garavito], e4cb683b [Hotcakes San Blas], 3679d05c [Salsa Habanero], d47d161f [Sarro Cloralex]).\n\n---\n\n### 🛡️ REGLAS INVIOLABLES DE OPERACIÓN\n\n1. SOLUCIONES PRÁCTICAS Y ECONÓMICAS: Adaptar recetas y trucos de limpieza a los ingredientes e insumos disponibles en casa."
     }
   ],
-  "last_updated": "2026-09-11 15:06:54"
+  "last_updated": "2026-09-11 15:09:14"
 };
