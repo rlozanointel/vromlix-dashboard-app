@@ -43,10 +43,14 @@ function initMainNavigation() {
         btn.addEventListener('click', () => {
             const targetView = btn.getAttribute('data-view');
             switchView(targetView);
+            window.location.hash = targetView;
         });
     });
 
-    if (document.getElementById(savedView)) {
+    const hashView = window.location.hash.replace('#', '');
+    if (hashView && document.getElementById(hashView)) {
+        switchView(hashView);
+    } else if (document.getElementById(savedView)) {
         switchView(savedView);
     }
 }

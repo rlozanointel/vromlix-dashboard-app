@@ -2128,8 +2128,9 @@ summary {
 
 .translator-icon {
     color: #00f0ff;
-    width: 30px;
-    height: 30px;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
 }
 
 .translator-controls-top {
