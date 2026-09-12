@@ -1831,9 +1831,21 @@ function initTranslator() {
     let currentTranslationState = null;
     let historyState = JSON.parse(localStorage.getItem('vromlix_translator_history') || '[]');
 
+    // TRADUCCIÓN AUTOMÁTICA AL ESCRIBIR (DEBOUNCE DE 400MS)
+    const debouncedAutoTranslate = debounce(() => {
+        if (inputArea && inputArea.value.trim().length > 0) {
+            performTranslation(true);
+        }
+    }, 400);
+
     if (inputArea && charCounter) {
         inputArea.addEventListener('input', () => {
             charCounter.textContent = `${inputArea.value.length} caracteres`;
+            if (inputArea.value.trim().length > 0) {
+                debouncedAutoTranslate();
+            } else if (resultsGrid) {
+                resultsGrid.classList.add('hidden');
+            }
         });
     }
 
@@ -1845,6 +1857,15 @@ function initTranslator() {
         });
     }
 
+    if (directionSelect) {
+        directionSelect.addEventListener('change', () => {
+            if (inputArea && inputArea.value.trim().length > 0) {
+                performTranslation(false);
+            }
+        });
+    }
+
+    // SPEECH RECOGNITION (MICRÓFONO STT)
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
         recognition = new SpeechRecognition();
@@ -1855,7 +1876,7 @@ function initTranslator() {
             isRecording = true;
             micBtn.classList.add('recording');
             micStatusLabel.textContent = 'Escuchando... ¡Habla ahora!';
-            showToast('Micrófono activado. Habla a tus audífonos/micrófono.', 'info');
+            showToast('Micrófono activado. Habla a tu micrófono/audífonos.', 'info');
         };
 
         recognition.onresult = (event) => {
@@ -1866,6 +1887,7 @@ function initTranslator() {
             if (inputArea) {
                 inputArea.value = transcript;
                 charCounter.textContent = `${transcript.length} caracteres`;
+                debouncedAutoTranslate();
             }
         };
 
@@ -1874,7 +1896,16 @@ function initTranslator() {
             isRecording = false;
             micBtn.classList.remove('recording');
             micStatusLabel.textContent = 'Hablar por Micrófono';
-            showToast(`Error de micrófono: ${event.error}`, 'warning');
+
+            if (event.error === 'not-allowed' || event.error === 'permission-denied') {
+                showToast('⚠️ Permiso de micrófono bloqueado. Haz clic en el icono de candado al lado de http://localhost:8080 y selecciona Permitir Micrófono.', 'warning');
+            } else if (event.error === 'no-speech') {
+                showToast('No se escuchó voz. Presiona el micrófono y habla claro.', 'warning');
+            } else if (event.error === 'network') {
+                showToast('El reconocimiento de voz de Chrome requiere conexión a internet.', 'warning');
+            } else {
+                showToast(`Error de micrófono: ${event.error}`, 'warning');
+            }
         };
 
         recognition.onend = () => {
@@ -1882,43 +1913,59 @@ function initTranslator() {
             micBtn.classList.remove('recording');
             micStatusLabel.textContent = 'Hablar por Micrófono';
             if (inputArea && inputArea.value.trim().length > 0) {
-                performTranslation();
+                performTranslation(false);
             }
         };
     } else {
         if (micBtn) micBtn.title = 'Tu navegador no soporta Web Speech API de micrófono.';
     }
 
+    function startSpeechRecognition() {
+        const dir = directionSelect ? directionSelect.value : 'auto';
+        recognition.lang = dir === 'es_en' ? 'es-ES' : 'en-US';
+        try {
+            recognition.start();
+        } catch(e) {
+            console.error(e);
+        }
+    }
+
     if (micBtn) {
         micBtn.addEventListener('click', () => {
             if (!recognition) {
-                showToast('Tu navegador no es compatible con reconocimiento de voz.', 'warning');
+                showToast('Tu navegador no es compatible con reconocimiento de voz. Usa Chrome o Brave.', 'warning');
                 return;
             }
             if (isRecording) {
                 recognition.stop();
             } else {
-                const dir = directionSelect ? directionSelect.value : 'auto';
-                recognition.lang = dir === 'es_en' ? 'es-ES' : 'en-US';
-                try {
-                    recognition.start();
-                } catch(e) {
-                    console.error(e);
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    navigator.mediaDevices.getUserMedia({ audio: true })
+                        .then((stream) => {
+                            stream.getTracks().forEach(track => track.stop());
+                            startSpeechRecognition();
+                        })
+                        .catch((err) => {
+                            console.warn('getUserMedia error:', err);
+                            showToast('⚠️ Permiso de micrófono denegado. Haz clic en el candado de la URL y activa el Micrófono.', 'warning');
+                        });
+                } else {
+                    startSpeechRecognition();
                 }
             }
         });
     }
 
-    function performTranslation() {
+    function performTranslation(isAuto = false) {
         if (!inputArea || !inputArea.value.trim()) {
-            showToast('Por favor escribe o habla una frase para traducir.', 'warning');
+            if (!isAuto) showToast('Por favor escribe o habla una frase para traducir.', 'warning');
             return;
         }
 
         const queryText = inputArea.value.trim();
         const direction = directionSelect ? directionSelect.value : 'auto';
 
-        if (translateBtn) {
+        if (translateBtn && !isAuto) {
             translateBtn.classList.add('loading');
             translateBtn.disabled = true;
         }
@@ -1935,10 +1982,10 @@ function initTranslator() {
                 translateBtn.disabled = false;
             }
             if (data.error) {
-                showToast(data.error, 'warning');
+                if (!isAuto) showToast(data.error, 'warning');
                 return;
             }
-            renderTranslationResults(data);
+            renderTranslationResults(data, isAuto);
             addToHistory(data.original, data.translated, data.target_lang);
         })
         .catch(err => {
@@ -1947,7 +1994,6 @@ function initTranslator() {
                 translateBtn.disabled = false;
             }
             console.error('Error traduciendo:', err);
-            showToast('Error de conexión al servidor de traducción.', 'warning');
         });
     }
 
@@ -1962,7 +2008,7 @@ function initTranslator() {
         });
     }
 
-    function renderTranslationResults(data) {
+    function renderTranslationResults(data, isAuto = false) {
         currentTranslationState = data;
         if (resultsGrid) resultsGrid.classList.remove('hidden');
 
@@ -2002,7 +2048,9 @@ function initTranslator() {
             }
         }
 
-        speakText(data.translated, data.target_lang === 'es' ? 'es-ES' : 'en-US');
+        if (!isAuto) {
+            speakText(data.translated, data.target_lang === 'es' ? 'es-ES' : 'en-US');
+        }
     }
 
     function speakText(textToSpeak, langCode = 'en-US', rate = 1.0) {

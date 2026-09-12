@@ -199,17 +199,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
     {
-      "Official Title": "Scary Movie",
-      "Spanish Title": "Una película de miedo (Scary Movie)",
-      "Genres": "Comedy",
-      "Release Year": "2026",
-      "Release Date": "2026-06-03",
-      "IMDb Rating": 4.9,
-      "Vromlix Score": 37,
-      "Plot Summary": "Twenty-six years after outrunning a suspiciously familiar masked killer, the Core Four are back in the killer's crosshairs and no horror movie IP is safe.",
-      "IMDb Link": "https://www.imdb.com/title/tt32093575"
-    },
-    {
       "Official Title": "Scare Out",
       "Spanish Title": "Susto total",
       "Genres": "Crime, Thriller, Action",
@@ -265,25 +254,14 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27665778/"
     },
     {
-      "Official Title": "Masters of the Universe",
-      "Spanish Title": "Amos del Universo",
-      "Genres": "Action, Fantasy, Science Fiction",
-      "Release Year": "2026",
-      "Release Date": "2026-06-03",
-      "IMDb Rating": 6.4,
-      "Vromlix Score": 58,
-      "Plot Summary": "After being separated for 15 years, the Sword of Power leads Prince Adam back to Eternia, where he discovers his home shattered under the fiendish rule of Skeletor. To save his family and his world, Adam must join forces with his closest allies, Teela and Duncan/Man-At-Arms, and embrace his true destiny as He-Man — the most powerful man in the universe.",
-      "IMDb Link": "https://www.imdb.com/title/tt0427340/"
-    },
-    {
-      "Official Title": "Old Boyfriends",
-      "Spanish Title": "Ogro",
-      "Genres": "Drama, Comedy, Romance",
+      "Official Title": "Operación Ogro",
+      "Spanish Title": "Operación Ogro (Ogro)",
+      "Genres": "Drama, Thriller",
       "Release Year": "1979",
       "Release Date": "1979-03-22",
       "IMDb Rating": 5.8,
       "Vromlix Score": 59,
-      "Plot Summary": "When her marriage falls apart, a psychiatrist seeks out those of her former boyfriends who left the biggest impact on her life, mostly in a bad way.",
+      "Plot Summary": "Dramatización de la Operación Ogro: el atentado cometido en 1973 en Madrid contra el presidente del gobierno español Luis Carrero Blanco.",
       "IMDb Link": "https://www.imdb.com/title/tt0079660/"
     },
     {
@@ -863,10 +841,10 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "Spider-Noir",
       "Spanish Title": "Spider-Noir",
-      "Current Season": 0,
-      "Current Episode": 0,
+      "Current Season": 1,
+      "Current Episode": 2,
       "Show Status": "Returning Series",
-      "Watch Status": "Unstarted",
+      "Watch Status": "Watching",
       "Vromlix Score": 78,
       "Plot Summary": "Ben Reilly, an aging and down on his luck private investigator in 1930s New York, is forced to grapple with his past life as the city's one and only superhero.",
       "IMDb Link": "https://www.imdb.com/title/tt30460310/"
@@ -885,8 +863,8 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "#Luimelia",
       "Spanish Title": "#Luimelia",
-      "Current Season": 1,
-      "Current Episode": 6,
+      "Current Season": 3,
+      "Current Episode": 7,
       "Show Status": "Ended",
       "Watch Status": "Watching",
       "Vromlix Score": 80,
@@ -1237,5 +1215,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-09-12 17:54:35"
+  "last_updated": "2026-09-12 19:15:08"
 };

@@ -2215,6 +2215,17 @@ summary {
     flex-wrap: wrap;
 }
 
+.mic-svg,
+.btn-translator-mic svg,
+.btn-translator-action svg,
+.btn-audio-action svg {
+    width: 18px !important;
+    height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
+    flex-shrink: 0;
+}
+
 .btn-translator-mic {
     display: flex;
     align-items: center;
