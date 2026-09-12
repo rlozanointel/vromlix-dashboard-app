@@ -1986,7 +1986,7 @@ function initTranslator() {
                 return;
             }
             renderTranslationResults(data, isAuto);
-            addToHistory(data.original, data.translated, data.target_lang);
+            addToHistory(data.original, data.translated, data.target_lang, isAuto);
         })
         .catch(err => {
             if (translateBtn) {
@@ -2099,9 +2099,14 @@ function initTranslator() {
         });
     }
 
-    function addToHistory(original, translated, targetLang) {
-        historyState = historyState.filter(h => h.original.toLowerCase() !== original.toLowerCase());
-        historyState.unshift({ original, translated, targetLang, timestamp: Date.now() });
+    function addToHistory(original, translated, targetLang, isAuto = false) {
+        if (!original || original.trim().length < 3) return;
+        const cleanOrig = original.trim();
+        // Ignore single characters or trailing incomplete words if triggered by auto-translate
+        if (isAuto && cleanOrig.split(' ').slice(-1)[0].length < 3 && cleanOrig.length < 5) return;
+
+        historyState = historyState.filter(h => h.original.toLowerCase() !== cleanOrig.toLowerCase() && h.original.trim().length >= 3);
+        historyState.unshift({ original: cleanOrig, translated, targetLang, timestamp: Date.now() });
         if (historyState.length > 20) historyState.pop();
         localStorage.setItem('vromlix_translator_history', JSON.stringify(historyState));
         renderHistory();
@@ -2110,6 +2115,10 @@ function initTranslator() {
     function renderHistory() {
         if (!historyListDisplay) return;
         historyListDisplay.innerHTML = '';
+        
+        // Clean out legacy partial garbage from history
+        historyState = historyState.filter(item => item && item.original && item.original.trim().length >= 3 && !/^[a-z]{1,2}$/i.test(item.original.trim()));
+
         if (historyState.length === 0) {
             historyListDisplay.innerHTML = '<span style="font-size: 0.85rem; color: hsl(220, 15%, 50%); padding: 6px;">Sin búsquedas recientes.</span>';
             return;
