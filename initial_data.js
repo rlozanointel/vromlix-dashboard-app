@@ -287,6 +287,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt0079660/"
     },
     {
+      "Official Title": "Hasta el fin del mundo",
+      "Spanish Title": "Hasta el fin del mundo",
+      "Genres": "Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-07-23",
+      "IMDb Rating": 6.0,
+      "Vromlix Score": 60,
+      "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
+      "IMDb Link": "https://www.imdb.com/title/tt30332656/"
+    },
+    {
       "Official Title": "Enola Holmes 3",
       "Spanish Title": "Enola Holmes 3",
       "Genres": "Adventure, Crime, Mystery",
@@ -307,17 +318,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 62.7,
       "Plot Summary": "Grappling with his past after a life of crime and murder, Robin Hood finds himself gravely injured after a battle he thought would be his last. In the hands of a mysterious woman, he is offered a chance at salvation.",
       "IMDb Link": "https://www.imdb.com/title/tt32273171/"
-    },
-    {
-      "Official Title": "Hasta el fin del mundo",
-      "Spanish Title": "Hasta el fin del mundo",
-      "Genres": "Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-07-23",
-      "IMDb Rating": 6.7,
-      "Vromlix Score": 67,
-      "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
-      "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
     {
       "Official Title": "Salvation",
@@ -437,7 +437,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-06-13",
       "IMDb Rating": 7.8,
       "Vromlix Score": 83,
-      "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbeth Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbeth's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
+      "Plot Summary": "Hoping to rebuild their lives following a family tragedy, a Romanian couple and their children relocate to a remote Norwegian village, but their fragile fresh start begins to unravel when their young daughter arrives at school covered in bruises.",
       "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
@@ -1237,5 +1237,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-09-12 12:39:09"
+  "last_updated": "2026-09-12 17:35:11"
 };

@@ -80,6 +80,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                 <span>Mente</span>
             </button>
+            <button class="nav-tab-btn" data-view="view-traductor">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span>Traductor</span>
+            </button>
         </nav>
 
         <!-- MAIN LAYOUT VVIEWS -->
@@ -996,6 +1000,123 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+        <!-- VISTA: TRADUCTOR E INTERPRETE EN TIEMPO REAL -->
+        <div id="view-traductor" class="dashboard-view">
+            <div class="section-card translator-hero-card">
+                <div class="card-header">
+                    <div class="header-title-group">
+                        <svg class="header-icon translator-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <div>
+                            <h2>Traductor Rápido & Intérprete Educativo</h2>
+                            <p class="subtitle-text">Traducción Inglés ↔ Español en tiempo real con dictado por micrófono, voz a audífonos, fonética y ejemplos prácticos.</p>
+                        </div>
+                    </div>
+                    <div class="translator-controls-top">
+                        <select id="translator-direction" class="translator-select">
+                            <option value="auto">🌐 Auto-Detectar Idioma</option>
+                            <option value="en_es">🇺🇸 Inglés ➔ 🇲🇽 Español</option>
+                            <option value="es_en">🇲🇽 Español ➔ 🇺🇸 Inglés</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ÁREA DE ENTRADA Y MICRÓFONO -->
+                <div class="translator-input-container">
+                    <div class="input-wrapper-rel">
+                        <textarea id="translator-input" class="translator-textarea" rows="3" placeholder="Escribe o habla por el micrófono (ej: How are you doing today? / Romper un huevo)..."></textarea>
+                        <div class="input-action-badge">
+                            <span id="char-counter">0 caracteres</span>
+                            <button id="clear-translator-btn" class="btn-icon-subtle" title="Limpiar texto">✕</button>
+                        </div>
+                    </div>
+
+                    <div class="translator-btn-bar">
+                        <button id="translator-mic-btn" class="btn-translator-mic" title="Presionar para hablar por el micrófono">
+                            <svg class="mic-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                            <span id="mic-status-label">Hablar por Micrófono</span>
+                        </button>
+
+                        <button id="trigger-translate-btn" class="btn-translator-action">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            <span>Traducir e Interpretar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULTADOS Y TARJETAS EDUCATIVAS -->
+            <div id="translator-results-grid" class="translator-results-grid hidden">
+                <!-- TARJETA 1: TRADUCCIÓN DIRECTA & REPRODUCTORES DE VOZ -->
+                <div class="translator-card result-main-card">
+                    <div class="translator-card-header">
+                        <span class="card-badge badge-primary" id="translation-lang-badge">Inglés ➔ Español</span>
+                        <div class="audio-controls-group">
+                            <button id="play-audio-btn" class="btn-audio-action" title="Escuchar pronunciación completa en audífonos">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                                Escuchar
+                            </button>
+                            <button id="play-slow-audio-btn" class="btn-audio-subtle" title="Escuchar despacio para practicar la pronunciación">
+                                🐢 Lento
+                            </button>
+                            <button id="copy-translation-btn" class="btn-audio-subtle" title="Copiar traducción al portapapeles">
+                                📋 Copiar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="translated-output-box" id="translated-text-display">
+                        <!-- Traducción aquí -->
+                    </div>
+                </div>
+
+                <!-- TARJETA 2: GUÍA DE PRONUNCIACIÓN FONÉTICA -->
+                <div class="translator-card" id="phonetic-card">
+                    <div class="translator-card-header">
+                        <span class="card-badge badge-accent">🗣️ Pronunciación Guiada</span>
+                    </div>
+                    <p class="card-desc">Cómo se lee aproximadamente para hispanohablantes:</p>
+                    <div class="phonetic-output-box" id="phonetic-display">
+                        <!-- Fonética aquí -->
+                    </div>
+                </div>
+
+                <!-- TARJETA 3: EXPLICACIÓN DE USO Y CONTEXTO -->
+                <div class="translator-card" id="explanation-card">
+                    <div class="translator-card-header">
+                        <span class="card-badge badge-info">💡 Explicación de Uso & Contexto</span>
+                    </div>
+                    <div class="explanation-output-box" id="explanation-display">
+                        <!-- Explicación aquí -->
+                    </div>
+                </div>
+
+                <!-- TARJETA 4: EJEMPLOS PRÁCTICOS EN ORACIONES -->
+                <div class="translator-card full-width-card" id="examples-card">
+                    <div class="translator-card-header">
+                        <span class="card-badge badge-success">📚 Ejemplos Prácticos de Uso Cotidiano</span>
+                    </div>
+                    <div class="examples-list-grid" id="examples-list-display">
+                        <!-- Ejemplos inyectados dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- TARJETA 5: HISTORIAL RÁPIDO DE BÚSQUEDAS -->
+            <div class="section-card history-section-card">
+                <div class="card-header">
+                    <div class="header-title-group">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <h3>Últimas Búsquedas y Palabras Frecuentes</h3>
+                    </div>
+                    <button id="clear-history-btn" class="btn-text-action">Limpiar Historial</button>
+                </div>
+                <div class="card-content">
+                    <div id="translator-history-list" class="history-chips-container">
+                        <!-- Historial dinámico -->
+                    </div>
+                </div>
             </div>
         </div>
 
