@@ -2047,21 +2047,28 @@ function initTranslator() {
     }
 
     function speakText(textToSpeak, langCode = 'en-US', rate = 1.0) {
-        if (!('speechSynthesis' in window)) {
-            showToast('SpeechSynthesis no soportado en tu navegador.', 'warning');
-            return;
+        if (!textToSpeak) return;
+
+        if (window.currentTtsAudio) {
+            window.currentTtsAudio.pause();
+            window.currentTtsAudio = null;
         }
 
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.lang = langCode;
-        utterance.rate = rate;
+        const cleanLang = langCode.startsWith('es') ? 'es' : 'en';
+        const ttsUrl = `/api/tts?text=${encodeURIComponent(textToSpeak)}&lang=${cleanLang}`;
+        const audio = new Audio(ttsUrl);
+        window.currentTtsAudio = audio;
 
-        const voices = window.speechSynthesis.getVoices();
-        const preferredVoice = voices.find(v => v.lang.startsWith(langCode.substring(0, 2)) && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Premium')));
-        if (preferredVoice) utterance.voice = preferredVoice;
-
-        window.speechSynthesis.speak(utterance);
+        audio.play().catch(err => {
+            console.warn('Fallback a WebSpeech API:', err);
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = langCode;
+                utterance.rate = rate;
+                window.speechSynthesis.speak(utterance);
+            }
+        });
     }
 
     window.speakText = speakText;
