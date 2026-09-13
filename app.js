@@ -1865,94 +1865,87 @@ function initTranslator() {
         });
     }
 
-    // SPEECH RECOGNITION (MICRÓFONO STT)
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition) {
-        recognition = new SpeechRecognition();
-        recognition.continuous = false;
-        recognition.interimResults = true;
-
-        recognition.onstart = () => {
-            isRecording = true;
-            micBtn.classList.add('recording');
-            micStatusLabel.textContent = 'Escuchando... ¡Habla ahora!';
-            showToast('Micrófono activado. Habla a tu micrófono/audífonos.', 'info');
-        };
-
-        recognition.onresult = (event) => {
-            let transcript = '';
-            for (let i = event.resultIndex; i < event.results.length; i++) {
-                transcript += event.results[i][0].transcript;
-            }
-            if (inputArea) {
-                inputArea.value = transcript;
-                charCounter.textContent = `${transcript.length} caracteres`;
-                debouncedAutoTranslate();
-            }
-        };
-
-        recognition.onerror = (event) => {
-            console.error('Speech recognition error:', event.error);
-            isRecording = false;
-            micBtn.classList.remove('recording');
-            micStatusLabel.textContent = 'Hablar por Micrófono';
-
-            if (event.error === 'not-allowed' || event.error === 'permission-denied') {
-                showToast('⚠️ Permiso de micrófono bloqueado. Haz clic en el icono de candado al lado de http://localhost:8080 y selecciona Permitir Micrófono.', 'warning');
-            } else if (event.error === 'no-speech') {
-                showToast('No se escuchó voz. Presiona el micrófono y habla claro.', 'warning');
-            } else if (event.error === 'network') {
-                showToast('El reconocimiento de voz de Chrome requiere conexión a internet.', 'warning');
-            } else {
-                showToast(`Error de micrófono: ${event.error}`, 'warning');
-            }
-        };
-
-        recognition.onend = () => {
-            isRecording = false;
-            micBtn.classList.remove('recording');
-            micStatusLabel.textContent = 'Hablar por Micrófono';
-            if (inputArea && inputArea.value.trim().length > 0) {
-                performTranslation(false);
-            }
-        };
-    } else {
-        if (micBtn) micBtn.title = 'Tu navegador no soporta Web Speech API de micrófono.';
-    }
-
-    function startSpeechRecognition() {
-        const dir = directionSelect ? directionSelect.value : 'auto';
-        recognition.lang = dir === 'es_en' ? 'es-ES' : 'en-US';
-        try {
-            recognition.start();
-        } catch(e) {
-            console.error(e);
-        }
-    }
+    // GRABACIÓN NATIVA DE MICRÓFONO (HTML5 MediaRecorder + Server /api/transcribe)
+    let mediaRecorder = null;
+    let audioChunks = [];
 
     if (micBtn) {
         micBtn.addEventListener('click', () => {
-            if (!recognition) {
-                showToast('Tu navegador no es compatible con reconocimiento de voz. Usa Chrome o Brave.', 'warning');
+            if (isRecording && mediaRecorder) {
+                mediaRecorder.stop();
                 return;
             }
-            if (isRecording) {
-                recognition.stop();
-            } else {
-                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    navigator.mediaDevices.getUserMedia({ audio: true })
-                        .then((stream) => {
-                            stream.getTracks().forEach(track => track.stop());
-                            startSpeechRecognition();
-                        })
-                        .catch((err) => {
-                            console.warn('getUserMedia error:', err);
-                            showToast('⚠️ Permiso de micrófono denegado. Haz clic en el candado de la URL y activa el Micrófono.', 'warning');
-                        });
-                } else {
-                    startSpeechRecognition();
-                }
+
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                showToast('Tu navegador no soporta captura de micrófono.', 'warning');
+                return;
             }
+
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    audioChunks = [];
+                    mediaRecorder = new MediaRecorder(stream);
+
+                    mediaRecorder.onstart = () => {
+                        isRecording = true;
+                        micBtn.classList.add('recording');
+                        micStatusLabel.textContent = '🔴 Grabando... Haz clic para finalizar y traducir';
+                        showToast('Habla claro por tu micrófono/audífonos. Haz clic de nuevo al terminar.', 'info');
+                    };
+
+                    mediaRecorder.ondataavailable = (e) => {
+                        if (e.data && e.data.size > 0) {
+                            audioChunks.push(e.data);
+                        }
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        isRecording = false;
+                        micBtn.classList.remove('recording');
+                        micStatusLabel.textContent = 'Hablar por Micrófono';
+                        stream.getTracks().forEach(track => track.stop());
+
+                        if (audioChunks.length === 0) return;
+
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        const reader = new FileReader();
+                        reader.readAsDataURL(audioBlob);
+                        reader.onloadend = () => {
+                            const base64Audio = reader.result;
+                            const dir = directionSelect ? directionSelect.value : 'auto';
+                            const targetLang = dir === 'es_en' ? 'es-ES' : 'en-US';
+
+                            micStatusLabel.textContent = 'Transcribiendo voz...';
+                            fetch('/api/transcribe', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ audio: base64Audio, lang: targetLang })
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                micStatusLabel.textContent = 'Hablar por Micrófono';
+                                if (data.success && data.text) {
+                                    if (inputArea) inputArea.value = data.text;
+                                    if (charCounter) charCounter.textContent = `${data.text.length} caracteres`;
+                                    performTranslation(false);
+                                } else {
+                                    showToast(data.error || 'No se logró interpretar el audio. Intenta de nuevo.', 'warning');
+                                }
+                            })
+                            .catch(err => {
+                                micStatusLabel.textContent = 'Hablar por Micrófono';
+                                console.error('Error enviando audio:', err);
+                                showToast('Error al procesar audio en el servidor.', 'warning');
+                            });
+                        };
+                    };
+
+                    mediaRecorder.start();
+                })
+                .catch(err => {
+                    console.error('getUserMedia error:', err);
+                    showToast('⚠️ Permiso de micrófono denegado. Haz clic en el candado de la URL y activa el Micrófono.', 'warning');
+                });
         });
     }
 
@@ -2100,12 +2093,12 @@ function initTranslator() {
     }
 
     function addToHistory(original, translated, targetLang, isAuto = false) {
-        if (!original || original.trim().length < 3) return;
-        const cleanOrig = original.trim();
-        // Ignore single characters or trailing incomplete words if triggered by auto-translate
-        if (isAuto && cleanOrig.split(' ').slice(-1)[0].length < 3 && cleanOrig.length < 5) return;
+        if (isAuto) return; // Do not store live typing auto-translations in history!
 
-        historyState = historyState.filter(h => h.original.toLowerCase() !== cleanOrig.toLowerCase() && h.original.trim().length >= 3);
+        if (!original || original.trim().length < 2) return;
+        const cleanOrig = original.trim();
+
+        historyState = historyState.filter(h => h.original.toLowerCase() !== cleanOrig.toLowerCase());
         historyState.unshift({ original: cleanOrig, translated, targetLang, timestamp: Date.now() });
         if (historyState.length > 20) historyState.pop();
         localStorage.setItem('vromlix_translator_history', JSON.stringify(historyState));
@@ -2116,8 +2109,8 @@ function initTranslator() {
         if (!historyListDisplay) return;
         historyListDisplay.innerHTML = '';
         
-        // Clean out legacy partial garbage from history
-        historyState = historyState.filter(item => item && item.original && item.original.trim().length >= 3 && !/^[a-z]{1,2}$/i.test(item.original.trim()));
+        // Clean out any legacy invalid items from history
+        historyState = historyState.filter(item => item && item.original && item.original.trim().length >= 2);
 
         if (historyState.length === 0) {
             historyListDisplay.innerHTML = '<span style="font-size: 0.85rem; color: hsl(220, 15%, 50%); padding: 6px;">Sin búsquedas recientes.</span>';
@@ -2130,7 +2123,7 @@ function initTranslator() {
             chip.innerHTML = `<span>${escapeHTML(item.original)}</span> <small style="opacity:0.7;">➔ ${escapeHTML(item.translated)}</small>`;
             chip.addEventListener('click', () => {
                 if (inputArea) inputArea.value = item.original;
-                performTranslation();
+                performTranslation(false);
             });
             historyListDisplay.appendChild(chip);
         });
