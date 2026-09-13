@@ -2100,12 +2100,26 @@ function initTranslator() {
     }
 
     function addToHistory(original, translated, targetLang, isAuto = false) {
-        if (isAuto) return; // Do not store live typing auto-translations in history!
-
-        if (!original || original.trim().length < 2) return;
+        if (!original) return;
         const cleanOrig = original.trim();
+        if (cleanOrig.length < 2) return;
 
-        historyState = historyState.filter(h => h.original.toLowerCase() !== cleanOrig.toLowerCase());
+        const currLower = cleanOrig.toLowerCase();
+
+        // If history has existing items, check if top item is a prefix of current phrase being typed
+        if (historyState.length > 0) {
+            const topLower = historyState[0].original.trim().toLowerCase();
+            // If user is actively extending/modifying the top phrase (e.g. "no" -> "no cap"), update top entry!
+            if (currLower.startsWith(topLower) || topLower.startsWith(currLower)) {
+                historyState[0] = { original: cleanOrig, translated, targetLang, timestamp: Date.now() };
+                localStorage.setItem('vromlix_translator_history', JSON.stringify(historyState));
+                renderHistory();
+                return;
+            }
+        }
+
+        // Add new unique phrase to top of history
+        historyState = historyState.filter(h => h.original.toLowerCase() !== currLower);
         historyState.unshift({ original: cleanOrig, translated, targetLang, timestamp: Date.now() });
         if (historyState.length > 20) historyState.pop();
         localStorage.setItem('vromlix_translator_history', JSON.stringify(historyState));
