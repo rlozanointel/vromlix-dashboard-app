@@ -274,8 +274,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama, Action, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.2,
-      "Vromlix Score": 62.5,
+      "IMDb Rating": 7.1,
+      "Vromlix Score": 62,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -351,8 +351,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Mystery, Thriller",
       "Release Year": "2026",
       "Release Date": "2026-08-12",
-      "IMDb Rating": 6.6,
-      "Vromlix Score": 73.7,
+      "IMDb Rating": 6.5,
+      "Vromlix Score": 73.3,
       "Plot Summary": "After a mysterious cosmic event rips Oak Street from suburbia and transports their neighborhood to someplace unknown, the Platt family soon discovers that their very survival depends on them sticking together as they navigate their now unrecognizable surroundings.",
       "IMDb Link": "https://www.imdb.com/title/tt27165187/"
     },
@@ -959,7 +959,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
-      "Vromlix Score": 84.2,
+      "Vromlix Score": 83.4,
       "Plot Summary": "In 1970, the Brazilian national team took the field with big dreams and an even bigger challenge: to become the first three-time world champions.",
       "IMDb Link": "https://www.imdb.com/title/tt37041010/"
     },
@@ -1219,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-09-14 13:26:37"
+  "last_updated": "2026-09-15 12:53:02"
 };
