@@ -263,8 +263,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, History, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.2,
-      "Vromlix Score": 62.5,
+      "IMDb Rating": 7.091,
+      "Vromlix Score": 62,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -324,6 +324,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt15047880/"
     },
     {
+      "Official Title": "Hasta el Fin del Mundo",
+      "Spanish Title": "Hasta el fin del mundo",
+      "Genres": "Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-07-23",
+      "IMDb Rating": 7.226,
+      "Vromlix Score": 72.3,
+      "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
+      "IMDb Link": "https://www.imdb.com/title/tt30332656/"
+    },
+    {
       "Official Title": "Yellow Letters",
       "Spanish Title": "Cartas amarillas",
       "Genres": "Drama",
@@ -366,17 +377,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 74.3,
       "Plot Summary": "The professional mercenary Sir William Walker instigates a slave revolt on the Caribbean island of Queimada in order to help improve the British sugar trade. Years later he is sent again to deal with the same rebels that he built up because they have seized too much power that now threatens British sugar interests.",
       "IMDb Link": "https://www.imdb.com/title/tt0064866/"
-    },
-    {
-      "Official Title": "Hasta el Fin del Mundo",
-      "Spanish Title": "Hasta el fin del mundo",
-      "Genres": "Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-07-23",
-      "IMDb Rating": 7.444,
-      "Vromlix Score": 74.4,
-      "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
-      "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
     {
       "Official Title": "Spider-Man: Brand New Day",
@@ -1219,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-09-17 12:26:18"
+  "last_updated": "2026-09-19 00:09:38"
 };
