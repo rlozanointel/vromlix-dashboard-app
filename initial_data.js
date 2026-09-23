@@ -203,17 +203,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt36535318/"
     },
     {
-      "Official Title": "La bola negra",
-      "Spanish Title": "La bola negra",
-      "Genres": "Drama, War",
-      "Release Year": "2026",
-      "Release Date": "2026-09-25",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": 44,
-      "Plot Summary": "The intertwined lives of three men in three different eras, three lives intimately linked by sexuality and desire, pain, and legacy.",
-      "IMDb Link": "https://www.imdb.com/title/tt35511966/"
-    },
-    {
       "Official Title": "The Dog Stars",
       "Spanish Title": "Las estrellas del perro",
       "Genres": "Science Fiction, Thriller, Adventure",
@@ -247,17 +236,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27665778/"
     },
     {
-      "Official Title": "The Uprising",
-      "Spanish Title": "El levantamiento",
-      "Genres": "Action, History, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-09-10",
-      "IMDb Rating": 6.8,
-      "Vromlix Score": 60.5,
-      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
-      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
-    },
-    {
       "Official Title": "Enola Holmes 3",
       "Spanish Title": "Enola Holmes 3",
       "Genres": "Adventure, Crime, Mystery",
@@ -267,6 +245,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 61,
       "Plot Summary": "Adventure follows detective Enola Holmes to Malta, where her plans to tie the knot unravel when Sherlock's disappearance plunges her into a perilous case.",
       "IMDb Link": "https://www.imdb.com/title/tt32278481/"
+    },
+    {
+      "Official Title": "The Uprising",
+      "Spanish Title": "El levantamiento",
+      "Genres": "Action, History, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-09-10",
+      "IMDb Rating": 7.0,
+      "Vromlix Score": 61.5,
+      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
+      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
     {
       "Official Title": "The Death of Robin Hood",
@@ -313,6 +302,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt43063916/"
     },
     {
+      "Official Title": "Yellow Letters",
+      "Spanish Title": "Cartas amarillas",
+      "Genres": "Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-03-05",
+      "IMDb Rating": 7.211,
+      "Vromlix Score": 72.1,
+      "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
+      "IMDb Link": "https://www.imdb.com/title/tt32888226/"
+    },
+    {
       "Official Title": "Disclosure Day",
       "Spanish Title": "Día de revelación",
       "Genres": "Science Fiction, Thriller",
@@ -322,17 +322,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 72.3,
       "Plot Summary": "A cybersecurity expert becomes a whistleblower after uncovering secrets about aliens, putting him on the run from a corporation. Meanwhile, a meteorologist experiencing strange phenomena joins forces with him to prove there's life beyond our understanding.",
       "IMDb Link": "https://www.imdb.com/title/tt15047880/"
-    },
-    {
-      "Official Title": "Yellow Letters",
-      "Spanish Title": "Cartas amarillas",
-      "Genres": "Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-03-05",
-      "IMDb Rating": 7.3,
-      "Vromlix Score": 73,
-      "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
-      "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
     {
       "Official Title": "The End of Oak Street",
@@ -368,13 +357,24 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt0064866/"
     },
     {
+      "Official Title": "Heart of the Beast",
+      "Spanish Title": "Corazón de la bestia",
+      "Genres": "Adventure, Thriller",
+      "Release Year": "2026",
+      "Release Date": "2026-09-19",
+      "IMDb Rating": 7.5,
+      "Vromlix Score": 75,
+      "Plot Summary": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+      "IMDb Link": "https://www.imdb.com/title/tt7526136/"
+    },
+    {
       "Official Title": "Until the End of the World",
       "Spanish Title": "Hasta el fin del mundo",
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-07-23",
-      "IMDb Rating": 7.848,
-      "Vromlix Score": 78.5,
+      "IMDb Rating": 7.574,
+      "Vromlix Score": 75.7,
       "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
       "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
@@ -410,6 +410,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 80,
       "Plot Summary": "When Bonnie receives a Lilypad tablet as a gift and becomes obsessed, Buzz, Woody, Jessie and the rest of the gang's jobs become exponentially harder when they have to go head to head with the all-new threat to playtime.",
       "IMDb Link": "https://www.imdb.com/title/tt29355505/"
+    },
+    {
+      "Official Title": "La bola negra",
+      "Spanish Title": "La bola negra",
+      "Genres": "Drama, War",
+      "Release Year": "2026",
+      "Release Date": "2026-09-25",
+      "IMDb Rating": 7.0,
+      "Vromlix Score": 81.3,
+      "Plot Summary": "The intertwined lives of three men in three different eras, three lives intimately linked by sexuality and desire, pain, and legacy.",
+      "IMDb Link": "https://www.imdb.com/title/tt35511966/"
     },
     {
       "Official Title": "Fjord",
@@ -498,17 +509,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 87.3,
       "Plot Summary": "When disillusioned Swedish knight Antonius Block returns home from the Crusades to find his country in the grips of the Black Death, he challenges Death to a chess match for his life. Tormented by the belief that God does not exist, Block sets off on a journey, meeting up with traveling players Jof and his wife, Mia, and becoming determined to evade Death long enough to commit one redemptive act while he still lives.",
       "IMDb Link": "https://www.imdb.com/title/tt0050976/"
-    },
-    {
-      "Official Title": "Heart of the Beast",
-      "Spanish Title": "Corazón de la bestia",
-      "Genres": "Adventure, Thriller",
-      "Release Year": "2026",
-      "Release Date": "2026-09-19",
-      "IMDb Rating": 8.8,
-      "Vromlix Score": 88,
-      "Plot Summary": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
-      "IMDb Link": "https://www.imdb.com/title/tt7526136/"
     },
     {
       "Official Title": "The Odyssey",
@@ -720,14 +720,14 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt32174149/"
     },
     {
-      "Official Title": "Apocalipsis Z: New World",
+      "Official Title": "Apocalypse Z: New World",
       "Spanish Title": "Apocalipsis Z: Nuevo Mundo",
       "Genres": "Horror, Thriller",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
-      "Plot Summary": "N/A",
+      "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
       "IMDb Link": "https://www.imdb.com/title/tt37522541/"
     },
     {
@@ -959,7 +959,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
-      "Vromlix Score": 83.8,
+      "Vromlix Score": 83.6,
       "Plot Summary": "In 1970, the Brazilian national team took the field with big dreams and an even bigger challenge: to become the first three-time world champions.",
       "IMDb Link": "https://www.imdb.com/title/tt37041010/"
     },
@@ -1219,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-09-22 12:14:16"
+  "last_updated": "2026-09-23 05:42:03"
 };
