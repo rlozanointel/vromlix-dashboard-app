@@ -252,8 +252,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, History, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.167,
-      "Vromlix Score": 62.3,
+      "IMDb Rating": 7.2,
+      "Vromlix Score": 62.5,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -307,8 +307,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-03-05",
-      "IMDb Rating": 7.211,
-      "Vromlix Score": 72.1,
+      "IMDb Rating": 7.2,
+      "Vromlix Score": 72,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
@@ -373,8 +373,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-07-23",
-      "IMDb Rating": 7.721,
-      "Vromlix Score": 77.2,
+      "IMDb Rating": 7.667,
+      "Vromlix Score": 76.7,
       "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
       "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
@@ -454,6 +454,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 85.3,
       "Plot Summary": "Woody has always been confident about his place in the world, devoted to taking care of his kid—whether that's Andy or Bonnie. But after Bonnie creates a reluctant new toy called \"Forky\", a road trip adventure alongside old and new friends challenges everything Woody believes about loyalty, purpose, and what it truly means to be a toy.",
       "IMDb Link": "https://www.imdb.com/title/tt1979376/"
+    },
+    {
+      "Official Title": "Digger",
+      "Spanish Title": "Digger",
+      "Genres": "Drama, Comedy",
+      "Release Year": "2026",
+      "Release Date": "2026-09-30",
+      "IMDb Rating": 8.6,
+      "Vromlix Score": 86,
+      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
+      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
     {
       "Official Title": "Fatherland",
@@ -575,17 +586,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 92,
       "Plot Summary": "Paratrooper commander Colonel Mathieu, a former French Resistance fighter during World War II, is sent to Algeria to reinforce efforts to squelch the uprisings of the Algerian War. There he faces Ali la Pointe, a former petty criminal who, as the leader of the Algerian Front de Liberation Nationale, directs terror strategies against the colonial French government occupation. As each side resorts to ever-increasing brutality, no violent act is too unthinkable.",
       "IMDb Link": "https://www.imdb.com/title/tt0058946/"
-    },
-    {
-      "Official Title": "Digger",
-      "Spanish Title": "Digger",
-      "Genres": "Drama, Comedy",
-      "Release Year": "2026",
-      "Release Date": "2026-09-30",
-      "IMDb Rating": 9.5,
-      "Vromlix Score": 95,
-      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
-      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
     {
       "Official Title": "Klara and the Sun",
@@ -724,7 +724,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Spanish Title": "La tierra errante 3",
       "Genres": "Science Fiction, Action, Adventure",
       "Release Year": "2027",
-      "Release Date": "06 Feb 2027",
+      "Release Date": "2027-02-06",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
       "Plot Summary": "The sun is about to be destroyed, and humans have built huge thrusters on the surface of the earth to find a new home. However, the road to the universe is full of dangers. In order to save the earth, young people from the wandering earth era stepped forward for the third time and started a life-and-death battle against time.",
@@ -782,7 +782,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-12-25",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
-      "Plot Summary": "Described as a comedic drama set in the world of artificial intelligence, around the period at OpenAI in 2023 that saw CEO Sam Altman fired and rehired in a matter of days.",
+      "Plot Summary": "The confusing firing and rehiring cycle of Sam Altman at OpenAI where the board gained control of the company and removed him, and Altman still returned.",
       "IMDb Link": "https://www.imdb.com/title/tt37171180/"
     },
     {
@@ -1219,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-09-25 11:27:53"
+  "last_updated": "2026-09-26 12:57:25"
 };
