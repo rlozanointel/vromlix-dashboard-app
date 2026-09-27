@@ -379,6 +379,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
     {
+      "Official Title": "Digger",
+      "Spanish Title": "Digger",
+      "Genres": "Drama, Comedy",
+      "Release Year": "2026",
+      "Release Date": "2026-09-30",
+      "IMDb Rating": 7.8,
+      "Vromlix Score": 78,
+      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
+      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
+    },
+    {
       "Official Title": "Spider-Man: Brand New Day",
       "Spanish Title": "Spider-Man: Un nuevo día",
       "Genres": "Science Fiction, Action, Adventure",
@@ -454,17 +465,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 85.3,
       "Plot Summary": "Woody has always been confident about his place in the world, devoted to taking care of his kid—whether that's Andy or Bonnie. But after Bonnie creates a reluctant new toy called \"Forky\", a road trip adventure alongside old and new friends challenges everything Woody believes about loyalty, purpose, and what it truly means to be a toy.",
       "IMDb Link": "https://www.imdb.com/title/tt1979376/"
-    },
-    {
-      "Official Title": "Digger",
-      "Spanish Title": "Digger",
-      "Genres": "Drama, Comedy",
-      "Release Year": "2026",
-      "Release Date": "2026-09-30",
-      "IMDb Rating": 8.6,
-      "Vromlix Score": 86,
-      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
-      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
     {
       "Official Title": "Fatherland",
@@ -672,7 +672,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-12-15",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
-      "Plot Summary": "Emperor Paul Atreides faces the fallout from his ascent to power as political plots and a galaxy-wide holy war endanger the future only he can see.",
+      "Plot Summary": "Nearly two decades after he seized control of the Imperium, Paul Atreides is now a ruthless Emperor, and must face the consequences of his reign as old allies return, terrifying new threats emerge, and betrayal lurks in every shadow. Haunted by visions of Imperial collapse and the reappearance of his long-lost love, Paul is drawn into a sweeping conspiracy, with Chani at the heart of its unfolding mystery. As enemies close in, Paul must confront the true cost of power and the fate of those he loves the most.",
       "IMDb Link": "https://www.imdb.com/title/tt31378509/"
     },
     {
@@ -1147,7 +1147,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Show Status": "Returning Series",
       "Watch Status": "On Hold",
       "Vromlix Score": 90,
-      "Plot Summary": "Follows a sociopathic genius scientist who drags his inherently timid grandson on adventures across the universe.",
+      "Plot Summary": "The fractured domestic lives of a nihilistic mad scientist and his anxious grandson are further complicated by their inter-dimensional misadventures.",
       "IMDb Link": "https://www.imdb.com/title/tt2861424/"
     },
     {
@@ -1219,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-09-26 12:57:25"
+  "last_updated": "2026-09-27 13:08:06"
 };
