@@ -258,26 +258,15 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
     {
-      "Official Title": "The Death of Robin Hood",
-      "Spanish Title": "La muerte de Robin Hood",
-      "Genres": "Adventure, Drama, Action",
+      "Official Title": "Motherf*ckers",
+      "Spanish Title": null,
+      "Genres": "Drama, Comedy",
       "Release Year": "2026",
-      "Release Date": "2026-06-18",
-      "IMDb Rating": 6.0,
-      "Vromlix Score": 62.7,
-      "Plot Summary": "Grappling with his past after a life of crime and murder, Robin Hood finds himself gravely injured after a battle he thought would be his last. In the hands of a mysterious woman, he is offered a chance at salvation.",
-      "IMDb Link": "https://www.imdb.com/title/tt32273171/"
-    },
-    {
-      "Official Title": "Operation Ogre",
-      "Spanish Title": "Operación Ogro (Ogro)",
-      "Genres": "Drama, History, Thriller",
-      "Release Year": "1979",
-      "Release Date": "1979-09-28",
-      "IMDb Rating": 7.1,
-      "Vromlix Score": 65.5,
-      "Plot Summary": "Spain, 1973. Dictator Francisco Franco has ruled the country since 1939 with an iron fist; but he is now a very old and sick man. The future of the weakened regime is in danger. Admiral Carrero Blanco is his natural successor. The Basque terrorist gang ETA decides that he must die to prevent the dictatorship from continuing.",
-      "IMDb Link": "https://www.imdb.com/title/tt0079655/"
+      "Release Date": "2026-09-17",
+      "IMDb Rating": 6.6,
+      "Vromlix Score": 66,
+      "Plot Summary": "When Martín learns that his mother is going to marry Juan, the bully who tormented him as a child, he does what any son would do: sabotage the wedding... by sleeping with Juan's mother.",
+      "IMDb Link": "https://www.imdb.com/title/tt40630780/"
     },
     {
       "Official Title": "Salvation",
@@ -313,15 +302,15 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
     {
-      "Official Title": "Disclosure Day",
-      "Spanish Title": "Día de revelación",
-      "Genres": "Science Fiction, Thriller",
-      "Release Year": "2026",
-      "Release Date": "2026-06-10",
-      "IMDb Rating": 6.4,
-      "Vromlix Score": 72.3,
-      "Plot Summary": "A cybersecurity expert becomes a whistleblower after uncovering secrets about aliens, putting him on the run from a corporation. Meanwhile, a meteorologist experiencing strange phenomena joins forces with him to prove there's life beyond our understanding.",
-      "IMDb Link": "https://www.imdb.com/title/tt15047880/"
+      "Official Title": "We Shall Not Be Moved",
+      "Spanish Title": null,
+      "Genres": "Drama, Comedy",
+      "Release Year": "2024",
+      "Release Date": "2024-12-11",
+      "IMDb Rating": 7.3,
+      "Vromlix Score": 73,
+      "Plot Summary": "Socorro is a lawyer obsessed with finding the soldier who killed her brother during the 1968 Tlatelolco massacre. When she receives a crucial clue about the soldier’s whereabouts fifty years after her brother’s death, Socorro embarks on a reckless mission for revenge.",
+      "IMDb Link": "https://www.imdb.com/title/tt31113406/"
     },
     {
       "Official Title": "The End of Oak Street",
@@ -454,6 +443,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 83,
       "Plot Summary": "After Acme products fail him one too many times in his dogged pursuit of the Roadrunner, Wile E. Coyote decides to hire a billboard lawyer to sue the Acme Corporation.",
       "IMDb Link": "https://www.imdb.com/title/tt1756855/"
+    },
+    {
+      "Official Title": "Hundreds of Beavers",
+      "Spanish Title": null,
+      "Genres": "Comedy, Adventure, Action",
+      "Release Year": "2024",
+      "Release Date": "2024-01-26",
+      "IMDb Rating": 7.6,
+      "Vromlix Score": 85,
+      "Plot Summary": "In the 19th century, a drunken applejack salesman must go from zero to hero and become North America's greatest fur trapper by defeating hundreds of beavers.",
+      "IMDb Link": "https://www.imdb.com/title/tt12818328/"
     },
     {
       "Official Title": "Toy Story 4",
@@ -846,7 +846,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Official Title": "Spider-Noir",
       "Spanish Title": "Spider-Noir",
       "Current Season": 1,
-      "Current Episode": 2,
+      "Current Episode": 3,
       "Show Status": "Returning Series",
       "Watch Status": "Watching",
       "Vromlix Score": 78,
@@ -856,10 +856,10 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "Reacher",
       "Spanish Title": "Reacher",
-      "Current Season": 0,
-      "Current Episode": 0,
+      "Current Season": 2,
+      "Current Episode": 5,
       "Show Status": "Returning Series",
-      "Watch Status": "Unstarted",
+      "Watch Status": "Watching",
       "Vromlix Score": 80,
       "Plot Summary": "Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served.",
       "IMDb Link": "https://www.imdb.com/title/tt9288030/"
@@ -1219,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-09-28 14:18:20"
+  "last_updated": "2026-09-29 11:25:59"
 };
