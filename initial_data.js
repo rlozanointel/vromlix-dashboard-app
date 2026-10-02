@@ -247,17 +247,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt32278481/"
     },
     {
-      "Official Title": "The Uprising",
-      "Spanish Title": "El levantamiento",
-      "Genres": "History, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-09-10",
-      "IMDb Rating": 7.5,
-      "Vromlix Score": 64,
-      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
-      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
-    },
-    {
       "Official Title": "Motherf*ckers",
       "Spanish Title": null,
       "Genres": "Drama, Comedy",
@@ -267,6 +256,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 66,
       "Plot Summary": "When Martín learns that his mother is going to marry Juan, the bully who tormented him as a child, he does what any son would do: sabotage the wedding... by sleeping with Juan's mother.",
       "IMDb Link": "https://www.imdb.com/title/tt40630780/"
+    },
+    {
+      "Official Title": "The Uprising",
+      "Spanish Title": "El levantamiento",
+      "Genres": "History, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-09-10",
+      "IMDb Rating": 8.1,
+      "Vromlix Score": 67,
+      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
+      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
     {
       "Official Title": "Salvation",
@@ -291,6 +291,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt43063916/"
     },
     {
+      "Official Title": "Hombre Al Agua",
+      "Spanish Title": "Hombre al agua",
+      "Genres": "Drama, Comedy",
+      "Release Year": "2026",
+      "Release Date": "2026-09-24",
+      "IMDb Rating": 7.0,
+      "Vromlix Score": 70,
+      "Plot Summary": "Camilo, a Cuban lifeguard, saves Mexican businessman Abel from drowning. Grateful, Abel brings Camilo to Mexico, where he marries Abel's daughter, Juana, and they have a child. But Camilo soon discovers his new life is part of Abel's Machiavellian plan of manipulation and control. With his world collapsing, Camilo must uncover the plot and take control of his destiny. Will he find a way out, or remain trapped in the power game?",
+      "IMDb Link": "https://www.imdb.com/title/tt39019415/"
+    },
+    {
       "Official Title": "Yellow Letters",
       "Spanish Title": "Cartas amarillas",
       "Genres": "Drama",
@@ -300,17 +311,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 72,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
-    },
-    {
-      "Official Title": "Digger",
-      "Spanish Title": "Digger",
-      "Genres": "Comedy, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-09-28",
-      "IMDb Rating": 7.3,
-      "Vromlix Score": 73,
-      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
-      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
     {
       "Official Title": "We Shall Not Be Moved",
@@ -344,6 +344,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 74,
       "Plot Summary": "This is the rambunctious, ridiculous and totally true story of how the Minions conquered Hollywood, became movie stars, lost everything, unleashed monsters onto the world and then banded together to try and save the planet from the mayhem they had just created.",
       "IMDb Link": "https://www.imdb.com/title/tt32890033/"
+    },
+    {
+      "Official Title": "Digger",
+      "Spanish Title": "Digger",
+      "Genres": "Comedy, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-09-28",
+      "IMDb Rating": 7.4,
+      "Vromlix Score": 74,
+      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
+      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
     {
       "Official Title": "Burn!",
@@ -384,8 +395,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-07-23",
-      "IMDb Rating": 7.876,
-      "Vromlix Score": 78.8,
+      "IMDb Rating": 7.9,
+      "Vromlix Score": 79,
       "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
       "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
@@ -584,7 +595,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "1966-09-08",
       "IMDb Rating": 8.1,
       "Vromlix Score": 92,
-      "Plot Summary": "Paratrooper commander Colonel Mathieu, a former French Resistance fighter during World War II, is sent to Algeria to reinforce efforts to squelch the uprisings of the Algerian War. There he faces Ali la Pointe, a former petty criminal who, as the leader of the Algerian Front de Liberation Nationale, directs terror strategies against the colonial French government occupation. As each side resorts to ever-increasing brutality, no violent act is too unthinkable.",
+      "Plot Summary": "Former petty criminal Ali la Pointe becomes a commander of the Algerian Front de Liberation Nationale, directing a guerilla insurgency against the colonial French occupation. Paratrooper commander Colonel Phillippe Mathieu, a veteran of World War II and the First Indochina War, is sent to Algeria to reinforce efforts to squelch the uprisings.",
       "IMDb Link": "https://www.imdb.com/title/tt0058946/"
     },
     {
@@ -806,17 +817,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": null,
       "Plot Summary": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
       "IMDb Link": "https://www.imdb.com/title/tt21357150/"
-    },
-    {
-      "Official Title": "Hombre Al Agua",
-      "Spanish Title": "Hombre al agua",
-      "Genres": "Drama, Comedy",
-      "Release Year": "2026",
-      "Release Date": "2026-09-24",
-      "IMDb Rating": null,
-      "Vromlix Score": null,
-      "Plot Summary": "Camilo, a Cuban lifeguard, saves Mexican businessman Abel from drowning. Grateful, Abel brings Camilo to Mexico, where he marries Abel's daughter, Juana, and they have a child. But Camilo soon discovers his new life is part of Abel's Machiavellian plan of manipulation and control. With his world collapsing, Camilo must uncover the plot and take control of his destiny. Will he find a way out, or remain trapped in the power game?",
-      "IMDb Link": "https://www.imdb.com/title/tt39019415/"
     }
   ],
   "series": [
@@ -1230,5 +1230,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-01 11:05:40"
+  "last_updated": "2026-10-02 02:04:46"
 };
