@@ -230,8 +230,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama, Comedy",
       "Release Year": "2026",
       "Release Date": "2026-09-24",
-      "IMDb Rating": 6.0,
-      "Vromlix Score": 60,
+      "IMDb Rating": 5.75,
+      "Vromlix Score": 57.5,
       "Plot Summary": "Camilo, a Cuban lifeguard, saves Mexican businessman Abel from drowning. Grateful, Abel brings Camilo to Mexico, where he marries Abel's daughter, Juana, and they have a child. But Camilo soon discovers his new life is part of Abel's Machiavellian plan of manipulation and control. With his world collapsing, Camilo must uncover the plot and take control of his destiny. Will he find a way out, or remain trapped in the power game?",
       "IMDb Link": "https://www.imdb.com/title/tt39019415/"
     },
@@ -249,7 +249,7 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "The Uprising",
       "Spanish Title": "El levantamiento",
-      "Genres": "History, Drama",
+      "Genres": "History, Drama, Action",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
       "IMDb Rating": 7.9,
@@ -324,17 +324,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27165187/"
     },
     {
-      "Official Title": "Digger",
-      "Spanish Title": "Digger",
-      "Genres": "Comedy, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-09-28",
-      "IMDb Rating": 7.379,
-      "Vromlix Score": 73.8,
-      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
-      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
-    },
-    {
       "Official Title": "Minions & Monsters",
       "Spanish Title": "Minions y Monstruos",
       "Genres": "Adventure, Animation, Comedy, Family, Fantasy",
@@ -368,6 +357,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt7526136/"
     },
     {
+      "Official Title": "Digger",
+      "Spanish Title": "Digger",
+      "Genres": "Comedy, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-09-28",
+      "IMDb Rating": 7.555,
+      "Vromlix Score": 75.5,
+      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
+      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
+    },
+    {
       "Official Title": "Spider-Man: Brand New Day",
       "Spanish Title": "Spider-Man: Un nuevo día",
       "Genres": "Science Fiction, Action, Adventure",
@@ -377,17 +377,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 78.7,
       "Plot Summary": "Fighting crime full-time as Spider-Man in a world that doesn't remember him—and the pressure of seeing his old friends move on without him—sparks a change in Peter Parker he may not have the power to control. But that transformation might also be the only thing that can stop a shocking new threat to the city and those he loves - a powerful villain no one can even see.",
       "IMDb Link": "https://www.imdb.com/title/tt22084616/"
-    },
-    {
-      "Official Title": "Until the End of the World",
-      "Spanish Title": "Hasta el fin del mundo",
-      "Genres": "Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-07-23",
-      "IMDb Rating": 7.99,
-      "Vromlix Score": 79.9,
-      "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
-      "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
     {
       "Official Title": "Thank You for Banking with Us",
@@ -410,6 +399,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 80,
       "Plot Summary": "When Bonnie receives a Lilypad tablet as a gift and becomes obsessed, Buzz, Woody, Jessie and the rest of the gang's jobs become exponentially harder when they have to go head to head with the all-new threat to playtime.",
       "IMDb Link": "https://www.imdb.com/title/tt29355505/"
+    },
+    {
+      "Official Title": "Until the End of the World",
+      "Spanish Title": "Hasta el fin del mundo",
+      "Genres": "Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-07-23",
+      "IMDb Rating": 8.01,
+      "Vromlix Score": 80.1,
+      "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
+      "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
     {
       "Official Title": "La bola negra",
@@ -450,8 +450,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Adventure, Action",
       "Release Year": "2024",
       "Release Date": "2024-01-26",
-      "IMDb Rating": 7.6,
-      "Vromlix Score": 85,
+      "IMDb Rating": 7.5,
+      "Vromlix Score": 84.7,
       "Plot Summary": "In the 19th century, a drunken applejack salesman must go from zero to hero and become North America's greatest fur trapper by defeating hundreds of beavers.",
       "IMDb Link": "https://www.imdb.com/title/tt12818328/"
     },
@@ -827,7 +827,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
-      "Vromlix Score": 76.7,
+      "Vromlix Score": 77,
       "Plot Summary": "The protagonist Archie, considered the school loser, is bitten by a zombie and finds himself at the center of a mission to save the city alongside his friends Cris and Brenda.",
       "IMDb Link": "https://www.imdb.com/title/tt31841438/"
     },
@@ -1219,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-05 09:12:33"
+  "last_updated": "2026-10-06 09:53:14"
 };
