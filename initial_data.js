@@ -247,17 +247,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt32278481/"
     },
     {
-      "Official Title": "The Uprising",
-      "Spanish Title": "El levantamiento",
-      "Genres": "History, Drama, Action",
-      "Release Year": "2026",
-      "Release Date": "2026-09-10",
-      "IMDb Rating": 7.9,
-      "Vromlix Score": 66,
-      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
-      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
-    },
-    {
       "Official Title": "Motherf*ckers",
       "Spanish Title": null,
       "Genres": "Drama, Comedy",
@@ -267,6 +256,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 66,
       "Plot Summary": "When Martín learns that his mother is going to marry Juan, the bully who tormented him as a child, he does what any son would do: sabotage the wedding... by sleeping with Juan's mother.",
       "IMDb Link": "https://www.imdb.com/title/tt40630780/"
+    },
+    {
+      "Official Title": "The Uprising",
+      "Spanish Title": "El levantamiento",
+      "Genres": "History, Drama, Action",
+      "Release Year": "2026",
+      "Release Date": "2026-09-10",
+      "IMDb Rating": 8.0,
+      "Vromlix Score": 66.5,
+      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
+      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
     {
       "Official Title": "Salvation",
@@ -324,17 +324,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27165187/"
     },
     {
-      "Official Title": "Minions & Monsters",
-      "Spanish Title": "Minions y Monstruos",
-      "Genres": "Adventure, Animation, Comedy, Family, Fantasy",
-      "Release Year": "2026",
-      "Release Date": "2026-06-24",
-      "IMDb Rating": 6.3,
-      "Vromlix Score": 74,
-      "Plot Summary": "This is the rambunctious, ridiculous and totally true story of how the Minions conquered Hollywood, became movie stars, lost everything, unleashed monsters onto the world and then banded together to try and save the planet from the mayhem they had just created.",
-      "IMDb Link": "https://www.imdb.com/title/tt32890033/"
-    },
-    {
       "Official Title": "Burn!",
       "Spanish Title": "Queimada!",
       "Genres": "History, Drama, War",
@@ -362,8 +351,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.555,
-      "Vromlix Score": 75.5,
+      "IMDb Rating": 7.5,
+      "Vromlix Score": 75,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
@@ -406,8 +395,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-07-23",
-      "IMDb Rating": 8.01,
-      "Vromlix Score": 80.1,
+      "IMDb Rating": 8.0,
+      "Vromlix Score": 80,
       "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
       "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
@@ -735,7 +724,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Spanish Title": "Apocalipsis Z: Nuevo Mundo",
       "Genres": "Horror, Thriller",
       "Release Year": "2026",
-      "Release Date": "2026-10-09",
+      "Release Date": "2026-10-10",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
       "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
@@ -782,7 +771,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-12-25",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
-      "Plot Summary": "The confusing firing and rehiring cycle of Sam Altman at OpenAI where the board gained control of the company and removed him, and Altman still returned.",
+      "Plot Summary": "When computer scientist Ilya Sutskever and AI pioneer Professor Geoffrey Hinton make a breakthrough they are certain will alter humanity forever, the most prominent figures in Silicon Valley race to become a part of their vision.  Years later, after a chance meeting with Sam Altman, Ilya and a group of idealistic entrepreneurs create OpenAI with backing from Elon Musk and assistance from engineer Mira Murati.",
       "IMDb Link": "https://www.imdb.com/title/tt37171180/"
     },
     {
@@ -827,7 +816,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
-      "Vromlix Score": 77,
+      "Vromlix Score": 75,
       "Plot Summary": "The protagonist Archie, considered the school loser, is bitten by a zombie and finds himself at the center of a mission to save the city alongside his friends Cris and Brenda.",
       "IMDb Link": "https://www.imdb.com/title/tt31841438/"
     },
@@ -959,7 +948,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
-      "Vromlix Score": 83.2,
+      "Vromlix Score": 83,
       "Plot Summary": "In 1970, the Brazilian national team took the field with big dreams and an even bigger challenge: to become the first three-time world champions.",
       "IMDb Link": "https://www.imdb.com/title/tt37041010/"
     },
@@ -1219,5 +1208,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-06 09:53:14"
+  "last_updated": "2026-10-07 09:10:26"
 };
