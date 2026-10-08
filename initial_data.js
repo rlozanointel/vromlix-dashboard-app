@@ -192,15 +192,37 @@ window.INITIAL_DASHBOARD_DATA = {
   },
   "movies": [
     {
+      "Official Title": "I Play Rocky",
+      "Spanish Title": "Yo juego a Rocky",
+      "Genres": "Drama, History",
+      "Release Year": "2026",
+      "Release Date": "2026-11-06",
+      "IMDb Rating": 0.0,
+      "Vromlix Score": 42,
+      "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
+      "IMDb Link": "https://www.imdb.com/title/tt11995650/"
+    },
+    {
       "Official Title": "Scare Out",
       "Spanish Title": "Susto total",
       "Genres": "Crime, Thriller, Action",
       "Release Year": "2026",
       "Release Date": "2026-02-17",
-      "IMDb Rating": 5.5,
-      "Vromlix Score": 42.5,
+      "IMDb Rating": 5.2,
+      "Vromlix Score": 44,
       "Plot Summary": "After a critical intelligence leak, a national security unit launches an intensive investigation. But successive setbacks in their arrest operations reveal a shocking truth: the trail leads back to within the unit itself. Amidst a storm of trust and betrayal, a silent battle begins to unfold...",
       "IMDb Link": "https://www.imdb.com/title/tt36535318/"
+    },
+    {
+      "Official Title": "Godzilla Minus Zero",
+      "Spanish Title": "Godzilla Minus Zero",
+      "Genres": "Science Fiction, Horror, Action",
+      "Release Year": "2026",
+      "Release Date": "2026-11-03",
+      "IMDb Rating": 0.0,
+      "Vromlix Score": 48.5,
+      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant.",
+      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
     },
     {
       "Official Title": "The Dog Stars",
@@ -209,7 +231,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Year": "2026",
       "Release Date": "2026-08-26",
       "IMDb Rating": 6.5,
-      "Vromlix Score": 51.3,
+      "Vromlix Score": 51.7,
       "Plot Summary": "After the world's population has been ravaged by a pandemic, a man lives a lonesome existence in a Colorado airplane hangar with his dog and a dour gunman he has befriended. When a mysterious transmission comes through on the radio while he’s flying his old Cessna, it sparks a hunt for the provenance of the sound.",
       "IMDb Link": "https://www.imdb.com/title/tt21285562/"
     },
@@ -230,8 +252,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama, Comedy",
       "Release Year": "2026",
       "Release Date": "2026-09-24",
-      "IMDb Rating": 5.75,
-      "Vromlix Score": 57.5,
+      "IMDb Rating": 5.8,
+      "Vromlix Score": 58,
       "Plot Summary": "Camilo, a Cuban lifeguard, saves Mexican businessman Abel from drowning. Grateful, Abel brings Camilo to Mexico, where he marries Abel's daughter, Juana, and they have a child. But Camilo soon discovers his new life is part of Abel's Machiavellian plan of manipulation and control. With his world collapsing, Camilo must uncover the plot and take control of his destiny. Will he find a way out, or remain trapped in the power game?",
       "IMDb Link": "https://www.imdb.com/title/tt39019415/"
     },
@@ -247,6 +269,28 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt32278481/"
     },
     {
+      "Official Title": "The Uprising",
+      "Spanish Title": "El levantamiento",
+      "Genres": "History, Drama, Action",
+      "Release Year": "2026",
+      "Release Date": "2026-09-10",
+      "IMDb Rating": 8.0,
+      "Vromlix Score": 62.7,
+      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
+      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
+    },
+    {
+      "Official Title": "Digger",
+      "Spanish Title": "Digger",
+      "Genres": "Comedy, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-09-28",
+      "IMDb Rating": 7.532,
+      "Vromlix Score": 63.7,
+      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
+      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
+    },
+    {
       "Official Title": "Motherf*ckers",
       "Spanish Title": null,
       "Genres": "Drama, Comedy",
@@ -256,17 +300,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 66,
       "Plot Summary": "When Martín learns that his mother is going to marry Juan, the bully who tormented him as a child, he does what any son would do: sabotage the wedding... by sleeping with Juan's mother.",
       "IMDb Link": "https://www.imdb.com/title/tt40630780/"
-    },
-    {
-      "Official Title": "The Uprising",
-      "Spanish Title": "El levantamiento",
-      "Genres": "History, Drama, Action",
-      "Release Year": "2026",
-      "Release Date": "2026-09-10",
-      "IMDb Rating": 8.0,
-      "Vromlix Score": 66.5,
-      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
-      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
     {
       "Official Title": "Salvation",
@@ -335,37 +368,26 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt0064866/"
     },
     {
-      "Official Title": "Heart of the Beast",
-      "Spanish Title": "Corazón de la bestia",
-      "Genres": "Adventure, Thriller",
-      "Release Year": "2026",
-      "Release Date": "2026-09-19",
-      "IMDb Rating": 7.5,
-      "Vromlix Score": 75,
-      "Plot Summary": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
-      "IMDb Link": "https://www.imdb.com/title/tt7526136/"
-    },
-    {
-      "Official Title": "Digger",
-      "Spanish Title": "Digger",
-      "Genres": "Comedy, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-09-28",
-      "IMDb Rating": 7.5,
-      "Vromlix Score": 75,
-      "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
-      "IMDb Link": "https://www.imdb.com/title/tt31450459/"
-    },
-    {
       "Official Title": "Spider-Man: Brand New Day",
       "Spanish Title": "Spider-Man: Un nuevo día",
       "Genres": "Science Fiction, Action, Adventure",
       "Release Year": "2026",
       "Release Date": "2026-07-29",
       "IMDb Rating": 8.1,
-      "Vromlix Score": 78.7,
+      "Vromlix Score": 79,
       "Plot Summary": "Fighting crime full-time as Spider-Man in a world that doesn't remember him—and the pressure of seeing his old friends move on without him—sparks a change in Peter Parker he may not have the power to control. But that transformation might also be the only thing that can stop a shocking new threat to the city and those he loves - a powerful villain no one can even see.",
       "IMDb Link": "https://www.imdb.com/title/tt22084616/"
+    },
+    {
+      "Official Title": "Heart of the Beast",
+      "Spanish Title": "Corazón de la bestia",
+      "Genres": "Adventure, Thriller",
+      "Release Year": "2026",
+      "Release Date": "2026-09-19",
+      "IMDb Rating": 7.5,
+      "Vromlix Score": 80,
+      "Plot Summary": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+      "IMDb Link": "https://www.imdb.com/title/tt7526136/"
     },
     {
       "Official Title": "Thank You for Banking with Us",
@@ -395,32 +417,21 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-07-23",
-      "IMDb Rating": 8.0,
-      "Vromlix Score": 80,
+      "IMDb Rating": 8.029,
+      "Vromlix Score": 80.3,
       "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
       "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
     {
-      "Official Title": "La bola negra",
+      "Official Title": "LA BOLA NEGRA",
       "Spanish Title": "La bola negra",
       "Genres": "Drama, War",
       "Release Year": "2026",
       "Release Date": "2026-09-25",
       "IMDb Rating": 7.0,
-      "Vromlix Score": 81.3,
+      "Vromlix Score": 82.7,
       "Plot Summary": "The intertwined lives of three men in three different eras, three lives intimately linked by sexuality and desire, pain, and legacy.",
       "IMDb Link": "https://www.imdb.com/title/tt35511966/"
-    },
-    {
-      "Official Title": "Fjord",
-      "Spanish Title": "Fjord",
-      "Genres": "Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-06-13",
-      "IMDb Rating": 7.8,
-      "Vromlix Score": 83,
-      "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbeth Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbeth's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
-      "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
       "Official Title": "Coyote vs. Acme",
@@ -432,6 +443,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 83,
       "Plot Summary": "After Acme products fail him one too many times in his dogged pursuit of the Roadrunner, Wile E. Coyote decides to hire a billboard lawyer to sue the Acme Corporation.",
       "IMDb Link": "https://www.imdb.com/title/tt1756855/"
+    },
+    {
+      "Official Title": "Fjord",
+      "Spanish Title": "Fjord",
+      "Genres": "Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-06-13",
+      "IMDb Rating": 7.8,
+      "Vromlix Score": 83.3,
+      "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbeth Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbeth's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
+      "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
       "Official Title": "Hundreds of Beavers",
@@ -511,26 +533,26 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt0050976/"
     },
     {
-      "Official Title": "The Odyssey",
-      "Spanish Title": "La odisea",
-      "Genres": "Adventure, Action, Fantasy",
-      "Release Year": "2026",
-      "Release Date": "2026-07-15",
-      "IMDb Rating": 8.4,
-      "Vromlix Score": 88.3,
-      "Plot Summary": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point.",
-      "IMDb Link": "https://www.imdb.com/title/tt33764258/"
-    },
-    {
       "Official Title": "Minotaur",
       "Spanish Title": "Minotauro",
       "Genres": "Drama, Crime, Thriller",
       "Release Year": "2026",
       "Release Date": "2026-10-14",
       "IMDb Rating": 7.6,
-      "Vromlix Score": 88.7,
+      "Vromlix Score": 88,
       "Plot Summary": "When Gleb, a successful company director, finds himself under siege from mounting corporate pressures, an increasingly unstable world, and the discovery of his wife's affair, the collapse of his carefully ordered life accelerates toward violence.",
       "IMDb Link": "https://www.imdb.com/title/tt37118301/"
+    },
+    {
+      "Official Title": "The Odyssey",
+      "Spanish Title": "La odisea",
+      "Genres": "Adventure, Action, Fantasy",
+      "Release Year": "2026",
+      "Release Date": "2026-07-15",
+      "IMDb Rating": 8.4,
+      "Vromlix Score": 88.7,
+      "Plot Summary": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point.",
+      "IMDb Link": "https://www.imdb.com/title/tt33764258/"
     },
     {
       "Official Title": "8½",
@@ -584,7 +606,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-10-21",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
-      "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
+      "Plot Summary": "An Artificial Friend named Klara finds a deep bond with a troubled young girl, bringing light and hope to a grieving family through her unwavering devotion and innocent wonder.",
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
     {
@@ -724,7 +746,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Spanish Title": "Apocalipsis Z: Nuevo Mundo",
       "Genres": "Horror, Thriller",
       "Release Year": "2026",
-      "Release Date": "2026-10-10",
+      "Release Date": "2026-10-09",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
       "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
@@ -740,28 +762,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": null,
       "Plot Summary": null,
       "IMDb Link": "https://www.imdb.com/title/tt10868842/"
-    },
-    {
-      "Official Title": "I Play Rocky",
-      "Spanish Title": "Yo juego a Rocky",
-      "Genres": "Drama, History",
-      "Release Year": "2026",
-      "Release Date": "2026-11-06",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": null,
-      "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
-      "IMDb Link": "https://www.imdb.com/title/tt11995650/"
-    },
-    {
-      "Official Title": "Godzilla Minus Zero",
-      "Spanish Title": "Godzilla Minus Zero",
-      "Genres": "Science Fiction, Horror, Action",
-      "Release Year": "2026",
-      "Release Date": "2026-11-03",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": null,
-      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant.",
-      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
     },
     {
       "Official Title": "Artificial",
@@ -795,6 +795,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": null,
       "Plot Summary": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
       "IMDb Link": "https://www.imdb.com/title/tt21357150/"
+    },
+    {
+      "Official Title": "Animals",
+      "Spanish Title": null,
+      "Genres": "Crime, Thriller",
+      "Release Year": "2026",
+      "Release Date": "2026-10-09",
+      "IMDb Rating": 0.0,
+      "Vromlix Score": null,
+      "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
+      "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     }
   ],
   "series": [
@@ -805,7 +816,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Current Episode": 0,
       "Show Status": "Ended",
       "Watch Status": "Unstarted",
-      "Vromlix Score": 71,
+      "Vromlix Score": 72,
       "Plot Summary": "Heather Gay explores the secrets and sins behind the Mormon church, fracturing the church's seemingly perfect veneer to expose the secrets that have been kept behind closed doors. Heather has impactful conversations with abuse survivors, ex-Mormons and former LDS church leaders.",
       "IMDb Link": "https://www.imdb.com/title/tt38748836/"
     },
@@ -816,7 +827,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
-      "Vromlix Score": 75,
+      "Vromlix Score": 77,
       "Plot Summary": "The protagonist Archie, considered the school loser, is bitten by a zombie and finds himself at the center of a mission to save the city alongside his friends Cris and Brenda.",
       "IMDb Link": "https://www.imdb.com/title/tt31841438/"
     },
@@ -1208,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-07 09:10:26"
+  "last_updated": "2026-10-08 10:56:52"
 };
