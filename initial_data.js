@@ -214,6 +214,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt36535318/"
     },
     {
+      "Official Title": "Artificial",
+      "Spanish Title": "Artificial",
+      "Genres": "Comedy, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-12-25",
+      "IMDb Rating": 0.0,
+      "Vromlix Score": 47.5,
+      "Plot Summary": "When computer scientist Ilya Sutskever and AI pioneer Professor Geoffrey Hinton make a breakthrough they are certain will alter humanity forever, the most prominent figures in Silicon Valley race to become a part of their vision.  Years later, after a chance meeting with Sam Altman, Ilya and a group of idealistic entrepreneurs create OpenAI with backing from Elon Musk and assistance from engineer Mira Murati.",
+      "IMDb Link": "https://www.imdb.com/title/tt37171180/"
+    },
+    {
       "Official Title": "Godzilla Minus Zero",
       "Spanish Title": "Godzilla Minus Zero",
       "Genres": "Science Fiction, Horror, Action",
@@ -247,26 +258,26 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27665778/"
     },
     {
+      "Official Title": "Enola Holmes 3",
+      "Spanish Title": "Enola Holmes 3",
+      "Genres": "Adventure, Crime, Mystery",
+      "Release Year": "2026",
+      "Release Date": "2026-06-30",
+      "IMDb Rating": 5.7,
+      "Vromlix Score": 60,
+      "Plot Summary": "Adventure follows detective Enola Holmes to Malta, where her plans to tie the knot unravel when Sherlock's disappearance plunges her into a perilous case.",
+      "IMDb Link": "https://www.imdb.com/title/tt32278481/"
+    },
+    {
       "Official Title": "Hombre al agua",
       "Spanish Title": "Hombre al agua",
       "Genres": "Drama, Comedy",
       "Release Year": "2026",
       "Release Date": "2026-09-24",
       "IMDb Rating": 5.8,
-      "Vromlix Score": 58,
+      "Vromlix Score": 61,
       "Plot Summary": "Camilo, a Cuban lifeguard, saves Mexican businessman Abel from drowning. Grateful, Abel brings Camilo to Mexico, where he marries Abel's daughter, Juana, and they have a child. But Camilo soon discovers his new life is part of Abel's Machiavellian plan of manipulation and control. With his world collapsing, Camilo must uncover the plot and take control of his destiny. Will he find a way out, or remain trapped in the power game?",
       "IMDb Link": "https://www.imdb.com/title/tt39019415/"
-    },
-    {
-      "Official Title": "Enola Holmes 3",
-      "Spanish Title": "Enola Holmes 3",
-      "Genres": "Adventure, Crime, Mystery",
-      "Release Year": "2026",
-      "Release Date": "2026-06-30",
-      "IMDb Rating": 5.8,
-      "Vromlix Score": 61,
-      "Plot Summary": "Adventure follows detective Enola Holmes to Malta, where her plans to tie the knot unravel when Sherlock's disappearance plunges her into a perilous case.",
-      "IMDb Link": "https://www.imdb.com/title/tt32278481/"
     },
     {
       "Official Title": "The Uprising",
@@ -274,8 +285,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "History, Drama, Action",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 8.0,
-      "Vromlix Score": 62.7,
+      "IMDb Rating": 7.9,
+      "Vromlix Score": 62.3,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -285,8 +296,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.532,
-      "Vromlix Score": 63.7,
+      "IMDb Rating": 7.489,
+      "Vromlix Score": 63.4,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
@@ -335,6 +346,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
     {
+      "Official Title": "Animals",
+      "Spanish Title": null,
+      "Genres": "Thriller, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-10-09",
+      "IMDb Rating": 7.23,
+      "Vromlix Score": 72.3,
+      "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
+      "IMDb Link": "https://www.imdb.com/title/tt31049299/"
+    },
+    {
       "Official Title": "We Shall Not Be Moved",
       "Spanish Title": null,
       "Genres": "Drama, Comedy",
@@ -373,8 +395,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Action, Adventure",
       "Release Year": "2026",
       "Release Date": "2026-07-29",
-      "IMDb Rating": 8.1,
-      "Vromlix Score": 79,
+      "IMDb Rating": 8.0,
+      "Vromlix Score": 78.7,
       "Plot Summary": "Fighting crime full-time as Spider-Man in a world that doesn't remember him—and the pressure of seeing his old friends move on without him—sparks a change in Peter Parker he may not have the power to control. But that transformation might also be the only thing that can stop a shocking new threat to the city and those he loves - a powerful villain no one can even see.",
       "IMDb Link": "https://www.imdb.com/title/tt22084616/"
     },
@@ -417,10 +439,21 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-07-23",
-      "IMDb Rating": 8.029,
-      "Vromlix Score": 80.3,
+      "IMDb Rating": 8.085,
+      "Vromlix Score": 80.9,
       "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
       "IMDb Link": "https://www.imdb.com/title/tt30332656/"
+    },
+    {
+      "Official Title": "Fjord",
+      "Spanish Title": "Fjord",
+      "Genres": "Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-06-13",
+      "IMDb Rating": 7.6,
+      "Vromlix Score": 81.7,
+      "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbeth Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbeth's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
+      "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
       "Official Title": "LA BOLA NEGRA",
@@ -443,17 +476,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 83,
       "Plot Summary": "After Acme products fail him one too many times in his dogged pursuit of the Roadrunner, Wile E. Coyote decides to hire a billboard lawyer to sue the Acme Corporation.",
       "IMDb Link": "https://www.imdb.com/title/tt1756855/"
-    },
-    {
-      "Official Title": "Fjord",
-      "Spanish Title": "Fjord",
-      "Genres": "Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-06-13",
-      "IMDb Rating": 7.8,
-      "Vromlix Score": 83.3,
-      "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbeth Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbeth's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
-      "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
       "Official Title": "Hundreds of Beavers",
@@ -764,17 +786,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt10868842/"
     },
     {
-      "Official Title": "Artificial",
-      "Spanish Title": "Artificial",
-      "Genres": "Comedy, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-12-25",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": null,
-      "Plot Summary": "When computer scientist Ilya Sutskever and AI pioneer Professor Geoffrey Hinton make a breakthrough they are certain will alter humanity forever, the most prominent figures in Silicon Valley race to become a part of their vision.  Years later, after a chance meeting with Sam Altman, Ilya and a group of idealistic entrepreneurs create OpenAI with backing from Elon Musk and assistance from engineer Mira Murati.",
-      "IMDb Link": "https://www.imdb.com/title/tt37171180/"
-    },
-    {
       "Official Title": "Hershey",
       "Spanish Title": "Hershey",
       "Genres": "Drama, History, Romance",
@@ -795,20 +806,31 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": null,
       "Plot Summary": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
       "IMDb Link": "https://www.imdb.com/title/tt21357150/"
-    },
-    {
-      "Official Title": "Animals",
-      "Spanish Title": null,
-      "Genres": "Crime, Thriller",
-      "Release Year": "2026",
-      "Release Date": "2026-10-09",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": null,
-      "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
-      "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     }
   ],
   "series": [
+    {
+      "Official Title": "I Would Rather Die",
+      "Spanish Title": null,
+      "Current Season": 0,
+      "Current Episode": 0,
+      "Show Status": "Returning Series",
+      "Watch Status": "Unstarted",
+      "Vromlix Score": 60,
+      "Plot Summary": "One cold night, misfit Archie gets bitten by a zombie and after briefly considering ending his life, he decides he's going to figure out what the hell is happening to his body. So, with the help of his only friend and his lifelong crush, Archie sets out to find a cure before he turns into a full-blown monster and kills everyone.",
+      "IMDb Link": "https://www.imdb.com/title/tt31841438/"
+    },
+    {
+      "Official Title": "Georgie & Mandy's First Marriage",
+      "Spanish Title": null,
+      "Current Season": 2,
+      "Current Episode": 8,
+      "Show Status": "Returning Series",
+      "Watch Status": "On Hold",
+      "Vromlix Score": 71,
+      "Plot Summary": "Georgie and Mandy raise their young family in Texas while navigating the challenges of adulthood, parenting, and marriage.",
+      "IMDb Link": "https://www.imdb.com/title/tt31589662/"
+    },
     {
       "Official Title": "Surviving Mormonism with Heather Gay",
       "Spanish Title": "Sobreviviendo al mormonismo con Heather Gay",
@@ -821,17 +843,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt38748836/"
     },
     {
-      "Official Title": "I Would Rather Die",
-      "Spanish Title": null,
-      "Current Season": 0,
-      "Current Episode": 0,
-      "Show Status": "Returning Series",
-      "Watch Status": "Unstarted",
-      "Vromlix Score": 77,
-      "Plot Summary": "The protagonist Archie, considered the school loser, is bitten by a zombie and finds himself at the center of a mission to save the city alongside his friends Cris and Brenda.",
-      "IMDb Link": "https://www.imdb.com/title/tt31841438/"
-    },
-    {
       "Official Title": "Taco Chronicles",
       "Spanish Title": "Las crónicas del taco",
       "Current Season": 2,
@@ -841,17 +852,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 78,
       "Plot Summary": "Many of the most popular taco styles have long, rich, little-known histories. Explore some of them in this eye-opening, mouth-watering food adventure.",
       "IMDb Link": "https://www.imdb.com/title/tt10242848/"
-    },
-    {
-      "Official Title": "Spider-Noir",
-      "Spanish Title": "Spider-Noir",
-      "Current Season": 1,
-      "Current Episode": 3,
-      "Show Status": "Returning Series",
-      "Watch Status": "Watching",
-      "Vromlix Score": 78,
-      "Plot Summary": "Ben Reilly, an aging and down on his luck private investigator in 1930s New York, is forced to grapple with his past life as the city's one and only superhero.",
-      "IMDb Link": "https://www.imdb.com/title/tt30460310/"
     },
     {
       "Official Title": "Reacher",
@@ -931,26 +931,26 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt4955642/"
     },
     {
-      "Official Title": "Hacks",
-      "Spanish Title": "Hacks",
-      "Current Season": 0,
-      "Current Episode": 0,
-      "Show Status": "Ended",
-      "Watch Status": "Unstarted",
-      "Vromlix Score": 82,
-      "Plot Summary": "Explore a dark mentorship that forms between Deborah Vance, a legendary Las Vegas comedian, and an entitled, outcast 25-year-old.",
-      "IMDb Link": "https://www.imdb.com/title/tt11815682/"
-    },
-    {
       "Official Title": "House of the Dragon",
       "Spanish Title": "La casa del dragón",
       "Current Season": 0,
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
-      "Vromlix Score": 83,
+      "Vromlix Score": 82,
       "Plot Summary": "The Targaryen dynasty is at the absolute apex of its power, with more than 15 dragons under their yoke. Most empires crumble from such heights. In the case of the Targaryens, their slow fall begins when King Viserys breaks with a century of tradition by naming his daughter Rhaenyra heir to the Iron Throne. But when Viserys later fathers a son, the court is shocked when Rhaenyra retains her status as his heir, and seeds of division sow friction across the realm.",
       "IMDb Link": "https://www.imdb.com/title/tt11198330/"
+    },
+    {
+      "Official Title": "Hacks",
+      "Spanish Title": "Hacks",
+      "Current Season": 0,
+      "Current Episode": 0,
+      "Show Status": "Ended",
+      "Watch Status": "Unstarted",
+      "Vromlix Score": 83,
+      "Plot Summary": "Explore a dark mentorship that forms between Deborah Vance, a legendary Las Vegas comedian, and an entitled, outcast 25-year-old.",
+      "IMDb Link": "https://www.imdb.com/title/tt11815682/"
     },
     {
       "Official Title": "Brazil '70: The Third Star",
@@ -1096,6 +1096,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt5555260/"
     },
     {
+      "Official Title": "Heated Rivalry",
+      "Spanish Title": "Rivalidad ardiente",
+      "Current Season": 0,
+      "Current Episode": 0,
+      "Show Status": "Returning Series",
+      "Watch Status": "Unstarted",
+      "Vromlix Score": 87,
+      "Plot Summary": "Two of the biggest stars in Major League Hockey are bound by ambition, rivalry, and a magnetic pull neither of them fully understands. What begins as a secret fling between two fresh faced rookies evolves into a years-long journey of love, denial, and self-discovery. Over the next eight years, as they chase glory on the ice, they struggle to navigate their feelings for each other. Torn between the sport they live for and the love they can’t ignore, they must decide if there’s room in their fiercely competitive world for something as fragile – and powerful – as real love.",
+      "IMDb Link": "https://www.imdb.com/title/tt35495073/"
+    },
+    {
       "Official Title": "Fargo",
       "Spanish Title": "Fargo",
       "Current Season": 0,
@@ -1118,24 +1129,13 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt7660850/"
     },
     {
-      "Official Title": "Heated Rivalry",
-      "Spanish Title": "Rivalidad ardiente",
-      "Current Season": 0,
-      "Current Episode": 0,
-      "Show Status": "Returning Series",
-      "Watch Status": "Unstarted",
-      "Vromlix Score": 88,
-      "Plot Summary": "Two of the biggest stars in Major League Hockey are bound by ambition, rivalry, and a magnetic pull neither of them fully understands. What begins as a secret fling between two fresh faced rookies evolves into a years-long journey of love, denial, and self-discovery. Over the next eight years, as they chase glory on the ice, they struggle to navigate their feelings for each other. Torn between the sport they live for and the love they can’t ignore, they must decide if there’s room in their fiercely competitive world for something as fragile – and powerful – as real love.",
-      "IMDb Link": "https://www.imdb.com/title/tt35495073/"
-    },
-    {
       "Official Title": "Seinfeld",
       "Spanish Title": "Seinfeld",
       "Current Season": 0,
       "Current Episode": 0,
       "Show Status": "Ended",
       "Watch Status": "Unstarted",
-      "Vromlix Score": 89,
+      "Vromlix Score": 88,
       "Plot Summary": "A stand-up comedian and his three offbeat friends weather the pitfalls and payoffs of life in New York City in the '90s. It's a show about nothing.",
       "IMDb Link": "https://www.imdb.com/title/tt0098904/"
     },
@@ -1219,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-08 10:56:52"
+  "last_updated": "2026-10-10 19:51:15"
 };
