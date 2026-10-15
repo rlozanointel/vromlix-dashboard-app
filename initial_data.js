@@ -285,8 +285,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 8.0,
-      "Vromlix Score": 62.7,
+      "IMDb Rating": 7.9,
+      "Vromlix Score": 62.3,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -296,8 +296,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.483,
-      "Vromlix Score": 63.4,
+      "IMDb Rating": 7.492,
+      "Vromlix Score": 63.5,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
@@ -324,7 +324,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt36472181/"
     },
     {
-      "Official Title": "Loco México Mágico",
+      "Official Title": "Crazy Magical Mexico",
       "Spanish Title": "Loco México Mágico",
       "Genres": "Comedy",
       "Release Year": "2026",
@@ -340,8 +340,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-03-05",
-      "IMDb Rating": 7.2,
-      "Vromlix Score": 72,
+      "IMDb Rating": 7.16,
+      "Vromlix Score": 71.6,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
@@ -351,8 +351,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 7.3,
-      "Vromlix Score": 73,
+      "IMDb Rating": 7.213,
+      "Vromlix Score": 72.1,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -471,7 +471,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Spanish Title": "Coyote vs. Acme",
       "Genres": "Comedy, Adventure, Family",
       "Release Year": "2026",
-      "Release Date": "2026-08-17",
+      "Release Date": "2026-08-20",
       "IMDb Rating": 7.6,
       "Vromlix Score": 83,
       "Plot Summary": "After Acme products fail him one too many times in his dogged pursuit of the Roadrunner, Wile E. Coyote decides to hire a billboard lawyer to sue the Acme Corporation.",
@@ -1219,5 +1219,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-15 09:19:17"
+  "last_updated": "2026-10-15 14:54:01"
 };

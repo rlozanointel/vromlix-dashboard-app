@@ -84,6 +84,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
                 <span>Traductor</span>
             </button>
+            <button class="nav-tab-btn" data-view="view-agente-ops">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4.93 10.93a2 2 0 0 1 2.83 0l1.41 1.41a2 2 0 0 1-2.83 2.83l-1.41-1.41a2 2 0 0 1 0-2.83zm14.14 0a2 2 0 0 1 0 2.83l-1.41 1.41a2 2 0 0 1-2.83-2.83l1.41-1.41a2 2 0 0 1 2.83 0zM12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-8 6a8 8 0 0 1 16 0H4z"/></svg>
+                <span>Agente & Aprobaciones</span>
+            </button>
         </nav>
 
         <!-- MAIN LAYOUT VVIEWS -->
@@ -1115,12 +1119,93 @@
             </div>
         </div>
 
+        <!-- VISTA: AGENTE & APROBACIONES -->
+        <div id="view-agente-ops" class="dashboard-view">
+            <div class="section-card">
+                <div class="card-header">
+                    <div class="header-title-group">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4.93 10.93a2 2 0 0 1 2.83 0l1.41 1.41a2 2 0 0 1-2.83 2.83l-1.41-1.41a2 2 0 0 1 0-2.83zm14.14 0a2 2 0 0 1 0 2.83l-1.41 1.41a2 2 0 0 1-2.83-2.83l1.41-1.41a2 2 0 0 1 2.83 0zM12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-8 6a8 8 0 0 1 16 0H4z"/>
+                        </svg>
+                        <div>
+                            <h2>Centro de Operaciones Autónomas & Aprobaciones del Agente</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">
+                                Auditoría nocturna (06:00 AM) de chats de Antigravity, extracción de perfil Ground Truth y arbitraje adversarial.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="header-action-group">
+                        <button id="agent-trigger-scan-btn" class="btn-primary" style="padding: 8px 16px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;" title="Disparar inspección de chats ahora mismo">
+                            ⚡ Escanear Ahora
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <!-- MÉTRICAS EN TIEMPO REAL -->
+                    <div class="agent-metrics-row">
+                        <div class="agent-metric-card">
+                            <div class="agent-metric-icon">⏳</div>
+                            <div class="agent-metric-info">
+                                <span class="agent-metric-val" id="badge-agent-pending">0</span>
+                                <span class="agent-metric-lbl">Aprobaciones Pendientes</span>
+                            </div>
+                        </div>
+                        <div class="agent-metric-card">
+                            <div class="agent-metric-icon">💬</div>
+                            <div class="agent-metric-info">
+                                <span class="agent-metric-val" id="badge-agent-chats">0</span>
+                                <span class="agent-metric-lbl">Chats Activos Monitoreados</span>
+                            </div>
+                        </div>
+                        <div class="agent-metric-card">
+                            <div class="agent-metric-icon">⚡</div>
+                            <div class="agent-metric-info">
+                                <span class="agent-metric-val" id="badge-agent-auto">0</span>
+                                <span class="agent-metric-lbl">Rutinas Auto-Ejecutadas</span>
+                            </div>
+                        </div>
+                        <div class="agent-metric-card">
+                            <div class="agent-metric-icon">🛡️</div>
+                            <div class="agent-metric-info">
+                                <span class="agent-metric-val" style="color: #38bdf8; font-size: 1.15rem; font-weight: 700;">Activo</span>
+                                <span class="agent-metric-lbl">Árbitro Adversarial</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BANDEJA DE PROPUESTAS PENDIENTES -->
+                    <div style="margin-bottom: 32px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+                                <span>📥 Bandeja de Decisiones Requeridas</span>
+                            </h3>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Las propuestas se acumulan de forma persistente hasta tu resolución</span>
+                        </div>
+                        <div id="agent-pending-container">
+                            <!-- Inyectado por agent_ops_view.js -->
+                        </div>
+                    </div>
+
+                    <!-- HISTORIAL Y BITÁCORA -->
+                    <details style="margin-top: 24px;">
+                        <summary style="font-size: 1rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; padding: 6px 0;">
+                            📜 Ver Historial de Acciones Resueltas y Bitácora del Sistema
+                        </summary>
+                        <div id="agent-history-container" style="margin-top: 16px;">
+                            <!-- Inyectado por agent_ops_view.js -->
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
 
     <!-- TOAST NOTIFICATIONS -->
     <div id="toast-container" class="toast-container"></div>
 
     <script src="initial_data.js"></script>
     <script src="app.js?v=20260914_0243"></script>
+    <script src="agent_ops_view.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
