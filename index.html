@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260908_1730">
+    <link rel="stylesheet" href="style.css?v=20261017_1900">
 </head>
 <body>
     <div class="dashboard-container">
@@ -84,9 +84,14 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
                 <span>Traductor</span>
             </button>
+            <button class="nav-tab-btn" data-view="view-youtube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                <span>YouTube</span>
+                <span id="nav-yt-badge" class="nav-badge-pill" style="display: none;">0</span>
+            </button>
             <button class="nav-tab-btn" data-view="view-agente-ops">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4.93 10.93a2 2 0 0 1 2.83 0l1.41 1.41a2 2 0 0 1-2.83 2.83l-1.41-1.41a2 2 0 0 1 0-2.83zm14.14 0a2 2 0 0 1 0 2.83l-1.41 1.41a2 2 0 0 1-2.83-2.83l1.41-1.41a2 2 0 0 1 2.83 0zM12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-8 6a8 8 0 0 1 16 0H4z"/></svg>
-                <span>Agente & Aprobaciones</span>
+                <span>Agente</span>
             </button>
         </nav>
 
@@ -1200,12 +1205,96 @@
             </div>
         </div>
 
+        <!-- VISTA: YOUTUBE EXECUTIVE DIGEST -->
+        <div id="view-youtube" class="dashboard-view">
+            <div class="section-card">
+                <div class="card-header">
+                    <div class="header-title-group">
+                        <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+                        </svg>
+                        <div>
+                            <h2>Bandeja Ejecutiva de YouTube & Segundo Cerebro</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">
+                                Corte automático diario <b>10:00 AM (CDMX)</b> · Resúmenes de Doble Capa sin humo · Respaldo 100% íntegro (YAML + Transcripción) en <code>Vault_Conocimiento/01_NOTAS/</code>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="header-action-group">
+                        <button id="yt-trigger-scan-btn" class="btn-primary" style="padding: 8px 16px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;" title="Escanear los 17 canales ahora mismo en busca de videos nuevos">
+                            🔄 Buscar Nuevos Ahora
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <!-- MÉTRICAS DE LA BANDEJA -->
+                    <div class="agent-metrics-row">
+                        <div class="agent-metric-card">
+                            <div class="agent-metric-icon">📥</div>
+                            <div class="agent-metric-info">
+                                <span class="agent-metric-val" id="yt-metric-unread">0</span>
+                                <span class="agent-metric-lbl">Por Leer en Bandeja</span>
+                            </div>
+                        </div>
+                        <div class="agent-metric-card">
+                            <div class="agent-metric-icon">🧠</div>
+                            <div class="agent-metric-info">
+                                <span class="agent-metric-val" id="yt-metric-archived">0</span>
+                                <span class="agent-metric-lbl">Archivados / Vistos</span>
+                            </div>
+                        </div>
+                        <div class="agent-metric-card">
+                            <div class="agent-metric-icon">📡</div>
+                            <div class="agent-metric-info">
+                                <span class="agent-metric-val" id="yt-metric-channels">17</span>
+                                <span class="agent-metric-lbl">Canales Monitoreados</span>
+                            </div>
+                        </div>
+                        <div class="agent-metric-card">
+                            <div class="agent-metric-icon">🕙</div>
+                            <div class="agent-metric-info">
+                                <span class="agent-metric-val" style="color: #059669; font-size: 1.15rem; font-weight: 700;">10:00 AM</span>
+                                <span class="agent-metric-lbl">Horario Diario (CDMX)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BARRA DE FILTROS + RESUMIDOR MANUAL DE URL -->
+                    <div class="yt-toolbar-row">
+                        <div class="yt-filter-chips">
+                            <button class="yt-filter-chip active" data-yt-filter="all">Todos</button>
+                            <button class="yt-filter-chip" data-yt-filter="Negocios_IA_Tech">🤖 IA, Tech & Negocios</button>
+                            <button class="yt-filter-chip" data-yt-filter="Geopolitica_Noticias">🌍 Noticias, Mañanera & Análisis</button>
+                            <button class="yt-filter-chip" data-yt-filter="Ciencia_Divulgacion">🔬 Ciencia & Espacio</button>
+                            <button class="yt-filter-chip" data-yt-filter="Historia_Arquitectura">🏛️ Historia & Arquitectura</button>
+                            <button class="yt-filter-chip" data-yt-filter="channels_list">📡 Ver 17 Canales</button>
+                        </div>
+
+                        <div class="yt-quick-url-box">
+                            <input type="text" id="yt-custom-url-input" class="yt-quick-url-input" placeholder="Pegar cualquier link de YouTube para resumir y archivar...">
+                            <button id="yt-summarize-url-btn" class="btn-primary" style="padding: 8px 14px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; white-space: nowrap;">
+                                ⚡ Resumir Video
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- LISTA DE FICHAS EJECUTIVAS -->
+                    <div id="yt-cards-container">
+                        <!-- Inyectado dinámicamente por youtube_view.js -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <!-- TOAST NOTIFICATIONS -->
     <div id="toast-container" class="toast-container"></div>
 
     <script src="initial_data.js"></script>
     <script src="app.js?v=20260914_0243"></script>
     <script src="agent_ops_view.js"></script>
+    <script src="youtube_view.js?v=20261017_1900"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
