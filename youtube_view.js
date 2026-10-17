@@ -431,6 +431,16 @@ async function summarizeCustomYouTubeUrl(url) {
         const data = await res.json();
         if (!res.ok || !data.success) throw new Error(data.error || 'Error resumiendo video');
 
+        if (data.video && data.video.cached) {
+            if (typeof showAgentNotification === 'function') {
+                showAgentNotification('⚡ Video recuperado al instante desde tu Segundo Cerebro (Caché local)', 'success');
+            }
+        } else {
+            if (typeof showAgentNotification === 'function') {
+                showAgentNotification('✅ Resumen generado y respaldado en tu Segundo Cerebro', 'success');
+            }
+        }
+
         if (input) input.value = '';
         await loadYouTubeSummaries();
     } catch (err) {
