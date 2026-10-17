@@ -213,27 +213,163 @@ function renderMonitoredChannelsGrid() {
     };
 
     const cards = ytChannelsCache.map((ch, idx) => `
-        <div class="yt-channel-item">
+        <div class="yt-channel-item" id="yt-channel-card-${ch.handle.replace(/[^a-zA-Z0-9]/g, '')}">
             <div class="yt-ch-num">#${idx + 1}</div>
             <div class="yt-ch-info">
                 <div class="yt-ch-name">${ch.name}</div>
-                <div class="yt-ch-handle">${ch.handle} · <span>${modeBadges[ch.mode] || ch.mode}</span></div>
+                <div class="yt-ch-handle">
+                    <a href="https://www.youtube.com/${ch.handle}" target="_blank" rel="noopener" style="color: var(--accent-primary); text-decoration: none;">${ch.handle}</a> 
+                    · <span>${modeBadges[ch.mode] || ch.mode}</span>
+                </div>
             </div>
-            <a href="${ch.urls[0]}" target="_blank" rel="noopener" class="yt-btn yt-btn-open" style="padding: 6px 12px; font-size: 0.8rem;">
-                Canal ↗
-            </a>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <a href="https://www.youtube.com/${ch.handle}" target="_blank" rel="noopener" class="yt-btn yt-btn-open" style="padding: 6px 10px; font-size: 0.8rem;">
+                    Canal ↗
+                </a>
+                <button class="yt-btn yt-btn-dismiss" style="padding: 6px 10px; font-size: 0.8rem; margin: 0;" onclick="deleteMonitoredChannel('${ch.handle}', '${ch.name.replace(/'/g, "\\'")}')">
+                    🗑️ Quitar
+                </button>
+            </div>
         </div>
     `).join('');
 
     return `
         <div class="yt-channels-panel">
-            <h3 style="margin-bottom: 12px; color: var(--text-primary);">📡 Tus 17 Canales Monitoreados (Corte diario: 10:00 AM CDMX · Sin Shorts)</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <h3 style="margin-bottom: 4px; color: var(--text-primary);">📡 Canales Monitoreados (${ytChannelsCache.length} Canales Activos)</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Corte diario: 10:00 AM (CDMX) · Videos normales y en vivos · Sin Shorts</p>
+                </div>
+            </div>
+
+            <!-- BUSCADOR PARA AGREGAR NUEVO CANAL -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 22px;">
+                <label style="display: block; font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">
+                    ➕ Agregar Nuevo Canal (Escribe el nombre o pega @handle / enlace):
+                </label>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <input type="text" id="yt-channel-search-input" class="yt-quick-url-input" style="flex: 1; min-width: 250px;" placeholder="Ej: Platzi, Lex Fridman, QuantumFracture, o @nombre..." onkeydown="if(event.key==='Enter') searchNewYouTubeChannel();">
+                    <button id="yt-search-channel-btn" class="btn-primary" style="padding: 9px 18px; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; white-space: nowrap;" onclick="searchNewYouTubeChannel();">
+                        🔍 Buscar Canal
+                    </button>
+                </div>
+                <div id="yt-search-results-container" style="margin-top: 14px; display: none;"></div>
+            </div>
+
+            <!-- GRILLA DE CANALES ACTIVOS -->
             <div class="yt-channels-grid">
                 ${cards}
             </div>
         </div>
     `;
 }
+
+async function searchNewYouTubeChannel() {
+    const input = document.getElementById('yt-channel-search-input');
+    const container = document.getElementById('yt-search-results-container');
+    const btn = document.getElementById('yt-search-channel-btn');
+    if (!input || !container) return;
+
+    const query = input.value.trim();
+    if (!query) return;
+
+    if (btn) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Buscando...';
+    }
+
+    container.style.display = 'block';
+    container.innerHTML = `<div style="font-size: 0.88rem; color: var(--text-muted); padding: 8px 0;">🔍 Buscando "${query}" en YouTube...</div>`;
+
+    try {
+        const res = await fetch('/api/youtube/channels/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: query })
+        });
+        const data = await res.json();
+        const candidates = data.candidates || [];
+
+        if (candidates.length === 0) {
+            container.innerHTML = `<div style="font-size: 0.88rem; color: var(--accent-warning); padding: 8px 0;">⚠️ No se encontraron canales para "${query}". Intenta escribir el @handle exacto o su enlace.</div>`;
+            return;
+        }
+
+        const itemsHtml = candidates.map(c => `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 8px;">
+                <div>
+                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">${c.name}</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">
+                        <b>${c.handle}</b> ${c.sample_title ? `· Último video: <i>"${c.sample_title}"</i>` : ''}
+                    </div>
+                </div>
+                <button class="btn-primary" style="padding: 6px 14px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-md); cursor: pointer;" onclick="addMonitoredChannel('${c.handle}', '${c.name.replace(/'/g, "\\'")}')">
+                    ➕ Agregar Canal
+                </button>
+            </div>
+        `).join('');
+
+        container.innerHTML = `
+            <div style="margin-top: 6px;">
+                <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-primary); margin-bottom: 8px;">¿Cuál de estos canales deseas monitorear?</div>
+                ${itemsHtml}
+            </div>
+        `;
+    } catch (err) {
+        container.innerHTML = `<div style="color: var(--accent-danger); font-size: 0.88rem;">Error buscando: ${err.message}</div>`;
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.textContent = '🔍 Buscar Canal';
+        }
+    }
+}
+
+async function addMonitoredChannel(handle, name) {
+    try {
+        const res = await fetch('/api/youtube/channels/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ handle: handle, name: name })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.error || 'Error al agregar');
+
+        if (typeof showAgentNotification === 'function') {
+            showAgentNotification(`Canal ${name} agregado con éxito`, 'success');
+        } else {
+            alert(`✅ Canal "${name}" agregado al monitoreo diario.`);
+        }
+        await loadYouTubeSummaries();
+    } catch (err) {
+        alert('Error: ' + err.message);
+    }
+}
+
+async function deleteMonitoredChannel(handle, name) {
+    const ok = confirm(`¿Estás seguro de que deseas dejar de monitorear el canal "${name}" (${handle})?`);
+    if (!ok) return;
+
+    try {
+        const res = await fetch('/api/youtube/channels/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ handle: handle })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.error || 'Error al eliminar');
+
+        if (typeof showAgentNotification === 'function') {
+            showAgentNotification(`Canal ${name} eliminado del monitoreo`, 'info');
+        } else {
+            alert(`🗑️ Canal "${name}" eliminado.`);
+        }
+        await loadYouTubeSummaries();
+    } catch (err) {
+        alert('Error: ' + err.message);
+    }
+}
+
 
 async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
     if (actionType === 'watched' && markWatchedUrl) {
