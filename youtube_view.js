@@ -161,9 +161,21 @@ function renderYouTubeView() {
         : ytAllCache.filter(item => item.status !== 'UNREAD');
 
     const filtered = sourceList.filter(item => {
-        // Filtro por categoría
-        if (ytCurrentFilter !== 'all' && item.category_ui !== ytCurrentFilter) {
-            return false;
+        // Filtro por categoría inteligente
+        if (ytCurrentFilter !== 'all') {
+            const cat = (item.category_ui || '').toLowerCase();
+            const filter = ytCurrentFilter.toLowerCase();
+            if (filter === 'entrevistas' || filter === 'negocios_ia_tech' || filter === 'ia') {
+                if (cat !== 'entrevistas' && cat !== 'negocios_ia_tech') return false;
+            } else if (filter === 'politica' || filter === 'geopolitica_noticias') {
+                if (cat !== 'politica' && cat !== 'geopolitica_noticias') return false;
+            } else if (filter === 'ciencia' || filter === 'ciencia_divulgacion') {
+                if (cat !== 'ciencia' && cat !== 'ciencia_divulgacion') return false;
+            } else if (filter === 'visual' || filter === 'historia_arquitectura') {
+                if (cat !== 'visual' && cat !== 'historia_arquitectura') return false;
+            } else if (cat !== filter) {
+                return false;
+            }
         }
         // Filtro por buscador en vivo
         if (ytSearchQuery) {
@@ -308,7 +320,6 @@ function renderYouTubeSummaryCard(v) {
             </div>
         </article>
     `;
-}
 }
 
 function renderMonitoredChannelsGrid() {
