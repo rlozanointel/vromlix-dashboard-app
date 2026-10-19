@@ -4,7 +4,10 @@
 // =========================================================================
 
 let ytCurrentFilter = 'all';
+let ytViewMode = 'unread'; // 'unread' or 'history'
+let ytSearchQuery = '';
 let ytUnreadCache = [];
+let ytAllCache = [];
 let ytChannelsCache = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,6 +20,51 @@ function initYouTubeView() {
     const scanBtn = document.getElementById('yt-trigger-scan-btn');
     if (scanBtn) {
         scanBtn.addEventListener('click', triggerYouTubeChannelScan);
+    }
+
+    const markAllBtn = document.getElementById('yt-mark-all-read-btn');
+    if (markAllBtn) {
+        markAllBtn.addEventListener('click', handleMarkAllRead);
+    }
+
+    const tabUnread = document.getElementById('yt-tab-unread');
+    const tabHistory = document.getElementById('yt-tab-history');
+    if (tabUnread && tabHistory) {
+        tabUnread.addEventListener('click', () => {
+            ytViewMode = 'unread';
+            updateViewModeUI();
+            renderYouTubeView();
+        });
+        tabHistory.addEventListener('click', () => {
+            ytViewMode = 'history';
+            updateViewModeUI();
+            renderYouTubeView();
+        });
+    }
+
+    const cardUnread = document.getElementById('yt-metric-card-unread');
+    const cardArchived = document.getElementById('yt-metric-card-archived');
+    if (cardUnread) {
+        cardUnread.addEventListener('click', () => {
+            ytViewMode = 'unread';
+            updateViewModeUI();
+            renderYouTubeView();
+        });
+    }
+    if (cardArchived) {
+        cardArchived.addEventListener('click', () => {
+            ytViewMode = 'history';
+            updateViewModeUI();
+            renderYouTubeView();
+        });
+    }
+
+    const searchInput = document.getElementById('yt-search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            ytSearchQuery = (e.target.value || '').toLowerCase().trim();
+            renderYouTubeView();
+        });
     }
 
     const sumBtn = document.getElementById('yt-summarize-url-btn');
@@ -38,6 +86,24 @@ function initYouTubeView() {
     });
 }
 
+function updateViewModeUI() {
+    const tabUnread = document.getElementById('yt-tab-unread');
+    const tabHistory = document.getElementById('yt-tab-history');
+    if (tabUnread && tabHistory) {
+        if (ytViewMode === 'unread') {
+            tabUnread.style.background = 'var(--primary-color, #3b82f6)';
+            tabUnread.style.color = '#fff';
+            tabHistory.style.background = 'transparent';
+            tabHistory.style.color = 'var(--text-secondary)';
+        } else {
+            tabHistory.style.background = 'var(--primary-color, #3b82f6)';
+            tabHistory.style.color = '#fff';
+            tabUnread.style.background = 'transparent';
+            tabUnread.style.color = 'var(--text-secondary)';
+        }
+    }
+}
+
 async function loadYouTubeSummaries() {
     const container = document.getElementById('yt-cards-container');
     if (!container) return;
@@ -48,24 +114,32 @@ async function loadYouTubeSummaries() {
         const data = await res.json();
 
         ytUnreadCache = data.unread || [];
+        ytAllCache = data.all_summaries || [];
         ytChannelsCache = data.channels || [];
         const stats = data.stats || {};
+
+        const unreadCount = stats.unread_count ?? ytUnreadCache.length;
+        const archivedCount = stats.archived_count ?? 0;
 
         const badgeUnread = document.getElementById('yt-metric-unread');
         const badgeArchived = document.getElementById('yt-metric-archived');
         const badgeChannels = document.getElementById('yt-metric-channels');
         const navBadge = document.getElementById('nav-yt-badge');
+        const pillUnread = document.getElementById('yt-pill-unread-count');
+        const pillHistory = document.getElementById('yt-pill-history-count');
 
-        if (badgeUnread) badgeUnread.textContent = stats.unread_count ?? ytUnreadCache.length;
-        if (badgeArchived) badgeArchived.textContent = stats.archived_count ?? 0;
+        if (badgeUnread) badgeUnread.textContent = unreadCount;
+        if (badgeArchived) badgeArchived.textContent = archivedCount;
         if (badgeChannels) badgeChannels.textContent = stats.channels_count ?? 17;
+        if (pillUnread) pillUnread.textContent = unreadCount;
+        if (pillHistory) pillHistory.textContent = archivedCount;
 
         if (navBadge) {
-            const count = stats.unread_count ?? ytUnreadCache.length;
-            navBadge.textContent = count;
-            navBadge.style.display = count > 0 ? 'inline-flex' : 'none';
+            navBadge.textContent = unreadCount;
+            navBadge.style.display = unreadCount > 0 ? 'inline-flex' : 'none';
         }
 
+        updateViewModeUI();
         renderYouTubeView();
     } catch (err) {
         console.error('Error cargando resúmenes YouTube:', err);
@@ -82,19 +156,46 @@ function renderYouTubeView() {
         return;
     }
 
-    const filtered = ytUnreadCache.filter(item => {
-        if (ytCurrentFilter === 'all') return true;
-        return item.category_ui === ytCurrentFilter;
+    const sourceList = (ytViewMode === 'unread') 
+        ? ytUnreadCache 
+        : ytAllCache.filter(item => item.status !== 'UNREAD');
+
+    const filtered = sourceList.filter(item => {
+        // Filtro por categoría
+        if (ytCurrentFilter !== 'all' && item.category_ui !== ytCurrentFilter) {
+            return false;
+        }
+        // Filtro por buscador en vivo
+        if (ytSearchQuery) {
+            const titleMatch = (item.title || '').toLowerCase().includes(ytSearchQuery);
+            const chanMatch = (item.channel_name || '').toLowerCase().includes(ytSearchQuery);
+            const tldrMatch = (item.tldr || []).some(t => t.toLowerCase().includes(ytSearchQuery));
+            const kpMatch = (item.key_points || []).some(k => k.toLowerCase().includes(ytSearchQuery));
+            if (!titleMatch && !chanMatch && !tldrMatch && !kpMatch) {
+                return false;
+            }
+        }
+        return true;
     });
 
     if (filtered.length === 0) {
-        container.innerHTML = `
-            <div class="agent-empty-state">
-                <div class="empty-icon">🎬</div>
-                <h3>Bandeja de YouTube al Día</h3>
-                <p>No tienes resúmenes pendientes en esta categoría. El próximo corte automático se ejecutará a las <b>10:00 AM (CDMX)</b>, o puedes pegar cualquier enlace arriba.</p>
-            </div>
-        `;
+        if (ytViewMode === 'unread') {
+            container.innerHTML = `
+                <div class="agent-empty-state">
+                    <div class="empty-icon">🎬</div>
+                    <h3>Bandeja de YouTube al Día</h3>
+                    <p>No tienes resúmenes pendientes en esta categoría. El próximo corte automático se ejecutará a las <b>10:00 AM (CDMX)</b>, o puedes pegar cualquier enlace arriba.</p>
+                </div>
+            `;
+        } else {
+            container.innerHTML = `
+                <div class="agent-empty-state">
+                    <div class="empty-icon">📚</div>
+                    <h3>Historial de Videos</h3>
+                    <p>No se encontraron videos archivados con los filtros seleccionados.</p>
+                </div>
+            `;
+        }
         return;
     }
 
@@ -109,10 +210,10 @@ function renderYouTubeSummaryCard(v) {
     };
     const modeBadge = modeLabels[v.channel_mode] || '⚡ Ejecutivo';
     const isVisual = v.channel_mode === 'MODO_C_VISUAL';
+    const isArchived = v.status !== 'UNREAD';
 
     const tldrHtml = (v.tldr || []).map(line => `<li>${line}</li>`).join('');
     const kpHtml = (v.key_points || []).map(line => `<li>${line}</li>`).join('');
-    const rfHtml = (v.rogerman_filter || []).map(line => `<li>${line}</li>`).join('');
 
     const chaptersHtml = (v.chapters || []).map(ch => {
         const sec = ch.sec || 0;
@@ -128,13 +229,14 @@ function renderYouTubeSummaryCard(v) {
     const vaultFileName = v.vault_path ? v.vault_path.split('/').pop() : 'Guardado en Vault_Conocimiento';
 
     return `
-        <article class="yt-summary-card ${isVisual ? 'yt-card-visual' : ''}" id="yt-card-${v.video_id}">
+        <article class="yt-summary-card ${isVisual ? 'yt-card-visual' : ''} ${isArchived ? 'yt-card-archived' : ''}" id="yt-card-${v.video_id}">
             <!-- CABECERA DE LA FICHA -->
             <div class="yt-card-top">
                 <div class="yt-badges-row">
                     <span class="yt-badge yt-badge-channel">${v.channel_name}</span>
                     <span class="yt-badge yt-badge-mode">${modeBadge}</span>
                     <span class="yt-badge yt-badge-verdict">${v.verdict_badge || '🔥 Resumen Ejecutivo'}</span>
+                    ${isArchived ? `<span class="yt-badge" style="background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3);">✅ Visto / Archivado</span>` : ''}
                 </div>
                 <div class="yt-meta-right">
                     <span class="yt-duration-pill">⏱️ ${v.duration_str}</span>
@@ -166,43 +268,47 @@ function renderYouTubeSummaryCard(v) {
                 </ul>
             </div>
 
-            <!-- 3. FILTRO ROGERMAN -->
-            <div class="yt-section-box yt-box-rogerman">
-                <div class="yt-section-title">🎯 3. ¿Qué nos sirve a nosotros hoy? (Filtro Rogerman)</div>
-                <ul class="yt-bullet-list yt-rf-list">
-                    ${rfHtml}
-                </ul>
-            </div>
-
-            <!-- 4. MAPA RÁPIDO DE MOMENTOS -->
+            <!-- 3. MAPA RÁPIDO DE MOMENTOS -->
             ${chaptersHtml ? `
                 <div class="yt-chapters-block">
-                    <div class="yt-chapters-label">⏱️ 4. Momentos Clave (Clic para saltar a ese minuto en YouTube):</div>
+                    <div class="yt-chapters-label">⏱️ 3. Momentos Clave (Clic para saltar a ese minuto en YouTube):</div>
                     <div class="yt-chapters-grid">
                         ${chaptersHtml}
                     </div>
                 </div>
             ` : ''}
 
-            <!-- BARRA DE 3 BOTONES DE ACCIÓN -->
+            <!-- BARRA DE ACCIONES -->
             <div class="yt-actions-footer">
-                <button class="yt-btn yt-btn-watched" onclick="handleYouTubeCardAction('${v.video_id}', 'watched', '${v.url_mark_watched}')" title="Abre los últimos 4 segundos en YouTube para que quede con barra roja de Visto en tus Suscripciones y quita la ficha de esta bandeja">
-                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3"><polyline points="20 6 9 17 4 12"/></svg>
-                    <span>Visto (Últimos 4s) y Quitar</span>
-                </button>
+                ${!isArchived ? `
+                    <button class="yt-btn yt-btn-watched" onclick="handleYouTubeCardAction('${v.video_id}', 'watched', '${v.url_mark_watched}')" title="Abre los últimos 4 segundos en YouTube para que quede con barra roja de Visto en tus Suscripciones y quita la ficha de esta bandeja">
+                        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>Visto (Últimos 4s) y Quitar</span>
+                    </button>
 
-                <a href="${v.url_video}" target="_blank" rel="noopener" class="yt-btn yt-btn-open" title="Solo abrir el video en YouTube desde el inicio sin borrar esta ficha">
-                    <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                    <span>Abrir en YouTube</span>
-                </a>
+                    <a href="${v.url_video}" target="_blank" rel="noopener" class="yt-btn yt-btn-open" title="Solo abrir el video en YouTube desde el inicio sin borrar esta ficha">
+                        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Abrir en YouTube</span>
+                    </a>
 
-                <button class="yt-btn yt-btn-dismiss" onclick="handleYouTubeCardAction('${v.video_id}', 'dismiss', '')" title="Solo quitar la ficha de esta bandeja sin abrir YouTube (el respaldo .md permanece en tu Segundo Cerebro)">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-                    <span>Solo Quitar</span>
-                </button>
+                    <button class="yt-btn yt-btn-dismiss" onclick="handleYouTubeCardAction('${v.video_id}', 'dismiss', '')" title="Solo quitar la ficha de esta bandeja sin abrir YouTube (el respaldo .md permanece en tu Segundo Cerebro)">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                        <span>Solo Quitar</span>
+                    </button>
+                ` : `
+                    <a href="${v.url_video}" target="_blank" rel="noopener" class="yt-btn yt-btn-open" title="Abrir el video en YouTube">
+                        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Ver en YouTube</span>
+                    </a>
+
+                    <button class="yt-btn yt-btn-dismiss" onclick="handleReactivateCard('${v.video_id}')" title="Mover nuevamente a la bandeja de pendientes">
+                        <span>📥 Regresar a Pendientes</span>
+                    </button>
+                `}
             </div>
         </article>
     `;
+}
 }
 
 function renderMonitoredChannelsGrid() {
@@ -480,3 +586,45 @@ async function triggerYouTubeChannelScan() {
         }
     }
 }
+
+async function handleMarkAllRead() {
+    if (ytUnreadCache.length === 0) {
+        alert('No hay videos pendientes en la bandeja.');
+        return;
+    }
+    const ok = confirm(`¿Deseas marcar los ${ytUnreadCache.length} videos pendientes como leídos?\n\nTodos los resúmenes y transcripciones completas seguirán intactos y respaldados en tu Segundo Cerebro (Vault_Conocimiento/01_NOTAS/).`);
+    if (!ok) return;
+
+    try {
+        const res = await fetch('/api/youtube/action', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ video_id: 'ALL', action: 'watched' })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.error || 'Error al limpiar bandeja');
+
+        if (typeof showAgentNotification === 'function') {
+            showAgentNotification('🧹 Bandeja limpia. Todos los videos marcados como vistos.', 'success');
+        }
+        await loadYouTubeSummaries();
+    } catch (err) {
+        alert('Error: ' + err.message);
+    }
+}
+
+async function handleReactivateCard(videoId) {
+    try {
+        const res = await fetch('/api/youtube/action', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ video_id: videoId, action: 'unread' })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.error || 'Error al reactivar video');
+        await loadYouTubeSummaries();
+    } catch (err) {
+        alert('Error: ' + err.message);
+    }
+}
+

@@ -1217,11 +1217,14 @@
                         <div>
                             <h2>Bandeja Ejecutiva de YouTube & Segundo Cerebro</h2>
                             <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">
-                                Corte automático diario <b>10:00 AM (CDMX)</b> · Resúmenes de Doble Capa sin humo · Respaldo 100% íntegro (YAML + Transcripción) en <code>Vault_Conocimiento/01_NOTAS/</code>
+                                Corte automático diario <b>10:00 AM (CDMX)</b> · Resúmenes Ejecutivos Objetivos y Sin Humo · Respaldo 100% íntegro (YAML + Transcripción) en <code>Vault_Conocimiento/01_NOTAS/</code>
                             </p>
                         </div>
                     </div>
-                    <div class="header-action-group">
+                    <div class="header-action-group" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button id="yt-mark-all-read-btn" class="btn-secondary" style="padding: 8px 16px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border-color); background: var(--bg-surface);" title="Marcar todos los videos pendientes como leídos para dejar la bandeja limpia">
+                            🧹 Limpiar Bandeja
+                        </button>
                         <button id="yt-trigger-scan-btn" class="btn-primary" style="padding: 8px 16px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;" title="Escanear los 17 canales ahora mismo en busca de videos nuevos">
                             🔄 Buscar Nuevos Ahora
                         </button>
@@ -1231,14 +1234,14 @@
                 <div class="card-content">
                     <!-- MÉTRICAS DE LA BANDEJA -->
                     <div class="agent-metrics-row">
-                        <div class="agent-metric-card">
+                        <div class="agent-metric-card" id="yt-metric-card-unread" style="cursor: pointer;" title="Ver solo pendientes">
                             <div class="agent-metric-icon">📥</div>
                             <div class="agent-metric-info">
                                 <span class="agent-metric-val" id="yt-metric-unread">0</span>
                                 <span class="agent-metric-lbl">Por Leer en Bandeja</span>
                             </div>
                         </div>
-                        <div class="agent-metric-card">
+                        <div class="agent-metric-card" id="yt-metric-card-archived" style="cursor: pointer;" title="Ver historial completo">
                             <div class="agent-metric-icon">🧠</div>
                             <div class="agent-metric-info">
                                 <span class="agent-metric-val" id="yt-metric-archived">0</span>
@@ -1261,21 +1264,37 @@
                         </div>
                     </div>
 
-                    <!-- BARRA DE FILTROS + RESUMIDOR MANUAL DE URL -->
+                    <!-- BARRA DE FILTROS + BUSCADOR + RESUMIDOR MANUAL DE URL -->
                     <div class="yt-toolbar-row">
                         <div class="yt-filter-chips">
                             <button class="yt-filter-chip active" data-yt-filter="all">Todos</button>
-                            <button class="yt-filter-chip" data-yt-filter="Negocios_IA_Tech">🤖 IA, Tech & Negocios</button>
-                            <button class="yt-filter-chip" data-yt-filter="Geopolitica_Noticias">🌍 Noticias, Mañanera & Análisis</button>
-                            <button class="yt-filter-chip" data-yt-filter="Ciencia_Divulgacion">🔬 Ciencia & Espacio</button>
-                            <button class="yt-filter-chip" data-yt-filter="Historia_Arquitectura">🏛️ Historia & Arquitectura</button>
+                            <button class="yt-filter-chip" data-yt-filter="Negocios_IA_Tech">🤖 IA & Tech</button>
+                            <button class="yt-filter-chip" data-yt-filter="Geopolitica_Noticias">🌍 Noticias</button>
+                            <button class="yt-filter-chip" data-yt-filter="Ciencia_Divulgacion">🔬 Ciencia</button>
+                            <button class="yt-filter-chip" data-yt-filter="Historia_Arquitectura">🏛️ Historia</button>
                             <button class="yt-filter-chip" data-yt-filter="channels_list">📡 Ver 17 Canales</button>
                         </div>
 
                         <div class="yt-quick-url-box">
                             <input type="text" id="yt-custom-url-input" class="yt-quick-url-input" placeholder="Pegar cualquier link de YouTube para resumir y archivar...">
                             <button id="yt-summarize-url-btn" class="btn-primary" style="padding: 8px 14px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; white-space: nowrap;">
-                                ⚡ Resumir Video
+                                ⚡ Resumir
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SEGUNDA FILA: BUSCADOR EN VIVO Y SELECTOR DE BANDEJA/HISTORIAL -->
+                    <div style="display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap;">
+                        <div style="position: relative; flex: 1; min-width: 260px; max-width: 480px;">
+                            <input type="text" id="yt-search-input" placeholder="🔍 Filtrar por título, canal o concepto clave..." style="width: 100%; padding: 8px 14px 8px 32px; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-primary); font-size: 0.9rem;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); opacity: 0.5; pointer-events: none;">🔍</span>
+                        </div>
+                        <div style="display: flex; gap: 6px; background: var(--bg-surface); padding: 4px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                            <button id="yt-tab-unread" class="btn-sm active-tab-pill" style="padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 0.85rem;" title="Mostrar únicamente videos no leídos">
+                                📥 Pendientes (<span id="yt-pill-unread-count">0</span>)
+                            </button>
+                            <button id="yt-tab-history" class="btn-sm" style="padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: var(--text-secondary); font-size: 0.85rem;" title="Mostrar historial de videos archivados y vistos">
+                                📚 Historial (<span id="yt-pill-history-count">0</span>)
                             </button>
                         </div>
                     </div>

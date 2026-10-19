@@ -2970,6 +2970,10 @@ summary {
     border-left-color: #d97706;
 }
 
+.yt-summary-card.yt-card-archived {
+    border-left-color: #10b981;
+}
+
 .yt-summary-card:hover {
     box-shadow: var(--shadow-hover);
 }
@@ -3070,11 +3074,6 @@ summary {
 .yt-box-keypoints {
     background: var(--bg-subtle);
     border-left: 4px solid #059669;
-}
-
-.yt-box-rogerman {
-    background: rgba(217, 119, 6, 0.06);
-    border-left: 4px solid #d97706;
 }
 
 .yt-section-title {
