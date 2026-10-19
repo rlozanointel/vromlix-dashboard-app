@@ -22,11 +22,6 @@ function initYouTubeView() {
         scanBtn.addEventListener('click', triggerYouTubeChannelScan);
     }
 
-    const markAllBtn = document.getElementById('yt-mark-all-read-btn');
-    if (markAllBtn) {
-        markAllBtn.addEventListener('click', handleMarkAllRead);
-    }
-
     const tabUnread = document.getElementById('yt-tab-unread');
     const tabHistory = document.getElementById('yt-tab-history');
     if (tabUnread && tabHistory) {
@@ -598,31 +593,6 @@ async function triggerYouTubeChannelScan() {
     }
 }
 
-async function handleMarkAllRead() {
-    if (ytUnreadCache.length === 0) {
-        alert('No hay videos pendientes en la bandeja.');
-        return;
-    }
-    const ok = confirm(`¿Deseas marcar los ${ytUnreadCache.length} videos pendientes como leídos?\n\nTodos los resúmenes y transcripciones completas seguirán intactos y respaldados en tu Segundo Cerebro (Vault_Conocimiento/01_NOTAS/).`);
-    if (!ok) return;
-
-    try {
-        const res = await fetch('/api/youtube/action', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ video_id: 'ALL', action: 'watched' })
-        });
-        const data = await res.json();
-        if (!res.ok || !data.success) throw new Error(data.error || 'Error al limpiar bandeja');
-
-        if (typeof showAgentNotification === 'function') {
-            showAgentNotification('🧹 Bandeja limpia. Todos los videos marcados como vistos.', 'success');
-        }
-        await loadYouTubeSummaries();
-    } catch (err) {
-        alert('Error: ' + err.message);
-    }
-}
 
 async function handleReactivateCard(videoId) {
     try {
