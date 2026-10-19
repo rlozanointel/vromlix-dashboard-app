@@ -324,23 +324,30 @@ function renderMonitoredChannelsGrid() {
         'MODO_C_VISUAL': '🖼️ Visual / Historia (Con Alerta Visual)'
     };
 
-    const cards = ytChannelsCache.map((ch, idx) => `
+    const cards = ytChannelsCache.map((ch, idx) => {
+        const isPlaylist = (ch.handle || '').startsWith('playlist:');
+        const plId = isPlaylist ? ch.handle.replace('playlist:', '') : '';
+        const chUrl = isPlaylist ? `https://www.youtube.com/playlist?list=${plId}` : `https://www.youtube.com/${ch.handle}`;
+        const displayBadge = isPlaylist ? '📋 Playlist de Temporada' : (modeBadges[ch.mode] || ch.mode);
+        const handleLabel = isPlaylist ? '📋 Playlist' : ch.handle;
+
+        return `
         <div class="yt-channel-item" id="yt-channel-card-${ch.handle.replace(/[^a-zA-Z0-9]/g, '')}">
             <div class="yt-ch-num">#${idx + 1}</div>
             <div class="yt-ch-info">
                 <div class="yt-ch-name">${ch.name}</div>
                 <div class="yt-ch-handle">
-                    <a href="https://www.youtube.com/${ch.handle}" target="_blank" rel="noopener" style="color: var(--accent-primary); text-decoration: none;">${ch.handle}</a> 
-                    · <span>${modeBadges[ch.mode] || ch.mode}</span>
+                    <a href="${chUrl}" target="_blank" rel="noopener" style="color: var(--accent-primary); text-decoration: none;">${handleLabel}</a> 
+                    · <span>${displayBadge}</span>
                 </div>
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
-                <a href="https://www.youtube.com/${ch.handle}" target="_blank" rel="noopener" class="yt-icon-btn yt-icon-yt" title="Abrir canal en YouTube (${ch.name})">
+                <a href="${chUrl}" target="_blank" rel="noopener" class="yt-icon-btn yt-icon-yt" title="Abrir en YouTube (${ch.name})">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
                 </a>
-                <button class="yt-icon-btn yt-icon-trash" title="Dejar de monitorear este canal" onclick="deleteMonitoredChannel('${ch.handle}', '${ch.name.replace(/'/g, "\\'")}')">
+                <button class="yt-icon-btn yt-icon-trash" title="Dejar de monitorear" onclick="deleteMonitoredChannel('${ch.handle}', '${ch.name.replace(/'/g, "\\'")}')">
                     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="3 6 5 6 21 6"/>
                         <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
@@ -350,26 +357,27 @@ function renderMonitoredChannelsGrid() {
                 </button>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
 
     return `
         <div class="yt-channels-panel">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
                 <div>
-                    <h3 style="margin-bottom: 4px; color: var(--text-primary);">📡 Canales Monitoreados (${ytChannelsCache.length} Canales Activos)</h3>
+                    <h3 style="margin-bottom: 4px; color: var(--text-primary);">📡 Canales & Playlists Monitoreadas (${ytChannelsCache.length} Activos)</h3>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Corte diario: 10:00 AM (CDMX) · Videos normales y en vivos · Sin Shorts</p>
                 </div>
             </div>
 
-            <!-- BUSCADOR PARA AGREGAR NUEVO CANAL -->
+            <!-- BUSCADOR PARA AGREGAR NUEVO CANAL O PLAYLIST -->
             <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 22px;">
                 <label style="display: block; font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">
-                    ➕ Agregar Nuevo Canal (Escribe el nombre o pega @handle / enlace):
+                    ➕ Agregar Canal o Playlist (Escribe el nombre, @handle, o pega el enlace de la playlist):
                 </label>
                 <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <input type="text" id="yt-channel-search-input" class="yt-quick-url-input" style="flex: 1; min-width: 250px;" placeholder="Ej: Platzi, Lex Fridman, QuantumFracture, o @nombre..." onkeydown="if(event.key==='Enter') searchNewYouTubeChannel();">
+                    <input type="text" id="yt-channel-search-input" class="yt-quick-url-input" style="flex: 1; min-width: 250px;" placeholder="Ej: Platzi, QuantumFracture, @nombre, o enlace de Playlist de temporada..." onkeydown="if(event.key==='Enter') searchNewYouTubeChannel();">
                     <button id="yt-search-channel-btn" class="btn-primary" style="padding: 9px 18px; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; white-space: nowrap;" onclick="searchNewYouTubeChannel();">
-                        🔍 Buscar Canal
+                        🔍 Buscar
                     </button>
                 </div>
                 <div id="yt-search-results-container" style="margin-top: 14px; display: none;"></div>
