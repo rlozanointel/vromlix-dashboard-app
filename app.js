@@ -10,6 +10,8 @@ function openYtVideo(url) {
 document.addEventListener('DOMContentLoaded', () => {
     initMainNavigation();
     initClock();
+    initWeather();
+    initTiempo();
     initWhiteboard();
     initTasks();
     initPrayers();
@@ -102,6 +104,7 @@ function escapeHTML(str) {
 
 // ==========================================
 // BINARY CLOCK (Puebla / CDMX Timezone - 6 bits Aligned)
+// Drift-Free Epoch Sync & Android Lock/Suspend Wakeup Fix
 // ==========================================
 function initClock() {
     const timeEl = document.getElementById('current-time');
@@ -131,7 +134,7 @@ function initClock() {
         
         // Format time strictly to Mexico City (Puebla) timezone
         const options = { timeZone: 'America/Mexico_City', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-        const parts = new Intl.DateTimeFormat('es-MX', options).formatToParts(now);
+        const parts = new Intl.DateTimeFormat('en-US', options).formatToParts(now);
         
         let hour = 0, minute = 0, second = 0;
         for (const part of parts) {
@@ -145,20 +148,134 @@ function initClock() {
         setBits('binary-minutes', minute, 6);
         setBits('binary-seconds', second, 6);
         
-        // Update Digital Text Display (element may not exist if hidden in layout)
+        // Update Digital Text Display (if present)
         if (timeEl) {
             timeEl.textContent = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}`;
         }
         
-        // Date display
+        // Clean English Date Display: "Monday 19 Oct" (or "Tuesday 20 Oct")
         if (dateEl) {
-            const dateOptions = { timeZone: 'America/Mexico_City', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            dateEl.textContent = now.toLocaleDateString('es-MX', dateOptions);
+            const dateOptions = { timeZone: 'America/Mexico_City', weekday: 'long', day: 'numeric', month: 'short' };
+            const dateParts = new Intl.DateTimeFormat('en-US', dateOptions).formatToParts(now);
+            let wDay = '', mDay = '', mMonth = '';
+            for (const p of dateParts) {
+                if (p.type === 'weekday') wDay = p.value;
+                if (p.type === 'day') mDay = p.value;
+                if (p.type === 'month') mMonth = p.value;
+            }
+            dateEl.textContent = `${wDay} ${mDay} ${mMonth}`;
         }
     }
     
-    updateClock();
-    setInterval(updateClock, 1000);
+    // Drift-free Epoch Rescheduler (Self-aligning to exact millisecond boundary)
+    let clockTimeoutId = null;
+    function tickClock() {
+        updateClock();
+        const nowMs = Date.now();
+        const nextDelay = Math.max(25, 1000 - (nowMs % 1000));
+        clockTimeoutId = setTimeout(tickClock, nextDelay);
+    }
+
+    // Android Lock Screen / Tab Suspend Wakeup Listeners
+    function forceWakeupSync() {
+        if (clockTimeoutId) clearTimeout(clockTimeoutId);
+        tickClock();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) forceWakeupSync();
+    });
+    window.addEventListener('focus', forceWakeupSync);
+    window.addEventListener('pageshow', forceWakeupSync);
+
+    tickClock();
+}
+
+// ==========================================
+// OPEN-METEO WEATHER ENGINE (Puebla - Col. Universidades)
+// Latitude: 19.0125, Longitude: -98.2045
+// 100% Free, No Key, Rain probability for next 1-2 hours
+// ==========================================
+function initWeather() {
+    const tempEl = document.getElementById('weather-temp');
+    const humEl = document.getElementById('weather-humidity');
+    const rainEl = document.getElementById('weather-rain');
+    if (!tempEl) return;
+
+    const CACHE_KEY = 'vromlix_weather_puebla_cache';
+    const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
+
+    function renderWeather(data) {
+        if (!data) return;
+        const temp = Math.round(data.temperature);
+        const hum = Math.round(data.humidity);
+        const rainProb = Math.round(data.rainProbNext1_2h);
+
+        if (tempEl) tempEl.textContent = `${temp}°C`;
+        if (humEl) humEl.textContent = `💧 ${hum}%`;
+        if (rainEl) {
+            rainEl.textContent = `☔ ${rainProb}% (1-2h)`;
+            if (rainProb >= 40) {
+                rainEl.className = 'weather-rain rain-warning';
+                rainEl.title = `Alerta: Alta probabilidad de lluvia (${rainProb}%) en Puebla para las siguientes 1-2 horas`;
+            } else {
+                rainEl.className = 'weather-rain rain-safe';
+                rainEl.title = `Baja probabilidad de lluvia (${rainProb}%) en Puebla para las siguientes 1-2 horas`;
+            }
+        }
+    }
+
+    // Load cached first
+    try {
+        const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+        if (cached && (Date.now() - cached.timestamp < CACHE_TTL)) {
+            renderWeather(cached.data);
+        }
+    } catch(e) {}
+
+    function fetchWeather() {
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=19.0125&longitude=-98.2045&current=temperature_2m,relative_humidity_2m&hourly=precipitation_probability&timezone=America%2FMexico_City&forecast_hours=3';
+        fetch(url)
+            .then(res => res.json())
+            .then(resData => {
+                if (resData && resData.current) {
+                    const curTemp = resData.current.temperature_2m;
+                    const curHum = resData.current.relative_humidity_2m;
+                    const hourlyRain = (resData.hourly && resData.hourly.precipitation_probability) || [];
+                    const prob1 = hourlyRain[0] !== undefined ? hourlyRain[0] : 0;
+                    const prob2 = hourlyRain[1] !== undefined ? hourlyRain[1] : prob1;
+                    const maxProb = Math.max(prob1, prob2);
+
+                    const weatherPayload = {
+                        temperature: curTemp,
+                        humidity: curHum,
+                        rainProbNext1_2h: maxProb
+                    };
+
+                    localStorage.setItem(CACHE_KEY, JSON.stringify({
+                        timestamp: Date.now(),
+                        data: weatherPayload
+                    }));
+
+                    renderWeather(weatherPayload);
+                }
+            })
+            .catch(err => {
+                console.log("Open-Meteo no disponible en este momento:", err);
+            });
+    }
+
+    fetchWeather();
+    setInterval(fetchWeather, CACHE_TTL);
+
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+            if (!cached || (Date.now() - cached.timestamp >= CACHE_TTL)) {
+                fetchWeather();
+            }
+        }
+    });
 }
 
 // ==========================================
@@ -2161,3 +2278,394 @@ function initTranslator() {
 
     renderHistory();
 }
+
+// ==========================================
+// TIEMPO ENGINE (STOPWATCH, ACTIVIDADES & DESCANSO)
+// Reboot-resilient, SQLite-backed, 25-45m Deep Work Pomodoro,
+// Street / Errands, Leisure, Sleep & Wake 1-click tracking.
+// ==========================================
+function initTiempo() {
+    const timerDisplay = document.getElementById('timer-display');
+    const timerSublabel = document.getElementById('timer-sublabel');
+    const heroCard = document.getElementById('tiempo-hero-card');
+    const activeBadge = document.getElementById('active-phase-badge');
+    const phaseDot = document.getElementById('tiempo-phase-dot');
+    const pomodoroFill = document.getElementById('pomodoro-fill');
+    const pomodoroAlert = document.getElementById('pomodoro-alert');
+
+    // Stat Elements
+    const statNetWork = document.getElementById('stat-net-work');
+    const statWorkEff = document.getElementById('stat-work-efficiency');
+    const statTotalPauses = document.getElementById('stat-total-pauses');
+    const statPauseCount = document.getElementById('stat-pause-count');
+    const statTotalStreet = document.getElementById('stat-total-street');
+    const statStreetCount = document.getElementById('stat-street-count');
+    const statLastSleep = document.getElementById('stat-last-sleep');
+
+    // List & Table Elements
+    const pausesList = document.getElementById('pauses-breakdown-list');
+    const streetList = document.getElementById('street-breakdown-list');
+    const historyBody = document.getElementById('tiempo-history-body');
+
+    let currentServerState = null;
+    let localTickInterval = null;
+
+    const PHASE_CONFIG = {
+        'trabajo': { title: '💻 Trabajo Efectivo', class: 'phase-trabajo', color: 'var(--accent-primary)', sub: 'Enfoque Profundo (25-45m)' },
+        'pausa': { title: '☕ Pausa Corta', class: 'phase-pausa', color: 'var(--accent-warning)', sub: 'Recuperación de 5 min' },
+        'comida': { title: '🍽️ Comida / Almuerzo', class: 'phase-comida', color: '#8b5cf6', sub: 'Alimentación' },
+        'calle': { title: '🚶‍♂️ En la Calle / Diligencia', class: 'phase-calle', color: '#ea580c', sub: 'Salida de casa' },
+        'ocio': { title: '🎬 Ocio / YouTube', class: 'phase-ocio', color: '#ef4444', sub: 'Relajación nocturna' },
+        'espiritual': { title: '📖 Espiritual / Spotify', class: 'phase-espiritual', color: '#38bdf8', sub: 'Libro de Mormón / Mañana' },
+        'dormir': { title: '🌙 Durmiendo / Descanso', class: 'phase-dormir', color: '#6366f1', sub: 'Sueño nocturno' },
+        'detenido': { title: '⏹️ Detenido', class: 'phase-detenido', color: 'var(--text-muted)', sub: 'Jornada pausada' }
+    };
+
+    function formatSecs(sec) {
+        if (!sec || sec < 0) return '00:00:00';
+        const h = Math.floor(sec / 3600);
+        const m = Math.floor((sec % 3600) / 60);
+        const s = Math.floor(sec % 60);
+        return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function formatShortSecs(sec) {
+        if (!sec || sec <= 0) return '0m';
+        const h = Math.floor(sec / 3600);
+        const m = Math.floor((sec % 3600) / 60);
+        if (h > 0) return `${h}h ${m}m`;
+        return `${m}m`;
+    }
+
+    function updateLiveTimerUI() {
+        if (!currentServerState || !currentServerState.active_interval) {
+            if (timerDisplay) timerDisplay.textContent = '00:00:00';
+            if (timerSublabel) timerSublabel.textContent = 'Jornada detenida o en espera';
+            if (activeBadge) {
+                activeBadge.textContent = '⏹️ Detenido';
+                activeBadge.className = 'phase-badge phase-detenido';
+            }
+            if (heroCard) heroCard.className = 'section-card tiempo-hero-card';
+            if (phaseDot) phaseDot.style.background = 'transparent';
+            if (pomodoroFill) pomodoroFill.style.width = '0%';
+            if (pomodoroAlert) pomodoroAlert.style.display = 'none';
+            highlightActiveButton('detenido');
+            return;
+        }
+
+        const active = currentServerState.active_interval;
+        const nowEpoch = Date.now() / 1000.0;
+        const elapsed = Math.max(0, nowEpoch - active.start_epoch);
+
+        if (timerDisplay) timerDisplay.textContent = formatSecs(elapsed);
+
+        const phaseKey = (active.phase || '').toLowerCase();
+        const cfg = PHASE_CONFIG[phaseKey] || PHASE_CONFIG['trabajo'];
+
+        const displayTitle = active.subtag ? `${cfg.title} (${active.subtag})` : cfg.title;
+        if (activeBadge) {
+            activeBadge.textContent = displayTitle;
+            activeBadge.className = `phase-badge ${cfg.class}`;
+        }
+        if (timerSublabel) {
+            timerSublabel.textContent = `${cfg.sub} • Iniciado a las ${active.start_iso ? active.start_iso.substring(11, 16) : ''}`;
+        }
+        if (phaseDot) phaseDot.style.background = cfg.color;
+        highlightActiveButton(phaseKey);
+
+        // Dynamic Card Glow & Color Transition
+        if (heroCard) {
+            heroCard.className = `section-card tiempo-hero-card card-glow-${phaseKey}`;
+        }
+
+        // Pomodoro Progress Bar (0 to 45 mins target)
+        if (pomodoroFill) {
+            if (phaseKey === 'trabajo') {
+                const targetSec = 45 * 60; // 45m deep work
+                const pct = Math.min(100, Math.round((elapsed / targetSec) * 100));
+                pomodoroFill.style.width = `${pct}%`;
+
+                if (elapsed >= 45 * 60) {
+                    pomodoroFill.style.background = 'var(--accent-warning)';
+                    if (pomodoroAlert) {
+                        pomodoroAlert.style.display = 'block';
+                        pomodoroAlert.innerHTML = `⚠️ <b>Límite de 45m alcanzado (${formatShortSecs(elapsed)}):</b> Es momento óptimo para tomar tu pausa corta de 5 min y estirar el cuerpo.`;
+                    }
+                } else if (elapsed >= 25 * 60) {
+                    pomodoroFill.style.background = 'var(--accent-primary)';
+                    if (pomodoroAlert) {
+                        pomodoroAlert.style.display = 'block';
+                        pomodoroAlert.innerHTML = `💡 <b>25m de trabajo cumplidos (${formatShortSecs(elapsed)}):</b> Al cerrar tu idea o función actual, puedes tomar 5 min de descanso.`;
+                    }
+                } else {
+                    pomodoroFill.style.background = 'var(--accent-success)';
+                    if (pomodoroAlert) pomodoroAlert.style.display = 'none';
+                }
+            } else if (phaseKey === 'pausa') {
+                const pauseTarget = 5 * 60; // 5 min
+                const pct = Math.min(100, Math.round((elapsed / pauseTarget) * 100));
+                pomodoroFill.style.width = `${pct}%`;
+                pomodoroFill.style.background = 'var(--accent-warning)';
+                if (elapsed >= 5 * 60) {
+                    if (pomodoroAlert) {
+                        pomodoroAlert.style.display = 'block';
+                        pomodoroAlert.innerHTML = `☕ <b>Pausa de 5 minutos completada:</b> Listo para volver al trabajo efectivo con la mente despejada.`;
+                    }
+                } else {
+                    if (pomodoroAlert) pomodoroAlert.style.display = 'none';
+                }
+            } else {
+                pomodoroFill.style.width = '0%';
+                if (pomodoroAlert) pomodoroAlert.style.display = 'none';
+            }
+        }
+    }
+
+    function highlightActiveButton(phase) {
+        document.querySelectorAll('.btn-tiempo-action').forEach(btn => btn.classList.remove('active-phase'));
+        const targetBtn = document.getElementById(`btn-phase-${phase}`);
+        if (targetBtn) targetBtn.classList.add('active-phase');
+    }
+
+    function renderStats(state) {
+        if (!state) return;
+        currentServerState = state;
+
+        if (statNetWork) statNetWork.textContent = state.net_work_formatted || '0m';
+        if (statWorkEff) statWorkEff.textContent = `Eficiencia: ${state.efficiency_pct || 0}%`;
+
+        if (statTotalPauses) statTotalPauses.textContent = state.total_pause_formatted || '0m';
+        if (statPauseCount) statPauseCount.textContent = `${state.pause_count || 0} pausas`;
+
+        if (statTotalStreet) statTotalStreet.textContent = state.street_formatted || '0m';
+        if (statStreetCount) statStreetCount.textContent = `${(state.street_breakdown || []).length} salidas hoy`;
+
+        if (statLastSleep) {
+            if (state.last_sleep && state.last_sleep.duration_hours) {
+                statLastSleep.textContent = `${state.last_sleep.duration_hours}h`;
+            } else {
+                statLastSleep.textContent = '--h';
+            }
+        }
+
+        // Render Pauses Breakdown List
+        if (pausesList) {
+            const list = state.pauses_breakdown || [];
+            if (list.length === 0) {
+                pausesList.innerHTML = '<div class="empty-text">No has tomado pausas cortas aún hoy.</div>';
+            } else {
+                pausesList.innerHTML = list.map((p, idx) => `
+                    <div class="tiempo-breakdown-item">
+                        <span class="breakdown-idx">Pausa #${idx + 1}</span>
+                        <span class="breakdown-range">${p.start} ➔ ${p.end}</span>
+                        <span class="breakdown-dur badge-amber">${p.duration_formatted}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Render Street Breakdown List
+        if (streetList) {
+            const list = state.street_breakdown || [];
+            if (list.length === 0) {
+                streetList.innerHTML = '<div class="empty-text">Sin salidas registradas hoy.</div>';
+            } else {
+                streetList.innerHTML = list.map(s => `
+                    <div class="tiempo-breakdown-item">
+                        <span class="breakdown-idx">🚶‍♂️ ${escapeHTML(s.subtag)}</span>
+                        <span class="breakdown-range">${s.time}</span>
+                        <span class="breakdown-dur badge-orange">${s.duration_formatted}</span>
+                    </div>
+                `).join('');
+            }
+        }
+    }
+
+    function loadServerState() {
+        fetch('/api/time/state')
+            .then(res => res.json())
+            .then(data => {
+                if (data && !data.error) {
+                    renderStats(data);
+                    updateLiveTimerUI();
+                    localStorage.setItem('vromlix_time_cached_state', JSON.stringify(data));
+                    updateSyncBadge(true);
+                }
+            })
+            .catch(err => {
+                console.log("No se pudo conectar a /api/time/state, usando caché offline:", err);
+                updateSyncBadge(false);
+                try {
+                    const cached = JSON.parse(localStorage.getItem('vromlix_time_cached_state') || 'null');
+                    if (cached) renderStats(cached);
+                } catch(e) {}
+            });
+    }
+
+    function loadHistory() {
+        if (!historyBody) return;
+        fetch('/api/time/history')
+            .then(res => res.json())
+            .then(data => {
+                const list = data.history || [];
+                if (list.length === 0) {
+                    historyBody.innerHTML = '<tr><td colspan="7" style="text-align:center; color: var(--text-muted); padding: 12px;">Sin registros anteriores aún.</td></tr>';
+                    return;
+                }
+                historyBody.innerHTML = list.map(item => `
+                    <tr>
+                        <td><b>${item.date}</b></td>
+                        <td>${item.sleep_hours ? `<span class="badge-indigo">${item.sleep_hours}h</span>` : '--'}</td>
+                        <td><span class="badge-cyan">${formatShortSecs(item.trabajo)}</span></td>
+                        <td>${formatShortSecs(item.pausa)}</td>
+                        <td>${formatShortSecs(item.calle)}</td>
+                        <td>${formatShortSecs(item.comida)}</td>
+                        <td>${formatShortSecs(item.ocio)}</td>
+                    </tr>
+                `).join('');
+            })
+            .catch(() => {});
+    }
+
+    function updateSyncBadge(isOnline) {
+        const syncBadge = document.getElementById('sync-status-indicator');
+        if (syncBadge) {
+            if (isOnline) {
+                syncBadge.textContent = '🟢 Sync';
+                syncBadge.className = 'sync-indicator sync-online';
+                syncBadge.title = 'Conectado y sincronizado con tu laptop';
+            } else {
+                syncBadge.textContent = '🟠 Offline';
+                syncBadge.className = 'sync-indicator sync-offline';
+                syncBadge.title = 'Modo local autónomo (se sincronizará al conectar)';
+            }
+        }
+    }
+
+    // Exposed Global Actions for UI Buttons
+    window.cambiarFaseTiempo = function(phase, subtag = '', note = '') {
+        const calleMenu = document.getElementById('calle-presets-menu');
+        if (calleMenu) calleMenu.classList.add('hidden');
+
+        // Optimistic UI state
+        if (currentServerState) {
+            if (phase === 'detener') {
+                currentServerState.active_interval = null;
+            } else {
+                currentServerState.active_interval = {
+                    phase: phase,
+                    subtag: subtag,
+                    start_epoch: Date.now() / 1000.0,
+                    start_iso: new Date().toISOString()
+                };
+            }
+            updateLiveTimerUI();
+        }
+
+        fetch('/api/time/lap', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phase, subtag, note })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.state) {
+                renderStats(data.state);
+                updateLiveTimerUI();
+                showToast(`Fase cambiada a: ${phase.toUpperCase()}`);
+            }
+        })
+        .catch(err => {
+            showToast(`Fase activada localmente: ${phase.toUpperCase()}`);
+            updateSyncBadge(false);
+        });
+    };
+
+    window.marcarDormir = function() {
+        if (!confirm("¿Marcar inicio de descanso / A dormir?")) return;
+        window.cambiarFaseTiempo('dormir', 'noche', 'A dormir');
+        showToast("🌙 Que descanses bien Roger. Sueño registrado.");
+    };
+
+    window.marcarDespertar = function() {
+        fetch('/api/time/wake', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ note: 'Despertar y Libro de Mormón' })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.state) {
+                renderStats(data.state);
+                updateLiveTimerUI();
+                loadHistory();
+                showToast("☀️ ¡Buenos días! Sueño guardado. Iniciando rutina matutina.");
+            }
+        })
+        .catch(() => {
+            window.cambiarFaseTiempo('espiritual', 'libro_mormon', 'Despertar matutino');
+            showToast("☀️ ¡Buenos días! Iniciando rutina matutina.");
+        });
+    };
+
+    window.toggleCalleMenu = function() {
+        const menu = document.getElementById('calle-presets-menu');
+        if (menu) menu.classList.toggle('hidden');
+    };
+
+    window.handleAudioFileSelected = function(fileInput) {
+        if (!fileInput.files || !fileInput.files[0]) return;
+        const file = fileInput.files[0];
+        const statusLabel = document.getElementById('audio-upload-status');
+        if (statusLabel) {
+            statusLabel.textContent = `⏳ Subiendo "${file.name}" (${(file.size / (1024 * 1024)).toFixed(1)} MB)...`;
+            statusLabel.style.color = 'var(--accent-warning)';
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const base64Audio = e.target.result;
+            fetch('/api/audio/upload', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    filename: file.name,
+                    audio_base64: base64Audio
+                })
+            })
+            .then(res => res.json())
+            .then(resp => {
+                if (resp.success) {
+                    if (statusLabel) {
+                        statusLabel.textContent = `✅ Guardado en VROMLIX_DATA/audio_recordings listo para Whisper`;
+                        statusLabel.style.color = 'var(--accent-success)';
+                    }
+                    showToast(`Grabación recibida: ${file.name}`);
+                } else {
+                    if (statusLabel) statusLabel.textContent = `❌ Error: ${resp.error}`;
+                }
+            })
+            .catch(err => {
+                if (statusLabel) statusLabel.textContent = `❌ Error al subir: ${err.message}`;
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // Auto-ticking interval (1s)
+    if (localTickInterval) clearInterval(localTickInterval);
+    localTickInterval = setInterval(updateLiveTimerUI, 1000);
+
+    // Initial load
+    loadServerState();
+    loadHistory();
+
+    // Re-check on visibilitychange and focus
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            loadServerState();
+            loadHistory();
+        }
+    });
+}
+

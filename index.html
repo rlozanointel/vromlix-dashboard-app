@@ -53,7 +53,17 @@
                         <div class="bit" data-col="6" data-val="1"></div>
                     </div>
                 </div>
-                <span id="current-date">Cargando fecha...</span>
+                <div class="header-status-line">
+                    <span id="current-date">Loading date...</span>
+                    <span class="status-dot">•</span>
+                    <span id="weather-badge" class="weather-badge" title="Puebla de Zaragoza (Col. Universidades)">
+                        <span id="weather-temp">--°C</span>
+                        <span id="weather-humidity">💧 --%</span>
+                        <span id="weather-rain" class="rain-safe">☔ --% (1-2h)</span>
+                    </span>
+                    <span class="status-dot">•</span>
+                    <span id="sync-status-indicator" class="sync-indicator" title="Estado de sincronización">🟢 Sync</span>
+                </div>
             </div>
         </header>
 
@@ -62,6 +72,11 @@
             <button class="nav-tab-btn active" data-view="view-principal">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 <span>Principal</span>
+            </button>
+            <button class="nav-tab-btn" data-view="view-tiempo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Tiempo</span>
+                <span id="tiempo-phase-dot" class="tiempo-dot-indicator"></span>
             </button>
             <button class="nav-tab-btn" data-view="view-iglesia">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
@@ -170,6 +185,279 @@
                         </div>
                     </div>
                 </section>
+            </div>
+
+            <!-- VISTA: TIEMPO (STOPWATCH, ACTIVIDADES & DESCANSO) -->
+            <div id="view-tiempo" class="dashboard-view">
+                
+                <!-- HERO CARD: STOPWATCH Y FASES -->
+                <div class="section-card tiempo-hero-card" id="tiempo-hero-card">
+                    <div class="card-header tiempo-hero-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <div>
+                                <h2>Control de Tiempo, Actividad & Descanso</h2>
+                                <p class="subtitle-text">Monitoreo continuo persistente a reinicios • Bloques de 25-45m de trabajo profundo</p>
+                            </div>
+                        </div>
+                        <div class="tiempo-phase-badge-wrapper">
+                            <span id="active-phase-badge" class="phase-badge phase-detenido">⏹️ Detenido</span>
+                        </div>
+                    </div>
+
+                    <div class="card-content tiempo-hero-body">
+                        <!-- CRONÓMETRO GIGANTE -->
+                        <div class="timer-display-section">
+                            <div class="timer-digits-container">
+                                <span id="timer-display" class="timer-digits">00:00:00</span>
+                                <span id="timer-sublabel" class="timer-sublabel">Esperando inicio</span>
+                            </div>
+
+                            <!-- Barra de Progreso de Enfoque (Pomodoro 25m - 45m Deep Work) -->
+                            <div class="pomodoro-progress-bar-container" title="Meta de Enfoque Continuo: 25 a 45 minutos">
+                                <div class="pomodoro-milestones">
+                                    <span class="milestone m-start">0m</span>
+                                    <span class="milestone m-pomodoro">25m (Pausa sugerida)</span>
+                                    <span class="milestone m-deepwork">45m (Límite Deep Work)</span>
+                                </div>
+                                <div class="pomodoro-track">
+                                    <div id="pomodoro-fill" class="pomodoro-fill" style="width: 0%;"></div>
+                                </div>
+                                <div id="pomodoro-alert" class="pomodoro-alert-message" style="display: none;">
+                                    💡 Has completado más de 25 min de trabajo efectivo. Tómate una pausa corta de 5m cuando cierres tu idea actual.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BOTONES DE ACCIÓN RÁPIDA (LAP CONTINUO) -->
+                        <div class="tiempo-actions-grid">
+                            <button id="btn-phase-trabajo" class="btn-tiempo-action btn-phase-work" onclick="window.cambiarFaseTiempo('trabajo', 'deep_work')">
+                                <span class="btn-icon-emoji">💻</span>
+                                <div class="btn-text-col">
+                                    <span class="btn-title">Trabajo</span>
+                                    <span class="btn-desc">25 a 45 min efectivo</span>
+                                </div>
+                            </button>
+
+                            <button id="btn-phase-pausa" class="btn-tiempo-action btn-phase-pause" onclick="window.cambiarFaseTiempo('pausa', '5min')">
+                                <span class="btn-icon-emoji">☕</span>
+                                <div class="btn-text-col">
+                                    <span class="btn-title">Pausa</span>
+                                    <span class="btn-desc">5 minutos de descanso</span>
+                                </div>
+                            </button>
+
+                            <button id="btn-phase-comida" class="btn-tiempo-action btn-phase-meal" onclick="window.cambiarFaseTiempo('comida', 'almuerzo')">
+                                <span class="btn-icon-emoji">🍽️</span>
+                                <div class="btn-text-col">
+                                    <span class="btn-title">Comida</span>
+                                    <span class="btn-desc">Almuerzo / Alimentos</span>
+                                </div>
+                            </button>
+
+                            <!-- BOTON SALIDA CALLE CON MENÚ RÁPIDO -->
+                            <div class="calle-dropdown-wrapper">
+                                <button id="btn-phase-calle" class="btn-tiempo-action btn-phase-street" onclick="window.toggleCalleMenu()">
+                                    <span class="btn-icon-emoji">🚶‍♂️</span>
+                                    <div class="btn-text-col">
+                                        <span class="btn-title">Calle</span>
+                                        <span class="btn-desc">Salida o diligencias ▾</span>
+                                    </div>
+                                </button>
+                                <div id="calle-presets-menu" class="calle-menu-dropdown hidden">
+                                    <div class="calle-menu-header">Motivo de salida:</div>
+                                    <button onclick="window.cambiarFaseTiempo('calle', 'Dentista')">🦷 Dentista</button>
+                                    <button onclick="window.cambiarFaseTiempo('calle', 'Tienda / Agua')">💧 Comprar Agua / Tienda</button>
+                                    <button onclick="window.cambiarFaseTiempo('calle', 'Terapia Hna. Alma')">💆 Terapia Hna. Alma</button>
+                                    <button onclick="window.cambiarFaseTiempo('calle', 'Psicólogo')">🧠 Psicólogo</button>
+                                    <button onclick="window.cambiarFaseTiempo('calle', 'Iglesia / Bautismos')">⛪ Iglesia / Bautismos</button>
+                                    <button onclick="window.cambiarFaseTiempo('calle', 'Clases Inglés')">🗣️ Inglés presencial</button>
+                                    <button onclick="window.cambiarFaseTiempo('calle', 'General')">🚶 Otra salida</button>
+                                </div>
+                            </div>
+
+                            <button id="btn-phase-ocio" class="btn-tiempo-action btn-phase-leisure" onclick="window.cambiarFaseTiempo('ocio', 'youtube_noche')">
+                                <span class="btn-icon-emoji">🎬</span>
+                                <div class="btn-text-col">
+                                    <span class="btn-title">Ocio</span>
+                                    <span class="btn-desc">YouTube nocturno</span>
+                                </div>
+                            </button>
+
+                            <button id="btn-phase-espiritual" class="btn-tiempo-action btn-phase-spiritual" onclick="window.cambiarFaseTiempo('espiritual', 'libro_mormon')">
+                                <span class="btn-icon-emoji">📖</span>
+                                <div class="btn-text-col">
+                                    <span class="btn-title">Espiritual</span>
+                                    <span class="btn-desc">Libro de Mormón</span>
+                                </div>
+                            </button>
+
+                            <!-- BOTONES DE SUEÑO / DESPERTAR 1-CLIC -->
+                            <button id="btn-phase-dormir" class="btn-tiempo-action btn-phase-sleep" onclick="window.marcarDormir()">
+                                <span class="btn-icon-emoji">🌙</span>
+                                <div class="btn-text-col">
+                                    <span class="btn-title">A Dormir</span>
+                                    <span class="btn-desc">Registrar sueño 1-clic</span>
+                                </div>
+                            </button>
+
+                            <button id="btn-phase-despertar" class="btn-tiempo-action btn-phase-wake" onclick="window.marcarDespertar()">
+                                <span class="btn-icon-emoji">☀️</span>
+                                <div class="btn-text-col">
+                                    <span class="btn-title">Desperté</span>
+                                    <span class="btn-desc">Cerrar sueño e iniciar</span>
+                                </div>
+                            </button>
+
+                            <button id="btn-phase-detener" class="btn-tiempo-action btn-phase-stop" onclick="window.cambiarFaseTiempo('detener')">
+                                <span class="btn-icon-emoji">⏹️</span>
+                                <div class="btn-text-col">
+                                    <span class="btn-title">Pausa Global</span>
+                                    <span class="btn-desc">Cerrar jornada activa</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RESUMEN DIARIO DE MÉTRICAS -->
+                <div class="tiempo-stats-grid">
+                    <div class="tiempo-stat-card border-work">
+                        <div class="stat-header">
+                            <span class="stat-icon">💻</span>
+                            <span class="stat-title">Trabajo Neto</span>
+                        </div>
+                        <div class="stat-value" id="stat-net-work">0m</div>
+                        <div class="stat-sub" id="stat-work-efficiency">Eficiencia: 0%</div>
+                    </div>
+
+                    <div class="tiempo-stat-card border-pause">
+                        <div class="stat-header">
+                            <span class="stat-icon">☕</span>
+                            <span class="stat-title">Pausas Tomadas</span>
+                        </div>
+                        <div class="stat-value" id="stat-total-pauses">0m</div>
+                        <div class="stat-sub" id="stat-pause-count">0 pausas</div>
+                    </div>
+
+                    <div class="tiempo-stat-card border-street">
+                        <div class="stat-header">
+                            <span class="stat-icon">🚶‍♂️</span>
+                            <span class="stat-title">Tiempo en Calle</span>
+                        </div>
+                        <div class="stat-value" id="stat-total-street">0m</div>
+                        <div class="stat-sub" id="stat-street-count">Diligencias e Iglesia</div>
+                    </div>
+
+                    <div class="tiempo-stat-card border-sleep">
+                        <div class="stat-header">
+                            <span class="stat-icon">🌙</span>
+                            <span class="stat-title">Último Sueño</span>
+                        </div>
+                        <div class="stat-value" id="stat-last-sleep">--h</div>
+                        <div class="stat-sub" id="stat-sleep-quality">Descanso nocturno</div>
+                    </div>
+                </div>
+
+                <!-- DESGLOSE DETALLADO DE PAUSAS Y SALIDAS DE HOY -->
+                <div class="tiempo-details-row">
+                    <!-- Columna 1: Pausas de Hoy -->
+                    <div class="section-card">
+                        <div class="card-header">
+                            <div class="header-title-group">
+                                <h3>☕ Desglose de Pausas de Hoy</h3>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div id="pauses-breakdown-list" class="tiempo-breakdown-list">
+                                <div class="empty-text">No has tomado pausas cortas aún hoy.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Salidas a la Calle de Hoy -->
+                    <div class="section-card">
+                        <div class="card-header">
+                            <div class="header-title-group">
+                                <h3>🚶‍♂️ Salidas a la Calle y Diligencias</h3>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div id="street-breakdown-list" class="tiempo-breakdown-list">
+                                <div class="empty-text">Sin salidas registradas hoy.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HISTORIAL SEMANAL DE PRODUCTIVIDAD -->
+                <div class="section-card">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            <h3>Historial de Jornadas & Sueño (Últimos Días)</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="history-table-wrapper">
+                            <table class="tiempo-history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Sueño 🌙</th>
+                                        <th>Trabajo Neto 💻</th>
+                                        <th>Pausas ☕</th>
+                                        <th>Calle 🚶‍♂️</th>
+                                        <th>Comida 🍽️</th>
+                                        <th>Ocio 🎬</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tiempo-history-body">
+                                    <tr><td colspan="7" style="text-align:center; color: var(--text-muted);">Cargando historial...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE GRABACIONES DE REUNIONES (FOSSIFY & TRANSCRIPCIÓN) -->
+                <div class="section-card" style="margin-top: 10px;">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                            <div>
+                                <h3>🎙️ Grabadora de Reuniones (Fossify Voice Recorder + Whisper IA)</h3>
+                                <p class="subtitle-text">Para reuniones de iglesia, entrevistas y clases presenciales</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="recorder-guide-box">
+                            <div class="guide-steps">
+                                <div class="step-item">
+                                    <span class="step-num">1</span>
+                                    <span>Graba tu reunión con <b>Fossify Voice Recorder</b> en tu celular (formato M4A u OGG Opus a 32kbps mono).</span>
+                                </div>
+                                <div class="step-item">
+                                    <span class="step-num">2</span>
+                                    <span>Al terminar, toca <b>Compartir</b> directo a tu <b>Telegram</b> personal o transfiérelo por WiFi.</span>
+                                </div>
+                                <div class="step-item">
+                                    <span class="step-num">3</span>
+                                    <span>O sube el archivo de audio aquí para transcribir y generar el resumen ejecutivo en tu Segundo Cerebro:</span>
+                                </div>
+                            </div>
+                            <div class="upload-audio-zone" id="upload-audio-zone">
+                                <input type="file" id="audio-file-input" accept="audio/*,.m4a,.ogg,.opus,.mp3,.wav" style="display: none;" onchange="window.handleAudioFileSelected(this)">
+                                <button class="btn-primary" onclick="document.getElementById('audio-file-input').click()">
+                                    📁 Seleccionar Audio de Reunión (.m4a / .opus)
+                                </button>
+                                <span id="audio-upload-status" class="audio-status-label">Listo para procesar grabaciones de hasta 2+ horas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- VISTA 2: IGLESIA Y FE -->
