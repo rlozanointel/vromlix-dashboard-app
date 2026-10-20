@@ -67,6 +67,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
                 <span>Iglesia</span>
             </button>
+            <button class="nav-tab-btn" data-view="view-mormon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                <span>Mormón</span>
+            </button>
             <button class="nav-tab-btn" data-view="view-multimedia">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
                 <span>Multimedia</span>
@@ -206,6 +210,83 @@
                             <!-- Loaded dynamically -->
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- VISTA: LIBRO DE MORMÓN (MNEMOTECNIA & GUÍA DE MINISTRACIÓN) -->
+            <div id="view-mormon" class="dashboard-view">
+                <!-- HERO CARD CON CONTROLES Y BUSCADOR -->
+                <div class="section-card mormon-hero-card">
+                    <div class="card-header mormon-header">
+                        <div class="header-title-group">
+                            <div class="mormon-header-icon-box">
+                                <svg class="header-icon mormon-gold-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="mormon-title-badge-row">
+                                    <h2>El Libro de Mormón — Mnemotecnia & Guía de Ministración</h2>
+                                    <span class="mormon-badge-pill">Otro Testamento de Jesucristo</span>
+                                </div>
+                                <p class="subtitle-text">Retención del 80% de la historia en un renglón por capítulo • Ubicación instantánea de escrituras • Soluciones doctrinales a situaciones reales de vida</p>
+                            </div>
+                        </div>
+                        <div class="mormon-stats-row">
+                            <div class="mormon-stat-pill">
+                                <span class="mormon-stat-num">15</span>
+                                <span class="mormon-stat-label">Libros</span>
+                            </div>
+                            <div class="mormon-stat-pill">
+                                <span class="mormon-stat-num">239</span>
+                                <span class="mormon-stat-label">Capítulos</span>
+                            </div>
+                            <div class="mormon-stat-pill mormon-stat-active">
+                                <span class="mormon-stat-num" id="mormon-match-count">239</span>
+                                <span class="mormon-stat-label">Visibles</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BARRA DE BÚSQUEDA Y ACCIONES RÁPIDAS -->
+                    <div class="mormon-controls-container">
+                        <div class="mormon-search-row">
+                            <div class="mormon-search-wrapper">
+                                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                </svg>
+                                <input type="text" id="mormon-search-input" class="mormon-search" placeholder="🔍 Buscar por palabra clave, profeta o hecho (ej: barco, ira, ayuno, santa cena, capilla, consuelo, aflicción, salud, Alma 32)...">
+                                <button id="mormon-clear-search-btn" class="mormon-clear-btn" title="Limpiar búsqueda" style="display: none;">×</button>
+                            </div>
+                            <div class="mormon-action-buttons">
+                                <button id="mormon-random-btn" class="btn-mormon-action" title="Capítulo aleatorio de inspiración diaria">
+                                    🎲 Inspiración al Azar
+                                </button>
+                                <button id="mormon-expand-all-btn" class="btn-mormon-action" title="Expandir todos los 15 libros">
+                                    📂 Expandir Todos
+                                </button>
+                                <button id="mormon-collapse-all-btn" class="btn-mormon-action" title="Colapsar todos los libros">
+                                    📁 Colapsar Todos
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- CHIPS TEMÁTICOS DE SITUACIONES DE VIDA & MINISTRACIÓN -->
+                        <div class="mormon-chips-section">
+                            <div class="mormon-chips-header">
+                                <span class="mormon-chips-title">🏷️ Situaciones de Vida & Ministración Rápida (Clic para filtrar y resaltar):</span>
+                                <span id="mormon-active-filter-indicator" class="active-filter-pill" style="display:none;"></span>
+                            </div>
+                            <div class="mormon-chips-scroll" id="mormon-theme-chips">
+                                <!-- Inyectado dinámicamente por mormon_view.js -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENEDOR DE LIBROS EN ACORDEÓN -->
+                <div id="mormon-books-accordion" class="mormon-books-container">
+                    <!-- 15 Libros colapsables inyectados dinámicamente -->
                 </div>
             </div>
 
@@ -1311,6 +1392,7 @@
     <script src="app.js?v=20260914_0243"></script>
     <script src="agent_ops_view.js"></script>
     <script src="youtube_view.js?v=20261017_1900"></script>
+    <script src="mormon_view.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

@@ -3289,3 +3289,669 @@ summary {
     box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
 }
 
+/* =========================================================================
+   SECTION: LIBRO DE MORMÓN (MNEMOTECNIA & MINISTRACIÓN RÁPIDA)
+   Diseño de alta retención, acordeón profético y chips de ministración
+   ========================================================================= */
+
+:root {
+    --mormon-gold: #f59e0b;
+    --mormon-gold-hover: #d97706;
+    --mormon-gold-bg: rgba(245, 158, 11, 0.12);
+    --mormon-gold-border: rgba(245, 158, 11, 0.35);
+    --mormon-glow: 0 0 16px rgba(245, 158, 11, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --mormon-gold: #fbbf24;
+        --mormon-gold-hover: #f59e0b;
+        --mormon-gold-bg: rgba(251, 191, 36, 0.15);
+        --mormon-gold-border: rgba(251, 191, 36, 0.4);
+        --mormon-glow: 0 0 20px rgba(251, 191, 36, 0.28);
+    }
+}
+
+/* HERO CARD */
+.mormon-hero-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    position: relative;
+}
+
+.mormon-hero-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100%;
+    background: radial-gradient(circle at top right, var(--mormon-gold-bg), transparent 70%);
+    pointer-events: none;
+}
+
+.mormon-header {
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mormon-header-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--mormon-gold-bg);
+    border: 1px solid var(--mormon-gold-border);
+    box-shadow: var(--mormon-glow);
+    flex-shrink: 0;
+}
+
+.mormon-gold-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--mormon-gold);
+}
+
+.mormon-title-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.mormon-title-badge-row h2 {
+    font-family: 'Outfit', var(--font-sans);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+}
+
+.mormon-badge-pill {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: var(--mormon-gold);
+    background: var(--mormon-gold-bg);
+    border: 1px solid var(--mormon-gold-border);
+}
+
+/* STATS PILLS */
+.mormon-stats-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mormon-stat-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-color);
+    min-width: 64px;
+    text-align: center;
+}
+
+.mormon-stat-pill.mormon-stat-active {
+    border-color: var(--mormon-gold);
+    background: var(--mormon-gold-bg);
+}
+
+.mormon-stat-num {
+    font-family: 'Outfit', var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+}
+
+.mormon-stat-active .mormon-stat-num {
+    color: var(--mormon-gold);
+}
+
+.mormon-stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* CONTROLS & SEARCH */
+.mormon-controls-container {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.mormon-search-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.mormon-search-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 280px;
+}
+
+.mormon-search {
+    width: 100%;
+    padding: 12px 38px 12px 42px;
+    font-size: 0.95rem;
+    font-family: var(--font-sans);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-page);
+    color: var(--text-primary);
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.mormon-search:focus {
+    border-color: var(--mormon-gold);
+    box-shadow: 0 0 0 3px var(--mormon-gold-bg);
+}
+
+.mormon-search-wrapper .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.mormon-clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+    border-radius: 50%;
+    transition: color 0.15s;
+}
+
+.mormon-clear-btn:hover {
+    color: var(--accent-danger);
+}
+
+.mormon-action-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-mormon-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+}
+
+.btn-mormon-action:hover {
+    border-color: var(--mormon-gold);
+    background: var(--mormon-gold-bg);
+    color: var(--mormon-gold);
+    transform: translateY(-1px);
+}
+
+/* CHIPS SECTION */
+.mormon-chips-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mormon-chips-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.mormon-chips-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.active-filter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 12px;
+    background: var(--mormon-gold);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+    animation: fadeInView 0.2s ease forwards;
+}
+
+.mormon-chips-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mormon-gold) var(--border-color);
+}
+
+.mormon-chips-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.mormon-chips-scroll::-webkit-scrollbar-thumb {
+    background: var(--mormon-gold);
+    border-radius: 10px;
+}
+
+.mormon-chip {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+}
+
+.mormon-chip:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.mormon-chip.active {
+    background: var(--mormon-gold);
+    color: #ffffff !important;
+    border-color: var(--mormon-gold);
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+}
+
+/* THEMATIC SPECIFIC CHIP ACCENTS ON HOVER/STYLE */
+.theme-ira:hover { border-color: #f43f5e; color: #f43f5e; }
+.theme-consuelo:hover { border-color: #6366f1; color: #6366f1; }
+.theme-ordenanzas:hover { border-color: #f59e0b; color: #f59e0b; }
+.theme-capilla:hover { border-color: #0ea5e9; color: #0ea5e9; }
+.theme-salud:hover { border-color: #10b981; color: #10b981; }
+.theme-barco:hover { border-color: #06b6d4; color: #06b6d4; }
+.theme-oracion:hover { border-color: #a855f7; color: #a855f7; }
+.theme-familia:hover { border-color: #f97316; color: #f97316; }
+.theme-fe:hover { border-color: #84cc16; color: #84cc16; }
+.theme-perdon:hover { border-color: #eab308; color: #eab308; }
+.theme-tentacion:hover { border-color: #ef4444; color: #ef4444; }
+.theme-decisiones:hover { border-color: #38bdf8; color: #38bdf8; }
+.theme-caridad:hover { border-color: #ec4899; color: #ec4899; }
+
+/* BOOKS ACCORDION */
+.mormon-books-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.mormon-book-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.mormon-book-card[open] {
+    border-color: var(--mormon-gold-border);
+    box-shadow: var(--shadow-hover);
+}
+
+.mormon-book-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    background: var(--bg-card);
+    transition: background var(--transition-fast);
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.mormon-book-summary::-webkit-details-marker {
+    display: none;
+}
+
+.mormon-book-summary:hover {
+    background: var(--bg-subtle);
+}
+
+.book-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.book-chevron-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--bg-subtle);
+    color: var(--text-muted);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s, background 0.2s;
+}
+
+.mormon-book-card[open] .book-chevron-icon {
+    transform: rotate(90deg);
+    color: var(--mormon-gold);
+    background: var(--mormon-gold-bg);
+}
+
+.book-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.book-name {
+    font-family: 'Outfit', var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.book-meta-pill {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.book-summary-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.book-desc-snippet {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 460px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 900px) {
+    .book-desc-snippet {
+        display: none;
+    }
+}
+
+.book-count-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-color);
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.mormon-book-body {
+    padding: 14px 20px 20px 20px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-page);
+}
+
+.mormon-chapters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* CHAPTER ROW */
+.mormon-chapter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    gap: 16px;
+    transition: all var(--transition-fast);
+}
+
+.mormon-chapter-row:hover {
+    border-color: var(--border-hover);
+    transform: translateX(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.mormon-chap-left {
+    flex-shrink: 0;
+}
+
+.mormon-chap-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-color);
+    color: var(--accent-primary);
+    font-family: 'Outfit', var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+}
+
+.mormon-chap-badge:hover {
+    background: var(--accent-primary-bg);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(26, 115, 232, 0.2);
+}
+
+.mormon-chap-badge .external-icon {
+    opacity: 0.6;
+    transition: opacity 0.15s;
+}
+
+.mormon-chap-badge:hover .external-icon {
+    opacity: 1;
+}
+
+.mormon-chap-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.mormon-chap-text {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text-primary);
+}
+
+.mormon-chap-text .fact-bold {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.mormon-chap-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.mormon-tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+    background: var(--bg-subtle);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.mormon-tag-pill:hover {
+    transform: translateY(-1px);
+    border-color: var(--mormon-gold);
+    color: var(--mormon-gold);
+    background: var(--mormon-gold-bg);
+}
+
+.mormon-chap-actions {
+    flex-shrink: 0;
+}
+
+.mormon-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.mormon-copy-btn:hover {
+    color: var(--mormon-gold);
+    border-color: var(--mormon-gold);
+    background: var(--mormon-gold-bg);
+    transform: translateY(-1px);
+}
+
+.mormon-copy-btn.copied {
+    border-color: var(--accent-success);
+    color: var(--accent-success);
+    background: var(--accent-success-bg);
+}
+
+/* HIGHLIGHTED & PULSE STATES */
+.mormon-chapter-row.is-highlighted {
+    border-color: var(--mormon-gold-border);
+    border-left: 4px solid var(--mormon-gold);
+    background: var(--mormon-gold-bg);
+}
+
+.mormon-chapter-row.is-highlighted .mormon-chap-badge {
+    border-color: var(--mormon-gold);
+    color: var(--mormon-gold);
+}
+
+.pulse-highlight {
+    animation: mormonPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes mormonPulse {
+    from {
+        box-shadow: 0 0 4px var(--mormon-gold);
+        transform: scale(1);
+    }
+    to {
+        box-shadow: 0 0 18px var(--mormon-gold);
+        transform: scale(1.01);
+    }
+}
+
+/* RESPONSIVE OPTIMIZATIONS */
+@media (max-width: 768px) {
+    .mormon-chapter-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .mormon-chap-actions {
+        align-self: flex-end;
+    }
+    .mormon-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .mormon-stats-row {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+

@@ -263,19 +263,19 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.954,
+      "IMDb Rating": 7.945,
       "Vromlix Score": 62.5,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
     {
-      "Official Title": "Hombre al agua",
+      "Official Title": "Man Overboard!",
       "Spanish Title": "Hombre al agua",
       "Genres": "Drama, Comedy",
       "Release Year": "2026",
       "Release Date": "2026-09-24",
-      "IMDb Rating": 6.167,
-      "Vromlix Score": 62.8,
+      "IMDb Rating": 6.2,
+      "Vromlix Score": 63,
       "Plot Summary": "Camilo, a Cuban lifeguard, saves Mexican businessman Abel from drowning. Grateful, Abel brings Camilo to Mexico, where he marries Abel's daughter, Juana, and they have a child. But Camilo soon discovers his new life is part of Abel's Machiavellian plan of manipulation and control. With his world collapsing, Camilo must uncover the plot and take control of his destiny. Will he find a way out, or remain trapped in the power game?",
       "IMDb Link": "https://www.imdb.com/title/tt39019415/"
     },
@@ -285,10 +285,21 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.49,
-      "Vromlix Score": 63.5,
+      "IMDb Rating": 7.486,
+      "Vromlix Score": 63.4,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
+    },
+    {
+      "Official Title": "Hollywoodland",
+      "Spanish Title": null,
+      "Genres": "Crime, Drama, Mystery",
+      "Release Year": "2006",
+      "Release Date": "2006-08-31",
+      "IMDb Rating": 6.5,
+      "Vromlix Score": 65,
+      "Plot Summary": "When Hollywood superstar George Reeves dies in his home, private detective Louis Simo is hired to investigate his death and gets caught in a web of lies involving a big studio executive's wife. Based on a true story.",
+      "IMDb Link": "https://www.imdb.com/title/tt0427969/"
     },
     {
       "Official Title": "Motherf*ckers",
@@ -329,8 +340,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 7.065,
-      "Vromlix Score": 70.7,
+      "IMDb Rating": 7.027,
+      "Vromlix Score": 70.3,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -340,8 +351,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-03-05",
-      "IMDb Rating": 7.135,
-      "Vromlix Score": 71.3,
+      "IMDb Rating": 7.17,
+      "Vromlix Score": 71.7,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
@@ -412,17 +423,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt28254159/"
     },
     {
-      "Official Title": "Toy Story 5",
-      "Spanish Title": "Toy Story 5",
-      "Genres": "Animation, Family, Comedy, Adventure",
-      "Release Year": "2026",
-      "Release Date": "2026-06-17",
-      "IMDb Rating": 7.4,
-      "Vromlix Score": 80,
-      "Plot Summary": "When Bonnie receives a Lilypad tablet as a gift and becomes obsessed, Buzz, Woody, Jessie and the rest of the gang's jobs become exponentially harder when they have to go head to head with the all-new threat to playtime.",
-      "IMDb Link": "https://www.imdb.com/title/tt29355505/"
-    },
-    {
       "Official Title": "Fjord",
       "Spanish Title": "Fjord",
       "Genres": "Drama",
@@ -467,6 +467,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt1756855/"
     },
     {
+      "Official Title": "Once Upon a Time in the Middle East",
+      "Spanish Title": null,
+      "Genres": "Drama, War",
+      "Release Year": "2026",
+      "Release Date": "2026-08-08",
+      "IMDb Rating": 8.3,
+      "Vromlix Score": 83,
+      "Plot Summary": "Seeking a fresh start, chef Xu Fu travels to the Middle East to support his family and repay his debts. Alongside restaurant manager Ma Junsheng, he transforms the struggling Dragon Restaurant into a thriving business. But when war engulfs the city, their hard-won success is shattered and the restaurant becomes a refuge for those caught in the conflict. As danger closes in, Xu Fu must risk everything to protect his newfound community and preserve a small beacon of hope amid the devastation.",
+      "IMDb Link": "https://www.imdb.com/title/tt34386754/"
+    },
+    {
       "Official Title": "Hundreds of Beavers",
       "Spanish Title": null,
       "Genres": "Comedy, Adventure",
@@ -476,17 +487,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 84.7,
       "Plot Summary": "In the 19th century, a drunken applejack salesman must go from zero to hero and become North America's greatest fur trapper by defeating hundreds of beavers.",
       "IMDb Link": "https://www.imdb.com/title/tt12818328/"
-    },
-    {
-      "Official Title": "Toy Story 4",
-      "Spanish Title": "Toy Story 4",
-      "Genres": "Family, Comedy, Animation, Adventure",
-      "Release Year": "2019",
-      "Release Date": "2019-06-19",
-      "IMDb Rating": 7.6,
-      "Vromlix Score": 85.3,
-      "Plot Summary": "Woody has always been confident about his place in the world, devoted to taking care of his kid—whether that's Andy or Bonnie. But after Bonnie creates a reluctant new toy called \"Forky\", a road trip adventure alongside old and new friends challenges everything Woody believes about loyalty, purpose, and what it truly means to be a toy.",
-      "IMDb Link": "https://www.imdb.com/title/tt1979376/"
     },
     {
       "Official Title": "Fatherland",
@@ -623,7 +623,7 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "Klara and the Sun",
       "Spanish Title": "Klara y el sol",
-      "Genres": "Science Fiction, Drama, Comedy",
+      "Genres": "Science Fiction, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-21",
       "IMDb Rating": 0.0,
@@ -863,17 +863,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 80,
       "Plot Summary": "A spin-off of \"Amar es para siempre\" that focuses on the relationship between Luisita and Amelia in the present - 43 years after their original storyline.",
       "IMDb Link": "https://www.imdb.com/title/tt11396318"
-    },
-    {
-      "Official Title": "Adolescence",
-      "Spanish Title": "Adolescencia",
-      "Current Season": 0,
-      "Current Episode": 0,
-      "Show Status": "Ended",
-      "Watch Status": "Unstarted",
-      "Vromlix Score": 81,
-      "Plot Summary": "When a 13-year-old is accused of the murder of a classmate, his family, the psychological expert and the detective in charge are all left asking: what really happened?",
-      "IMDb Link": "https://www.imdb.com/title/tt31806037/"
     },
     {
       "Official Title": "Silo",
@@ -1208,5 +1197,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-18 22:26:41"
+  "last_updated": "2026-10-20 15:52:59"
 };
