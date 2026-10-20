@@ -190,14 +190,14 @@
             <!-- VISTA: TIEMPO (STOPWATCH, ACTIVIDADES & DESCANSO) -->
             <div id="view-tiempo" class="dashboard-view">
                 
-                <!-- HERO CARD: STOPWATCH Y FASES -->
+                <!-- HERO CARD: CRONÓMETRO Y CONTROLES PRINCIPALES -->
                 <div class="section-card tiempo-hero-card" id="tiempo-hero-card">
                     <div class="card-header tiempo-hero-header">
                         <div class="header-title-group">
                             <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             <div>
-                                <h2>Control de Tiempo, Actividad & Descanso</h2>
-                                <p class="subtitle-text">Monitoreo continuo persistente a reinicios • Bloques de 25-45m de trabajo profundo</p>
+                                <h2>Control de Tiempo y Actividad</h2>
+                                <p class="subtitle-text">Monitoreo continuo persistente a reinicios • Bloques de 25-45m</p>
                             </div>
                         </div>
                         <div class="tiempo-phase-badge-wrapper">
@@ -210,10 +210,10 @@
                         <div class="timer-display-section">
                             <div class="timer-digits-container">
                                 <span id="timer-display" class="timer-digits">00:00:00</span>
-                                <span id="timer-sublabel" class="timer-sublabel">Esperando inicio</span>
+                                <span id="timer-sublabel" class="timer-sublabel">Jornada detenida o en espera</span>
                             </div>
 
-                            <!-- Barra de Progreso de Enfoque (Pomodoro 25m - 45m Deep Work) -->
+                            <!-- Barra de Progreso Pomodoro (25m sugerida - 45m límite) -->
                             <div class="pomodoro-progress-bar-container" title="Meta de Enfoque Continuo: 25 a 45 minutos">
                                 <div class="pomodoro-milestones">
                                     <span class="milestone m-start">0m</span>
@@ -229,103 +229,95 @@
                             </div>
                         </div>
 
-                        <!-- BOTONES DE ACCIÓN RÁPIDA (LAP CONTINUO) -->
-                        <div class="tiempo-actions-grid">
-                            <button id="btn-phase-trabajo" class="btn-tiempo-action btn-phase-work" onclick="window.cambiarFaseTiempo('trabajo', 'deep_work')">
-                                <span class="btn-icon-emoji">💻</span>
-                                <div class="btn-text-col">
-                                    <span class="btn-title">Trabajo</span>
-                                    <span class="btn-desc">25 a 45 min efectivo</span>
+                        <!-- NIVEL 1: CONTROLES PRINCIPALES DE TRABAJO (GRANDES Y DIRECTOS) -->
+                        <div class="tiempo-primary-controls">
+                            <button id="btn-phase-trabajo" class="btn-tiempo-hero btn-hero-work" onclick="window.cambiarFaseTiempo('trabajo', 'deep_work')">
+                                <span class="btn-hero-icon">💻</span>
+                                <div class="btn-hero-info">
+                                    <span class="btn-hero-title">TRABAJO</span>
+                                    <span class="btn-hero-sub">25 a 45m enfoque</span>
                                 </div>
                             </button>
 
-                            <button id="btn-phase-pausa" class="btn-tiempo-action btn-phase-pause" onclick="window.cambiarFaseTiempo('pausa', '5min')">
-                                <span class="btn-icon-emoji">☕</span>
-                                <div class="btn-text-col">
-                                    <span class="btn-title">Pausa</span>
-                                    <span class="btn-desc">5 minutos de descanso</span>
+                            <button id="btn-phase-pausa" class="btn-tiempo-hero btn-hero-pause" onclick="window.cambiarFaseTiempo('pausa', '5min')">
+                                <span class="btn-hero-icon">☕</span>
+                                <div class="btn-hero-info">
+                                    <span class="btn-hero-title">PAUSA</span>
+                                    <span class="btn-hero-sub">5 min descanso</span>
                                 </div>
                             </button>
 
-                            <button id="btn-phase-comida" class="btn-tiempo-action btn-phase-meal" onclick="window.cambiarFaseTiempo('comida', 'almuerzo')">
-                                <span class="btn-icon-emoji">🍽️</span>
-                                <div class="btn-text-col">
-                                    <span class="btn-title">Comida</span>
-                                    <span class="btn-desc">Almuerzo / Alimentos</span>
+                            <!-- BOTÓN DE DETENER / PARAR DESTACADO EN ROJO -->
+                            <button id="btn-phase-detener" class="btn-tiempo-hero btn-hero-stop" onclick="window.cambiarFaseTiempo('detener')">
+                                <span class="btn-hero-icon">⏹️</span>
+                                <div class="btn-hero-info">
+                                    <span class="btn-hero-title">DETENER</span>
+                                    <span class="btn-hero-sub">Pausar / Parar reloj</span>
                                 </div>
                             </button>
+                        </div>
 
-                            <!-- BOTON SALIDA CALLE CON MENÚ RÁPIDO -->
-                            <div class="calle-dropdown-wrapper">
-                                <button id="btn-phase-calle" class="btn-tiempo-action btn-phase-street" onclick="window.toggleCalleMenu()">
-                                    <span class="btn-icon-emoji">🚶‍♂️</span>
-                                    <div class="btn-text-col">
-                                        <span class="btn-title">Calle</span>
-                                        <span class="btn-desc">Salida o diligencias ▾</span>
-                                    </div>
+                        <!-- NIVEL 2: OTRAS RUTINAS Y ACTIVIDADES DIARIAS -->
+                        <div class="tiempo-secondary-section">
+                            <div class="section-label-sm">RUTINAS & ACTIVIDADES COTIDIANAS:</div>
+                            <div class="tiempo-secondary-grid">
+                                <button id="btn-phase-comida" class="btn-tiempo-subaction btn-sub-meal" onclick="window.cambiarFaseTiempo('comida', 'almuerzo')">
+                                    <span>🍽️ Comida / Almuerzo</span>
                                 </button>
-                                <div id="calle-presets-menu" class="calle-menu-dropdown hidden">
-                                    <div class="calle-menu-header">Motivo de salida:</div>
-                                    <button onclick="window.cambiarFaseTiempo('calle', 'Dentista')">🦷 Dentista</button>
-                                    <button onclick="window.cambiarFaseTiempo('calle', 'Tienda / Agua')">💧 Comprar Agua / Tienda</button>
-                                    <button onclick="window.cambiarFaseTiempo('calle', 'Terapia Hna. Alma')">💆 Terapia Hna. Alma</button>
-                                    <button onclick="window.cambiarFaseTiempo('calle', 'Psicólogo')">🧠 Psicólogo</button>
-                                    <button onclick="window.cambiarFaseTiempo('calle', 'Iglesia / Bautismos')">⛪ Iglesia / Bautismos</button>
-                                    <button onclick="window.cambiarFaseTiempo('calle', 'Clases Inglés')">🗣️ Inglés presencial</button>
-                                    <button onclick="window.cambiarFaseTiempo('calle', 'General')">🚶 Otra salida</button>
+
+                                <div class="calle-dropdown-wrapper">
+                                    <button id="btn-phase-calle" class="btn-tiempo-subaction btn-sub-street" onclick="window.toggleCalleMenu()">
+                                        <span>🚶‍♂️ Calle / Diligencia ▾</span>
+                                    </button>
+                                    <div id="calle-presets-menu" class="calle-menu-dropdown hidden">
+                                        <div class="calle-menu-header">Selecciona motivo de salida:</div>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Dentista')">🦷 Dentista</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Tienda / Agua')">💧 Comprar Agua / Tienda</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Terapia Hna. Alma')">💆 Terapia Hna. Alma</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Psicólogo')">🧠 Psicólogo</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Iglesia / Bautismos')">⛪ Iglesia / Bautismos</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Clases Inglés')">🗣️ Inglés presencial</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'General')">🚶 Otra salida general</button>
+                                    </div>
+                                </div>
+
+                                <button id="btn-phase-ocio" class="btn-tiempo-subaction btn-sub-leisure" onclick="window.cambiarFaseTiempo('ocio', 'youtube_noche')">
+                                    <span>🎬 Ocio / YouTube</span>
+                                </button>
+
+                                <button id="btn-phase-espiritual" class="btn-tiempo-subaction btn-sub-spiritual" onclick="window.cambiarFaseTiempo('espiritual', 'libro_mormon')">
+                                    <span>📖 Libro de Mormón</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- NIVEL 3: CONTROL DE SUEÑO Y DESCANSO (1-CLIC) -->
+                        <div class="tiempo-sleep-strip">
+                            <div class="sleep-strip-text">
+                                <span class="sleep-strip-icon">🌙</span>
+                                <div>
+                                    <div class="sleep-strip-title">Ciclo de Descanso Nocturno</div>
+                                    <div class="sleep-strip-subtitle" id="stat-sleep-quality">Registra automáticamente tus horas de sueño</div>
                                 </div>
                             </div>
-
-                            <button id="btn-phase-ocio" class="btn-tiempo-action btn-phase-leisure" onclick="window.cambiarFaseTiempo('ocio', 'youtube_noche')">
-                                <span class="btn-icon-emoji">🎬</span>
-                                <div class="btn-text-col">
-                                    <span class="btn-title">Ocio</span>
-                                    <span class="btn-desc">YouTube nocturno</span>
-                                </div>
-                            </button>
-
-                            <button id="btn-phase-espiritual" class="btn-tiempo-action btn-phase-spiritual" onclick="window.cambiarFaseTiempo('espiritual', 'libro_mormon')">
-                                <span class="btn-icon-emoji">📖</span>
-                                <div class="btn-text-col">
-                                    <span class="btn-title">Espiritual</span>
-                                    <span class="btn-desc">Libro de Mormón</span>
-                                </div>
-                            </button>
-
-                            <!-- BOTONES DE SUEÑO / DESPERTAR 1-CLIC -->
-                            <button id="btn-phase-dormir" class="btn-tiempo-action btn-phase-sleep" onclick="window.marcarDormir()">
-                                <span class="btn-icon-emoji">🌙</span>
-                                <div class="btn-text-col">
-                                    <span class="btn-title">A Dormir</span>
-                                    <span class="btn-desc">Registrar sueño 1-clic</span>
-                                </div>
-                            </button>
-
-                            <button id="btn-phase-despertar" class="btn-tiempo-action btn-phase-wake" onclick="window.marcarDespertar()">
-                                <span class="btn-icon-emoji">☀️</span>
-                                <div class="btn-text-col">
-                                    <span class="btn-title">Desperté</span>
-                                    <span class="btn-desc">Cerrar sueño e iniciar</span>
-                                </div>
-                            </button>
-
-                            <button id="btn-phase-detener" class="btn-tiempo-action btn-phase-stop" onclick="window.cambiarFaseTiempo('detener')">
-                                <span class="btn-icon-emoji">⏹️</span>
-                                <div class="btn-text-col">
-                                    <span class="btn-title">Pausa Global</span>
-                                    <span class="btn-desc">Cerrar jornada activa</span>
-                                </div>
-                            </button>
+                            <div class="sleep-strip-actions">
+                                <button id="btn-phase-dormir" class="btn-sleep-action btn-sleep-night" onclick="window.marcarDormir()">
+                                    🌙 A Dormir (1-Clic)
+                                </button>
+                                <button id="btn-phase-despertar" class="btn-sleep-action btn-sleep-morning" onclick="window.marcarDespertar()">
+                                    ☀️ Desperté (1-Clic)
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- RESUMEN DIARIO DE MÉTRICAS -->
+                <!-- RESUMEN DIARIO DE MÉTRICAS (4 CARDS COMPACTAS) -->
                 <div class="tiempo-stats-grid">
                     <div class="tiempo-stat-card border-work">
                         <div class="stat-header">
                             <span class="stat-icon">💻</span>
-                            <span class="stat-title">Trabajo Neto</span>
+                            <span class="stat-title">Trabajo Efectivo Hoy</span>
                         </div>
                         <div class="stat-value" id="stat-net-work">0m</div>
                         <div class="stat-sub" id="stat-work-efficiency">Eficiencia: 0%</div>
@@ -352,110 +344,108 @@
                     <div class="tiempo-stat-card border-sleep">
                         <div class="stat-header">
                             <span class="stat-icon">🌙</span>
-                            <span class="stat-title">Último Sueño</span>
+                            <span class="stat-title">Último Descanso</span>
                         </div>
                         <div class="stat-value" id="stat-last-sleep">--h</div>
-                        <div class="stat-sub" id="stat-sleep-quality">Descanso nocturno</div>
+                        <div class="stat-sub">Horas dormidas</div>
                     </div>
                 </div>
 
-                <!-- DESGLOSE DETALLADO DE PAUSAS Y SALIDAS DE HOY -->
-                <div class="tiempo-details-row">
-                    <!-- Columna 1: Pausas de Hoy -->
-                    <div class="section-card">
-                        <div class="card-header">
-                            <div class="header-title-group">
-                                <h3>☕ Desglose de Pausas de Hoy</h3>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div id="pauses-breakdown-list" class="tiempo-breakdown-list">
-                                <div class="empty-text">No has tomado pausas cortas aún hoy.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Columna 2: Salidas a la Calle de Hoy -->
-                    <div class="section-card">
-                        <div class="card-header">
-                            <div class="header-title-group">
-                                <h3>🚶‍♂️ Salidas a la Calle y Diligencias</h3>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div id="street-breakdown-list" class="tiempo-breakdown-list">
-                                <div class="empty-text">Sin salidas registradas hoy.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HISTORIAL SEMANAL DE PRODUCTIVIDAD -->
-                <div class="section-card">
-                    <div class="card-header">
-                        <div class="header-title-group">
-                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                            <h3>Historial de Jornadas & Sueño (Últimos Días)</h3>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="history-table-wrapper">
-                            <table class="tiempo-history-table">
-                                <thead>
-                                    <tr>
-                                        <th>Fecha</th>
-                                        <th>Sueño 🌙</th>
-                                        <th>Trabajo Neto 💻</th>
-                                        <th>Pausas ☕</th>
-                                        <th>Calle 🚶‍♂️</th>
-                                        <th>Comida 🍽️</th>
-                                        <th>Ocio 🎬</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tiempo-history-body">
-                                    <tr><td colspan="7" style="text-align:center; color: var(--text-muted);">Cargando historial...</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN DE GRABACIONES DE REUNIONES (FOSSIFY & TRANSCRIPCIÓN) -->
-                <div class="section-card" style="margin-top: 10px;">
-                    <div class="card-header">
-                        <div class="header-title-group">
-                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-                            <div>
-                                <h3>🎙️ Grabadora de Reuniones (Fossify Voice Recorder + Whisper IA)</h3>
-                                <p class="subtitle-text">Para reuniones de iglesia, entrevistas y clases presenciales</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="recorder-guide-box">
-                            <div class="guide-steps">
-                                <div class="step-item">
-                                    <span class="step-num">1</span>
-                                    <span>Graba tu reunión con <b>Fossify Voice Recorder</b> en tu celular (formato M4A u OGG Opus a 32kbps mono).</span>
+                <!-- SECCIÓN COLAPSABLE: DESGLOSES DETALLADOS (EVITA SATURAR LA PANTALLA) -->
+                <div class="tiempo-accordions-group">
+                    
+                    <!-- Acordeón 1: Desglose de Pausas y Salidas a la Calle -->
+                    <details class="tiempo-accordion-item">
+                        <summary class="tiempo-accordion-summary">
+                            <span class="accordion-summary-title">📊 Ver desglose detallado de Pausas y Salidas de Hoy</span>
+                            <span class="accordion-hint">Toca para abrir / cerrar</span>
+                        </summary>
+                        <div class="tiempo-accordion-body">
+                            <div class="tiempo-details-row">
+                                <div class="section-card">
+                                    <div class="card-header">
+                                        <h3>☕ Desglose de Pausas de Hoy</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <div id="pauses-breakdown-list" class="tiempo-breakdown-list">
+                                            <div class="empty-text">No has tomado pausas cortas aún hoy.</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="step-item">
-                                    <span class="step-num">2</span>
-                                    <span>Al terminar, toca <b>Compartir</b> directo a tu <b>Telegram</b> personal o transfiérelo por WiFi.</span>
-                                </div>
-                                <div class="step-item">
-                                    <span class="step-num">3</span>
-                                    <span>O sube el archivo de audio aquí para transcribir y generar el resumen ejecutivo en tu Segundo Cerebro:</span>
+                                <div class="section-card">
+                                    <div class="card-header">
+                                        <h3>🚶‍♂️ Salidas a la Calle y Diligencias</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <div id="street-breakdown-list" class="tiempo-breakdown-list">
+                                            <div class="empty-text">Sin salidas registradas hoy.</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="upload-audio-zone" id="upload-audio-zone">
-                                <input type="file" id="audio-file-input" accept="audio/*,.m4a,.ogg,.opus,.mp3,.wav" style="display: none;" onchange="window.handleAudioFileSelected(this)">
-                                <button class="btn-primary" onclick="document.getElementById('audio-file-input').click()">
-                                    📁 Seleccionar Audio de Reunión (.m4a / .opus)
-                                </button>
-                                <span id="audio-upload-status" class="audio-status-label">Listo para procesar grabaciones de hasta 2+ horas</span>
+                        </div>
+                    </details>
+
+                    <!-- Acordeón 2: Historial de Días Anteriores -->
+                    <details class="tiempo-accordion-item">
+                        <summary class="tiempo-accordion-summary">
+                            <span class="accordion-summary-title">📅 Ver Historial de Jornadas & Sueño (Últimos Días)</span>
+                            <span class="accordion-hint">Toca para abrir / cerrar</span>
+                        </summary>
+                        <div class="tiempo-accordion-body">
+                            <div class="history-table-wrapper">
+                                <table class="tiempo-history-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Sueño 🌙</th>
+                                            <th>Trabajo Neto 💻</th>
+                                            <th>Pausas ☕</th>
+                                            <th>Calle 🚶‍♂️</th>
+                                            <th>Comida 🍽️</th>
+                                            <th>Ocio 🎬</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tiempo-history-body">
+                                        <tr><td colspan="7" style="text-align:center; color: var(--text-muted);">Cargando historial...</td></tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
+                    </details>
+
+                    <!-- Acordeón 3: Grabadora de Reuniones & Transcripción -->
+                    <details class="tiempo-accordion-item">
+                        <summary class="tiempo-accordion-summary">
+                            <span class="accordion-summary-title">🎙️ Grabadora Fossify & Transcripción IA</span>
+                            <span class="accordion-hint">Guía y subida de audio</span>
+                        </summary>
+                        <div class="tiempo-accordion-body">
+                            <div class="recorder-guide-box">
+                                <div class="guide-steps">
+                                    <div class="step-item">
+                                        <span class="step-num">1</span>
+                                        <span>Graba con <b>Fossify Voice Recorder</b> en celular (formato <b>M4A</b> en ajustes, ocupa solo 15MB/hora).</span>
+                                    </div>
+                                    <div class="step-item">
+                                        <span class="step-num">2</span>
+                                        <span><b>Compartir directo sin buscar carpetas:</b> En la lista de grabaciones de Fossify, toca los 3 puntos (⋮) ➔ <b>Compartir</b> ➔ Selecciona tu <b>Bot de Telegram</b>.</span>
+                                    </div>
+                                    <div class="step-item">
+                                        <span class="step-num">3</span>
+                                        <span>O selecciona tu archivo de audio aquí para subirlo directo a tu laptop:</span>
+                                    </div>
+                                </div>
+                                <div class="upload-audio-zone" id="upload-audio-zone">
+                                    <input type="file" id="audio-file-input" accept="audio/*,.m4a,.ogg,.opus,.mp3,.wav" style="display: none;" onchange="window.handleAudioFileSelected(this)">
+                                    <button class="btn-primary" onclick="document.getElementById('audio-file-input').click()">
+                                        📁 Subir Audio de Reunión (.m4a / .opus)
+                                    </button>
+                                    <span id="audio-upload-status" class="audio-status-label">Listo para procesar grabaciones de cualquier duración</span>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
                 </div>
 
             </div>
@@ -503,7 +493,7 @@
 
             <!-- VISTA: LIBRO DE MORMÓN (MNEMOTECNIA & GUÍA DE MINISTRACIÓN) -->
             <div id="view-mormon" class="dashboard-view">
-                <!-- HERO CARD CON CONTROLES Y BUSCADOR -->
+                <!-- HERO CARD CON BUSCADOR UNIFICADO Y PESTAÑAS DE MINISTRACIÓN -->
                 <div class="section-card mormon-hero-card">
                     <div class="card-header mormon-header">
                         <div class="header-title-group">
@@ -517,7 +507,7 @@
                                     <h2>El Libro de Mormón — Mnemotecnia & Guía de Ministración</h2>
                                     <span class="mormon-badge-pill">Otro Testamento de Jesucristo</span>
                                 </div>
-                                <p class="subtitle-text">Retención del 80% de la historia en un renglón por capítulo • Ubicación instantánea de escrituras • Soluciones doctrinales a situaciones reales de vida</p>
+                                <p class="subtitle-text">15 Libros • 239 Capítulos (retención del 80% de la historia) • 106 Pasajes Quirúrgicos con versículo exacto para ministrar</p>
                             </div>
                         </div>
                         <div class="mormon-stats-row">
@@ -529,26 +519,33 @@
                                 <span class="mormon-stat-num">239</span>
                                 <span class="mormon-stat-label">Capítulos</span>
                             </div>
-                            <div class="mormon-stat-pill mormon-stat-active">
+                            <div class="mormon-stat-pill" title="106 situaciones reales de vida con versículo exacto">
+                                <span class="mormon-stat-num">106</span>
+                                <span class="mormon-stat-label">Temas Pastoral</span>
+                            </div>
+                            <div class="mormon-stat-pill mormon-stat-active" title="Capítulos visibles según búsqueda">
                                 <span class="mormon-stat-num" id="mormon-match-count">239</span>
                                 <span class="mormon-stat-label">Visibles</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- BARRA DE BÚSQUEDA Y ACCIONES RÁPIDAS -->
+                    <!-- BARRA DE BÚSQUEDA UNIFICADA Y ACCIONES -->
                     <div class="mormon-controls-container">
                         <div class="mormon-search-row">
                             <div class="mormon-search-wrapper">
                                 <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                                 </svg>
-                                <input type="text" id="mormon-search-input" class="mormon-search" placeholder="🔍 Buscar por palabra clave, profeta o hecho (ej: barco, ira, ayuno, santa cena, capilla, consuelo, aflicción, salud, Alma 32)...">
+                                <input type="text" id="mormon-search-input" class="mormon-search" placeholder="🔍 Busca por tema de vida (ej: ansiedad, depresión, duelo, recaí, perdón, chismes, diezmo) o hecho histórico (barco, Abinadí, Alma 32)...">
                                 <button id="mormon-clear-search-btn" class="mormon-clear-btn" title="Limpiar búsqueda" style="display: none;">×</button>
                             </div>
                             <div class="mormon-action-buttons">
-                                <button id="mormon-random-btn" class="btn-mormon-action" title="Capítulo aleatorio de inspiración diaria">
-                                    🎲 Inspiración al Azar
+                                <button id="mormon-toggle-drawer-btn" class="btn-mormon-action btn-mormon-drawer active" onclick="window.toggleMinisterioDrawer()" title="Abrir/Cerrar índice de 106 temas de ministración">
+                                    📑 Pestañas de Ministración (106)
+                                </button>
+                                <button id="mormon-random-btn" class="btn-mormon-action" title="Capítulo aleatorio de inspiración">
+                                    🎲 Inspiración
                                 </button>
                                 <button id="mormon-expand-all-btn" class="btn-mormon-action" title="Expandir todos los 15 libros">
                                     📂 Expandir Todos
@@ -559,20 +556,27 @@
                             </div>
                         </div>
 
-                        <!-- CHIPS TEMÁTICOS DE SITUACIONES DE VIDA & MINISTRACIÓN -->
-                        <div class="mormon-chips-section">
-                            <div class="mormon-chips-header">
-                                <span class="mormon-chips-title">🏷️ Situaciones de Vida & Ministración Rápida (Clic para filtrar y resaltar):</span>
-                                <span id="mormon-active-filter-indicator" class="active-filter-pill" style="display:none;"></span>
+                        <!-- DRAWER PLEGABLE DE PESTAÑAS DE MINISTRACIÓN (106 TEMAS EN 8 ÁREAS) -->
+                        <div id="mormon-ministerio-drawer" class="mormon-ministerio-drawer">
+                            <div class="drawer-header-row">
+                                <span class="drawer-header-title">🏷️ Pestañas de Ministración — Haz clic en cualquier tema para ir directo al pasaje en el Libro de Mormón:</span>
+                                <span id="drawer-active-filter-badge" class="drawer-filter-pill" style="display: none;"></span>
                             </div>
-                            <div class="mormon-chips-scroll" id="mormon-theme-chips">
-                                <!-- Inyectado dinámicamente por mormon_view.js -->
+
+                            <!-- Pestañas de las 8 macro-categorías -->
+                            <div class="drawer-categories-scroll" id="drawer-categories-bar">
+                                <!-- Inyectado dinámicamente -->
+                            </div>
+
+                            <!-- Nube de chips de temas específicos de la categoría seleccionada -->
+                            <div class="drawer-topics-cloud" id="drawer-topics-cloud">
+                                <!-- Inyectado dinámicamente (106 temas con sus citas) -->
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- CONTENEDOR DE LIBROS EN ACORDEÓN -->
+                <!-- CONTENEDOR PRINCIPAL: LOS 15 LIBROS EN ACORDEÓN CON PASAJES QUIRÚRGICOS INTEGRADOS -->
                 <div id="mormon-books-accordion" class="mormon-books-container">
                     <!-- 15 Libros colapsables inyectados dinámicamente -->
                 </div>

@@ -2337,6 +2337,43 @@ function initTiempo() {
         return `${m}m`;
     }
 
+    const navTabTiempo = document.querySelector('.nav-tab-btn[data-view="view-tiempo"]');
+
+    function updateDynamicFavicon(color) {
+        try {
+            const canvas = document.createElement('canvas');
+            canvas.width = 32;
+            canvas.height = 32;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, 32, 32);
+            ctx.beginPath();
+            ctx.arc(16, 16, 14, 0, 2 * Math.PI);
+            ctx.fillStyle = color || '#374151';
+            ctx.fill();
+            ctx.lineWidth = 2.5;
+            ctx.strokeStyle = '#ffffff';
+            ctx.stroke();
+            let link = document.querySelector("link[rel*='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link);
+            }
+            link.href = canvas.toDataURL();
+        } catch (e) {}
+    }
+
+    function setNavTabGlow(phaseKey) {
+        if (!navTabTiempo) return;
+        navTabTiempo.classList.remove(
+            'nav-tiempo-trabajo', 'nav-tiempo-pausa', 'nav-tiempo-calle',
+            'nav-tiempo-comida', 'nav-tiempo-ocio', 'nav-tiempo-espiritual', 'nav-tiempo-dormir'
+        );
+        if (phaseKey && phaseKey !== 'detenido') {
+            navTabTiempo.classList.add(`nav-tiempo-${phaseKey}`);
+        }
+    }
+
     function updateLiveTimerUI() {
         if (!currentServerState || !currentServerState.active_interval) {
             if (timerDisplay) timerDisplay.textContent = '00:00:00';
@@ -2349,6 +2386,9 @@ function initTiempo() {
             if (phaseDot) phaseDot.style.background = 'transparent';
             if (pomodoroFill) pomodoroFill.style.width = '0%';
             if (pomodoroAlert) pomodoroAlert.style.display = 'none';
+            setNavTabGlow('detenido');
+            updateDynamicFavicon('#6b7280');
+            document.title = '⏹️ Vromlix • Dashboard';
             highlightActiveButton('detenido');
             return;
         }
@@ -2356,8 +2396,9 @@ function initTiempo() {
         const active = currentServerState.active_interval;
         const nowEpoch = Date.now() / 1000.0;
         const elapsed = Math.max(0, nowEpoch - active.start_epoch);
+        const timeFormatted = formatSecs(elapsed);
 
-        if (timerDisplay) timerDisplay.textContent = formatSecs(elapsed);
+        if (timerDisplay) timerDisplay.textContent = timeFormatted;
 
         const phaseKey = (active.phase || '').toLowerCase();
         const cfg = PHASE_CONFIG[phaseKey] || PHASE_CONFIG['trabajo'];
@@ -2371,6 +2412,12 @@ function initTiempo() {
             timerSublabel.textContent = `${cfg.sub} • Iniciado a las ${active.start_iso ? active.start_iso.substring(11, 16) : ''}`;
         }
         if (phaseDot) phaseDot.style.background = cfg.color;
+        
+        // Pestaña Nav y Pestaña del Navegador Dinámicas
+        setNavTabGlow(phaseKey);
+        updateDynamicFavicon(cfg.color);
+        document.title = `${cfg.title.split(' ')[0]} ${timeFormatted} | ${phaseKey.toUpperCase()} • Vromlix`;
+
         highlightActiveButton(phaseKey);
 
         // Dynamic Card Glow & Color Transition
@@ -2422,7 +2469,7 @@ function initTiempo() {
     }
 
     function highlightActiveButton(phase) {
-        document.querySelectorAll('.btn-tiempo-action').forEach(btn => btn.classList.remove('active-phase'));
+        document.querySelectorAll('.btn-tiempo-hero, .btn-tiempo-subaction, .btn-sleep-action').forEach(btn => btn.classList.remove('active-phase'));
         const targetBtn = document.getElementById(`btn-phase-${phase}`);
         if (targetBtn) targetBtn.classList.add('active-phase');
     }
@@ -2659,6 +2706,9 @@ function initTiempo() {
     // Initial load
     loadServerState();
     loadHistory();
+
+    // Polling periódico continuo (cada 3s) para sincronización en tiempo real con widget y móvil
+    setInterval(loadServerState, 3000);
 
     // Re-check on visibilitychange and focus
     document.addEventListener('visibilitychange', () => {
