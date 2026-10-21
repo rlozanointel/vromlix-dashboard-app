@@ -6872,13 +6872,13 @@
     ]
   },
   {
-    "id": "moroni",
+    "id": "moro",
     "title": "Moroni",
     "author": "Moroni / Mormón",
     "period": "aprox. 401 d.C. — 421 d.C.",
     "icon": "🎺",
     "summary": "El profeta solitario que concluye las planchas, ordenanzas sagradas (don del Espíritu Santo, sacerdocio, Santa Cena), el sermón de la caridad de Mormón, condena al bautismo de infantes y la inmortal Promesa de Moroni.",
-    "url_slug": "moroni",
+    "url_slug": "moro",
     "chapters": [
       {
         "ch": 1,
@@ -6923,7 +6923,28 @@
           "capilla_comunion"
         ],
         "keywords": "oracion sacramental pan bendecir santificar recordar cuerpo siempre acordarse guardar mandamientos",
-        "topics": []
+        "topics": [
+          {
+            "id": "significado_santa_cena_semanal",
+            "category": "convenios_capilla",
+            "title": "El verdadero significado de la Santa Cena semanal: renovar convenios",
+            "keywords": [
+              "santa cena",
+              "sacramento",
+              "oracion del pan",
+              "oracion del agua",
+              "recordarle siempre",
+              "espiritu santo"
+            ],
+            "scriptureRef": "Moroni 4:3; 5:2",
+            "scriptureQuote": "Oh Dios, Padre Eterno, en el nombre de Jesucristo, tu Hijo, te pedimos que bendigas y santifiques este pan... para que testifiquen ante ti, oh Dios, Padre Eterno, que están dispuestos a tomar sobre sí el nombre de tu Hijo, y a recordarle siempre, y a guardar sus mandamientos que él les ha dado, para que siempre puedan tener su Espíritu consigo.",
+            "pastoralInsight": "La Santa Cena no es para personas perfectas, sino para personas que están arrepintiéndose. Cada domingo es un nuevo comienzo donde tu bautismo se renueva por completo.",
+            "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/4?lang=spa&id=p3#p3",
+            "bookId": "moro",
+            "chapterNum": 4,
+            "shortTitle": "La Santa Cena Semanal"
+          }
+        ]
       },
       {
         "ch": 5,
@@ -6947,7 +6968,47 @@
           "arrepentimiento_perdon"
         ],
         "keywords": "bautismo requisitos quebrantado contrito reunirse a menudo ayunar orar bienestar almas santa cena perdon",
-        "topics": []
+        "topics": [
+          {
+            "id": "recaidas_constantes_mismo_error",
+            "category": "culpa_perdon",
+            "title": "Desesperanza tras recaídas constantes en el mismo error",
+            "keywords": [
+              "recai",
+              "otra vez cai",
+              "recaida",
+              "fracaso moral",
+              "no cambio nunca",
+              "siempre lo mismo"
+            ],
+            "scriptureRef": "Moroni 6:8",
+            "scriptureQuote": "Pero cuantas veces se arrepentían y pedían perdón, con verdadera intención, se les perdonaba.",
+            "pastoralInsight": "La recaída duele, pero rendirse es la verdadera trampa del adversario. El Salvador te invita a levantarte, sacudirte el polvo y volver a acudir a Él.",
+            "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/6?lang=spa&id=p8#p8",
+            "bookId": "moro",
+            "chapterNum": 6,
+            "shortTitle": "Recaídas Constantes"
+          },
+          {
+            "id": "por_que_asistir_capilla_reunirse",
+            "category": "convenios_capilla",
+            "title": "¿Por qué es indispensable congregarse en la capilla los domingos?",
+            "keywords": [
+              "asistir a la capilla",
+              "por que ir a la iglesia",
+              "reunirse a menudo",
+              "hermandad",
+              "comunion"
+            ],
+            "scriptureRef": "Moroni 6:5-6",
+            "scriptureQuote": "Y la iglesia se reunía a menudo para ayunar y orar, y para hablar unos con otros concerniente al bienestar de sus almas. Y se reunían a menudo para participar del pan y del vino, en memoria del Señor Jesús.",
+            "pastoralInsight": "No vamos a la capilla porque todos sean perfectos; vamos para recordar a Cristo juntos, tomar la Santa Cena y cuidar del bienestar de nuestras almas.",
+            "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/6?lang=spa&id=p5-p6#p5",
+            "bookId": "moro",
+            "chapterNum": 6,
+            "shortTitle": "¿Por qué ir a la Capilla?"
+          }
+        ]
       },
       {
         "ch": 7,
@@ -6959,7 +7020,64 @@
           "consuelo_afliccion"
         ],
         "keywords": "caridad amor puro de cristo fe esperanza luz de cristo juzgar bien nunca deja de ser",
-        "topics": []
+        "topics": [
+          {
+            "id": "caridad_amor_puro_cristo",
+            "category": "relaciones_hogar",
+            "title": "Aprender a amar a las personas difíciles: la caridad pura",
+            "keywords": [
+              "caridad",
+              "amor puro",
+              "tolerancia",
+              "amar a los dificiles",
+              "paciencia con otros"
+            ],
+            "scriptureRef": "Moroni 7:45-48",
+            "scriptureQuote": "La caridad es sufrida y es benigna, y no tiene envidia, ni se ensancha, no busca lo suyo, no se irrita fácilmente, no piensa el mal, no se regocija en la iniquidad, sino se regocija en la verdad; todo lo sufre, todo lo cree, todo lo espera, todo lo soporta... la caridad es el amor puro de Cristo, y permanece para siempre.",
+            "pastoralInsight": "Amar a quien nos trata bien es fácil; la caridad de Cristo se demuestra cuando somos benignos y pacientes con aquel que es tosco o antipático.",
+            "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/7?lang=spa&id=p45-p48#p45",
+            "bookId": "moro",
+            "chapterNum": 7,
+            "shortTitle": "Amar al Difícil (Caridad)"
+          },
+          {
+            "id": "discernir_voz_espiritu",
+            "category": "fe_dudas",
+            "title": "Cómo saber si una impresión proviene de Dios o de mi propia mente",
+            "keywords": [
+              "discernimiento",
+              "voz del espiritu",
+              "es de dios o mio",
+              "inspiracion",
+              "moroni 7"
+            ],
+            "scriptureRef": "Moroni 7:16-17",
+            "scriptureQuote": "Pues he aquí, a todo hombre se da el Espíritu de Cristo para que sepa discernir el bien del mal... toda cosa que invita e induce a hacer lo bueno, y a amar a Dios y a servirle, es inspirada por Dios... pero todo lo que persuade a los hombres a hacer lo malo... es del diablo.",
+            "pastoralInsight": "La prueba es sencilla: si una idea te impulsa a hacer el bien, ser bondadoso, perdonar y acercarte a Cristo, viene de Dios. Actúa sobre ella sin dudar.",
+            "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/7?lang=spa&id=p16-p17#p16",
+            "bookId": "moro",
+            "chapterNum": 7,
+            "shortTitle": "Discernir la Voz del Espíritu"
+          },
+          {
+            "id": "caridad_amor_puro_permanece",
+            "category": "convenios_capilla",
+            "title": "Pedir al Padre con toda la energía del corazón para ser llenos de amor",
+            "keywords": [
+              "pedir caridad",
+              "energia del corazon",
+              "amor puro de cristo",
+              "moroni 7"
+            ],
+            "scriptureRef": "Moroni 7:47-48",
+            "scriptureQuote": "Pero la caridad es el amor puro de Cristo, y permanece para siempre; y a quien la posea en el postrer día, le irá bien. Por consiguiente, amados hermanos míos, pedid al Padre con toda la energía de vuestros corazones, que seáis llenos de este amor que él ha otorgado a todos los que son verdaderos discípulos de su Hijo Jesucristo...",
+            "pastoralInsight": "La caridad no es algo que fabricamos solos; es un don que se ruega de rodillas al Padre. Cuando ministres, pide primero ser lleno de ese amor puro por esa persona.",
+            "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/7?lang=spa&id=p47-p48#p47",
+            "bookId": "moro",
+            "chapterNum": 7,
+            "shortTitle": "La Caridad Pura de Cristo"
+          }
+        ]
       },
       {
         "ch": 8,
@@ -6971,7 +7089,28 @@
           "doctrina"
         ],
         "keywords": "bautismo ninos pequenos burla ante dios vivos en cristo sin pecado doctrina salvacion",
-        "topics": []
+        "topics": [
+          {
+            "id": "muerte_hijo_pequeno",
+            "category": "duelo_dolor",
+            "title": "Muerte desgarradora de un niño pequeño, bebé o hijo",
+            "keywords": [
+              "muerte de un hijo",
+              "bebe",
+              "nino fallecido",
+              "muerte infantil",
+              "duelo maternal",
+              "luto hijo"
+            ],
+            "scriptureRef": "Moroni 8:12, 17, 22",
+            "scriptureQuote": "Los niños pequeños no pueden pecar... viven en Cristo aun desde la fundación del mundo... Todos los niños pequeños viven en Cristo, y también todos aquellos que están sin ley. Porque el poder de la redención surte efecto en todos los que no tienen ley.",
+            "pastoralInsight": "Los niños pequeños son puros y van directo a la presencia del Padre por los méritos de Cristo. Su salvación es completa y la promesa del sellamiento eterno les devolverá a sus brazos.",
+            "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/8?lang=spa&id=p12,p17,p22#p12",
+            "bookId": "moro",
+            "chapterNum": 8,
+            "shortTitle": "Muerte de un Hijo"
+          }
+        ]
       },
       {
         "ch": 9,
@@ -6997,7 +7136,26 @@
           "consuelo_afliccion"
         ],
         "keywords": "promesa moroni preguntar dios corazon sincero fe en cristo manifestara verdad espiritu santo dones venid a cristo gracia suficiente",
-        "topics": []
+        "topics": [
+          {
+            "id": "promesa_moroni_libro_mormon",
+            "category": "fe_dudas",
+            "title": "La promesa de Moroni: saber por ti mismo que el Libro es verdad",
+            "keywords": [
+              "promesa de moroni",
+              "oracion libro de mormon",
+              "saber la verdad",
+              "espiritu santo testimonio"
+            ],
+            "scriptureRef": "Moroni 10:4-5",
+            "scriptureQuote": "Y cuando recibáis estas cosas, quisiera exhortaros a que preguntéis a Dios, el Eterno Padre, en el nombre de Cristo, si no son verdaderas estas cosas; y si pedís con un corazón sincero, con verdadera intención, teniendo fe en Cristo, él os manifestará la verdad de ellas por el poder del Espíritu Santo; y por el poder del Espíritu Santo podréis conocer la verdad de todas las cosas.",
+            "pastoralInsight": "Tu testimonio no tiene que depender del de tus padres o líderes. El Espíritu Santo puede confirmar directamente a tu corazón que Jesucristo vive y este libro es Su palabra.",
+            "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/10?lang=spa&id=p4-p5#p4",
+            "bookId": "moro",
+            "chapterNum": 10,
+            "shortTitle": "La Promesa de Moroni"
+          }
+        ]
       }
     ]
   }
