@@ -112,6 +112,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4.93 10.93a2 2 0 0 1 2.83 0l1.41 1.41a2 2 0 0 1-2.83 2.83l-1.41-1.41a2 2 0 0 1 0-2.83zm14.14 0a2 2 0 0 1 0 2.83l-1.41 1.41a2 2 0 0 1-2.83-2.83l1.41-1.41a2 2 0 0 1 2.83 0zM12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-8 6a8 8 0 0 1 16 0H4z"/></svg>
                 <span>Agente</span>
             </button>
+            <button class="nav-tab-btn" data-view="view-pitch">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                <span>Pitch</span>
+            </button>
         </nav>
 
         <!-- MAIN LAYOUT VVIEWS -->
@@ -1677,6 +1681,754 @@
             </div>
         </div>
 
+        <!-- ==========================================
+             VISTA: PITCH COMERCIAL & NEGOCIACIÓN JORGE MARES
+             ========================================== -->
+        <div id="view-pitch" class="dashboard-view">
+            <div class="pitch-container">
+
+                <!-- HERO CARD PRINCIPAL -->
+                <div class="pitch-hero-card">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+                            </svg>
+                            <div>
+                                <h2>Cockpit de Pitch Comercial — Venta de Sitio Web con IA & Cotizador</h2>
+                                <p class="subtitle-text">Guía Rápida para Llamadas y Negociación con Jorge Mares Hernández (Sprinters, Suburbans, Vans) • CDMX & Foráneos</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BARRA DE ESTADO / PILLS CLAVE -->
+                    <div class="pitch-status-bar">
+                        <span class="pitch-pill pitch-pill-primary">🎯 Cierre Clave: Viernes (Segunda Reunión)</span>
+                        <span class="pitch-pill pitch-pill-success">🚐 Flota Real: Sprinters (17-20 pax) & Suburbans (7 pax)</span>
+                        <span class="pitch-pill pitch-pill-warning">💡 Regla de Oro: "Basura entra, Basura sale"</span>
+                        <span class="pitch-pill pitch-pill-purple">🛡️ Estrategia: Defensor de Valor ($45k-$85k en CDMX)</span>
+                    </div>
+
+                    <!-- BARRA DE FILTROS & BUSCADOR EN VIVO -->
+                    <div class="pitch-toolbar">
+                        <div class="pitch-filter-chips">
+                            <button class="pitch-filter-chip active" data-pitch-filter="all">Todos</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="estrategia">🎯 Pitch de Entrada & Autoridad</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="pasos">🧭 4 Pasos de Reunión</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="paquetes">📦 3 Paquetes</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="tiempos">⏱️ Tiempos & Prototipo</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="ia">🤖 IA & Cotizador</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="admin">🎛️ Panel de Flota (Admin)</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="sat">🧾 SAT & Contabilidad</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="checklist">📋 Datos que Pedir</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="objeciones">🛡️ Objeciones (Speech)</button>
+                            <button class="pitch-filter-chip" data-pitch-filter="vehiculo">🚐 Aclaración Ertiga vs Sprinter</button>
+                        </div>
+                        <div class="pitch-search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="pitch-search-input" placeholder="Buscar argumento o dato rápido...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 0: PITCH DE ENTRADA & ESCUDO DE AUTORIDAD TÉCNICA (VENDERSE CARO) -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="estrategia">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <div>
+                                <h2>0. Pitch de Entrada & Escudo de Autoridad Técnica (Cómo Venderte Caro)</h2>
+                                <p class="subtitle-text">El discurso inicial y los conceptos técnicos explicados para que Roger suene como un arquitecto senior ante Jorge.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="pitch-speech-box" style="border-left: 4px solid var(--accent-primary); margin-top: 0;">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">🎙️ Guión de Entrada (Primeros 2 Minutos de la Conversación)</span>
+                                <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-intro-autoridad', this)">📋 Copiar</button>
+                            </div>
+                            <div class="pitch-speech-text" id="speech-intro-autoridad">
+                                "Jorge, qué gusto saludarte. Mi primo Efraín me platicó de tu operación de transporte ejecutivo y del nivel de clientes que manejas. Mira, para empresas y turismo corporativo nosotros no hacemos páginas genéricas de plantilla tipo Wix o WordPress que se traban y tardan 6 segundos en cargar; nosotros desarrollamos código limpio a la medida en CSS Vanilla y arquitectura serverless en la nube, optimizada para los estándares de Google Core Web Vitals. Esto garantiza que tu página abra en menos de 1 segundo en el celular de un director de empresa aunque vaya en carretera con mala señal, y que el asistente de Inteligencia Artificial le cotice en 2 segundos a las 2 de la mañana. Por eso este tipo de desarrollo en agencias de Polanco o Santa Fe se cotiza arriba de $45,000 pesos."
+                            </div>
+                        </div>
+
+                        <div class="pitch-authority-grid">
+                            <div class="pitch-authority-card">
+                                <span class="pitch-authority-icon">⚡</span>
+                                <div class="pitch-authority-title">CSS Vanilla & Código a Medida (vs WordPress/Wix)</div>
+                                <div class="pitch-authority-concept">
+                                    <b>¿Qué significa en simple?</b> Las páginas de principiantes usan plantillas prediseñadas con 40 plugins que pesan muchísimo. El código a la medida (HTML5 + CSS Vanilla) es como un traje sastre: ligero, sin basura digital y ultra-rápido.
+                                </div>
+                                <div class="pitch-authority-killer">
+                                    💡 <b>El dato letal para el cliente:</b> "Si una página tarda más de 2.5 segundos en abrir, el 53% de los clientes en CDMX se sale y le habla a tu competencia. Nuestro código carga en menos de 0.8 segundos."
+                                </div>
+                            </div>
+
+                            <div class="pitch-authority-card">
+                                <span class="pitch-authority-icon">🌐</span>
+                                <div class="pitch-authority-title">Google Core Web Vitals & Arquitectura Serverless</div>
+                                <div class="pitch-authority-concept">
+                                    <b>¿Qué significa en simple?</b> Es la métrica oficial de Google que premia la estabilidad visual y la velocidad. 'Serverless' significa que la web no se cae ni se 'apaga' si de pronto entran 50 personas al mismo tiempo cotizando para un congreso.
+                                </div>
+                                <div class="pitch-authority-killer">
+                                    💡 <b>El dato letal para el cliente:</b> "Google le da preferencia en los mapas y búsquedas a las empresas que cumplen con esta métrica. Tu negocio aparecerá antes que los sitios lentos."
+                                </div>
+                            </div>
+
+                            <div class="pitch-authority-card">
+                                <span class="pitch-authority-icon">🤖</span>
+                                <div class="pitch-authority-title">IA Gemini de Baja Latencia (< 500ms)</div>
+                                <div class="pitch-authority-concept">
+                                    <b>¿Qué significa en simple?</b> Conexión directa con los modelos de Inteligencia Artificial de Google. No es un chatbot tonto de respuestas fijas, sino una IA que entiende texto libre y recomienda la van exacta según personas y maletas.
+                                </div>
+                                <div class="pitch-authority-killer">
+                                    💡 <b>El dato letal para el cliente:</b> "No te vende una página de internet, te vende una recepcionista digital bilingüe que cierra prospectos mientras tú estás al volante o descansando."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 0.5: ESTRATEGIA DE CONVERSACIÓN (LOS 4 PASOS DE LA REUNIÓN) -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="pasos">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <h2>0.5 Estrategia de Conversación: Los 4 Pasos Secuenciales de la Reunión</h2>
+                                <p class="subtitle-text">La estructura psicológica probada para conducir la llamada sin titubear y cerrar con autoridad.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="pitch-steps-grid">
+                            <div class="pitch-step-box">
+                                <span class="pitch-step-badge">Paso 1 • Min 0 a 2</span>
+                                <div class="pitch-step-title">Empatía & Despeje Ertiga</div>
+                                <div class="pitch-step-desc">
+                                    Saludar con calidez, reconocer su flota ejecutiva y aclarar de inmediato: <i>"Esa camioneta chica fue una consulta familiar de Efraín; tu web es 100% Sprinters y vans ejecutivas."</i>
+                                </div>
+                            </div>
+
+                            <div class="pitch-step-box">
+                                <span class="pitch-step-badge">Paso 2 • Min 2 a 5</span>
+                                <div class="pitch-step-title">Escudo de Autoridad Técnica</div>
+                                <div class="pitch-step-desc">
+                                    Venderte caro: explicar que desarrollas código limpio a medida (HTML/CSS) con IA de alta velocidad y no plantillas pesadas de WordPress que ahuyentan clientes.
+                                </div>
+                            </div>
+
+                            <div class="pitch-step-box">
+                                <span class="pitch-step-badge">Paso 3 • Min 5 a 10</span>
+                                <div class="pitch-step-title">Presentación de 3 Paquetes</div>
+                                <div class="pitch-step-desc">
+                                    Desglosar Esencial ($14.5k), Pro ($24.5k) y Elite ($34.5k). Resaltar que el Elite con IA le ahorra 3 horas diarias y cotiza en automático a cualquier hora.
+                                </div>
+                            </div>
+
+                            <div class="pitch-step-box" style="border-color: var(--accent-success); background: var(--accent-success-bg);">
+                                <span class="pitch-step-badge" style="background: var(--accent-success); color: #fff;">Paso 4 • Min 10 a 12</span>
+                                <div class="pitch-step-title" style="color: var(--accent-success);">Cierre con Doble Ganancia</div>
+                                <div class="pitch-step-desc">
+                                    Lanzar la palanca: <i>"Si cerramos el Elite esta semana, te regalo el Panel de Flota ($8,000 gratis) y te entrego tu prototipo navegable en 5 días bajo esquema 50/25/25."</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 1: MATRIZ DE PAQUETES Y PRECIOS -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="paquetes">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                            <div>
+                                <h2>1. Matriz de Paquetes en Lenguaje Simple (Para Explicar sin Tecnocracias)</h2>
+                                <p class="subtitle-text">Diferencias claras, tiempos de entrega y lo que incluye y no incluye cada nivel.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="pitch-pkg-grid">
+
+                            <!-- PAQUETE 1: ESENCIAL -->
+                            <div class="pitch-pkg-card pitch-searchable">
+                                <div class="pitch-pkg-header">
+                                    <span class="pitch-pkg-badge badge-esencial">Fachada & Vitrina</span>
+                                    <h3 class="pitch-pkg-title">Esencial</h3>
+                                    <div class="pitch-pkg-subtitle">Presencia Corporativa Limpia</div>
+                                </div>
+                                <div class="pitch-pkg-pricing">
+                                    <div class="pitch-price-val">$14,500 <span style="font-size: 0.9rem; font-weight: 500;">MXN</span></div>
+                                    <div class="pitch-price-sub">Entrega: 5 a 7 días hábiles</div>
+                                </div>
+                                <div class="pitch-pkg-verdict">
+                                    "La tarjeta de presentación digital para que el cliente corporativo vea seriedad y no dude de contratar."
+                                </div>
+                                <ul class="pitch-feature-list">
+                                    <li>✅ <b>Catálogo fotográfico HD:</b> Galería de su flota real (Sprinter, Suburban, Hiace) con fotos limpias.</li>
+                                    <li>✅ <b>Fichas técnicas simples:</b> Capacidad real de pasajeros, maletas y amenidades (WiFi, A/C, pantallas).</li>
+                                    <li>✅ <b>Botón directo a WhatsApp:</b> Enlace flotante para que el cliente pregunte en un clic.</li>
+                                    <li>✅ <b>Formulario de cotización básico:</b> Solicitud tradicional por correo o WhatsApp.</li>
+                                    <li>✅ <b>Carga ultra-rápida:</b> Optimizado para celulares en menos de 1 segundo.</li>
+                                    <li>✅ <b>1 mes de garantía:</b> Soporte técnico y cambios menores incluidos.</li>
+                                </ul>
+                                <ul class="pitch-cons-list">
+                                    <li>❌ Sin cotizador automático de precios</li>
+                                    <li>❌ Sin Inteligencia Artificial</li>
+                                    <li>❌ Sin panel de control interno</li>
+                                </ul>
+                                <div class="pitch-speech-box">
+                                    <div class="pitch-speech-header">
+                                        <span class="pitch-speech-tag">📞 Speech Telefónico Rápido</span>
+                                        <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-pkg-esencial', this)">📋 Copiar</button>
+                                    </div>
+                                    <div class="pitch-speech-text" id="speech-pkg-esencial">
+                                        "Jorge, el paquete Esencial es tu vitrina digital de lujo. Cuando una empresa o un cliente te pida fotos, le mandas un link corporativo que carga al segundo, con tus camionetas en alta definición, capacidades y botón directo a tu WhatsApp. Es ideal para tener presencia seria y no perder llamadas."
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PAQUETE 2: PRO -->
+                            <div class="pitch-pkg-card pitch-searchable">
+                                <div class="pitch-pkg-header">
+                                    <span class="pitch-pkg-badge badge-pro">Más Vendido • Automatización</span>
+                                    <h3 class="pitch-pkg-title">Pro</h3>
+                                    <div class="pitch-pkg-subtitle">Cotizador Paramétrico & Catálogo</div>
+                                </div>
+                                <div class="pitch-pkg-pricing">
+                                    <div class="pitch-price-val">$24,500 <span style="font-size: 0.9rem; font-weight: 500;">MXN</span></div>
+                                    <div class="pitch-price-sub">Entrega: 10 a 12 días hábiles</div>
+                                </div>
+                                <div class="pitch-pkg-verdict">
+                                    "El cotizador que hace las preguntas por Jorge y le entrega el cliente con todos los datos listos en WhatsApp."
+                                </div>
+                                <ul class="pitch-feature-list">
+                                    <li>✅ <b>Todo lo del Paquete Esencial.</b></li>
+                                    <li>✅ <b>Cotizador interactivo en vivo:</b> El cliente elige origen, destino, fechas, número de pasajeros y tipo de van.</li>
+                                    <li>✅ <b>Cálculo de presupuesto estimado:</b> Tabulado con las reglas de kilometraje o destinos fijos de Jorge.</li>
+                                    <li>✅ <b>Ficha precargada a WhatsApp:</b> Con 1 clic, Jorge recibe en su WhatsApp: <i>'Quiero cotizar Sprinter para 16 personas, CDMX-Acapulco, 15 al 17 Nov'</i>.</li>
+                                    <li>✅ <b>SEO Local en Google:</b> Optimizado para búsquedas como <i>'Renta de Sprinters en CDMX'</i> o <i>'Transporte ejecutivo eventos'</i>.</li>
+                                </ul>
+                                <ul class="pitch-cons-list">
+                                    <li>❌ Sin IA conversacional abierta (usa listas y reglas fijas)</li>
+                                    <li>❌ Sin gestión de choferes o inventario</li>
+                                </ul>
+                                <div class="pitch-speech-box">
+                                    <div class="pitch-speech-header">
+                                        <span class="pitch-speech-tag">📞 Speech Telefónico Rápido</span>
+                                        <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-pkg-pro', this)">📋 Copiar</button>
+                                    </div>
+                                    <div class="pitch-speech-text" id="speech-pkg-pro">
+                                        "El paquete Pro te ahorra entre 2 y 3 horas diarias en el teléfono. En lugar de estar preguntando cuántas personas son, a dónde van y en qué fechas, la misma página les calcula el presupuesto base y te manda a tu WhatsApp el mensaje con todos los datos masticados para que tú solo confirmes disponibilidad y pidas el anticipo."
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PAQUETE 3: ELITE + IA CONCIERGE -->
+                            <div class="pitch-pkg-card highlight pitch-searchable">
+                                <div class="pitch-ribbon">Recomendado</div>
+                                <div class="pitch-pkg-header">
+                                    <span class="pitch-pkg-badge badge-elite">Nivel Mexitours • Ventas 24/7</span>
+                                    <h3 class="pitch-pkg-title">Elite + IA Concierge</h3>
+                                    <div class="pitch-pkg-subtitle">Agente Comercial Autónomo</div>
+                                </div>
+                                <div class="pitch-pkg-pricing">
+                                    <div class="pitch-price-val" style="color: var(--accent-primary);">$34,500 <span style="font-size: 0.9rem; font-weight: 500;">MXN</span></div>
+                                    <div class="pitch-price-sub">Entrega: 15 a 18 días hábiles</div>
+                                </div>
+                                <div class="pitch-pkg-verdict">
+                                    "Un vendedor de IA atendiendo las 24 horas, cotizando en el segundo cero y transfiriendo al cliente cerrado a WhatsApp."
+                                </div>
+                                <ul class="pitch-feature-list">
+                                    <li>✅ <b>Todo lo del Paquete Pro.</b></li>
+                                    <li>✅ <b>Asistente Virtual con IA (Gemini):</b> Atiende a cualquier hora (incluso 2 AM). Entiende texto libre, responde sobre amenidades, equipaje y recomienda la unidad ideal.</li>
+                                    <li>✅ <b>Cotizador Inteligente en Lenguaje Natural:</b> Si el cliente escribe: <i>'Somos 14 y llevamos 8 maletas grandes a Querétaro'</i>, la IA le dice exactamente qué Sprinter le queda y cuánto cuesta.</li>
+                                    <li>✅ <b>Handoff Automático a WhatsApp:</b> Si piden una ruta especial con paradas intermedias, la IA empaqueta el itinerario y le dice al cliente: <i>'Te acabo de transferir con Jorge a WhatsApp con tus datos listos'</i>.</li>
+                                    <li>✅ <b>Experiencia VIP Concierge:</b> Diseño y nivel idéntico o superior a Mexitours.</li>
+                                </ul>
+                                <ul class="pitch-cons-list" style="color: var(--accent-success); border-top-color: var(--accent-success);">
+                                    <li>⭐ Máxima tasa de conversión y diferenciación frente a la competencia</li>
+                                </ul>
+                                <div class="pitch-speech-box">
+                                    <div class="pitch-speech-header">
+                                        <span class="pitch-speech-tag">📞 Speech Telefónico Rápido</span>
+                                        <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-pkg-elite', this)">📋 Copiar</button>
+                                    </div>
+                                    <div class="pitch-speech-text" id="speech-pkg-elite">
+                                        "Jorge, el paquete Elite es tener a un vendedor estrella trabajando para ti las 24 horas del día, 365 días al año. Si un cliente corporativo te busca a las 11 de la noche mientras manejas o descansas, la IA lo atiende al instante, le explica qué camioneta necesita según sus maletas y personas, le da el estimado y te lo transfiere calificado a tu WhatsApp para que no se te vaya con otra empresa."
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 1.5: CRONOGRAMA DE ENTREGAS & EL PROTOTIPO EN 5 DÍAS -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="tiempos">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <div>
+                                <h2>1.5 Cronograma de Entregas & El Prototipo en 5 Días (¿Cómo Funcionan los Tiempos?)</h2>
+                                <p class="subtitle-text">Por qué el prototipo en 5 días está DENTRO del plazo total y cómo elimina el riesgo para el cliente.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="pitch-concept-callout">
+                            <b>💡 Aclaración Vital sobre los Tiempos:</b> Los 5 días del prototipo <b>NO se suman</b> al tiempo de entrega; son los <b>primeros 5 días</b> del proyecto. Esto significa que Jorge no pasa 3 semanas a ciegas esperando: al quinto día hábil ya tiene un link en su celular donde puede navegar su página, ver sus fotos y probar los botones.
+                        </div>
+
+                        <div class="pitch-tiempos-table-wrapper">
+                            <table class="pitch-tiempos-table">
+                                <thead>
+                                    <tr>
+                                        <th>Hito / Fase del Proyecto</th>
+                                        <th>Paquete Esencial ($14.5k)</th>
+                                        <th>Paquete Pro ($24.5k)</th>
+                                        <th>Paquete Elite + IA ($34.5k)</th>
+                                        <th>Pago Asociado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><b>1. Inicio & Carga de Fotos / Flota</b></td>
+                                        <td>Día 1 a 2</td>
+                                        <td>Día 1 a 2</td>
+                                        <td>Día 1 a 2</td>
+                                        <td><b>50% Anticipo</b> al firmar</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>2. Entrega de Prototipo Funcional</b></td>
+                                        <td><b>Día 5 hábil</b> (Demo privado)</td>
+                                        <td><b>Día 5 hábil</b> (Demo privado)</td>
+                                        <td><b>Día 5 hábil</b> (Demo privado)</td>
+                                        <td><b>25%</b> contra aprobación de diseño</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>3. Calibración Técnica & Algoritmos</b></td>
+                                        <td>Revisión de textos y dominio</td>
+                                        <td>Programación de cotizador y rutas</td>
+                                        <td>Entrenamiento de la IA y Handoff</td>
+                                        <td>En proceso de afinación</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>4. Entrega Final & Lanzamiento Web</b></td>
+                                        <td><span class="pitch-pill pitch-pill-primary">7 días hábiles totales</span></td>
+                                        <td><span class="pitch-pill pitch-pill-warning">12 a 15 días hábiles totales</span></td>
+                                        <td><span class="pitch-pill pitch-pill-purple">18 a 20 días hábiles totales</span></td>
+                                        <td><b>25% Final</b> contra entrega a satisfacción</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pitch-speech-box">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">📞 Speech para Explicarle los Tiempos a Jorge</span>
+                                <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-tiempos-entrega', this)">📋 Copiar</button>
+                            </div>
+                            <div class="pitch-speech-text" id="speech-tiempos-entrega">
+                                "Jorge, en cuanto a tiempos nosotros trabajamos por fases para que tú no tengas ninguna incertidumbre: a los 5 días hábiles de arrancar yo te entrego tu prototipo funcional navegable en un enlace privado; tú entras desde tu celular, ves tus camionetas reales montadas, revisas los colores y los botones. Una vez que me des el visto bueno, el paquete Esencial queda listo a los 7 días, el Pro a los 12 o 15 días con todo su cotizador, y el paquete Elite nos toma entre 18 y 20 días hábiles porque entrenamos a la Inteligencia Artificial con tu catálogo y hacemos pruebas exhaustivas de tarifas para que no se equivoque jamás."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 2: CÓMO OPERA LA IA CONCIERGE & HANDOFF A WHATSAPP -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="ia">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4.93 10.93a2 2 0 0 1 2.83 0l1.41 1.41a2 2 0 0 1-2.83 2.83l-1.41-1.41a2 2 0 0 1 0-2.83zm14.14 0a2 2 0 0 1 0 2.83l-1.41 1.41a2 2 0 0 1-2.83-2.83l1.41-1.41a2 2 0 0 1 2.83 0zM12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-8 6a8 8 0 0 1 16 0H4z"/></svg>
+                            <div>
+                                <h2>2. ¿Cómo Opera la IA de Ventas y el Handoff a WhatsApp? (Flujo Operativo)</h2>
+                                <p class="subtitle-text">El mecanismo que resuelve la duda de Jorge sobre presupuestos en vivo y rutas no contempladas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="pitch-flow-container">
+                            <div class="pitch-flow-step">
+                                <div class="pitch-flow-step-num">1</div>
+                                <div class="pitch-flow-step-title">Pregunta del Cliente</div>
+                                <div class="pitch-flow-step-desc">El usuario escribe en el chat de la web: <i>"Hola, necesitamos llevar a 15 ingenieros a una planta en Querétaro el viernes y volver el sábado."</i></div>
+                            </div>
+                            <div class="pitch-flow-step">
+                                <div class="pitch-flow-step-num">2</div>
+                                <div class="pitch-flow-step-title">Consulta de Flota & Tarifas</div>
+                                <div class="pitch-flow-step-desc">La IA revisa la base de unidades: detecta que la unidad óptima es la <b>Sprinter Ejecutiva (17-20 pax)</b> y consulta la tarifa base CDMX-Querétaro.</div>
+                            </div>
+                            <div class="pitch-flow-step">
+                                <div class="pitch-flow-step-num">3</div>
+                                <div class="pitch-flow-step-title">Respuesta & Asesoría</div>
+                                <div class="pitch-flow-step-desc">En 2 segundos le responde: <i>"Para 15 personas la opción ideal es la Mercedes Sprinter con A/C, asientos de piel y WiFi. El estimado base es de $12,500 MXN viaje redondo."</i></div>
+                            </div>
+                            <div class="pitch-flow-step" style="border-color: var(--accent-primary); background: var(--accent-primary-bg);">
+                                <div class="pitch-flow-step-num" style="background: var(--accent-primary);">4</div>
+                                <div class="pitch-flow-step-title" style="color: var(--accent-primary);">Escalación a WhatsApp</div>
+                                <div class="pitch-flow-step-desc">Si el cliente pide escala o ruta especial, la IA genera un botón: <b>[Hablar con Jorge en WhatsApp con esta cotización]</b> y Jorge recibe el mensaje 100% armado.</div>
+                            </div>
+                        </div>
+
+                        <!-- COTIZADOR DE BOLSILLO EN VIVO -->
+                        <div class="pitch-speech-box" style="margin-top: 20px;">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">⚡ Cotizador de Bolsillo en Vivo (Para dar precios de referencia en llamada)</span>
+                            </div>
+                            <div class="pitch-calc-grid">
+                                <div class="pitch-calc-field">
+                                    <label>Origen:</label>
+                                    <select id="calc-origen" disabled><option>Ciudad de México (CDMX)</option></select>
+                                </div>
+                                <div class="pitch-calc-field">
+                                    <label>Destino Frecuente:</label>
+                                    <select id="calc-destino">
+                                        <option value="queretaro">Querétaro (440 km R/T)</option>
+                                        <option value="puebla">Puebla de Zaragoza (260 km R/T)</option>
+                                        <option value="acapulco">Acapulco Diamante (760 km R/T)</option>
+                                        <option value="toluca">Toluca / Metepec (140 km R/T)</option>
+                                        <option value="cuernavaca">Cuernavaca (180 km R/T)</option>
+                                        <option value="valle_bravo">Valle de Bravo (320 km R/T)</option>
+                                        <option value="aeropuerto">Traslado Aeropuerto AICM / AIFA</option>
+                                    </select>
+                                </div>
+                                <div class="pitch-calc-field">
+                                    <label>Tipo de Camioneta:</label>
+                                    <select id="calc-van">
+                                        <option value="sprinter">Mercedes-Benz Sprinter (17-20 Pax)</option>
+                                        <option value="suburban">Chevrolet Suburban (6-7 Pax VIP)</option>
+                                        <option value="hiace">Toyota Hiace (12-14 Pax)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="pitch-calc-result-box">
+                                <div>
+                                    <div style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">TARIFA DE REFERENCIA MERCADO EJECUTIVO CDMX:</div>
+                                    <div id="calc-result-price" class="pitch-calc-price">$12,500 MXN</div>
+                                </div>
+                                <div id="calc-result-detail" style="font-size: 0.88rem; color: var(--text-secondary); max-width: 500px;">
+                                    Calculando...
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 3: EL PANEL DE CONTROL / ADMINISTRACIÓN (FLEET MANAGEMENT) -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="admin">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                            <div>
+                                <h2>3. El Panel de Control / Administración de Flota (Respuesta a la Duda de Jorge)</h2>
+                                <p class="subtitle-text">¿Viene incluido en los paquetes? ¿Cómo plantearlo y cómo usarlo como arma de cierre?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="pitch-speech-box" style="border-left: 4px solid var(--accent-warning); margin-top: 0;">
+                            <h3 style="font-size: 1.1rem; color: var(--accent-warning); margin-bottom: 8px;">📌 Situación Real & Respuesta a Jorge:</h3>
+                            <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+                                Jorge le preguntó a Efraín si el panel de control (donde se ve qué camioneta está disponible, qué viajes se tienen, etc.) estaba incluido en la propuesta y Roger le dijo que no. <b>Esto es 100% correcto:</b> Una página web pública es para que los clientes compren, mientras que un <b>Panel de Administración de Flota</b> es un software interno privado (mini ERP de logística).
+                            </p>
+                        </div>
+
+                        <!-- ACLARACIÓN CON PERAS Y MANZANAS: WEB PÚBLICA VS PANEL INTERNO -->
+                        <div class="pitch-concept-callout" style="border-left-color: var(--accent-secondary); background: rgba(111, 66, 193, 0.05); margin-top: 14px;">
+                            <h4 style="font-size: 1rem; color: var(--accent-secondary); margin-bottom: 6px;">🍎 Aclaración con Peras y Manzanas para Roger:</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px;">
+                                <div style="background: var(--bg-card); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                    <b style="color: var(--accent-primary);">1. La Página Web Pública (Lo que compran en el paquete):</b><br>
+                                    Es lo que ve la gente en internet (<code>www.transportesjorge.com</code>). Es la fachada comercial: fotos, cotizador para el cliente y botón para pedir viajes por WhatsApp. Esto viene en los 3 paquetes.
+                                </div>
+                                <div style="background: var(--bg-card); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                    <b style="color: var(--accent-secondary);">2. El Panel de Control Interno = Gestión de Choferes e Inventario:</b><br>
+                                    <b>Son exactamente lo mismo.</b> Es una pantalla secreta con usuario y contraseña (<code>admin.transportesjorge.com</code>) solo para Jorge y su secretaria. Ahí ve qué chofer tiene qué Sprinter, qué unidades están en taller y cambia precios. <b>NO viene en Esencial ni en Pro (vale $8,000 extra)</b>, pero <b>se le regala en el paquete Elite ($34.5k)</b> como gancho de cierre.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pitch-checklist-grid" style="margin-top: 16px;">
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">🎛️ ¿Qué funciones tiene este Panel de Control?</div>
+                                <ul class="pitch-checklist-items">
+                                    <li><b>Semáforo de Flota:</b> Ver en pantalla qué camioneta está <i>'Disponible'</i>, <i>'En Viaje'</i> o <i>'En Taller / Mantenimiento'</i>.</li>
+                                    <li><b>Calendario de Salidas:</b> Ver los viajes de la semana, fechas de regreso y qué chofer está asignado.</li>
+                                    <li><b>Ajuste de Precios sin Programar:</b> Una pantalla donde Jorge puede cambiar el precio de Acapulco o el costo por km sin llamarle a nadie.</li>
+                                    <li><b>Acceso seguro con contraseña:</b> Solo para Jorge y su secretaria o asistente.</li>
+                                </ul>
+                            </div>
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">💰 Estrategia de Venta & Negociación:</div>
+                                <ul class="pitch-checklist-items">
+                                    <li><b>Opción A (Como Módulo Extra):</b> Se cotiza por separado en <b>+$8,000 MXN</b> sobre el paquete Pro o Esencial.</li>
+                                    <li><b>Opción B (Arma de Cierre Magistral):</b> Si Jorge duda en contratar el paquete <b>Elite de $34,500</b>, Roger le dice: <i>'Jorge, si cerramos el paquete Elite esta misma semana, te regalo e integro el Panel de Control de Flota sin cobrarte un solo peso más (te estás ahorrando $8,000 de desarrollo)'</i>.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pitch-speech-box">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">📞 Speech Telefónico Rápido para el Panel</span>
+                                <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-admin-panel', this)">📋 Copiar</button>
+                            </div>
+                            <div class="pitch-speech-text" id="speech-admin-panel">
+                                "Jorge, sobre el panel de control de camionetas que me comentaste: en la cotización base no venía porque una cosa es la página web para que los clientes te compren y otra es un sistema interno de logística para controlar tus unidades y choferes. Ese módulo normalmente lo cotizo en $8,000 pesos aparte. Pero para demostrarte que quiero una relación a largo plazo, si cerramos el paquete Elite de $34,500 esta misma semana, yo te programo e integro el Panel de Flota completamente gratis como cortesía de bienvenida."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 4: ROADMAP FUTURO SAT Y CONTABILIDAD CON OCR -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="sat">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            <div>
+                                <h2>4. Módulo Futuro: Contabilidad & Declaración SAT con OCR (Roadmap Fase 2)</h2>
+                                <p class="subtitle-text">Cómo explicarle la visión a futuro de digitalizar facturas de gasolina, casetas y deducciones.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">
+                            En el sector de transportación de pasajeros, el dolor de cabeza número uno son las facturas de gasolina, tickets arrugados de casetas y viáticos de los choferes. Un módulo OCR permite que el chofer suba una foto del ticket desde su celular, la IA extraiga el RFC de la gasolinera, litros, IVA y IEPS de combustible, y lo mande directo al reporte contable.
+                        </p>
+
+                        <div class="pitch-checklist-grid">
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">⚙️ Cómo operará técnicamente:</div>
+                                <ul class="pitch-checklist-items">
+                                    <li><b>Subida de Fotos / XML:</b> Chofer toma foto del ticket de caseta o gasolina al terminar el viaje.</li>
+                                    <li><b>Extracción OCR + IA:</b> Lee fecha, RFC emisor, folio fiscal, importe total y desglose de IVA/IEPS.</li>
+                                    <li><b>Asignación por Camioneta:</b> Cada gasto queda amarrado a la Sprinter correspondiente para saber la rentabilidad real de cada viaje.</li>
+                                    <li><b>Reporte para Contador:</b> Genera archivo Excel y resumen listo para la declaración mensual del SAT.</li>
+                                </ul>
+                            </div>
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">📈 Cómo vendérselo a Jorge:</div>
+                                <ul class="pitch-checklist-items">
+                                    <li><b>No venderlo hoy como parte del desarrollo inicial:</b> La prioridad de Jorge este viernes es vender viajes y tener presencia digital.</li>
+                                    <li><b>Plantearlo como Fase 2:</b> Dejarle la espina sembrada diciéndole que la arquitectura de su sitio web queda lista para conectarle este módulo el próximo año.</li>
+                                    <li><b>Modelo de Negocio Recurrente:</b> Este módulo se vende como servicio mensual de mantenimiento y contabilidad digital ($1,500 a $2,500 MXN al mes).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pitch-speech-box">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">📞 Speech Telefónico Rápido para Módulo SAT</span>
+                                <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-sat-module', this)">📋 Copiar</button>
+                            </div>
+                            <div class="pitch-speech-text" id="speech-sat-module">
+                                "Jorge, lo de la contabilidad y el SAT con fotos de tickets de gasolina que me platicaste es una maravilla y te va a quitar un dolor de cabeza enorme con el contador. Lo que vamos a hacer es dejar la arquitectura de tu página preparada desde ahorita; primero arrancamos la web para que empieces a facturar viajes nuevos, y en una segunda etapa le conectamos el lector de tickets de gasolina y casetas para que tus números fiscales se generen solos."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 5: CHECKLIST DE DATOS QUE PEDIR A JORGE ("BASURA ENTRA, BASURA SALE") -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="checklist">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            <div>
+                                <h2>5. Checklist: Lo que Necesitamos de Jorge ("Basura entra, basura sale")</h2>
+                                <p class="subtitle-text">Los 4 bloques de información exacta que Efraín o Roger deben solicitarle este viernes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="pitch-checklist-grid">
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">📸 1. Fotos Reales de la Flota (Mínimo 4 por unidad)</div>
+                                <ul class="pitch-checklist-items">
+                                    <li>[ ] Foto exterior 3/4 frontal limpia (con luz de día, sin sombras duras).</li>
+                                    <li>[ ] Foto exterior lateral completa.</li>
+                                    <li>[ ] Foto interior de los asientos de pasajeros (mostrando piel/vestiduras).</li>
+                                    <li>[ ] Foto de amenidades (pantallas, espacio para maletas, cargadores USB).</li>
+                                </ul>
+                            </div>
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">📋 2. Ficha Técnica de Cada Vehículo</div>
+                                <ul class="pitch-checklist-items">
+                                    <li>[ ] Marca, Modelo y Año (ej: Mercedes Sprinter 2022, Suburban 2021).</li>
+                                    <li>[ ] Capacidad máxima de pasajeros cómodos (ej: 17 personas + chofer).</li>
+                                    <li>[ ] Capacidad de equipaje (ej: 15 maletas de 20kg + equipaje de mano).</li>
+                                    <li>[ ] Amenidades oficiales (WiFi a bordo, A/C doble, sonido Bluetooth, conectores).</li>
+                                </ul>
+                            </div>
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">💵 3. Tabla Base de Tarifas & Reglas de Cotización</div>
+                                <ul class="pitch-checklist-items">
+                                    <li>[ ] Precios fijos para los 5 viajes más comunes (Acapulco, Querétaro, Puebla, Toluca, AICM/AIFA).</li>
+                                    <li>[ ] Costo base por kilómetro o por día de servicio con chofer.</li>
+                                    <li>[ ] Qué incluye la tarifa (¿Combustible? ¿Casetas? ¿Hospedaje del chofer en foráneos?).</li>
+                                    <li>[ ] Porcentaje de anticipo requerido para apartar fecha (ej: 20% o 50%).</li>
+                                </ul>
+                            </div>
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">📱 4. Datos de Contacto y Enlace Operativo</div>
+                                <ul class="pitch-checklist-items">
+                                    <li>[ ] Número de WhatsApp Business oficial donde caerán los prospectos calificados.</li>
+                                    <li>[ ] Logotipo actual o nombre comercial registrado.</li>
+                                    <li>[ ] Domicilio o base de operaciones en CDMX para el mapa de Google.</li>
+                                    <li>[ ] Horarios de atención telefónica para soporte de choferes.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pitch-speech-box">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">📞 Speech para Pedir la Información sin Abrumar</span>
+                                <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-datos-jorge', this)">📋 Copiar</button>
+                            </div>
+                            <div class="pitch-speech-text" id="speech-datos-jorge">
+                                "Jorge, para que la inteligencia artificial no invente cosas y tu página venda exactamente lo que tú ofreces, aplicamos la regla de oro: entre más limpios sean los datos que le cargamos, más rápido cierra clientes. Solo requiero que me mandes fotos reales de tus camionetas, cuántos pasajeros les caben con maletas y tu lista de precios para los viajes más típicos como Querétaro, Acapulco y traslados al aeropuerto. Con eso te monto el cotizador de inmediato."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 6: MANEJO DE OBJECIONES (SPEECH COPIABLE DE 30 SEGUNDOS) -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="objeciones">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <div>
+                                <h2>6. Respuestas a Objeciones de Jorge (Guión para Hablar por Teléfono)</h2>
+                                <p class="subtitle-text">Argumentos probados para resolver sus dudas sobre el coche chico, la impresión negra y el precio.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+
+                        <!-- OBJECIÓN 1: CAMIONETA CHICA DE 3 PASAJEROS -->
+                        <div class="pitch-speech-box">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">🚨 Objeción 1: "Vi en la presentación una camioneta chica de 3 pasajeros o algo así"</span>
+                                <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-obj-ertiga', this)">📋 Copiar</button>
+                            </div>
+                            <div class="pitch-speech-text" id="speech-obj-ertiga">
+                                "Jorge, qué bueno que lo mencionas. Esa lámina fue un apunte cruzado porque Efraín me estaba platicando sobre un coche particular de agencia (la Ertiga familiar); pero tu sitio web estará configurado al 100% con tu flota ejecutiva de alta capacidad: tus Sprinters de 17 a 20 pasajeros y camionetas de lujo como las que tú operas. Toda la imagen de la web será de primer nivel corporativo para turismo y empresas."
+                            </div>
+                        </div>
+
+                        <!-- OBJECIÓN 2: PDF NEGRO QUE NO SE PUDO IMPRIMIR -->
+                        <div class="pitch-speech-box">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">🖨️ Objeción 2: "El archivo era negro y no lo pude imprimir porque gastaba toner"</span>
+                                <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-obj-pdf', this)">📋 Copiar</button>
+                            </div>
+                            <div class="pitch-speech-text" id="speech-obj-pdf">
+                                "Totalmente de acuerdo, Jorge. El diseño original estaba pensado para verse en celulares y pantallas OLED con el estilo Dark Mode de noche. Ya te preparé la versión Ejecutiva en fondo blanco impoluto, con tipografía clara y membrete corporativo, lista para que la imprimas en cualquier impresora de oficina sin gastar tinta."
+                            </div>
+                        </div>
+
+                        <!-- OBJECIÓN 3: "¿ME PUEDES HACER UN DESCUENTO?" -->
+                        <div class="pitch-speech-box">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">💵 Objeción 3: "¿Me puedes hacer un descuento en el paquete?"</span>
+                                <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-obj-descuento', this)">📋 Copiar</button>
+                            </div>
+                            <div class="pitch-speech-text" id="speech-obj-descuento">
+                                "Jorge, honestamente un desarrollo con inteligencia artificial, cotizador paramétrico y velocidad de carga corporativa en agencias de Polanco o Santa Fe se cotiza entre $45,000 y $85,000 pesos. El precio de $34,500 que te di ya viene con un descuento directo de más de $15,000 por ser amigo y recomendado de mi primo Efraín. Lo que sí puedo hacer para apoyarte con tu flujo de caja es darte facilidades: 50% de anticipo para arrancar, 25% contra entrega de la primera versión funcional, y el 25% restante hasta que quede 100% a tu entera satisfacción. Y si cerramos el paquete Elite, te incluyo el Panel de Control de Flota valorado en $8,000 pesos."
+                            </div>
+                        </div>
+
+                        <!-- OBJECIÓN 4: "¿POR QUÉ LA IA VALE MÁS QUE UNA PÁGINA NORMAL?" -->
+                        <div class="pitch-speech-box">
+                            <div class="pitch-speech-header">
+                                <span class="pitch-speech-tag">🤖 Objeción 4: "¿Por qué el paquete con IA cuesta $34,500?"</span>
+                                <button class="pitch-copy-btn" onclick="copiarSpeechPitch('speech-obj-ia', this)">📋 Copiar</button>
+                            </div>
+                            <div class="pitch-speech-text" id="speech-obj-ia">
+                                "Porque una página común y corriente es solo un folleto digital con un formulario que nadie lee a tiempo. El paquete con IA es un empleado digital que contesta en 3 segundos a las 2 de la mañana, entiende lo que el cliente escribe, le recomienda la camioneta correcta según sus maletas y personas, calcula el precio y te manda el cliente calificado y listo para pagar a tu WhatsApp. No te vende una página, te vende reservaciones cerradas en automático."
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 7: ACLARACIÓN TÉCNICA DEL VEHÍCULO DEL CHAT (SUZUKI ERTIGA) -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="vehiculo">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                            <div>
+                                <h2>7. Ficha Identificativa: El Vehículo del Chat de Efraín (Aclaración Fotográfica)</h2>
+                                <p class="subtitle-text">Identificación del modelo de las imágenes para no confundirlo jamás con la flota de Jorge.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="pitch-vehicle-split">
+                            <div class="pitch-vehicle-preview">
+                                <img src="ertiga_cutaway.jpg" alt="Suzuki Ertiga Interior Cutaway">
+                                <div style="margin-top: 8px;">
+                                    <span class="pitch-badge-alert">Vehículo Particular de Agencia</span>
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary); margin-top: 4px;">Suzuki Ertiga (7 Plazas Compacta)</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 8px;">🔍 Origen de la Confusión:</h3>
+                                <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+                                    1. <b>Jorge Mares</b> trabaja o trabajó como asesor en la agencia <b>Suzuki</b> (por eso el contacto en WhatsApp dice <i>'Jorge Mares Hernández Suzuki'</i>). Efraín le compró una Ertiga hace tiempo.<br>
+                                    2. El 26 de septiembre, Efraín le mandó a Roger esta foto de corte del interior preguntando si cabían 3 personas por fila en la Ertiga.<br>
+                                    3. Por error, esa duda se mezcló con la propuesta de Jorge, y Jorge pensó que le estaban ofreciendo una página para una <i>'camioneta chica de 3 pasajeros'</i>.<br>
+                                    4. <b>La Flota Real de Jorge:</b> Es transporte ejecutivo (Mercedes-Benz Sprinter de 17-20 pasajeros, Chevrolet Suburban de 7 pasajeros VIP y vans ejecutivas).
+                                </p>
+                                <div class="pitch-speech-box" style="margin-top: 10px;">
+                                    <div class="pitch-speech-header">
+                                        <span class="pitch-speech-tag">💡 Conclusión para Roger</span>
+                                    </div>
+                                    <div style="font-size: 0.9rem; color: var(--text-primary);">
+                                        No te preocupes por esa camioneta en la web. La web de Jorge llevará fotos exclusivas de Sprinters ejecutivas, asientos de piel reclinables, clima doble y maleteros amplios.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 8: PREGUNTAS TÉCNICAS Y RENTA DIRECTA EN LA WEB -->
+                <div class="section-card pitch-section-block pitch-searchable" data-section-type="ia">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <div>
+                                <h2>8. ¿Es la IA lo más difícil de una página? & Renta Directa con Tarjeta</h2>
+                                <p class="subtitle-text">Conceptos clave para que Roger entienda el alcance técnico y comercial de cada función.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="pitch-checklist-grid">
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">🤖 ¿Es la IA lo más complicado de programar?</div>
+                                <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                                    <b>Técnicamente no es difícil conectarla:</b> Hoy en día conectar un modelo de Google (Gemini Flash) con API toma solo unas líneas de código.<br><br>
+                                    <b>Lo verdaderamente difícil es el MODELADO DE LAS REGLAS DE NEGOCIO:</b> Calibrar el prompt para que la IA no alucine precios, no prometa camionetas inexistentes y sepa cuándo parar y pasarle la estafeta a Jorge por WhatsApp. Por eso se cobra $34,500, porque es consultoría de ventas y blindaje comercial, no solo código.
+                                </p>
+                            </div>
+                            <div class="pitch-checklist-card">
+                                <div class="pitch-checklist-title">💳 ¿Y la Renta Directa con Tarjeta en la Web?</div>
+                                <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                                    <b>Sí se puede agregar fácilmente</b> (con Stripe, Clip o MercadoPago para cobrar un 20% de apartado).<br><br>
+                                    <b>Pero en transporte ejecutivo en México:</b> El 85% de las empresas y familias que rentan una camioneta para Acapulco o Querétaro NO meten su tarjeta de crédito en una web desconocida por $20,000 pesos de golpe. Prefieren hablar por WhatsApp, verificar que la empresa existe y hacer transferencia SPEI. Por eso, el flujo IA ➔ WhatsApp cierra 3 veces más ventas que una pasarela fría.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     <!-- TOAST NOTIFICATIONS -->
     <div id="toast-container" class="toast-container"></div>
 
@@ -1685,6 +2437,7 @@
     <script src="agent_ops_view.js"></script>
     <script src="youtube_view.js?v=20261017_1900"></script>
     <script src="mormon_view.js"></script>
+    <script src="pitch_view.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -1696,3 +2449,4 @@
     </script>
 </body>
 </html>
+

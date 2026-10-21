@@ -1,6 +1,6 @@
 // =========================================================================
 // VROMLIX OS - LIBRO DE MORMÓN: MNEMOTECNIA & GUÍA DE MINISTRACIÓN
-// 15 Libros • 239 Capítulos • 106 Pasajes Quirúrgicos de Ministración Integrados
+// 15 Libros (Colapsados por defecto) • 239 Capítulos • 106 Pasajes Quirúrgicos
 // =========================================================================
 
 (function() {
@@ -10,49 +10,49 @@
   {
     "id": "salud_mental",
     "icon": "🧠",
-    "label": "Salud Mental & Emociones",
+    "label": "Salud Mental",
     "desc": "Ansiedad, depresión, pánico, sobrecarga, soledad y desánimo"
   },
   {
     "id": "duelo_dolor",
     "icon": "🖤",
-    "label": "Duelo, Pérdida & Dolor",
+    "label": "Duelo & Pérdida",
     "desc": "Muerte de seres queridos, hijos, enfermedad física y consuelo eterno"
   },
   {
     "id": "culpa_perdon",
     "icon": "🕊️",
-    "label": "Culpa & Perdón a Uno Mismo",
+    "label": "Culpa & Perdón",
     "desc": "Arrepentimiento sincero, recaídas, vergüenza ante Dios y paz interior"
   },
   {
     "id": "relaciones_hogar",
     "icon": "🤝",
-    "label": "Relaciones, Ofensas & Familia",
+    "label": "Familia & Hogar",
     "desc": "Insultos, rencor, chismes de barrio, matrimonio en crisis e hijos rebeldes"
   },
   {
     "id": "fe_dudas",
     "icon": "💡",
-    "label": "Fe, Dudas & Oración",
+    "label": "Fe & Dudas",
     "desc": "Dudas doctrinales/históricas, oraciones frías, falta de deseo y testimonio"
   },
   {
     "id": "habitos_ataduras",
     "icon": "🔗",
-    "label": "Hábitos, Adicciones & Cadenas",
+    "label": "Adicciones",
     "desc": "Pornografía, ataduras progresivas, falta de autocontrol y murallas de defensa"
   },
   {
     "id": "decisiones_futuro",
     "icon": "🧭",
-    "label": "Decisiones, Trabajo & Futuro",
+    "label": "Decisiones",
     "desc": "Empleo, miedo al futuro, pagar diezmo en crisis, orientación y Liahona"
   },
   {
     "id": "convenios_capilla",
     "icon": "⛪",
-    "label": "Convenios, Templo & Capilla",
+    "label": "Convenios",
     "desc": "Significado real de la Santa Cena, congregarse, ayuno y perseverancia"
   }
 ];
@@ -77,7 +77,8 @@
     "pastoralInsight": "Recuérdale que el Salvador experimentó en Su propia carne y espíritu la sensación exacta de ahogo y angustia que siente hoy. No es una debilidad de fe, y Cristo sabe íntimamente cómo socorrerle.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/7?lang=spa&id=p11-p13#p11",
     "bookId": "alma",
-    "chapterNum": 7
+    "chapterNum": 7,
+    "shortTitle": "Ansiedad y Pánico"
   },
   {
     "id": "depresion_desanimo_salmo_nefi",
@@ -98,7 +99,8 @@
     "pastoralInsight": "Nefi, un profeta gigante, también experimentó días oscuros de llanto y abatimiento. La salida no es fingir estar bien, sino desahogar el alma y recordar en Quién hemos confiado.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/4?lang=spa&id=p16-p19,p26-p28#p16",
     "bookId": "2-ne",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "Depresión y Desánimo"
   },
   {
     "id": "cargas_pesadas_alivio",
@@ -119,7 +121,8 @@
     "pastoralInsight": "El Señor a veces no quita la prueba de inmediato, pero fortalece las espaldas de manera que la carga se vuelve ligera. Pregúntale: '¿Cómo podemos orar hoy para que sientas ese sostén?'",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/24?lang=spa&id=p14-p15#p14",
     "bookId": "mosiah",
-    "chapterNum": 24
+    "chapterNum": 24,
+    "shortTitle": "Cargas Pesadas"
   },
   {
     "id": "soledad_sensacion_abandono",
@@ -139,7 +142,8 @@
     "pastoralInsight": "Dios jamás nos olvida. Las marcas de los clavos en las manos del Salvador son el recordatorio eterno de que tu nombre está grabado indeleblemente en Su corazón.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/21?lang=spa&id=p14-p16#p14",
     "bookId": "1-ne",
-    "chapterNum": 21
+    "chapterNum": 21,
+    "shortTitle": "Soledad y Abandono"
   },
   {
     "id": "agotamiento_burnout_prisa",
@@ -160,7 +164,8 @@
     "pastoralInsight": "El Evangelio no te pide que colapses por auto-exigencia. El Señor pide prudencia, ritmo sostenible y descanso mental. Validar su fatiga es el primer paso del consuelo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p27#p27",
     "bookId": "mosiah",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "Agotamiento / Burnout"
   },
   {
     "id": "miedo_futuro_terror",
@@ -180,7 +185,8 @@
     "pastoralInsight": "El miedo anticipa desgracias que el Señor promete disipar con Su presencia. Ayúdale a enfocar su energía solo en el día de hoy con la certeza de que Dios ya está en su mañana.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/22?lang=spa&id=p2#p2",
     "bookId": "2-ne",
-    "chapterNum": 22
+    "chapterNum": 22,
+    "shortTitle": "Miedo al Futuro"
   },
   {
     "id": "perdida_deseo_vivir",
@@ -193,14 +199,20 @@
       "desesperanza",
       "tormento",
       "oscuridad",
-      "vacio"
+      "vacio",
+      "suicidio",
+      "suicida",
+      "quitarse la vida",
+      "no quiero vivir",
+      "morir"
     ],
     "scriptureRef": "Alma 36:18-20",
     "scriptureQuote": "¡Oh Jesús, Hijo de Dios, ten misericordia de mí!... Y cuando pensé en esto, ya no me pude acordar más de mis dolores... ¡Y oh qué gozo, y qué luz tan maravillosa fue la que vi! Sí, mi alma se llenó de un gozo tan profundo como lo había sido mi dolor.",
     "pastoralInsight": "Cuando el dolor es desgarrador, una sola súplica al nombre de Jesucristo puede ser el inicio del rescate. Escucha sin juzgar, ofrece apoyo profesional médico de inmediato y acompáñale con amor incondicional.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/36?lang=spa&id=p18-p20#p18",
     "bookId": "alma",
-    "chapterNum": 36
+    "chapterNum": 36,
+    "shortTitle": "Suicidio y Desesperanza"
   },
   {
     "id": "autoestima_inutil_desprecio",
@@ -220,7 +232,8 @@
     "pastoralInsight": "Tu valor no se mide por tus debilidades ni por la opinión humana, sino por el precio infinito que el Salvador pagó por ti en Getsemaní.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/4?lang=spa&id=p34-p35#p34",
     "bookId": "2-ne",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "Baja Autoestima"
   },
   {
     "id": "ira_interna_refrenar_pasiones",
@@ -241,7 +254,8 @@
     "pastoralInsight": "Alma le enseñó a su hijo que 'refrenar' las pasiones como a un caballo no es reprimirse enfermizamente, sino encauzar la energía para que el corazón pueda llenarse de amor y paz.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/38?lang=spa&id=p12#p12",
     "bookId": "alma",
-    "chapterNum": 38
+    "chapterNum": 38,
+    "shortTitle": "Ira y Enojo"
   },
   {
     "id": "tristeza_rechazo_vilipendios",
@@ -261,7 +275,8 @@
     "pastoralInsight": "El dolor del rechazo duele en lo profundo, pero el Señor nos pide que no dejemos que las opiniones humanas definan nuestra paz. Dios aprueba tu caminar honesto.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/8?lang=spa&id=p7#p7",
     "bookId": "2-ne",
-    "chapterNum": 8
+    "chapterNum": 8,
+    "shortTitle": "Rechazo y Burlas"
   },
   {
     "id": "paz_conciencia_gozo",
@@ -281,7 +296,8 @@
     "pastoralInsight": "La paz de conciencia no es ausencia de problemas externos, sino la dulce calma espiritual que Jesucristo entrega al corazón cuando descansamos en Su misericordia.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p3#p3",
     "bookId": "mosiah",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "Paz de Conciencia"
   },
   {
     "id": "confianza_sostenido_dificultad",
@@ -301,7 +317,8 @@
     "pastoralInsight": "No necesitas tener todas las respuestas hoy ni resolver el mes completo; solo poner tu confianza en Dios para dar el siguiente paso de fe. Él te sostiene.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/36?lang=spa&id=p3#p3",
     "bookId": "alma",
-    "chapterNum": 36
+    "chapterNum": 36,
+    "shortTitle": "Sostén en Aflicción"
   },
   {
     "id": "debilidad_humildad_eter",
@@ -321,7 +338,8 @@
     "pastoralInsight": "La debilidad no es tu enemiga: es el taller donde Dios forja tu humildad. Su gracia es suficiente para suplir exactamente lo que te falta.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/ether/12?lang=spa&id=p27#p27",
     "bookId": "ether",
-    "chapterNum": 12
+    "chapterNum": 12,
+    "shortTitle": "Debilidad Personal"
   },
   {
     "id": "gozo_proposito_vida",
@@ -341,7 +359,8 @@
     "pastoralInsight": "Dios no diseñó esta vida para que vivamos en miseria o culpa constante; el objetivo supremo del Plan de Salvación es el gozo verdadero en Cristo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/2?lang=spa&id=p25#p25",
     "bookId": "2-ne",
-    "chapterNum": 2
+    "chapterNum": 2,
+    "shortTitle": "El Propósito: Gozo"
   },
   {
     "id": "desesperacion_pruebas_fe",
@@ -359,7 +378,8 @@
     "pastoralInsight": "Incluso profetas como Alma oraron en medio de lágrimas y dolor agudo pidiendo consuelo para su propia alma. El silencio temporal de Dios no es ausencia, es preparación de Su respuesta.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/31?lang=spa&id=p31-p33#p31",
     "bookId": "alma",
-    "chapterNum": 31
+    "chapterNum": 31,
+    "shortTitle": "Oración en el Dolor"
   },
   {
     "id": "muerte_hijo_pequeno",
@@ -378,7 +398,8 @@
     "pastoralInsight": "Los niños pequeños son puros y van directo a la presencia del Padre por los méritos de Cristo. Su salvación es completa y la promesa del sellamiento eterno les devolverá a sus brazos.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/8?lang=spa&id=p12,p17,p22#p12",
     "bookId": "moro",
-    "chapterNum": 8
+    "chapterNum": 8,
+    "shortTitle": "Muerte de un Hijo"
   },
   {
     "id": "fallecimiento_conyuge_padres",
@@ -398,7 +419,8 @@
     "pastoralInsight": "Tu ser querido no ha dejado de existir; ha entrado en un estado de descanso absoluto donde no hay dolor, enfermedad ni angustia terrenal, a la espera del abrazo glorioso de la resurrección.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/40?lang=spa&id=p11-p12#p11",
     "bookId": "alma",
-    "chapterNum": 40
+    "chapterNum": 40,
+    "shortTitle": "Luto Conyugal / Padres"
   },
   {
     "id": "tragedia_repentina_luto",
@@ -417,7 +439,8 @@
     "pastoralInsight": "Llorar una pérdida es sagrado; el llanto no contradice la fe. El Evangelio abraza las lágrimas mientras nos sostiene con la certeza inquebrantable de la vida eterna.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/28?lang=spa&id=p11-p12#p11",
     "bookId": "alma",
-    "chapterNum": 28
+    "chapterNum": 28,
+    "shortTitle": "Tragedia Inesperada"
   },
   {
     "id": "miedo_propia_muerte",
@@ -436,7 +459,8 @@
     "pastoralInsight": "Para el discípulo de Jesucristo, la muerte no es un abismo oscuro sino una puerta de entrada a la paz, donde toda lágrima será enjugada.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/27?lang=spa&id=p28#p28",
     "bookId": "alma",
-    "chapterNum": 27
+    "chapterNum": 27,
+    "shortTitle": "Miedo a la Muerte"
   },
   {
     "id": "resurreccion_perfecta_cuerpo",
@@ -454,7 +478,8 @@
     "pastoralInsight": "Todo cuerpo mutilado, enfermo, desgastado por la edad o los achaques se levantará con vigor y esplendor eterno. Volverás a abrazar a tus seres queridos cara a cara.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/11?lang=spa&id=p43-p44#p43",
     "bookId": "alma",
-    "chapterNum": 11
+    "chapterNum": 11,
+    "shortTitle": "Resurrección del Cuerpo"
   },
   {
     "id": "dolor_fisico_cronico",
@@ -473,7 +498,8 @@
     "pastoralInsight": "Cristo sabe lo que siente cada nervio, cada articulación y cada noche de insomnio por el dolor. Él está presente a tu lado en cada minuto de tu aflicción corporal.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/7?lang=spa&id=p11-p12#p11",
     "bookId": "alma",
-    "chapterNum": 7
+    "chapterNum": 7,
+    "shortTitle": "Dolor Físico Crónico"
   },
   {
     "id": "bendicion_sin_sanidad_inmediata",
@@ -491,7 +517,8 @@
     "pastoralInsight": "A veces la respuesta de Dios no es quitar el cáliz al instante, sino consagrar el dolor para refinar nuestra alma de forma santa. Su poder sigue obrando en ti.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/2?lang=spa&id=p1-p2#p1",
     "bookId": "2-ne",
-    "chapterNum": 2
+    "chapterNum": 2,
+    "shortTitle": "Cuando no Hay Sanidad"
   },
   {
     "id": "cuidar_enfermo_prolongado",
@@ -509,7 +536,8 @@
     "pastoralInsight": "Tu servicio silencioso al pie de la cama es una de las expresiones más sagradas del convenio bautismal. Dios ve cada noche de desvelo y te sostendrá.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p8-p9#p8",
     "bookId": "mosiah",
-    "chapterNum": 18
+    "chapterNum": 18,
+    "shortTitle": "Fatiga del Cuidador"
   },
   {
     "id": "llorar_con_los_que_lloran",
@@ -528,7 +556,8 @@
     "pastoralInsight": "No necesitas tener sermones preparados. Muchas veces el acto de ministración más poderoso es sentarse en silencio al lado de la persona y dejar que llore.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p9#p9",
     "bookId": "mosiah",
-    "chapterNum": 18
+    "chapterNum": 18,
+    "shortTitle": "Llorar con el Afligido"
   },
   {
     "id": "aguijon_muerte_consumido",
@@ -545,7 +574,8 @@
     "pastoralInsight": "La tumba no es el final de la historia. El dolor de la separación es temporal; la reunión venidera será eterna y llena de gozo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/16?lang=spa&id=p7-p8#p7",
     "bookId": "mosiah",
-    "chapterNum": 16
+    "chapterNum": 16,
+    "shortTitle": "Victoria sobre la Tumba"
   },
   {
     "id": "perdidas_materiales_fuego_robo",
@@ -564,7 +594,8 @@
     "pastoralInsight": "Las posesiones terrenales vienen y van, pero tu valor y tus tesoros en el cielo están intactos. Dios te dará la sabiduría y la fuerza para levantarte de nuevo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/jacob/2?lang=spa&id=p18-p19#p18",
     "bookId": "jacob",
-    "chapterNum": 2
+    "chapterNum": 2,
+    "shortTitle": "Pérdida Material / Ruina"
   },
   {
     "id": "paz_que_sobrepuja_todo",
@@ -581,7 +612,8 @@
     "pastoralInsight": "La paz no significa que la tormenta haya cesado alrededor, sino que dentro de tu alma tienes anclada la mano del Príncipe de Paz.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/38?lang=spa&id=p5#p5",
     "bookId": "alma",
-    "chapterNum": 38
+    "chapterNum": 38,
+    "shortTitle": "Paz Inexplicable"
   },
   {
     "id": "pecado_demasiado_grave",
@@ -601,7 +633,8 @@
     "pastoralInsight": "No existe pecado que sobrepase el alcance infinito de la Expiación de Jesucristo si hay arrepentimiento sincero. La palabra de Dios dice 'cuantas veces se arrepienta, le perdonaré'.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/26?lang=spa&id=p30#p30",
     "bookId": "mosiah",
-    "chapterNum": 26
+    "chapterNum": 26,
+    "shortTitle": "¿Pecado Irredimible?"
   },
   {
     "id": "recaidas_constantes_mismo_error",
@@ -620,7 +653,8 @@
     "pastoralInsight": "La recaída duele, pero rendirse es la verdadera trampa del adversario. El Salvador te invita a levantarte, sacudirte el polvo y volver a acudir a Él.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/6?lang=spa&id=p8#p8",
     "bookId": "moro",
-    "chapterNum": 6
+    "chapterNum": 6,
+    "shortTitle": "Recaídas Constantes"
   },
   {
     "id": "verguenza_miedo_obispo",
@@ -638,7 +672,8 @@
     "pastoralInsight": "El obispo no es un verdugo, es un médico espiritual llamado para ayudarte a vendar las heridas. La confesión abre la puerta para que el tormento se transforme en gozo puro.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/36?lang=spa&id=p17-p19#p17",
     "bookId": "alma",
-    "chapterNum": 36
+    "chapterNum": 36,
+    "shortTitle": "Miedo a Confesar al Obispo"
   },
   {
     "id": "perdonarse_a_uno_mismo",
@@ -656,7 +691,8 @@
     "pastoralInsight": "Si Dios ya perdonó y olvidó tu pecado, insistir en seguir flagelándote es dudar de la suficiencia del sacrificio de Su Hijo. Deja que tu culpa sea desterrada hoy.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/enos/1?lang=spa&id=p5-p8#p5",
     "bookId": "enos",
-    "chapterNum": 1
+    "chapterNum": 1,
+    "shortTitle": "Perdonarse a sí Mismo"
   },
   {
     "id": "tristeza_segun_dios_vs_mundana",
@@ -673,7 +709,8 @@
     "pastoralInsight": "La culpa sana te empuja hacia Cristo para cambiar; la culpa del adversario te dice que no vales nada y que deberías esconderte. Quédate solo con la que te lleva a la luz.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/42?lang=spa&id=p29-p30#p29",
     "bookId": "alma",
-    "chapterNum": 42
+    "chapterNum": 42,
+    "shortTitle": "Tristeza según Dios"
   },
   {
     "id": "potente_cambio_corazon",
@@ -691,7 +728,8 @@
     "pastoralInsight": "El Evangelio no es solo modificación de conducta externa; es una re-creación interna de tus afectos. Pídele al Señor ese potente cambio hoy.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/5?lang=spa&id=p2#p2",
     "bookId": "mosiah",
-    "chapterNum": 5
+    "chapterNum": 5,
+    "shortTitle": "Cambio de Corazón"
   },
   {
     "id": "vestidos_blancos_sangre_cordero",
@@ -710,7 +748,8 @@
     "pastoralInsight": "No importa cuán oscuras hayan sido tus manchas; el poder limpiador del Salvador tiene la potencia de dejar tus vestiduras más blancas que la nieve.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/5?lang=spa&id=p21#p21",
     "bookId": "alma",
-    "chapterNum": 5
+    "chapterNum": 5,
+    "shortTitle": "Purificación Total"
   },
   {
     "id": "confesar_abandonar_pecado",
@@ -728,7 +767,8 @@
     "pastoralInsight": "Confesar no te debilita; te quita la máscara y te devuelve el poder. Al abandonar el pecado y ser transparente, el Espíritu regresa con plenitud.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/27?lang=spa&id=p35#p35",
     "bookId": "mosiah",
-    "chapterNum": 27
+    "chapterNum": 27,
+    "shortTitle": "Confesar y Abandonar"
   },
   {
     "id": "restitucion_maldad_nunca_felicidad",
@@ -745,7 +785,8 @@
     "pastoralInsight": "El pecado deja un rastro amargo. Cuando nos humillamos a reparar lo dañado y actuar con justicia hacia quienes herimos, el gozo celestial regresa.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/41?lang=spa&id=p10,p14#p10",
     "bookId": "alma",
-    "chapterNum": 41
+    "chapterNum": 41,
+    "shortTitle": "Maldad Nunca Fue Felicidad"
   },
   {
     "id": "trampa_posponer_arrepentimiento",
@@ -762,7 +803,8 @@
     "pastoralInsight": "El mañana no está garantizado. El momento de ser libre, de pedir perdón y de respirar en paz con Dios es hoy mismo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/34?lang=spa&id=p32-p34#p32",
     "bookId": "alma",
-    "chapterNum": 34
+    "chapterNum": 34,
+    "shortTitle": "No Posponer el Cambio"
   },
   {
     "id": "enterrar_armas_guerra",
@@ -779,7 +821,8 @@
     "pastoralInsight": "Para no volver a caer, hay que deshacerse de los accesos, contraseñas, ambientes o amistades que nos incitaban. Enterrar las armas es un acto de amor a Dios.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/24?lang=spa&id=p15-p18#p15",
     "bookId": "alma",
-    "chapterNum": 24
+    "chapterNum": 24,
+    "shortTitle": "Enterrar Armas de Pecado"
   },
   {
     "id": "brazo_misericordia_extendido",
@@ -797,7 +840,8 @@
     "pastoralInsight": "Cristo no te está esperando con un ceño fruncido o una lista de acusaciones. Su brazo está abierto y extendido hacia ti ahora mismo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/9?lang=spa&id=p14#p14",
     "bookId": "3-ne",
-    "chapterNum": 9
+    "chapterNum": 9,
+    "shortTitle": "Brazos Abiertos de Cristo"
   },
   {
     "id": "salvados_por_gracia_esfuerzo",
@@ -815,7 +859,8 @@
     "pastoralInsight": "Hacer 'cuanto podamos' no significa alcanzar la perfección por cuenta propia, sino dar nuestro sincero empeño y dejar que la gracia de Cristo haga el resto.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/25?lang=spa&id=p23#p23",
     "bookId": "2-ne",
-    "chapterNum": 25
+    "chapterNum": 25,
+    "shortTitle": "Gracia Suficiente"
   },
   {
     "id": "paz_interior_incomprensible",
@@ -832,7 +877,8 @@
     "pastoralInsight": "La medida de tu tristeza actual será la medida del gozo que experimentarás cuando permitas que el Salvador disuelva tu culpa. Ten fe.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/36?lang=spa&id=p20-p21#p20",
     "bookId": "alma",
-    "chapterNum": 36
+    "chapterNum": 36,
+    "shortTitle": "Gozo del Perdón"
   },
   {
     "id": "orgullo_humillacion_espiritual",
@@ -850,7 +896,8 @@
     "pastoralInsight": "El orgullo es la gran barrera del alma. Humillarse ante Dios y ante nuestro prójimo no es debilidad; es la mayor demostración de nobleza espiritual.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/5?lang=spa&id=p27-p28#p27",
     "bookId": "alma",
-    "chapterNum": 5
+    "chapterNum": 5,
+    "shortTitle": "Vencer el Orgullo"
   },
   {
     "id": "insultos_ataques_contencion",
@@ -870,7 +917,8 @@
     "pastoralInsight": "Responder al insulto con ira es darle la victoria al adversario. El pacificador no es débil; tiene la fuerza de Cristo para desarmar la contención con silencio o mansedumbre.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/11?lang=spa&id=p29-p30#p29",
     "bookId": "3-ne",
-    "chapterNum": 11
+    "chapterNum": 11,
+    "shortTitle": "Insultos y Agresiones"
   },
   {
     "id": "perdonar_traicion_grave",
@@ -889,7 +937,8 @@
     "pastoralInsight": "Perdonar no es justificar la maldad del otro ni exponerte a más daño; es soltar el veneno del rencor para que tu propia alma no quede envenenada.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/26?lang=spa&id=p31#p31",
     "bookId": "mosiah",
-    "chapterNum": 26
+    "chapterNum": 26,
+    "shortTitle": "Perdonar Traición Grave"
   },
   {
     "id": "chismes_juicios_barrio",
@@ -908,7 +957,8 @@
     "pastoralInsight": "Cuando en el barrio o familia abundan las críticas, tu ministerio debe ser el antídoto: bondad incondicional, silencio ante el chisme y brazos abiertos al necesitado.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/1?lang=spa&id=p30#p30",
     "bookId": "alma",
-    "chapterNum": 1
+    "chapterNum": 1,
+    "shortTitle": "Chismes en el Barrio"
   },
   {
     "id": "matrimonio_corazones_quebrantados",
@@ -928,7 +978,8 @@
     "pastoralInsight": "El Señor ama y defiende la ternura en el hogar. Sanar un matrimonio exige verdad absoluta, abandono de egoísmos y reconstrucción de la confianza con hechos concretos.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/jacob/2?lang=spa&id=p31-p35#p31",
     "bookId": "jacob",
-    "chapterNum": 2
+    "chapterNum": 2,
+    "shortTitle": "Matrimonio en Crisis"
   },
   {
     "id": "amor_conyugal_ternura",
@@ -946,7 +997,8 @@
     "pastoralInsight": "El mayor legado que un padre o madre puede dejar a sus hijos es ver cómo se aman, se respetan y se perdonan mutuamente en el día a día.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/jacob/3?lang=spa&id=p7#p7",
     "bookId": "jacob",
-    "chapterNum": 3
+    "chapterNum": 3,
+    "shortTitle": "Ternura Conyugal"
   },
   {
     "id": "hijos_rebeldes_alejados",
@@ -964,7 +1016,8 @@
     "pastoralInsight": "Las oraciones de un padre y una madre con fe tienen un alcance sagrado. Nunca dejes de orar con fe por ese hijo; el Señor no lo ha perdido de vista.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/27?lang=spa&id=p14#p14",
     "bookId": "mosiah",
-    "chapterNum": 27
+    "chapterNum": 27,
+    "shortTitle": "Hijos Descarriados"
   },
   {
     "id": "ensenar_hijos_sin_renas",
@@ -982,7 +1035,8 @@
     "pastoralInsight": "Enseñar a los hijos no es imponer mediante el miedo, sino modelar la rectitud y enseñarles a amarse mutuamente bajo el espíritu de Cristo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p14-p15#p14",
     "bookId": "mosiah",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "Educar sin Gritos"
   },
   {
     "id": "envidia_celos_hermanos",
@@ -1000,7 +1054,8 @@
     "pastoralInsight": "La comparación es el ladrón del gozo. Dios no tiene hijos favoritos; Él tiene un plan a la medida exacta para ti que no compite con el de nadie más.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/38?lang=spa&id=p11#p11",
     "bookId": "alma",
-    "chapterNum": 38
+    "chapterNum": 38,
+    "shortTitle": "Envidia y Comparación"
   },
   {
     "id": "caridad_amor_puro_cristo",
@@ -1018,7 +1073,8 @@
     "pastoralInsight": "Amar a quien nos trata bien es fácil; la caridad de Cristo se demuestra cuando somos benignos y pacientes con aquel que es tosco o antipático.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/7?lang=spa&id=p45-p48#p45",
     "bookId": "moro",
-    "chapterNum": 7
+    "chapterNum": 7,
+    "shortTitle": "Amar al Difícil (Caridad)"
   },
   {
     "id": "amistades_toxicas_presion",
@@ -1036,7 +1092,8 @@
     "pastoralInsight": "El amor ministerial no implica dejar que otros destruyan tu testimonio o tu integridad. Saber decir 'no' y elegir amigos que te eleven es un mandamiento sabio.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/28?lang=spa&id=p14-p16#p14",
     "bookId": "2-ne",
-    "chapterNum": 28
+    "chapterNum": 28,
+    "shortTitle": "Amistades Tóxicas"
   },
   {
     "id": "albedrio_respeto_decisiones_ajenas",
@@ -1054,7 +1111,8 @@
     "pastoralInsight": "No puedes obligar a nadie a ser feliz o a obedecer. Ama, enseña con el ejemplo, ora sin cesar y suelta la necesidad de controlar lo que solo Dios y ellos pueden decidir.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/29?lang=spa&id=p4#p4",
     "bookId": "alma",
-    "chapterNum": 29
+    "chapterNum": 29,
+    "shortTitle": "Respetar el Albedrío"
   },
   {
     "id": "desacuerdos_mansedumbre",
@@ -1073,7 +1131,8 @@
     "pastoralInsight": "En cualquier desacuerdo conyugal o familiar, el que baja la voz y busca entender antes de tener la razón es quien gana la verdadera victoria de Cristo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/38?lang=spa&id=p12#p12",
     "bookId": "alma",
-    "chapterNum": 38
+    "chapterNum": 38,
+    "shortTitle": "Resolver Desacuerdos"
   },
   {
     "id": "unidad_corazones_entrelazados",
@@ -1091,7 +1150,8 @@
     "pastoralInsight": "La iglesia florece cuando no hay bandos ni favoritismos, sino un solo corazón entrelazado para socorrer al que está caído.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p21#p21",
     "bookId": "mosiah",
-    "chapterNum": 18
+    "chapterNum": 18,
+    "shortTitle": "Unidad de Corazón"
   },
   {
     "id": "perdonar_padres_errores",
@@ -1108,7 +1168,8 @@
     "pastoralInsight": "Tus padres fueron personas imperfectas enfrentando sus propias tormentas. Pedirle al Señor que enternezca tu corazón te liberará del peso amargo del reproche.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/2?lang=spa&id=p16#p16",
     "bookId": "1-ne",
-    "chapterNum": 2
+    "chapterNum": 2,
+    "shortTitle": "Perdonar a los Padres"
   },
   {
     "id": "servir_desinteresado_projimo",
@@ -1126,7 +1187,8 @@
     "pastoralInsight": "La cura más rápida para la autocompasión o el aislamiento es salir a servir a alguien que tiene una carga mayor. Al bendecir a otros, Dios te sana a ti.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/2?lang=spa&id=p17#p17",
     "bookId": "mosiah",
-    "chapterNum": 2
+    "chapterNum": 2,
+    "shortTitle": "Servicio Desinteresado"
   },
   {
     "id": "experimento_semilla_dudas",
@@ -1145,7 +1207,8 @@
     "pastoralInsight": "Dios no exige certeza absoluta el primer día. Basta con un pequeño deseo de creer. Siembras la semilla orando con sinceridad y observando el fruto de paz en tu vida.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/32?lang=spa&id=p27-p28#p27",
     "bookId": "alma",
-    "chapterNum": 32
+    "chapterNum": 32,
+    "shortTitle": "¿Existe Dios? (Semilla)"
   },
   {
     "id": "dudas_historia_doctrina_iglesia",
@@ -1163,7 +1226,8 @@
     "pastoralInsight": "Tener preguntas no es pecado; el Evangelio nació de la pregunta honesta de un joven de 14 años. Lo importante es no abandonar lo que ya sabes por lo que aún no entiendes.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/ether/12?lang=spa&id=p6#p6",
     "bookId": "ether",
-    "chapterNum": 12
+    "chapterNum": 12,
+    "shortTitle": "Dudas de Historia / Internet"
   },
   {
     "id": "oraciones_frias_enemigo_no_orar",
@@ -1181,7 +1245,8 @@
     "pastoralInsight": "Cuando sientas que no quieres orar, ese es exactamente el momento en que más necesitas ponerte de rodillas. El adversario busca cortar tu línea directa con Dios.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/32?lang=spa&id=p8-p9#p8",
     "bookId": "2-ne",
-    "chapterNum": 32
+    "chapterNum": 32,
+    "shortTitle": "Oraciones Frías / Desgano"
   },
   {
     "id": "orar_con_hambre_alma_enos",
@@ -1199,7 +1264,8 @@
     "pastoralInsight": "La oración que transforma no es una lista apresurada de pedidos, sino abrir el alma vulnerable y transparente ante el Padre.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/enos/1?lang=spa&id=p4#p4",
     "bookId": "enos",
-    "chapterNum": 1
+    "chapterNum": 1,
+    "shortTitle": "Hambre en el Alma (Enós)"
   },
   {
     "id": "sequia_espiritual_hipocrita",
@@ -1217,7 +1283,8 @@
     "pastoralInsight": "Estar en la capilla sintiéndote débil no te hace hipócrita; te hace un paciente sincero en el hospital del Señor. Sé honesto con Dios y Él renovará tu fuego.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/31?lang=spa&id=p13#p13",
     "bookId": "2-ne",
-    "chapterNum": 31
+    "chapterNum": 31,
+    "shortTitle": "Sentirse Frío en la Capilla"
   },
   {
     "id": "por_que_dios_permite_maldad",
@@ -1234,7 +1301,8 @@
     "pastoralInsight": "Dios respeta el albedrío humano aun cuando los hombres eligen causar daño atroz. Su justicia es perfecta y Él recibe a los que sufren en gloria eterna.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/14?lang=spa&id=p10-p11#p10",
     "bookId": "alma",
-    "chapterNum": 14
+    "chapterNum": 14,
+    "shortTitle": "¿Por qué Sufre el Inocente?"
   },
   {
     "id": "discernir_voz_espiritu",
@@ -1252,7 +1320,8 @@
     "pastoralInsight": "La prueba es sencilla: si una idea te impulsa a hacer el bien, ser bondadoso, perdonar y acercarte a Cristo, viene de Dios. Actúa sobre ella sin dudar.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/7?lang=spa&id=p16-p17#p16",
     "bookId": "moro",
-    "chapterNum": 7
+    "chapterNum": 7,
+    "shortTitle": "Discernir la Voz del Espíritu"
   },
   {
     "id": "desgano_leer_escrituras",
@@ -1270,7 +1339,8 @@
     "pastoralInsight": "Las Escrituras no son una tarea para tachar de una lista; son el escudo cotidiano que apaga los dardos inflamados de ansiedad y tentación que el mundo te lanza.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/15?lang=spa&id=p23-p24#p23",
     "bookId": "1-ne",
-    "chapterNum": 15
+    "chapterNum": 15,
+    "shortTitle": "Desgano por las Escrituras"
   },
   {
     "id": "orar_en_todo_lugar_campo_casa",
@@ -1288,7 +1358,8 @@
     "pastoralInsight": "Dios está interesado en cada detalle de tu vida: tu trabajo, tus finanzas, tus miedos y tu hogar. Habla con Él con la confianza de un hijo amado.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/34?lang=spa&id=p18-p27#p18",
     "bookId": "alma",
-    "chapterNum": 34
+    "chapterNum": 34,
+    "shortTitle": "Orar en Todo Momento"
   },
   {
     "id": "fe_pequena_como_semilla",
@@ -1306,7 +1377,8 @@
     "pastoralInsight": "No necesitas mover montañas hoy; solo necesitas darle un lugar pequeño a la palabra en tu corazón. El Salvador se encarga de hacerla crecer.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/32?lang=spa&id=p27#p27",
     "bookId": "alma",
-    "chapterNum": 32
+    "chapterNum": 32,
+    "shortTitle": "Fe Pequeña"
   },
   {
     "id": "sabios_en_su_propia_opinion",
@@ -1323,7 +1395,8 @@
     "pastoralInsight": "El Evangelio ama el estudio y la verdad, pero la razón sin humildad espiritual se vuelve ciega. Estudia con la mente y cree con el corazón.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/9?lang=spa&id=p28-p29#p28",
     "bookId": "2-ne",
-    "chapterNum": 9
+    "chapterNum": 9,
+    "shortTitle": "Intelectualismo Soberbio"
   },
   {
     "id": "promesa_moroni_libro_mormon",
@@ -1340,7 +1413,8 @@
     "pastoralInsight": "Tu testimonio no tiene que depender del de tus padres o líderes. El Espíritu Santo puede confirmar directamente a tu corazón que Jesucristo vive y este libro es Su palabra.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/10?lang=spa&id=p4-p5#p4",
     "bookId": "moro",
-    "chapterNum": 10
+    "chapterNum": 10,
+    "shortTitle": "La Promesa de Moroni"
   },
   {
     "id": "permanecer_arbol_vida_burlas",
@@ -1357,7 +1431,8 @@
     "pastoralInsight": "La clave de Lehi y los fieles fue una sola frase: 'no les hicimos caso'. No discutas con el edificio espacioso de las redes sociales; sigue saboreando el amor de Dios.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/8?lang=spa&id=p33#p33",
     "bookId": "1-ne",
-    "chapterNum": 8
+    "chapterNum": 8,
+    "shortTitle": "Burlas del Mundo (Edificio)"
   },
   {
     "id": "pedir_senales_korihor",
@@ -1374,7 +1449,8 @@
     "pastoralInsight": "Las señales no engendran fe duradera; la fe nace de la humildad del corazón. La creación entera y el latido de tu pecho testifican de la bondad de Dios.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/30?lang=spa&id=p44#p44",
     "bookId": "alma",
-    "chapterNum": 30
+    "chapterNum": 30,
+    "shortTitle": "Exigir Señales (Korihor)"
   },
   {
     "id": "liahona_palabras_cristo",
@@ -1391,7 +1467,8 @@
     "pastoralInsight": "La guía diaria de Dios es simple pero requiere constancia. Unos minutos al día en las Escrituras operan como tu Liahona para no perder el rumbo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/37?lang=spa&id=p44-p46#p44",
     "bookId": "alma",
-    "chapterNum": 37
+    "chapterNum": 37,
+    "shortTitle": "La Liahona Espiritual"
   },
   {
     "id": "pornografia_inmoralidad_crucificate",
@@ -1411,7 +1488,8 @@
     "pastoralInsight": "Alma no condenó a su hijo Coriantón para siempre; le mostró con amor firme que debía cortar de raíz los estímulos que alimentaban la tentación y refugiarse en el Señor.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/39?lang=spa&id=p9,p11#p9",
     "bookId": "alma",
-    "chapterNum": 39
+    "chapterNum": 39,
+    "shortTitle": "Pornografía e Impureza"
   },
   {
     "id": "engano_cordel_lino_adormecer",
@@ -1430,7 +1508,8 @@
     "pastoralInsight": "Las adicciones casi nunca empiezan con una cuerda gruesa, sino con un 'cordel suave de lino' (solo una vez, nadie me ve). Reconocer la trampa a tiempo salva la vida.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/28?lang=spa&id=p21-p22#p21",
     "bookId": "2-ne",
-    "chapterNum": 28
+    "chapterNum": 28,
+    "shortTitle": "El Engaño Suave (Lino)"
   },
   {
     "id": "fortificar_puntos_debiles_moroni",
@@ -1448,7 +1527,8 @@
     "pastoralInsight": "No esperes a que la tentación golpee para decidir qué harás. Pon filtros, cambia de hábitos, duerme temprano y establece barreras claras cuando estás fuerte.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/48?lang=spa&id=p8-p9#p8",
     "bookId": "alma",
-    "chapterNum": 48
+    "chapterNum": 48,
+    "shortTitle": "Fortificar Puntos Débiles"
   },
   {
     "id": "roca_cristo_fundamento_helaman",
@@ -1466,7 +1546,8 @@
     "pastoralInsight": "Las tormentas vendrán a todos, pero si tus pies están anclados al Salvador a través de convenios diarios, ninguna adicción ni torbellino podrá derribarte.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/hel/5?lang=spa&id=p12#p12",
     "bookId": "hel",
-    "chapterNum": 5
+    "chapterNum": 5,
+    "shortTitle": "La Roca de Cristo"
   },
   {
     "id": "cuidar_templo_cuerpo_salud",
@@ -1478,6 +1559,15 @@
       "cuerpo templo",
       "alcohol",
       "drogas",
+      "sustancias",
+      "alcohol",
+      "alcoholico",
+      "alcoholismo",
+      "bebida",
+      "borracho",
+      "vicio",
+      "drogas",
+      "tabaco",
       "sustancias"
     ],
     "scriptureRef": "Alma 46:40",
@@ -1485,7 +1575,8 @@
     "pastoralInsight": "Dios proveyó cosas saludables para nuestro sustento y nos mandó cuidar el cuerpo. Mantener el templo corporal libre de sustancias destructivas despeja la mente para recibir revelación.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/46?lang=spa&id=p40#p40",
     "bookId": "alma",
-    "chapterNum": 46
+    "chapterNum": 46,
+    "shortTitle": "Alcohol, Drogas y Salud"
   },
   {
     "id": "redimido_del_abismo_cambio",
@@ -1503,7 +1594,8 @@
     "pastoralInsight": "Alma hijo era el mayor perseguidor de la Iglesia de su época. Si Dios pudo transformar su vida, puede transformar la tuya o la de cualquier ser querido.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/27?lang=spa&id=p28#p28",
     "bookId": "mosiah",
-    "chapterNum": 27
+    "chapterNum": 27,
+    "shortTitle": "Rescate del Abismo"
   },
   {
     "id": "perezosos_facilidad_senda",
@@ -1521,7 +1613,8 @@
     "pastoralInsight": "La mayoría de las caídas no ocurren por rebelión violenta, sino por dejar de orar y leer por pura pereza. Mantén tus hábitos espirituales vivos hoy.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/37?lang=spa&id=p46#p46",
     "bookId": "alma",
-    "chapterNum": 37
+    "chapterNum": 37,
+    "shortTitle": "Pereza Espiritual"
   },
   {
     "id": "cortar_ambientes_armas_guerra",
@@ -1539,7 +1632,8 @@
     "pastoralInsight": "Si tienes que borrar una aplicación, cambiar de número, botar objetos o alejarte de un lugar, hazlo hoy. Tu paz eterna vale más que cualquier apego terrenal.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/24?lang=spa&id=p17-p18#p17",
     "bookId": "alma",
-    "chapterNum": 24
+    "chapterNum": 24,
+    "shortTitle": "Cortar Detonantes de Raíz"
   },
   {
     "id": "velar_y_orar_siempre_redes",
@@ -1556,7 +1650,8 @@
     "pastoralInsight": "La oración no es solo para pedir perdón tras el error; es el radar que te avisa del peligro antes de que caigas en él.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/18?lang=spa&id=p18#p18",
     "bookId": "3-ne",
-    "chapterNum": 18
+    "chapterNum": 18,
+    "shortTitle": "Velar y Orar contra Redes"
   },
   {
     "id": "romper_cadenas_saturnino",
@@ -1574,7 +1669,8 @@
     "pastoralInsight": "El Padre te llama a despertar con dignidad. No naciste para ser esclavo de una pantalla ni de un vicio; naciste para reinar en rectitud.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/1?lang=spa&id=p23#p23",
     "bookId": "2-ne",
-    "chapterNum": 1
+    "chapterNum": 1,
+    "shortTitle": "Romper las Cadenas"
   },
   {
     "id": "consulta_al_senor_todos_hechos",
@@ -1593,7 +1689,8 @@
     "pastoralInsight": "No tomes decisiones importantes a solas con tu ansiedad. Presenta tus opciones en oración, pide confirmación y Él dirigirá tus pasos para bien.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/37?lang=spa&id=p37#p37",
     "bookId": "alma",
-    "chapterNum": 37
+    "chapterNum": 37,
+    "shortTitle": "Elegir Empleo / Carrera"
   },
   {
     "id": "crisis_economica_dios_provee",
@@ -1612,7 +1709,8 @@
     "pastoralInsight": "Si estás esforzándote por ser justo, Dios no te abandonará en la escasez. Él proveyó alimento en el desierto y proveerá los medios para tu familia.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/17?lang=spa&id=p3#p3",
     "bookId": "1-ne",
-    "chapterNum": 17
+    "chapterNum": 17,
+    "shortTitle": "Desempleo y Sustento"
   },
   {
     "id": "diezmo_ventanas_de_cielos",
@@ -1630,7 +1728,8 @@
     "pastoralInsight": "El diezmo no se paga con dinero, sino con fe. Es la ley de la prosperidad espiritual que asegura la protección celestial sobre tu hogar.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/24?lang=spa&id=p10#p10",
     "bookId": "3-ne",
-    "chapterNum": 24
+    "chapterNum": 24,
+    "shortTitle": "Pagar el Diezmo en Crisis"
   },
   {
     "id": "guiado_por_espiritu_sin_saber",
@@ -1648,7 +1747,8 @@
     "pastoralInsight": "La revelación casi nunca llega en un mapa completo; llega como una linterna que alumbra solo el siguiente paso. Confía y camina.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/4?lang=spa&id=p6#p6",
     "bookId": "1-ne",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "Dar el Paso a Ciegas"
   },
   {
     "id": "riquezas_para_hacer_el_bien",
@@ -1666,7 +1766,8 @@
     "pastoralInsight": "Tener bienes no es pecado si el corazón está puesto en bendecir al necesitado y no en el orgullo terrenal.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/jacob/2?lang=spa&id=p18-p19#p18",
     "bookId": "jacob",
-    "chapterNum": 2
+    "chapterNum": 2,
+    "shortTitle": "Riquezas para el Bien"
   },
   {
     "id": "integridad_deudas_devolver",
@@ -1684,7 +1785,8 @@
     "pastoralInsight": "La integridad en tus tratos económicos es testimonio puro del Evangelio. Un discípulo de Cristo honra su palabra aun a costa de su propia comodidad.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p28#p28",
     "bookId": "mosiah",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "Honradez y Devolver Deudas"
   },
   {
     "id": "compartir_con_pobre_aunque_poco",
@@ -1702,7 +1804,8 @@
     "pastoralInsight": "El Señor bendice las manos que dan. No esperes a tener abundancia para ser generoso; la ofrenda del que tiene poco tiene un valor incalculable en el cielo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p21-p22#p21",
     "bookId": "mosiah",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "Generosidad con el Pobre"
   },
   {
     "id": "planes_frustrados_consagrar",
@@ -1719,7 +1822,8 @@
     "pastoralInsight": "A veces una puerta cerrada es la mayor bendición de protección que Dios te da. Confía en Su visión panorámica.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/2?lang=spa&id=p2#p2",
     "bookId": "2-ne",
-    "chapterNum": 2
+    "chapterNum": 2,
+    "shortTitle": "Cuando los Planes Fracasan"
   },
   {
     "id": "palabras_cristo_haran_saber",
@@ -1736,7 +1840,8 @@
     "pastoralInsight": "Cuando no sepas qué decisión tomar, sumérgete en las Escrituras buscando principios. El Espíritu te dará la claridad exacta que necesitas.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/32?lang=spa&id=p3,p5#p3",
     "bookId": "2-ne",
-    "chapterNum": 32
+    "chapterNum": 32,
+    "shortTitle": "Dirección por la Palabra"
   },
   {
     "id": "no_tengo_pero_si_tuviera_daria",
@@ -1753,7 +1858,8 @@
     "pastoralInsight": "Dios mira el deseo íntimo de tu corazón. Si tus intenciones son puras, Él acepta tu deseo como si hubieses dado en abundancia.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p24#p24",
     "bookId": "mosiah",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "Deseo del Corazón sin Recursos"
   },
   {
     "id": "trabajar_propias_manos_ocio",
@@ -1771,7 +1877,8 @@
     "pastoralInsight": "El trabajo honesto dignifica el alma y es el cimiento de la autosuficiencia espiritual y temporal. Dios bendice el sudor honesto.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/27?lang=spa&id=p3-p4#p3",
     "bookId": "mosiah",
-    "chapterNum": 27
+    "chapterNum": 27,
+    "shortTitle": "Laboriosidad vs Ocio"
   },
   {
     "id": "gratitud_continua_misericordias",
@@ -1788,7 +1895,8 @@
     "pastoralInsight": "Un corazón agradecido es inmune al desánimo. Empezar el día agradeciendo 3 cosas sencillas cambia por completo la perspectiva ante el futuro.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/34?lang=spa&id=p38#p38",
     "bookId": "alma",
-    "chapterNum": 34
+    "chapterNum": 34,
+    "shortTitle": "Gratitud Diaria"
   },
   {
     "id": "significado_santa_cena_semanal",
@@ -1807,7 +1915,8 @@
     "pastoralInsight": "La Santa Cena no es para personas perfectas, sino para personas que están arrepintiéndose. Cada domingo es un nuevo comienzo donde tu bautismo se renueva por completo.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/4?lang=spa&id=p3#p3",
     "bookId": "moro",
-    "chapterNum": 4
+    "chapterNum": 4,
+    "shortTitle": "La Santa Cena Semanal"
   },
   {
     "id": "por_que_asistir_capilla_reunirse",
@@ -1825,7 +1934,8 @@
     "pastoralInsight": "No vamos a la capilla porque todos sean perfectos; vamos para recordar a Cristo juntos, tomar la Santa Cena y cuidar del bienestar de nuestras almas.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/6?lang=spa&id=p5-p6#p5",
     "bookId": "moro",
-    "chapterNum": 6
+    "chapterNum": 6,
+    "shortTitle": "¿Por qué ir a la Capilla?"
   },
   {
     "id": "convenio_bautismal_aguas_mormon",
@@ -1843,7 +1953,8 @@
     "pastoralInsight": "El bautismo es sellar tu pertenencia a la familia de Dios. Haces la promesa de servirle y Él te promete Su Espíritu como compañero constante.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p8-p10#p8",
     "bookId": "mosiah",
-    "chapterNum": 18
+    "chapterNum": 18,
+    "shortTitle": "El Convenio Bautismal"
   },
   {
     "id": "don_espiritu_santo_lengua_angeles",
@@ -1860,7 +1971,8 @@
     "pastoralInsight": "El Espíritu Santo no es solo una voz tenue; es un fuego purificador que limpia tu corazón y te da palabras de consuelo para ministrar a otros.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/31?lang=spa&id=p13-p14#p13",
     "bookId": "2-ne",
-    "chapterNum": 31
+    "chapterNum": 31,
+    "shortTitle": "Don del Espíritu Santo"
   },
   {
     "id": "templo_casa_del_senor_nefi",
@@ -1878,7 +1990,8 @@
     "pastoralInsight": "Aun en medio del desierto y con pocos recursos, el pueblo de Nefi priorizó edificar un templo. En el templo encontramos refugio del ruido del mundo y poder celestial.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/5?lang=spa&id=p16#p16",
     "bookId": "2-ne",
-    "chapterNum": 5
+    "chapterNum": 5,
+    "shortTitle": "El Templo y Adoración"
   },
   {
     "id": "poder_espiritual_del_ayuno",
@@ -1896,7 +2009,8 @@
     "pastoralInsight": "El ayuno con propósito abre las compuertas de la revelación y rompe las ataduras de la duda. Cuando tengas una necesidad urgente, une tu oración al ayuno.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/17?lang=spa&id=p2-p3#p2",
     "bookId": "alma",
-    "chapterNum": 17
+    "chapterNum": 17,
+    "shortTitle": "Poder del Ayuno Sincero"
   },
   {
     "id": "sostener_lideres_servicio_humilde",
@@ -1914,7 +2028,8 @@
     "pastoralInsight": "En la Iglesia no hay clero pagado; nuestros líderes son vecinos y hermanos que sirven con sacrificio. Sostenerlos con nuestras oraciones fortalece al barrio entero.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/2?lang=spa&id=p11-p14#p11",
     "bookId": "mosiah",
-    "chapterNum": 2
+    "chapterNum": 2,
+    "shortTitle": "Sostener a los Líderes"
   },
   {
     "id": "aplicar_escrituras_hogar",
@@ -1931,7 +2046,8 @@
     "pastoralInsight": "El Libro de Mormón no fue escrito para los antiguos; fue escrito para nuestros días. Cuando lo lees preguntando '¿cómo aplica esto a mi problema de hoy?', cobra vida.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/19?lang=spa&id=p23#p23",
     "bookId": "1-ne",
-    "chapterNum": 19
+    "chapterNum": 19,
+    "shortTitle": "Aplicar las Escrituras"
   },
   {
     "id": "dia_de_reposo_reverencia",
@@ -1949,7 +2065,8 @@
     "pastoralInsight": "El domingo es un oasis en el desierto de la semana. No es un día de prohibiciones, sino una oportunidad de recargar el espíritu y reconectar con la familia y con Dios.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p23,p25#p23",
     "bookId": "mosiah",
-    "chapterNum": 18
+    "chapterNum": 18,
+    "shortTitle": "El Día de Reposo"
   },
   {
     "id": "ministrar_uno_por_uno_cristo",
@@ -1967,7 +2084,8 @@
     "pastoralInsight": "Jesús nunca ministró a bulto; se detuvo a mirar a los ojos y bendecir a cada uno por su nombre. Ese es el estándar de oro de nuestra ministración.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/17?lang=spa&id=p21#p21",
     "bookId": "3-ne",
-    "chapterNum": 17
+    "chapterNum": 17,
+    "shortTitle": "Ministrar Uno por Uno"
   },
   {
     "id": "perseverar_hasta_el_fin_esperanza",
@@ -1984,7 +2102,8 @@
     "pastoralInsight": "Perseverar no es apretar los dientes con amargura hasta morir; es caminar con los ojos puestos en Cristo, con una sonrisa de esperanza y amor por los demás.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/31?lang=spa&id=p20#p20",
     "bookId": "2-ne",
-    "chapterNum": 31
+    "chapterNum": 31,
+    "shortTitle": "Perseverar hasta el Fin"
   },
   {
     "id": "caridad_amor_puro_permanece",
@@ -2001,7 +2120,8 @@
     "pastoralInsight": "La caridad no es algo que fabricamos solos; es un don que se ruega de rodillas al Padre. Cuando ministres, pide primero ser lleno de ese amor puro por esa persona.",
     "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/7?lang=spa&id=p47-p48#p47",
     "bookId": "moro",
-    "chapterNum": 7
+    "chapterNum": 7,
+    "shortTitle": "La Caridad Pura de Cristo"
   }
 ];
     const MORMON_BOOKS = [
@@ -2051,7 +2171,8 @@
             "pastoralInsight": "Tus padres fueron personas imperfectas enfrentando sus propias tormentas. Pedirle al Señor que enternezca tu corazón te liberará del peso amargo del reproche.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/2?lang=spa&id=p16#p16",
             "bookId": "1-ne",
-            "chapterNum": 2
+            "chapterNum": 2,
+            "shortTitle": "Perdonar a los Padres"
           }
         ]
       },
@@ -2093,7 +2214,8 @@
             "pastoralInsight": "La revelación casi nunca llega en un mapa completo; llega como una linterna que alumbra solo el siguiente paso. Confía y camina.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/4?lang=spa&id=p6#p6",
             "bookId": "1-ne",
-            "chapterNum": 4
+            "chapterNum": 4,
+            "shortTitle": "Dar el Paso a Ciegas"
           }
         ]
       },
@@ -2157,7 +2279,8 @@
             "pastoralInsight": "La clave de Lehi y los fieles fue una sola frase: 'no les hicimos caso'. No discutas con el edificio espacioso de las redes sociales; sigue saboreando el amor de Dios.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/8?lang=spa&id=p33#p33",
             "bookId": "1-ne",
-            "chapterNum": 8
+            "chapterNum": 8,
+            "shortTitle": "Burlas del Mundo (Edificio)"
           }
         ]
       },
@@ -2256,7 +2379,8 @@
             "pastoralInsight": "Las Escrituras no son una tarea para tachar de una lista; son el escudo cotidiano que apaga los dardos inflamados de ansiedad y tentación que el mundo te lanza.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/15?lang=spa&id=p23-p24#p23",
             "bookId": "1-ne",
-            "chapterNum": 15
+            "chapterNum": 15,
+            "shortTitle": "Desgano por las Escrituras"
           }
         ]
       },
@@ -2302,7 +2426,8 @@
             "pastoralInsight": "Si estás esforzándote por ser justo, Dios no te abandonará en la escasez. Él proveyó alimento en el desierto y proveerá los medios para tu familia.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/17?lang=spa&id=p3#p3",
             "bookId": "1-ne",
-            "chapterNum": 17
+            "chapterNum": 17,
+            "shortTitle": "Desempleo y Sustento"
           }
         ]
       },
@@ -2344,7 +2469,8 @@
             "pastoralInsight": "El Libro de Mormón no fue escrito para los antiguos; fue escrito para nuestros días. Cuando lo lees preguntando '¿cómo aplica esto a mi problema de hoy?', cobra vida.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/19?lang=spa&id=p23#p23",
             "bookId": "1-ne",
-            "chapterNum": 19
+            "chapterNum": 19,
+            "shortTitle": "Aplicar las Escrituras"
           }
         ]
       },
@@ -2387,7 +2513,8 @@
             "pastoralInsight": "Dios jamás nos olvida. Las marcas de los clavos en las manos del Salvador son el recordatorio eterno de que tu nombre está grabado indeleblemente en Su corazón.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/21?lang=spa&id=p14-p16#p14",
             "bookId": "1-ne",
-            "chapterNum": 21
+            "chapterNum": 21,
+            "shortTitle": "Soledad y Abandono"
           }
         ]
       },
@@ -2439,7 +2566,8 @@
             "pastoralInsight": "El Padre te llama a despertar con dignidad. No naciste para ser esclavo de una pantalla ni de un vicio; naciste para reinar en rectitud.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/1?lang=spa&id=p23#p23",
             "bookId": "2-ne",
-            "chapterNum": 1
+            "chapterNum": 1,
+            "shortTitle": "Romper las Cadenas"
           }
         ]
       },
@@ -2472,7 +2600,8 @@
             "pastoralInsight": "Dios no diseñó esta vida para que vivamos en miseria o culpa constante; el objetivo supremo del Plan de Salvación es el gozo verdadero en Cristo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/2?lang=spa&id=p25#p25",
             "bookId": "2-ne",
-            "chapterNum": 2
+            "chapterNum": 2,
+            "shortTitle": "El Propósito: Gozo"
           },
           {
             "id": "bendicion_sin_sanidad_inmediata",
@@ -2490,7 +2619,8 @@
             "pastoralInsight": "A veces la respuesta de Dios no es quitar el cáliz al instante, sino consagrar el dolor para refinar nuestra alma de forma santa. Su poder sigue obrando en ti.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/2?lang=spa&id=p1-p2#p1",
             "bookId": "2-ne",
-            "chapterNum": 2
+            "chapterNum": 2,
+            "shortTitle": "Cuando no Hay Sanidad"
           },
           {
             "id": "planes_frustrados_consagrar",
@@ -2507,7 +2637,8 @@
             "pastoralInsight": "A veces una puerta cerrada es la mayor bendición de protección que Dios te da. Confía en Su visión panorámica.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/2?lang=spa&id=p2#p2",
             "bookId": "2-ne",
-            "chapterNum": 2
+            "chapterNum": 2,
+            "shortTitle": "Cuando los Planes Fracasan"
           }
         ]
       },
@@ -2553,7 +2684,8 @@
             "pastoralInsight": "Nefi, un profeta gigante, también experimentó días oscuros de llanto y abatimiento. La salida no es fingir estar bien, sino desahogar el alma y recordar en Quién hemos confiado.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/4?lang=spa&id=p16-p19,p26-p28#p16",
             "bookId": "2-ne",
-            "chapterNum": 4
+            "chapterNum": 4,
+            "shortTitle": "Depresión y Desánimo"
           },
           {
             "id": "autoestima_inutil_desprecio",
@@ -2573,7 +2705,8 @@
             "pastoralInsight": "Tu valor no se mide por tus debilidades ni por la opinión humana, sino por el precio infinito que el Salvador pagó por ti en Getsemaní.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/4?lang=spa&id=p34-p35#p34",
             "bookId": "2-ne",
-            "chapterNum": 4
+            "chapterNum": 4,
+            "shortTitle": "Baja Autoestima"
           }
         ]
       },
@@ -2604,7 +2737,8 @@
             "pastoralInsight": "Aun en medio del desierto y con pocos recursos, el pueblo de Nefi priorizó edificar un templo. En el templo encontramos refugio del ruido del mundo y poder celestial.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/5?lang=spa&id=p16#p16",
             "bookId": "2-ne",
-            "chapterNum": 5
+            "chapterNum": 5,
+            "shortTitle": "El Templo y Adoración"
           }
         ]
       },
@@ -2657,7 +2791,8 @@
             "pastoralInsight": "El dolor del rechazo duele en lo profundo, pero el Señor nos pide que no dejemos que las opiniones humanas definan nuestra paz. Dios aprueba tu caminar honesto.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/8?lang=spa&id=p7#p7",
             "bookId": "2-ne",
-            "chapterNum": 8
+            "chapterNum": 8,
+            "shortTitle": "Rechazo y Burlas"
           }
         ]
       },
@@ -2687,7 +2822,8 @@
             "pastoralInsight": "El Evangelio ama el estudio y la verdad, pero la razón sin humildad espiritual se vuelve ciega. Estudia con la mente y cree con el corazón.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/9?lang=spa&id=p28-p29#p28",
             "bookId": "2-ne",
-            "chapterNum": 9
+            "chapterNum": 9,
+            "shortTitle": "Intelectualismo Soberbio"
           }
         ]
       },
@@ -2850,7 +2986,8 @@
             "pastoralInsight": "El miedo anticipa desgracias que el Señor promete disipar con Su presencia. Ayúdale a enfocar su energía solo en el día de hoy con la certeza de que Dios ya está en su mañana.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/22?lang=spa&id=p2#p2",
             "bookId": "2-ne",
-            "chapterNum": 22
+            "chapterNum": 22,
+            "shortTitle": "Miedo al Futuro"
           }
         ]
       },
@@ -2902,7 +3039,8 @@
             "pastoralInsight": "Hacer 'cuanto podamos' no significa alcanzar la perfección por cuenta propia, sino dar nuestro sincero empeño y dejar que la gracia de Cristo haga el resto.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/25?lang=spa&id=p23#p23",
             "bookId": "2-ne",
-            "chapterNum": 25
+            "chapterNum": 25,
+            "shortTitle": "Gracia Suficiente"
           }
         ]
       },
@@ -2954,7 +3092,8 @@
             "pastoralInsight": "El amor ministerial no implica dejar que otros destruyan tu testimonio o tu integridad. Saber decir 'no' y elegir amigos que te eleven es un mandamiento sabio.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/28?lang=spa&id=p14-p16#p14",
             "bookId": "2-ne",
-            "chapterNum": 28
+            "chapterNum": 28,
+            "shortTitle": "Amistades Tóxicas"
           },
           {
             "id": "engano_cordel_lino_adormecer",
@@ -2973,7 +3112,8 @@
             "pastoralInsight": "Las adicciones casi nunca empiezan con una cuerda gruesa, sino con un 'cordel suave de lino' (solo una vez, nadie me ve). Reconocer la trampa a tiempo salva la vida.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/28?lang=spa&id=p21-p22#p21",
             "bookId": "2-ne",
-            "chapterNum": 28
+            "chapterNum": 28,
+            "shortTitle": "El Engaño Suave (Lino)"
           }
         ]
       },
@@ -3025,7 +3165,8 @@
             "pastoralInsight": "Estar en la capilla sintiéndote débil no te hace hipócrita; te hace un paciente sincero en el hospital del Señor. Sé honesto con Dios y Él renovará tu fuego.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/31?lang=spa&id=p13#p13",
             "bookId": "2-ne",
-            "chapterNum": 31
+            "chapterNum": 31,
+            "shortTitle": "Sentirse Frío en la Capilla"
           },
           {
             "id": "don_espiritu_santo_lengua_angeles",
@@ -3042,7 +3183,8 @@
             "pastoralInsight": "El Espíritu Santo no es solo una voz tenue; es un fuego purificador que limpia tu corazón y te da palabras de consuelo para ministrar a otros.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/31?lang=spa&id=p13-p14#p13",
             "bookId": "2-ne",
-            "chapterNum": 31
+            "chapterNum": 31,
+            "shortTitle": "Don del Espíritu Santo"
           },
           {
             "id": "perseverar_hasta_el_fin_esperanza",
@@ -3059,7 +3201,8 @@
             "pastoralInsight": "Perseverar no es apretar los dientes con amargura hasta morir; es caminar con los ojos puestos en Cristo, con una sonrisa de esperanza y amor por los demás.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/31?lang=spa&id=p20#p20",
             "bookId": "2-ne",
-            "chapterNum": 31
+            "chapterNum": 31,
+            "shortTitle": "Perseverar hasta el Fin"
           }
         ]
       },
@@ -3090,7 +3233,8 @@
             "pastoralInsight": "Cuando sientas que no quieres orar, ese es exactamente el momento en que más necesitas ponerte de rodillas. El adversario busca cortar tu línea directa con Dios.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/32?lang=spa&id=p8-p9#p8",
             "bookId": "2-ne",
-            "chapterNum": 32
+            "chapterNum": 32,
+            "shortTitle": "Oraciones Frías / Desgano"
           },
           {
             "id": "palabras_cristo_haran_saber",
@@ -3107,7 +3251,8 @@
             "pastoralInsight": "Cuando no sepas qué decisión tomar, sumérgete en las Escrituras buscando principios. El Espíritu te dará la claridad exacta que necesitas.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/32?lang=spa&id=p3,p5#p3",
             "bookId": "2-ne",
-            "chapterNum": 32
+            "chapterNum": 32,
+            "shortTitle": "Dirección por la Palabra"
           }
         ]
       },
@@ -3172,7 +3317,8 @@
             "pastoralInsight": "Las posesiones terrenales vienen y van, pero tu valor y tus tesoros en el cielo están intactos. Dios te dará la sabiduría y la fuerza para levantarte de nuevo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/jacob/2?lang=spa&id=p18-p19#p18",
             "bookId": "jacob",
-            "chapterNum": 2
+            "chapterNum": 2,
+            "shortTitle": "Pérdida Material / Ruina"
           },
           {
             "id": "matrimonio_corazones_quebrantados",
@@ -3192,7 +3338,8 @@
             "pastoralInsight": "El Señor ama y defiende la ternura en el hogar. Sanar un matrimonio exige verdad absoluta, abandono de egoísmos y reconstrucción de la confianza con hechos concretos.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/jacob/2?lang=spa&id=p31-p35#p31",
             "bookId": "jacob",
-            "chapterNum": 2
+            "chapterNum": 2,
+            "shortTitle": "Matrimonio en Crisis"
           },
           {
             "id": "riquezas_para_hacer_el_bien",
@@ -3210,7 +3357,8 @@
             "pastoralInsight": "Tener bienes no es pecado si el corazón está puesto en bendecir al necesitado y no en el orgullo terrenal.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/jacob/2?lang=spa&id=p18-p19#p18",
             "bookId": "jacob",
-            "chapterNum": 2
+            "chapterNum": 2,
+            "shortTitle": "Riquezas para el Bien"
           }
         ]
       },
@@ -3240,7 +3388,8 @@
             "pastoralInsight": "El mayor legado que un padre o madre puede dejar a sus hijos es ver cómo se aman, se respetan y se perdonan mutuamente en el día a día.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/jacob/3?lang=spa&id=p7#p7",
             "bookId": "jacob",
-            "chapterNum": 3
+            "chapterNum": 3,
+            "shortTitle": "Ternura Conyugal"
           }
         ]
       },
@@ -3328,7 +3477,8 @@
             "pastoralInsight": "Si Dios ya perdonó y olvidó tu pecado, insistir en seguir flagelándote es dudar de la suficiencia del sacrificio de Su Hijo. Deja que tu culpa sea desterrada hoy.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/enos/1?lang=spa&id=p5-p8#p5",
             "bookId": "enos",
-            "chapterNum": 1
+            "chapterNum": 1,
+            "shortTitle": "Perdonarse a sí Mismo"
           },
           {
             "id": "orar_con_hambre_alma_enos",
@@ -3346,7 +3496,8 @@
             "pastoralInsight": "La oración que transforma no es una lista apresurada de pedidos, sino abrir el alma vulnerable y transparente ante el Padre.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/enos/1?lang=spa&id=p4#p4",
             "bookId": "enos",
-            "chapterNum": 1
+            "chapterNum": 1,
+            "shortTitle": "Hambre en el Alma (Enós)"
           }
         ]
       }
@@ -3464,7 +3615,8 @@
             "pastoralInsight": "La cura más rápida para la autocompasión o el aislamiento es salir a servir a alguien que tiene una carga mayor. Al bendecir a otros, Dios te sana a ti.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/2?lang=spa&id=p17#p17",
             "bookId": "mosiah",
-            "chapterNum": 2
+            "chapterNum": 2,
+            "shortTitle": "Servicio Desinteresado"
           },
           {
             "id": "sostener_lideres_servicio_humilde",
@@ -3482,7 +3634,8 @@
             "pastoralInsight": "En la Iglesia no hay clero pagado; nuestros líderes son vecinos y hermanos que sirven con sacrificio. Sostenerlos con nuestras oraciones fortalece al barrio entero.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/2?lang=spa&id=p11-p14#p11",
             "bookId": "mosiah",
-            "chapterNum": 2
+            "chapterNum": 2,
+            "shortTitle": "Sostener a los Líderes"
           }
         ]
       },
@@ -3528,7 +3681,8 @@
             "pastoralInsight": "El Evangelio no te pide que colapses por auto-exigencia. El Señor pide prudencia, ritmo sostenible y descanso mental. Validar su fatiga es el primer paso del consuelo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p27#p27",
             "bookId": "mosiah",
-            "chapterNum": 4
+            "chapterNum": 4,
+            "shortTitle": "Agotamiento / Burnout"
           },
           {
             "id": "paz_conciencia_gozo",
@@ -3548,7 +3702,8 @@
             "pastoralInsight": "La paz de conciencia no es ausencia de problemas externos, sino la dulce calma espiritual que Jesucristo entrega al corazón cuando descansamos en Su misericordia.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p3#p3",
             "bookId": "mosiah",
-            "chapterNum": 4
+            "chapterNum": 4,
+            "shortTitle": "Paz de Conciencia"
           },
           {
             "id": "ensenar_hijos_sin_renas",
@@ -3566,7 +3721,8 @@
             "pastoralInsight": "Enseñar a los hijos no es imponer mediante el miedo, sino modelar la rectitud y enseñarles a amarse mutuamente bajo el espíritu de Cristo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p14-p15#p14",
             "bookId": "mosiah",
-            "chapterNum": 4
+            "chapterNum": 4,
+            "shortTitle": "Educar sin Gritos"
           },
           {
             "id": "integridad_deudas_devolver",
@@ -3584,7 +3740,8 @@
             "pastoralInsight": "La integridad en tus tratos económicos es testimonio puro del Evangelio. Un discípulo de Cristo honra su palabra aun a costa de su propia comodidad.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p28#p28",
             "bookId": "mosiah",
-            "chapterNum": 4
+            "chapterNum": 4,
+            "shortTitle": "Honradez y Devolver Deudas"
           },
           {
             "id": "compartir_con_pobre_aunque_poco",
@@ -3602,7 +3759,8 @@
             "pastoralInsight": "El Señor bendice las manos que dan. No esperes a tener abundancia para ser generoso; la ofrenda del que tiene poco tiene un valor incalculable en el cielo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p21-p22#p21",
             "bookId": "mosiah",
-            "chapterNum": 4
+            "chapterNum": 4,
+            "shortTitle": "Generosidad con el Pobre"
           },
           {
             "id": "no_tengo_pero_si_tuviera_daria",
@@ -3619,7 +3777,8 @@
             "pastoralInsight": "Dios mira el deseo íntimo de tu corazón. Si tus intenciones son puras, Él acepta tu deseo como si hubieses dado en abundancia.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=spa&id=p24#p24",
             "bookId": "mosiah",
-            "chapterNum": 4
+            "chapterNum": 4,
+            "shortTitle": "Deseo del Corazón sin Recursos"
           }
         ]
       },
@@ -3650,7 +3809,8 @@
             "pastoralInsight": "El Evangelio no es solo modificación de conducta externa; es una re-creación interna de tus afectos. Pídele al Señor ese potente cambio hoy.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/5?lang=spa&id=p2#p2",
             "bookId": "mosiah",
-            "chapterNum": 5
+            "chapterNum": 5,
+            "shortTitle": "Cambio de Corazón"
           }
         ]
       },
@@ -3790,7 +3950,8 @@
             "pastoralInsight": "La tumba no es el final de la historia. El dolor de la separación es temporal; la reunión venidera será eterna y llena de gozo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/16?lang=spa&id=p7-p8#p7",
             "bookId": "mosiah",
-            "chapterNum": 16
+            "chapterNum": 16,
+            "shortTitle": "Victoria sobre la Tumba"
           }
         ]
       },
@@ -3833,7 +3994,8 @@
             "pastoralInsight": "Tu servicio silencioso al pie de la cama es una de las expresiones más sagradas del convenio bautismal. Dios ve cada noche de desvelo y te sostendrá.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p8-p9#p8",
             "bookId": "mosiah",
-            "chapterNum": 18
+            "chapterNum": 18,
+            "shortTitle": "Fatiga del Cuidador"
           },
           {
             "id": "llorar_con_los_que_lloran",
@@ -3852,7 +4014,8 @@
             "pastoralInsight": "No necesitas tener sermones preparados. Muchas veces el acto de ministración más poderoso es sentarse en silencio al lado de la persona y dejar que llore.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p9#p9",
             "bookId": "mosiah",
-            "chapterNum": 18
+            "chapterNum": 18,
+            "shortTitle": "Llorar con el Afligido"
           },
           {
             "id": "unidad_corazones_entrelazados",
@@ -3870,7 +4033,8 @@
             "pastoralInsight": "La iglesia florece cuando no hay bandos ni favoritismos, sino un solo corazón entrelazado para socorrer al que está caído.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p21#p21",
             "bookId": "mosiah",
-            "chapterNum": 18
+            "chapterNum": 18,
+            "shortTitle": "Unidad de Corazón"
           },
           {
             "id": "convenio_bautismal_aguas_mormon",
@@ -3888,7 +4052,8 @@
             "pastoralInsight": "El bautismo es sellar tu pertenencia a la familia de Dios. Haces la promesa de servirle y Él te promete Su Espíritu como compañero constante.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p8-p10#p8",
             "bookId": "mosiah",
-            "chapterNum": 18
+            "chapterNum": 18,
+            "shortTitle": "El Convenio Bautismal"
           },
           {
             "id": "dia_de_reposo_reverencia",
@@ -3906,7 +4071,8 @@
             "pastoralInsight": "El domingo es un oasis en el desierto de la semana. No es un día de prohibiciones, sino una oportunidad de recargar el espíritu y reconectar con la familia y con Dios.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/18?lang=spa&id=p23,p25#p23",
             "bookId": "mosiah",
-            "chapterNum": 18
+            "chapterNum": 18,
+            "shortTitle": "El Día de Reposo"
           }
         ]
       },
@@ -3999,7 +4165,8 @@
             "pastoralInsight": "El Señor a veces no quita la prueba de inmediato, pero fortalece las espaldas de manera que la carga se vuelve ligera. Pregúntale: '¿Cómo podemos orar hoy para que sientas ese sostén?'",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/24?lang=spa&id=p14-p15#p14",
             "bookId": "mosiah",
-            "chapterNum": 24
+            "chapterNum": 24,
+            "shortTitle": "Cargas Pesadas"
           }
         ]
       },
@@ -4044,7 +4211,8 @@
             "pastoralInsight": "No existe pecado que sobrepase el alcance infinito de la Expiación de Jesucristo si hay arrepentimiento sincero. La palabra de Dios dice 'cuantas veces se arrepienta, le perdonaré'.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/26?lang=spa&id=p30#p30",
             "bookId": "mosiah",
-            "chapterNum": 26
+            "chapterNum": 26,
+            "shortTitle": "¿Pecado Irredimible?"
           },
           {
             "id": "perdonar_traicion_grave",
@@ -4063,7 +4231,8 @@
             "pastoralInsight": "Perdonar no es justificar la maldad del otro ni exponerte a más daño; es soltar el veneno del rencor para que tu propia alma no quede envenenada.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/26?lang=spa&id=p31#p31",
             "bookId": "mosiah",
-            "chapterNum": 26
+            "chapterNum": 26,
+            "shortTitle": "Perdonar Traición Grave"
           }
         ]
       },
@@ -4095,7 +4264,8 @@
             "pastoralInsight": "Confesar no te debilita; te quita la máscara y te devuelve el poder. Al abandonar el pecado y ser transparente, el Espíritu regresa con plenitud.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/27?lang=spa&id=p35#p35",
             "bookId": "mosiah",
-            "chapterNum": 27
+            "chapterNum": 27,
+            "shortTitle": "Confesar y Abandonar"
           },
           {
             "id": "hijos_rebeldes_alejados",
@@ -4113,7 +4283,8 @@
             "pastoralInsight": "Las oraciones de un padre y una madre con fe tienen un alcance sagrado. Nunca dejes de orar con fe por ese hijo; el Señor no lo ha perdido de vista.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/27?lang=spa&id=p14#p14",
             "bookId": "mosiah",
-            "chapterNum": 27
+            "chapterNum": 27,
+            "shortTitle": "Hijos Descarriados"
           },
           {
             "id": "redimido_del_abismo_cambio",
@@ -4131,7 +4302,8 @@
             "pastoralInsight": "Alma hijo era el mayor perseguidor de la Iglesia de su época. Si Dios pudo transformar su vida, puede transformar la tuya o la de cualquier ser querido.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/27?lang=spa&id=p28#p28",
             "bookId": "mosiah",
-            "chapterNum": 27
+            "chapterNum": 27,
+            "shortTitle": "Rescate del Abismo"
           },
           {
             "id": "trabajar_propias_manos_ocio",
@@ -4149,7 +4321,8 @@
             "pastoralInsight": "El trabajo honesto dignifica el alma y es el cimiento de la autosuficiencia espiritual y temporal. Dios bendice el sudor honesto.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/27?lang=spa&id=p3-p4#p3",
             "bookId": "mosiah",
-            "chapterNum": 27
+            "chapterNum": 27,
+            "shortTitle": "Laboriosidad vs Ocio"
           }
         ]
       },
@@ -4214,7 +4387,8 @@
             "pastoralInsight": "Cuando en el barrio o familia abundan las críticas, tu ministerio debe ser el antídoto: bondad incondicional, silencio ante el chisme y brazos abiertos al necesitado.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/1?lang=spa&id=p30#p30",
             "bookId": "alma",
-            "chapterNum": 1
+            "chapterNum": 1,
+            "shortTitle": "Chismes en el Barrio"
           }
         ]
       },
@@ -4280,7 +4454,8 @@
             "pastoralInsight": "No importa cuán oscuras hayan sido tus manchas; el poder limpiador del Salvador tiene la potencia de dejar tus vestiduras más blancas que la nieve.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/5?lang=spa&id=p21#p21",
             "bookId": "alma",
-            "chapterNum": 5
+            "chapterNum": 5,
+            "shortTitle": "Purificación Total"
           },
           {
             "id": "orgullo_humillacion_espiritual",
@@ -4298,7 +4473,8 @@
             "pastoralInsight": "El orgullo es la gran barrera del alma. Humillarse ante Dios y ante nuestro prójimo no es debilidad; es la mayor demostración de nobleza espiritual.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/5?lang=spa&id=p27-p28#p27",
             "bookId": "alma",
-            "chapterNum": 5
+            "chapterNum": 5,
+            "shortTitle": "Vencer el Orgullo"
           }
         ]
       },
@@ -4345,7 +4521,8 @@
             "pastoralInsight": "Recuérdale que el Salvador experimentó en Su propia carne y espíritu la sensación exacta de ahogo y angustia que siente hoy. No es una debilidad de fe, y Cristo sabe íntimamente cómo socorrerle.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/7?lang=spa&id=p11-p13#p11",
             "bookId": "alma",
-            "chapterNum": 7
+            "chapterNum": 7,
+            "shortTitle": "Ansiedad y Pánico"
           },
           {
             "id": "dolor_fisico_cronico",
@@ -4364,7 +4541,8 @@
             "pastoralInsight": "Cristo sabe lo que siente cada nervio, cada articulación y cada noche de insomnio por el dolor. Él está presente a tu lado en cada minuto de tu aflicción corporal.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/7?lang=spa&id=p11-p12#p11",
             "bookId": "alma",
-            "chapterNum": 7
+            "chapterNum": 7,
+            "shortTitle": "Dolor Físico Crónico"
           }
         ]
       },
@@ -4429,7 +4607,8 @@
             "pastoralInsight": "Todo cuerpo mutilado, enfermo, desgastado por la edad o los achaques se levantará con vigor y esplendor eterno. Volverás a abrazar a tus seres queridos cara a cara.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/11?lang=spa&id=p43-p44#p43",
             "bookId": "alma",
-            "chapterNum": 11
+            "chapterNum": 11,
+            "shortTitle": "Resurrección del Cuerpo"
           }
         ]
       },
@@ -4481,7 +4660,8 @@
             "pastoralInsight": "Dios respeta el albedrío humano aun cuando los hombres eligen causar daño atroz. Su justicia es perfecta y Él recibe a los que sufren en gloria eterna.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/14?lang=spa&id=p10-p11#p10",
             "bookId": "alma",
-            "chapterNum": 14
+            "chapterNum": 14,
+            "shortTitle": "¿Por qué Sufre el Inocente?"
           }
         ]
       },
@@ -4535,7 +4715,8 @@
             "pastoralInsight": "El ayuno con propósito abre las compuertas de la revelación y rompe las ataduras de la duda. Cuando tengas una necesidad urgente, une tu oración al ayuno.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/17?lang=spa&id=p2-p3#p2",
             "bookId": "alma",
-            "chapterNum": 17
+            "chapterNum": 17,
+            "shortTitle": "Poder del Ayuno Sincero"
           }
         ]
       },
@@ -4634,7 +4815,8 @@
             "pastoralInsight": "Para no volver a caer, hay que deshacerse de los accesos, contraseñas, ambientes o amistades que nos incitaban. Enterrar las armas es un acto de amor a Dios.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/24?lang=spa&id=p15-p18#p15",
             "bookId": "alma",
-            "chapterNum": 24
+            "chapterNum": 24,
+            "shortTitle": "Enterrar Armas de Pecado"
           },
           {
             "id": "cortar_ambientes_armas_guerra",
@@ -4652,7 +4834,8 @@
             "pastoralInsight": "Si tienes que borrar una aplicación, cambiar de número, botar objetos o alejarte de un lugar, hazlo hoy. Tu paz eterna vale más que cualquier apego terrenal.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/24?lang=spa&id=p17-p18#p17",
             "bookId": "alma",
-            "chapterNum": 24
+            "chapterNum": 24,
+            "shortTitle": "Cortar Detonantes de Raíz"
           }
         ]
       },
@@ -4706,7 +4889,8 @@
             "pastoralInsight": "Para el discípulo de Jesucristo, la muerte no es un abismo oscuro sino una puerta de entrada a la paz, donde toda lágrima será enjugada.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/27?lang=spa&id=p28#p28",
             "bookId": "alma",
-            "chapterNum": 27
+            "chapterNum": 27,
+            "shortTitle": "Miedo a la Muerte"
           }
         ]
       },
@@ -4737,7 +4921,8 @@
             "pastoralInsight": "Llorar una pérdida es sagrado; el llanto no contradice la fe. El Evangelio abraza las lágrimas mientras nos sostiene con la certeza inquebrantable de la vida eterna.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/28?lang=spa&id=p11-p12#p11",
             "bookId": "alma",
-            "chapterNum": 28
+            "chapterNum": 28,
+            "shortTitle": "Tragedia Inesperada"
           }
         ]
       },
@@ -4767,7 +4952,8 @@
             "pastoralInsight": "No puedes obligar a nadie a ser feliz o a obedecer. Ama, enseña con el ejemplo, ora sin cesar y suelta la necesidad de controlar lo que solo Dios y ellos pueden decidir.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/29?lang=spa&id=p4#p4",
             "bookId": "alma",
-            "chapterNum": 29
+            "chapterNum": 29,
+            "shortTitle": "Respetar el Albedrío"
           }
         ]
       },
@@ -4796,7 +4982,8 @@
             "pastoralInsight": "Las señales no engendran fe duradera; la fe nace de la humildad del corazón. La creación entera y el latido de tu pecho testifican de la bondad de Dios.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/30?lang=spa&id=p44#p44",
             "bookId": "alma",
-            "chapterNum": 30
+            "chapterNum": 30,
+            "shortTitle": "Exigir Señales (Korihor)"
           }
         ]
       },
@@ -4827,7 +5014,8 @@
             "pastoralInsight": "Incluso profetas como Alma oraron en medio de lágrimas y dolor agudo pidiendo consuelo para su propia alma. El silencio temporal de Dios no es ausencia, es preparación de Su respuesta.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/31?lang=spa&id=p31-p33#p31",
             "bookId": "alma",
-            "chapterNum": 31
+            "chapterNum": 31,
+            "shortTitle": "Oración en el Dolor"
           }
         ]
       },
@@ -4859,7 +5047,8 @@
             "pastoralInsight": "Dios no exige certeza absoluta el primer día. Basta con un pequeño deseo de creer. Siembras la semilla orando con sinceridad y observando el fruto de paz en tu vida.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/32?lang=spa&id=p27-p28#p27",
             "bookId": "alma",
-            "chapterNum": 32
+            "chapterNum": 32,
+            "shortTitle": "¿Existe Dios? (Semilla)"
           },
           {
             "id": "fe_pequena_como_semilla",
@@ -4877,7 +5066,8 @@
             "pastoralInsight": "No necesitas mover montañas hoy; solo necesitas darle un lugar pequeño a la palabra en tu corazón. El Salvador se encarga de hacerla crecer.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/32?lang=spa&id=p27#p27",
             "bookId": "alma",
-            "chapterNum": 32
+            "chapterNum": 32,
+            "shortTitle": "Fe Pequeña"
           }
         ]
       },
@@ -4919,7 +5109,8 @@
             "pastoralInsight": "El mañana no está garantizado. El momento de ser libre, de pedir perdón y de respirar en paz con Dios es hoy mismo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/34?lang=spa&id=p32-p34#p32",
             "bookId": "alma",
-            "chapterNum": 34
+            "chapterNum": 34,
+            "shortTitle": "No Posponer el Cambio"
           },
           {
             "id": "orar_en_todo_lugar_campo_casa",
@@ -4937,7 +5128,8 @@
             "pastoralInsight": "Dios está interesado en cada detalle de tu vida: tu trabajo, tus finanzas, tus miedos y tu hogar. Habla con Él con la confianza de un hijo amado.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/34?lang=spa&id=p18-p27#p18",
             "bookId": "alma",
-            "chapterNum": 34
+            "chapterNum": 34,
+            "shortTitle": "Orar en Todo Momento"
           },
           {
             "id": "gratitud_continua_misericordias",
@@ -4954,7 +5146,8 @@
             "pastoralInsight": "Un corazón agradecido es inmune al desánimo. Empezar el día agradeciendo 3 cosas sencillas cambia por completo la perspectiva ante el futuro.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/34?lang=spa&id=p38#p38",
             "bookId": "alma",
-            "chapterNum": 34
+            "chapterNum": 34,
+            "shortTitle": "Gratitud Diaria"
           }
         ]
       },
@@ -4991,14 +5184,20 @@
               "desesperanza",
               "tormento",
               "oscuridad",
-              "vacio"
+              "vacio",
+              "suicidio",
+              "suicida",
+              "quitarse la vida",
+              "no quiero vivir",
+              "morir"
             ],
             "scriptureRef": "Alma 36:18-20",
             "scriptureQuote": "¡Oh Jesús, Hijo de Dios, ten misericordia de mí!... Y cuando pensé en esto, ya no me pude acordar más de mis dolores... ¡Y oh qué gozo, y qué luz tan maravillosa fue la que vi! Sí, mi alma se llenó de un gozo tan profundo como lo había sido mi dolor.",
             "pastoralInsight": "Cuando el dolor es desgarrador, una sola súplica al nombre de Jesucristo puede ser el inicio del rescate. Escucha sin juzgar, ofrece apoyo profesional médico de inmediato y acompáñale con amor incondicional.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/36?lang=spa&id=p18-p20#p18",
             "bookId": "alma",
-            "chapterNum": 36
+            "chapterNum": 36,
+            "shortTitle": "Suicidio y Desesperanza"
           },
           {
             "id": "confianza_sostenido_dificultad",
@@ -5018,7 +5217,8 @@
             "pastoralInsight": "No necesitas tener todas las respuestas hoy ni resolver el mes completo; solo poner tu confianza en Dios para dar el siguiente paso de fe. Él te sostiene.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/36?lang=spa&id=p3#p3",
             "bookId": "alma",
-            "chapterNum": 36
+            "chapterNum": 36,
+            "shortTitle": "Sostén en Aflicción"
           },
           {
             "id": "verguenza_miedo_obispo",
@@ -5036,7 +5236,8 @@
             "pastoralInsight": "El obispo no es un verdugo, es un médico espiritual llamado para ayudarte a vendar las heridas. La confesión abre la puerta para que el tormento se transforme en gozo puro.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/36?lang=spa&id=p17-p19#p17",
             "bookId": "alma",
-            "chapterNum": 36
+            "chapterNum": 36,
+            "shortTitle": "Miedo a Confesar al Obispo"
           },
           {
             "id": "paz_interior_incomprensible",
@@ -5053,7 +5254,8 @@
             "pastoralInsight": "La medida de tu tristeza actual será la medida del gozo que experimentarás cuando permitas que el Salvador disuelva tu culpa. Ten fe.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/36?lang=spa&id=p20-p21#p20",
             "bookId": "alma",
-            "chapterNum": 36
+            "chapterNum": 36,
+            "shortTitle": "Gozo del Perdón"
           }
         ]
       },
@@ -5083,7 +5285,8 @@
             "pastoralInsight": "La guía diaria de Dios es simple pero requiere constancia. Unos minutos al día en las Escrituras operan como tu Liahona para no perder el rumbo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/37?lang=spa&id=p44-p46#p44",
             "bookId": "alma",
-            "chapterNum": 37
+            "chapterNum": 37,
+            "shortTitle": "La Liahona Espiritual"
           },
           {
             "id": "perezosos_facilidad_senda",
@@ -5101,7 +5304,8 @@
             "pastoralInsight": "La mayoría de las caídas no ocurren por rebelión violenta, sino por dejar de orar y leer por pura pereza. Mantén tus hábitos espirituales vivos hoy.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/37?lang=spa&id=p46#p46",
             "bookId": "alma",
-            "chapterNum": 37
+            "chapterNum": 37,
+            "shortTitle": "Pereza Espiritual"
           },
           {
             "id": "consulta_al_senor_todos_hechos",
@@ -5120,7 +5324,8 @@
             "pastoralInsight": "No tomes decisiones importantes a solas con tu ansiedad. Presenta tus opciones en oración, pide confirmación y Él dirigirá tus pasos para bien.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/37?lang=spa&id=p37#p37",
             "bookId": "alma",
-            "chapterNum": 37
+            "chapterNum": 37,
+            "shortTitle": "Elegir Empleo / Carrera"
           }
         ]
       },
@@ -5154,7 +5359,8 @@
             "pastoralInsight": "Alma le enseñó a su hijo que 'refrenar' las pasiones como a un caballo no es reprimirse enfermizamente, sino encauzar la energía para que el corazón pueda llenarse de amor y paz.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/38?lang=spa&id=p12#p12",
             "bookId": "alma",
-            "chapterNum": 38
+            "chapterNum": 38,
+            "shortTitle": "Ira y Enojo"
           },
           {
             "id": "paz_que_sobrepuja_todo",
@@ -5171,7 +5377,8 @@
             "pastoralInsight": "La paz no significa que la tormenta haya cesado alrededor, sino que dentro de tu alma tienes anclada la mano del Príncipe de Paz.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/38?lang=spa&id=p5#p5",
             "bookId": "alma",
-            "chapterNum": 38
+            "chapterNum": 38,
+            "shortTitle": "Paz Inexplicable"
           },
           {
             "id": "envidia_celos_hermanos",
@@ -5189,7 +5396,8 @@
             "pastoralInsight": "La comparación es el ladrón del gozo. Dios no tiene hijos favoritos; Él tiene un plan a la medida exacta para ti que no compite con el de nadie más.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/38?lang=spa&id=p11#p11",
             "bookId": "alma",
-            "chapterNum": 38
+            "chapterNum": 38,
+            "shortTitle": "Envidia y Comparación"
           },
           {
             "id": "desacuerdos_mansedumbre",
@@ -5208,7 +5416,8 @@
             "pastoralInsight": "En cualquier desacuerdo conyugal o familiar, el que baja la voz y busca entender antes de tener la razón es quien gana la verdadera victoria de Cristo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/38?lang=spa&id=p12#p12",
             "bookId": "alma",
-            "chapterNum": 38
+            "chapterNum": 38,
+            "shortTitle": "Resolver Desacuerdos"
           }
         ]
       },
@@ -5241,7 +5450,8 @@
             "pastoralInsight": "Alma no condenó a su hijo Coriantón para siempre; le mostró con amor firme que debía cortar de raíz los estímulos que alimentaban la tentación y refugiarse en el Señor.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/39?lang=spa&id=p9,p11#p9",
             "bookId": "alma",
-            "chapterNum": 39
+            "chapterNum": 39,
+            "shortTitle": "Pornografía e Impureza"
           }
         ]
       },
@@ -5273,7 +5483,8 @@
             "pastoralInsight": "Tu ser querido no ha dejado de existir; ha entrado en un estado de descanso absoluto donde no hay dolor, enfermedad ni angustia terrenal, a la espera del abrazo glorioso de la resurrección.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/40?lang=spa&id=p11-p12#p11",
             "bookId": "alma",
-            "chapterNum": 40
+            "chapterNum": 40,
+            "shortTitle": "Luto Conyugal / Padres"
           }
         ]
       },
@@ -5303,7 +5514,8 @@
             "pastoralInsight": "El pecado deja un rastro amargo. Cuando nos humillamos a reparar lo dañado y actuar con justicia hacia quienes herimos, el gozo celestial regresa.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/41?lang=spa&id=p10,p14#p10",
             "bookId": "alma",
-            "chapterNum": 41
+            "chapterNum": 41,
+            "shortTitle": "Maldad Nunca Fue Felicidad"
           }
         ]
       },
@@ -5333,7 +5545,8 @@
             "pastoralInsight": "La culpa sana te empuja hacia Cristo para cambiar; la culpa del adversario te dice que no vales nada y que deberías esconderte. Quédate solo con la que te lleva a la luz.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/42?lang=spa&id=p29-p30#p29",
             "bookId": "alma",
-            "chapterNum": 42
+            "chapterNum": 42,
+            "shortTitle": "Tristeza según Dios"
           }
         ]
       },
@@ -5393,6 +5606,15 @@
               "cuerpo templo",
               "alcohol",
               "drogas",
+              "sustancias",
+              "alcohol",
+              "alcoholico",
+              "alcoholismo",
+              "bebida",
+              "borracho",
+              "vicio",
+              "drogas",
+              "tabaco",
               "sustancias"
             ],
             "scriptureRef": "Alma 46:40",
@@ -5400,7 +5622,8 @@
             "pastoralInsight": "Dios proveyó cosas saludables para nuestro sustento y nos mandó cuidar el cuerpo. Mantener el templo corporal libre de sustancias destructivas despeja la mente para recibir revelación.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/46?lang=spa&id=p40#p40",
             "bookId": "alma",
-            "chapterNum": 46
+            "chapterNum": 46,
+            "shortTitle": "Alcohol, Drogas y Salud"
           }
         ]
       },
@@ -5442,7 +5665,8 @@
             "pastoralInsight": "No esperes a que la tentación golpee para decidir qué harás. Pon filtros, cambia de hábitos, duerme temprano y establece barreras claras cuando estás fuerte.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/48?lang=spa&id=p8-p9#p8",
             "bookId": "alma",
-            "chapterNum": 48
+            "chapterNum": 48,
+            "shortTitle": "Fortificar Puntos Débiles"
           }
         ]
       },
@@ -5702,7 +5926,8 @@
             "pastoralInsight": "Las tormentas vendrán a todos, pero si tus pies están anclados al Salvador a través de convenios diarios, ninguna adicción ni torbellino podrá derribarte.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/hel/5?lang=spa&id=p12#p12",
             "bookId": "hel",
-            "chapterNum": 5
+            "chapterNum": 5,
+            "shortTitle": "La Roca de Cristo"
           }
         ]
       },
@@ -5958,7 +6183,8 @@
             "pastoralInsight": "Cristo no te está esperando con un ceño fruncido o una lista de acusaciones. Su brazo está abierto y extendido hacia ti ahora mismo.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/9?lang=spa&id=p14#p14",
             "bookId": "3-ne",
-            "chapterNum": 9
+            "chapterNum": 9,
+            "shortTitle": "Brazos Abiertos de Cristo"
           }
         ]
       },
@@ -6003,7 +6229,8 @@
             "pastoralInsight": "Responder al insulto con ira es darle la victoria al adversario. El pacificador no es débil; tiene la fuerza de Cristo para desarmar la contención con silencio o mansedumbre.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/11?lang=spa&id=p29-p30#p29",
             "bookId": "3-ne",
-            "chapterNum": 11
+            "chapterNum": 11,
+            "shortTitle": "Insultos y Agresiones"
           }
         ]
       },
@@ -6093,7 +6320,8 @@
             "pastoralInsight": "Jesús nunca ministró a bulto; se detuvo a mirar a los ojos y bendecir a cada uno por su nombre. Ese es el estándar de oro de nuestra ministración.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/17?lang=spa&id=p21#p21",
             "bookId": "3-ne",
-            "chapterNum": 17
+            "chapterNum": 17,
+            "shortTitle": "Ministrar Uno por Uno"
           }
         ]
       },
@@ -6123,7 +6351,8 @@
             "pastoralInsight": "La oración no es solo para pedir perdón tras el error; es el radar que te avisa del peligro antes de que caigas en él.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/18?lang=spa&id=p18#p18",
             "bookId": "3-ne",
-            "chapterNum": 18
+            "chapterNum": 18,
+            "shortTitle": "Velar y Orar contra Redes"
           }
         ]
       },
@@ -6209,7 +6438,8 @@
             "pastoralInsight": "El diezmo no se paga con dinero, sino con fe. Es la ley de la prosperidad espiritual que asegura la protección celestial sobre tu hogar.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/24?lang=spa&id=p10#p10",
             "bookId": "3-ne",
-            "chapterNum": 24
+            "chapterNum": 24,
+            "shortTitle": "Pagar el Diezmo en Crisis"
           }
         ]
       },
@@ -6581,7 +6811,8 @@
             "pastoralInsight": "La debilidad no es tu enemiga: es el taller donde Dios forja tu humildad. Su gracia es suficiente para suplir exactamente lo que te falta.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/ether/12?lang=spa&id=p27#p27",
             "bookId": "ether",
-            "chapterNum": 12
+            "chapterNum": 12,
+            "shortTitle": "Debilidad Personal"
           },
           {
             "id": "dudas_historia_doctrina_iglesia",
@@ -6599,7 +6830,8 @@
             "pastoralInsight": "Tener preguntas no es pecado; el Evangelio nació de la pregunta honesta de un joven de 14 años. Lo importante es no abandonar lo que ya sabes por lo que aún no entiendes.",
             "churchUrl": "https://www.churchofjesuschrist.org/study/scriptures/bofm/ether/12?lang=spa&id=p6#p6",
             "bookId": "ether",
-            "chapterNum": 12
+            "chapterNum": 12,
+            "shortTitle": "Dudas de Historia / Internet"
           }
         ]
       },
@@ -6787,6 +7019,7 @@
         renderBooksAccordion();
         bindEvents();
         updateMatchCount();
+        initScrollTopButton();
     }
 
     // Normalizador de texto para búsquedas (sin tildes, minúsculas)
@@ -6872,8 +7105,8 @@
         filtered.forEach(topic => {
             html += `
                 <button class="drawer-topic-chip" onclick="window.locateAndOpenTopic('${topic.id}', '${topic.bookId}', ${topic.chapterNum})" title="Ir a ${topic.scriptureRef}: ${topic.title}">
+                    <span class="topic-chip-title">${escapeHtml(topic.shortTitle)}</span>
                     <span class="topic-chip-ref">${escapeHtml(topic.scriptureRef)}</span>
-                    <span class="topic-chip-title">${escapeHtml(topic.title)}</span>
                 </button>
             `;
         });
@@ -6914,7 +7147,7 @@
 
         const topic = MINISTERIO_TOPICS.find(t => t.id === topicId);
         if (topic && typeof showToast === 'function') {
-            showToast(`📖 ${topic.scriptureRef}: ${topic.title}`, 'success');
+            showToast(`📖 ${topic.scriptureRef}: ${topic.shortTitle}`, 'success');
         }
     };
 
@@ -6934,6 +7167,7 @@
 
     // -------------------------------------------------------------------------
     // RENDERIZAR ACORDEÓN DE LIBROS (15 LIBROS • 239 CAPÍTULOS)
+    // COLAPSADOS POR DEFECTO PARA MEJOR NAVEGACIÓN
     // -------------------------------------------------------------------------
     function renderBooksAccordion() {
         const container = document.getElementById('mormon-books-accordion');
@@ -6943,8 +7177,9 @@
         MORMON_BOOKS.forEach(book => {
             const bookTotal = book.chapters.length;
 
+            // SIN el atributo 'open' -> Todos colapsados por defecto
             html += `
-                <details class="mormon-book-card" id="book-${book.id}" open>
+                <details class="mormon-book-card" id="book-${book.id}">
                     <summary class="mormon-book-summary">
                         <div class="mormon-book-header-left">
                             <span class="mormon-book-icon">${book.icon || '📖'}</span>
@@ -6968,10 +7203,9 @@
             `;
 
             book.chapters.forEach(chap => {
-                // Construir indice de busqueda para este capitulo (historia + temas asociados)
                 let topicSearchTokens = '';
                 chap.topics.forEach(t => {
-                    topicSearchTokens += ' ' + t.title + ' ' + t.keywords.join(' ') + ' ' + t.scriptureRef + ' ' + t.scriptureQuote;
+                    topicSearchTokens += ' ' + t.title + ' ' + (t.shortTitle || '') + ' ' + t.keywords.join(' ') + ' ' + t.scriptureRef + ' ' + t.scriptureQuote;
                 });
 
                 const searchTokens = normalizeText(`${book.title} ${chap.ch} ${chap.fact} ${chap.summary} ${chap.keywords || ''} ${topicSearchTokens}`);
@@ -7006,23 +7240,20 @@
                     html += `<div class="chapter-pastoral-pills-row">`;
                     chap.topics.forEach(top => {
                         html += `
-                            <button id="btn-toggle-${top.id}" class="chap-pastoral-pill" onclick="window.toggleTopicDetail('${top.id}')" title="Ver pasaje y guía de ministración para ${top.title}">
+                            <button id="btn-toggle-${top.id}" class="chap-pastoral-pill" onclick="window.toggleTopicDetail('${top.id}')" title="Ver versículo y guía para ${top.title}">
                                 <span class="pill-icon">🩺</span>
                                 <span class="pill-ref">${escapeHtml(top.scriptureRef)}</span>
-                                <span class="pill-title">${escapeHtml(top.title)}</span>
+                                <span class="pill-title">${escapeHtml(top.shortTitle)}</span>
                                 <span class="pill-arrow">▾</span>
                             </button>
                         `;
                     });
                     html += `</div>`;
 
-                    // Fichas quirúrgicas colapsables
+                    // Fichas quirúrgicas colapsables (SIN texto repetido)
                     chap.topics.forEach(top => {
                         html += `
                             <div id="detail-${top.id}" class="embedded-topic-card" style="display: none;">
-                                <div class="embedded-card-header">
-                                    <span class="embedded-card-title">📖 ${escapeHtml(top.scriptureRef)} — ${escapeHtml(top.title)}</span>
-                                </div>
                                 <div class="embedded-quote-box">
                                     <p class="embedded-quote-text">«${escapeHtml(top.scriptureQuote)}»</p>
                                 </div>
@@ -7061,6 +7292,7 @@
 
     // -------------------------------------------------------------------------
     // BÚSQUEDA Y FILTRADO EN TIEMPO REAL
+    // OCULTA LIBROS NO COINCIDENTES PARA NAVEGACIÓN RÁPIDA
     // -------------------------------------------------------------------------
     function filterBooksAccordion() {
         const q = normalizeText(searchQuery);
@@ -7081,7 +7313,7 @@
                     row.style.display = 'block';
                     if (q) {
                         row.classList.add('is-highlighted');
-                        // Si busca un termino que coincide con un pasaje quirurgico, abrir la ficha
+                        // Abrir la ficha correspondiente en la búsqueda activa
                         const embeddedCards = row.querySelectorAll('.embedded-topic-card');
                         embeddedCards.forEach(card => card.style.display = 'block');
                     } else {
@@ -7100,17 +7332,20 @@
 
             if (q) {
                 if (bookVisibleCount > 0) {
+                    // Solo mostrar y abrir los libros que coinciden
                     details.open = true;
                     details.style.opacity = '1';
                     details.style.display = 'block';
                 } else {
+                    // Ocultar por completo los libros que no coinciden
                     details.open = false;
-                    details.style.opacity = '0.35';
-                    details.style.display = 'block';
+                    details.style.display = 'none';
                 }
             } else {
+                // Sin búsqueda: todos los libros visibles y colapsados
                 details.style.opacity = '1';
                 details.style.display = 'block';
+                // Si el usuario colapsó, mantenerlo colapsado
             }
         });
 
@@ -7123,6 +7358,47 @@
             matchCountEl.textContent = count !== undefined ? count : 239;
         }
     }
+
+    // -------------------------------------------------------------------------
+    // BOTÓN FLOTANTE: VOLVER ARRIBA
+    // -------------------------------------------------------------------------
+    function initScrollTopButton() {
+        let btn = document.getElementById('mormon-scroll-top-btn');
+        if (!btn) {
+            btn = document.createElement('button');
+            btn.id = 'mormon-scroll-top-btn';
+            btn.className = 'mormon-scroll-top-btn';
+            btn.title = 'Volver al inicio del Libro de Mormón';
+            btn.innerHTML = `
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+                <span>Arriba</span>
+            `;
+            btn.onclick = window.scrollMormonTop;
+            document.body.appendChild(btn);
+        }
+
+        window.addEventListener('scroll', () => {
+            const currentTab = document.querySelector('.nav-tab-btn.active');
+            const isMormonActive = currentTab && currentTab.getAttribute('data-view') === 'view-mormon';
+
+            if (isMormonActive && window.scrollY > 350) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+    }
+
+    window.scrollMormonTop = function() {
+        const hero = document.querySelector('.mormon-hero-card');
+        if (hero) {
+            hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
 
     // -------------------------------------------------------------------------
     // EVENT LISTENERS
