@@ -588,21 +588,52 @@
                             </div>
                         </div>
 
-                        <!-- DRAWER PLEGABLE DE PESTAÑAS DE MINISTRACIÓN (106 TEMAS EN 8 ÁREAS) -->
+                        <!-- DRAWER DE PESTAÑAS DE MINISTRACIÓN ESTRUCTURADO (106 TEMAS EN 8 ÁREAS) -->
                         <div id="mormon-ministerio-drawer" class="mormon-ministerio-drawer">
+                            <!-- Fila 1: Título, Badge de Filtro Activo y Selector de Modo de Vista -->
                             <div class="drawer-header-row">
-                                <span class="drawer-header-title">🏷️ Pestañas de Ministración — Haz clic en cualquier tema para ir directo al pasaje en el Libro de Mormón:</span>
-                                <span id="drawer-active-filter-badge" class="drawer-filter-pill" style="display: none;"></span>
+                                <div class="drawer-title-group">
+                                    <span class="drawer-header-title">🏷️ Pestañas de Ministración — 106 Temas de Vida</span>
+                                    <span id="drawer-active-filter-badge" class="drawer-filter-pill" style="display: none;"></span>
+                                </div>
+                                <div class="drawer-view-mode-tabs">
+                                    <button id="btn-drawerview-cards" class="drawer-mode-tab active" onclick="window.setDrawerViewMode('cards')" title="Ver por Cuadrícula de 8 Tarjetas Temáticas">
+                                        <span>📂</span> Categorías (8)
+                                    </button>
+                                    <button id="btn-drawerview-az" class="drawer-mode-tab" onclick="window.setDrawerViewMode('az')" title="Ver en Índice Alfabético de la A a la Z">
+                                        <span>🔤</span> Índice A - Z
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Pestañas de las 8 macro-categorías -->
-                            <div class="drawer-categories-scroll" id="drawer-categories-bar">
-                                <!-- Inyectado dinámicamente -->
+                            <!-- Fila 2: ACCESO RÁPIDO (Los 8 temas más consultados) -->
+                            <div class="drawer-frequent-shelf">
+                                <div class="frequent-shelf-label">
+                                    <span class="frequent-icon">⚡</span>
+                                    <span>Más Frecuentes:</span>
+                                </div>
+                                <div class="drawer-frequent-chips" id="drawer-frequent-chips">
+                                    <!-- Inyectado dinámicamente con los 8 temas más comunes -->
+                                </div>
                             </div>
 
-                            <!-- Nube de chips de temas específicos de la categoría seleccionada -->
-                            <div class="drawer-topics-cloud" id="drawer-topics-cloud">
-                                <!-- Inyectado dinámicamente (106 temas con sus citas) -->
+                            <!-- Fila 3: Mini-buscador instantáneo y filtro de categoría -->
+                            <div class="drawer-toolbar-row">
+                                <div class="drawer-mini-search-wrapper">
+                                    <svg class="mini-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                    </svg>
+                                    <input type="text" id="drawer-mini-search" class="drawer-mini-search-input" placeholder="🔍 Filtrar entre los 106 temas (ej: alcohol, ansiedad, duelo, matrimonio, perdón, diezmo)..." oninput="window.filterDrawerTopics(this.value)">
+                                    <button id="drawer-mini-clear-btn" class="drawer-mini-clear-btn" style="display: none;" onclick="window.clearDrawerMiniSearch()" title="Limpiar filtro">×</button>
+                                </div>
+                                <div class="drawer-categories-scroll" id="drawer-categories-bar">
+                                    <!-- Inyectado dinámicamente -->
+                                </div>
+                            </div>
+
+                            <!-- Fila 4: Contenedor Dinámico Principal (Tarjetas Temáticas o Índice A-Z) -->
+                            <div id="drawer-main-content" class="drawer-main-content">
+                                <!-- Inyectado dinámicamente: Tarjetas Temáticas o Índice A-Z -->
                             </div>
                         </div>
                     </div>

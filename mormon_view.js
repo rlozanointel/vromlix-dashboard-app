@@ -7007,6 +7007,8 @@
     let searchQuery = '';
     let isDrawerOpen = true;
     let activeTopicFilterId = null;
+    let drawerViewMode = 'cards'; // 'cards' | 'az'
+    let drawerSearchQuery = '';
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMormonView);
@@ -7015,8 +7017,9 @@
     }
 
     function initMormonView() {
+        renderDrawerFrequent();
         renderDrawerCategories();
-        renderDrawerTopics();
+        renderDrawerContent();
         renderBooksAccordion();
         bindEvents();
         updateMatchCount();
@@ -7051,9 +7054,50 @@
         }
     };
 
+    const FREQUENT_TOPIC_CONFIG = [
+        { id: 'ansiedad_panico', label: 'Ansiedad & Pánico', icon: '🧠' },
+        { id: 'depresion_desanimo_salmo_nefi', label: 'Depresión', icon: '🌧️' },
+        { id: 'fallecimiento_conyuge_padres', label: 'Duelo & Muerte', icon: '🖤' },
+        { id: 'matrimonio_corazones_quebrantados', label: 'Matrimonio en Crisis', icon: '💍' },
+        { id: 'cuidar_templo_cuerpo_salud', label: 'Alcohol & Drogas', icon: '🍷' },
+        { id: 'paz_interior_incomprensible', label: 'Paz & Perdón', icon: '🕊️' },
+        { id: 'diezmo_ventanas_de_cielos', label: 'Diezmo en Crisis', icon: '💰' },
+        { id: 'significado_santa_cena_semanal', label: 'Santa Cena', icon: '🍞' }
+    ];
+
+    function renderDrawerFrequent() {
+        const container = document.getElementById('drawer-frequent-chips');
+        if (!container) return;
+
+        let html = '';
+        FREQUENT_TOPIC_CONFIG.forEach(cfg => {
+            const topic = MINISTERIO_TOPICS.find(t => t.id === cfg.id);
+            if (!topic) return;
+
+            const isActive = (activeTopicFilterId === topic.id);
+            html += `
+                <button class="frequent-chip-btn ${isActive ? 'active-filter' : ''}"
+                        onclick="window.locateAndOpenTopic('${topic.id}', '${topic.bookId}', ${topic.chapterNum})"
+                        title="${escapeHtml(topic.title)} (${escapeHtml(topic.scriptureRef)})">
+                    <span>${cfg.icon}</span>
+                    <span>${escapeHtml(cfg.label)}</span>
+                </button>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
     function renderDrawerCategories() {
         const container = document.getElementById('drawer-categories-bar');
         if (!container) return;
+
+        // Si estamos en modo A-Z, ocultar la barra de filtros por categoría
+        if (drawerViewMode !== 'cards') {
+            container.style.display = 'none';
+            return;
+        }
+        container.style.display = 'flex';
 
         const countMap = {};
         MINISTERIO_TOPICS.forEach(t => {
@@ -7061,17 +7105,18 @@
         });
 
         let html = `
-            <button class="drawer-cat-tab active" data-cat="all" onclick="window.selectDrawerCategory('all')">
+            <button class="drawer-cat-tab ${activeCategoryFilter === 'all' ? 'active' : ''}" data-cat="all" onclick="window.selectDrawerCategory('all')">
                 <span class="cat-tab-icon">✨</span>
-                <span class="cat-tab-label">Todos</span>
+                <span class="cat-tab-label">Todas</span>
                 <span class="cat-tab-badge">${MINISTERIO_TOPICS.length}</span>
             </button>
         `;
 
         MINISTERIO_CATEGORIES.forEach(cat => {
             const count = countMap[cat.id] || 0;
+            const isActive = (activeCategoryFilter === cat.id);
             html += `
-                <button class="drawer-cat-tab" data-cat="${cat.id}" onclick="window.selectDrawerCategory('${cat.id}')" title="${cat.desc}">
+                <button class="drawer-cat-tab ${isActive ? 'active' : ''}" data-cat="${cat.id}" onclick="window.selectDrawerCategory('${cat.id}')" title="${cat.desc}">
                     <span class="cat-tab-icon">${cat.icon}</span>
                     <span class="cat-tab-label">${cat.label}</span>
                     <span class="cat-tab-badge">${count}</span>
@@ -7084,33 +7129,217 @@
 
     window.selectDrawerCategory = function(catId) {
         activeCategoryFilter = catId;
-        document.querySelectorAll('.drawer-cat-tab').forEach(btn => {
-            if (btn.getAttribute('data-cat') === catId) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
-        renderDrawerTopics();
+        renderDrawerCategories();
+        renderDrawerContent();
     };
 
-    function renderDrawerTopics() {
-        const container = document.getElementById('drawer-topics-cloud');
+    window.setDrawerViewMode = function(mode) {
+        drawerViewMode = mode;
+        const btnCards = document.getElementById('btn-drawerview-cards');
+        const btnAz = document.getElementById('btn-drawerview-az');
+        if (btnCards && btnAz) {
+            if (mode === 'cards') {
+                btnCards.classList.add('active');
+                btnAz.classList.remove('active');
+            } else {
+                btnAz.classList.add('active');
+                btnCards.classList.remove('active');
+            }
+        }
+        renderDrawerCategories();
+        renderDrawerContent();
+    };
+
+    window.filterDrawerTopics = function(query) {
+        drawerSearchQuery = query || '';
+        const clearBtn = document.getElementById('drawer-mini-clear-btn');
+        if (clearBtn) clearBtn.style.display = drawerSearchQuery ? 'block' : 'none';
+        renderDrawerContent();
+    };
+
+    window.clearDrawerMiniSearch = function() {
+        drawerSearchQuery = '';
+        const input = document.getElementById('drawer-mini-search');
+        if (input) {
+            input.value = '';
+            input.focus();
+        }
+        const clearBtn = document.getElementById('drawer-mini-clear-btn');
+        if (clearBtn) clearBtn.style.display = 'none';
+        renderDrawerContent();
+    };
+
+    window.jumpToAzLetter = function(letter) {
+        const el = document.getElementById(`az-group-${letter}`);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    };
+
+    function renderDrawerContent() {
+        const container = document.getElementById('drawer-main-content');
         if (!container) return;
 
-        const filtered = (activeCategoryFilter === 'all')
-            ? MINISTERIO_TOPICS
-            : MINISTERIO_TOPICS.filter(t => t.category === activeCategoryFilter);
+        const query = normalizeText(drawerSearchQuery);
 
-        let html = '';
-        filtered.forEach(topic => {
-            const isActive = (activeTopicFilterId === topic.id);
+        if (drawerViewMode === 'cards') {
+            renderCardsView(container, query);
+        } else {
+            renderAzView(container, query);
+        }
+    }
+
+    function renderCardsView(container, query) {
+        let categoriesToRender = (activeCategoryFilter === 'all')
+            ? MINISTERIO_CATEGORIES
+            : MINISTERIO_CATEGORIES.filter(c => c.id === activeCategoryFilter);
+
+        let html = `<div class="drawer-categories-grid">`;
+        let totalMatches = 0;
+
+        categoriesToRender.forEach(cat => {
+            let catTopics = MINISTERIO_TOPICS.filter(t => t.category === cat.id);
+
+            if (query) {
+                catTopics = catTopics.filter(t => {
+                    const searchStr = normalizeText(`${t.shortTitle} ${t.title} ${t.keywords.join(' ')} ${t.scriptureRef}`);
+                    return searchStr.includes(query);
+                });
+            }
+
+            // Ordenar alfabéticamente dentro de la tarjeta
+            catTopics.sort((a, b) => (a.shortTitle || '').localeCompare(b.shortTitle || '', 'es'));
+
+            if (catTopics.length > 0) {
+                totalMatches += catTopics.length;
+                html += `
+                    <div class="drawer-cat-card" id="cat-card-${cat.id}">
+                        <div class="drawer-cat-card-header">
+                            <div class="drawer-cat-title-row">
+                                <span class="drawer-cat-title">
+                                    <span class="drawer-cat-icon">${cat.icon}</span>
+                                    <span>${escapeHtml(cat.label)}</span>
+                                </span>
+                                <span class="drawer-cat-badge">${catTopics.length}</span>
+                            </div>
+                            <p class="drawer-cat-desc">${escapeHtml(cat.desc)}</p>
+                        </div>
+                        <div class="drawer-cat-topics-list">
+                `;
+
+                catTopics.forEach(topic => {
+                    const isActive = (activeTopicFilterId === topic.id);
+                    html += `
+                        <button class="drawer-topic-item ${isActive ? 'active-filter' : ''}"
+                                onclick="window.locateAndOpenTopic('${topic.id}', '${topic.bookId}', ${topic.chapterNum})"
+                                title="${escapeHtml(topic.title)} (${escapeHtml(topic.scriptureRef)})">
+                            <span class="topic-item-left">
+                                <span class="topic-item-bullet">◆</span>
+                                <span class="topic-item-title">${escapeHtml(topic.shortTitle)}</span>
+                            </span>
+                            <span class="topic-item-arrow">→</span>
+                        </button>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        html += `</div>`;
+
+        if (totalMatches === 0) {
+            html = `
+                <div class="drawer-empty-state">
+                    <span class="drawer-empty-icon">🔍</span>
+                    <p>No se encontraron temas para <strong>"${escapeHtml(drawerSearchQuery)}"</strong>.</p>
+                    <button class="drawer-filter-clear-btn" onclick="window.clearDrawerMiniSearch()" style="margin-top:10px;">Limpiar filtro</button>
+                </div>
+            `;
+        }
+
+        container.innerHTML = html;
+    }
+
+    function renderAzView(container, query) {
+        let topics = [...MINISTERIO_TOPICS];
+
+        if (query) {
+            topics = topics.filter(t => {
+                const searchStr = normalizeText(`${t.shortTitle} ${t.title} ${t.keywords.join(' ')} ${t.scriptureRef}`);
+                return searchStr.includes(query);
+            });
+        }
+
+        // Ordenar alfabéticamente
+        topics.sort((a, b) => (a.shortTitle || '').localeCompare(b.shortTitle || '', 'es'));
+
+        if (topics.length === 0) {
+            container.innerHTML = `
+                <div class="drawer-empty-state">
+                    <span class="drawer-empty-icon">🔍</span>
+                    <p>No se encontraron temas en el índice alfabético para <strong>"${escapeHtml(drawerSearchQuery)}"</strong>.</p>
+                    <button class="drawer-filter-clear-btn" onclick="window.clearDrawerMiniSearch()" style="margin-top:10px;">Limpiar filtro</button>
+                </div>
+            `;
+            return;
+        }
+
+        // Agrupar por primera letra
+        const groups = {};
+        topics.forEach(t => {
+            let firstLetter = (t.shortTitle || '').charAt(0).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if (!firstLetter || !/[A-Z]/.test(firstLetter)) firstLetter = '#';
+            if (!groups[firstLetter]) groups[firstLetter] = [];
+            groups[firstLetter].push(t);
+        });
+
+        const letters = Object.keys(groups).sort();
+
+        // Barra de salto rápido por letra
+        let html = `<div class="drawer-az-jump-bar">`;
+        letters.forEach(letter => {
+            html += `<button class="az-jump-btn" onclick="window.jumpToAzLetter('${letter}')">${letter}</button>`;
+        });
+        html += `</div>`;
+
+        // Secciones de cada letra
+        html += `<div class="drawer-az-groups-container">`;
+        letters.forEach(letter => {
+            const groupTopics = groups[letter];
             html += `
-                <button class="drawer-topic-chip ${isActive ? 'active-filter' : ''}" onclick="window.locateAndOpenTopic('${topic.id}', '${topic.bookId}', ${topic.chapterNum})" title="${escapeHtml(topic.title)} (${escapeHtml(topic.scriptureRef)})">
-                    <span class="topic-chip-title">${escapeHtml(topic.shortTitle)}</span>
-                </button>
+                <div class="drawer-az-group" id="az-group-${letter}">
+                    <div class="az-group-header">
+                        <span class="az-group-letter">${letter}</span>
+                        <span class="az-group-count">${groupTopics.length} ${groupTopics.length === 1 ? 'tema' : 'temas'}</span>
+                    </div>
+                    <div class="az-group-topics-grid">
+            `;
+
+            groupTopics.forEach(topic => {
+                const isActive = (activeTopicFilterId === topic.id);
+                html += `
+                    <button class="drawer-topic-item ${isActive ? 'active-filter' : ''}"
+                            onclick="window.locateAndOpenTopic('${topic.id}', '${topic.bookId}', ${topic.chapterNum})"
+                            title="${escapeHtml(topic.title)} (${escapeHtml(topic.scriptureRef)})">
+                        <span class="topic-item-left">
+                            <span class="topic-item-bullet">◆</span>
+                            <span class="topic-item-title">${escapeHtml(topic.shortTitle)}</span>
+                        </span>
+                        <span class="topic-item-arrow">→</span>
+                    </button>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
             `;
         });
+        html += `</div>`;
 
         container.innerHTML = html;
     }
@@ -7210,7 +7439,8 @@
         }
 
         // 7. Refrescar chips del drawer para marcar el chip activo
-        renderDrawerTopics();
+        renderDrawerFrequent();
+        renderDrawerContent();
 
         if (typeof showToast === 'function') {
             showToast(`📖 ${topic.scriptureRef}: ${topic.shortTitle}`, 'success');
@@ -7254,7 +7484,8 @@
             }
         });
 
-        renderDrawerTopics();
+        renderDrawerFrequent();
+        renderDrawerContent();
         updateMatchCount(239);
 
         if (typeof showToast === 'function') {
@@ -7421,7 +7652,8 @@
                 filterBanner.style.display = 'none';
                 filterBanner.innerHTML = '';
             }
-            renderDrawerTopics();
+            renderDrawerFrequent();
+            renderDrawerContent();
         } else if (!q && activeTopicFilterId) {
             // Mantener el aislamiento del tema activo
             return;
