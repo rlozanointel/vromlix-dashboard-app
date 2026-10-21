@@ -2505,7 +2505,10 @@ function initTiempo() {
                     <div class="tiempo-breakdown-item">
                         <span class="breakdown-idx">Pausa #${idx + 1}</span>
                         <span class="breakdown-range">${p.start} ➔ ${p.end}</span>
-                        <span class="breakdown-dur badge-amber">${p.duration_formatted}</span>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span class="breakdown-dur badge-amber">${p.duration_formatted}</span>
+                            <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${p.id})" title="Eliminar registro de prueba">🗑️</button>
+                        </div>
                     </div>
                 `).join('');
             }
@@ -2521,12 +2524,37 @@ function initTiempo() {
                     <div class="tiempo-breakdown-item">
                         <span class="breakdown-idx">🚶‍♂️ ${escapeHTML(s.subtag)}</span>
                         <span class="breakdown-range">${s.time}</span>
-                        <span class="breakdown-dur badge-orange">${s.duration_formatted}</span>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span class="breakdown-dur badge-orange">${s.duration_formatted}</span>
+                            <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${s.id})" title="Eliminar registro de prueba">🗑️</button>
+                        </div>
                     </div>
                 `).join('');
             }
         }
     }
+
+    window.eliminarIntervalo = function(id) {
+        if (!id) return;
+        if (!confirm("¿Eliminar este registro de tiempo? (Ideal para limpiar pruebas)")) return;
+        fetch('/api/time/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.state) {
+                renderStats(data.state);
+                updateLiveTimerUI();
+                loadHistory();
+                showToast("🗑️ Registro de prueba eliminado.");
+            }
+        })
+        .catch(err => {
+            showToast("Error eliminando registro.");
+        });
+    };
 
     function loadServerState() {
         fetch('/api/time/state')
