@@ -74,7 +74,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "martes": [],
       "miercoles": [
         {
-          "time": "13:00",
+          "time": "11:00",
           "title": "Terapia Hna. Alma",
           "details": "",
           "action_items": "",
@@ -221,7 +221,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-12-25",
       "IMDb Rating": 0.0,
       "Vromlix Score": 47.5,
-      "Plot Summary": "When computer scientist Ilya Sutskever and AI pioneer Geoffrey Hinton make a breakthrough they're certain will alter humanity forever, the most prominent figures in Silicon Valley race to become a part of their vision. Years later, after a chance meeting with Sam Altman, Sutskever and a group of idealistic entrepreneurs create OpenAI with backing from Elon Musk and assistance from engineer Mira Murati.",
+      "Plot Summary": "The story of OpenAI CEO Sam Altman, centred on his controversial firing and re-hiring in November 2023, a movement led by co-founder Ilya Sutskever.",
       "IMDb Link": "https://www.imdb.com/title/tt37171180/"
     },
     {
@@ -232,8 +232,19 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-11-03",
       "IMDb Rating": 0.0,
       "Vromlix Score": 48.5,
-      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant.",
+      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
       "IMDb Link": "https://www.imdb.com/title/tt34384661/"
+    },
+    {
+      "Official Title": "Un mal partido",
+      "Spanish Title": null,
+      "Genres": "Family, Comedy",
+      "Release Year": "2026",
+      "Release Date": "2026-10-08",
+      "IMDb Rating": 5.0,
+      "Vromlix Score": 50,
+      "Plot Summary": "An overprotective father clashes with his daughter's boyfriend during a family trip, leading to comedic tension as he struggles to accept their relationship while trying to maintain control.",
+      "IMDb Link": "https://www.imdb.com/title/tt39251676/"
     },
     {
       "Official Title": "The Dog Stars",
@@ -263,8 +274,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.945,
-      "Vromlix Score": 62.5,
+      "IMDb Rating": 7.9,
+      "Vromlix Score": 62.3,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -285,7 +296,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.486,
+      "IMDb Rating": 7.485,
       "Vromlix Score": 63.4,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
@@ -340,7 +351,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 7.027,
+      "IMDb Rating": 7.03,
       "Vromlix Score": 70.3,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
@@ -351,8 +362,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-03-05",
-      "IMDb Rating": 7.17,
-      "Vromlix Score": 71.7,
+      "IMDb Rating": 7.2,
+      "Vromlix Score": 72,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
@@ -423,6 +434,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt28254159/"
     },
     {
+      "Official Title": "Until the End of the World",
+      "Spanish Title": "Hasta el fin del mundo",
+      "Genres": "Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-07-23",
+      "IMDb Rating": 8.116,
+      "Vromlix Score": 81.2,
+      "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
+      "IMDb Link": "https://www.imdb.com/title/tt30332656/"
+    },
+    {
       "Official Title": "Fjord",
       "Spanish Title": "Fjord",
       "Genres": "Drama",
@@ -432,17 +454,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 81.7,
       "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbeth Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbeth's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
       "IMDb Link": "https://www.imdb.com/title/tt35410859/"
-    },
-    {
-      "Official Title": "Until the End of the World",
-      "Spanish Title": "Hasta el fin del mundo",
-      "Genres": "Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-07-23",
-      "IMDb Rating": 8.171,
-      "Vromlix Score": 81.7,
-      "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
-      "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
     {
       "Official Title": "La bola negra",
@@ -626,8 +637,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-21",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": null,
+      "IMDb Rating": 10.0,
+      "Vromlix Score": 100,
       "Plot Summary": "An Artificial Friend named Klara finds a deep bond with a troubled young girl, bringing light and hope to a grieving family through her unwavering devotion and innocent wonder.",
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
@@ -806,17 +817,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": null,
       "Plot Summary": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
       "IMDb Link": "https://www.imdb.com/title/tt21357150/"
-    },
-    {
-      "Official Title": "Un mal partido",
-      "Spanish Title": null,
-      "Genres": "Family, Comedy",
-      "Release Year": "2026",
-      "Release Date": "2026-10-08",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": null,
-      "Plot Summary": "An overprotective father clashes with his daughter's boyfriend during a family trip, leading to comedic tension as he struggles to accept their relationship while trying to maintain control.",
-      "IMDb Link": "https://www.imdb.com/title/tt39251676/"
     }
   ],
   "series": [
@@ -1197,5 +1197,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-20 23:32:04"
+  "last_updated": "2026-10-21 09:25:27"
 };
