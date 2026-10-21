@@ -4847,6 +4847,28 @@ summary {
     color: var(--accent-warning);
 }
 
+.apk-download-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 12px;
+    background: rgba(0, 240, 255, 0.12);
+    color: #00f0ff;
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.apk-download-badge:hover {
+    background: rgba(0, 240, 255, 0.25);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+    transform: translateY(-1px);
+}
+
 .tiempo-dot-indicator {
     width: 8px;
     height: 8px;
