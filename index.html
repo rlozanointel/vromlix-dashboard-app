@@ -270,7 +270,7 @@
                                 </button>
 
                                 <div class="calle-dropdown-wrapper">
-                                    <button id="btn-phase-calle" class="btn-tiempo-subaction btn-sub-street" onclick="window.toggleCalleMenu()">
+                                    <button id="btn-phase-calle" class="btn-tiempo-subaction btn-sub-street" onclick="window.toggleCalleMenu(event)">
                                         <span>🚶‍♂️ Calle / Diligencia ▾</span>
                                     </button>
                                     <div id="calle-presets-menu" class="calle-menu-dropdown hidden">
@@ -358,13 +358,25 @@
                 <!-- SECCIÓN COLAPSABLE: DESGLOSES DETALLADOS (EVITA SATURAR LA PANTALLA) -->
                 <div class="tiempo-accordions-group">
                     
-                    <!-- Acordeón 1: Desglose de Pausas y Salidas a la Calle -->
-                    <details class="tiempo-accordion-item">
+                    <!-- Acordeón 1: Sesiones e Intervalos de Hoy (Abierto para ver y borrar registros) -->
+                    <details class="tiempo-accordion-item" open>
                         <summary class="tiempo-accordion-summary">
-                            <span class="accordion-summary-title">📊 Ver desglose detallado de Pausas y Salidas de Hoy</span>
-                            <span class="accordion-hint">Toca para abrir / cerrar</span>
+                            <span class="accordion-summary-title">📋 Registro de Sesiones de Hoy (Ver y Borrar Pruebas)</span>
+                            <span class="accordion-hint">Abierto por defecto • Toca para colapsar</span>
                         </summary>
                         <div class="tiempo-accordion-body">
+                            <!-- Lista Completa de Sesiones de Hoy con Botón de Borrar -->
+                            <div class="section-card" style="margin-bottom: 16px;">
+                                <div class="card-header">
+                                    <h3>🕒 Todas las Sesiones Registradas Hoy (Trabajo, Pausas, Calle, etc.)</h3>
+                                </div>
+                                <div class="card-content">
+                                    <div id="today-all-intervals-list" class="tiempo-breakdown-list">
+                                        <div class="empty-text">Sin sesiones registradas hoy aún.</div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="tiempo-details-row">
                                 <div class="section-card">
                                     <div class="card-header">

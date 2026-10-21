@@ -2532,6 +2532,35 @@ function initTiempo() {
                 `).join('');
             }
         }
+
+        // Render ALL Sessions of Today (with prominent delete buttons)
+        const allIntervalsList = document.getElementById('today-all-intervals-list');
+        if (allIntervalsList) {
+            const list = state.today_intervals || [];
+            if (list.length === 0) {
+                allIntervalsList.innerHTML = '<div class="empty-text">Sin sesiones registradas hoy aún.</div>';
+            } else {
+                allIntervalsList.innerHTML = list.map(item => {
+                    const phase = (item.phase || '').toLowerCase();
+                    const cfg = PHASE_CONFIG[phase] || { title: phase.toUpperCase(), color: '#9ca3af' };
+                    const startStr = item.start_iso ? item.start_iso.substring(11, 16) : '';
+                    const endStr = item.end_iso ? item.end_iso.substring(11, 16) : (item.is_active ? 'En curso ⏳' : '');
+                    const dur = formatShortSecs(item.duration_seconds || 0);
+                    return `
+                        <div class="tiempo-breakdown-item" style="border-left: 3px solid ${cfg.color};">
+                            <div>
+                                <span class="breakdown-idx">${cfg.title} ${item.subtag ? `(${escapeHTML(item.subtag)})` : ''}</span>
+                                <span class="breakdown-range" style="margin-left: 8px;">${startStr} ➔ ${endStr}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <span class="breakdown-dur" style="background: rgba(255,255,255,0.06); color: ${cfg.color}; font-weight:700;">${dur}</span>
+                                <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id})" title="Eliminar este registro de prueba">🗑️ Borrar</button>
+                            </div>
+                        </div>
+                    `;
+                }).reverse().join('');
+            }
+        }
     }
 
     window.eliminarIntervalo = function(id) {
@@ -2683,10 +2712,22 @@ function initTiempo() {
         });
     };
 
-    window.toggleCalleMenu = function() {
+    window.toggleCalleMenu = function(e) {
+        if (e && e.stopPropagation) e.stopPropagation();
         const menu = document.getElementById('calle-presets-menu');
         if (menu) menu.classList.toggle('hidden');
     };
+
+    // Cerrar menú de calle al dar clic fuera
+    document.addEventListener('click', (e) => {
+        const menu = document.getElementById('calle-presets-menu');
+        const btn = document.getElementById('btn-phase-calle');
+        if (menu && !menu.classList.contains('hidden')) {
+            if (!menu.contains(e.target) && (!btn || !btn.contains(e.target))) {
+                menu.classList.add('hidden');
+            }
+        }
+    });
 
     window.handleAudioFileSelected = function(fileInput) {
         if (!fileInput.files || !fileInput.files[0]) return;
