@@ -2533,34 +2533,64 @@ function initTiempo() {
             }
         }
 
-        // Render ALL Sessions of Today (with prominent delete buttons)
+        // Render ALL Sessions of Today (with dynamic category filter & prominent delete buttons)
+        window.lastKnownTimeIntervals = state.today_intervals || [];
+        renderFilteredIntervals();
+    }
+
+    let currentIntervalFilter = 'todos';
+    window.filtrarIntervalos = function(filter) {
+        currentIntervalFilter = filter;
+        document.querySelectorAll('.filter-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${filter}'`));
+        });
+        renderFilteredIntervals();
+    };
+
+    function renderFilteredIntervals() {
         const allIntervalsList = document.getElementById('today-all-intervals-list');
-        if (allIntervalsList) {
-            const list = state.today_intervals || [];
-            if (list.length === 0) {
-                allIntervalsList.innerHTML = '<div class="empty-text">Sin sesiones registradas hoy aún.</div>';
-            } else {
-                allIntervalsList.innerHTML = list.map(item => {
-                    const phase = (item.phase || '').toLowerCase();
-                    const cfg = PHASE_CONFIG[phase] || { title: phase.toUpperCase(), color: '#9ca3af' };
-                    const startStr = item.start_iso ? item.start_iso.substring(11, 16) : '';
-                    const endStr = item.end_iso ? item.end_iso.substring(11, 16) : (item.is_active ? 'En curso ⏳' : '');
-                    const dur = formatShortSecs(item.duration_seconds || 0);
-                    return `
-                        <div class="tiempo-breakdown-item" style="border-left: 3px solid ${cfg.color};">
-                            <div>
-                                <span class="breakdown-idx">${cfg.title} ${item.subtag ? `(${escapeHTML(item.subtag)})` : ''}</span>
-                                <span class="breakdown-range" style="margin-left: 8px;">${startStr} ➔ ${endStr}</span>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:10px;">
-                                <span class="breakdown-dur" style="background: rgba(255,255,255,0.06); color: ${cfg.color}; font-weight:700;">${dur}</span>
-                                <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id})" title="Eliminar este registro de prueba">🗑️ Borrar</button>
-                            </div>
-                        </div>
-                    `;
-                }).reverse().join('');
-            }
+        if (!allIntervalsList) return;
+
+        const list = window.lastKnownTimeIntervals || [];
+        let filtered = list;
+        if (currentIntervalFilter === 'trabajo') {
+            filtered = list.filter(item => (item.phase || '').toLowerCase() === 'trabajo');
+        } else if (currentIntervalFilter === 'pausa') {
+            filtered = list.filter(item => (item.phase || '').toLowerCase() === 'pausa');
+        } else if (currentIntervalFilter === 'calle') {
+            filtered = list.filter(item => (item.phase || '').toLowerCase() === 'calle');
+        } else if (currentIntervalFilter === 'otros') {
+            filtered = list.filter(item => {
+                const p = (item.phase || '').toLowerCase();
+                return p === 'comida' || p === 'ocio' || p === 'espiritual';
+            });
         }
+
+        if (filtered.length === 0) {
+            allIntervalsList.innerHTML = '<div class="empty-text">Sin registros bajo este filtro hoy.</div>';
+            return;
+        }
+
+        allIntervalsList.innerHTML = filtered.map(item => {
+            const phase = (item.phase || '').toLowerCase();
+            const cfg = PHASE_CONFIG[phase] || { title: phase.toUpperCase(), color: '#9ca3af' };
+            const startStr = item.start_iso ? item.start_iso.substring(11, 16) : '';
+            const endStr = item.end_iso ? item.end_iso.substring(11, 16) : (item.is_active ? 'En curso ⏳' : '');
+            const dur = formatShortSecs(item.duration_seconds || 0);
+            return `
+                <div class="tiempo-breakdown-item" style="border-left: 3px solid ${cfg.color};">
+                    <div>
+                        <span class="breakdown-idx" style="color: ${cfg.color}; font-weight: 700;">${cfg.title}</span>
+                        ${item.subtag ? `<span style="color: #cbd5e1; font-size: 0.88rem; margin-left: 6px;">• ${escapeHTML(item.subtag)}</span>` : ''}
+                        <span class="breakdown-range" style="margin-left: 10px; color: #94a3b8; font-size: 0.84rem;">(${startStr} ➔ ${endStr})</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span class="breakdown-dur" style="background: rgba(255,255,255,0.06); color: ${cfg.color}; font-weight:700;">${dur}</span>
+                        <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id})" title="Eliminar este registro de prueba">🗑️ Borrar</button>
+                    </div>
+                </div>
+            `;
+        }).reverse().join('');
     }
 
     window.eliminarIntervalo = function(id) {

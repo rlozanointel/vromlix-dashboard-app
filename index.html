@@ -67,55 +67,81 @@
             </div>
         </header>
 
-        <!-- MAIN NAVIGATION BAR (PÁGINAS / MENÚS UNIFICADOS) -->
+        <!-- MAIN NAVIGATION BAR (PÁGINAS / 4 MACRO-ÁREAS MAESTRAS) -->
         <nav class="main-nav-bar">
-            <button class="nav-tab-btn active" data-view="view-principal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                <span>Principal</span>
-            </button>
-            <button class="nav-tab-btn" data-view="view-tiempo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span>Tiempo</span>
-                <span id="tiempo-phase-dot" class="tiempo-dot-indicator"></span>
-            </button>
-            <button class="nav-tab-btn" data-view="view-iglesia">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
-                <span>Iglesia</span>
-            </button>
-            <button class="nav-tab-btn" data-view="view-mormon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                <span>Mormón</span>
-            </button>
-            <button class="nav-tab-btn" data-view="view-multimedia">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
-                <span>Multimedia</span>
-            </button>
-            <button class="nav-tab-btn" data-view="view-herramientas">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                <span>Herramientas</span>
-            </button>
-        
-            <button class="nav-tab-btn" data-view="view-carisma">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-                <span>Mente</span>
-            </button>
-            <button class="nav-tab-btn" data-view="view-traductor">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
-                <span>Traductor</span>
-            </button>
-            <button class="nav-tab-btn" data-view="view-youtube">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
-                <span>YouTube</span>
-                <span id="nav-yt-badge" class="nav-badge-pill" style="display: none;">0</span>
-            </button>
-            <button class="nav-tab-btn" data-view="view-agente-ops">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4.93 10.93a2 2 0 0 1 2.83 0l1.41 1.41a2 2 0 0 1-2.83 2.83l-1.41-1.41a2 2 0 0 1 0-2.83zm14.14 0a2 2 0 0 1 0 2.83l-1.41 1.41a2 2 0 0 1-2.83-2.83l1.41-1.41a2 2 0 0 1 2.83 0zM12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-8 6a8 8 0 0 1 16 0H4z"/></svg>
-                <span>Agente</span>
-            </button>
-            <button class="nav-tab-btn" data-view="view-pitch">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                <span>Pitch</span>
-            </button>
+            <!-- ÁREA 1: ⚡ NÚCLEO & PRODUCTIVIDAD -->
+            <div class="nav-macro-cluster">
+                <span class="nav-cluster-label">⚡ Núcleo</span>
+                <div class="nav-cluster-buttons">
+                    <button class="nav-tab-btn active" data-view="view-principal" title="Pizarrón Semanal y Tareas">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        <span>Principal</span>
+                    </button>
+                    <button class="nav-tab-btn" data-view="view-tiempo" title="Control de Tiempo, Pomodoro y Sueño">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Tiempo</span>
+                        <span id="tiempo-phase-dot" class="tiempo-dot-indicator"></span>
+                    </button>
+                    <button class="nav-tab-btn" data-view="view-pitch" title="Estrategia Comercial y Negociación">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                        <span>Pitch</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ÁREA 2: 🏛️ FE & IDIOMA -->
+            <div class="nav-macro-cluster">
+                <span class="nav-cluster-label">🏛️ Fe & Idioma</span>
+                <div class="nav-cluster-buttons">
+                    <button class="nav-tab-btn" data-view="view-iglesia" title="Clases, Apuntes y Oraciones">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+                        <span>Iglesia</span>
+                    </button>
+                    <button class="nav-tab-btn" data-view="view-mormon" title="Libro de Mormón y 106 Temas Pastorales">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        <span>Mormón</span>
+                    </button>
+                    <button class="nav-tab-btn" data-view="view-traductor" title="Traductor y Coach de Inglés">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span>Inglés</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ÁREA 3: 🎬 MEDIA & MENTE -->
+            <div class="nav-macro-cluster">
+                <span class="nav-cluster-label">🎬 Media & Mente</span>
+                <div class="nav-cluster-buttons">
+                    <button class="nav-tab-btn" data-view="view-multimedia" title="Catálogo SQLite Películas y Series">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                        <span>Películas</span>
+                    </button>
+                    <button class="nav-tab-btn" data-view="view-carisma" title="Introspección, Sesgos y Carisma">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                        <span>Mente</span>
+                    </button>
+                    <button class="nav-tab-btn" data-view="view-youtube" title="Resúmenes Diarios de Canales">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        <span>YouTube</span>
+                        <span id="nav-yt-badge" class="nav-badge-pill" style="display: none;">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ÁREA 4: 🛠️ SISTEMA & AGENTE -->
+            <div class="nav-macro-cluster">
+                <span class="nav-cluster-label">🛠️ Sistema & Ops</span>
+                <div class="nav-cluster-buttons">
+                    <button class="nav-tab-btn" data-view="view-herramientas" title="Buscador de Chats y Prompts Maestros">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        <span>Herramientas</span>
+                    </button>
+                    <button class="nav-tab-btn" data-view="view-agente-ops" title="Operaciones Autónomas y Watermarks">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4.93 10.93a2 2 0 0 1 2.83 0l1.41 1.41a2 2 0 0 1-2.83 2.83l-1.41-1.41a2 2 0 0 1 0-2.83zm14.14 0a2 2 0 0 1 0 2.83l-1.41 1.41a2 2 0 0 1-2.83-2.83l1.41-1.41a2 2 0 0 1 2.83 0zM12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-8 6a8 8 0 0 1 16 0H4z"/></svg>
+                        <span>Agente</span>
+                    </button>
+                </div>
+            </div>
         </nav>
 
         <!-- MAIN LAYOUT VVIEWS -->
@@ -233,10 +259,12 @@
                             </div>
                         </div>
 
-                        <!-- NIVEL 1: CONTROLES PRINCIPALES DE TRABAJO (GRANDES Y DIRECTOS) -->
+                        <!-- NIVEL 1: CONTROLES PRINCIPALES DE TRABAJO (EJECUTIVOS & MINIMALISTAS) -->
                         <div class="tiempo-primary-controls">
                             <button id="btn-phase-trabajo" class="btn-tiempo-hero btn-hero-work" onclick="window.cambiarFaseTiempo('trabajo', 'deep_work')">
-                                <span class="btn-hero-icon">💻</span>
+                                <span class="btn-hero-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                </span>
                                 <div class="btn-hero-info">
                                     <span class="btn-hero-title">TRABAJO</span>
                                     <span class="btn-hero-sub">25 a 45m enfoque</span>
@@ -244,7 +272,9 @@
                             </button>
 
                             <button id="btn-phase-pausa" class="btn-tiempo-hero btn-hero-pause" onclick="window.cambiarFaseTiempo('pausa', '5min')">
-                                <span class="btn-hero-icon">☕</span>
+                                <span class="btn-hero-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                                </span>
                                 <div class="btn-hero-info">
                                     <span class="btn-hero-title">PAUSA</span>
                                     <span class="btn-hero-sub">5 min descanso</span>
@@ -253,7 +283,9 @@
 
                             <!-- BOTÓN DE DETENER / PARAR DESTACADO EN ROJO -->
                             <button id="btn-phase-detener" class="btn-tiempo-hero btn-hero-stop" onclick="window.cambiarFaseTiempo('detener')">
-                                <span class="btn-hero-icon">⏹️</span>
+                                <span class="btn-hero-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+                                </span>
                                 <div class="btn-hero-info">
                                     <span class="btn-hero-title">DETENER</span>
                                     <span class="btn-hero-sub">Pausar / Parar reloj</span>
@@ -361,41 +393,25 @@
                     <!-- Acordeón 1: Sesiones e Intervalos de Hoy (Abierto para ver y borrar registros) -->
                     <details class="tiempo-accordion-item" open>
                         <summary class="tiempo-accordion-summary">
-                            <span class="accordion-summary-title">📋 Registro de Sesiones de Hoy (Ver y Borrar Pruebas)</span>
+                            <span class="accordion-summary-title">📋 Bitácora Detallada de Hoy (Ver, Filtrar y Borrar Registros)</span>
                             <span class="accordion-hint">Abierto por defecto • Toca para colapsar</span>
                         </summary>
                         <div class="tiempo-accordion-body">
-                            <!-- Lista Completa de Sesiones de Hoy con Botón de Borrar -->
-                            <div class="section-card" style="margin-bottom: 16px;">
-                                <div class="card-header">
-                                    <h3>🕒 Todas las Sesiones Registradas Hoy (Trabajo, Pausas, Calle, etc.)</h3>
+                            <!-- Única Lista Unificada de Sesiones de Hoy con Filtros Rápidos -->
+                            <div class="section-card">
+                                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                                    <h3>🕒 Línea de Tiempo de Hoy</h3>
+                                    <div class="tiempo-filter-pills" id="tiempo-filter-pills">
+                                        <button class="filter-pill active" onclick="window.filtrarIntervalos('todos')">Todas</button>
+                                        <button class="filter-pill" onclick="window.filtrarIntervalos('trabajo')">💻 Trabajo</button>
+                                        <button class="filter-pill" onclick="window.filtrarIntervalos('pausa')">☕ Pausas</button>
+                                        <button class="filter-pill" onclick="window.filtrarIntervalos('calle')">🚶 Calle</button>
+                                        <button class="filter-pill" onclick="window.filtrarIntervalos('otros')">🍽️ Comida / Ocio</button>
+                                    </div>
                                 </div>
                                 <div class="card-content">
                                     <div id="today-all-intervals-list" class="tiempo-breakdown-list">
                                         <div class="empty-text">Sin sesiones registradas hoy aún.</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tiempo-details-row">
-                                <div class="section-card">
-                                    <div class="card-header">
-                                        <h3>☕ Desglose de Pausas de Hoy</h3>
-                                    </div>
-                                    <div class="card-content">
-                                        <div id="pauses-breakdown-list" class="tiempo-breakdown-list">
-                                            <div class="empty-text">No has tomado pausas cortas aún hoy.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="section-card">
-                                    <div class="card-header">
-                                        <h3>🚶‍♂️ Salidas a la Calle y Diligencias</h3>
-                                    </div>
-                                    <div class="card-content">
-                                        <div id="street-breakdown-list" class="tiempo-breakdown-list">
-                                            <div class="empty-text">Sin salidas registradas hoy.</div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -591,6 +607,9 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- BANNER DE FILTRADO ACTIVO POR TEMA DE MINISTRACIÓN -->
+                <div id="mormon-active-filter-banner" class="mormon-active-filter-banner" style="display: none;"></div>
 
                 <!-- CONTENEDOR PRINCIPAL: LOS 15 LIBROS EN ACORDEÓN CON PASAJES QUIRÚRGICOS INTEGRADOS -->
                 <div id="mormon-books-accordion" class="mormon-books-container">
