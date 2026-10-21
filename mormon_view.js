@@ -7006,6 +7006,7 @@
     let activeCategoryFilter = 'all';
     let searchQuery = '';
     let isDrawerOpen = true;
+    let activeTopicFilterId = null;
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMormonView);
@@ -7103,10 +7104,10 @@
 
         let html = '';
         filtered.forEach(topic => {
+            const isActive = (activeTopicFilterId === topic.id);
             html += `
-                <button class="drawer-topic-chip" onclick="window.locateAndOpenTopic('${topic.id}', '${topic.bookId}', ${topic.chapterNum})" title="Ir a ${topic.scriptureRef}: ${topic.title}">
+                <button class="drawer-topic-chip ${isActive ? 'active-filter' : ''}" onclick="window.locateAndOpenTopic('${topic.id}', '${topic.bookId}', ${topic.chapterNum})" title="${escapeHtml(topic.title)} (${escapeHtml(topic.scriptureRef)})">
                     <span class="topic-chip-title">${escapeHtml(topic.shortTitle)}</span>
-                    <span class="topic-chip-ref">${escapeHtml(topic.scriptureRef)}</span>
                 </button>
             `;
         });
@@ -7115,21 +7116,56 @@
     }
 
     // -------------------------------------------------------------------------
-    // LOCALIZAR Y EXPANDIR PASAJE DIRECTO EN EL LIBRO
+    // LOCALIZAR Y AISLAR PASAJE DIRECTO EN EL LIBRO (FILTRA LIBRO Y CAPÍTULO)
     // -------------------------------------------------------------------------
     window.locateAndOpenTopic = function(topicId, bookId, chapterNum) {
-        // 1. Abrir libro
-        const bookDetails = document.getElementById(`book-${bookId}`);
-        if (bookDetails) {
-            bookDetails.open = true;
-            bookDetails.style.display = 'block';
-            bookDetails.style.opacity = '1';
-        }
+        const topic = MINISTERIO_TOPICS.find(t => t.id === topicId);
+        if (!topic) return;
 
-        // 2. Localizar fila del capitulo
+        activeTopicFilterId = topicId;
+
+        // Limpiar input de búsqueda previa para evitar colisiones
+        const searchInput = document.getElementById('mormon-search-input');
+        const clearBtn = document.getElementById('mormon-clear-search-btn');
+        if (searchInput) searchInput.value = '';
+        if (clearBtn) clearBtn.style.display = 'none';
+        searchQuery = '';
+
+        // 1. Filtrar los 15 libros: Aislar el libro y ocultar por completo los otros 14
+        MORMON_BOOKS.forEach(book => {
+            const details = document.getElementById(`book-${book.id}`);
+            if (!details) return;
+
+            if (book.id === bookId) {
+                // Mostrar y expandir el libro coincidente
+                details.style.display = 'block';
+                details.style.opacity = '1';
+                details.open = true;
+
+                // Ocultar todos los demás capítulos de este libro, dejando SOLO el capítulo de la necesidad
+                const rows = details.querySelectorAll('.mormon-chapter-row');
+                rows.forEach(row => {
+                    if (row.id === `chap-${bookId}-${chapterNum}`) {
+                        row.style.display = 'block';
+                        row.classList.add('is-highlighted');
+                    } else {
+                        row.style.display = 'none';
+                        row.classList.remove('is-highlighted');
+                    }
+                });
+
+                const countBadge = document.getElementById(`badge-count-${book.id}`);
+                if (countBadge) countBadge.textContent = '1 cap';
+            } else {
+                // Ocultar por completo los otros 14 libros
+                details.style.display = 'none';
+                details.open = false;
+            }
+        });
+
+        // 2. Localizar y destacar la fila del capítulo seleccionado
         const chapRow = document.getElementById(`chap-${bookId}-${chapterNum}`);
         if (chapRow) {
-            chapRow.style.display = 'block';
             chapRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
             chapRow.classList.add('pulse-highlight');
             setTimeout(() => {
@@ -7137,7 +7173,7 @@
             }, 3500);
         }
 
-        // 3. Abrir la ficha quirurgica especifica
+        // 3. Abrir la ficha quirúrgica específica del tema
         const detailEl = document.getElementById(`detail-${topicId}`);
         if (detailEl) {
             detailEl.style.display = 'block';
@@ -7145,9 +7181,84 @@
             if (toggleBtn) toggleBtn.classList.add('active');
         }
 
-        const topic = MINISTERIO_TOPICS.find(t => t.id === topicId);
-        if (topic && typeof showToast === 'function') {
+        // 4. Actualizar contador total visible
+        updateMatchCount(1);
+
+        // 5. Actualizar insignia en el Drawer de ministración
+        const drawerBadge = document.getElementById('drawer-active-filter-badge');
+        if (drawerBadge) {
+            drawerBadge.style.display = 'inline-flex';
+            drawerBadge.innerHTML = `
+                <span>🏷️ <strong>${escapeHtml(topic.shortTitle)}</strong> (${escapeHtml(topic.scriptureRef)})</span>
+                <button class="drawer-filter-clear-btn" onclick="window.clearTopicFilter()" title="Quitar filtro y ver todos los 15 libros">✕ Ver todos los libros</button>
+            `;
+        }
+
+        // 6. Actualizar banner de filtro activo sobre los libros
+        const filterBanner = document.getElementById('mormon-active-filter-banner');
+        if (filterBanner) {
+            filterBanner.style.display = 'flex';
+            filterBanner.innerHTML = `
+                <div class="filter-banner-text">
+                    <span class="filter-banner-icon">🎯</span>
+                    <span>Mostrando únicamente tema: <strong>${escapeHtml(topic.shortTitle)}</strong> — <span class="filter-banner-ref">${escapeHtml(topic.scriptureRef)}</span></span>
+                </div>
+                <button class="btn-clear-active-filter" onclick="window.clearTopicFilter()" title="Restaurar los 15 libros del Libro de Mormón">
+                    ✕ Ver todos los 15 libros
+                </button>
+            `;
+        }
+
+        // 7. Refrescar chips del drawer para marcar el chip activo
+        renderDrawerTopics();
+
+        if (typeof showToast === 'function') {
             showToast(`📖 ${topic.scriptureRef}: ${topic.shortTitle}`, 'success');
+        }
+    };
+
+    // -------------------------------------------------------------------------
+    // RESTAURAR TODOS LOS LIBROS Y CAPÍTULOS
+    // -------------------------------------------------------------------------
+    window.clearTopicFilter = function() {
+        activeTopicFilterId = null;
+
+        const drawerBadge = document.getElementById('drawer-active-filter-badge');
+        if (drawerBadge) {
+            drawerBadge.style.display = 'none';
+            drawerBadge.innerHTML = '';
+        }
+
+        const filterBanner = document.getElementById('mormon-active-filter-banner');
+        if (filterBanner) {
+            filterBanner.style.display = 'none';
+            filterBanner.innerHTML = '';
+        }
+
+        // Restaurar los 15 libros (visibles y colapsados para orden)
+        MORMON_BOOKS.forEach(book => {
+            const details = document.getElementById(`book-${book.id}`);
+            if (details) {
+                details.style.display = 'block';
+                details.style.opacity = '1';
+                details.open = false;
+
+                const rows = details.querySelectorAll('.mormon-chapter-row');
+                rows.forEach(row => {
+                    row.style.display = 'block';
+                    row.classList.remove('is-highlighted');
+                });
+
+                const countBadge = document.getElementById(`badge-count-${book.id}`);
+                if (countBadge) countBadge.textContent = `${book.chapters.length} caps`;
+            }
+        });
+
+        renderDrawerTopics();
+        updateMatchCount(239);
+
+        if (typeof showToast === 'function') {
+            showToast('Mostrando todos los 15 libros del Libro de Mormón', 'info');
         }
     };
 
@@ -7296,6 +7407,26 @@
     // -------------------------------------------------------------------------
     function filterBooksAccordion() {
         const q = normalizeText(searchQuery);
+
+        if (q && activeTopicFilterId) {
+            // Si el usuario escribe una búsqueda libre, quitar el aislamiento del tema
+            activeTopicFilterId = null;
+            const drawerBadge = document.getElementById('drawer-active-filter-badge');
+            if (drawerBadge) {
+                drawerBadge.style.display = 'none';
+                drawerBadge.innerHTML = '';
+            }
+            const filterBanner = document.getElementById('mormon-active-filter-banner');
+            if (filterBanner) {
+                filterBanner.style.display = 'none';
+                filterBanner.innerHTML = '';
+            }
+            renderDrawerTopics();
+        } else if (!q && activeTopicFilterId) {
+            // Mantener el aislamiento del tema activo
+            return;
+        }
+
         let totalVisible = 0;
 
         MORMON_BOOKS.forEach(book => {
@@ -7430,14 +7561,25 @@
         const expandBtn = document.getElementById('mormon-expand-all-btn');
         if (expandBtn) {
             expandBtn.addEventListener('click', () => {
-                document.querySelectorAll('.mormon-book-card').forEach(d => d.open = true);
+                if (activeTopicFilterId) {
+                    window.clearTopicFilter();
+                }
+                document.querySelectorAll('.mormon-book-card').forEach(d => {
+                    d.style.display = 'block';
+                    d.open = true;
+                });
             });
         }
 
         const collapseBtn = document.getElementById('mormon-collapse-all-btn');
         if (collapseBtn) {
             collapseBtn.addEventListener('click', () => {
-                document.querySelectorAll('.mormon-book-card').forEach(d => d.open = false);
+                if (activeTopicFilterId) {
+                    window.clearTopicFilter();
+                }
+                document.querySelectorAll('.mormon-book-card').forEach(d => {
+                    d.open = false;
+                });
             });
         }
 

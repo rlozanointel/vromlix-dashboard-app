@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vromlix-dashboard-v5';
+const CACHE_NAME = 'vromlix-dashboard-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
