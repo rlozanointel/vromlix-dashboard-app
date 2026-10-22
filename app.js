@@ -542,29 +542,38 @@ function initTasks() {
                     saveTasks();
                 });
                 
+                const mainInfo = document.createElement("div");
+                mainInfo.className = "weekly-task-main";
+
                 const txt = document.createElement("span");
                 txt.className = "weekly-task-text";
                 const displayTitle = task.time ? `${task.time} — ${task.title || ""}` : (task.title || "");
                 txt.textContent = displayTitle;
+                mainInfo.appendChild(txt);
 
-                content.appendChild(checkbox);
-                content.appendChild(txt);
-
-                // Visual Alert Badge for Pending Action Items (Campo 4)
+                // Meta row for Action Items badge or detail icon
                 if (hasActions) {
+                    const metaRow = document.createElement("div");
+                    metaRow.className = "weekly-task-metarow";
                     const alertBadge = document.createElement("span");
                     alertBadge.className = "action-alert-badge";
                     alertBadge.title = "Tiene pendientes o tareas a realizar";
                     alertBadge.innerHTML = `⚡ Pendiente`;
-                    content.appendChild(alertBadge);
+                    metaRow.appendChild(alertBadge);
+                    mainInfo.appendChild(metaRow);
                 } else if (task.details && task.details.trim() !== "") {
+                    const metaRow = document.createElement("div");
+                    metaRow.className = "weekly-task-metarow";
                     const detailBadge = document.createElement("span");
                     detailBadge.className = "task-detail-icon";
                     detailBadge.title = "Tiene detalles (clic para ver)";
                     detailBadge.textContent = "📝 ver";
-                    content.appendChild(detailBadge);
+                    metaRow.appendChild(detailBadge);
+                    mainInfo.appendChild(metaRow);
                 }
 
+                content.appendChild(checkbox);
+                content.appendChild(mainInfo);
                 item.appendChild(content);
 
                 // Open modal on click
