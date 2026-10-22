@@ -236,7 +236,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Mera Kirai",
           "details": "",
-          "action_items": "* Revisar imagenes\n* Boton de cotizar IA\n* Colocar fecha de Xochimilco\n* Agregar Clabe a Stripe\n* Agregar palabra desde a los precios\n* Generar el PDF de catalogo como revista\n* Integrar venta de productos\n* Agregar las imagenes del salon\n* Optimizar para visualizar en celular (3 cosas del otro chat)\n*Revision General",
+          "action_items": "* Revisar imagenes\n* Boton de cotizar IA\n* Colocar fecha de Xochimilco\n* Quitar evento de estilismo\n* Agregar Clabe a Stripe\n* Agregar palabra desde a los precios\n* Generar el PDF de catalogo como revista\n* Integrar venta de productos\n* Agregar las imagenes de publicidad del salon\n* Optimizar para visualizar en celular (3 cosas del otro chat)\n* Revision General\n\nHermana:\n* Agregar Alma\n* Crear para la Ruta del Aguila\n* Documentar todo\n* Poner QR en espejos de estetica\n* Enviar los precios y secciones de cortes",
           "completed": false
         },
         {
@@ -1284,5 +1284,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-22 13:07:48"
+  "last_updated": "2026-10-22 13:12:47"
 };
