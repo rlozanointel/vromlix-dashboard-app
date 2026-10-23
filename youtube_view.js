@@ -255,21 +255,21 @@ function renderYouTubeSummaryCard(v) {
                 <a href="${v.url_video}" target="_blank" rel="noopener">${v.title}</a>
             </h3>
 
-            <div class="yt-vault-indicator" title="${v.vault_path || ''}">
-                🧠 <b>Segundo Cerebro (YAML + Transcripción Completa):</b> <code>${vaultFileName}</code>
+            <div class="yt-vault-indicator" title="Segundo Cerebro: ${v.vault_path || ''}">
+                🧠 <code>${vaultFileName}</code>
             </div>
 
-            <!-- 1. EL NÚCLEO EN 3 FRASES (10 SEGUNDOS) -->
+            <!-- 1. EL NÚCLEO -->
             <div class="yt-section-box yt-box-tldr">
-                <div class="yt-section-title">⚡ 1. ¿De qué trata en 3 frases? (El Núcleo en 10 segundos)</div>
+                <div class="yt-section-title">⚡ El Núcleo</div>
                 <ul class="yt-bullet-list yt-tldr-list">
                     ${tldrHtml}
                 </ul>
             </div>
 
-            <!-- 2. IDEAS PRINCIPALES / BLOQUES TEMÁTICOS -->
+            <!-- 2. IDEAS PRINCIPALES -->
             <div class="yt-section-box yt-box-keypoints">
-                <div class="yt-section-title">🔑 2. Ideas Principales / Bloques Temáticos (100% General y Sin Humo)</div>
+                <div class="yt-section-title">🔑 Ideas Principales</div>
                 <ul class="yt-bullet-list yt-kp-list">
                     ${kpHtml}
                 </ul>
@@ -278,7 +278,7 @@ function renderYouTubeSummaryCard(v) {
             <!-- 3. MAPA RÁPIDO DE MOMENTOS -->
             ${chaptersHtml ? `
                 <div class="yt-chapters-block">
-                    <div class="yt-chapters-label">⏱️ 3. Momentos Clave (Clic para saltar a ese minuto en YouTube):</div>
+                    <div class="yt-chapters-label">⏱️ Momentos Clave:</div>
                     <div class="yt-chapters-grid">
                         ${chaptersHtml}
                     </div>

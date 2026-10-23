@@ -131,8 +131,8 @@
                         <span class="conf-session-tag ${sessionBadgeClass}">
                             ${escapeHtml(talk.badge)}
                         </span>
-                        <span class="conf-talk-number">#${numPadded}</span>
-                        ${talk.theme ? `<span class="conf-theme-tag">${escapeHtml(talk.theme)}</span>` : ''}
+                        <span class="conf-talk-number">Discurso #${numPadded}</span>
+                        ${talk.theme ? `<span class="conf-theme-tag">🏷️ ${escapeHtml(talk.theme)}</span>` : ''}
                     </div>
                     <div class="conf-speaker-title-box">
                         <h3 class="conf-speaker-name">${escapeHtml(talk.speaker)}</h3>
