@@ -358,6 +358,7 @@ function initTasks() {
     const deleteModalBtn = document.getElementById("delete-modal-task-btn");
 
     let currentEditingLocation = { day: null, index: null };
+    let pendingEditProject = null; // { catId: string, projectRef: object }
 
     // Days mapping to match Date.getDay() (Sunday is 0, Monday is 1, etc.)
     const daysOfWeek = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
@@ -375,7 +376,23 @@ function initTasks() {
         if (modalDetailsInput) modalDetailsInput.value = taskObj.details || "";
         if (modalActionsInput) modalActionsInput.value = taskObj.action_items || "";
         
-        if (taskModal) taskModal.classList.remove("hidden");
+        if (taskModal) {
+            taskModal.classList.remove("hidden");
+            // Auto focus for immediate typing
+            setTimeout(() => {
+                if (day === "antigravity") {
+                    if (modalDetailsInput && !modalDetailsInput.value) {
+                        modalDetailsInput.focus();
+                    } else if (modalActionsInput && !modalActionsInput.value) {
+                        modalActionsInput.focus();
+                    } else if (modalTitleInput) {
+                        modalTitleInput.focus();
+                    }
+                } else {
+                    if (modalTitleInput) modalTitleInput.focus();
+                }
+            }, 60);
+        }
     }
 
     function closeTaskModal() {
@@ -385,11 +402,36 @@ function initTasks() {
 
     if (closeModalBtn) closeModalBtn.addEventListener("click", closeTaskModal);
     
+    // Close modal on outside click (anywhere outside .modal-card)
+    let isMouseDownInsideModalCard = false;
     if (taskModal) {
+        taskModal.addEventListener("mousedown", (e) => {
+            isMouseDownInsideModalCard = !!e.target.closest(".modal-card");
+        });
         taskModal.addEventListener("click", (e) => {
-            if (e.target === taskModal) closeTaskModal();
+            if (!isMouseDownInsideModalCard && (e.target === taskModal || !e.target.closest(".modal-card"))) {
+                closeTaskModal();
+            }
+            isMouseDownInsideModalCard = false;
+        });
+
+        // Ctrl+Enter or Cmd+Enter to save modal
+        taskModal.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                if (saveModalBtn) saveModalBtn.click();
+            }
         });
     }
+
+    // Escape key closes modal immediately
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            if (taskModal && !taskModal.classList.contains("hidden")) {
+                closeTaskModal();
+            }
+        }
+    });
 
     if (saveModalBtn) {
         saveModalBtn.addEventListener("click", () => {
@@ -894,24 +936,64 @@ function initTasks() {
             const quickInput = document.createElement("input");
             quickInput.type = "text";
             quickInput.className = "proj-col-input";
+            quickInput.id = `proj-col-input-${cat.id}`;
             quickInput.placeholder = cat.placeholder;
+
+            // If user just created a project in this column, keep focus and prompt for Enter
+            if (pendingEditProject && pendingEditProject.catId === cat.id) {
+                quickInput.classList.add("awaiting-edit-enter");
+                quickInput.placeholder = "↵ Presiona Enter para abrir y editar detalles...";
+                setTimeout(() => {
+                    const el = document.getElementById(`proj-col-input-${cat.id}`);
+                    if (el) el.focus();
+                }, 40);
+            }
+
             quickInput.addEventListener("keydown", (e) => {
-                if (e.key === "Enter" && quickInput.value.trim() !== "") {
+                if (e.key === "Enter") {
                     const title = quickInput.value.trim();
-                    if (!tasksState.weekly.antigravity) tasksState.weekly.antigravity = [];
-                    tasksState.weekly.antigravity.unshift({
-                        time: "",
-                        title: title,
-                        details: "",
-                        action_items: "",
-                        completed: false,
-                        category: cat.id,
-                        is_focus: currentProjectScope === "focus"
-                    });
-                    quickInput.value = "";
-                    saveTasks();
-                    renderWeeklyTasks();
-                    showToast(`Proyecto añadido a ${cat.label}`, "success");
+                    if (title !== "") {
+                        // 1. Create card
+                        if (!tasksState.weekly.antigravity) tasksState.weekly.antigravity = [];
+                        const newProj = {
+                            time: "",
+                            title: title,
+                            details: "",
+                            action_items: "",
+                            completed: false,
+                            category: cat.id,
+                            is_focus: currentProjectScope === "focus"
+                        };
+                        tasksState.weekly.antigravity.unshift(newProj);
+                        pendingEditProject = { catId: cat.id, projectRef: newProj };
+                        quickInput.value = "";
+                        saveTasks();
+                        renderWeeklyTasks();
+                        showToast(`"${title}" añadido. Presiona Enter para abrir y editar 📝`, "success");
+                    } else {
+                        // 2. Empty input + Enter pressed -> Open card if pending
+                        if (pendingEditProject && pendingEditProject.catId === cat.id) {
+                            e.preventDefault();
+                            const targetRef = pendingEditProject.projectRef;
+                            pendingEditProject = null;
+                            const origIdx = tasksState.weekly.antigravity.indexOf(targetRef);
+                            if (origIdx !== -1) {
+                                openTaskModal("antigravity", origIdx);
+                            }
+                        }
+                    }
+                } else if (e.key === "Escape") {
+                    pendingEditProject = null;
+                    quickInput.classList.remove("awaiting-edit-enter");
+                    quickInput.placeholder = cat.placeholder;
+                    quickInput.blur();
+                } else {
+                    // Typing any other key resets pendingEditProject
+                    if (pendingEditProject && pendingEditProject.catId === cat.id) {
+                        pendingEditProject = null;
+                        quickInput.classList.remove("awaiting-edit-enter");
+                        quickInput.placeholder = cat.placeholder;
+                    }
                 }
             });
             quickAddBox.appendChild(quickInput);
@@ -933,6 +1015,17 @@ function initTasks() {
 
         const card = document.createElement("div");
         card.className = `project-bento-card ${catMeta.class} ${proj.completed ? "completed" : ""} ${proj.is_focus ? "is-focus" : ""}`;
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `Abrir proyecto ${proj.title || ''}`);
+        card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                if (e.target === card || e.target.classList.contains("proj-card-title") || e.target.classList.contains("proj-card-body")) {
+                    e.preventDefault();
+                    openTaskModal("antigravity", origIdx);
+                }
+            }
+        });
 
         // Top Header: Tag + Controls (Star, Delete)
         const cardHeader = document.createElement("div");
@@ -1086,6 +1179,17 @@ function initTasks() {
     function createCompactProjectStrip(proj, origIdx, cat) {
         const strip = document.createElement("div");
         strip.className = `proj-compact-strip ${proj.completed ? "completed" : ""}`;
+        strip.tabIndex = 0;
+        strip.setAttribute("role", "button");
+        strip.setAttribute("aria-label", `Abrir proyecto ${proj.title || ''}`);
+        strip.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                if (e.target === strip || e.target.classList.contains("compact-title") || e.target.classList.contains("compact-left")) {
+                    e.preventDefault();
+                    openTaskModal("antigravity", origIdx);
+                }
+            }
+        });
 
         // Parse action items count
         const rawLines = (proj.action_items || "")
