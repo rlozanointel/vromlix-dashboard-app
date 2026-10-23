@@ -46,24 +46,24 @@ function initMainNavigation() {
             e.preventDefault();
             const targetView = btn.getAttribute('data-view');
             switchView(targetView);
-            // Actualizar URL sin forzar scroll anchor nativo
-            if (window.history && window.history.replaceState) {
-                window.history.replaceState(null, '', '#' + targetView);
+            // Actualizar URL sin provocar scroll brusco hacia abajo
+            if (history.replaceState) {
+                history.replaceState(null, null, '#' + targetView);
+            } else {
+                window.location.hash = targetView;
             }
-            // Asegurar que el encabezado y pestañas permanezcan visibles en la parte superior
-            window.scrollTo({ top: 0, behavior: 'instant' });
+            // Asegurar que la barra de navegación permanezca visible arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
 
     const hashView = window.location.hash.replace('#', '');
     if (hashView && document.getElementById(hashView)) {
         switchView(hashView);
+        window.scrollTo({ top: 0, behavior: 'instant' });
     } else if (document.getElementById(savedView)) {
         switchView(savedView);
     }
-    setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'instant' });
-    }, 20);
 }
 
 // ==========================================
