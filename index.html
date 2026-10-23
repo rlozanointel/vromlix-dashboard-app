@@ -569,10 +569,30 @@
                 </div>
             </div>
 
-            <!-- VISTA: LIBRO DE MORMÓN (MNEMOTECNIA & GUÍA DE MINISTRACIÓN) -->
+            <!-- VISTA: LIBRO DE MORMÓN & CONFERENCIA GENERAL (FE & ESPIRITUALIDAD) -->
             <div id="view-mormon" class="dashboard-view">
-                <!-- HERO CARD CON BUSCADOR UNIFICADO Y PESTAÑAS DE MINISTRACIÓN -->
-                <div class="section-card mormon-hero-card">
+                <!-- BARRA SELECTORA SUPERIOR (SUB-PESTAÑAS FE & MINISTRACIÓN) -->
+                <div class="mormon-subnav-bar">
+                    <button class="mormon-subnav-btn active" id="btn-subview-escrituras" onclick="window.switchMormonSubview('escrituras')">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        <span>📖 Libro de Mormón (Mnemotecnia & 106 Temas)</span>
+                        <span class="subnav-pill-badge">239 Capítulos</span>
+                    </button>
+                    <button class="mormon-subnav-btn" id="btn-subview-conferencia" onclick="window.switchMormonSubview('conferencia')">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/>
+                        </svg>
+                        <span>🏛️ Conferencia General (Octubre 2026)</span>
+                        <span class="subnav-pill-badge subnav-gold-badge">37 Discursos</span>
+                    </button>
+                </div>
+
+                <!-- SUB-PANEL 1: LIBRO DE MORMÓN (MNEMOTECNIA & MINISTRACIÓN) -->
+                <div id="subview-escrituras" class="mormon-subview-panel">
+                    <!-- HERO CARD CON BUSCADOR UNIFICADO Y PESTAÑAS DE MINISTRACIÓN -->
+                    <div class="section-card mormon-hero-card">
                     <div class="card-header mormon-header">
                         <div class="header-title-group">
                             <div class="mormon-header-icon-box">
@@ -692,6 +712,119 @@
                 <div id="mormon-books-accordion" class="mormon-books-container">
                     <!-- 15 Libros colapsables inyectados dinámicamente -->
                 </div>
+                </div> <!-- FIN SUB-PANEL 1: ESCRITURAS -->
+
+                <!-- SUB-PANEL 2: CONFERENCIA GENERAL (OCTUBRE 2026) -->
+                <div id="subview-conferencia" class="mormon-subview-panel" style="display: none;">
+                    <!-- HERO CARD CONFERENCIA GENERAL -->
+                    <div class="section-card conferencia-hero-card">
+                        <div class="card-header conferencia-header">
+                            <div class="header-title-group">
+                                <div class="conferencia-header-icon-box">
+                                    <svg class="header-icon conf-gold-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="mormon-title-badge-row">
+                                        <h2>Conferencia General — Octubre 2026</h2>
+                                        <span class="conf-badge-pill">Semestral N° 196</span>
+                                    </div>
+                                    <p class="subtitle-text">37 Discursos Sintéticos • 4 Sesiones • Anécdotas Memorables • Citas de Oro para Ministrar y Retos de Acción</p>
+                                </div>
+                            </div>
+                            <div class="mormon-stats-row">
+                                <div class="mormon-stat-pill">
+                                    <span class="mormon-stat-num">37</span>
+                                    <span class="mormon-stat-label">Discursos</span>
+                                </div>
+                                <div class="mormon-stat-pill">
+                                    <span class="mormon-stat-num">4</span>
+                                    <span class="mormon-stat-label">Sesiones</span>
+                                </div>
+                                <div class="mormon-stat-pill mormon-stat-active" title="Discursos visibles según filtro">
+                                    <span class="mormon-stat-num" id="conf-match-count">37</span>
+                                    <span class="mormon-stat-label">Visibles</span>
+                                </div>
+                                <a href="/Guia_Conferencia_Octubre_2026.pdf" target="_blank" download="Guia_Conferencia_Octubre_2026.pdf" class="btn-download-pdf" title="Descargar la guía completa en PDF imprimible (2.6 MB)">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                                    </svg>
+                                    <span>Descargar PDF</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- CONTROLES Y BÚSQUEDA -->
+                        <div class="conf-controls-container">
+                            <div class="conf-search-row">
+                                <div class="mormon-search-wrapper">
+                                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                    </svg>
+                                    <input type="text" id="conf-search-input" class="mormon-search" placeholder="🔍 Busca por orador (Gong, Oaks, Runia, Bednar), tema (templo, dolor, diezmo, perdón) o palabra clave...">
+                                    <button id="conf-clear-search-btn" class="mormon-clear-btn" title="Limpiar búsqueda" style="display: none;">×</button>
+                                </div>
+                            </div>
+
+                            <!-- FILTRO DE SESIONES -->
+                            <div class="conf-filter-pills-row">
+                                <span class="conf-filter-label">Sesión:</span>
+                                <div class="conf-filter-scroll">
+                                    <button class="conf-filter-pill active" data-session="all">Todas (37)</button>
+                                    <button class="conf-filter-pill" data-session="sab-man">🌅 Sáb. Mañana (6)</button>
+                                    <button class="conf-filter-pill" data-session="sab-tar">☀️ Sáb. Tarde (12)</button>
+                                    <button class="conf-filter-pill" data-session="dom-man">🌄 Dom. Mañana (9)</button>
+                                    <button class="conf-filter-pill" data-session="dom-tar">🌇 Dom. Tarde (10)</button>
+                                </div>
+                            </div>
+
+                            <!-- FILTRO DE LLAMAMIENTO -->
+                            <div class="conf-filter-pills-row conf-calling-row">
+                                <span class="conf-filter-label">Líderes:</span>
+                                <div class="conf-filter-scroll">
+                                    <button class="conf-calling-pill active" data-calling="all">Todos</button>
+                                    <button class="conf-calling-pill" data-calling="presidencia">👑 Primera Presidencia</button>
+                                    <button class="conf-calling-pill" data-calling="apostoles">⚡ Doce Apóstoles</button>
+                                    <button class="conf-calling-pill" data-calling="mujeres">🌸 Líderes de Mujeres & Niños</button>
+                                    <button class="conf-calling-pill" data-calling="setentas">🤝 Setentas & Obispado</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN DE ACONTECIMIENTOS Y MÚSICA (COLLAPSIBLE ACORDEÓN) -->
+                    <details class="executive-accordion conf-special-accordion">
+                        <summary class="executive-accordion-summary">
+                            <div class="summary-left">
+                                <span class="summary-icon">🏛️</span>
+                                <span class="summary-title">Acontecimientos Especiales, Sostenimiento Solemne & Música Sagrada</span>
+                            </div>
+                            <span class="summary-badge">Ver Anuncios y Coro</span>
+                        </summary>
+                        <div class="executive-accordion-content conf-special-content">
+                            <div class="conf-special-grid">
+                                <div class="conf-special-card">
+                                    <h4>🤝 Sostenimiento Solemne de Líderes</h4>
+                                    <p>El <strong>élder D. Todd Christofferson</strong> (del Quórum de los Doce) dirigió el sostenimiento solemne de Autoridades Generales, Setentas de Área y Oficiales Generales. Se sostuvo por voto unánime al élder David Kannar como nuevo Setenta de Área y se agradeció el fiel servicio del élder Robert H. Simpson.</p>
+                                </div>
+                                <div class="conf-special-card highlight-gold">
+                                    <h4>🏛️ Celebración Templo de Salt Lake 2027</h4>
+                                    <p>El <strong>presidente Dallin H. Oaks</strong> anunció formalmente que las extensas obras de renovación sísmica y restauración del histórico <strong>Templo de Salt Lake</strong> concluirán en 2026, abriendo sus puertas para un período de puertas abiertas y dedicación solemne en la <strong>primavera de 2027</strong>.</p>
+                                </div>
+                                <div class="conf-special-card">
+                                    <h4>🎵 El Coro del Tabernáculo de la Manzana del Templo</h4>
+                                    <p>Música inspiradora en las 4 sesiones: himnos clásicos como <em>«Señor, te necesito»</em>, <em>«Paz, cálmense»</em>, <em>«Creo en Cristo»</em> y <em>«Bandera de Sión»</em>, dirigidos por Mack Wilberg y Ryan Murphy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- CONTENEDOR DE TARJETAS DE DISCURSOS -->
+                    <div id="conf-talks-container" class="conf-talks-grid">
+                        <!-- Renderizado dinámicamente desde conferencia_data.js -->
+                    </div>
+                </div> <!-- FIN SUB-PANEL 2: CONFERENCIA -->
             </div>
 
             <!-- VISTA 3: MULTIMEDIA -->
@@ -2593,6 +2726,8 @@
     <script src="agent_ops_view.js"></script>
     <script src="youtube_view.js?v=20261017_1900"></script>
     <script src="mormon_view.js"></script>
+    <script src="conferencia_data.js"></script>
+    <script src="conferencia_view.js"></script>
     <script src="pitch_view.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
