@@ -42,10 +42,16 @@ function initMainNavigation() {
     }
 
     navButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
             const targetView = btn.getAttribute('data-view');
             switchView(targetView);
-            window.location.hash = targetView;
+            // Actualizar URL sin forzar scroll anchor nativo
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', '#' + targetView);
+            }
+            // Asegurar que el encabezado y pestañas permanezcan visibles en la parte superior
+            window.scrollTo({ top: 0, behavior: 'instant' });
         });
     });
 
@@ -55,6 +61,9 @@ function initMainNavigation() {
     } else if (document.getElementById(savedView)) {
         switchView(savedView);
     }
+    setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 20);
 }
 
 // ==========================================
@@ -627,6 +636,311 @@ function initTasks() {
                 };
             }
         });
+        renderProjects();
+    }
+
+    // ==========================================
+    // BENTO PROJECTS DECK ENGINE (3 LAYERS: FOCUS, CATEGORIES & NEXT ACTION)
+    // ==========================================
+    let currentProjectScope = localStorage.getItem('vromlix_project_scope') || 'all'; // 'all' or 'focus'
+    let currentProjectCat = localStorage.getItem('vromlix_project_cat') || 'all'; // 'all', 'negocios', 'carrera', 'tech', 'fe'
+
+    function getProjectCategory(item) {
+        if (item.category) return item.category;
+        const t = (item.title || "").toLowerCase();
+        if (t.includes("mera kirai") || t.includes("nexo") || t.includes("playera") || t.includes("negocio")) return "negocios";
+        if (t.includes("postula") || t.includes("cv") || t.includes("empleo") || t.includes("kheri")) return "carrera";
+        if (t.includes("elder") || t.includes("family") || t.includes("lds") || t.includes("lectura") || t.includes("publicidad")) return "fe";
+        return "tech";
+    }
+
+    function getCategoryMeta(cat) {
+        switch(cat) {
+            case "negocios":
+                return { label: "💼 Negocios", class: "cat-biz" };
+            case "carrera":
+                return { label: "🎯 Carrera & CV", class: "cat-career" };
+            case "fe":
+                return { label: "🏛️ Fe & Misión", class: "cat-faith" };
+            case "tech":
+            default:
+                return { label: "🛠️ Tech / Ops", class: "cat-tech" };
+        }
+    }
+
+    window.setProjectScope = function(scope) {
+        currentProjectScope = scope;
+        localStorage.setItem('vromlix_project_scope', scope);
+        renderProjects();
+    };
+
+    window.setProjectCategory = function(cat) {
+        currentProjectCat = cat;
+        localStorage.setItem('vromlix_project_cat', cat);
+        renderProjects();
+    };
+
+    window.quickAddProject = function() {
+        const input = document.getElementById('new-project-input');
+        const select = document.getElementById('new-project-cat-select');
+        if (!input || !input.value.trim()) return;
+        const title = input.value.trim();
+        const cat = select ? select.value : 'tech';
+
+        if (!tasksState.weekly.antigravity) tasksState.weekly.antigravity = [];
+        tasksState.weekly.antigravity.unshift({
+            time: "",
+            title: title,
+            details: "",
+            action_items: "",
+            completed: false,
+            category: cat,
+            is_focus: currentProjectScope === 'focus'
+        });
+        input.value = "";
+        saveTasks();
+        renderWeeklyTasks();
+        showToast(`Proyecto "${title}" añadido con éxito`, 'success');
+    };
+
+    window.toggleExtraActions = function(index) {
+        const el = document.getElementById(`proj-extra-${index}`);
+        const btn = document.getElementById(`proj-btn-toggle-${index}`);
+        if (!el) return;
+        const isHidden = el.classList.toggle('hidden');
+        if (btn) btn.textContent = isHidden ? btn.getAttribute('data-show-text') : 'Ocultar tareas ▴';
+    };
+
+    function renderProjects() {
+        const grid = document.getElementById("projects-bento-grid");
+        if (!grid) return;
+        grid.innerHTML = "";
+
+        const allProjects = tasksState.weekly.antigravity || [];
+
+        // Ensure default is_focus on initial load
+        allProjects.forEach(p => {
+            if (p.is_focus === undefined) {
+                const t = (p.title || "").toLowerCase();
+                if (t.includes("mera kirai") || t.includes("postula") || t.includes("nexo")) {
+                    p.is_focus = true;
+                } else {
+                    p.is_focus = false;
+                }
+            }
+        });
+
+        // Update counters
+        const totalCount = allProjects.length;
+        const focusCount = allProjects.filter(p => p.is_focus && !p.completed).length;
+
+        const totalCounterEl = document.getElementById("projects-total-counter");
+        if (totalCounterEl) totalCounterEl.textContent = `${totalCount} proyectos`;
+
+        const countAllEl = document.getElementById("count-proj-all");
+        if (countAllEl) countAllEl.textContent = totalCount;
+
+        const countFocusEl = document.getElementById("count-proj-focus");
+        if (countFocusEl) countFocusEl.textContent = focusCount;
+
+        // Update scope buttons state
+        document.querySelectorAll(".proj-scope-btn").forEach(btn => {
+            btn.classList.toggle("active", (btn.id === `btn-proj-scope-${currentProjectScope}`));
+        });
+
+        // Update category pills state
+        document.querySelectorAll(".proj-cat-pill").forEach(pill => {
+            pill.classList.toggle("active", pill.getAttribute("data-cat") === currentProjectCat);
+        });
+
+        // Filter projects
+        const filtered = allProjects.map((proj, origIdx) => ({ proj, origIdx })).filter(({ proj }) => {
+            if (currentProjectScope === "focus" && !proj.is_focus) return false;
+            if (currentProjectCat !== "all" && getProjectCategory(proj) !== currentProjectCat) return false;
+            return true;
+        });
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `
+                <div class="projects-empty-state">
+                    <span class="empty-icon">📂</span>
+                    <p>No hay proyectos en esta vista.</p>
+                    <small>Prueba seleccionando "Todos" o añade uno nuevo abajo.</small>
+                </div>
+            `;
+            return;
+        }
+
+        filtered.forEach(({ proj, origIdx }) => {
+            const cat = getProjectCategory(proj);
+            const catMeta = getCategoryMeta(cat);
+
+            // Parse action items
+            const rawLines = (proj.action_items || "")
+                .split("\n")
+                .map(l => l.trim())
+                .filter(l => l.length > 0);
+
+            const card = document.createElement("div");
+            card.className = `project-bento-card ${catMeta.class} ${proj.completed ? "completed" : ""} ${proj.is_focus ? "is-focus" : ""}`;
+
+            // Top Header: Tag + Controls (Star, Delete)
+            const cardHeader = document.createElement("div");
+            cardHeader.className = "proj-card-header";
+
+            const tag = document.createElement("span");
+            tag.className = `proj-cat-tag ${catMeta.class}`;
+            tag.textContent = catMeta.label;
+
+            const headerActions = document.createElement("div");
+            headerActions.className = "proj-header-actions";
+
+            const starBtn = document.createElement("button");
+            starBtn.className = `btn-proj-star ${proj.is_focus ? "active" : ""}`;
+            starBtn.title = proj.is_focus ? "Quitar de Foco Semanal" : "Marcar como Foco Semanal ⭐";
+            starBtn.innerHTML = proj.is_focus ? "⭐" : "☆";
+            starBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                proj.is_focus = !proj.is_focus;
+                saveTasks();
+                renderWeeklyTasks();
+                showToast(proj.is_focus ? `"${proj.title}" añadido al Foco Semanal ⭐` : `Quitado del Foco`, "success");
+            });
+
+            const delBtn = document.createElement("button");
+            delBtn.className = "btn-proj-delete";
+            delBtn.title = "Eliminar proyecto";
+            delBtn.textContent = "×";
+            delBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                if (confirm(`¿Eliminar el proyecto "${proj.title}"?`)) {
+                    tasksState.weekly.antigravity.splice(origIdx, 1);
+                    saveTasks();
+                    renderWeeklyTasks();
+                    showToast("Proyecto eliminado", "success");
+                }
+            });
+
+            headerActions.appendChild(starBtn);
+            headerActions.appendChild(delBtn);
+            cardHeader.appendChild(tag);
+            cardHeader.appendChild(headerActions);
+            card.appendChild(cardHeader);
+
+            // Card Body
+            const cardBody = document.createElement("div");
+            cardBody.className = "proj-card-body";
+
+            // Title & Checkbox
+            const titleRow = document.createElement("div");
+            titleRow.className = "proj-title-row";
+
+            const chk = document.createElement("input");
+            chk.type = "checkbox";
+            chk.className = "task-checkbox";
+            chk.checked = !!proj.completed;
+            chk.addEventListener("click", (e) => {
+                e.stopPropagation();
+                proj.completed = !proj.completed;
+                saveTasks();
+                renderWeeklyTasks();
+            });
+
+            const titleText = document.createElement("h3");
+            titleText.className = "proj-card-title";
+            titleText.textContent = proj.title || "Sin Título";
+
+            titleRow.appendChild(chk);
+            titleRow.appendChild(titleText);
+            cardBody.appendChild(titleRow);
+
+            if (proj.details && proj.details.trim() !== "") {
+                const detailsP = document.createElement("p");
+                detailsP.className = "proj-card-details";
+                detailsP.textContent = proj.details;
+                cardBody.appendChild(detailsP);
+            }
+
+            // Action Items Box & Next Action
+            if (rawLines.length > 0) {
+                const nextActionBox = document.createElement("div");
+                nextActionBox.className = "proj-next-action-box";
+
+                const cleanFirstLine = rawLines[0].replace(/^[\*\•\-\s]+/, "");
+                nextActionBox.innerHTML = `
+                    <div class="next-action-header">
+                        <span class="next-action-label">👉 PRÓXIMA ACCIÓN:</span>
+                        <span class="proj-task-count-badge">${rawLines.length} pendientes</span>
+                    </div>
+                    <div class="next-action-text">${escapeHTML(cleanFirstLine)}</div>
+                `;
+                cardBody.appendChild(nextActionBox);
+
+                if (rawLines.length > 1) {
+                    const extraBox = document.createElement("div");
+                    extraBox.className = "proj-extra-actions-box hidden";
+                    extraBox.id = `proj-extra-${origIdx}`;
+
+                    const extraList = document.createElement("ul");
+                    extraList.className = "proj-extra-list";
+                    rawLines.slice(1).forEach(itemLine => {
+                        const li = document.createElement("li");
+                        li.textContent = itemLine.replace(/^[\*\•\-\s]+/, "");
+                        extraList.appendChild(li);
+                    });
+                    extraBox.appendChild(extraList);
+                    cardBody.appendChild(extraBox);
+
+                    const toggleBtn = document.createElement("button");
+                    toggleBtn.className = "proj-toggle-btn";
+                    toggleBtn.id = `proj-btn-toggle-${origIdx}`;
+                    toggleBtn.setAttribute("data-show-text", `Ver ${rawLines.length - 1} pendientes más ▾`);
+                    toggleBtn.textContent = `Ver ${rawLines.length - 1} pendientes más ▾`;
+                    toggleBtn.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        window.toggleExtraActions(origIdx);
+                    });
+                    cardBody.appendChild(toggleBtn);
+                }
+            } else {
+                const emptyAction = document.createElement("div");
+                emptyAction.className = "proj-empty-action";
+                emptyAction.textContent = "Sin tareas pendientes. Toca para redactar.";
+                cardBody.appendChild(emptyAction);
+            }
+
+            card.appendChild(cardBody);
+
+            // Card Footer / Edit Button
+            const cardFooter = document.createElement("div");
+            cardFooter.className = "proj-card-footer";
+            const editBtn = document.createElement("button");
+            editBtn.className = "btn-edit-proj";
+            editBtn.innerHTML = `📝 Editar / Ver todo`;
+            editBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                openTaskModal("antigravity", origIdx);
+            });
+            cardFooter.appendChild(editBtn);
+            card.appendChild(cardFooter);
+
+            // Clicking card also opens modal
+            card.addEventListener("click", (e) => {
+                if (e.target.closest("button") || e.target.classList.contains("task-checkbox")) return;
+                openTaskModal("antigravity", origIdx);
+            });
+
+            grid.appendChild(card);
+        });
+    }
+
+    const newProjInput = document.getElementById("new-project-input");
+    if (newProjInput) {
+        newProjInput.onkeydown = (e) => {
+            if (e.key === "Enter") {
+                window.quickAddProject();
+            }
+        };
     }
 
     loadTasks();

@@ -203,16 +203,57 @@
                 <!-- PROYECTOS, METAS & PENDIENTES GENERALES -->
                 <section class="antigravity-section-full">
                     <div class="section-card antigravity-planner-card">
-                        <div class="card-header">
+                        <div class="card-header projects-header-row">
                             <div class="header-title-group">
                                 <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                <h2>Proyectos, Metas & Pendientes Generales</h2>
+                                <div class="projects-title-box">
+                                    <h2>Deck de Proyectos & Metas</h2>
+                                    <span class="projects-count-pill" id="projects-total-counter">13 proyectos</span>
+                                </div>
+                            </div>
+                            
+                            <!-- SCOPE TABS & CATEGORY FILTERS -->
+                            <div class="projects-toolbar">
+                                <div class="projects-scope-group">
+                                    <button class="proj-scope-btn active" id="btn-proj-scope-all" onclick="window.setProjectScope('all')">
+                                        📂 Todos (<span id="count-proj-all">13</span>)
+                                    </button>
+                                    <button class="proj-scope-btn" id="btn-proj-scope-focus" onclick="window.setProjectScope('focus')">
+                                        ⭐ Foco Semanal (<span id="count-proj-focus">3</span>)
+                                    </button>
+                                </div>
+
+                                <div class="projects-category-group" id="projects-category-pills">
+                                    <button class="proj-cat-pill active" data-cat="all" onclick="window.setProjectCategory('all')">Todos</button>
+                                    <button class="proj-cat-pill cat-biz" data-cat="negocios" onclick="window.setProjectCategory('negocios')">💼 Negocios</button>
+                                    <button class="proj-cat-pill cat-career" data-cat="carrera" onclick="window.setProjectCategory('carrera')">🎯 Carrera</button>
+                                    <button class="proj-cat-pill cat-tech" data-cat="tech" onclick="window.setProjectCategory('tech')">🛠️ Tech</button>
+                                    <button class="proj-cat-pill cat-faith" data-cat="fe" onclick="window.setProjectCategory('fe')">🏛️ Fe & Misión</button>
+                                </div>
                             </div>
                         </div>
+
                         <div class="card-content">
-                            <div class="weekly-column antigravity-column" data-day="antigravity" style="min-height: 120px;">
+                            <!-- BENTO GRID DE PROYECTOS -->
+                            <div class="projects-bento-grid" id="projects-bento-grid">
+                                <!-- Tarjetas Bento inyectadas dinámicamente -->
+                            </div>
+
+                            <!-- BARRA ELEGANTE PARA AÑADIR NUEVO PROYECTO -->
+                            <div class="new-project-bar">
+                                <input type="text" id="new-project-input" class="new-project-input" placeholder="+ Escribe nuevo proyecto / meta y presiona Enter...">
+                                <select id="new-project-cat-select" class="new-project-select">
+                                    <option value="negocios">💼 Negocios</option>
+                                    <option value="carrera">🎯 Carrera</option>
+                                    <option value="tech" selected>🛠️ Tech / Ops</option>
+                                    <option value="fe">🏛️ Fe & Misión</option>
+                                </select>
+                                <button class="btn-add-project" onclick="window.quickAddProject()">+ Añadir Proyecto</button>
+                            </div>
+
+                            <!-- Contenedor weekly-column oculto para compatibilidad interna de selectores -->
+                            <div class="weekly-column antigravity-column" data-day="antigravity" style="display: none;">
                                 <div class="weekly-task-list"></div>
-                                <input type="text" class="weekly-input" placeholder="+ añadir nuevo proyecto / meta general y presionar Enter...">
                             </div>
                         </div>
                     </div>
@@ -734,45 +775,6 @@
                 </div>
             </div>
 
-        </main>
-    </div>
-
-    <!-- MODAL DE DETALLE Y APUNTES DE TAREAS -->
-    <div id="task-modal" class="modal-overlay hidden">
-        <div class="modal-card">
-            <div class="modal-header">
-                <div class="modal-title-container">
-                    <span class="modal-category-badge" id="modal-task-category">Pizarrón</span>
-                    <h3 id="modal-task-title">Detalle del Pendiente</h3>
-                </div>
-                <button id="close-task-modal-btn" class="modal-close-btn" title="Cerrar ventana">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-grid-2col" style="display: grid; grid-template-columns: 1fr 2.5fr; gap: 12px;">
-                    <div class="form-group">
-                        <label class="modal-label">1. Horario (24h):</label>
-                        <input type="text" id="modal-task-time-input" class="modal-input" placeholder="Ej: 10:30">
-                    </div>
-                    <div class="form-group">
-                        <label class="modal-label">2. Título de la Actividad:</label>
-                        <input type="text" id="modal-task-title-input" class="modal-input" placeholder="Ej: Resiliencia Emocional">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="modal-label">3. Detalles / Ubicación / Descripción:</label>
-                    <textarea id="modal-task-details-input" class="modal-textarea" rows="3" placeholder="Ej: Clase presencial con la Hna. Alma en la Capilla..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="modal-label" style="color: var(--accent-warning); font-weight: 700;">4. Tareas, Pendientes o Acciones Específicas (Cambia color a ALERTA):</label>
-                    <textarea id="modal-task-actions-input" class="modal-textarea" rows="3" placeholder="Ej: Revisar tarea y asignación semanal con el Hno. Roger Morales..."></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="delete-modal-task-btn" class="btn-danger-light">Eliminar Tarea</button>
-                <button id="save-modal-task-btn" class="btn-primary">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
 
     
         <!-- VISTA: CARISMA Y COMUNICACION -->
@@ -2492,6 +2494,46 @@
 
             </div>
         </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL DE DETALLE Y APUNTES DE TAREAS -->
+    <div id="task-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title-container">
+                    <span class="modal-category-badge" id="modal-task-category">Pizarrón</span>
+                    <h3 id="modal-task-title">Detalle del Pendiente</h3>
+                </div>
+                <button id="close-task-modal-btn" class="modal-close-btn" title="Cerrar ventana">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid-2col" style="display: grid; grid-template-columns: 1fr 2.5fr; gap: 12px;">
+                    <div class="form-group">
+                        <label class="modal-label">1. Horario (24h):</label>
+                        <input type="text" id="modal-task-time-input" class="modal-input" placeholder="Ej: 10:30">
+                    </div>
+                    <div class="form-group">
+                        <label class="modal-label">2. Título de la Actividad:</label>
+                        <input type="text" id="modal-task-title-input" class="modal-input" placeholder="Ej: Resiliencia Emocional">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="modal-label">3. Detalles / Ubicación / Descripción:</label>
+                    <textarea id="modal-task-details-input" class="modal-textarea" rows="3" placeholder="Ej: Clase presencial con la Hna. Alma en la Capilla..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="modal-label" style="color: var(--accent-warning); font-weight: 700;">4. Tareas, Pendientes o Acciones Específicas (Cambia color a ALERTA):</label>
+                    <textarea id="modal-task-actions-input" class="modal-textarea" rows="3" placeholder="Ej: Revisar tarea y asignación semanal con el Hno. Roger Morales..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="delete-modal-task-btn" class="btn-danger-light">Eliminar Tarea</button>
+                <button id="save-modal-task-btn" class="btn-primary">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
 
     <!-- TOAST NOTIFICATIONS -->
     <div id="toast-container" class="toast-container"></div>

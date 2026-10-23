@@ -6417,3 +6417,480 @@ summary {
     font-weight: 700;
 }
 
+/* =============================================================
+   BENTO PROJECTS DECK & COMMAND CENTER (POINT 3 ARCHITECTURE)
+   ============================================================= */
+.projects-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px 24px;
+}
+
+.projects-title-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.projects-count-pill {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    background: var(--accent-primary-bg);
+    border: 1px solid rgba(26, 115, 232, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.projects-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.projects-scope-group {
+    display: flex;
+    background: var(--bg-page);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 3px;
+    gap: 3px;
+}
+
+.proj-scope-btn {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.proj-scope-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-card);
+}
+
+.proj-scope-btn.active {
+    background: var(--accent-primary);
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(26, 115, 232, 0.25);
+}
+
+.projects-category-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.proj-cat-pill {
+    background: var(--bg-page);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.proj-cat-pill:hover {
+    border-color: var(--text-muted);
+    color: var(--text-primary);
+}
+
+.proj-cat-pill.active {
+    background: var(--bg-card);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.proj-cat-pill.cat-biz.active {
+    border-color: #10b981;
+    color: #059669;
+    background: rgba(16, 185, 129, 0.12);
+}
+
+.proj-cat-pill.cat-career.active {
+    border-color: #3b82f6;
+    color: #2563eb;
+    background: rgba(59, 130, 246, 0.12);
+}
+
+.proj-cat-pill.cat-tech.active {
+    border-color: #8b5cf6;
+    color: #7c3aed;
+    background: rgba(139, 92, 246, 0.12);
+}
+
+.proj-cat-pill.cat-faith.active {
+    border-color: #f59e0b;
+    color: #d97706;
+    background: rgba(245, 158, 11, 0.12);
+}
+
+/* BENTO GRID */
+.projects-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1280px) {
+    .projects-bento-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-bento-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* INDIVIDUAL BENTO CARD */
+.project-bento-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-primary);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    position: relative;
+}
+
+.project-bento-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    border-color: var(--border-hover);
+}
+
+/* Color thematic borders */
+.project-bento-card.cat-biz {
+    border-left-color: #10b981 !important;
+}
+.project-bento-card.cat-career {
+    border-left-color: #3b82f6 !important;
+}
+.project-bento-card.cat-tech {
+    border-left-color: #8b5cf6 !important;
+}
+.project-bento-card.cat-faith {
+    border-left-color: #f59e0b !important;
+}
+
+.project-bento-card.completed {
+    opacity: 0.6;
+    background: var(--bg-page);
+}
+
+.project-bento-card.is-focus {
+    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.4), 0 4px 16px rgba(245, 158, 11, 0.12);
+}
+
+.proj-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.proj-cat-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.proj-cat-tag.cat-biz {
+    color: #059669;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.proj-cat-tag.cat-career {
+    color: #2563eb;
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+}
+.proj-cat-tag.cat-tech {
+    color: #7c3aed;
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+}
+.proj-cat-tag.cat-faith {
+    color: #d97706;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.proj-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-proj-star {
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: transform 0.15s ease;
+    line-height: 1;
+}
+.btn-proj-star:hover {
+    transform: scale(1.25);
+}
+.btn-proj-star.active {
+    color: #f59e0b;
+}
+
+.btn-proj-delete {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    line-height: 1;
+    transition: color 0.15s, background 0.15s;
+}
+.btn-proj-delete:hover {
+    color: var(--accent-danger);
+    background: var(--accent-danger-bg);
+}
+
+.proj-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.proj-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.proj-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin: 0;
+}
+
+.project-bento-card.completed .proj-card-title {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.proj-card-details {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* NEXT ACTION BOX */
+.proj-next-action-box {
+    background: var(--bg-page);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.next-action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.next-action-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+}
+
+.proj-task-count-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 1px 6px;
+    border-radius: 8px;
+}
+
+.next-action-text {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.proj-extra-actions-box {
+    background: var(--bg-page);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    margin-top: 2px;
+}
+
+.proj-extra-list {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.80rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.proj-toggle-btn {
+    background: transparent;
+    border: none;
+    color: var(--accent-primary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    padding: 2px 0;
+    margin-top: 2px;
+}
+.proj-toggle-btn:hover {
+    text-decoration: underline;
+}
+
+.proj-empty-action {
+    font-size: 0.80rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 6px 0;
+}
+
+.proj-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 8px;
+    margin-top: 4px;
+}
+
+.btn-edit-proj {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all var(--transition-fast);
+}
+.btn-edit-proj:hover {
+    color: var(--accent-primary);
+    background: var(--bg-page);
+}
+
+/* NEW PROJECT BAR */
+.new-project-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: var(--bg-page);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    flex-wrap: wrap;
+}
+
+.new-project-input {
+    flex: 1;
+    min-width: 220px;
+    border: 1px dashed var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-family: var(--font-sans);
+    outline: none;
+}
+.new-project-input:focus {
+    border-color: var(--accent-primary);
+    border-style: solid;
+}
+
+.new-project-select {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-family: var(--font-sans);
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-add-project {
+    background: var(--accent-primary);
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    white-space: nowrap;
+}
+.btn-add-project:hover {
+    background: #1557b0;
+}
+
+.projects-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--bg-page);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+}
+.projects-empty-state .empty-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
