@@ -3074,9 +3074,9 @@ summary {
 }
 
 .yt-badge {
-    font-size: 0.78rem;
+    font-size: 0.90rem;
     font-weight: 700;
-    padding: 4px 10px;
+    padding: 5px 12px;
     border-radius: 6px;
 }
 
@@ -3156,7 +3156,7 @@ summary {
 }
 
 .yt-section-title {
-    font-size: 0.92rem;
+    font-size: 1.04rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 8px;
@@ -3173,8 +3173,8 @@ summary {
 }
 
 .yt-bullet-list li {
-    font-size: 0.96rem;
-    line-height: 1.55;
+    font-size: 1.06rem;
+    line-height: 1.65;
     color: var(--text-secondary);
 }
 
@@ -4211,14 +4211,14 @@ summary {
 }
 
 .mormon-chap-content {
-    font-size: 0.92rem;
-    line-height: 1.5;
+    font-size: 1.02rem;
+    line-height: 1.6;
     color: var(--text-primary);
 }
 
 .mormon-chap-fact strong {
     font-weight: 700;
-    color: #f8fafc;
+    color: var(--text-primary);
 }
 
 .mormon-chap-separator {
@@ -4321,10 +4321,10 @@ summary {
 }
 
 .embedded-quote-text {
-    font-size: 0.88rem;
+    font-size: 1.02rem;
     font-style: italic;
     color: #f1f5f9;
-    line-height: 1.55;
+    line-height: 1.6;
     margin: 0;
 }
 
@@ -4332,21 +4332,22 @@ summary {
     background: rgba(14, 165, 233, 0.08);
     border: 1px solid rgba(14, 165, 233, 0.25);
     border-radius: 6px;
-    padding: 8px 12px;
+    padding: 10px 14px;
     margin-bottom: 12px;
 }
 
 .embedded-pastoral-label {
-    font-size: 0.75rem;
+    font-size: 0.88rem;
+    font-weight: 700;
     color: #38bdf8;
     display: block;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
 }
 
 .embedded-pastoral-text {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.45;
+    font-size: 0.98rem;
+    color: #e2e8f0;
+    line-height: 1.55;
     margin: 0;
 }
 
