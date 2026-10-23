@@ -329,8 +329,28 @@
                         <div class="tiempo-secondary-section">
                             <div class="section-label-sm">RUTINAS & ACTIVIDADES COTIDIANAS:</div>
                             <div class="tiempo-secondary-grid">
-                                <button id="btn-phase-comida" class="btn-tiempo-subaction btn-sub-meal" onclick="window.cambiarFaseTiempo('comida', 'almuerzo')">
-                                    <span>🍽️ Comida / Almuerzo</span>
+                                <button id="btn-phase-cocinar" class="btn-tiempo-subaction btn-sub-cook" onclick="window.cambiarFaseTiempo('cocinar', 'preparar')">
+                                    <span>🍳 Cocinar / Preparar</span>
+                                </button>
+
+                                <button id="btn-phase-comida" class="btn-tiempo-subaction btn-sub-meal" onclick="window.cambiarFaseTiempo('comida', 'comer')">
+                                    <span>🍽️ Comer / Alimentos</span>
+                                </button>
+
+                                <button id="btn-phase-bano" class="btn-tiempo-subaction btn-sub-bath" onclick="window.cambiarFaseTiempo('bano', 'ducha')">
+                                    <span>🚿 Baño / Aseo</span>
+                                </button>
+
+                                <button id="btn-phase-descanso" class="btn-tiempo-subaction btn-sub-rest" onclick="window.cambiarFaseTiempo('descanso', 'siesta')">
+                                    <span>🛋️ Siesta / Descanso</span>
+                                </button>
+
+                                <button id="btn-phase-ocio" class="btn-tiempo-subaction btn-sub-leisure" onclick="window.cambiarFaseTiempo('ocio', 'youtube_noche')">
+                                    <span>🎬 Ocio / Videos</span>
+                                </button>
+
+                                <button id="btn-phase-espiritual" class="btn-tiempo-subaction btn-sub-spiritual" onclick="window.cambiarFaseTiempo('espiritual', 'libro_mormon')">
+                                    <span>📖 Libro de Mormón</span>
                                 </button>
 
                                 <div class="calle-dropdown-wrapper">
@@ -339,23 +359,15 @@
                                     </button>
                                     <div id="calle-presets-menu" class="calle-menu-dropdown hidden">
                                         <div class="calle-menu-header">Selecciona motivo de salida:</div>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Dentista')">🦷 Dentista</button>
                                         <button onclick="window.cambiarFaseTiempo('calle', 'Tienda / Agua')">💧 Comprar Agua / Tienda</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Xilotzingo / Mercado')">🛒 Xilotzingo / Mercado</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Dentista')">🦷 Dentista</button>
                                         <button onclick="window.cambiarFaseTiempo('calle', 'Terapia Hna. Alma')">💆 Terapia Hna. Alma</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Psicólogo')">🧠 Psicólogo</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Iglesia / Bautismos')">⛪ Iglesia / Bautismos</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Clases Inglés')">🗣️ Inglés presencial</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Psicólogo')">🧠 Psicólogo / Centro</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Capilla')">⛪ Capilla (Reuniones, Inglés, FamilySearch)</button>
                                         <button onclick="window.cambiarFaseTiempo('calle', 'General')">🚶 Otra salida general</button>
                                     </div>
                                 </div>
-
-                                <button id="btn-phase-ocio" class="btn-tiempo-subaction btn-sub-leisure" onclick="window.cambiarFaseTiempo('ocio', 'youtube_noche')">
-                                    <span>🎬 Ocio / YouTube</span>
-                                </button>
-
-                                <button id="btn-phase-espiritual" class="btn-tiempo-subaction btn-sub-spiritual" onclick="window.cambiarFaseTiempo('espiritual', 'libro_mormon')">
-                                    <span>📖 Libro de Mormón</span>
-                                </button>
                             </div>
                         </div>
 
@@ -501,7 +513,7 @@
                                     </div>
                                 </div>
                                 <div class="upload-audio-zone" id="upload-audio-zone">
-                                    <input type="file" id="audio-file-input" accept="audio/*,.m4a,.ogg,.opus,.mp3,.wav" style="display: none;" onchange="window.handleAudioFileSelected(this)">
+                                    <input type="file" id="audio-file-input" accept="audio/*,.m4a,.ogg,.opus,.mp3,.wav,*/*" style="display: none;" onchange="window.handleAudioFileSelected(this)">
                                     <button class="btn-primary" onclick="document.getElementById('audio-file-input').click()">
                                         📁 Subir Audio de Reunión (.m4a / .opus)
                                     </button>

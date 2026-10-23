@@ -2883,10 +2883,13 @@ function initTiempo() {
     const PHASE_CONFIG = {
         'trabajo': { title: '💻 Trabajo Efectivo', class: 'phase-trabajo', color: 'var(--accent-primary)', sub: 'Enfoque Profundo (25-45m)' },
         'pausa': { title: '☕ Pausa Corta', class: 'phase-pausa', color: 'var(--accent-warning)', sub: 'Recuperación de 5 min' },
-        'comida': { title: '🍽️ Comida / Almuerzo', class: 'phase-comida', color: '#8b5cf6', sub: 'Alimentación' },
+        'cocinar': { title: '🍳 Cocinar / Preparar', class: 'phase-cocinar', color: '#f97316', sub: 'Preparar comida / recoger' },
+        'comida': { title: '🍽️ Comer / Alimentos', class: 'phase-comida', color: '#a855f7', sub: 'Tiempo de comer' },
+        'bano': { title: '🚿 Baño / Aseo', class: 'phase-bano', color: '#06b6d4', sub: 'Ducha y aseo personal' },
+        'descanso': { title: '🛋️ Siesta / Descanso', class: 'phase-descanso', color: '#14b8a6', sub: 'Descanso / Siesta' },
         'calle': { title: '🚶‍♂️ En la Calle / Diligencia', class: 'phase-calle', color: '#ea580c', sub: 'Salida de casa' },
-        'ocio': { title: '🎬 Ocio / YouTube', class: 'phase-ocio', color: '#ef4444', sub: 'Relajación nocturna' },
-        'espiritual': { title: '📖 Espiritual / Spotify', class: 'phase-espiritual', color: '#38bdf8', sub: 'Libro de Mormón / Mañana' },
+        'ocio': { title: '🎬 Ocio / Videos', class: 'phase-ocio', color: '#ef4444', sub: 'Videos y relajación' },
+        'espiritual': { title: '📖 Libro de Mormón', class: 'phase-espiritual', color: '#38bdf8', sub: 'Estudio de escrituras / Spotify' },
         'dormir': { title: '🌙 Durmiendo / Descanso', class: 'phase-dormir', color: '#6366f1', sub: 'Sueño nocturno' },
         'detenido': { title: '⏹️ Detenido', class: 'phase-detenido', color: 'var(--text-muted)', sub: 'Jornada pausada' }
     };
@@ -3132,7 +3135,7 @@ function initTiempo() {
         } else if (currentIntervalFilter === 'otros') {
             filtered = list.filter(item => {
                 const p = (item.phase || '').toLowerCase();
-                return p === 'comida' || p === 'ocio' || p === 'espiritual';
+                return p === 'comida' || p === 'cocinar' || p === 'bano' || p === 'descanso' || p === 'ocio' || p === 'espiritual';
             });
         }
 
@@ -3295,7 +3298,7 @@ function initTiempo() {
         fetch('/api/time/wake', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ note: 'Despertar y Libro de Mormón' })
+            body: JSON.stringify({ note: 'Despertar' })
         })
         .then(res => res.json())
         .then(data => {
@@ -3303,12 +3306,12 @@ function initTiempo() {
                 renderStats(data.state);
                 updateLiveTimerUI();
                 loadHistory();
-                showToast("☀️ ¡Buenos días! Sueño guardado. Iniciando rutina matutina.");
+                showToast("☀️ ¡Buenos días! Sueño guardado. Selecciona tu siguiente actividad (Baño, Libro de Mormón, Cocinar o Trabajo).");
             }
         })
         .catch(() => {
-            window.cambiarFaseTiempo('espiritual', 'libro_mormon', 'Despertar matutino');
-            showToast("☀️ ¡Buenos días! Iniciando rutina matutina.");
+            window.cambiarFaseTiempo('detener', '', 'Despertar');
+            showToast("☀️ ¡Buenos días! Sueño finalizado.");
         });
     };
 

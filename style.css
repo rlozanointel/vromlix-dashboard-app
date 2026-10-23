@@ -5044,12 +5044,16 @@ summary {
 }
 
 .timer-digits {
-    font-size: 3.8rem;
+    font-size: clamp(2.2rem, 9.5vw, 3.8rem);
     font-weight: 800;
     font-family: 'Outfit', var(--font-sans);
-    letter-spacing: 2px;
+    letter-spacing: clamp(0.5px, 1.2vw, 2px);
     color: var(--text-primary);
     line-height: 1;
+    display: inline-block;
+    max-width: 100%;
+    word-break: keep-all;
+    white-space: nowrap;
 }
 
 .timer-sublabel {
@@ -5064,15 +5068,18 @@ summary {
     width: 100%;
     max-width: 650px;
     margin-top: 20px;
+    box-sizing: border-box;
+    padding: 0 4px;
 }
 
 .pomodoro-milestones {
     display: flex;
     justify-content: space-between;
-    font-size: 0.78rem;
+    font-size: clamp(0.68rem, 2.2vw, 0.78rem);
     color: var(--text-muted);
     font-weight: 600;
     margin-bottom: 6px;
+    gap: 4px;
 }
 
 .pomodoro-track {
@@ -5115,6 +5122,18 @@ summary {
 @media (max-width: 680px) {
     .tiempo-primary-controls {
         grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    .btn-tiempo-hero {
+        padding: 12px 14px;
+        gap: 12px;
+    }
+    .btn-hero-icon {
+        width: 38px;
+        height: 38px;
+    }
+    .btn-hero-title {
+        font-size: 1.05rem;
     }
 }
 
@@ -5252,6 +5271,39 @@ summary {
     border-color: var(--accent-primary);
     background: var(--accent-primary-bg);
     box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.btn-sub-cook:hover, .btn-sub-cook.active-phase {
+    border-color: #f97316;
+    background: rgba(249, 115, 22, 0.15);
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.25);
+}
+.btn-sub-bath:hover, .btn-sub-bath.active-phase {
+    border-color: #06b6d4;
+    background: rgba(6, 182, 212, 0.15);
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.25);
+}
+.btn-sub-rest:hover, .btn-sub-rest.active-phase {
+    border-color: #14b8a6;
+    background: rgba(20, 184, 166, 0.15);
+    box-shadow: 0 0 10px rgba(20, 184, 166, 0.25);
+}
+
+@media (max-width: 540px) {
+    .tiempo-secondary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    .btn-tiempo-subaction {
+        padding: 9px 8px;
+        font-size: 0.82rem;
+    }
+    .calle-menu-dropdown {
+        left: 0;
+        right: 0;
+        min-width: 100%;
+        max-width: 100%;
+    }
 }
 
 /* ==========================================
