@@ -7539,3 +7539,581 @@ summary {
     border-color: var(--accent-danger);
 }
 
+/* =========================================================================
+   VROMLIX OS - CONFERENCIA GENERAL & SUB-NAVEGACIÓN DE FE (OCTUBRE 2026)
+   ========================================================================= */
+
+/* BARRA DE SUB-NAVEGACIÓN SUPERIOR (Pills Switcher) */
+.mormon-subnav-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 6px;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.mormon-subnav-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 18px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-family: 'Outfit', var(--font-sans);
+    font-size: 0.96rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mormon-subnav-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.mormon-subnav-btn.active {
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.35);
+    color: #fbbf24;
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.15);
+}
+
+.mormon-subnav-btn#btn-subview-escrituras.active {
+    background: rgba(14, 165, 233, 0.12);
+    border-color: rgba(14, 165, 233, 0.35);
+    color: #38bdf8;
+    box-shadow: 0 0 16px rgba(14, 165, 233, 0.15);
+}
+
+.subnav-pill-badge {
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+}
+
+.mormon-subnav-btn.active .subnav-pill-badge {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fde68a;
+}
+
+.mormon-subnav-btn#btn-subview-escrituras.active .subnav-pill-badge {
+    background: rgba(14, 165, 233, 0.2);
+    color: #bae6fd;
+}
+
+/* HERO CONFERENCIA */
+.conferencia-hero-card {
+    border-color: rgba(245, 158, 11, 0.22);
+    background: linear-gradient(145deg, rgba(22, 27, 34, 0.85) 0%, rgba(15, 23, 42, 0.9) 100%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.conf-gold-icon {
+    color: #f59e0b;
+}
+
+.conferencia-header-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.conf-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    background: rgba(245, 158, 11, 0.14);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: #f59e0b;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.btn-download-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 8px;
+    color: #fbbf24;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-download-pdf:hover {
+    background: #f59e0b;
+    color: #0b0f17;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+/* FILTROS CONFERENCIA */
+.conf-controls-container {
+    padding: 18px 20px 20px 20px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.conf-filter-pills-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.conf-filter-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    min-width: 65px;
+}
+
+.conf-filter-scroll {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.conf-filter-pill,
+.conf-calling-pill {
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.conf-filter-pill:hover,
+.conf-calling-pill:hover {
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.conf-filter-pill.active {
+    background: rgba(245, 158, 11, 0.18);
+    border-color: #f59e0b;
+    color: #fbbf24;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+}
+
+.conf-calling-pill.active {
+    background: rgba(14, 165, 233, 0.18);
+    border-color: #0ea5e9;
+    color: #38bdf8;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.2);
+}
+
+/* ACORDEÓN ACONTECIMIENTOS ESPECIALES */
+.conf-special-accordion {
+    margin-bottom: 24px;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+}
+
+.conf-special-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    padding: 16px;
+}
+
+.conf-special-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.conf-special-card.highlight-gold {
+    border-color: rgba(245, 158, 11, 0.35);
+    background: rgba(245, 158, 11, 0.04);
+}
+
+.conf-special-card h4 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 8px;
+}
+
+.conf-special-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* GRID DE DISCURSOS */
+.conf-talks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(520px, 1fr));
+    gap: 20px;
+    margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    .conf-talks-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.conf-talk-card {
+    background: rgba(22, 27, 34, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.conf-talk-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(245, 158, 11, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* CARD HEADER */
+.conf-card-header {
+    margin-bottom: 14px;
+}
+
+.conf-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.conf-session-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.conf-session-tag.badge-sab-man { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+.conf-session-tag.badge-sab-tar { background: rgba(234, 88, 12, 0.15); color: #fb923c; border: 1px solid rgba(234, 88, 12, 0.3); }
+.conf-session-tag.badge-dom-man { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.3); }
+.conf-session-tag.badge-dom-tar { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+.conf-talk-number {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+.conf-theme-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.conf-speaker-title-box {
+    margin-bottom: 8px;
+}
+
+.conf-speaker-name {
+    font-family: 'Outfit', var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f8fafc;
+    line-height: 1.3;
+    margin-bottom: 2px;
+}
+
+.conf-speaker-calling {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.conf-talk-headline {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    line-height: 1.45;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+/* CARD BODY */
+.conf-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-grow: 1;
+    margin-bottom: 16px;
+}
+
+.conf-section-box {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.conf-section-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.conf-story-box {
+    border-left: 3px solid #f59e0b;
+    background: rgba(245, 158, 11, 0.04);
+}
+
+.conf-story-box .conf-section-label {
+    color: #f59e0b;
+}
+
+.conf-story-text {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: #cbd5e1;
+}
+
+.conf-story-text strong {
+    color: #f8fafc;
+}
+
+.conf-principles-list {
+    margin: 0;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.conf-principles-list li {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: #cbd5e1;
+}
+
+.conf-principles-list li strong {
+    color: #f8fafc;
+}
+
+/* QUOTE BOX */
+.conf-quote-box {
+    background: rgba(14, 165, 233, 0.05);
+    border: 1px solid rgba(14, 165, 233, 0.25);
+    border-left: 3px solid #0ea5e9;
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+.conf-quote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.conf-quote-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.btn-copy-quote {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(14, 165, 233, 0.15);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    color: #38bdf8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-copy-quote:hover {
+    background: #0ea5e9;
+    color: #0b0f17;
+}
+
+.btn-copy-quote.copied {
+    background: #10b981;
+    border-color: #10b981;
+    color: #0b0f17;
+}
+
+.conf-quote-text {
+    font-size: 0.96rem;
+    font-style: italic;
+    color: #f1f5f9;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* ACTION BOX */
+.conf-action-box {
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+.conf-action-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #34d399;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.conf-action-text {
+    font-size: 0.92rem;
+    color: #e2e8f0;
+    line-height: 1.5;
+}
+
+/* CARD FOOTER */
+.conf-card-footer {
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.conf-external-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.conf-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.btn-yt {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+}
+
+.btn-yt:hover {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+.btn-church {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cbd5e1;
+}
+
+.btn-church:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+/* EMPTY STATE */
+.conf-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 48px 20px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+.conf-empty-state .empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.conf-empty-state h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.conf-empty-state p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+}
+
+.btn-clear-conf-filters {
+    padding: 8px 18px;
+    border-radius: 8px;
+    background: var(--mormon-gold);
+    color: #0b0f17;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.btn-clear-conf-filters:hover {
+    transform: translateY(-1px);
+}
+
+
