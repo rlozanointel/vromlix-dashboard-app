@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio y Ministración | El Libro de Mormón & Conferencia General</title>
+    <meta name="description" content="Herramienta de estudio nemotécnico del Libro de Mormón, 106 temas de ministración pastoral y guía interactiva de la Conferencia General Octubre 2026.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #0b0f17;
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+        .portal-topbar {
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 12px 20px;
+        }
+        .portal-topbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .portal-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .portal-brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f59e0b;
+        }
+        .portal-brand-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+        .portal-brand-subtitle {
+            font-size: 0.76rem;
+            color: #94a3b8;
+        }
+        .portal-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-portal-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .btn-portal-action:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <header class="portal-topbar">
+        <div class="portal-topbar-inner">
+            <a href="#" class="portal-brand">
+                <div class="portal-brand-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="portal-brand-title">Mormón & Conferencia <span style="color: #f59e0b;">2026</span></div>
+                    <div class="portal-brand-subtitle">Mnemotecnia • Ministración Pastoral • Citas Clave</div>
+                </div>
+            </a>
+            <div class="portal-nav-actions">
+                <a href="/Guia_Conferencia_Octubre_2026.pdf" download="Guia_Conferencia_Octubre_2026.pdf" class="btn-portal-action" title="Descargar Guía en PDF">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                    <span>PDF Conferencia</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- VISTA: LIBRO DE MORMÓN & CONFERENCIA GENERAL (FE & ESPIRITUALIDAD) -->
+            <div id="view-mormon" class="dashboard-view" style="display: block; max-width: 1200px; margin: 0 auto; padding: 20px 16px;">
+                <!-- BARRA SELECTORA SUPERIOR (SUB-PESTAÑAS FE & MINISTRACIÓN) -->
+                <div class="mormon-subnav-bar">
+                    <button class="mormon-subnav-btn active" id="btn-subview-escrituras" onclick="window.switchMormonSubview('escrituras')">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        <span>📖 Libro de Mormón (Mnemotecnia & 106 Temas)</span>
+                        <span class="subnav-pill-badge">239 Capítulos</span>
+                    </button>
+                    <button class="mormon-subnav-btn" id="btn-subview-conferencia" onclick="window.switchMormonSubview('conferencia')">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/>
+                        </svg>
+                        <span>🏛️ Conferencia General (Octubre 2026)</span>
+                        <span class="subnav-pill-badge subnav-gold-badge">37 Discursos</span>
+                    </button>
+                </div>
+
+                <!-- SUB-PANEL 1: LIBRO DE MORMÓN (MNEMOTECNIA & MINISTRACIÓN) -->
+                <div id="subview-escrituras" class="mormon-subview-panel">
+                    <!-- HERO CARD CON BUSCADOR UNIFICADO Y PESTAÑAS DE MINISTRACIÓN -->
+                    <div class="section-card mormon-hero-card">
+                    <div class="card-header mormon-header">
+                        <div class="header-title-group">
+                            <div class="mormon-header-icon-box">
+                                <svg class="header-icon mormon-gold-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="mormon-title-badge-row">
+                                    <h2>El Libro de Mormón — Mnemotecnia & Guía de Ministración</h2>
+                                    <span class="mormon-badge-pill">Otro Testamento de Jesucristo</span>
+                                </div>
+                                <p class="subtitle-text">15 Libros • 239 Capítulos (retención del 80% de la historia) • 106 Pasajes Quirúrgicos con versículo exacto para ministrar</p>
+                            </div>
+                        </div>
+                        <div class="mormon-stats-row">
+                            <div class="mormon-stat-pill">
+                                <span class="mormon-stat-num">15</span>
+                                <span class="mormon-stat-label">Libros</span>
+                            </div>
+                            <div class="mormon-stat-pill">
+                                <span class="mormon-stat-num">239</span>
+                                <span class="mormon-stat-label">Capítulos</span>
+                            </div>
+                            <div class="mormon-stat-pill" title="106 situaciones reales de vida con versículo exacto">
+                                <span class="mormon-stat-num">106</span>
+                                <span class="mormon-stat-label">Temas Pastoral</span>
+                            </div>
+                            <div class="mormon-stat-pill mormon-stat-active" title="Capítulos visibles según búsqueda">
+                                <span class="mormon-stat-num" id="mormon-match-count">239</span>
+                                <span class="mormon-stat-label">Visibles</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BARRA DE BÚSQUEDA UNIFICADA Y ACCIONES -->
+                    <div class="mormon-controls-container">
+                        <div class="mormon-search-row">
+                            <div class="mormon-search-wrapper">
+                                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                </svg>
+                                <input type="text" id="mormon-search-input" class="mormon-search" placeholder="🔍 Busca por tema de vida (ej: ansiedad, depresión, duelo, recaí, perdón, chismes, diezmo) o hecho histórico (barco, Abinadí, Alma 32)...">
+                                <button id="mormon-clear-search-btn" class="mormon-clear-btn" title="Limpiar búsqueda" style="display: none;">×</button>
+                            </div>
+                            <div class="mormon-action-buttons">
+                                <button id="mormon-toggle-drawer-btn" class="btn-mormon-action btn-mormon-drawer active" onclick="window.toggleMinisterioDrawer()" title="Abrir/Cerrar índice de 106 temas de ministración">
+                                    📑 Pestañas de Ministración (106)
+                                </button>
+                                <button id="mormon-random-btn" class="btn-mormon-action" title="Capítulo aleatorio de inspiración">
+                                    🎲 Inspiración
+                                </button>
+                                <button id="mormon-expand-all-btn" class="btn-mormon-action" title="Expandir todos los 15 libros">
+                                    📂 Expandir Todos
+                                </button>
+                                <button id="mormon-collapse-all-btn" class="btn-mormon-action" title="Colapsar todos los libros">
+                                    📁 Colapsar Todos
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- DRAWER DE PESTAÑAS DE MINISTRACIÓN ESTRUCTURADO (106 TEMAS EN 8 ÁREAS) -->
+                        <div id="mormon-ministerio-drawer" class="mormon-ministerio-drawer">
+                            <!-- Fila 1: Título, Badge de Filtro Activo y Selector de Modo de Vista -->
+                            <div class="drawer-header-row">
+                                <div class="drawer-title-group">
+                                    <span class="drawer-header-title">🏷️ Pestañas de Ministración — 106 Temas de Vida</span>
+                                    <span id="drawer-active-filter-badge" class="drawer-filter-pill" style="display: none;"></span>
+                                </div>
+                                <div class="drawer-view-mode-tabs">
+                                    <button id="btn-drawerview-cards" class="drawer-mode-tab active" onclick="window.setDrawerViewMode('cards')" title="Ver por Cuadrícula de 8 Tarjetas Temáticas">
+                                        <span>📂</span> Categorías (8)
+                                    </button>
+                                    <button id="btn-drawerview-az" class="drawer-mode-tab" onclick="window.setDrawerViewMode('az')" title="Ver en Índice Alfabético de la A a la Z">
+                                        <span>🔤</span> Índice A - Z
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Fila 2: ACCESO RÁPIDO (Los 8 temas más consultados) -->
+                            <div class="drawer-frequent-shelf">
+                                <div class="frequent-shelf-label">
+                                    <span class="frequent-icon">⚡</span>
+                                    <span>Más Frecuentes:</span>
+                                </div>
+                                <div class="drawer-frequent-chips" id="drawer-frequent-chips">
+                                    <!-- Inyectado dinámicamente con los 8 temas más comunes -->
+                                </div>
+                            </div>
+
+                            <!-- Fila 3: Mini-buscador instantáneo y filtro de categoría -->
+                            <div class="drawer-toolbar-row">
+                                <div class="drawer-mini-search-wrapper">
+                                    <svg class="mini-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                    </svg>
+                                    <input type="text" id="drawer-mini-search" class="drawer-mini-search-input" placeholder="🔍 Filtrar entre los 106 temas (ej: alcohol, ansiedad, duelo, matrimonio, perdón, diezmo)..." oninput="window.filterDrawerTopics(this.value)">
+                                    <button id="drawer-mini-clear-btn" class="drawer-mini-clear-btn" style="display: none;" onclick="window.clearDrawerMiniSearch()" title="Limpiar filtro">×</button>
+                                </div>
+                                <div class="drawer-categories-scroll" id="drawer-categories-bar">
+                                    <!-- Inyectado dinámicamente -->
+                                </div>
+                            </div>
+
+                            <!-- Fila 4: Contenedor Dinámico Principal (Tarjetas Temáticas o Índice A-Z) -->
+                            <div id="drawer-main-content" class="drawer-main-content">
+                                <!-- Inyectado dinámicamente: Tarjetas Temáticas o Índice A-Z -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BANNER DE FILTRADO ACTIVO POR TEMA DE MINISTRACIÓN -->
+                <div id="mormon-active-filter-banner" class="mormon-active-filter-banner" style="display: none;"></div>
+
+                <!-- CONTENEDOR PRINCIPAL: LOS 15 LIBROS EN ACORDEÓN CON PASAJES QUIRÚRGICOS INTEGRADOS -->
+                <div id="mormon-books-accordion" class="mormon-books-container">
+                    <!-- 15 Libros colapsables inyectados dinámicamente -->
+                </div>
+                </div> <!-- FIN SUB-PANEL 1: ESCRITURAS -->
+
+                <!-- SUB-PANEL 2: CONFERENCIA GENERAL (OCTUBRE 2026) -->
+                <div id="subview-conferencia" class="mormon-subview-panel" style="display: none;">
+                    <!-- HERO CARD CONFERENCIA GENERAL -->
+                    <div class="section-card conferencia-hero-card">
+                        <div class="card-header conferencia-header">
+                            <div class="header-title-group">
+                                <div class="conferencia-header-icon-box">
+                                    <svg class="header-icon conf-gold-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="mormon-title-badge-row">
+                                        <h2>Conferencia General — Octubre 2026</h2>
+                                        <span class="conf-badge-pill">Semestral N° 196</span>
+                                    </div>
+                                    <p class="subtitle-text">37 Discursos Sintéticos • 4 Sesiones • Anécdotas Memorables • Citas de Oro para Ministrar y Retos de Acción</p>
+                                </div>
+                            </div>
+                            <div class="mormon-stats-row">
+                                <div class="mormon-stat-pill">
+                                    <span class="mormon-stat-num">37</span>
+                                    <span class="mormon-stat-label">Discursos</span>
+                                </div>
+                                <div class="mormon-stat-pill">
+                                    <span class="mormon-stat-num">4</span>
+                                    <span class="mormon-stat-label">Sesiones</span>
+                                </div>
+                                <div class="mormon-stat-pill mormon-stat-active" title="Discursos visibles según filtro">
+                                    <span class="mormon-stat-num" id="conf-match-count">37</span>
+                                    <span class="mormon-stat-label">Visibles</span>
+                                </div>
+                                <a href="/Guia_Conferencia_Octubre_2026.pdf" target="_blank" download="Guia_Conferencia_Octubre_2026.pdf" class="btn-download-pdf" title="Descargar la guía completa en PDF imprimible (2.6 MB)">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                                    </svg>
+                                    <span>Descargar PDF</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- CONTROLES Y BÚSQUEDA -->
+                        <div class="conf-controls-container">
+                            <div class="conf-search-row">
+                                <div class="mormon-search-wrapper">
+                                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                    </svg>
+                                    <input type="text" id="conf-search-input" class="mormon-search" placeholder="🔍 Busca por orador (Gong, Oaks, Runia, Bednar), tema (templo, dolor, diezmo, perdón) o palabra clave...">
+                                    <button id="conf-clear-search-btn" class="mormon-clear-btn" title="Limpiar búsqueda" style="display: none;">×</button>
+                                </div>
+                            </div>
+
+                            <!-- FILTRO DE SESIONES -->
+                            <div class="conf-filter-pills-row">
+                                <span class="conf-filter-label">Sesión:</span>
+                                <div class="conf-filter-scroll">
+                                    <button class="conf-filter-pill active" data-session="all">Todas (37)</button>
+                                    <button class="conf-filter-pill" data-session="sab-man">🌅 Sáb. Mañana (6)</button>
+                                    <button class="conf-filter-pill" data-session="sab-tar">☀️ Sáb. Tarde (12)</button>
+                                    <button class="conf-filter-pill" data-session="dom-man">🌄 Dom. Mañana (9)</button>
+                                    <button class="conf-filter-pill" data-session="dom-tar">🌇 Dom. Tarde (10)</button>
+                                </div>
+                            </div>
+
+                            <!-- FILTRO DE LLAMAMIENTO -->
+                            <div class="conf-filter-pills-row conf-calling-row">
+                                <span class="conf-filter-label">Líderes:</span>
+                                <div class="conf-filter-scroll">
+                                    <button class="conf-calling-pill active" data-calling="all">Todos</button>
+                                    <button class="conf-calling-pill" data-calling="presidencia">👑 Primera Presidencia</button>
+                                    <button class="conf-calling-pill" data-calling="apostoles">⚡ Doce Apóstoles</button>
+                                    <button class="conf-calling-pill" data-calling="mujeres">🌸 Líderes de Mujeres & Niños</button>
+                                    <button class="conf-calling-pill" data-calling="setentas">🤝 Setentas & Obispado</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN DE ACONTECIMIENTOS Y MÚSICA (COLLAPSIBLE ACORDEÓN) -->
+                    <details class="executive-accordion conf-special-accordion">
+                        <summary class="executive-accordion-summary">
+                            <div class="summary-left">
+                                <span class="summary-icon">🏛️</span>
+                                <span class="summary-title">Acontecimientos Especiales, Sostenimiento Solemne & Música Sagrada</span>
+                            </div>
+                            <span class="summary-badge">Ver Anuncios y Coro</span>
+                        </summary>
+                        <div class="executive-accordion-content conf-special-content">
+                            <div class="conf-special-grid">
+                                <div class="conf-special-card">
+                                    <h4>🤝 Sostenimiento Solemne de Líderes</h4>
+                                    <p>El <strong>élder D. Todd Christofferson</strong> (del Quórum de los Doce) dirigió el sostenimiento solemne de Autoridades Generales, Setentas de Área y Oficiales Generales. Se sostuvo por voto unánime al élder David Kannar como nuevo Setenta de Área y se agradeció el fiel servicio del élder Robert H. Simpson.</p>
+                                </div>
+                                <div class="conf-special-card highlight-gold">
+                                    <h4>🏛️ Celebración Templo de Salt Lake 2027</h4>
+                                    <p>El <strong>presidente Dallin H. Oaks</strong> anunció formalmente que las extensas obras de renovación sísmica y restauración del histórico <strong>Templo de Salt Lake</strong> concluirán en 2026, abriendo sus puertas para un período de puertas abiertas y dedicación solemne en la <strong>primavera de 2027</strong>.</p>
+                                </div>
+                                <div class="conf-special-card">
+                                    <h4>🎵 El Coro del Tabernáculo de la Manzana del Templo</h4>
+                                    <p>Música inspiradora en las 4 sesiones: himnos clásicos como <em>«Señor, te necesito»</em>, <em>«Paz, cálmense»</em>, <em>«Creo en Cristo»</em> y <em>«Bandera de Sión»</em>, dirigidos por Mack Wilberg y Ryan Murphy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- CONTENEDOR DE TARJETAS DE DISCURSOS -->
+                    <div id="conf-talks-container" class="conf-talks-grid">
+                        <!-- Renderizado dinámicamente desde conferencia_data.js -->
+                    </div>
+                </div> <!-- FIN SUB-PANEL 2: CONFERENCIA -->
+            </div>
+    </main>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="initial_data.js"></script>
+    <script src="mormon_view.js"></script>
+    <script src="conferencia_data.js"></script>
+    <script src="conferencia_view.js"></script>
+    <script>
+        window.showToast = function(msg, type = 'info') {
+            const c = document.getElementById('toast-container');
+            if (!c) return;
+            const t = document.createElement('div');
+            t.className = 'toast toast-' + (type || 'info');
+            t.textContent = msg;
+            c.appendChild(t);
+            setTimeout(() => {
+                t.style.opacity = '0';
+                t.style.transform = 'translateY(10px)';
+                setTimeout(() => t.remove(), 300);
+            }, 2500);
+        };
+    </script>
+</body>
+</html>
