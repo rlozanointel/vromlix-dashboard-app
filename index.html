@@ -65,6 +65,8 @@
                     <span id="sync-status-indicator" class="sync-indicator" title="Estado de sincronización">🟢 Sync</span>
                     <span class="status-dot">•</span>
                     <a href="/vromlix-dashboard.apk" download="vromlix-dashboard.apk" id="apk-download-btn" class="apk-download-badge" title="Descargar APK para Android">📱 APK</a>
+                    <span class="status-dot">•</span>
+                    <button class="btn-lock-terminal" id="btn-lock-terminal" title="Bloquear Terminal" onclick="window.vromlixLockTerminal()">🔒</button>
                 </div>
             </div>
         </header>
@@ -2534,10 +2536,59 @@
         </div>
     </div>
 
+    <!-- VROMLIX SECURITY GATE (LOCK SCREEN) -->
+    <div id="vromlix-auth-gate" class="vromlix-auth-gate" style="display: none;">
+        <div class="auth-gate-card">
+            <div class="auth-gate-header">
+                <div class="auth-logo-group">
+                    <span class="auth-logo-accent">VROMLIX</span>
+                    <span class="auth-logo-sub">OS</span>
+                </div>
+                <div class="auth-lock-icon">🔒</div>
+                <h2 class="auth-title">Terminal Privada</h2>
+                <p class="auth-subtitle">Ingrese PIN Maestro para acceder</p>
+            </div>
+
+            <!-- PIN Display Dots -->
+            <div class="auth-pin-display" id="auth-pin-dots">
+                <div class="pin-dot" data-idx="0"></div>
+                <div class="pin-dot" data-idx="1"></div>
+                <div class="pin-dot" data-idx="2"></div>
+                <div class="pin-dot" data-idx="3"></div>
+            </div>
+
+            <!-- Error message feedback -->
+            <div class="auth-error-msg" id="auth-error-msg"></div>
+
+            <!-- Numeric Keypad -->
+            <div class="auth-keypad">
+                <button type="button" class="keypad-btn" data-key="1">1</button>
+                <button type="button" class="keypad-btn" data-key="2">2</button>
+                <button type="button" class="keypad-btn" data-key="3">3</button>
+                <button type="button" class="keypad-btn" data-key="4">4</button>
+                <button type="button" class="keypad-btn" data-key="5">5</button>
+                <button type="button" class="keypad-btn" data-key="6">6</button>
+                <button type="button" class="keypad-btn" data-key="7">7</button>
+                <button type="button" class="keypad-btn" data-key="8">8</button>
+                <button type="button" class="keypad-btn" data-key="9">9</button>
+                <button type="button" class="keypad-btn btn-clear" data-key="clear">C</button>
+                <button type="button" class="keypad-btn" data-key="0">0</button>
+                <button type="button" class="keypad-btn btn-backspace" data-key="backspace">⌫</button>
+            </div>
+
+            <!-- Trust Device Checkbox -->
+            <label class="auth-remember-label">
+                <input type="checkbox" id="auth-remember-device" checked>
+                <span>Recordar este dispositivo</span>
+            </label>
+        </div>
+    </div>
+
     <!-- TOAST NOTIFICATIONS -->
     <div id="toast-container" class="toast-container"></div>
 
     <script src="initial_data.js"></script>
+    <script src="auth_gate.js"></script>
     <script src="app.js?v=20260914_0243"></script>
     <script src="agent_ops_view.js"></script>
     <script src="youtube_view.js?v=20261017_1900"></script>
