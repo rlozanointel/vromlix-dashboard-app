@@ -3383,11 +3383,19 @@ function initTiempo() {
             if (data.state) {
                 renderStats(data.state);
                 updateLiveTimerUI();
-                showToast(`Fase cambiada a: ${phase.toUpperCase()}`);
+                if (phase.toLowerCase() === 'trabajo') {
+                    showToast("⚡ SOY UN GENERADOR IMPARABLE DE RIQUEZA Y VALOR");
+                } else {
+                    showToast(`Fase activada: ${phase.toUpperCase()}`);
+                }
             }
         })
         .catch(err => {
-            showToast(`Fase activada localmente: ${phase.toUpperCase()}`);
+            if (phase.toLowerCase() === 'trabajo') {
+                showToast("⚡ SOY UN GENERADOR IMPARABLE DE RIQUEZA Y VALOR");
+            } else {
+                showToast(`Fase activada localmente: ${phase.toUpperCase()}`);
+            }
             updateSyncBadge(false);
         });
     };
