@@ -219,7 +219,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Mera Kirai",
           "details": "",
-          "action_items": "* Revisar imagenes\n* Boton de cotizar IA\n* Colocar fecha de Xochimilco\n* Quitar evento de estilismo\n* Agregar Clabe a Stripe\n* Agregar palabra desde a los precios\n* Generar el PDF de catalogo como revista\n* Integrar venta de productos\n* Agregar las imagenes de publicidad del salon\n* Optimizar para visualizar en celular (3 cosas del otro chat)\n* Revision General\n* Agregar etc. en la presentacion del salon, mas de 30 años.\n*Revisar para eventos en GDL y provincia\n\nHermana:\n* Agregar Alma\n* Crear para la Ruta del Aguila\n* Documentar todo\n* Poner QR en espejos de estetica\n* Enviar los precios y secciones de cortes",
+          "action_items": "* Revisar imágenes\n* Botón de cotizar IA\n* Colocar fecha de Xochimilco\n* Quitar evento de estilismo\n* Agregar Clabe a Stripe\n* Agregar palabra desde a los precios\n* Generar el PDF de catalogo como revista\n* Integrar venta de productos\n* Agregar las imágenes de publicidad del salon\n* Optimizar para visualizar en celular (3 cosas del otro chat)\n* Revision General\n* Agregar etc. en la presentación del salon, mas de 30 años.\n*Revisar para eventos en GDL y provincia\n\nBotón Whatsapp:\n\"Para la integración de Whatsapp en la web, el flujo debe ser:\n1. En la Web (Front-end):\n   - Colocar el botón o icono flotante con enlace directo en formato:\n     https://wa.me/521XXXXXXXXXX?text=Hola,%20me%20interesa%20apartar%20el%20viaje%20a%20[DESTINO]%20para%20[N]_personas\n   - El mensaje debe llevar el destino y número de personas prellenado para que el usuario solo tenga que dar \"Enviar\" sin escribir desde cero.\n\n2. En la Recepción (WhatsApp Business / Agente):\n   - Al dar clic, el usuario abre WhatsApp directamente con ese mensaje ya redactado.\n   - Si se usa WhatsApp Business, la respuesta rápida o mensaje de bienvenida automático recibe ese contexto exacto y entrega los datos de apartado ($200 MXN), itinerario y opciones de pago (SPEI/OXXO).\"\n\nHermana:\n* Agregar Alma\n* Crear para la Ruta del Águila\n* Documentar todo\n* Poner QR en espejos de estética\n* Enviar los precios y secciones de cortes",
           "completed": false,
           "is_focus": true
         },
@@ -329,13 +329,24 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27665778/"
     },
     {
+      "Official Title": "Klara and the Sun",
+      "Spanish Title": "Klara y el sol",
+      "Genres": "Science Fiction, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-10-21",
+      "IMDb Rating": 6.2,
+      "Vromlix Score": 62,
+      "Plot Summary": "An Artificial Friend named Klara finds a deep bond with a troubled young girl, bringing light and hope to a grieving family through her unwavering devotion and innocent wonder.",
+      "IMDb Link": "https://www.imdb.com/title/tt14371256/"
+    },
+    {
       "Official Title": "The Uprising",
       "Spanish Title": "El levantamiento",
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.9,
-      "Vromlix Score": 62.3,
+      "IMDb Rating": 7.937,
+      "Vromlix Score": 62.5,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -356,7 +367,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.485,
+      "IMDb Rating": 7.474,
       "Vromlix Score": 63.4,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
@@ -384,6 +395,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt40630780/"
     },
     {
+      "Official Title": "Animals",
+      "Spanish Title": null,
+      "Genres": "Thriller, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-10-09",
+      "IMDb Rating": 6.963,
+      "Vromlix Score": 69.6,
+      "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
+      "IMDb Link": "https://www.imdb.com/title/tt31049299/"
+    },
+    {
       "Official Title": "Salvation",
       "Spanish Title": "Salvación",
       "Genres": "Drama, Mystery",
@@ -404,17 +426,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 70,
       "Plot Summary": "A man finds the best motivation to secure and save his town: making an independent Mexican film.",
       "IMDb Link": "https://www.imdb.com/title/tt43063916/"
-    },
-    {
-      "Official Title": "Animals",
-      "Spanish Title": null,
-      "Genres": "Thriller, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-10-09",
-      "IMDb Rating": 7.03,
-      "Vromlix Score": 70.3,
-      "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
-      "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
     {
       "Official Title": "Yellow Letters",
@@ -692,17 +703,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt0058946/"
     },
     {
-      "Official Title": "Klara and the Sun",
-      "Spanish Title": "Klara y el sol",
-      "Genres": "Science Fiction, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-10-21",
-      "IMDb Rating": 10.0,
-      "Vromlix Score": 100,
-      "Plot Summary": "An Artificial Friend named Klara finds a deep bond with a troubled young girl, bringing light and hope to a grieving family through her unwavering devotion and innocent wonder.",
-      "IMDb Link": "https://www.imdb.com/title/tt14371256/"
-    },
-    {
       "Official Title": "Another Day Without a Mexican",
       "Spanish Title": "Otro día sin mexicanos",
       "Genres": null,
@@ -901,6 +901,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 72,
       "Plot Summary": "Heather Gay explores the secrets and sins behind the Mormon church, fracturing the church's seemingly perfect veneer to expose the secrets that have been kept behind closed doors. Heather has impactful conversations with abuse survivors, ex-Mormons and former LDS church leaders.",
       "IMDb Link": "https://www.imdb.com/title/tt38748836/"
+    },
+    {
+      "Official Title": "Lupin",
+      "Spanish Title": null,
+      "Current Season": 2,
+      "Current Episode": 7,
+      "Show Status": "Returning Series",
+      "Watch Status": "On Hold",
+      "Vromlix Score": 75,
+      "Plot Summary": "Inspired by the adventures of Arsène Lupin, gentleman thief Assane Diop sets out to avenge his father for an injustice inflicted by a wealthy family.",
+      "IMDb Link": "https://www.imdb.com/title/tt2531336/"
     },
     {
       "Official Title": "Taco Chronicles",
@@ -1257,5 +1268,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-22 21:42:32"
+  "last_updated": "2026-10-23 12:15:04"
 };
