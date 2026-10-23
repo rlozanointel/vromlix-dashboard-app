@@ -648,9 +648,9 @@ function initTasks() {
     function getProjectCategory(item) {
         if (item.category) return item.category;
         const t = (item.title || "").toLowerCase();
-        if (t.includes("mera kirai") || t.includes("nexo") || t.includes("playera") || t.includes("negocio")) return "negocios";
+        if (t.includes("mera kirai") || t.includes("nexo") || t.includes("playera") || t.includes("negocio") || t.includes("publicidad")) return "negocios";
         if (t.includes("postula") || t.includes("cv") || t.includes("empleo") || t.includes("kheri")) return "carrera";
-        if (t.includes("elder") || t.includes("family") || t.includes("lds") || t.includes("lectura") || t.includes("publicidad")) return "fe";
+        if (t.includes("elder") || t.includes("family") || t.includes("lds") || t.includes("lectura")) return "fe";
         return "tech";
     }
 
@@ -753,185 +753,432 @@ function initTasks() {
             pill.classList.toggle("active", pill.getAttribute("data-cat") === currentProjectCat);
         });
 
-        // Filter projects
-        const filtered = allProjects.map((proj, origIdx) => ({ proj, origIdx })).filter(({ proj }) => {
-            if (currentProjectScope === "focus" && !proj.is_focus) return false;
-            if (currentProjectCat !== "all" && getProjectCategory(proj) !== currentProjectCat) return false;
-            return true;
-        });
+        // Define 4 Macro-Area Categories
+        const CATEGORIES = [
+            { id: "negocios", label: "Negocios & Emprendimiento", icon: "💼", class: "cat-biz", placeholder: "+ Añadir a Negocios..." },
+            { id: "carrera", label: "Carrera & CV", icon: "🎯", class: "cat-career", placeholder: "+ Añadir a Carrera..." },
+            { id: "tech", label: "Tech & Ops", icon: "🛠️", class: "cat-tech", placeholder: "+ Añadir a Tech..." },
+            { id: "fe", label: "Fe, Misión & Familia", icon: "🏛️", class: "cat-faith", placeholder: "+ Añadir a Fe..." }
+        ];
 
-        if (filtered.length === 0) {
-            grid.innerHTML = `
-                <div class="projects-empty-state">
-                    <span class="empty-icon">📂</span>
-                    <p>No hay proyectos en esta vista.</p>
-                    <small>Prueba seleccionando "Todos" o añade uno nuevo abajo.</small>
+        // Categories to display based on pill filter
+        const visibleCategories = currentProjectCat === "all" 
+            ? CATEGORIES 
+            : CATEGORIES.filter(c => c.id === currentProjectCat);
+
+        visibleCategories.forEach(cat => {
+            // Get projects for this category
+            const catProjects = allProjects
+                .map((proj, origIdx) => ({ proj, origIdx }))
+                .filter(({ proj }) => getProjectCategory(proj) === cat.id);
+
+            // Separate into Micro-States (Opción A)
+            const focusProjects = catProjects.filter(({ proj }) => proj.is_focus && !proj.completed);
+            const reserveProjects = catProjects.filter(({ proj }) => !proj.is_focus && !proj.completed);
+            const completedProjects = catProjects.filter(({ proj }) => proj.completed);
+
+            // Sort each group alphabetically
+            focusProjects.sort((a, b) => (a.proj.title || "").localeCompare(b.proj.title || ""));
+            reserveProjects.sort((a, b) => (a.proj.title || "").localeCompare(b.proj.title || ""));
+            completedProjects.sort((a, b) => (a.proj.title || "").localeCompare(b.proj.title || ""));
+
+            // Build Column Container
+            const col = document.createElement("div");
+            col.className = `project-category-column ${cat.class}`;
+
+            // Column Header
+            const colHeader = document.createElement("div");
+            colHeader.className = "proj-col-header";
+            const badgeText = currentProjectScope === 'focus' 
+                ? `${focusProjects.length}` 
+                : (focusProjects.length > 0 ? `⭐ ${focusProjects.length} / ${catProjects.length}` : `${catProjects.length}`);
+            colHeader.innerHTML = `
+                <div class="proj-col-title-group">
+                    <span class="proj-col-icon">${cat.icon}</span>
+                    <h3 class="proj-col-title">${cat.label}</h3>
                 </div>
+                <span class="proj-col-badge">${badgeText}</span>
             `;
-            return;
-        }
+            col.appendChild(colHeader);
 
-        filtered.forEach(({ proj, origIdx }) => {
-            const cat = getProjectCategory(proj);
-            const catMeta = getCategoryMeta(cat);
+            // Cards List
+            const cardsList = document.createElement("div");
+            cardsList.className = "proj-col-cards-list";
 
-            // Parse action items
-            const rawLines = (proj.action_items || "")
-                .split("\n")
-                .map(l => l.trim())
-                .filter(l => l.length > 0);
-
-            const card = document.createElement("div");
-            card.className = `project-bento-card ${catMeta.class} ${proj.completed ? "completed" : ""} ${proj.is_focus ? "is-focus" : ""}`;
-
-            // Top Header: Tag + Controls (Star, Delete)
-            const cardHeader = document.createElement("div");
-            cardHeader.className = "proj-card-header";
-
-            const tag = document.createElement("span");
-            tag.className = `proj-cat-tag ${catMeta.class}`;
-            tag.textContent = catMeta.label;
-
-            const headerActions = document.createElement("div");
-            headerActions.className = "proj-header-actions";
-
-            const starBtn = document.createElement("button");
-            starBtn.className = `btn-proj-star ${proj.is_focus ? "active" : ""}`;
-            starBtn.title = proj.is_focus ? "Quitar de Foco Semanal" : "Marcar como Foco Semanal ⭐";
-            starBtn.innerHTML = proj.is_focus ? "⭐" : "☆";
-            starBtn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                proj.is_focus = !proj.is_focus;
-                saveTasks();
-                renderWeeklyTasks();
-                showToast(proj.is_focus ? `"${proj.title}" añadido al Foco Semanal ⭐` : `Quitado del Foco`, "success");
-            });
-
-            const delBtn = document.createElement("button");
-            delBtn.className = "btn-proj-delete";
-            delBtn.title = "Eliminar proyecto";
-            delBtn.textContent = "×";
-            delBtn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                if (confirm(`¿Eliminar el proyecto "${proj.title}"?`)) {
-                    tasksState.weekly.antigravity.splice(origIdx, 1);
-                    saveTasks();
-                    renderWeeklyTasks();
-                    showToast("Proyecto eliminado", "success");
-                }
-            });
-
-            headerActions.appendChild(starBtn);
-            headerActions.appendChild(delBtn);
-            cardHeader.appendChild(tag);
-            cardHeader.appendChild(headerActions);
-            card.appendChild(cardHeader);
-
-            // Card Body
-            const cardBody = document.createElement("div");
-            cardBody.className = "proj-card-body";
-
-            // Title & Checkbox
-            const titleRow = document.createElement("div");
-            titleRow.className = "proj-title-row";
-
-            const chk = document.createElement("input");
-            chk.type = "checkbox";
-            chk.className = "task-checkbox";
-            chk.checked = !!proj.completed;
-            chk.addEventListener("click", (e) => {
-                e.stopPropagation();
-                proj.completed = !proj.completed;
-                saveTasks();
-                renderWeeklyTasks();
-            });
-
-            const titleText = document.createElement("h3");
-            titleText.className = "proj-card-title";
-            titleText.textContent = proj.title || "Sin Título";
-
-            titleRow.appendChild(chk);
-            titleRow.appendChild(titleText);
-            cardBody.appendChild(titleRow);
-
-            if (proj.details && proj.details.trim() !== "") {
-                const detailsP = document.createElement("p");
-                detailsP.className = "proj-card-details";
-                detailsP.textContent = proj.details;
-                cardBody.appendChild(detailsP);
-            }
-
-            // Action Items Box & Next Action
-            if (rawLines.length > 0) {
-                const nextActionBox = document.createElement("div");
-                nextActionBox.className = "proj-next-action-box";
-
-                const cleanFirstLine = rawLines[0].replace(/^[\*\•\-\s]+/, "");
-                nextActionBox.innerHTML = `
-                    <div class="next-action-header">
-                        <span class="next-action-label">👉 PRÓXIMA ACCIÓN:</span>
-                        <span class="proj-task-count-badge">${rawLines.length} pendientes</span>
-                    </div>
-                    <div class="next-action-text">${escapeHTML(cleanFirstLine)}</div>
-                `;
-                cardBody.appendChild(nextActionBox);
-
-                if (rawLines.length > 1) {
-                    const extraBox = document.createElement("div");
-                    extraBox.className = "proj-extra-actions-box hidden";
-                    extraBox.id = `proj-extra-${origIdx}`;
-
-                    const extraList = document.createElement("ul");
-                    extraList.className = "proj-extra-list";
-                    rawLines.slice(1).forEach(itemLine => {
-                        const li = document.createElement("li");
-                        li.textContent = itemLine.replace(/^[\*\•\-\s]+/, "");
-                        extraList.appendChild(li);
+            if (currentProjectScope === "focus") {
+                // Focus Only View
+                if (focusProjects.length === 0) {
+                    const emptyMsg = document.createElement("div");
+                    emptyMsg.className = "proj-col-empty";
+                    emptyMsg.textContent = "Sin proyectos en foco aquí";
+                    cardsList.appendChild(emptyMsg);
+                } else {
+                    focusProjects.forEach(({ proj, origIdx }) => {
+                        const card = createProjectCard(proj, origIdx);
+                        cardsList.appendChild(card);
                     });
-                    extraBox.appendChild(extraList);
-                    cardBody.appendChild(extraBox);
-
-                    const toggleBtn = document.createElement("button");
-                    toggleBtn.className = "proj-toggle-btn";
-                    toggleBtn.id = `proj-btn-toggle-${origIdx}`;
-                    toggleBtn.setAttribute("data-show-text", `Ver ${rawLines.length - 1} pendientes más ▾`);
-                    toggleBtn.textContent = `Ver ${rawLines.length - 1} pendientes más ▾`;
-                    toggleBtn.addEventListener("click", (e) => {
-                        e.stopPropagation();
-                        window.toggleExtraActions(origIdx);
-                    });
-                    cardBody.appendChild(toggleBtn);
                 }
             } else {
-                const emptyAction = document.createElement("div");
-                emptyAction.className = "proj-empty-action";
-                emptyAction.textContent = "Sin tareas pendientes. Toca para redactar.";
-                cardBody.appendChild(emptyAction);
+                // Opción A: Macro-Áreas con Micro-Estados (En Marcha vs En Reserva)
+
+                // 1. SECCIÓN: EN MARCHA / FOCO SEMANAL
+                const focusHeader = document.createElement("div");
+                focusHeader.className = "proj-subgroup-header";
+                focusHeader.innerHTML = `
+                    <div class="proj-subgroup-title-group">
+                        <span class="subgroup-dot focus-dot"></span>
+                        <span>En Marcha / Foco (${focusProjects.length})</span>
+                    </div>
+                `;
+                cardsList.appendChild(focusHeader);
+
+                if (focusProjects.length > 0) {
+                    focusProjects.forEach(({ proj, origIdx }) => {
+                        const card = createProjectCard(proj, origIdx);
+                        cardsList.appendChild(card);
+                    });
+                } else {
+                    const emptyDrop = document.createElement("div");
+                    emptyDrop.className = "proj-focus-empty-drop";
+                    emptyDrop.innerHTML = `<span>☆ Toca la estrella de un proyecto abajo para activarlo en marcha</span>`;
+                    cardsList.appendChild(emptyDrop);
+                }
+
+                // 2. SECCIÓN: EN RESERVA / INCUBACIÓN
+                if (reserveProjects.length > 0) {
+                    const reserveHeader = document.createElement("div");
+                    reserveHeader.className = "proj-subgroup-header";
+                    reserveHeader.innerHTML = `
+                        <div class="proj-subgroup-title-group">
+                            <span class="subgroup-dot reserve-dot"></span>
+                            <span>En Reserva (${reserveProjects.length})</span>
+                        </div>
+                    `;
+                    cardsList.appendChild(reserveHeader);
+
+                    reserveProjects.forEach(({ proj, origIdx }) => {
+                        const strip = createCompactProjectStrip(proj, origIdx, cat);
+                        cardsList.appendChild(strip);
+                    });
+                }
+
+                // 3. SECCIÓN: COMPLETADOS (colapsada)
+                if (completedProjects.length > 0) {
+                    const compDetails = document.createElement("details");
+                    compDetails.className = "proj-completed-details";
+                    compDetails.innerHTML = `<summary>✓ Completados (${completedProjects.length})</summary>`;
+                    const compList = document.createElement("div");
+                    compList.className = "proj-completed-list";
+                    completedProjects.forEach(({ proj, origIdx }) => {
+                        const strip = createCompactProjectStrip(proj, origIdx, cat);
+                        compList.appendChild(strip);
+                    });
+                    compDetails.appendChild(compList);
+                    cardsList.appendChild(compDetails);
+                }
+
+                // Si toda la columna está completamente vacía
+                if (catProjects.length === 0) {
+                    cardsList.innerHTML = "";
+                    const emptyMsg = document.createElement("div");
+                    emptyMsg.className = "proj-col-empty";
+                    emptyMsg.textContent = "Sin proyectos aún en esta área";
+                    cardsList.appendChild(emptyMsg);
+                }
             }
+            col.appendChild(cardsList);
 
-            card.appendChild(cardBody);
-
-            // Card Footer / Edit Button
-            const cardFooter = document.createElement("div");
-            cardFooter.className = "proj-card-footer";
-            const editBtn = document.createElement("button");
-            editBtn.className = "btn-edit-proj";
-            editBtn.innerHTML = `📝 Editar / Ver todo`;
-            editBtn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                openTaskModal("antigravity", origIdx);
+            // Inline Quick Add at bottom of column
+            const quickAddBox = document.createElement("div");
+            quickAddBox.className = "proj-col-quick-add";
+            const quickInput = document.createElement("input");
+            quickInput.type = "text";
+            quickInput.className = "proj-col-input";
+            quickInput.placeholder = cat.placeholder;
+            quickInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" && quickInput.value.trim() !== "") {
+                    const title = quickInput.value.trim();
+                    if (!tasksState.weekly.antigravity) tasksState.weekly.antigravity = [];
+                    tasksState.weekly.antigravity.unshift({
+                        time: "",
+                        title: title,
+                        details: "",
+                        action_items: "",
+                        completed: false,
+                        category: cat.id,
+                        is_focus: currentProjectScope === "focus"
+                    });
+                    quickInput.value = "";
+                    saveTasks();
+                    renderWeeklyTasks();
+                    showToast(`Proyecto añadido a ${cat.label}`, "success");
+                }
             });
-            cardFooter.appendChild(editBtn);
-            card.appendChild(cardFooter);
+            quickAddBox.appendChild(quickInput);
+            col.appendChild(quickAddBox);
 
-            // Clicking card also opens modal
-            card.addEventListener("click", (e) => {
-                if (e.target.closest("button") || e.target.classList.contains("task-checkbox")) return;
-                openTaskModal("antigravity", origIdx);
-            });
-
-            grid.appendChild(card);
+            grid.appendChild(col);
         });
+    }
+
+    function createProjectCard(proj, origIdx) {
+        const cat = getProjectCategory(proj);
+        const catMeta = getCategoryMeta(cat);
+
+        // Parse action items
+        const rawLines = (proj.action_items || "")
+            .split("\n")
+            .map(l => l.trim())
+            .filter(l => l.length > 0);
+
+        const card = document.createElement("div");
+        card.className = `project-bento-card ${catMeta.class} ${proj.completed ? "completed" : ""} ${proj.is_focus ? "is-focus" : ""}`;
+
+        // Top Header: Tag + Controls (Star, Delete)
+        const cardHeader = document.createElement("div");
+        cardHeader.className = "proj-card-header";
+
+        const tag = document.createElement("span");
+        tag.className = `proj-cat-tag ${catMeta.class}`;
+        tag.textContent = catMeta.label;
+
+        const headerActions = document.createElement("div");
+        headerActions.className = "proj-header-actions";
+
+        const starBtn = document.createElement("button");
+        starBtn.className = `btn-proj-star ${proj.is_focus ? "active" : ""}`;
+        starBtn.title = proj.is_focus ? "Quitar de Foco Semanal" : "Marcar como Foco Semanal ⭐";
+        starBtn.innerHTML = proj.is_focus ? "⭐" : "☆";
+        starBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            proj.is_focus = !proj.is_focus;
+            saveTasks();
+            renderWeeklyTasks();
+            showToast(proj.is_focus ? `"${proj.title}" añadido al Foco Semanal ⭐` : `Quitado del Foco`, "success");
+        });
+
+        const delBtn = document.createElement("button");
+        delBtn.className = "btn-proj-delete";
+        delBtn.title = "Eliminar proyecto";
+        delBtn.textContent = "×";
+        delBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (confirm(`¿Eliminar el proyecto "${proj.title}"?`)) {
+                tasksState.weekly.antigravity.splice(origIdx, 1);
+                saveTasks();
+                renderWeeklyTasks();
+                showToast("Proyecto eliminado", "success");
+            }
+        });
+
+        headerActions.appendChild(starBtn);
+        headerActions.appendChild(delBtn);
+        cardHeader.appendChild(tag);
+        cardHeader.appendChild(headerActions);
+        card.appendChild(cardHeader);
+
+        // Card Body
+        const cardBody = document.createElement("div");
+        cardBody.className = "proj-card-body";
+
+        // Title & Checkbox
+        const titleRow = document.createElement("div");
+        titleRow.className = "proj-title-row";
+
+        const chk = document.createElement("input");
+        chk.type = "checkbox";
+        chk.className = "task-checkbox";
+        chk.checked = !!proj.completed;
+        chk.addEventListener("click", (e) => {
+            e.stopPropagation();
+            proj.completed = !proj.completed;
+            saveTasks();
+            renderWeeklyTasks();
+        });
+
+        const titleText = document.createElement("h3");
+        titleText.className = "proj-card-title";
+        titleText.textContent = proj.title || "Sin Título";
+
+        titleRow.appendChild(chk);
+        titleRow.appendChild(titleText);
+        cardBody.appendChild(titleRow);
+
+        if (proj.details && proj.details.trim() !== "") {
+            const detailsP = document.createElement("p");
+            detailsP.className = "proj-card-details";
+            detailsP.textContent = proj.details;
+            cardBody.appendChild(detailsP);
+        }
+
+        // Action Items Box & Next Action
+        if (rawLines.length > 0) {
+            const nextActionBox = document.createElement("div");
+            nextActionBox.className = "proj-next-action-box";
+
+            const cleanFirstLine = rawLines[0].replace(/^[\*\•\-\s]+/, "");
+            nextActionBox.innerHTML = `
+                <div class="next-action-header">
+                    <span class="next-action-label">👉 PRÓXIMA ACCIÓN:</span>
+                    <span class="proj-task-count-badge">${rawLines.length} pendientes</span>
+                </div>
+                <div class="next-action-text">${escapeHTML(cleanFirstLine)}</div>
+            `;
+            cardBody.appendChild(nextActionBox);
+
+            if (rawLines.length > 1) {
+                const extraBox = document.createElement("div");
+                extraBox.className = "proj-extra-actions-box hidden";
+                extraBox.id = `proj-extra-${origIdx}`;
+
+                const extraList = document.createElement("ul");
+                extraList.className = "proj-extra-list";
+                rawLines.slice(1).forEach(itemLine => {
+                    const li = document.createElement("li");
+                    li.textContent = itemLine.replace(/^[\*\•\-\s]+/, "");
+                    extraList.appendChild(li);
+                });
+                extraBox.appendChild(extraList);
+                cardBody.appendChild(extraBox);
+
+                const toggleBtn = document.createElement("button");
+                toggleBtn.className = "proj-toggle-btn";
+                toggleBtn.id = `proj-btn-toggle-${origIdx}`;
+                toggleBtn.setAttribute("data-show-text", `Ver ${rawLines.length - 1} pendientes más ▾`);
+                toggleBtn.textContent = `Ver ${rawLines.length - 1} pendientes más ▾`;
+                toggleBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    window.toggleExtraActions(origIdx);
+                });
+                cardBody.appendChild(toggleBtn);
+            }
+        } else {
+            const emptyAction = document.createElement("div");
+            emptyAction.className = "proj-empty-action";
+            emptyAction.textContent = "Sin tareas pendientes. Toca para redactar.";
+            cardBody.appendChild(emptyAction);
+        }
+
+        card.appendChild(cardBody);
+
+        // Card Footer / Edit Button
+        const cardFooter = document.createElement("div");
+        cardFooter.className = "proj-card-footer";
+        const editBtn = document.createElement("button");
+        editBtn.className = "btn-edit-proj";
+        editBtn.innerHTML = `📝 Editar / Ver todo`;
+        editBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            openTaskModal("antigravity", origIdx);
+        });
+        cardFooter.appendChild(editBtn);
+        card.appendChild(cardFooter);
+
+        // Clicking card also opens modal
+        card.addEventListener("click", (e) => {
+            if (e.target.closest("button") || e.target.classList.contains("task-checkbox")) return;
+            openTaskModal("antigravity", origIdx);
+        });
+
+        return card;
+    }
+
+    function createCompactProjectStrip(proj, origIdx, cat) {
+        const strip = document.createElement("div");
+        strip.className = `proj-compact-strip ${proj.completed ? "completed" : ""}`;
+
+        // Parse action items count
+        const rawLines = (proj.action_items || "")
+            .split("\n")
+            .map(l => l.trim())
+            .filter(l => l.length > 0);
+
+        // Left: checkbox + dot + title
+        const leftBox = document.createElement("div");
+        leftBox.className = "compact-left";
+
+        const chk = document.createElement("input");
+        chk.type = "checkbox";
+        chk.className = "task-checkbox";
+        chk.checked = !!proj.completed;
+        chk.addEventListener("click", (e) => {
+            e.stopPropagation();
+            proj.completed = !proj.completed;
+            saveTasks();
+            renderWeeklyTasks();
+        });
+
+        const dot = document.createElement("span");
+        dot.className = `compact-dot ${cat.class}`;
+
+        const titleSpan = document.createElement("span");
+        titleSpan.className = "compact-title";
+        titleSpan.textContent = proj.title || "Sin título";
+
+        leftBox.appendChild(chk);
+        leftBox.appendChild(dot);
+        leftBox.appendChild(titleSpan);
+
+        // Right: count pill + Star + Edit + Delete
+        const rightBox = document.createElement("div");
+        rightBox.className = "compact-right";
+
+        if (rawLines.length > 0) {
+            const countPill = document.createElement("span");
+            countPill.className = "compact-count-pill";
+            countPill.textContent = `${rawLines.length} pend.`;
+            rightBox.appendChild(countPill);
+        }
+
+        const starBtn = document.createElement("button");
+        starBtn.className = `btn-compact-star ${proj.is_focus ? "active" : ""}`;
+        starBtn.title = proj.is_focus ? "Quitar de Foco" : "Poner en Marcha ⭐";
+        starBtn.textContent = proj.is_focus ? "⭐" : "☆";
+        starBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            proj.is_focus = !proj.is_focus;
+            saveTasks();
+            renderWeeklyTasks();
+            showToast(proj.is_focus ? `"${proj.title}" puesto En Marcha ⭐` : `Movido a Reserva`, "success");
+        });
+
+        const editBtn = document.createElement("button");
+        editBtn.className = "btn-compact-edit";
+        editBtn.title = "Editar / Ver detalles";
+        editBtn.textContent = "✏️";
+        editBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            openTaskModal("antigravity", origIdx);
+        });
+
+        const delBtn = document.createElement("button");
+        delBtn.className = "btn-compact-del";
+        delBtn.title = "Eliminar";
+        delBtn.textContent = "×";
+        delBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (confirm(`¿Eliminar el proyecto "${proj.title}"?`)) {
+                tasksState.weekly.antigravity.splice(origIdx, 1);
+                saveTasks();
+                renderWeeklyTasks();
+                showToast("Proyecto eliminado", "success");
+            }
+        });
+
+        rightBox.appendChild(starBtn);
+        rightBox.appendChild(editBtn);
+        rightBox.appendChild(delBtn);
+
+        strip.appendChild(leftBox);
+        strip.appendChild(rightBox);
+
+        // Clicking strip body opens modal
+        strip.addEventListener("click", (e) => {
+            if (e.target.closest("button") || e.target.classList.contains("task-checkbox")) return;
+            openTaskModal("antigravity", origIdx);
+        });
+
+        return strip;
     }
 
     const newProjInput = document.getElementById("new-project-input");
