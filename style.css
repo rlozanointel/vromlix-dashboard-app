@@ -8127,6 +8127,7 @@ summary {
    RESPONSIVIDAD MÓVIL DEDICADA (CELULAR / SMARTPHONES < 680px)
    ========================================================================= */
 @media (max-width: 680px) {
+    /* Barra Superior y Selectores de Subvista */
     .mormon-subnav-bar {
         flex-direction: column;
         gap: 8px;
@@ -8138,6 +8139,207 @@ summary {
         justify-content: space-between;
         padding: 10px 14px;
         font-size: 0.88rem;
+    }
+
+    /* Contenedor y Hero Card del Libro de Mormón */
+    #view-mormon {
+        padding: 10px 8px !important;
+    }
+
+    .mormon-hero-card {
+        border-radius: 12px;
+    }
+
+    .mormon-header {
+        padding: 14px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .mormon-title-badge-row h2 {
+        font-size: 1.15rem;
+        line-height: 1.35;
+    }
+
+    .mormon-stats-row {
+        width: 100%;
+        justify-content: space-between;
+        gap: 6px;
+    }
+
+    .mormon-stat-pill {
+        padding: 4px 8px;
+    }
+
+    .mormon-stat-num {
+        font-size: 0.95rem;
+    }
+
+    .mormon-stat-label {
+        font-size: 0.65rem;
+    }
+
+    /* Controles y Búsqueda en Móvil */
+    .mormon-controls-container {
+        padding: 14px 12px;
+        gap: 12px;
+    }
+
+    .mormon-search-row {
+        gap: 10px;
+    }
+
+    .mormon-search-wrapper {
+        min-width: 100%;
+    }
+
+    .mormon-search {
+        font-size: 0.88rem;
+        padding: 10px 34px 10px 38px;
+    }
+
+    /* Botonera de Acciones segmentada en cuadrícula 2x2 para dedos */
+    .mormon-action-buttons {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .mormon-action-buttons .btn-filter-favorites {
+        grid-column: 1 / -1;
+        justify-content: center;
+        padding: 9px 14px;
+        font-size: 0.85rem;
+    }
+
+    .btn-mormon-action {
+        justify-content: center;
+        padding: 9px 8px;
+        font-size: 0.82rem;
+    }
+
+    /* Drawer de 106 Temas de Ministración en Móvil */
+    .mormon-ministerio-drawer {
+        padding: 12px 10px;
+        margin-top: 10px;
+    }
+
+    .drawer-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .drawer-view-mode-tabs {
+        width: 100%;
+        display: flex;
+    }
+
+    .drawer-mode-tab {
+        flex: 1;
+        justify-content: center;
+        padding: 7px 10px;
+        font-size: 0.80rem;
+    }
+
+    .drawer-frequent-shelf {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .drawer-toolbar-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .drawer-mini-search-wrapper {
+        min-width: 100%;
+    }
+
+    .drawer-categories-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px;
+    }
+
+    .drawer-cat-card {
+        padding: 10px 12px;
+    }
+
+    /* Filas de Capítulos y Fichas Quirúrgicas en Móvil */
+    .mormon-chapter-row {
+        padding: 12px 10px;
+    }
+
+    .chapter-row-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .mormon-chap-content {
+        font-size: 0.94rem;
+        line-height: 1.5;
+    }
+
+    .mormon-chapter-right {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .embedded-topic-card {
+        padding: 12px 10px;
+    }
+
+    .embedded-quote-text {
+        font-size: 0.95rem;
+    }
+
+    .embedded-pastoral-text {
+        font-size: 0.90rem;
+    }
+
+    .embedded-actions-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .btn-embedded-action {
+        justify-content: center;
+        padding: 8px 6px;
+        font-size: 0.78rem;
+    }
+
+    /* Sub-panel Conferencia General en Móvil */
+    .conf-controls-container {
+        padding: 14px 12px;
+        gap: 12px;
+    }
+
+    .conf-filter-pills-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .conf-filter-label {
+        min-width: auto;
+        font-size: 0.72rem;
+    }
+
+    .conf-filter-scroll {
+        width: 100%;
+    }
+
+    .conf-filter-pill,
+    .conf-calling-pill {
+        padding: 6px 10px;
+        font-size: 0.78rem;
     }
 
     .conf-talks-grid {
@@ -8209,6 +8411,14 @@ summary {
 
     .conf-special-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Botón flotante volver arriba en móvil */
+    .mormon-scroll-top-btn {
+        bottom: 16px;
+        right: 14px;
+        padding: 7px 12px;
+        font-size: 0.75rem;
     }
 }
 
