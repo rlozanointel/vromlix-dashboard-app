@@ -9,6 +9,8 @@ let ytSearchQuery = '';
 let ytUnreadCache = [];
 let ytAllCache = [];
 let ytChannelsCache = [];
+let ytUnreadLimit = 10;
+let ytHistoryLimit = 10;
 
 document.addEventListener('DOMContentLoaded', () => {
     initYouTubeView();
@@ -27,11 +29,13 @@ function initYouTubeView() {
     if (tabUnread && tabHistory) {
         tabUnread.addEventListener('click', () => {
             ytViewMode = 'unread';
+            ytUnreadLimit = 10;
             updateViewModeUI();
             renderYouTubeView();
         });
         tabHistory.addEventListener('click', () => {
             ytViewMode = 'history';
+            ytHistoryLimit = 10;
             updateViewModeUI();
             renderYouTubeView();
         });
@@ -42,6 +46,7 @@ function initYouTubeView() {
     if (cardUnread) {
         cardUnread.addEventListener('click', () => {
             ytViewMode = 'unread';
+            ytUnreadLimit = 10;
             updateViewModeUI();
             renderYouTubeView();
         });
@@ -49,6 +54,7 @@ function initYouTubeView() {
     if (cardArchived) {
         cardArchived.addEventListener('click', () => {
             ytViewMode = 'history';
+            ytHistoryLimit = 10;
             updateViewModeUI();
             renderYouTubeView();
         });
@@ -76,6 +82,8 @@ function initYouTubeView() {
             document.querySelectorAll('.yt-filter-chip').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             ytCurrentFilter = btn.getAttribute('data-yt-filter') || 'all';
+            ytUnreadLimit = 10;
+            ytHistoryLimit = 10;
             renderYouTubeView();
         });
     });
@@ -142,6 +150,30 @@ async function loadYouTubeSummaries() {
     }
 }
 
+function getYouTubeItemTimestamp(item) {
+    if (item.published_timestamp && typeof item.published_timestamp === 'number' && item.published_timestamp > 0) {
+        return item.published_timestamp;
+    }
+    if (item.published_at) {
+        const parsed = new Date(item.published_at).getTime();
+        if (!isNaN(parsed) && parsed > 0) return Math.floor(parsed / 1000);
+    }
+    if (item.upload_date) {
+        const parsed = new Date(item.upload_date + 'T00:00:00Z').getTime();
+        if (!isNaN(parsed) && parsed > 0) return Math.floor(parsed / 1000);
+    }
+    return 0;
+}
+
+function ytLoadMore(mode) {
+    if (mode === 'unread') {
+        ytUnreadLimit += 10;
+    } else {
+        ytHistoryLimit += 10;
+    }
+    renderYouTubeView();
+}
+
 function renderYouTubeView() {
     const container = document.getElementById('yt-cards-container');
     if (!container) return;
@@ -152,8 +184,25 @@ function renderYouTubeView() {
     }
 
     const sourceList = (ytViewMode === 'unread') 
-        ? ytUnreadCache 
+        ? [...ytUnreadCache] 
         : ytAllCache.filter(item => item.status !== 'UNREAD');
+
+    // ORDENAMIENTO CRONOLÓGICO ESTRICTO HASTA EN LOS SEGUNDOS:
+    // Pendientes (Bandeja): Del más antiguo al más reciente (ASC)
+    // Historial (Archivados): Del más reciente al más antiguo (DESC)
+    if (ytViewMode === 'unread') {
+        sourceList.sort((a, b) => {
+            const diff = getYouTubeItemTimestamp(a) - getYouTubeItemTimestamp(b);
+            if (diff !== 0) return diff;
+            return (a.video_id || '').localeCompare(b.video_id || '');
+        });
+    } else {
+        sourceList.sort((a, b) => {
+            const diff = getYouTubeItemTimestamp(b) - getYouTubeItemTimestamp(a);
+            if (diff !== 0) return diff;
+            return (b.video_id || '').localeCompare(a.video_id || '');
+        });
+    }
 
     const filtered = sourceList.filter(item => {
         // Filtro por categoría inteligente
@@ -206,7 +255,29 @@ function renderYouTubeView() {
         return;
     }
 
-    container.innerHTML = filtered.map(item => renderYouTubeSummaryCard(item)).join('');
+    // COLA VISUAL DE 10 VIDEOS (Anti-saturación):
+    const isUnread = (ytViewMode === 'unread');
+    const currentLimit = isUnread ? ytUnreadLimit : ytHistoryLimit;
+    const visibleCards = filtered.slice(0, currentLimit);
+    const remainingCount = filtered.length - visibleCards.length;
+
+    let cardsHtml = visibleCards.map(item => renderYouTubeSummaryCard(item)).join('');
+
+    if (remainingCount > 0) {
+        const loadMoreLabel = isUnread 
+            ? `⬇️ Cargar 10 más en cola (${remainingCount} pendientes restantes)`
+            : `⬇️ Cargar 10 más archivados (${remainingCount} restantes)`;
+        const loadMoreMode = isUnread ? 'unread' : 'history';
+        cardsHtml += `
+            <div class="yt-load-more-row">
+                <button class="yt-btn-load-more" onclick="ytLoadMore('${loadMoreMode}')">
+                    ${loadMoreLabel}
+                </button>
+            </div>
+        `;
+    }
+
+    container.innerHTML = cardsHtml;
 }
 
 function renderYouTubeSummaryCard(v) {
@@ -235,6 +306,13 @@ function renderYouTubeSummaryCard(v) {
 
     const vaultFileName = v.vault_path ? v.vault_path.split('/').pop() : 'Guardado en Vault_Conocimiento';
 
+    // Tooltip no intrusivo con el segundo exacto de publicación (si existe)
+    let dateTooltip = `Publicado: ${v.upload_date || ''}`;
+    if (v.published_at && !v.published_at.endsWith('T00:00:00Z')) {
+        const cleanPub = v.published_at.replace('T', ' ').replace('Z', ' UTC');
+        dateTooltip = `Publicado: ${cleanPub}`;
+    }
+
     return `
         <article class="yt-summary-card ${isVisual ? 'yt-card-visual' : ''} ${isArchived ? 'yt-card-archived' : ''}" id="yt-card-${v.video_id}">
             <!-- CABECERA DE LA FICHA -->
@@ -247,7 +325,7 @@ function renderYouTubeSummaryCard(v) {
                 </div>
                 <div class="yt-meta-right">
                     <span class="yt-duration-pill">⏱️ ${v.duration_str}</span>
-                    <span class="yt-date-pill">📅 ${v.upload_date || ''}</span>
+                    <span class="yt-date-pill" title="${dateTooltip}">📅 ${v.upload_date || ''}</span>
                 </div>
             </div>
 
@@ -510,6 +588,28 @@ async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
         cardEl.style.transform = 'translateY(-8px) scale(0.98)';
     }
 
+    // Actualización inmediata de la cola local (deslizar el video #11 hacia la pantalla)
+    if (actionType === 'watched' || actionType === 'dismiss') {
+        setTimeout(() => {
+            ytUnreadCache = ytUnreadCache.filter(item => item.video_id !== videoId);
+            const found = ytAllCache.find(item => item.video_id === videoId);
+            if (found) {
+                found.status = (actionType === 'watched') ? 'READ_WATCHED' : 'DISMISSED';
+            }
+            const badgeUnread = document.getElementById('yt-metric-unread');
+            const pillUnread = document.getElementById('yt-pill-unread-count');
+            const navBadge = document.getElementById('nav-yt-badge');
+            const count = ytUnreadCache.length;
+            if (badgeUnread) badgeUnread.textContent = count;
+            if (pillUnread) pillUnread.textContent = count;
+            if (navBadge) {
+                navBadge.textContent = count;
+                navBadge.style.display = count > 0 ? 'inline-flex' : 'none';
+            }
+            renderYouTubeView();
+        }, 150);
+    }
+
     try {
         const res = await fetch('/api/youtube/action', {
             method: 'POST',
@@ -521,7 +621,7 @@ async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
 
         setTimeout(() => {
             loadYouTubeSummaries();
-        }, 260);
+        }, 300);
     } catch (err) {
         alert('Error: ' + err.message);
         if (cardEl) {

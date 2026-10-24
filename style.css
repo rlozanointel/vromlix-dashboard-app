@@ -3370,6 +3370,37 @@ summary {
     box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
 }
 
+.yt-load-more-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px 0 36px 0;
+}
+
+.yt-btn-load-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 26px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-card);
+}
+
+.yt-btn-load-more:hover {
+    border-color: var(--accent-primary);
+    background: var(--bg-subtle);
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
 /* =========================================================================
    SECTION: LIBRO DE MORMÓN (MNEMOTECNIA & MINISTRACIÓN RÁPIDA)
    Diseño de alta retención, acordeón profético y chips de ministración

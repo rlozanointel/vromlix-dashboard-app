@@ -334,9 +334,9 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-21",
-      "IMDb Rating": 6.2,
-      "Vromlix Score": 62,
-      "Plot Summary": "An Artificial Friend named Klara finds a deep bond with a troubled young girl, bringing light and hope to a grieving family through her unwavering devotion and innocent wonder.",
+      "IMDb Rating": 6.071,
+      "Vromlix Score": 60.7,
+      "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
     {
@@ -345,8 +345,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.937,
-      "Vromlix Score": 62.5,
+      "IMDb Rating": 7.919,
+      "Vromlix Score": 62.4,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -367,8 +367,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.474,
-      "Vromlix Score": 63.4,
+      "IMDb Rating": 7.5,
+      "Vromlix Score": 63.5,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
@@ -400,8 +400,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.963,
-      "Vromlix Score": 69.6,
+      "IMDb Rating": 6.952,
+      "Vromlix Score": 69.5,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -549,17 +549,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt1756855/"
     },
     {
-      "Official Title": "Once Upon a Time in the Middle East",
-      "Spanish Title": null,
-      "Genres": "Drama, War",
-      "Release Year": "2026",
-      "Release Date": "2026-08-08",
-      "IMDb Rating": 8.3,
-      "Vromlix Score": 83,
-      "Plot Summary": "Seeking a fresh start, chef Xu Fu travels to the Middle East to support his family and repay his debts. Alongside restaurant manager Ma Junsheng, he transforms the struggling Dragon Restaurant into a thriving business. But when war engulfs the city, their hard-won success is shattered and the restaurant becomes a refuge for those caught in the conflict. As danger closes in, Xu Fu must risk everything to protect his newfound community and preserve a small beacon of hope amid the devastation.",
-      "IMDb Link": "https://www.imdb.com/title/tt34386754/"
-    },
-    {
       "Official Title": "Hundreds of Beavers",
       "Spanish Title": null,
       "Genres": "Comedy, Adventure",
@@ -690,6 +679,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 91,
       "Plot Summary": "Filmed at night from Tel Aviv rooftops, this investigative documentary examines the civilian casualties of Israel's military operations in Gaza and the systems behind targeted killings of Palestinians.",
       "IMDb Link": "https://www.imdb.com/title/tt44766123/"
+    },
+    {
+      "Official Title": "Once Upon a Time in the Middle East",
+      "Spanish Title": null,
+      "Genres": "Drama, War",
+      "Release Year": "2026",
+      "Release Date": "2026-08-08",
+      "IMDb Rating": 8.3,
+      "Vromlix Score": 91.5,
+      "Plot Summary": "Seeking a fresh start, chef Xu Fu travels to the Middle East to support his family and repay his debts. Alongside restaurant manager Ma Junsheng, he transforms the struggling Dragon Restaurant into a thriving business. But when war engulfs the city, their hard-won success is shattered and the restaurant becomes a refuge for those caught in the conflict. As danger closes in, Xu Fu must risk everything to protect his newfound community and preserve a small beacon of hope amid the devastation.",
+      "IMDb Link": "https://www.imdb.com/title/tt34386754/"
     },
     {
       "Official Title": "The Battle of Algiers",
@@ -1268,5 +1268,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-23 21:27:28"
+  "last_updated": "2026-10-24 12:10:05"
 };
