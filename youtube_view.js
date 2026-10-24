@@ -574,6 +574,8 @@ async function deleteMonitoredChannel(handle, name) {
 }
 
 
+let ytActiveToastTimer = null;
+
 function triggerYouTubeAutoMark(markWatchedUrl, videoId) {
     if (!markWatchedUrl) return;
 
@@ -601,7 +603,11 @@ function triggerYouTubeAutoMark(markWatchedUrl, videoId) {
     } catch (e) {}
 
     // 4. Mostrar Toast informativo breve
-    showMarkWatchedToast(4);
+    try {
+        showMarkWatchedToast(4);
+    } catch (e) {
+        console.warn('Error mostrando toast:', e);
+    }
 }
 
 function showMarkWatchedToast(seconds = 4) {
@@ -645,7 +651,11 @@ function hideMarkWatchedToast() {
 
 async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
     if (actionType === 'watched' && markWatchedUrl) {
-        triggerYouTubeAutoMark(markWatchedUrl, videoId);
+        try {
+            triggerYouTubeAutoMark(markWatchedUrl, videoId);
+        } catch (e) {
+            console.warn('Error en triggerYouTubeAutoMark:', e);
+        }
     }
 
     const cardEl = document.getElementById(`yt-card-${videoId}`);
