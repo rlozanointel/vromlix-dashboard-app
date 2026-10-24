@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Vromlix YouTube Auto-Watched & Closer
 // @namespace    https://vromlix.local/
-// @version      4.0
-// @description  Reproduce efectivamente los últimos 8s y auto-cierra la pestaña una vez registrado en el historial
+// @version      5.0
+// @description  Reproduce efectivamente los últimos 8s sin interrupciones y auto-cierra la pestaña al terminar
 // @author       Vromlix Core
 // @match        https://www.youtube.com/watch*
 // @grant        window.close
@@ -16,7 +16,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.has('vromlix_auto')) return;
 
-    console.log('[Vromlix] Script v4.0 activo en YouTube watch page');
+    console.log('[Vromlix] Script v5.0 activo: iniciando sincronización...');
 
     // 2. HUD Visual no invasivo
     let hud = null;
@@ -34,24 +34,26 @@
         } catch(e) {}
     }
 
+    updateHud('Cargando reproductor de YouTube...', '#f59e0b');
+
     let isFinished = false;
+    let hasMuted = false;
     let actualPlayedSeconds = 0;
-    let lastTime = -1;
-    let hasStartedRealPlay = false;
+    let lastPlayVideoAttempt = 0;
 
     function finishAndClose() {
         if (isFinished) return;
         isFinished = true;
         updateHud('✅ <b>¡Video terminado al 100%!</b> Registrando en historial y cerrando...', '#10b981');
-        console.log('[Vromlix] ✅ Video completado al 100% en YouTube. Cerrando pestaña en 2s...');
+        console.log('[Vromlix] ✅ Video completado al 100% en YouTube. Cerrando pestaña en 2.5s...');
         
-        // Esperar 2 segundos para asegurar que el ping de watchtime se envíe a los servidores de Google
+        // Esperar 2.5 segundos para garantizar que el ping de watchtime termine de enviarse
         setTimeout(() => {
             window.close();
-        }, 2000);
+        }, 2500);
     }
 
-    // 3. Loop de control cada 250ms
+    // 3. Loop de control inteligente cada 250ms
     const pollInterval = setInterval(() => {
         if (isFinished) {
             clearInterval(pollInterval);
@@ -67,73 +69,54 @@
             try { skipBtn.click(); } catch(e) {}
         }
 
-        // Silenciar para garantizar que Firefox y el reproductor permitan autoplay
-        if (player && typeof player.mute === 'function' && !player.isMuted()) {
-            try { player.mute(); player.setVolume(0); } catch(e) {}
-        }
-        if (video && (!video.muted || video.volume > 0)) {
-            video.muted = true;
-            video.volume = 0;
+        if (!player) {
+            updateHud('Esperando inicialización del reproductor...', '#f59e0b');
+            return;
         }
 
-        // Intentar dar Play si está en pausa
-        if (player && typeof player.playVideo === 'function') {
-            const state = player.getPlayerState();
-            // -1: unstarted, 2: paused, 5: cued
-            if (state === 2 || state === -1 || state === 5) {
-                try { player.playVideo(); } catch(e) {}
-            } else if (state === 0) { // 0 = ENDED
+        // Silenciar UNA SOLA VEZ para no generar eventos continuos de volumen
+        if (!hasMuted && typeof player.mute === 'function') {
+            try {
+                player.mute();
+                hasMuted = true;
+            } catch(e) {}
+        }
+
+        // Consultar estado nativo del reproductor de YouTube:
+        // -1 = Unstarted, 0 = Ended, 1 = Playing, 2 = Paused, 3 = Buffering, 5 = Cued
+        const state = (typeof player.getPlayerState === 'function') ? player.getPlayerState() : -1;
+
+        if (state === 0 || (video && video.ended)) {
+            // Video finalizado por completo
+            clearInterval(pollInterval);
+            finishAndClose();
+            return;
+        }
+
+        if (state === 1) {
+            // ESTADO REPRODUCIENDO: ¡NO TOCAR NADA! Dejar que fluya naturalmente sin clics ni llamadas
+            actualPlayedSeconds += 0.25;
+            updateHud(`Reproduciendo últimos 8s: <b>${actualPlayedSeconds.toFixed(1)}s / 8.0s</b>`, '#38bdf8');
+
+            // Si ya corrió al menos 7.5 segundos de reproducción activa
+            if (actualPlayedSeconds >= 7.5) {
                 clearInterval(pollInterval);
                 finishAndClose();
                 return;
             }
-        }
-
-        // Clic en botón central grande de play si existe
-        const largeBtn = document.querySelector('.ytp-large-play-button');
-        if (largeBtn && largeBtn.offsetParent !== null) {
-            try { largeBtn.click(); } catch(e) {}
-        }
-
-        // Forzar play en la etiqueta <video>
-        if (video) {
-            if (video.ended) {
-                clearInterval(pollInterval);
-                finishAndClose();
-                return;
+        } else if (state === 2 || state === -1 || state === 5) {
+            // ESTADO PAUSADO O INICIAL: Ordenar play de manera espaciada (máximo 1 vez cada 1.5s para no hacer toggle)
+            const now = Date.now();
+            if (now - lastPlayVideoAttempt > 1500) {
+                lastPlayVideoAttempt = now;
+                updateHud('Iniciando reproducción de los últimos 8 segundos...', '#f59e0b');
+                try {
+                    player.playVideo();
+                } catch(e) {}
             }
-
-            if (video.paused) {
-                video.play().catch(() => {});
-            }
-
-            // Monitorear avance real de tiempo
-            const curr = video.currentTime;
-            if (lastTime >= 0) {
-                const delta = curr - lastTime;
-                // Si el tiempo avanzó suavemente entre 0.05s y 1.2s, es reproducción real (no salto de búfer)
-                if (delta > 0.05 && delta < 1.2) {
-                    hasStartedRealPlay = true;
-                    actualPlayedSeconds += delta;
-                    updateHud(`Reproduciendo últimos 8s: <b>${actualPlayedSeconds.toFixed(1)}s / 8.0s</b>`, '#38bdf8');
-                } else if (delta > 1.2) {
-                    updateHud('Cargando últimos 8 segundos...', '#f59e0b');
-                }
-            } else {
-                updateHud('Conectando con reproductor...', '#38bdf8');
-            }
-            lastTime = curr;
-
-            // Condición de cierre:
-            // 1. Llegó al evento ended, O
-            // 2. Ha acumulado al menos 7.5 segundos de reproducción real, O
-            // 3. Ya arrancó y está a menos de 0.3s del final del video
-            const isNearEnd = video.duration > 0 && curr >= (video.duration - 0.3);
-            if (hasStartedRealPlay && (actualPlayedSeconds >= 7.5 || isNearEnd)) {
-                clearInterval(pollInterval);
-                finishAndClose();
-                return;
-            }
+        } else if (state === 3) {
+            // BUFFERING: Esperar a que cargue
+            updateHud('Cargando stream de video...', '#f59e0b');
         }
     }, 250);
 
