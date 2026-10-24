@@ -281,12 +281,6 @@ function renderYouTubeView() {
 }
 
 function renderYouTubeSummaryCard(v) {
-    const modeLabels = {
-        'MODO_A_ENTREVISTA': '🎙️ Entrevista / Tema Central',
-        'MODO_B_MULTITEMA': '📰 Multi-Tema / Análisis',
-        'MODO_C_VISUAL': '🖼️ Visual / Documental'
-    };
-    const modeBadge = modeLabels[v.channel_mode] || '⚡ Ejecutivo';
     const isVisual = v.channel_mode === 'MODO_C_VISUAL';
     const isArchived = v.status !== 'UNREAD';
 
@@ -296,15 +290,13 @@ function renderYouTubeSummaryCard(v) {
     const chaptersHtml = (v.chapters || []).map(ch => {
         const sec = ch.sec || 0;
         const tsUrl = `https://www.youtube.com/watch?v=${v.video_id}&t=${sec}s`;
+        const titleTooltip = ch.ts ? `Ir al minuto ${ch.ts} en YouTube` : 'Abrir este momento en YouTube';
         return `
-            <a href="${tsUrl}" target="_blank" rel="noopener" class="yt-chapter-pill" title="Abrir este minuto exacto en YouTube">
-                <span class="yt-ch-time">[${ch.ts}]</span>
+            <a href="${tsUrl}" target="_blank" rel="noopener" class="yt-chapter-pill" title="${titleTooltip}">
                 <span class="yt-ch-title">${ch.title}</span>
             </a>
         `;
     }).join('');
-
-    const vaultFileName = v.vault_path ? v.vault_path.split('/').pop() : 'Guardado en Vault_Conocimiento';
 
     // Tooltip no intrusivo con el segundo exacto de publicación (si existe)
     let dateTooltip = `Publicado: ${v.upload_date || ''}`;
@@ -313,13 +305,19 @@ function renderYouTubeSummaryCard(v) {
         dateTooltip = `Publicado: ${cleanPub}`;
     }
 
+    const noteBtnHtml = v.vault_path ? `
+        <a href="/api/open-note?path=${encodeURIComponent(v.vault_path)}" target="_blank" rel="noopener" class="yt-btn yt-btn-note" title="Segundo Cerebro: ${v.vault_path}">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Abrir en .md</span>
+        </a>
+    ` : '';
+
     return `
         <article class="yt-summary-card ${isVisual ? 'yt-card-visual' : ''} ${isArchived ? 'yt-card-archived' : ''}" id="yt-card-${v.video_id}">
             <!-- CABECERA DE LA FICHA -->
             <div class="yt-card-top">
                 <div class="yt-badges-row">
                     <span class="yt-badge yt-badge-channel">${v.channel_name}</span>
-                    <span class="yt-badge yt-badge-mode">${modeBadge}</span>
                     <span class="yt-badge yt-badge-verdict">${v.verdict_badge || '🔥 Resumen Ejecutivo'}</span>
                     ${isArchived ? `<span class="yt-badge" style="background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3);">✅ Visto / Archivado</span>` : ''}
                 </div>
@@ -332,10 +330,6 @@ function renderYouTubeSummaryCard(v) {
             <h3 class="yt-video-title">
                 <a href="${v.url_video}" target="_blank" rel="noopener">${v.title}</a>
             </h3>
-
-            <div class="yt-vault-indicator" title="Segundo Cerebro: ${v.vault_path || ''}">
-                🧠 <code>${vaultFileName}</code>
-            </div>
 
             <!-- 1. EL NÚCLEO -->
             <div class="yt-section-box yt-box-tldr">
@@ -376,6 +370,8 @@ function renderYouTubeSummaryCard(v) {
                         <span>Abrir en YouTube</span>
                     </a>
 
+                    ${noteBtnHtml}
+
                     <button class="yt-btn yt-btn-dismiss" onclick="handleYouTubeCardAction('${v.video_id}', 'dismiss', '')" title="Solo quitar la ficha de esta bandeja sin abrir YouTube (el respaldo .md permanece en tu Segundo Cerebro)">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
                         <span>Solo Quitar</span>
@@ -385,6 +381,8 @@ function renderYouTubeSummaryCard(v) {
                         <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                         <span>Ver en YouTube</span>
                     </a>
+
+                    ${noteBtnHtml}
 
                     <button class="yt-btn yt-btn-dismiss" onclick="handleReactivateCard('${v.video_id}')" title="Mover nuevamente a la bandeja de pendientes">
                         <span>📥 Regresar a Pendientes</span>
