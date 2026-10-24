@@ -3293,6 +3293,91 @@ summary {
     border-color: rgba(239, 68, 68, 0.3);
 }
 
+.yt-btn-note {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.yt-btn-note:hover {
+    background: #3b82f6;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* TOAST ELEGANTE PARA AUTO-MARCADO DE YOUTUBE */
+.yt-mark-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 10000;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(59, 130, 246, 0.45);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(59, 130, 246, 0.25);
+    color: #f8fafc;
+    padding: 12px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    animation: ytToastFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes ytToastFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.yt-toast-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(59, 130, 246, 0.25);
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: ytToastSpin 0.75s linear infinite;
+    flex-shrink: 0;
+}
+
+@keyframes ytToastSpin {
+    to { transform: rotate(360deg); }
+}
+
+.yt-toast-countdown {
+    color: #60a5fa;
+    font-weight: 700;
+    font-family: monospace;
+    font-size: 0.95rem;
+}
+
+.yt-toast-btn-dismiss {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 2px 6px;
+    border-radius: 6px;
+    margin-left: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.yt-toast-btn-dismiss:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.15);
+}
+
 .yt-channels-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));

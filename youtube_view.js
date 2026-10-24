@@ -574,9 +574,129 @@ async function deleteMonitoredChannel(handle, name) {
 }
 
 
+let ytActiveMarkPopup = null;
+let ytActiveToastTimer = null;
+
+function triggerYouTubeAutoMark(markWatchedUrl, videoId) {
+    if (!markWatchedUrl) return;
+
+    // 1. Agregar autoplay=1 y mute=1 para que el navegador NO bloquee la reproducción automática
+    let finalUrl = markWatchedUrl;
+    if (!finalUrl.includes('autoplay=')) {
+        finalUrl += (finalUrl.includes('?') ? '&' : '?') + 'autoplay=1&mute=1';
+    } else if (!finalUrl.includes('mute=')) {
+        finalUrl += '&mute=1';
+    }
+
+    // 2. Cerrar ventana previa si quedó alguna abierta
+    try {
+        if (ytActiveMarkPopup && !ytActiveMarkPopup.closed) {
+            ytActiveMarkPopup.close();
+        }
+    } catch (e) {}
+
+    // 3. Abrir ventana compañera compacta en la esquina inferior derecha (380x250)
+    // Al abrirse con dimensiones, NO reemplaza ni desvía la pestaña principal del Dashboard en Firefox/Chrome
+    const w = 380;
+    const h = 250;
+    const left = Math.max(10, (window.screen.availWidth || 1280) - w - 24);
+    const top = Math.max(10, (window.screen.availHeight || 800) - h - 50);
+    const features = `width=${w},height=${h},left=${left},top=${top},status=no,menubar=no,toolbar=no,location=no,resizable=yes`;
+
+    let popupWin = null;
+    try {
+        // Abrir SIN 'noopener' para poder conservar control y cerrarla automáticamente
+        popupWin = window.open(finalUrl, `yt_watch_${(videoId || 'vid').replace(/[^a-zA-Z0-9]/g, '_')}`, features);
+    } catch (e) {
+        console.warn('Popup bloqueado o no soportado:', e);
+    }
+
+    // Fallback a pestaña normal si el navegador bloqueó la mini-ventana
+    if (!popupWin || popupWin.closed || typeof popupWin.closed === 'undefined') {
+        popupWin = window.open(finalUrl, '_blank');
+    }
+
+    ytActiveMarkPopup = popupWin;
+
+    // 4. Intentar mantener el foco en la pestaña del dashboard
+    try {
+        if (window.focus) window.focus();
+    } catch (e) {}
+
+    // 5. Mostrar Toast visual no intrusivo con cuenta regresiva de 7s
+    showMarkWatchedToast(popupWin, 7);
+
+    // 6. Auto-cierre garantizado a los 7.5 segundos (3.5s carga/búfer + 4s de reproducción)
+    if (popupWin) {
+        setTimeout(() => {
+            try {
+                if (!popupWin.closed) {
+                    popupWin.close();
+                }
+            } catch (e) {
+                console.log('Ventana ya cerrada:', e);
+            }
+            hideMarkWatchedToast();
+        }, 7500);
+    }
+}
+
+function showMarkWatchedToast(popupWin, totalSeconds = 7) {
+    hideMarkWatchedToast();
+
+    const toast = document.createElement('div');
+    toast.id = 'yt-mark-toast';
+    toast.className = 'yt-mark-toast';
+    toast.innerHTML = `
+        <div class="yt-toast-spinner"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+            <div style="font-weight: 600; color: #f1f5f9;">Sincronizando con YouTube</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">
+                Últimos 4s (silenciado) · Auto-cierre en <span class="yt-toast-countdown" id="yt-toast-sec">${totalSeconds}</span>s
+            </div>
+        </div>
+        <button class="yt-toast-btn-dismiss" title="Cerrar ventana ahora" onclick="closeActiveMarkWindow()">✕</button>
+    `;
+    document.body.appendChild(toast);
+
+    let remaining = totalSeconds;
+    ytActiveToastTimer = setInterval(() => {
+        remaining -= 1;
+        const secEl = document.getElementById('yt-toast-sec');
+        if (secEl) secEl.textContent = remaining;
+        if (remaining <= 0) {
+            hideMarkWatchedToast();
+        }
+    }, 1000);
+}
+
+function hideMarkWatchedToast() {
+    if (ytActiveToastTimer) {
+        clearInterval(ytActiveToastTimer);
+        ytActiveToastTimer = null;
+    }
+    const toast = document.getElementById('yt-mark-toast');
+    if (toast) {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(12px) scale(0.96)';
+        setTimeout(() => {
+            if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 300);
+    }
+}
+
+function closeActiveMarkWindow() {
+    try {
+        if (ytActiveMarkPopup && !ytActiveMarkPopup.closed) {
+            ytActiveMarkPopup.close();
+        }
+    } catch (e) {}
+    hideMarkWatchedToast();
+}
+
 async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
     if (actionType === 'watched' && markWatchedUrl) {
-        window.open(markWatchedUrl, '_blank', 'noopener');
+        triggerYouTubeAutoMark(markWatchedUrl, videoId);
     }
 
     const cardEl = document.getElementById(`yt-card-${videoId}`);
