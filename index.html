@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261024_1400">
+    <link rel="stylesheet" href="style.css?v=20261024_1535">
 </head>
 <body>
     <div class="dashboard-container">
@@ -323,29 +323,22 @@
                             </button>
                         </div>
 
-                        <!-- NIVEL 2: OTRAS RUTINAS Y ACTIVIDADES DIARIAS -->
+                        <!-- NIVEL 2: CATEGORÍAS AGRUPADAS (IDÉNTICO AL WIDGET) -->
                         <div class="tiempo-secondary-section">
-                            <div class="section-label-sm">RUTINAS Y ACTIVIDADES:</div>
-                            <div class="tiempo-secondary-grid">
-                                <button id="btn-phase-cocinar" class="btn-tiempo-subaction btn-sub-cook" onclick="window.cambiarFaseTiempo('cocinar', 'Cocinar')">
-                                    <span>Cocinar</span>
-                                </button>
-
-                                <button id="btn-phase-comida" class="btn-tiempo-subaction btn-sub-meal" onclick="window.cambiarFaseTiempo('comida', 'Comer')">
-                                    <span>Comer</span>
-                                </button>
-
-                                <button id="btn-phase-bano" class="btn-tiempo-subaction btn-sub-bath" onclick="window.cambiarFaseTiempo('bano', 'Baño')">
-                                    <span>Baño</span>
-                                </button>
-
-                                <button id="btn-phase-descanso" class="btn-tiempo-subaction btn-sub-rest" onclick="window.cambiarFaseTiempo('descanso', 'Siesta')">
-                                    <span>Siesta</span>
-                                </button>
-
-                                <button id="btn-phase-espiritual" class="btn-tiempo-subaction btn-sub-spiritual" onclick="window.cambiarFaseTiempo('espiritual', 'Libro de Mormón')">
-                                    <span>Libro de Mormón</span>
-                                </button>
+                            <div class="section-label-sm">CATEGORÍAS Y RUTINAS:</div>
+                            <div class="tiempo-secondary-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+                                <div class="calle-dropdown-wrapper">
+                                    <button id="btn-group-rutinas" class="btn-tiempo-subaction btn-sub-routine" onclick="window.toggleRutinasMenu(event)">
+                                        <span>Rutinas ▾</span>
+                                    </button>
+                                    <div id="rutinas-presets-menu" class="calle-menu-dropdown hidden">
+                                        <button onclick="window.cambiarFaseTiempo('cocinar', 'Cocinar')">Cocinar</button>
+                                        <button onclick="window.cambiarFaseTiempo('comida', 'Comer')">Comer</button>
+                                        <button onclick="window.cambiarFaseTiempo('bano', 'Baño')">Baño</button>
+                                        <button onclick="window.cambiarFaseTiempo('descanso', 'Siesta')">Siesta</button>
+                                        <button onclick="window.cambiarFaseTiempo('espiritual', 'Mormón')">Mormón</button>
+                                    </div>
+                                </div>
 
                                 <div class="calle-dropdown-wrapper">
                                     <button id="btn-phase-ocio" class="btn-tiempo-subaction btn-sub-leisure" onclick="window.toggleOcioMenu(event)">
@@ -353,7 +346,7 @@
                                     </button>
                                     <div id="ocio-presets-menu" class="calle-menu-dropdown hidden">
                                         <button onclick="window.cambiarFaseTiempo('ocio', 'YouTube')">YouTube</button>
-                                        <button onclick="window.cambiarFaseTiempo('ocio', 'Película / Serie')">Película / Serie</button>
+                                        <button onclick="window.cambiarFaseTiempo('ocio', 'Película')">Película</button>
                                         <button onclick="window.cambiarFaseTiempo('ocio', 'General')">General</button>
                                     </div>
                                 </div>
@@ -395,14 +388,14 @@
                     </div>
                 </div>
 
-                <!-- RESUMEN DIARIO DE MÉTRICAS (4 CARDS COMPACTAS) -->
+                <!-- RESUMEN DIARIO DE MÉTRICAS (4 CARDS DE ALTA DENSIDAD ANALÍTICA) -->
                 <div class="tiempo-stats-grid">
                     <div class="tiempo-stat-card border-work">
                         <div class="stat-header">
                             <span class="stat-title">Foco Hoy</span>
                         </div>
                         <div class="stat-value" id="stat-net-work">0m</div>
-                        <div class="stat-sub" id="stat-work-efficiency">Eficiencia: 0%</div>
+                        <div class="stat-sub" id="stat-work-efficiency">Eficiencia: 0% • Ratio F/O: --</div>
                     </div>
 
                     <div class="tiempo-stat-card border-pause">
@@ -410,7 +403,7 @@
                             <span class="stat-title">Pausas</span>
                         </div>
                         <div class="stat-value" id="stat-total-pauses">0m</div>
-                        <div class="stat-sub" id="stat-pause-count">0 pausas</div>
+                        <div class="stat-sub" id="stat-pause-count">0 pausas • Promedio: 0m</div>
                     </div>
 
                     <div class="tiempo-stat-card border-street">
@@ -418,15 +411,15 @@
                             <span class="stat-title">Calle</span>
                         </div>
                         <div class="stat-value" id="stat-total-street">0m</div>
-                        <div class="stat-sub" id="stat-street-count">0 salidas</div>
+                        <div class="stat-sub" id="stat-street-count">0 salidas registradas</div>
                     </div>
 
                     <div class="tiempo-stat-card border-sleep">
                         <div class="stat-header">
-                            <span class="stat-title">Sueño</span>
+                            <span class="stat-title">Sueño y Rutinas</span>
                         </div>
                         <div class="stat-value" id="stat-last-sleep">--h</div>
-                        <div class="stat-sub">Último descanso</div>
+                        <div class="stat-sub" id="stat-rutinas-total">Rutinas: 0m</div>
                     </div>
                 </div>
 
@@ -462,10 +455,10 @@
                     </details>
 
                     <!-- Acordeón 2: Historial de Días Anteriores -->
-                    <details class="tiempo-accordion-item">
+                    <details class="tiempo-accordion-item" open>
                         <summary class="tiempo-accordion-summary">
-                            <span class="accordion-summary-title">Historial de Jornadas y Sueño</span>
-                            <span class="accordion-hint">Toca para abrir / cerrar</span>
+                            <span class="accordion-summary-title">Historial de Jornadas & KPIs Analíticos</span>
+                            <span class="accordion-hint">Abierto • Indicadores diarios para diagnóstico y mejora</span>
                         </summary>
                         <div class="tiempo-accordion-body">
                             <div class="history-table-wrapper">
@@ -475,14 +468,17 @@
                                             <th>Fecha</th>
                                             <th>Sueño</th>
                                             <th>Foco</th>
+                                            <th>Eficiencia</th>
                                             <th>Pausas</th>
-                                            <th>Calle</th>
-                                            <th>Comida</th>
                                             <th>Ocio</th>
+                                            <th>Ratio F/O</th>
+                                            <th>Calle</th>
+                                            <th>Rutinas</th>
+                                            <th>Diagnóstico</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tiempo-history-body">
-                                        <tr><td colspan="7" style="text-align:center; color: var(--text-muted);">Cargando historial...</td></tr>
+                                        <tr><td colspan="10" style="text-align:center; color: var(--text-muted);">Cargando historial...</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -2763,7 +2759,7 @@
 
     <script src="initial_data.js"></script>
     <script src="auth_gate.js"></script>
-    <script src="app.js?v=20260914_0243"></script>
+    <script src="app.js?v=20261024_1535"></script>
     <script src="agent_ops_view.js"></script>
     <script src="youtube_view.js?v=20261024_1515"></script>
     <script src="mormon_view.js?v=20261024_1400"></script>

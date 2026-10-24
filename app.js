@@ -2994,7 +2994,7 @@ function initTiempo() {
         'descanso': { title: 'Siesta', class: 'phase-descanso', color: '#14b8a6', sub: 'Descanso' },
         'calle': { title: 'Calle', class: 'phase-calle', color: '#ea580c', sub: 'Salida' },
         'ocio': { title: 'Ocio', class: 'phase-ocio', color: '#ef4444', sub: 'Videos y entretenimiento' },
-        'espiritual': { title: 'Libro de Mormón', class: 'phase-espiritual', color: '#38bdf8', sub: 'Lectura y reflexión' },
+        'espiritual': { title: 'Mormón', class: 'phase-espiritual', color: '#38bdf8', sub: 'Lectura y reflexión' },
         'dormir': { title: 'Dormir', class: 'phase-dormir', color: '#6366f1', sub: 'Sueño nocturno' },
         'detenido': { title: 'Detenido', class: 'phase-detenido', color: 'var(--text-muted)', sub: 'Reloj parado' }
     };
@@ -3151,6 +3151,7 @@ function initTiempo() {
         let targetId = `btn-phase-${phase}`;
         if (phase === 'foco' || phase === 'trabajo') targetId = 'btn-phase-trabajo';
         if (phase === 'parar' || phase === 'detener') targetId = 'btn-phase-detener';
+        if (['cocinar', 'comida', 'bano', 'descanso', 'espiritual'].includes(phase)) targetId = 'btn-group-rutinas';
         const targetBtn = document.getElementById(targetId);
         if (targetBtn) targetBtn.classList.add('active-phase');
     }
@@ -3160,13 +3161,18 @@ function initTiempo() {
         currentServerState = state;
 
         if (statNetWork) statNetWork.textContent = state.net_work_formatted || '0m';
-        if (statWorkEff) statWorkEff.textContent = `Eficiencia: ${state.efficiency_pct || 0}%`;
+        if (statWorkEff) {
+            const foRatio = state.focus_ocio_ratio ? `${state.focus_ocio_ratio}x` : '--';
+            statWorkEff.textContent = `Eficiencia: ${state.efficiency_pct || 0}% • Ratio F/O: ${foRatio}`;
+        }
 
         if (statTotalPauses) statTotalPauses.textContent = state.total_pause_formatted || '0m';
-        if (statPauseCount) statPauseCount.textContent = `${state.pause_count || 0} pausas`;
+        if (statPauseCount) {
+            statPauseCount.textContent = `${state.pause_count || 0} pausas • Promedio: ${state.pause_avg_formatted || '0m'}`;
+        }
 
         if (statTotalStreet) statTotalStreet.textContent = state.street_formatted || '0m';
-        if (statStreetCount) statStreetCount.textContent = `${(state.street_breakdown || []).length} salidas hoy`;
+        if (statStreetCount) statStreetCount.textContent = `${(state.street_breakdown || []).length} salidas registradas`;
 
         if (statLastSleep) {
             if (state.last_sleep && state.last_sleep.duration_hours) {
@@ -3174,6 +3180,11 @@ function initTiempo() {
             } else {
                 statLastSleep.textContent = '--h';
             }
+        }
+
+        const statRutinas = document.getElementById('stat-rutinas-total');
+        if (statRutinas) {
+            statRutinas.textContent = `Rutinas hoy: ${state.rutinas_formatted || '0m'}`;
         }
 
         // Render Pauses Breakdown List
@@ -3324,20 +3335,36 @@ function initTiempo() {
             .then(data => {
                 const list = data.history || [];
                 if (list.length === 0) {
-                    historyBody.innerHTML = '<tr><td colspan="7" style="text-align:center; color: var(--text-muted); padding: 12px;">Sin registros anteriores aún.</td></tr>';
+                    historyBody.innerHTML = '<tr><td colspan="10" style="text-align:center; color: var(--text-muted); padding: 14px;">Sin registros anteriores aún.</td></tr>';
                     return;
                 }
-                historyBody.innerHTML = list.map(item => `
-                    <tr>
-                        <td><b>${item.date}</b></td>
-                        <td>${item.sleep_hours ? `<span class="badge-indigo">${item.sleep_hours}h</span>` : '--'}</td>
-                        <td><span class="badge-cyan">${formatShortSecs(item.trabajo)}</span></td>
-                        <td>${formatShortSecs(item.pausa)}</td>
-                        <td>${formatShortSecs(item.calle)}</td>
-                        <td>${formatShortSecs(item.comida)}</td>
-                        <td>${formatShortSecs(item.ocio)}</td>
-                    </tr>
-                `).join('');
+                historyBody.innerHTML = list.map(item => {
+                    const slpBadge = item.sleep_hours ? (item.sleep_hours >= 7 ? 'badge-emerald' : (item.sleep_hours >= 6 ? 'badge-amber' : 'badge-rose')) : '';
+                    let diagColor = '#38bdf8';
+                    let diagBg = 'rgba(56, 189, 248, 0.12)';
+                    if (item.diagnostico === 'Óptimo') { diagColor = '#10b981'; diagBg = 'rgba(16, 185, 129, 0.15)'; }
+                    else if (item.diagnostico === 'Fuga') { diagColor = '#f43f5e'; diagBg = 'rgba(244, 63, 94, 0.15)'; }
+                    else if (item.diagnostico === 'Desvelo') { diagColor = '#f59e0b'; diagBg = 'rgba(245, 158, 11, 0.15)'; }
+                    else if (item.diagnostico === 'Equilibrado') { diagColor = '#818cf8'; diagBg = 'rgba(129, 140, 248, 0.15)'; }
+
+                    const effColor = (item.efficiency_pct >= 80) ? '#10b981' : ((item.efficiency_pct >= 65) ? '#f59e0b' : '#94a3b8');
+                    const foColor = (item.ratio_fo >= 3) ? '#10b981' : ((item.ratio_fo < 1 && item.ocio > 1800) ? '#f43f5e' : '#cbd5e1');
+
+                    return `
+                        <tr>
+                            <td><b>${item.date}</b></td>
+                            <td>${item.sleep_hours ? `<span class="badge ${slpBadge}" style="font-weight:700;">${item.sleep_hours}h</span>` : '--'}</td>
+                            <td><span style="color:#10b981; font-weight:700;">${item.trabajo_formatted || formatShortSecs(item.trabajo)}</span></td>
+                            <td><span style="color:${effColor}; font-weight:600;">${item.efficiency_pct || 0}%</span></td>
+                            <td>${item.pausa_formatted || formatShortSecs(item.pausa)} <span style="font-size:0.75rem; color:#94a3b8;">(${item.pausa_count || 0})</span></td>
+                            <td>${item.ocio_formatted || formatShortSecs(item.ocio)}</td>
+                            <td><span style="color:${foColor}; font-weight:700;">${item.ratio_fo || 0}x</span></td>
+                            <td>${item.calle_formatted || formatShortSecs(item.calle)} <span style="font-size:0.75rem; color:#94a3b8;">(${item.calle_count || 0})</span></td>
+                            <td>${item.rutinas_formatted || formatShortSecs(item.rutinas)}</td>
+                            <td><span style="color:${diagColor}; background:${diagBg}; padding:2px 8px; border-radius:4px; font-weight:700; font-size:0.8rem;">${item.diagnostico || 'Parcial'}</span></td>
+                        </tr>
+                    `;
+                }).join('');
             })
             .catch(() => {});
     }
@@ -3358,12 +3385,13 @@ function initTiempo() {
     }
 
     // Exposed Global Actions for UI Buttons
-    // Exposed Global Actions for UI Buttons
     window.cambiarFaseTiempo = function(phase, subtag = '', note = '') {
         const calleMenu = document.getElementById('calle-presets-menu');
         if (calleMenu) calleMenu.classList.add('hidden');
         const ocioMenu = document.getElementById('ocio-presets-menu');
         if (ocioMenu) ocioMenu.classList.add('hidden');
+        const rutinasMenu = document.getElementById('rutinas-presets-menu');
+        if (rutinasMenu) rutinasMenu.classList.add('hidden');
 
         const cleanPhase = (phase === 'parar' || phase === 'detener') ? 'detener' : phase;
 
@@ -3438,29 +3466,43 @@ function initTiempo() {
         });
     };
 
-    window.toggleCalleMenu = function(e) {
+    window.toggleRutinasMenu = function(e) {
         if (e && e.stopPropagation) e.stopPropagation();
+        const calleMenu = document.getElementById('calle-presets-menu');
+        if (calleMenu) calleMenu.classList.add('hidden');
         const ocioMenu = document.getElementById('ocio-presets-menu');
         if (ocioMenu) ocioMenu.classList.add('hidden');
-        const menu = document.getElementById('calle-presets-menu');
+        const menu = document.getElementById('rutinas-presets-menu');
         if (menu) menu.classList.toggle('hidden');
     };
 
     window.toggleOcioMenu = function(e) {
         if (e && e.stopPropagation) e.stopPropagation();
+        const rutinasMenu = document.getElementById('rutinas-presets-menu');
+        if (rutinasMenu) rutinasMenu.classList.add('hidden');
         const calleMenu = document.getElementById('calle-presets-menu');
         if (calleMenu) calleMenu.classList.add('hidden');
         const menu = document.getElementById('ocio-presets-menu');
         if (menu) menu.classList.toggle('hidden');
     };
 
+    window.toggleCalleMenu = function(e) {
+        if (e && e.stopPropagation) e.stopPropagation();
+        const rutinasMenu = document.getElementById('rutinas-presets-menu');
+        if (rutinasMenu) rutinasMenu.classList.add('hidden');
+        const ocioMenu = document.getElementById('ocio-presets-menu');
+        if (ocioMenu) ocioMenu.classList.add('hidden');
+        const menu = document.getElementById('calle-presets-menu');
+        if (menu) menu.classList.toggle('hidden');
+    };
+
     // Cerrar menús al dar clic fuera
     document.addEventListener('click', (e) => {
-        const calleMenu = document.getElementById('calle-presets-menu');
-        const calleBtn = document.getElementById('btn-phase-calle');
-        if (calleMenu && !calleMenu.classList.contains('hidden')) {
-            if (!calleMenu.contains(e.target) && (!calleBtn || !calleBtn.contains(e.target))) {
-                calleMenu.classList.add('hidden');
+        const rutinasMenu = document.getElementById('rutinas-presets-menu');
+        const rutinasBtn = document.getElementById('btn-group-rutinas');
+        if (rutinasMenu && !rutinasMenu.classList.contains('hidden')) {
+            if (!rutinasMenu.contains(e.target) && (!rutinasBtn || !rutinasBtn.contains(e.target))) {
+                rutinasMenu.classList.add('hidden');
             }
         }
         const ocioMenu = document.getElementById('ocio-presets-menu');
@@ -3468,6 +3510,13 @@ function initTiempo() {
         if (ocioMenu && !ocioMenu.classList.contains('hidden')) {
             if (!ocioMenu.contains(e.target) && (!ocioBtn || !ocioBtn.contains(e.target))) {
                 ocioMenu.classList.add('hidden');
+            }
+        }
+        const calleMenu = document.getElementById('calle-presets-menu');
+        const calleBtn = document.getElementById('btn-phase-calle');
+        if (calleMenu && !calleMenu.classList.contains('hidden')) {
+            if (!calleMenu.contains(e.target) && (!calleBtn || !calleBtn.contains(e.target))) {
+                calleMenu.classList.add('hidden');
             }
         }
     });
