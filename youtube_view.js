@@ -574,74 +574,37 @@ async function deleteMonitoredChannel(handle, name) {
 }
 
 
-let ytActiveMarkPopup = null;
-let ytActiveToastTimer = null;
-
 function triggerYouTubeAutoMark(markWatchedUrl, videoId) {
     if (!markWatchedUrl) return;
 
-    // 1. Agregar autoplay=1 y mute=1 para que el navegador NO bloquee la reproducción automática
+    // 1. Agregar autoplay=1, mute=1 y el marcador de automatización vromlix_auto=1
     let finalUrl = markWatchedUrl;
     if (!finalUrl.includes('autoplay=')) {
-        finalUrl += (finalUrl.includes('?') ? '&' : '?') + 'autoplay=1&mute=1';
-    } else if (!finalUrl.includes('mute=')) {
-        finalUrl += '&mute=1';
+        finalUrl += (finalUrl.includes('?') ? '&' : '?') + 'autoplay=1&mute=1&vromlix_auto=1';
+    } else {
+        if (!finalUrl.includes('mute=')) finalUrl += '&mute=1';
+        if (!finalUrl.includes('vromlix_auto=')) finalUrl += '&vromlix_auto=1';
     }
 
-    // 2. Cerrar ventana previa si quedó alguna abierta
+    // 2. Abrir como pestaña limpia (_blank sin window features como width/height).
+    // Con la preferencia de Firefox 'browser.tabs.loadDivertedInBackground = true',
+    // esto abre la pestaña A UN LADO EN SEGUNDO PLANO sin moverte jamás de tu Dashboard.
     try {
-        if (ytActiveMarkPopup && !ytActiveMarkPopup.closed) {
-            ytActiveMarkPopup.close();
-        }
-    } catch (e) {}
-
-    // 3. Abrir ventana compañera compacta en la esquina inferior derecha (380x250)
-    // Al abrirse con dimensiones, NO reemplaza ni desvía la pestaña principal del Dashboard en Firefox/Chrome
-    const w = 380;
-    const h = 250;
-    const left = Math.max(10, (window.screen.availWidth || 1280) - w - 24);
-    const top = Math.max(10, (window.screen.availHeight || 800) - h - 50);
-    const features = `width=${w},height=${h},left=${left},top=${top},status=no,menubar=no,toolbar=no,location=no,resizable=yes`;
-
-    let popupWin = null;
-    try {
-        // Abrir SIN 'noopener' para poder conservar control y cerrarla automáticamente
-        popupWin = window.open(finalUrl, `yt_watch_${(videoId || 'vid').replace(/[^a-zA-Z0-9]/g, '_')}`, features);
+        window.open(finalUrl, '_blank');
     } catch (e) {
-        console.warn('Popup bloqueado o no soportado:', e);
+        console.warn('Error al abrir pestaña:', e);
     }
 
-    // Fallback a pestaña normal si el navegador bloqueó la mini-ventana
-    if (!popupWin || popupWin.closed || typeof popupWin.closed === 'undefined') {
-        popupWin = window.open(finalUrl, '_blank');
-    }
-
-    ytActiveMarkPopup = popupWin;
-
-    // 4. Intentar mantener el foco en la pestaña del dashboard
+    // 3. Mantener el foco en la pestaña del Dashboard
     try {
         if (window.focus) window.focus();
     } catch (e) {}
 
-    // 5. Mostrar Toast visual no intrusivo con cuenta regresiva de 7s
-    showMarkWatchedToast(popupWin, 7);
-
-    // 6. Auto-cierre garantizado a los 7.5 segundos (3.5s carga/búfer + 4s de reproducción)
-    if (popupWin) {
-        setTimeout(() => {
-            try {
-                if (!popupWin.closed) {
-                    popupWin.close();
-                }
-            } catch (e) {
-                console.log('Ventana ya cerrada:', e);
-            }
-            hideMarkWatchedToast();
-        }, 7500);
-    }
+    // 4. Mostrar Toast informativo breve
+    showMarkWatchedToast(4);
 }
 
-function showMarkWatchedToast(popupWin, totalSeconds = 7) {
+function showMarkWatchedToast(seconds = 4) {
     hideMarkWatchedToast();
 
     const toast = document.createElement('div');
@@ -650,29 +613,24 @@ function showMarkWatchedToast(popupWin, totalSeconds = 7) {
     toast.innerHTML = `
         <div class="yt-toast-spinner"></div>
         <div style="display: flex; flex-direction: column; gap: 2px;">
-            <div style="font-weight: 600; color: #f1f5f9;">Sincronizando con YouTube</div>
+            <div style="font-weight: 600; color: #f1f5f9;">Pestaña enviada a un lado</div>
             <div style="font-size: 0.8rem; color: #94a3b8;">
-                Últimos 4s (silenciado) · Auto-cierre en <span class="yt-toast-countdown" id="yt-toast-sec">${totalSeconds}</span>s
+                Sincronizando últimos 4s en YouTube en segundo plano...
             </div>
         </div>
-        <button class="yt-toast-btn-dismiss" title="Cerrar ventana ahora" onclick="closeActiveMarkWindow()">✕</button>
+        <button class="yt-toast-btn-dismiss" title="Cerrar aviso" onclick="hideMarkWatchedToast()">✕</button>
     `;
     document.body.appendChild(toast);
 
-    let remaining = totalSeconds;
-    ytActiveToastTimer = setInterval(() => {
-        remaining -= 1;
-        const secEl = document.getElementById('yt-toast-sec');
-        if (secEl) secEl.textContent = remaining;
-        if (remaining <= 0) {
-            hideMarkWatchedToast();
-        }
-    }, 1000);
+    if (ytActiveToastTimer) clearTimeout(ytActiveToastTimer);
+    ytActiveToastTimer = setTimeout(() => {
+        hideMarkWatchedToast();
+    }, seconds * 1000);
 }
 
 function hideMarkWatchedToast() {
     if (ytActiveToastTimer) {
-        clearInterval(ytActiveToastTimer);
+        clearTimeout(ytActiveToastTimer);
         ytActiveToastTimer = null;
     }
     const toast = document.getElementById('yt-mark-toast');
@@ -683,15 +641,6 @@ function hideMarkWatchedToast() {
             if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
         }, 300);
     }
-}
-
-function closeActiveMarkWindow() {
-    try {
-        if (ytActiveMarkPopup && !ytActiveMarkPopup.closed) {
-            ytActiveMarkPopup.close();
-        }
-    } catch (e) {}
-    hideMarkWatchedToast();
 }
 
 async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
