@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Vromlix YouTube Auto-Watched & Closer
 // @namespace    https://vromlix.local/
-// @version      2.0
+// @version      3.0
 // @description  Reproduce efectivamente los últimos 4s en segundo plano y auto-cierra la pestaña una vez terminado
 // @author       Vromlix Core
 // @match        https://www.youtube.com/watch*
@@ -16,7 +16,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.has('vromlix_auto')) return;
 
-    console.log('[Vromlix] Script activado: forzando visibilidad y reproducción en segundo plano...');
+    console.log('[Vromlix] Script v3.0 activado: monitoreo estricto de reproducción...');
 
     // 2. BYPASS DE VISIBILIDAD: Engañar a YouTube para que crea que la pestaña está activa y visible
     try {
@@ -31,21 +31,41 @@
         return originalAddEventListener.call(this, type, listener, options);
     };
 
-    let secondsPlayed = 0;
-    let lastReportedTime = -1;
+    // 3. Crear HUD visual flotante en la esquina superior derecha
+    let hud = null;
+    function createOrUpdateHud(text, color = '#38bdf8') {
+        try {
+            if (!hud && document.body) {
+                hud = document.createElement('div');
+                hud.id = 'vromlix-yt-hud';
+                hud.style.cssText = 'position:fixed;top:16px;right:16px;z-index:2147483647;background:rgba(15,23,42,0.96);color:#f8fafc;padding:12px 18px;border-radius:12px;font-family:system-ui,sans-serif;font-size:13px;border:1px solid #38bdf8;box-shadow:0 8px 30px rgba(0,0,0,0.8);pointer-events:none;';
+                document.body.appendChild(hud);
+            }
+            if (hud) {
+                hud.innerHTML = `<span style="color:${color};font-weight:700;">⚡ VROMLIX</span> · ${text}`;
+            }
+        } catch(e) {}
+    }
+
     let isFinished = false;
+    let actualPlaybackTicks = 0; // Contaremos ticks de 250ms donde el video ESTÁ ACTIVAMENTE AVANZANDO
+    let lastTime = -1;
+    let hasStartedRealPlay = false;
 
     function finishAndClose() {
         if (isFinished) return;
         isFinished = true;
-        console.log('[Vromlix] ✅ Video completado al 100% en YouTube. Cerrando pestaña en 800ms...');
+        createOrUpdateHud('✅ <b>¡Video terminado al 100%!</b> Registrando en historial y cerrando...', '#10b981');
+        console.log('[Vromlix] ✅ Video completado al 100% en YouTube. Cerrando pestaña en 1.5s...');
+        
+        // Esperar 1.5 segundos para garantizar que el beacon de watchtime llegue a los servidores de Google
         setTimeout(() => {
             window.close();
-        }, 800);
+        }, 1500);
     }
 
-    // 3. Loop inteligente de monitoreo y reproducción activa
-    let pollInterval = setInterval(() => {
+    // 4. Loop de control inteligente cada 250ms
+    const pollInterval = setInterval(() => {
         if (isFinished) {
             clearInterval(pollInterval);
             return;
@@ -54,57 +74,91 @@
         const player = document.getElementById('movie_player');
         const video = document.querySelector('video');
 
-        // Silenciar para garantizar que el navegador permita la reproducción
-        if (player && typeof player.mute === 'function') {
-            player.mute();
-        }
-        if (video) {
-            video.muted = true;
+        // Saltar anuncios si aparecen
+        const skipBtn = document.querySelector('.ytp-ad-skip-button, .ytp-skip-ad-button, .ytp-ad-skip-button-modern');
+        if (skipBtn) {
+            try { skipBtn.click(); } catch(e) {}
         }
 
-        // Si la API del reproductor de YouTube está disponible, ordenar Play
+        // SILENCIAR SIEMPRE (Requisito fundamental para que Firefox permita reproducción automática sin interacción)
+        if (player && typeof player.mute === 'function' && !player.isMuted()) {
+            try { player.mute(); player.setVolume(0); } catch(e) {}
+        }
+        if (video && (!video.muted || video.volume > 0)) {
+            video.muted = true;
+            video.volume = 0;
+        }
+
+        // FORZAR PLAY
         if (player && typeof player.playVideo === 'function') {
             const state = player.getPlayerState();
-            // -1: unstarted, 2: paused, 3: buffering, 0: ended, 1: playing
-            if (state === 2 || state === -1) {
-                player.playVideo();
-            } else if (state === 0) {
+            // -1: unstarted, 2: paused, 5: cued
+            if (state === 2 || state === -1 || state === 5) {
+                try { player.playVideo(); } catch(e) {}
+            } else if (state === 0) { // 0 = ENDED
+                clearInterval(pollInterval);
                 finishAndClose();
                 return;
             }
         }
 
-        // Respaldo directo en el elemento HTML5 <video>
+        // Clic en el botón grande de Play si está visible
+        const largeBtn = document.querySelector('.ytp-large-play-button');
+        if (largeBtn && largeBtn.offsetParent !== null) {
+            try { largeBtn.click(); } catch(e) {}
+        }
+
+        // Forzar play en el tag <video>
         if (video) {
-            if (video.paused && !video.ended) {
+            if (video.ended) {
+                clearInterval(pollInterval);
+                finishAndClose();
+                return;
+            }
+
+            if (video.paused) {
                 video.play().catch(() => {});
             }
 
-            if (video.ended) {
-                finishAndClose();
-                return;
+            // MEDIR REPRODUCCIÓN REAL:
+            // Un salto grande de tiempo (> 1.5s) es un SEEK del búfer, NO reproducción.
+            // Solo contamos como reproducción real si el tiempo avanza suavemente entre 0.05s y 1.2s
+            const curr = video.currentTime;
+            if (lastTime >= 0) {
+                const delta = curr - lastTime;
+                if (delta > 0.05 && delta < 1.2) {
+                    hasStartedRealPlay = true;
+                    actualPlaybackTicks++;
+                    const playedSeconds = (actualPlaybackTicks * 0.25).toFixed(1);
+                    createOrUpdateHud(`Reproduciendo últimos 4s: <b>${playedSeconds}s / 4.0s</b>`, '#38bdf8');
+                } else if (delta > 1.2) {
+                    console.log(`[Vromlix] Salto de búfer detectado: ${lastTime.toFixed(1)}s -> ${curr.toFixed(1)}s`);
+                    createOrUpdateHud('Posicionando en últimos 4 segundos...', '#f59e0b');
+                }
+            } else {
+                createOrUpdateHud('Iniciando reproductor de YouTube...', '#38bdf8');
             }
+            lastTime = curr;
 
-            // Monitorear avance real del tiempo del video
-            if (lastReportedTime >= 0 && video.currentTime > lastReportedTime + 0.1) {
-                secondsPlayed += (video.currentTime - lastReportedTime);
-                console.log(`[Vromlix] Progreso verificado: ${secondsPlayed.toFixed(1)}s reproducidos`);
-            }
-            lastReportedTime = video.currentTime;
-
-            // Si ya avanzó al menos 3.5 segundos o llegó al segundo final de la duración
-            if (secondsPlayed >= 3.5 || (video.duration > 0 && video.currentTime >= video.duration - 0.5)) {
+            // CONDICIÓN DE TÉRMINO:
+            // 1. El video llegó a su fin (video.ended), O
+            // 2. Se han reproducido al menos 15 ticks reales (3.75 segundos de avance continuo), O
+            // 3. El tiempo actual está dentro de los últimos 0.4s de la duración Y YA INICIÓ la reproducción real
+            const isNearEnd = video.duration > 0 && curr >= (video.duration - 0.4);
+            if (hasStartedRealPlay && (actualPlaybackTicks >= 15 || isNearEnd)) {
+                clearInterval(pollInterval);
                 finishAndClose();
                 return;
             }
         }
     }, 250);
 
-    // 4. Temporizador de seguridad máximo (20 segundos) para no dejar pestañas colgadas en caso de fallo de red
+    // 5. Temporizador de seguridad máximo (35 segundos) por si hay error grave de red o video inaccesible
     setTimeout(() => {
         if (!isFinished) {
-            console.log('[Vromlix] Límite de tiempo de seguridad alcanzado. Cerrando...');
+            console.log('[Vromlix] Timeout de seguridad alcanzado (35s). Cerrando...');
+            clearInterval(pollInterval);
             finishAndClose();
         }
-    }, 20000);
+    }, 35000);
 })();
