@@ -148,7 +148,7 @@
                                     <h2>El Libro de Mormón — Mnemotecnia & Guía de Ministración</h2>
                                     <span class="mormon-badge-pill">Otro Testamento de Jesucristo</span>
                                 </div>
-                                <p class="subtitle-text">15 Libros • 239 Capítulos (retención del 80% de la historia) • 106 Pasajes Quirúrgicos con versículo exacto para ministrar</p>
+                                <p class="subtitle-text">15 Libros • 239 Capítulos • 106 Temas Pastorales con Cita Exacta</p>
                             </div>
                         </div>
                         <div class="mormon-stats-row">
@@ -178,21 +178,25 @@
                                 <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                                 </svg>
-                                <input type="text" id="mormon-search-input" class="mormon-search" placeholder="🔍 Busca por tema de vida (ej: ansiedad, depresión, duelo, recaí, perdón, chismes, diezmo) o hecho histórico (barco, Abinadí, Alma 32)...">
+                                <input type="text" id="mormon-search-input" class="mormon-search" placeholder="🔍 Busca por tema de vida (ej: ansiedad, depresión, duelo, recaí, perdón) o hecho histórico... [/ o Ctrl+K]">
                                 <button id="mormon-clear-search-btn" class="mormon-clear-btn" title="Limpiar búsqueda" style="display: none;">×</button>
                             </div>
                             <div class="mormon-action-buttons">
+                                <button id="mormon-favs-btn" class="btn-filter-favorites" onclick="window.toggleMormonFavFilter()" title="Ver solo pasajes guardados con estrella ⭐">
+                                    <span>⭐ Guardados</span>
+                                    <span class="fav-count-badge" id="mormon-fav-count-badge">0</span>
+                                </button>
                                 <button id="mormon-toggle-drawer-btn" class="btn-mormon-action btn-mormon-drawer active" onclick="window.toggleMinisterioDrawer()" title="Abrir/Cerrar índice de 106 temas de ministración">
-                                    📑 Pestañas de Ministración (106)
+                                    📑 Temas (106)
                                 </button>
                                 <button id="mormon-random-btn" class="btn-mormon-action" title="Capítulo aleatorio de inspiración">
                                     🎲 Inspiración
                                 </button>
                                 <button id="mormon-expand-all-btn" class="btn-mormon-action" title="Expandir todos los 15 libros">
-                                    📂 Expandir Todos
+                                    📂 Expandir
                                 </button>
                                 <button id="mormon-collapse-all-btn" class="btn-mormon-action" title="Colapsar todos los libros">
-                                    📁 Colapsar Todos
+                                    📁 Colapsar
                                 </button>
                             </div>
                         </div>
@@ -273,7 +277,7 @@
                                         <h2>Conferencia General — Octubre 2026</h2>
                                         <span class="conf-badge-pill">Semestral N° 196</span>
                                     </div>
-                                    <p class="subtitle-text">37 Discursos Sintéticos • 4 Sesiones • Anécdotas Memorables • Citas de Oro para Ministrar y Retos de Acción</p>
+                                    <p class="subtitle-text">37 Discursos Sintéticos • 4 Sesiones • Citas de Oro y Retos de Acción</p>
                                 </div>
                             </div>
                             <div class="mormon-stats-row">
@@ -305,15 +309,19 @@
                                     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                                     </svg>
-                                    <input type="text" id="conf-search-input" class="mormon-search" placeholder="🔍 Busca por orador (Gong, Oaks, Runia, Bednar), tema (templo, dolor, diezmo, perdón) o palabra clave...">
+                                    <input type="text" id="conf-search-input" class="mormon-search" placeholder="🔍 Busca por orador (Gong, Oaks, Runia, Bednar), tema o palabra clave... [/ o Ctrl+K]">
                                     <button id="conf-clear-search-btn" class="mormon-clear-btn" title="Limpiar búsqueda" style="display: none;">×</button>
                                 </div>
                             </div>
 
-                            <!-- FILTRO DE SESIONES -->
+                            <!-- FILTRO DE SESIONES Y FAVORITOS -->
                             <div class="conf-filter-pills-row">
                                 <span class="conf-filter-label">Sesión:</span>
                                 <div class="conf-filter-scroll">
+                                    <button id="conf-favs-btn" class="btn-filter-favorites" onclick="window.toggleConfFavFilter()" title="Ver solo discursos guardados con estrella ⭐">
+                                        <span>⭐ Guardados</span>
+                                        <span class="fav-count-badge" id="conf-fav-count-badge">0</span>
+                                    </button>
                                     <button class="conf-filter-pill active" data-session="all">Todas (37)</button>
                                     <button class="conf-filter-pill" data-session="sab-man">🌅 Sáb. Mañana (6)</button>
                                     <button class="conf-filter-pill" data-session="sab-tar">☀️ Sáb. Tarde (12)</button>
@@ -370,6 +378,43 @@
                 </div> <!-- FIN SUB-PANEL 2: CONFERENCIA -->
             </div>
     </main>
+
+    <!-- MODAL: MODO PÚLPITO (ALTA LEGIBILIDAD OLED PARA CLASES Y DISCURSOS) -->
+    <div id="pulpito-modal-overlay" class="pulpito-overlay" onclick="window.closePulpitoModal(event)">
+        <div class="pulpito-card" onclick="event.stopPropagation()">
+            <div class="pulpito-header">
+                <div class="pulpito-title-group">
+                    <span class="pulpito-badge" id="pulpito-badge">Lectura Solemne</span>
+                    <h3 class="pulpito-ref-title" id="pulpito-title">Alma 7:11-13</h3>
+                </div>
+                <div class="pulpito-controls">
+                    <button class="btn-pulpito-font" onclick="window.adjustPulpitoFont(-2)" title="Reducir tamaño de letra">A-</button>
+                    <button class="btn-pulpito-font" onclick="window.adjustPulpitoFont(2)" title="Aumentar tamaño de letra">A+</button>
+                    <button class="btn-pulpito-close" onclick="window.closePulpitoModal()" title="Cerrar (Escape)">✕ Cerrar</button>
+                </div>
+            </div>
+            <div class="pulpito-quote-container" id="pulpito-quote-text">
+                «Cita o pasaje sagrado...»
+            </div>
+            <div class="pulpito-insight-container" id="pulpito-insight-box">
+                <span class="pulpito-insight-label">💡 Enfoque Pastoral:</span>
+                <p class="pulpito-insight-text" id="pulpito-insight-text">Mensaje...</p>
+            </div>
+            <div class="pulpito-footer-actions">
+                <div style="font-size: 0.8rem; color: #64748b;">
+                    <span>⌨️ Presiona <strong>Esc</strong> para salir • <strong>A- / A+</strong> para ajustar tamaño</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-pulpito-action btn-pulpito-copy" id="btn-pulpito-copy" onclick="window.copyPulpitoContent()">
+                        📋 Copiar
+                    </button>
+                    <button class="btn-pulpito-action btn-pulpito-whatsapp" id="btn-pulpito-wa" onclick="window.sharePulpitoWhatsApp()">
+                        💬 Enviar por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- TOAST NOTIFICATIONS -->
     <div id="toast-container" class="toast-container"></div>

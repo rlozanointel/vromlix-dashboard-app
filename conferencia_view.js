@@ -9,6 +9,7 @@
     let currentSessionFilter = 'all';
     let currentCallingFilter = 'all';
     let currentSearchQuery = '';
+    let isConfFavFilterActive = false;
 
     // Inicializar cuando el DOM esté listo
     if (document.readyState === 'loading') {
@@ -66,6 +67,11 @@
         const q = currentSearchQuery.trim().toLowerCase();
 
         const filtered = allTalks.filter(talk => {
+            // Filtro de favoritos
+            if (isConfFavFilterActive) {
+                const favs = getConfFavorites();
+                if (!favs.includes(talk.num)) return false;
+            }
             // Filtro por sesión
             if (currentSessionFilter !== 'all' && talk.sessionCode !== currentSessionFilter) {
                 return false;
@@ -133,6 +139,15 @@
                         </span>
                         <span class="conf-talk-number">Discurso #${numPadded}</span>
                         ${talk.theme ? `<span class="conf-theme-tag">🏷️ ${escapeHtml(talk.theme)}</span>` : ''}
+                        <button class="btn-fav-star ${isConfFav(talk.num) ? 'is-favorited' : ''}" id="fav-conf-${talk.num}" onclick="window.toggleConfFav(${talk.num}, this)" title="Guardar discurso en favoritos ⭐">
+                            ⭐
+                        </button>
+                        <button class="btn-share-direct" onclick="window.copyDirectLinkConf(${talk.num}, this)" title="Copiar enlace directo (#conf-${talk.num})">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </button>
                     </div>
                     <div class="conf-speaker-title-box">
                         <h3 class="conf-speaker-name">${escapeHtml(talk.speaker)}</h3>
@@ -150,7 +165,7 @@
                         <div class="conf-section-box conf-story-box">
                             <div class="conf-section-label">
                                 <span class="label-icon">💡</span>
-                                <span>Anécdota o Relato Conmovedor</span>
+                                <span>💡 ANÉCDOTA CLAVE</span>
                             </div>
                             <div class="conf-story-text">
                                 ${talk.story}
@@ -163,7 +178,7 @@
                         <div class="conf-section-box conf-principles-box">
                             <div class="conf-section-label">
                                 <span class="label-icon">📖</span>
-                                <span>Principios Doctrinales Clave</span>
+                                <span>📖 PRINCIPIOS</span>
                             </div>
                             <ul class="conf-principles-list">
                                 ${principlesHtml}
@@ -175,14 +190,19 @@
                     ${talk.quote ? `
                         <div class="conf-quote-box">
                             <div class="conf-quote-header">
-                                <span class="conf-quote-label">💬 Cita de Oro para Atesorar</span>
-                                <button class="btn-copy-quote" onclick="window.copyConfQuote(${talk.num})" id="btn-copy-${talk.num}" title="Copiar cita con referencia para compartir por WhatsApp">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                                    </svg>
-                                    <span>Copiar para WhatsApp</span>
-                                </button>
+                                <span class="conf-quote-label">💬 CITA DE ORO</span>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button class="btn-embedded-action btn-pulpito-mini" onclick="window.openPulpitoForConf(${talk.num})" title="Modo Púlpito: Lectura solemne en pantalla completa">
+                                        📖 <span>Modo Púlpito</span>
+                                    </button>
+                                    <button class="btn-copy-quote" onclick="window.copyConfQuote(${talk.num})" id="btn-copy-${talk.num}" title="Copiar cita con referencia para compartir por WhatsApp">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                        </svg>
+                                        <span>Copiar para WhatsApp</span>
+                                    </button>
+                                </div>
                             </div>
                             <blockquote class="conf-quote-text">
                                 «${escapeHtml(talk.quote)}»
@@ -193,7 +213,7 @@
                     <!-- RETO PRÁCTICO DE ACCIÓN -->
                     ${talk.action ? `
                         <div class="conf-action-box">
-                            <div class="conf-action-label">🎯 Reto de Acción Personal o Ministración:</div>
+                            <div class="conf-action-label">🎯 RETO DE ACCIÓN:</div>
                             <div class="conf-action-text">${escapeHtml(talk.action)}</div>
                         </div>
                     ` : ''}
@@ -324,6 +344,76 @@
         });
 
         renderConfTalks();
+    };
+
+
+    // -------------------------------------------------------------
+    // FAVORITOS Y ENLACES DIRECTOS DE CONFERENCIA GENERAL
+    // -------------------------------------------------------------
+    function getConfFavorites() {
+        try {
+            const allFavs = JSON.parse(localStorage.getItem('vromlix_mormon_favorites_v1') || '[]');
+            return allFavs
+                .filter(id => typeof id === 'string' && id.startsWith('conf-'))
+                .map(id => parseInt(id.replace('conf-', ''), 10))
+                .filter(n => !isNaN(n));
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function isConfFav(talkNum) {
+        return getConfFavorites().includes(talkNum);
+    }
+
+    window.toggleConfFav = function(talkNum, btn) {
+        try {
+            let allFavs = JSON.parse(localStorage.getItem('vromlix_mormon_favorites_v1') || '[]');
+            const key = `conf-${talkNum}`;
+            if (allFavs.includes(key)) {
+                allFavs = allFavs.filter(id => id !== key);
+                if (btn) btn.classList.remove('is-favorited');
+                if (typeof showToast === 'function') showToast('Discurso retirado de favoritos', 'info');
+            } else {
+                allFavs.push(key);
+                if (btn) btn.classList.add('is-favorited');
+                if (typeof showToast === 'function') showToast('⭐ Discurso guardado en tu estudio personal', 'success');
+            }
+            localStorage.setItem('vromlix_mormon_favorites_v1', JSON.stringify(allFavs));
+            
+            // Actualizar contadores si existe la función global
+            const badgeC = document.getElementById('conf-fav-count-badge');
+            const confCount = allFavs.filter(id => typeof id === 'string' && id.startsWith('conf-')).length;
+            if (badgeC) badgeC.textContent = confCount;
+
+            if (isConfFavFilterActive) {
+                renderConfTalks();
+            }
+        } catch (e) {
+            console.error('Error toggling conf fav:', e);
+        }
+    };
+
+    window.toggleConfFavFilter = function() {
+        isConfFavFilterActive = !isConfFavFilterActive;
+        const btn = document.getElementById('conf-favs-btn');
+        if (btn) btn.classList.toggle('active', isConfFavFilterActive);
+        renderConfTalks();
+        if (isConfFavFilterActive && typeof showToast === 'function') {
+            const count = getConfFavorites().length;
+            showToast(`⭐ Mostrando ${count} discursos guardados`, 'info');
+        }
+    };
+
+    window.copyDirectLinkConf = function(talkNum, btn) {
+        const url = `${window.location.origin}${window.location.pathname}#conf-${talkNum}`;
+        navigator.clipboard.writeText(url).then(() => {
+            if (typeof showToast === 'function') showToast(`🔗 Enlace copiado: #conf-${talkNum}`, 'success');
+            if (btn) {
+                btn.classList.add('copied');
+                setTimeout(() => btn.classList.remove('copied'), 2000);
+            }
+        });
     };
 
     function escapeHtml(str) {

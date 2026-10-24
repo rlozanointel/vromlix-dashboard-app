@@ -7167,6 +7167,9 @@
     let activeTopicFilterId = null;
     let drawerViewMode = 'cards'; // 'cards' | 'az'
     let drawerSearchQuery = '';
+    let isFavFilterActive = false;
+    let currentPulpitoData = null;
+    let currentPulpitoFontSize = 24;
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMormonView);
@@ -7180,8 +7183,12 @@
         renderDrawerContent();
         renderBooksAccordion();
         bindEvents();
+        bindKeyboardEvents();
+        updateFavBadges();
         updateMatchCount();
         initScrollTopButton();
+        handleDeepLink();
+        window.addEventListener('hashchange', handleDeepLink);
     }
 
     // Normalizador de texto para búsquedas (sin tildes, minúsculas)
@@ -7725,6 +7732,12 @@
                                 </div>
                             </div>
                             <div class="mormon-chapter-right">
+                                <button class="btn-share-direct" onclick="window.copyDirectLinkChapter('${book.id}', ${chap.ch}, this)" title="Copiar enlace directo (#${book.id}-${chap.ch})">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                    </svg>
+                                </button>
                                 <button class="mormon-copy-btn" onclick="window.copyChapterSynthesis('${escapeHtml(book.title)}', ${chap.ch}, '${escapeHtml(chap.fact)}', '${escapeHtml(chap.summary)}', '${churchUrl}', this)" title="Copiar referencia">
                                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -7762,14 +7775,26 @@
                                     <p class="embedded-pastoral-text">${escapeHtml(top.pastoralInsight)}</p>
                                 </div>
                                 <div class="embedded-actions-row">
+                                    <button class="btn-fav-star ${isTopicFavorited(top.id) ? 'is-favorited' : ''}" id="fav-btn-${top.id}" onclick="window.toggleTopicFav('${top.id}', this)" title="Guardar en mis favoritos ⭐">
+                                        ⭐
+                                    </button>
+                                    <button class="btn-share-direct" onclick="window.copyDirectLinkTopic('${top.id}', this)" title="Copiar enlace directo (#top-${top.id})">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                        </svg>
+                                    </button>
                                     <button class="btn-embedded-action btn-copy-mini" onclick="window.copyMinisterioTopic('${top.id}', this)" title="Copiar pasaje al portapapeles">
-                                        📋 <span>Copiar Pasaje</span>
+                                        📋 <span>Copiar</span>
                                     </button>
                                     <button class="btn-embedded-action btn-whatsapp-mini" onclick="window.shareWhatsAppTopic('${top.id}')" title="Compartir mensaje por WhatsApp">
                                         💬 <span>WhatsApp</span>
                                     </button>
+                                    <button class="btn-embedded-action btn-pulpito-mini" onclick="window.openPulpitoForTopic('${top.id}')" title="Modo Púlpito: Lectura solemne en pantalla completa">
+                                        📖 <span>Modo Púlpito</span>
+                                    </button>
                                     <a href="${top.churchUrl}" target="_blank" rel="noopener noreferrer" class="btn-embedded-action btn-church-mini" title="Abrir en ChurchofJesusChrist.org">
-                                        📖 <span>Leer en Línea</span>
+                                        <span>Leer en Línea</span>
                                     </a>
                                 </div>
                             </div>
@@ -7826,17 +7851,34 @@
             let bookVisibleCount = 0;
             const rows = details.querySelectorAll('.mormon-chapter-row');
 
+            const favs = getFavorites();
             rows.forEach(row => {
                 const searchIdx = row.getAttribute('data-search') || '';
-                const isMatch = (!q || searchIdx.includes(q));
+                let isMatch = (!q || searchIdx.includes(q));
+
+                if (isFavFilterActive) {
+                    const rowId = row.id;
+                    const chapCh = parseInt(rowId.split('-').pop(), 10);
+                    const chapData = book.chapters.find(c => c.ch === chapCh);
+                    const hasFav = chapData && chapData.topics && chapData.topics.some(t => favs.includes(t.id));
+                    if (!hasFav) {
+                        isMatch = false;
+                    }
+                }
 
                 if (isMatch) {
                     row.style.display = 'block';
-                    if (q) {
+                    if (q || isFavFilterActive) {
                         row.classList.add('is-highlighted');
-                        // Abrir la ficha correspondiente en la búsqueda activa
                         const embeddedCards = row.querySelectorAll('.embedded-topic-card');
-                        embeddedCards.forEach(card => card.style.display = 'block');
+                        embeddedCards.forEach(card => {
+                            if (isFavFilterActive) {
+                                const cardId = card.id.replace('detail-', '');
+                                card.style.display = favs.includes(cardId) ? 'block' : 'none';
+                            } else {
+                                card.style.display = 'block';
+                            }
+                        });
                     } else {
                         row.classList.remove('is-highlighted');
                     }
@@ -7851,14 +7893,12 @@
             const badge = document.getElementById(`badge-count-${book.id}`);
             if (badge) badge.textContent = `${bookVisibleCount} caps`;
 
-            if (q) {
+            if (q || isFavFilterActive) {
                 if (bookVisibleCount > 0) {
-                    // Solo mostrar y abrir los libros que coinciden
                     details.open = true;
                     details.style.opacity = '1';
                     details.style.display = 'block';
                 } else {
-                    // Ocultar por completo los libros que no coinciden
                     details.open = false;
                     details.style.display = 'none';
                 }
@@ -8056,6 +8096,323 @@
             showToast(`📖 ${choice.book.title} ${choice.chapter.ch}: "${choice.chapter.fact}"`, 'success');
         }
     }
+
+
+    // -------------------------------------------------------------------------
+    // SISTEMA DE FAVORITOS (localStorage)
+    // -------------------------------------------------------------------------
+    function getFavorites() {
+        try {
+            return JSON.parse(localStorage.getItem('vromlix_mormon_favorites_v1') || '[]');
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function saveFavorites(favs) {
+        localStorage.setItem('vromlix_mormon_favorites_v1', JSON.stringify(favs));
+        updateFavBadges();
+    }
+
+    function isTopicFavorited(topicId) {
+        const favs = getFavorites();
+        return favs.includes(topicId);
+    }
+
+    window.toggleTopicFav = function(topicId, btn) {
+        let favs = getFavorites();
+        if (favs.includes(topicId)) {
+            favs = favs.filter(id => id !== topicId);
+            if (btn) btn.classList.remove('is-favorited');
+            if (typeof showToast === 'function') showToast('Eliminado de tus guardados', 'info');
+        } else {
+            favs.push(topicId);
+            if (btn) btn.classList.add('is-favorited');
+            if (typeof showToast === 'function') showToast('⭐ Guardado en tu estudio personal', 'success');
+        }
+        saveFavorites(favs);
+        if (isFavFilterActive) {
+            filterBooksAccordion();
+        }
+    };
+
+    window.toggleMormonFavFilter = function() {
+        isFavFilterActive = !isFavFilterActive;
+        const btn = document.getElementById('mormon-favs-btn');
+        if (btn) btn.classList.toggle('active', isFavFilterActive);
+        filterBooksAccordion();
+        if (isFavFilterActive && typeof showToast === 'function') {
+            const favCount = getFavorites().filter(id => !id.startsWith('conf-')).length;
+            showToast(`⭐ Mostrando ${favCount} temas guardados`, 'info');
+        }
+    };
+
+    function updateFavBadges() {
+        const favs = getFavorites();
+        const mormonCount = favs.filter(id => !id.startsWith('conf-')).length;
+        const confCount = favs.filter(id => id.startsWith('conf-')).length;
+        const badgeM = document.getElementById('mormon-fav-count-badge');
+        const badgeC = document.getElementById('conf-fav-count-badge');
+        if (badgeM) badgeM.textContent = mormonCount;
+        if (badgeC) badgeC.textContent = confCount;
+    }
+
+    // -------------------------------------------------------------------------
+    // ENLACES DIRECTOS (Deep-Linking)
+    // -------------------------------------------------------------------------
+    window.copyDirectLinkChapter = function(bookId, chapNum, btn) {
+        const url = `${window.location.origin}${window.location.pathname}#${bookId}-${chapNum}`;
+        navigator.clipboard.writeText(url).then(() => {
+            if (typeof showToast === 'function') showToast(`🔗 Enlace copiado: #${bookId}-${chapNum}`, 'success');
+            if (btn) {
+                btn.classList.add('copied');
+                setTimeout(() => btn.classList.remove('copied'), 2000);
+            }
+        });
+    };
+
+    window.copyDirectLinkTopic = function(topicId, btn) {
+        const url = `${window.location.origin}${window.location.pathname}#top-${topicId}`;
+        navigator.clipboard.writeText(url).then(() => {
+            if (typeof showToast === 'function') showToast(`🔗 Enlace directo copiado al portapapeles`, 'success');
+            if (btn) {
+                btn.classList.add('copied');
+                setTimeout(() => btn.classList.remove('copied'), 2000);
+            }
+        });
+    };
+
+    function handleDeepLink() {
+        const rawHash = (window.location.hash || '').replace('#', '').trim();
+        const params = new URLSearchParams(window.location.search);
+        const temaParam = params.get('tema') || params.get('topic');
+        const qParam = params.get('q') || params.get('buscar');
+
+        if (temaParam) {
+            const found = MINISTERIO_TOPICS.find(t => t.id === temaParam || (t.keywords && t.keywords.includes(temaParam.toLowerCase())));
+            if (found) {
+                if (typeof window.switchMormonSubview === 'function') window.switchMormonSubview('escrituras', false);
+                setTimeout(() => {
+                    window.locateAndOpenTopic(found.id, found.bookId, found.chapterNum);
+                }, 120);
+                return;
+            }
+        }
+
+        if (qParam) {
+            const input = document.getElementById('mormon-search-input');
+            if (input) {
+                input.value = qParam;
+                input.dispatchEvent(new Event('input'));
+            }
+            return;
+        }
+
+        if (!rawHash) return;
+
+        // Caso 1: Conferencia General (#conf-1, #conf-01, etc.)
+        if (rawHash.startsWith('conf-') || rawHash.startsWith('discurso-')) {
+            if (typeof window.switchMormonSubview === 'function') window.switchMormonSubview('conferencia', false);
+            setTimeout(() => {
+                const raw = rawHash.replace('conf-', '').replace('discurso-', '');
+                let el = null;
+                if (/^\d+$/.test(raw)) {
+                    el = document.getElementById(`conf-talk-${parseInt(raw, 10)}`);
+                } else if (window.CONFERENCIA_DATA) {
+                    const match = window.CONFERENCIA_DATA.find(t => normalizeText(t.speaker).includes(normalizeText(raw)));
+                    if (match) el = document.getElementById(`conf-talk-${match.num}`);
+                }
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    el.classList.add('highlight-pulse-gold');
+                    setTimeout(() => el.classList.remove('highlight-pulse-gold'), 3500);
+                }
+            }, 200);
+            return;
+        }
+
+        // Caso 2: Pasaje de ministración (#top-ansiedad_panico)
+        if (rawHash.startsWith('top-') || MINISTERIO_TOPICS.some(t => t.id === rawHash)) {
+            const id = rawHash.replace('top-', '');
+            const t = MINISTERIO_TOPICS.find(x => x.id === id);
+            if (t) {
+                if (typeof window.switchMormonSubview === 'function') window.switchMormonSubview('escrituras', false);
+                setTimeout(() => {
+                    window.locateAndOpenTopic(t.id, t.bookId, t.chapterNum);
+                }, 120);
+                return;
+            }
+        }
+
+        // Caso 3: Libro o capítulo (#alma-46, #1-nefi-3)
+        const parts = rawHash.toLowerCase().split('-');
+        let chap = null;
+        let bookId = rawHash.toLowerCase();
+        if (parts.length >= 2 && !isNaN(parts[parts.length - 1])) {
+            chap = parseInt(parts[parts.length - 1], 10);
+            bookId = parts.slice(0, -1).join('-');
+        }
+
+        const book = (typeof MORMON_BOOKS !== 'undefined' ? MORMON_BOOKS : []).find(b => b.id === bookId || b.url_slug === bookId);
+        if (book) {
+            if (typeof window.switchMormonSubview === 'function') window.switchMormonSubview('escrituras', false);
+            setTimeout(() => {
+                const bookEl = document.getElementById(`book-${book.id}`);
+                if (bookEl) bookEl.open = true;
+
+                if (chap !== null) {
+                    const chapEl = document.getElementById(`chap-${book.id}-${chap}`);
+                    if (chapEl) {
+                        chapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        chapEl.classList.add('highlight-pulse-gold');
+                        setTimeout(() => chapEl.classList.remove('highlight-pulse-gold'), 3500);
+                    }
+                } else if (bookEl) {
+                    bookEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 150);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // TECLADO Y ERGONOMÍA (Keyboard-First UX)
+    // -------------------------------------------------------------------------
+    function bindKeyboardEvents() {
+        document.addEventListener('keydown', (e) => {
+            const isEditing = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable;
+
+            if (e.key === 'Escape') {
+                const overlay = document.getElementById('pulpito-modal-overlay');
+                if (overlay && overlay.classList.contains('active')) {
+                    window.closePulpitoModal();
+                    return;
+                }
+
+                const drawer = document.getElementById('mormon-ministerio-drawer');
+                if (drawer && drawer.style.display !== 'none' && drawer.style.display !== '') {
+                    window.toggleMinisterioDrawer();
+                    return;
+                }
+
+                if (isEditing) {
+                    e.target.value = '';
+                    e.target.dispatchEvent(new Event('input'));
+                    e.target.blur();
+                }
+                return;
+            }
+
+            if (isEditing) return;
+
+            if (e.key === '/' || ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K'))) {
+                e.preventDefault();
+                const escriturasPanel = document.getElementById('subview-escrituras');
+                const isConf = escriturasPanel && escriturasPanel.style.display === 'none';
+                const targetInput = isConf ? document.getElementById('conf-search-input') : document.getElementById('mormon-search-input');
+                if (targetInput) {
+                    targetInput.focus();
+                    targetInput.select();
+                }
+                return;
+            }
+
+            if (e.key === '1') {
+                if (typeof window.switchMormonSubview === 'function') window.switchMormonSubview('escrituras');
+            } else if (e.key === '2') {
+                if (typeof window.switchMormonSubview === 'function') window.switchMormonSubview('conferencia');
+            }
+        });
+    }
+
+    // -------------------------------------------------------------------------
+    // MODO PÚLPITO (Alta Legibilidad OLED para Discursos y Clases)
+    // -------------------------------------------------------------------------
+    window.openPulpitoForTopic = function(topicId) {
+        const topic = MINISTERIO_TOPICS.find(t => t.id === topicId);
+        if (!topic) return;
+
+        currentPulpitoData = {
+            badge: 'Libro de Mormón • Ministración Pastoral',
+            title: `${topic.scriptureRef} — ${topic.shortTitle || topic.title}`,
+            quote: topic.scriptureQuote,
+            insight: topic.pastoralInsight,
+            churchUrl: topic.churchUrl
+        };
+
+        renderPulpitoModal();
+    };
+
+    window.openPulpitoForConf = function(talkNum) {
+        const allTalks = window.CONFERENCIA_DATA || [];
+        const talk = allTalks.find(t => t.num === talkNum);
+        if (!talk) return;
+
+        currentPulpitoData = {
+            badge: `Discurso #${String(talk.num).padStart(2,'0')} • Conferencia Octubre 2026`,
+            title: `${talk.speaker} (${talk.calling})`,
+            quote: talk.quote || talk.topic,
+            insight: talk.action ? `🎯 Reto: ${talk.action}` : (talk.story || ''),
+            churchUrl: talk.churchUrl || ''
+        };
+
+        renderPulpitoModal();
+    };
+
+    function renderPulpitoModal() {
+        if (!currentPulpitoData) return;
+        const overlay = document.getElementById('pulpito-modal-overlay');
+        const badge = document.getElementById('pulpito-badge');
+        const title = document.getElementById('pulpito-title');
+        const quote = document.getElementById('pulpito-quote-text');
+        const insightBox = document.getElementById('pulpito-insight-box');
+        const insightText = document.getElementById('pulpito-insight-text');
+
+        if (badge) badge.textContent = currentPulpitoData.badge;
+        if (title) title.textContent = currentPulpitoData.title;
+        if (quote) {
+            quote.textContent = `«${currentPulpitoData.quote}»`;
+            quote.style.fontSize = `${currentPulpitoFontSize}px`;
+        }
+        if (insightText && currentPulpitoData.insight) {
+            insightText.textContent = currentPulpitoData.insight;
+            if (insightBox) insightBox.style.display = 'block';
+        } else if (insightBox) {
+            insightBox.style.display = 'none';
+        }
+
+        if (overlay) {
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    window.closePulpitoModal = function() {
+        const overlay = document.getElementById('pulpito-modal-overlay');
+        if (overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    window.adjustPulpitoFont = function(delta) {
+        currentPulpitoFontSize = Math.max(16, Math.min(42, currentPulpitoFontSize + delta));
+        const quote = document.getElementById('pulpito-quote-text');
+        if (quote) quote.style.fontSize = `${currentPulpitoFontSize}px`;
+    };
+
+    window.copyPulpitoContent = function() {
+        if (!currentPulpitoData) return;
+        const text = `«${currentPulpitoData.quote}»\n\n— ${currentPulpitoData.title}`;
+        navigator.clipboard.writeText(text).then(() => {
+            if (typeof showToast === 'function') showToast('Cita copiada al portapapeles', 'success');
+        });
+    };
+
+    window.sharePulpitoWhatsApp = function() {
+        if (!currentPulpitoData) return;
+        const text = `Hola, te comparto esta cita edificante:\n\n«${currentPulpitoData.quote}»\n\n— *${currentPulpitoData.title}*`;
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+    };
 
     function escapeHtml(str) {
         if (!str) return '';
