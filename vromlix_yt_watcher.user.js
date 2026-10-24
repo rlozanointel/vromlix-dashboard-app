@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         Vromlix YouTube Auto-Watched & Closer
 // @namespace    https://vromlix.local/
-// @version      6.0
-// @description  Reproduce efectivamente los últimos 8s con emulación de tecla K y auto-cierra la pestaña al terminar
+// @version      6.1
+// @description  Reproduce efectivamente los últimos 8s con emulación de tecla K, bypass de Improve YouTube! y auto-cierre al terminar
 // @author       Vromlix Core
 // @match        https://www.youtube.com/watch*
 // @grant        window.close
 // @grant        unsafeWindow
-// @run-at       document-idle
+// @run-at       document-start
 // ==/UserScript==
 
 (function() {
@@ -17,9 +17,41 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.has('vromlix_auto')) return;
 
-    console.log('[Vromlix] Script v6.0 activo: iniciando sincronización con emulador de reproducción...');
+    console.log('[Vromlix] Script v6.1 activo: iniciando bypass de extensiones y sincronización...');
 
-    // 2. HUD Visual no invasivo
+    // 2. Neutralizar el bloqueo de autoplay de la extensión 'Improve YouTube!' (ImprovedTube)
+    // Esta extensión fuerza 'player_autoplay_disable: true' y pausa cualquier video si user_interacted === false.
+    function neutralizeImprovedTube() {
+        try {
+            if (typeof unsafeWindow !== 'undefined' && unsafeWindow.ImprovedTube) {
+                unsafeWindow.ImprovedTube.user_interacted = true;
+                if (unsafeWindow.ImprovedTube.storage) {
+                    unsafeWindow.ImprovedTube.storage.player_autoplay_disable = false;
+                }
+            }
+        } catch(e) {}
+    }
+
+    try {
+        const injectScript = document.createElement('script');
+        injectScript.textContent = `
+            (function() {
+                function unblock() {
+                    if (window.ImprovedTube) {
+                        window.ImprovedTube.user_interacted = true;
+                        if (window.ImprovedTube.storage) {
+                            window.ImprovedTube.storage.player_autoplay_disable = false;
+                        }
+                    }
+                }
+                unblock();
+                setInterval(unblock, 150);
+            })();
+        `;
+        (document.head || document.documentElement).appendChild(injectScript);
+    } catch(e) {}
+
+    // 3. HUD Visual no invasivo
     let hud = null;
     function updateHud(text, color = '#38bdf8') {
         try {
@@ -34,8 +66,6 @@
             }
         } catch(e) {}
     }
-
-    updateHud('Inicializando reproductor de YouTube...', '#f59e0b');
 
     let isFinished = false;
     let actualPlayedSeconds = 0;
@@ -56,6 +86,7 @@
 
     // Función multi-método para ordenar la reproducción (tecla K, HTML5 video.play, botón play, API)
     function executePlayRoutine(video, player) {
+        neutralizeImprovedTube();
         console.log('[Vromlix] Ejecutando rutina de reproducción (tecla K + video.play + UI)...');
 
         // A. Asegurar mute a nivel del elemento nativo <video>
@@ -70,7 +101,6 @@
         }
 
         // B. MÉTODO 1: Pulsación sintética de tecla 'K' (KeyK, keyCode 75)
-        // Descubrimiento clave: YouTube responde a 'K' para reproducir de inmediato sin sonido
         const keyEventInit = {
             key: 'k',
             code: 'KeyK',
@@ -93,7 +123,7 @@
         try { window.dispatchEvent(new KeyboardEvent('keydown', keyEventInit)); } catch(e) {}
         try { window.dispatchEvent(new KeyboardEvent('keyup', keyEventInit)); } catch(e) {}
 
-        // C. MÉTODO 2: HTML5 video.play() con manejo de promesa
+        // C. MÉTODO 2: HTML5 video.play() directo
         if (video && typeof video.play === 'function') {
             try {
                 video.play().then(() => {
@@ -119,7 +149,7 @@
         }
     }
 
-    // 3. Loop de control inteligente cada 250ms
+    // 4. Loop de control inteligente cada 250ms
     const pollInterval = setInterval(() => {
         if (isFinished) {
             clearInterval(pollInterval);
@@ -179,7 +209,7 @@
             // ESTADO PAUSADO O DETENIDO: Ejecutar rutina de play espaciada cada 1.5s
             if (now - lastPlayAttemptTime > 1500) {
                 lastPlayAttemptTime = now;
-                updateHud('Iniciando reproducción con tecla K...', '#f59e0b');
+                updateHud('Iniciando reproducción automática...', '#f59e0b');
                 executePlayRoutine(video, player);
             }
         } else if (state === 3) {
@@ -188,7 +218,7 @@
         }
     }, 250);
 
-    // 4. Temporizador de seguridad máximo (45 segundos)
+    // 5. Temporizador de seguridad máximo (45 segundos)
     setTimeout(() => {
         if (!isFinished) {
             console.log('[Vromlix] Timeout de seguridad alcanzado (45s). Finalizando...');
