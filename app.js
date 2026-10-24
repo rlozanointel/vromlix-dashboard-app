@@ -2985,17 +2985,18 @@ function initTiempo() {
     let localTickInterval = null;
 
     const PHASE_CONFIG = {
-        'trabajo': { title: '💻 Trabajo Efectivo', class: 'phase-trabajo', color: 'var(--accent-primary)', sub: 'Enfoque Profundo (25-45m)' },
-        'pausa': { title: '☕ Pausa Corta', class: 'phase-pausa', color: 'var(--accent-warning)', sub: 'Recuperación de 5 min' },
-        'cocinar': { title: '🍳 Cocinar / Preparar', class: 'phase-cocinar', color: '#f97316', sub: 'Preparar comida / recoger' },
-        'comida': { title: '🍽️ Comer / Alimentos', class: 'phase-comida', color: '#a855f7', sub: 'Tiempo de comer' },
-        'bano': { title: '🚿 Baño / Aseo', class: 'phase-bano', color: '#06b6d4', sub: 'Ducha y aseo personal' },
-        'descanso': { title: '🛋️ Siesta / Descanso', class: 'phase-descanso', color: '#14b8a6', sub: 'Descanso / Siesta' },
-        'calle': { title: '🚶‍♂️ En la Calle / Diligencia', class: 'phase-calle', color: '#ea580c', sub: 'Salida de casa' },
-        'ocio': { title: '🎬 Ocio / Videos', class: 'phase-ocio', color: '#ef4444', sub: 'Videos y relajación' },
-        'espiritual': { title: '📖 Libro de Mormón', class: 'phase-espiritual', color: '#38bdf8', sub: 'Estudio de escrituras / Spotify' },
-        'dormir': { title: '🌙 Durmiendo / Descanso', class: 'phase-dormir', color: '#6366f1', sub: 'Sueño nocturno' },
-        'detenido': { title: '⏹️ Detenido', class: 'phase-detenido', color: 'var(--text-muted)', sub: 'Jornada pausada' }
+        'trabajo': { title: 'Foco', class: 'phase-trabajo', color: 'var(--accent-primary)', sub: 'Enfoque profundo' },
+        'foco': { title: 'Foco', class: 'phase-trabajo', color: 'var(--accent-primary)', sub: 'Enfoque profundo' },
+        'pausa': { title: 'Pausa', class: 'phase-pausa', color: 'var(--accent-warning)', sub: 'Recuperación' },
+        'cocinar': { title: 'Cocinar', class: 'phase-cocinar', color: '#f97316', sub: 'Preparar comida' },
+        'comida': { title: 'Comer', class: 'phase-comida', color: '#a855f7', sub: 'Alimentos' },
+        'bano': { title: 'Baño', class: 'phase-bano', color: '#06b6d4', sub: 'Aseo personal' },
+        'descanso': { title: 'Siesta', class: 'phase-descanso', color: '#14b8a6', sub: 'Descanso' },
+        'calle': { title: 'Calle', class: 'phase-calle', color: '#ea580c', sub: 'Salida' },
+        'ocio': { title: 'Ocio', class: 'phase-ocio', color: '#ef4444', sub: 'Videos y entretenimiento' },
+        'espiritual': { title: 'Libro de Mormón', class: 'phase-espiritual', color: '#38bdf8', sub: 'Lectura y reflexión' },
+        'dormir': { title: 'Dormir', class: 'phase-dormir', color: '#6366f1', sub: 'Sueño nocturno' },
+        'detenido': { title: 'Detenido', class: 'phase-detenido', color: 'var(--text-muted)', sub: 'Reloj parado' }
     };
 
     function formatSecs(sec) {
@@ -3056,7 +3057,7 @@ function initTiempo() {
             if (timerDisplay) timerDisplay.textContent = '00:00:00';
             if (timerSublabel) timerSublabel.textContent = 'Jornada detenida o en espera';
             if (activeBadge) {
-                activeBadge.textContent = '⏹️ Detenido';
+                activeBadge.textContent = 'Detenido';
                 activeBadge.className = 'phase-badge phase-detenido';
             }
             if (heroCard) heroCard.className = 'section-card tiempo-hero-card';
@@ -3065,7 +3066,7 @@ function initTiempo() {
             if (pomodoroAlert) pomodoroAlert.style.display = 'none';
             setNavTabGlow('detenido');
             updateDynamicFavicon('#6b7280');
-            document.title = '⏹️ Vromlix • Dashboard';
+            document.title = 'Vromlix • Dashboard';
             highlightActiveButton('detenido');
             return;
         }
@@ -3078,7 +3079,7 @@ function initTiempo() {
         if (timerDisplay) timerDisplay.textContent = timeFormatted;
 
         const phaseKey = (active.phase || '').toLowerCase();
-        const cfg = PHASE_CONFIG[phaseKey] || PHASE_CONFIG['trabajo'];
+        const cfg = PHASE_CONFIG[phaseKey] || PHASE_CONFIG['foco'];
 
         const displayTitle = active.subtag ? `${cfg.title} (${active.subtag})` : cfg.title;
         if (activeBadge) {
@@ -3086,14 +3087,14 @@ function initTiempo() {
             activeBadge.className = `phase-badge ${cfg.class}`;
         }
         if (timerSublabel) {
-            timerSublabel.textContent = `${cfg.sub} • Iniciado a las ${active.start_iso ? active.start_iso.substring(11, 16) : ''}`;
+            timerSublabel.textContent = `${cfg.sub} • Desde ${active.start_iso ? active.start_iso.substring(11, 16) : ''}`;
         }
         if (phaseDot) phaseDot.style.background = cfg.color;
         
         // Pestaña Nav y Pestaña del Navegador Dinámicas
         setNavTabGlow(phaseKey);
         updateDynamicFavicon(cfg.color);
-        document.title = `${cfg.title.split(' ')[0]} ${timeFormatted} | ${phaseKey.toUpperCase()} • Vromlix`;
+        document.title = `${timeFormatted} | ${cfg.title} • Vromlix`;
 
         highlightActiveButton(phaseKey);
 
@@ -3104,7 +3105,7 @@ function initTiempo() {
 
         // Pomodoro Progress Bar (0 to 45 mins target)
         if (pomodoroFill) {
-            if (phaseKey === 'trabajo') {
+            if (phaseKey === 'trabajo' || phaseKey === 'foco') {
                 const targetSec = 45 * 60; // 45m deep work
                 const pct = Math.min(100, Math.round((elapsed / targetSec) * 100));
                 pomodoroFill.style.width = `${pct}%`;
@@ -3113,13 +3114,13 @@ function initTiempo() {
                     pomodoroFill.style.background = 'var(--accent-warning)';
                     if (pomodoroAlert) {
                         pomodoroAlert.style.display = 'block';
-                        pomodoroAlert.innerHTML = `⚠️ <b>Límite de 45m alcanzado (${formatShortSecs(elapsed)}):</b> Es momento óptimo para tomar tu pausa corta de 5 min y estirar el cuerpo.`;
+                        pomodoroAlert.innerHTML = `<b>Límite de 45m (${formatShortSecs(elapsed)}):</b> Momento ideal para tomar tu pausa corta de 5 min.`;
                     }
                 } else if (elapsed >= 25 * 60) {
                     pomodoroFill.style.background = 'var(--accent-primary)';
                     if (pomodoroAlert) {
                         pomodoroAlert.style.display = 'block';
-                        pomodoroAlert.innerHTML = `💡 <b>25m de trabajo cumplidos (${formatShortSecs(elapsed)}):</b> Al cerrar tu idea o función actual, puedes tomar 5 min de descanso.`;
+                        pomodoroAlert.innerHTML = `<b>25m cumplidos (${formatShortSecs(elapsed)}):</b> Al cerrar tu idea actual, puedes tomar 5 min de descanso.`;
                     }
                 } else {
                     pomodoroFill.style.background = 'var(--accent-success)';
@@ -3133,7 +3134,7 @@ function initTiempo() {
                 if (elapsed >= 5 * 60) {
                     if (pomodoroAlert) {
                         pomodoroAlert.style.display = 'block';
-                        pomodoroAlert.innerHTML = `☕ <b>Pausa de 5 minutos completada:</b> Listo para volver al trabajo efectivo con la mente despejada.`;
+                        pomodoroAlert.innerHTML = `<b>Pausa completada (5 min):</b> Listo para volver al foco.`;
                     }
                 } else {
                     if (pomodoroAlert) pomodoroAlert.style.display = 'none';
@@ -3147,7 +3148,10 @@ function initTiempo() {
 
     function highlightActiveButton(phase) {
         document.querySelectorAll('.btn-tiempo-hero, .btn-tiempo-subaction, .btn-sleep-action').forEach(btn => btn.classList.remove('active-phase'));
-        const targetBtn = document.getElementById(`btn-phase-${phase}`);
+        let targetId = `btn-phase-${phase}`;
+        if (phase === 'foco' || phase === 'trabajo') targetId = 'btn-phase-trabajo';
+        if (phase === 'parar' || phase === 'detener') targetId = 'btn-phase-detener';
+        const targetBtn = document.getElementById(targetId);
         if (targetBtn) targetBtn.classList.add('active-phase');
     }
 
@@ -3354,17 +3358,22 @@ function initTiempo() {
     }
 
     // Exposed Global Actions for UI Buttons
+    // Exposed Global Actions for UI Buttons
     window.cambiarFaseTiempo = function(phase, subtag = '', note = '') {
         const calleMenu = document.getElementById('calle-presets-menu');
         if (calleMenu) calleMenu.classList.add('hidden');
+        const ocioMenu = document.getElementById('ocio-presets-menu');
+        if (ocioMenu) ocioMenu.classList.add('hidden');
+
+        const cleanPhase = (phase === 'parar' || phase === 'detener') ? 'detener' : phase;
 
         // Optimistic UI state
         if (currentServerState) {
-            if (phase === 'detener') {
+            if (cleanPhase === 'detener') {
                 currentServerState.active_interval = null;
             } else {
                 currentServerState.active_interval = {
-                    phase: phase,
+                    phase: cleanPhase === 'foco' ? 'trabajo' : cleanPhase,
                     subtag: subtag,
                     start_epoch: Date.now() / 1000.0,
                     start_iso: new Date().toISOString()
@@ -3376,34 +3385,36 @@ function initTiempo() {
         fetch('/api/time/lap', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phase, subtag, note })
+            body: JSON.stringify({ phase: cleanPhase, subtag, note })
         })
         .then(res => res.json())
         .then(data => {
             if (data.state) {
                 renderStats(data.state);
                 updateLiveTimerUI();
-                if (phase.toLowerCase() === 'trabajo') {
-                    showToast("⚡ SOY UN GENERADOR IMPARABLE DE RIQUEZA Y VALOR");
+                if (cleanPhase === 'foco' || cleanPhase === 'trabajo') {
+                    showToast("SOY UN GENERADOR IMPARABLE DE RIQUEZA Y VALOR");
+                } else if (cleanPhase === 'detener') {
+                    showToast("Reloj parado");
                 } else {
-                    showToast(`Fase activada: ${phase.toUpperCase()}`);
+                    showToast(`Fase activada: ${subtag || cleanPhase.toUpperCase()}`);
                 }
             }
         })
         .catch(err => {
-            if (phase.toLowerCase() === 'trabajo') {
-                showToast("⚡ SOY UN GENERADOR IMPARABLE DE RIQUEZA Y VALOR");
+            if (cleanPhase === 'foco' || cleanPhase === 'trabajo') {
+                showToast("SOY UN GENERADOR IMPARABLE DE RIQUEZA Y VALOR");
             } else {
-                showToast(`Fase activada localmente: ${phase.toUpperCase()}`);
+                showToast(`Fase activada localmente: ${subtag || cleanPhase.toUpperCase()}`);
             }
             updateSyncBadge(false);
         });
     };
 
     window.marcarDormir = function() {
-        if (!confirm("¿Marcar inicio de descanso / A dormir?")) return;
-        window.cambiarFaseTiempo('dormir', 'noche', 'A dormir');
-        showToast("🌙 Que descanses bien Roger. Sueño registrado.");
+        if (!confirm("¿Marcar inicio de descanso nocturno?")) return;
+        window.cambiarFaseTiempo('dormir', 'Noche', 'A dormir');
+        showToast("Que descanses bien. Sueño registrado.");
     };
 
     window.marcarDespertar = function() {
@@ -3418,28 +3429,45 @@ function initTiempo() {
                 renderStats(data.state);
                 updateLiveTimerUI();
                 loadHistory();
-                showToast("☀️ ¡Buenos días! Sueño guardado. Selecciona tu siguiente actividad (Baño, Libro de Mormón, Cocinar o Trabajo).");
+                showToast("Buenos días. Sueño registrado y guardado.");
             }
         })
         .catch(() => {
             window.cambiarFaseTiempo('detener', '', 'Despertar');
-            showToast("☀️ ¡Buenos días! Sueño finalizado.");
+            showToast("Buenos días. Reloj detenido.");
         });
     };
 
     window.toggleCalleMenu = function(e) {
         if (e && e.stopPropagation) e.stopPropagation();
+        const ocioMenu = document.getElementById('ocio-presets-menu');
+        if (ocioMenu) ocioMenu.classList.add('hidden');
         const menu = document.getElementById('calle-presets-menu');
         if (menu) menu.classList.toggle('hidden');
     };
 
-    // Cerrar menú de calle al dar clic fuera
+    window.toggleOcioMenu = function(e) {
+        if (e && e.stopPropagation) e.stopPropagation();
+        const calleMenu = document.getElementById('calle-presets-menu');
+        if (calleMenu) calleMenu.classList.add('hidden');
+        const menu = document.getElementById('ocio-presets-menu');
+        if (menu) menu.classList.toggle('hidden');
+    };
+
+    // Cerrar menús al dar clic fuera
     document.addEventListener('click', (e) => {
-        const menu = document.getElementById('calle-presets-menu');
-        const btn = document.getElementById('btn-phase-calle');
-        if (menu && !menu.classList.contains('hidden')) {
-            if (!menu.contains(e.target) && (!btn || !btn.contains(e.target))) {
-                menu.classList.add('hidden');
+        const calleMenu = document.getElementById('calle-presets-menu');
+        const calleBtn = document.getElementById('btn-phase-calle');
+        if (calleMenu && !calleMenu.classList.contains('hidden')) {
+            if (!calleMenu.contains(e.target) && (!calleBtn || !calleBtn.contains(e.target))) {
+                calleMenu.classList.add('hidden');
+            }
+        }
+        const ocioMenu = document.getElementById('ocio-presets-menu');
+        const ocioBtn = document.getElementById('btn-phase-ocio');
+        if (ocioMenu && !ocioMenu.classList.contains('hidden')) {
+            if (!ocioMenu.contains(e.target) && (!ocioBtn || !ocioBtn.contains(e.target))) {
+                ocioMenu.classList.add('hidden');
             }
         }
     });

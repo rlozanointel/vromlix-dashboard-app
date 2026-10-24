@@ -260,12 +260,11 @@
                         <div class="header-title-group">
                             <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             <div>
-                                <h2>Control de Tiempo y Actividad</h2>
-                                <p class="subtitle-text">Monitoreo continuo persistente a reinicios • Bloques de 25-45m</p>
+                                <h2>Control de Tiempo</h2>
                             </div>
                         </div>
                         <div class="tiempo-phase-badge-wrapper">
-                            <span id="active-phase-badge" class="phase-badge phase-detenido">⏹️ Detenido</span>
+                            <span id="active-phase-badge" class="phase-badge phase-detenido">Detenido</span>
                         </div>
                     </div>
 
@@ -288,20 +287,19 @@
                                     <div id="pomodoro-fill" class="pomodoro-fill" style="width: 0%;"></div>
                                 </div>
                                 <div id="pomodoro-alert" class="pomodoro-alert-message" style="display: none;">
-                                    💡 Has completado más de 25 min de trabajo efectivo. Tómate una pausa corta de 5m cuando cierres tu idea actual.
+                                    💡 Has completado más de 25 min de foco. Puedes tomar una pausa corta cuando concluyas tu bloque actual.
                                 </div>
                             </div>
                         </div>
 
-                        <!-- NIVEL 1: CONTROLES PRINCIPALES DE TRABAJO (EJECUTIVOS & MINIMALISTAS) -->
+                        <!-- NIVEL 1: CONTROLES PRINCIPALES (EJECUTIVOS & MINIMALISTAS) -->
                         <div class="tiempo-primary-controls">
-                            <button id="btn-phase-trabajo" class="btn-tiempo-hero btn-hero-work" onclick="window.cambiarFaseTiempo('trabajo', 'deep_work')">
+                            <button id="btn-phase-trabajo" class="btn-tiempo-hero btn-hero-work" onclick="window.cambiarFaseTiempo('foco', 'deep_work')">
                                 <span class="btn-hero-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                                 </span>
                                 <div class="btn-hero-info">
-                                    <span class="btn-hero-title">TRABAJO</span>
-                                    <span class="btn-hero-sub">25 a 45m enfoque</span>
+                                    <span class="btn-hero-title">FOCO</span>
                                 </div>
                             </button>
 
@@ -311,83 +309,86 @@
                                 </span>
                                 <div class="btn-hero-info">
                                     <span class="btn-hero-title">PAUSA</span>
-                                    <span class="btn-hero-sub">5 min descanso</span>
                                 </div>
                             </button>
 
-                            <!-- BOTÓN DE DETENER / PARAR DESTACADO EN ROJO -->
-                            <button id="btn-phase-detener" class="btn-tiempo-hero btn-hero-stop" onclick="window.cambiarFaseTiempo('detener')">
+                            <!-- BOTÓN DE PARAR DESTACADO EN ROJO -->
+                            <button id="btn-phase-detener" class="btn-tiempo-hero btn-hero-stop" onclick="window.cambiarFaseTiempo('parar')">
                                 <span class="btn-hero-icon">
                                     <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
                                 </span>
                                 <div class="btn-hero-info">
-                                    <span class="btn-hero-title">DETENER</span>
-                                    <span class="btn-hero-sub">Pausar / Parar reloj</span>
+                                    <span class="btn-hero-title">PARAR</span>
                                 </div>
                             </button>
                         </div>
 
                         <!-- NIVEL 2: OTRAS RUTINAS Y ACTIVIDADES DIARIAS -->
                         <div class="tiempo-secondary-section">
-                            <div class="section-label-sm">RUTINAS & ACTIVIDADES COTIDIANAS:</div>
+                            <div class="section-label-sm">RUTINAS Y ACTIVIDADES:</div>
                             <div class="tiempo-secondary-grid">
-                                <button id="btn-phase-cocinar" class="btn-tiempo-subaction btn-sub-cook" onclick="window.cambiarFaseTiempo('cocinar', 'preparar')">
-                                    <span>🍳 Cocinar / Preparar</span>
+                                <button id="btn-phase-cocinar" class="btn-tiempo-subaction btn-sub-cook" onclick="window.cambiarFaseTiempo('cocinar', 'Cocinar')">
+                                    <span>Cocinar</span>
                                 </button>
 
-                                <button id="btn-phase-comida" class="btn-tiempo-subaction btn-sub-meal" onclick="window.cambiarFaseTiempo('comida', 'comer')">
-                                    <span>🍽️ Comer / Alimentos</span>
+                                <button id="btn-phase-comida" class="btn-tiempo-subaction btn-sub-meal" onclick="window.cambiarFaseTiempo('comida', 'Comer')">
+                                    <span>Comer</span>
                                 </button>
 
-                                <button id="btn-phase-bano" class="btn-tiempo-subaction btn-sub-bath" onclick="window.cambiarFaseTiempo('bano', 'ducha')">
-                                    <span>🚿 Baño / Aseo</span>
+                                <button id="btn-phase-bano" class="btn-tiempo-subaction btn-sub-bath" onclick="window.cambiarFaseTiempo('bano', 'Baño')">
+                                    <span>Baño</span>
                                 </button>
 
-                                <button id="btn-phase-descanso" class="btn-tiempo-subaction btn-sub-rest" onclick="window.cambiarFaseTiempo('descanso', 'siesta')">
-                                    <span>🛋️ Siesta / Descanso</span>
+                                <button id="btn-phase-descanso" class="btn-tiempo-subaction btn-sub-rest" onclick="window.cambiarFaseTiempo('descanso', 'Siesta')">
+                                    <span>Siesta</span>
                                 </button>
 
-                                <button id="btn-phase-ocio" class="btn-tiempo-subaction btn-sub-leisure" onclick="window.cambiarFaseTiempo('ocio', 'youtube_noche')">
-                                    <span>🎬 Ocio / Videos</span>
-                                </button>
-
-                                <button id="btn-phase-espiritual" class="btn-tiempo-subaction btn-sub-spiritual" onclick="window.cambiarFaseTiempo('espiritual', 'libro_mormon')">
-                                    <span>📖 Libro de Mormón</span>
+                                <button id="btn-phase-espiritual" class="btn-tiempo-subaction btn-sub-spiritual" onclick="window.cambiarFaseTiempo('espiritual', 'Libro de Mormón')">
+                                    <span>Libro de Mormón</span>
                                 </button>
 
                                 <div class="calle-dropdown-wrapper">
+                                    <button id="btn-phase-ocio" class="btn-tiempo-subaction btn-sub-leisure" onclick="window.toggleOcioMenu(event)">
+                                        <span>Ocio ▾</span>
+                                    </button>
+                                    <div id="ocio-presets-menu" class="calle-menu-dropdown hidden">
+                                        <button onclick="window.cambiarFaseTiempo('ocio', 'YouTube')">YouTube</button>
+                                        <button onclick="window.cambiarFaseTiempo('ocio', 'Película / Serie')">Película / Serie</button>
+                                        <button onclick="window.cambiarFaseTiempo('ocio', 'General')">General</button>
+                                    </div>
+                                </div>
+
+                                <div class="calle-dropdown-wrapper">
                                     <button id="btn-phase-calle" class="btn-tiempo-subaction btn-sub-street" onclick="window.toggleCalleMenu(event)">
-                                        <span>🚶‍♂️ Calle / Diligencia ▾</span>
+                                        <span>Calle ▾</span>
                                     </button>
                                     <div id="calle-presets-menu" class="calle-menu-dropdown hidden">
-                                        <div class="calle-menu-header">Selecciona motivo de salida:</div>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Tienda / Agua')">💧 Comprar Agua / Tienda</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Xilotzingo / Mercado')">🛒 Xilotzingo / Mercado</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Dentista')">🦷 Dentista</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Terapia Hna. Alma')">💆 Terapia Hna. Alma</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Psicólogo')">🧠 Psicólogo / Centro</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Capilla')">⛪ Capilla (Reuniones, Inglés, FamilySearch)</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'General')">🚶 Otra salida general</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Tienda')">Tienda</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Xilotzingo')">Xilotzingo</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Dentista')">Dentista</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Hna. Alma')">Hna. Alma</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Psicólogo')">Psicólogo</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Capilla')">Capilla</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'General')">General</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- NIVEL 3: CONTROL DE SUEÑO Y DESCANSO (1-CLIC) -->
+                        <!-- NIVEL 3: CONTROL DE SUEÑO Y DESCANSO -->
                         <div class="tiempo-sleep-strip">
                             <div class="sleep-strip-text">
-                                <span class="sleep-strip-icon">🌙</span>
                                 <div>
-                                    <div class="sleep-strip-title">Ciclo de Descanso Nocturno</div>
-                                    <div class="sleep-strip-subtitle" id="stat-sleep-quality">Registra automáticamente tus horas de sueño</div>
+                                    <div class="sleep-strip-title">Descanso Nocturno</div>
+                                    <div class="sleep-strip-subtitle" id="stat-sleep-quality">Registro de horas de sueño</div>
                                 </div>
                             </div>
                             <div class="sleep-strip-actions">
                                 <button id="btn-phase-dormir" class="btn-sleep-action btn-sleep-night" onclick="window.marcarDormir()">
-                                    🌙 A Dormir (1-Clic)
+                                    Dormir
                                 </button>
                                 <button id="btn-phase-despertar" class="btn-sleep-action btn-sleep-morning" onclick="window.marcarDespertar()">
-                                    ☀️ Desperté (1-Clic)
+                                    Despertar
                                 </button>
                             </div>
                         </div>
@@ -398,8 +399,7 @@
                 <div class="tiempo-stats-grid">
                     <div class="tiempo-stat-card border-work">
                         <div class="stat-header">
-                            <span class="stat-icon">💻</span>
-                            <span class="stat-title">Trabajo Efectivo Hoy</span>
+                            <span class="stat-title">Foco Hoy</span>
                         </div>
                         <div class="stat-value" id="stat-net-work">0m</div>
                         <div class="stat-sub" id="stat-work-efficiency">Eficiencia: 0%</div>
@@ -407,8 +407,7 @@
 
                     <div class="tiempo-stat-card border-pause">
                         <div class="stat-header">
-                            <span class="stat-icon">☕</span>
-                            <span class="stat-title">Pausas Tomadas</span>
+                            <span class="stat-title">Pausas</span>
                         </div>
                         <div class="stat-value" id="stat-total-pauses">0m</div>
                         <div class="stat-sub" id="stat-pause-count">0 pausas</div>
@@ -416,43 +415,41 @@
 
                     <div class="tiempo-stat-card border-street">
                         <div class="stat-header">
-                            <span class="stat-icon">🚶‍♂️</span>
-                            <span class="stat-title">Tiempo en Calle</span>
+                            <span class="stat-title">Calle</span>
                         </div>
                         <div class="stat-value" id="stat-total-street">0m</div>
-                        <div class="stat-sub" id="stat-street-count">Diligencias e Iglesia</div>
+                        <div class="stat-sub" id="stat-street-count">0 salidas</div>
                     </div>
 
                     <div class="tiempo-stat-card border-sleep">
                         <div class="stat-header">
-                            <span class="stat-icon">🌙</span>
-                            <span class="stat-title">Último Descanso</span>
+                            <span class="stat-title">Sueño</span>
                         </div>
                         <div class="stat-value" id="stat-last-sleep">--h</div>
-                        <div class="stat-sub">Horas dormidas</div>
+                        <div class="stat-sub">Último descanso</div>
                     </div>
                 </div>
 
-                <!-- SECCIÓN COLAPSABLE: DESGLOSES DETALLADOS (EVITA SATURAR LA PANTALLA) -->
+                <!-- SECCIÓN COLAPSABLE: DESGLOSES DETALLADOS -->
                 <div class="tiempo-accordions-group">
                     
-                    <!-- Acordeón 1: Sesiones e Intervalos de Hoy (Abierto para ver y borrar registros) -->
+                    <!-- Acordeón 1: Sesiones e Intervalos de Hoy -->
                     <details class="tiempo-accordion-item" open>
                         <summary class="tiempo-accordion-summary">
-                            <span class="accordion-summary-title">📋 Bitácora Detallada de Hoy (Ver, Filtrar y Borrar Registros)</span>
+                            <span class="accordion-summary-title">Bitácora de Hoy (Filtrar y Gestionar)</span>
                             <span class="accordion-hint">Abierto por defecto • Toca para colapsar</span>
                         </summary>
                         <div class="tiempo-accordion-body">
                             <!-- Única Lista Unificada de Sesiones de Hoy con Filtros Rápidos -->
                             <div class="section-card">
                                 <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                                    <h3>🕒 Línea de Tiempo de Hoy</h3>
+                                    <h3>Línea de Tiempo de Hoy</h3>
                                     <div class="tiempo-filter-pills" id="tiempo-filter-pills">
                                         <button class="filter-pill active" onclick="window.filtrarIntervalos('todos')">Todas</button>
-                                        <button class="filter-pill" onclick="window.filtrarIntervalos('trabajo')">💻 Trabajo</button>
-                                        <button class="filter-pill" onclick="window.filtrarIntervalos('pausa')">☕ Pausas</button>
-                                        <button class="filter-pill" onclick="window.filtrarIntervalos('calle')">🚶 Calle</button>
-                                        <button class="filter-pill" onclick="window.filtrarIntervalos('otros')">🍽️ Comida / Ocio</button>
+                                        <button class="filter-pill" onclick="window.filtrarIntervalos('trabajo')">Foco</button>
+                                        <button class="filter-pill" onclick="window.filtrarIntervalos('pausa')">Pausas</button>
+                                        <button class="filter-pill" onclick="window.filtrarIntervalos('calle')">Calle</button>
+                                        <button class="filter-pill" onclick="window.filtrarIntervalos('otros')">Rutinas y Ocio</button>
                                     </div>
                                 </div>
                                 <div class="card-content">
@@ -467,7 +464,7 @@
                     <!-- Acordeón 2: Historial de Días Anteriores -->
                     <details class="tiempo-accordion-item">
                         <summary class="tiempo-accordion-summary">
-                            <span class="accordion-summary-title">📅 Ver Historial de Jornadas & Sueño (Últimos Días)</span>
+                            <span class="accordion-summary-title">Historial de Jornadas y Sueño</span>
                             <span class="accordion-hint">Toca para abrir / cerrar</span>
                         </summary>
                         <div class="tiempo-accordion-body">
@@ -476,12 +473,12 @@
                                     <thead>
                                         <tr>
                                             <th>Fecha</th>
-                                            <th>Sueño 🌙</th>
-                                            <th>Trabajo Neto 💻</th>
-                                            <th>Pausas ☕</th>
-                                            <th>Calle 🚶‍♂️</th>
-                                            <th>Comida 🍽️</th>
-                                            <th>Ocio 🎬</th>
+                                            <th>Sueño</th>
+                                            <th>Foco</th>
+                                            <th>Pausas</th>
+                                            <th>Calle</th>
+                                            <th>Comida</th>
+                                            <th>Ocio</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tiempo-history-body">
