@@ -5337,16 +5337,42 @@ summary {
 }
 
 .btn-tiempo-subaction {
-    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 16px;
     border-radius: var(--radius-md);
     background: var(--bg-subtle);
     border: 1px solid var(--border-color);
     color: var(--text-primary);
-    font-size: 0.88rem;
-    font-weight: 600;
+    font-size: 0.94rem;
+    font-weight: 700;
     cursor: pointer;
     text-align: center;
     transition: all var(--transition-fast);
+}
+
+.subaction-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+}
+
+.subaction-icon-box svg {
+    width: 18px;
+    height: 18px;
+}
+
+.subaction-label {
+    letter-spacing: 0.3px;
 }
 
 .btn-tiempo-subaction:hover {
@@ -5355,26 +5381,52 @@ summary {
     transform: translateY(-1px);
 }
 
-.btn-tiempo-subaction.active-phase {
-    border-color: var(--accent-primary);
-    background: var(--accent-primary-bg);
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+/* Rutinas (Cyan / Menta) */
+.btn-sub-routine .subaction-icon-box {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.25);
+}
+.btn-sub-routine:hover, .btn-sub-routine.active-phase {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+.btn-sub-routine.active-phase .subaction-icon-box {
+    background: rgba(56, 189, 248, 0.25);
+    border-color: #38bdf8;
 }
 
-.btn-sub-cook:hover, .btn-sub-cook.active-phase {
-    border-color: #f97316;
-    background: rgba(249, 115, 22, 0.15);
-    box-shadow: 0 0 10px rgba(249, 115, 22, 0.25);
+/* Ocio (Violeta / Púrpura) */
+.btn-sub-leisure .subaction-icon-box {
+    color: #c084fc;
+    background: rgba(192, 132, 252, 0.1);
+    border-color: rgba(192, 132, 252, 0.25);
 }
-.btn-sub-bath:hover, .btn-sub-bath.active-phase {
-    border-color: #06b6d4;
-    background: rgba(6, 182, 212, 0.15);
-    box-shadow: 0 0 10px rgba(6, 182, 212, 0.25);
+.btn-sub-leisure:hover, .btn-sub-leisure.active-phase {
+    border-color: #c084fc;
+    background: rgba(192, 132, 252, 0.12);
+    box-shadow: 0 0 12px rgba(192, 132, 252, 0.25);
 }
-.btn-sub-rest:hover, .btn-sub-rest.active-phase {
-    border-color: #14b8a6;
-    background: rgba(20, 184, 166, 0.15);
-    box-shadow: 0 0 10px rgba(20, 184, 166, 0.25);
+.btn-sub-leisure.active-phase .subaction-icon-box {
+    background: rgba(192, 132, 252, 0.25);
+    border-color: #c084fc;
+}
+
+/* Calle (Ámbar / Naranja) */
+.btn-sub-street .subaction-icon-box {
+    color: #fb923c;
+    background: rgba(251, 146, 60, 0.1);
+    border-color: rgba(251, 146, 60, 0.25);
+}
+.btn-sub-street:hover, .btn-sub-street.active-phase {
+    border-color: #fb923c;
+    background: rgba(251, 146, 60, 0.12);
+    box-shadow: 0 0 12px rgba(251, 146, 60, 0.25);
+}
+.btn-sub-street.active-phase .subaction-icon-box {
+    background: rgba(251, 146, 60, 0.25);
+    border-color: #fb923c;
 }
 
 @media (max-width: 540px) {

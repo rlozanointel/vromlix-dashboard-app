@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261024_1535">
+    <link rel="stylesheet" href="style.css?v=20261024_1555">
 </head>
 <body>
     <div class="dashboard-container">
@@ -329,7 +329,20 @@
                             <div class="tiempo-secondary-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
                                 <div class="calle-dropdown-wrapper">
                                     <button id="btn-group-rutinas" class="btn-tiempo-subaction btn-sub-routine" onclick="window.toggleRutinasMenu(event)">
-                                        <span>Rutinas ▾</span>
+                                        <span class="subaction-icon-box">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="4"/>
+                                                <path d="M12 2v2"/>
+                                                <path d="M12 20v2"/>
+                                                <path d="m4.93 4.93 1.41 1.41"/>
+                                                <path d="m17.66 17.66 1.41 1.41"/>
+                                                <path d="M2 12h2"/>
+                                                <path d="M20 12h2"/>
+                                                <path d="m6.34 17.66-1.41 1.41"/>
+                                                <path d="m19.07 4.93-1.41 1.41"/>
+                                            </svg>
+                                        </span>
+                                        <span class="subaction-label">Rutinas ▾</span>
                                     </button>
                                     <div id="rutinas-presets-menu" class="calle-menu-dropdown hidden">
                                         <button onclick="window.cambiarFaseTiempo('cocinar', 'Cocinar')">Cocinar</button>
@@ -342,7 +355,19 @@
 
                                 <div class="calle-dropdown-wrapper">
                                     <button id="btn-phase-ocio" class="btn-tiempo-subaction btn-sub-leisure" onclick="window.toggleOcioMenu(event)">
-                                        <span>Ocio ▾</span>
+                                        <span class="subaction-icon-box">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                                                <line x1="7" y1="2" x2="7" y2="22"/>
+                                                <line x1="17" y1="2" x2="17" y2="22"/>
+                                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                                <line x1="2" y1="7" x2="7" y2="7"/>
+                                                <line x1="2" y1="17" x2="7" y2="17"/>
+                                                <line x1="17" y1="17" x2="22" y2="17"/>
+                                                <line x1="17" y1="7" x2="22" y2="7"/>
+                                            </svg>
+                                        </span>
+                                        <span class="subaction-label">Ocio ▾</span>
                                     </button>
                                     <div id="ocio-presets-menu" class="calle-menu-dropdown hidden">
                                         <button onclick="window.cambiarFaseTiempo('ocio', 'YouTube')">YouTube</button>
@@ -353,7 +378,13 @@
 
                                 <div class="calle-dropdown-wrapper">
                                     <button id="btn-phase-calle" class="btn-tiempo-subaction btn-sub-street" onclick="window.toggleCalleMenu(event)">
-                                        <span>Calle ▾</span>
+                                        <span class="subaction-icon-box">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                        </span>
+                                        <span class="subaction-label">Calle ▾</span>
                                     </button>
                                     <div id="calle-presets-menu" class="calle-menu-dropdown hidden">
                                         <button onclick="window.cambiarFaseTiempo('calle', 'Tienda')">Tienda</button>
@@ -2762,7 +2793,7 @@
 
     <script src="initial_data.js"></script>
     <script src="auth_gate.js"></script>
-    <script src="app.js?v=20261024_1535"></script>
+    <script src="app.js?v=20261024_1555"></script>
     <script src="agent_ops_view.js"></script>
     <script src="youtube_view.js?v=20261024_1545"></script>
     <script src="mormon_view.js?v=20261024_1400"></script>
