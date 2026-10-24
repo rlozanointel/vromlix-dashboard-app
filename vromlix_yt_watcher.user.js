@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Vromlix YouTube Auto-Watched & Closer
 // @namespace    https://vromlix.local/
-// @version      6.1
-// @description  Reproduce efectivamente los últimos 8s con emulación de tecla K, bypass de Improve YouTube! y auto-cierre al terminar
+// @version      7.0
+// @description  Silencio absoluto (100% Mute), salto forzado a los últimos 8s para barra roja al 100% en historial, y auto-cierre
 // @author       Vromlix Core
 // @match        https://www.youtube.com/watch*
 // @grant        window.close
@@ -17,21 +17,15 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.has('vromlix_auto')) return;
 
-    console.log('[Vromlix] Script v6.1 activo: iniciando bypass de extensiones y sincronización...');
+    console.log('[Vromlix] Script v7.0 activo: Silencio estricto + Salto a los últimos 8s + Registro 100%...');
 
-    // 2. Neutralizar el bloqueo de autoplay de la extensión 'Improve YouTube!' (ImprovedTube)
-    // Esta extensión fuerza 'player_autoplay_disable: true' y pausa cualquier video si user_interacted === false.
-    function neutralizeImprovedTube() {
-        try {
-            if (typeof unsafeWindow !== 'undefined' && unsafeWindow.ImprovedTube) {
-                unsafeWindow.ImprovedTube.user_interacted = true;
-                if (unsafeWindow.ImprovedTube.storage) {
-                    unsafeWindow.ImprovedTube.storage.player_autoplay_disable = false;
-                }
-            }
-        } catch(e) {}
+    // 2. Extraer el tiempo objetivo en segundos desde el parámetro 't' (ej. t=1087s -> 1087)
+    let urlTargetSec = 0;
+    if (urlParams.has('t')) {
+        urlTargetSec = parseFloat(urlParams.get('t').replace('s', '')) || 0;
     }
 
+    // 3. Bypass de 'Improve YouTube!' para evitar que congele la reproducción
     try {
         const injectScript = document.createElement('script');
         injectScript.textContent = `
@@ -45,13 +39,13 @@
                     }
                 }
                 unblock();
-                setInterval(unblock, 150);
+                setInterval(unblock, 200);
             })();
         `;
         (document.head || document.documentElement).appendChild(injectScript);
     } catch(e) {}
 
-    // 3. HUD Visual no invasivo
+    // 4. HUD Visual no invasivo
     let hud = null;
     function updateHud(text, color = '#38bdf8') {
         try {
@@ -71,6 +65,7 @@
     let actualPlayedSeconds = 0;
     let lastTickTime = Date.now();
     let lastPlayAttemptTime = 0;
+    let hasSeekedToEnd = false;
 
     function finishAndClose() {
         if (isFinished) return;
@@ -84,23 +79,33 @@
         }, 2500);
     }
 
-    // Función multi-método para ordenar la reproducción (tecla K, HTML5 video.play, botón play, API)
-    function executePlayRoutine(video, player) {
-        neutralizeImprovedTube();
-        console.log('[Vromlix] Ejecutando rutina de reproducción (tecla K + video.play + UI)...');
-
-        // A. Asegurar mute a nivel del elemento nativo <video>
+    // 5. Función para forzar MUTE CONTINUO e INFALIBLE
+    function enforceStrictMute(video, player) {
         if (video) {
-            try {
-                video.muted = true;
-                video.volume = 0;
-            } catch(e) {}
+            if (!video.muted) video.muted = true;
+            if (video.volume !== 0) video.volume = 0;
         }
-        if (player && typeof player.mute === 'function') {
-            try { player.mute(); } catch(e) {}
+        if (player && typeof player.isMuted === 'function') {
+            if (!player.isMuted()) {
+                try { player.mute(); } catch(e) {}
+            }
+        }
+    }
+
+    // 6. Función para forzar la reproducción si está pausado
+    function executePlayRoutine(video, player) {
+        enforceStrictMute(video, player);
+
+        // A. Clic en botón nativo de la barra
+        const playBtn = document.querySelector('.ytp-play-button');
+        if (playBtn) {
+            const btnState = (playBtn.getAttribute('aria-label') || playBtn.getAttribute('title') || '').toLowerCase();
+            if (btnState.includes('play') || btnState.includes('reproducir') || playBtn.getAttribute('data-title-no-tooltip') === 'Play') {
+                try { playBtn.click(); } catch(e) {}
+            }
         }
 
-        // B. MÉTODO 1: Pulsación sintética de tecla 'K' (KeyK, keyCode 75)
+        // B. Pulsación sintética de tecla 'K'
         const keyEventInit = {
             key: 'k',
             code: 'KeyK',
@@ -112,7 +117,6 @@
             composed: true,
             view: window
         };
-
         if (player) {
             try { player.focus(); } catch(e) {}
             try { player.dispatchEvent(new KeyboardEvent('keydown', keyEventInit)); } catch(e) {}
@@ -120,36 +124,19 @@
         }
         try { document.dispatchEvent(new KeyboardEvent('keydown', keyEventInit)); } catch(e) {}
         try { document.dispatchEvent(new KeyboardEvent('keyup', keyEventInit)); } catch(e) {}
-        try { window.dispatchEvent(new KeyboardEvent('keydown', keyEventInit)); } catch(e) {}
-        try { window.dispatchEvent(new KeyboardEvent('keyup', keyEventInit)); } catch(e) {}
 
-        // C. MÉTODO 2: HTML5 video.play() directo
+        // C. HTML5 video.play()
         if (video && typeof video.play === 'function') {
-            try {
-                video.play().then(() => {
-                    console.log('[Vromlix] video.play() iniciado correctamente');
-                }).catch(err => {
-                    console.log('[Vromlix] video.play() aviso:', err.message);
-                });
-            } catch(e) {}
+            try { video.play().catch(() => {}); } catch(e) {}
         }
 
-        // D. MÉTODO 3: Clic en el botón nativo de la barra (.ytp-play-button) si está en pausa
-        const playBtn = document.querySelector('.ytp-play-button');
-        if (playBtn) {
-            const btnState = (playBtn.getAttribute('aria-label') || playBtn.getAttribute('title') || '').toLowerCase();
-            if (btnState.includes('play') || btnState.includes('reproducir') || playBtn.getAttribute('data-title-no-tooltip') === 'Play') {
-                try { playBtn.click(); } catch(e) {}
-            }
-        }
-
-        // E. MÉTODO 4: Llamada directa al API del reproductor
+        // D. Player API
         if (player && typeof player.playVideo === 'function') {
             try { player.playVideo(); } catch(e) {}
         }
     }
 
-    // 4. Loop de control inteligente cada 250ms
+    // 7. Loop de control inteligente cada 250ms
     const pollInterval = setInterval(() => {
         if (isFinished) {
             clearInterval(pollInterval);
@@ -163,67 +150,98 @@
         const player = document.getElementById('movie_player') || document.querySelector('.html5-video-player');
         const video = document.querySelector('video.html5-main-video, video');
 
+        // FORZAR MUTE EN CADA TICK (garantiza cero sonido en cualquier momento)
+        enforceStrictMute(video, player);
+
         // Saltar anuncios automáticamente si aparecen
         const skipBtn = document.querySelector('.ytp-ad-skip-button, .ytp-skip-ad-button, .ytp-ad-skip-button-modern, .ytp-ad-overlay-close-button');
         if (skipBtn) {
             try { skipBtn.click(); } catch(e) {}
         }
 
-        // Cerrar diálogos de confirmación ("¿Sigues ahí?")
+        // Confirmar diálogo de "¿Sigues ahí?"
         const confirmBtn = document.querySelector('yt-confirm-dialog-renderer #confirm-button button');
         if (confirmBtn) {
             try { confirmBtn.click(); } catch(e) {}
         }
 
         if (!player && !video) {
-            updateHud('Esperando inicialización del reproductor...', '#f59e0b');
+            updateHud('Cargando reproductor de YouTube...', '#f59e0b');
             return;
+        }
+
+        const duration = (video && video.duration) ? video.duration : (player && player.getDuration ? player.getDuration() : 0);
+        const curTime = (video && typeof video.currentTime === 'number') ? video.currentTime : (player && player.getCurrentTime ? player.getCurrentTime() : 0);
+
+        // DETERMINAR TIEMPO OBJETIVO EXACTO (Últimos 8 segundos antes del final)
+        let effectiveTarget = urlTargetSec;
+        if (duration > 15) {
+            effectiveTarget = Math.max(0, duration - 8);
+        }
+
+        // FORZAR SALTO AL FINAL SI ESTÁ EN EL INICIO (evita reproducir desde el minuto 0:00)
+        if (effectiveTarget > 0 && curTime < (effectiveTarget - 2) && !hasSeekedToEnd) {
+            console.log(`[Vromlix] Video en ${curTime.toFixed(1)}s. Saltando a los últimos 8s (${effectiveTarget.toFixed(1)}s / ${duration.toFixed(1)}s)...`);
+            updateHud(`Saltando a los últimos 8s (${effectiveTarget.toFixed(0)}s de ${duration.toFixed(0)}s)...`, '#f59e0b');
+            
+            try {
+                if (video) video.currentTime = effectiveTarget;
+                if (player && typeof player.seekTo === 'function') player.seekTo(effectiveTarget, true);
+            } catch(e) {}
+            return; // Esperar siguiente tick para que se aplique el seek
+        } else if (effectiveTarget > 0 && curTime >= (effectiveTarget - 2)) {
+            hasSeekedToEnd = true;
         }
 
         // Consultar estado nativo del reproductor de YouTube:
         // -1 = Unstarted, 0 = Ended, 1 = Playing, 2 = Paused, 3 = Buffering, 5 = Cued
         const state = (player && typeof player.getPlayerState === 'function') ? player.getPlayerState() : -1;
-        const isActuallyPlaying = (state === 1) || (video && !video.paused && video.currentTime > 0);
+        const isActuallyPlaying = (state === 1) || (video && !video.paused && curTime > 0);
 
-        if (state === 0 || (video && video.ended)) {
-            // Video finalizado por completo
+        // ¿Llegó al final absoluto?
+        const hasReachedEnd = (state === 0) || (video && video.ended) || (duration > 0 && curTime >= (duration - 0.6));
+        if (hasReachedEnd) {
             clearInterval(pollInterval);
             finishAndClose();
             return;
         }
 
         if (isActuallyPlaying) {
-            // ESTADO REPRODUCIENDO: ¡NO INTERRUMPIR! Acumular tiempo real reproducido
-            if (deltaReal > 0.05 && deltaReal < 2.0) {
+            // SOLO ACUMULAR TIEMPO SI YA ESTÁ EN LOS ÚLTIMOS SEGUNDOS
+            const isNearTarget = (effectiveTarget > 0) ? (curTime >= effectiveTarget - 2) : true;
+            if (isNearTarget && deltaReal > 0.05 && deltaReal < 2.0) {
                 actualPlayedSeconds += deltaReal;
             }
-            updateHud(`Reproduciendo últimos 8s: <b>${actualPlayedSeconds.toFixed(1)}s / 8.0s</b>`, '#38bdf8');
 
-            // Si ya corrió al menos 7.5 segundos de reproducción activa
-            if (actualPlayedSeconds >= 7.5) {
+            const currentPosStr = curTime.toFixed(0);
+            const totalDurStr = duration > 0 ? duration.toFixed(0) : '?';
+            updateHud(`Reproduciendo final (<b>${currentPosStr}s / ${totalDurStr}s</b>): ${actualPlayedSeconds.toFixed(1)}s / 8.0s`, '#38bdf8');
+
+            // Si ya corrió al menos 7.5s cerca del final o sobrepasó la meta
+            if (isNearTarget && (actualPlayedSeconds >= 7.5 || (duration > 0 && curTime >= duration - 1.0))) {
                 clearInterval(pollInterval);
                 finishAndClose();
                 return;
             }
         } else if (state === 2 || state === -1 || state === 5 || (video && video.paused)) {
-            // ESTADO PAUSADO O DETENIDO: Ejecutar rutina de play espaciada cada 1.5s
+            // ESTADO PAUSADO O DETENIDO: Reanudar cada 1.5s
             if (now - lastPlayAttemptTime > 1500) {
                 lastPlayAttemptTime = now;
-                updateHud('Iniciando reproducción automática...', '#f59e0b');
+                updateHud('Iniciando reproducción silenciosa...', '#f59e0b');
                 executePlayRoutine(video, player);
             }
         } else if (state === 3) {
-            // BUFFERING: Esperando chunks del stream
-            updateHud('Cargando stream de video...', '#f59e0b');
+            // BUFFERING
+            updateHud('Cargando buffer de video...', '#f59e0b');
         }
     }, 250);
 
-    // 5. Temporizador de seguridad máximo (45 segundos)
+    // 8. Temporizador de seguridad máximo (50 segundos)
     setTimeout(() => {
         if (!isFinished) {
-            console.log('[Vromlix] Timeout de seguridad alcanzado (45s). Finalizando...');
+            console.log('[Vromlix] Timeout de seguridad alcanzado (50s). Cerrando...');
             clearInterval(pollInterval);
             finishAndClose();
         }
-    }, 45000);
+    }, 50000);
 })();
