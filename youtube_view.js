@@ -360,9 +360,9 @@ function renderYouTubeSummaryCard(v) {
             <!-- BARRA DE ACCIONES -->
             <div class="yt-actions-footer">
                 ${!isArchived ? `
-                    <button class="yt-btn yt-btn-watched" onclick="handleYouTubeCardAction('${v.video_id}', 'watched', '${v.url_mark_watched}')" title="Abre los últimos 4 segundos en YouTube para que quede con barra roja de Visto en tus Suscripciones y quita la ficha de esta bandeja">
+                    <button class="yt-btn yt-btn-watched" onclick="handleYouTubeCardAction('${v.video_id}', 'watched', '${v.url_mark_watched}')" title="Abre los últimos 8 segundos en YouTube para que quede con barra roja de Visto en tus Suscripciones y quita la ficha de esta bandeja">
                         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>Visto (Últimos 4s) y Quitar</span>
+                        <span>Visto (Últimos 8s) y Quitar</span>
                     </button>
 
                     <a href="${v.url_video}" target="_blank" rel="noopener" class="yt-btn yt-btn-open" title="Solo abrir el video en YouTube desde el inicio sin borrar esta ficha">
@@ -621,7 +621,7 @@ function showMarkWatchedToast(seconds = 4) {
         <div style="display: flex; flex-direction: column; gap: 2px;">
             <div style="font-weight: 600; color: #f1f5f9;">Pestaña enviada a un lado</div>
             <div style="font-size: 0.8rem; color: #94a3b8;">
-                Sincronizando últimos 4s en YouTube en segundo plano...
+                Sincronizando últimos 8s en YouTube en segundo plano...
             </div>
         </div>
         <button class="yt-toast-btn-dismiss" title="Cerrar aviso" onclick="hideMarkWatchedToast()">✕</button>
