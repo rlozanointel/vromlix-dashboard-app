@@ -569,12 +569,16 @@ async function addMonitoredChannel(handle, name) {
 
         if (typeof showAgentNotification === 'function') {
             showAgentNotification(`Canal ${name} agregado con éxito`, 'success');
-        } else {
-            alert(`✅ Canal "${name}" agregado al monitoreo diario.`);
+        } else if (typeof showToast === 'function') {
+            showToast(`Canal "${name}" agregado al monitoreo`, 'success');
         }
         await loadYouTubeSummaries();
     } catch (err) {
-        alert('Error: ' + err.message);
+        if (typeof showToast === 'function') {
+            showToast(err.message, 'error');
+        } else {
+            console.error('Error:', err);
+        }
     }
 }
 
@@ -593,12 +597,16 @@ async function deleteMonitoredChannel(handle, name) {
 
         if (typeof showAgentNotification === 'function') {
             showAgentNotification(`Canal ${name} eliminado del monitoreo`, 'info');
-        } else {
-            alert(`🗑️ Canal "${name}" eliminado.`);
+        } else if (typeof showToast === 'function') {
+            showToast(`Canal "${name}" eliminado`, 'info');
         }
         await loadYouTubeSummaries();
     } catch (err) {
-        alert('Error: ' + err.message);
+        if (typeof showToast === 'function') {
+            showToast(err.message, 'error');
+        } else {
+            console.error('Error:', err);
+        }
     }
 }
 
@@ -729,7 +737,11 @@ async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
             loadYouTubeSummaries();
         }, 300);
     } catch (err) {
-        alert('Error: ' + err.message);
+        if (typeof showToast === 'function') {
+            showToast(err.message, 'error');
+        } else {
+            console.error('Error:', err);
+        }
         if (cardEl) {
             cardEl.style.opacity = '1';
             cardEl.style.transform = 'none';
@@ -760,17 +772,25 @@ async function summarizeCustomYouTubeUrl(url) {
         if (data.video && data.video.cached) {
             if (typeof showAgentNotification === 'function') {
                 showAgentNotification('⚡ Video recuperado al instante desde tu Segundo Cerebro (Caché local)', 'success');
+            } else if (typeof showToast === 'function') {
+                showToast('⚡ Video recuperado al instante (Caché)', 'success');
             }
         } else {
             if (typeof showAgentNotification === 'function') {
                 showAgentNotification('✅ Resumen generado y respaldado en tu Segundo Cerebro', 'success');
+            } else if (typeof showToast === 'function') {
+                showToast('✅ Resumen generado y respaldado', 'success');
             }
         }
 
         if (input) input.value = '';
         await loadYouTubeSummaries();
     } catch (err) {
-        alert('No se pudo resumir el video: ' + err.message);
+        if (typeof showToast === 'function') {
+            showToast('No se pudo resumir: ' + err.message, 'error');
+        } else {
+            console.error('Error:', err);
+        }
     } finally {
         if (btn) {
             btn.disabled = false;
@@ -790,6 +810,8 @@ async function triggerYouTubeChannelScan() {
         const data = await res.json();
         if (typeof showAgentNotification === 'function') {
             showAgentNotification(data.message || 'Escaneo iniciado en segundo plano', 'info');
+        } else if (typeof showToast === 'function') {
+            showToast('Escaneo iniciado en segundo plano', 'info');
         }
         setTimeout(() => {
             loadYouTubeSummaries();
@@ -799,7 +821,11 @@ async function triggerYouTubeChannelScan() {
             }
         }, 4000);
     } catch (err) {
-        alert('Error: ' + err.message);
+        if (typeof showToast === 'function') {
+            showToast(err.message, 'error');
+        } else {
+            console.error('Error:', err);
+        }
         if (btn) {
             btn.disabled = false;
             btn.innerHTML = '🔄 Buscar Nuevos Ahora';
@@ -818,8 +844,15 @@ async function handleReactivateCard(videoId) {
         const data = await res.json();
         if (!res.ok || !data.success) throw new Error(data.error || 'Error al reactivar video');
         await loadYouTubeSummaries();
+        if (typeof showToast === 'function') {
+            showToast('Video reactivado en pendientes', 'success');
+        }
     } catch (err) {
-        alert('Error: ' + err.message);
+        if (typeof showToast === 'function') {
+            showToast(err.message, 'error');
+        } else {
+            console.error('Error:', err);
+        }
     }
 }
 

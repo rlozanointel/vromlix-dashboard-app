@@ -8358,6 +8358,17 @@
         renderPulpitoModal();
     };
 
+    window.openPulpitoGeneral = function(title, quote, insight = '', badge = 'Oración Pastoral / LDS') {
+        currentPulpitoData = {
+            badge: badge,
+            title: title || 'Oración Solemne',
+            quote: quote || '',
+            insight: insight || '',
+            churchUrl: ''
+        };
+        renderPulpitoModal();
+    };
+
     function renderPulpitoModal() {
         if (!currentPulpitoData) return;
         const overlay = document.getElementById('pulpito-modal-overlay');

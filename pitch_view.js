@@ -13,7 +13,7 @@ function initPitchView() {
     initPitchQuickCalculator();
 }
 
-// Filtro rápido por chips temáticos
+// Filtro rápido por chips temáticos (Soporte multi-categoría para Hick-Hyman)
 function initPitchFilterChips() {
     const chips = document.querySelectorAll('.pitch-filter-chip');
     const sections = document.querySelectorAll('.pitch-section-block');
@@ -23,9 +23,11 @@ function initPitchFilterChips() {
             chips.forEach(c => c.classList.remove('active'));
             chip.classList.add('active');
 
-            const filter = chip.getAttribute('data-pitch-filter');
+            const filter = chip.getAttribute('data-pitch-filter') || 'all';
+            const filterList = filter === 'all' ? ['all'] : filter.split(',').map(s => s.trim());
             sections.forEach(sec => {
-                if (filter === 'all' || sec.getAttribute('data-section-type') === filter) {
+                const secType = sec.getAttribute('data-section-type');
+                if (filter === 'all' || filterList.includes(secType)) {
                     sec.style.display = 'block';
                 } else {
                     sec.style.display = 'none';

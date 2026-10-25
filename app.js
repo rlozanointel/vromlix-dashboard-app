@@ -689,8 +689,46 @@ function initTasks() {
                 };
             }
         });
+
+        // Calculate weekly completion ratio
+        let totalWTasks = 0;
+        let completedWTasks = 0;
+        Object.keys(tasksState.weekly).forEach(k => {
+            if (k !== 'antigravity') {
+                const arr = tasksState.weekly[k] || [];
+                totalWTasks += arr.length;
+                completedWTasks += arr.filter(t => t.completed).length;
+            }
+        });
+        const progressPill = document.getElementById('weekly-tasks-progress-pill');
+        if (progressPill) {
+            const pct = totalWTasks > 0 ? Math.round((completedWTasks / totalWTasks) * 100) : 0;
+            progressPill.textContent = `${completedWTasks}/${totalWTasks} (${pct}%)`;
+        }
+
         renderProjects();
     }
+
+    // Toggle para vista móvil del pizarrón (Solo Hoy vs Semana Completa)
+    window.setWeeklyMobileView = function(mode) {
+        const grid = document.querySelector('.weekly-grid');
+        const btnAll = document.getElementById('btn-week-all');
+        const btnToday = document.getElementById('btn-week-today');
+        if (!grid) return;
+        if (mode === 'today') {
+            grid.classList.add('mobile-today-only');
+            if (btnToday) btnToday.classList.add('active');
+            if (btnAll) btnAll.classList.remove('active');
+        } else {
+            grid.classList.remove('mobile-today-only');
+            if (btnAll) btnAll.classList.add('active');
+            if (btnToday) btnToday.classList.remove('active');
+        }
+        localStorage.setItem('vromlix_weekly_mobile_mode', mode);
+    };
+
+    const savedWeeklyMode = localStorage.getItem('vromlix_weekly_mobile_mode') || 'all';
+    window.setWeeklyMobileView(savedWeeklyMode);
 
     // ==========================================
     // BENTO PROJECTS DECK ENGINE (3 LAYERS: FOCUS, CATEGORIES & NEXT ACTION)
@@ -1363,9 +1401,12 @@ function initPrayers() {
                         subContent.style.cssText = 'margin-top: 8px; font-size: 0.88rem; color: hsl(220, 10%, 90%); line-height: 1.5; white-space: pre-wrap;';
                         subContent.textContent = subBody;
 
+                        const actionsRow = document.createElement('div');
+                        actionsRow.style.cssText = 'margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;';
+
                         const copyBtn = document.createElement('button');
                         copyBtn.className = 'btn-copy';
-                        copyBtn.style.cssText = 'margin-top: 10px; padding: 6px 12px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border-color); border-radius: 6px; background: rgba(255,255,255,0.03); color: white; cursor: pointer;';
+                        copyBtn.style.cssText = 'padding: 6px 12px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border-color); border-radius: 6px; background: rgba(255,255,255,0.03); color: white; cursor: pointer;';
                         copyBtn.innerHTML = `
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
                             <span>Copiar</span>
@@ -1385,8 +1426,22 @@ function initPrayers() {
                                     }, 2000);
                                 });
                         });
-                        
-                        subContent.appendChild(copyBtn);
+
+                        const pulpitoBtn = document.createElement('button');
+                        pulpitoBtn.className = 'btn-copy';
+                        pulpitoBtn.style.cssText = 'padding: 6px 12px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; border: 1px solid var(--accent-primary); border-radius: 6px; background: rgba(56, 189, 248, 0.1); color: var(--accent-primary); cursor: pointer;';
+                        pulpitoBtn.innerHTML = `<span>📖 Modo Púlpito</span>`;
+                        pulpitoBtn.title = 'Abrir en pantalla completa OLED para lectura solemne';
+                        pulpitoBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            if (typeof window.openPulpitoGeneral === 'function') {
+                                window.openPulpitoGeneral(`${prayer.title} — ${subTitle}`, subBody, '', 'Oración SUD • Púlpito');
+                            }
+                        });
+
+                        actionsRow.appendChild(copyBtn);
+                        actionsRow.appendChild(pulpitoBtn);
+                        subContent.appendChild(actionsRow);
                         subDetails.appendChild(subSummary);
                         subDetails.appendChild(subContent);
                         content.appendChild(subDetails);
@@ -1397,9 +1452,12 @@ function initPrayers() {
                 singleContent.style.cssText = 'font-size: 0.88rem; color: hsl(220, 10%, 90%); line-height: 1.5; white-space: pre-wrap;';
                 singleContent.textContent = prayer.body;
 
+                const actionsRow = document.createElement('div');
+                actionsRow.style.cssText = 'margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;';
+
                 const copyBtn = document.createElement('button');
                 copyBtn.className = 'btn-copy';
-                copyBtn.style.cssText = 'margin-top: 10px; padding: 6px 12px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border-color); border-radius: 6px; background: rgba(255,255,255,0.03); color: white; cursor: pointer;';
+                copyBtn.style.cssText = 'padding: 6px 12px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border-color); border-radius: 6px; background: rgba(255,255,255,0.03); color: white; cursor: pointer;';
                 copyBtn.innerHTML = `
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
                     <span>Copiar</span>
@@ -1419,8 +1477,22 @@ function initPrayers() {
                             }, 2000);
                         });
                 });
-                
-                singleContent.appendChild(copyBtn);
+
+                const pulpitoBtn = document.createElement('button');
+                pulpitoBtn.className = 'btn-copy';
+                pulpitoBtn.style.cssText = 'padding: 6px 12px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; border: 1px solid var(--accent-primary); border-radius: 6px; background: rgba(56, 189, 248, 0.1); color: var(--accent-primary); cursor: pointer;';
+                pulpitoBtn.innerHTML = `<span>📖 Modo Púlpito</span>`;
+                pulpitoBtn.title = 'Abrir en pantalla completa OLED para lectura solemne';
+                pulpitoBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (typeof window.openPulpitoGeneral === 'function') {
+                        window.openPulpitoGeneral(prayer.title, prayer.body, '', 'Oración SUD • Púlpito');
+                    }
+                });
+
+                actionsRow.appendChild(copyBtn);
+                actionsRow.appendChild(pulpitoBtn);
+                singleContent.appendChild(actionsRow);
                 content.appendChild(singleContent);
             }
 
@@ -1510,6 +1582,13 @@ function initMedia() {
         showRecentCheckbox.addEventListener('change', (e) => {
             showRecent = e.target.checked;
             localStorage.setItem('showRecent', showRecent);
+            renderMedia();
+        });
+    }
+
+    const scoreFilterSelect = document.getElementById('media-score-filter');
+    if (scoreFilterSelect) {
+        scoreFilterSelect.addEventListener('change', () => {
             renderMedia();
         });
     }
@@ -1686,6 +1765,15 @@ function initMedia() {
                 return;
             }
 
+            const numScore = (typeof movie['Vromlix Score'] === 'number') ? movie['Vromlix Score'] : parseFloat(movie['Vromlix Score']);
+            const selectedScore = scoreFilterSelect ? scoreFilterSelect.value : 'all';
+            if (selectedScore === 'top80' && (isNaN(numScore) || numScore < 80)) {
+                return;
+            }
+            if (selectedScore === 'top70' && (isNaN(numScore) || numScore < 70)) {
+                return;
+            }
+
             renderedCount++;
             const card = document.createElement('div');
             card.className = `media-item ${isHidden ? 'hidden-state' : ''}`;
@@ -1786,6 +1874,15 @@ function initMedia() {
             const isHidden = hiddenTitles.includes(title);
 
             if (isHidden && !showHidden) {
+                return;
+            }
+
+            const numScore = (typeof show['Vromlix Score'] === 'number') ? show['Vromlix Score'] : parseFloat(show['Vromlix Score']);
+            const selectedScore = scoreFilterSelect ? scoreFilterSelect.value : 'all';
+            if (selectedScore === 'top80' && (isNaN(numScore) || numScore < 80)) {
+                return;
+            }
+            if (selectedScore === 'top70' && (isNaN(numScore) || numScore < 70)) {
                 return;
             }
 
@@ -2412,6 +2509,7 @@ function openYtMusic(query) {
     const url = 'https://music.youtube.com/search?q=' + encodeURIComponent(query);
     window.open(url, '_blank');
 }
+window.openYtMusic = openYtMusic;
 
 function initCarismaModule() {
     const searchInput = document.getElementById('carisma-search-input');
@@ -2471,6 +2569,15 @@ function initCarismaModule() {
             filterContent();
         });
     });
+
+    window.filterCarisma = function(cat) {
+        chipBtns.forEach(b => {
+            const matches = b.getAttribute('data-filter') === cat;
+            b.classList.toggle('active', matches);
+        });
+        currentFilter = cat;
+        filterContent();
+    };
 
     generateExitFormula();
 }
@@ -2961,6 +3068,15 @@ function initTranslator() {
         });
     }
 
+    window.toggleTranslatorDetail = function(cardId) {
+        const card = document.getElementById(cardId);
+        const btnId = `toggle-${cardId.replace('-card', '')}-btn`;
+        const btn = document.getElementById(btnId);
+        if (!card) return;
+        const isHidden = card.classList.toggle('hidden');
+        if (btn) btn.classList.toggle('active', !isHidden);
+    };
+
     renderHistory();
 }
 
@@ -3347,6 +3463,41 @@ function initTiempo() {
             });
     }
 
+    function renderTufteSparkline(pathId, dotId, values, width = 68, height = 16) {
+        const pathEl = document.getElementById(pathId);
+        const dotEl = document.getElementById(dotId);
+        if (!pathEl || !values || values.length === 0) return;
+
+        let cleanVals = values.map(v => (typeof v === 'number' && !isNaN(v)) ? v : 0);
+        if (cleanVals.length === 1) cleanVals = [cleanVals[0], cleanVals[0]];
+
+        const paddingY = 3;
+        const effH = height - (paddingY * 2);
+        const minVal = Math.min(...cleanVals);
+        const maxVal = Math.max(...cleanVals);
+        const range = (maxVal - minVal) === 0 ? 1 : (maxVal - minVal);
+
+        const stepX = width / (cleanVals.length - 1);
+        const points = cleanVals.map((val, idx) => {
+            const x = Math.round(idx * stepX);
+            const norm = (val - minVal) / range;
+            const y = Math.round((height - paddingY) - (norm * effH));
+            return { x, y };
+        });
+
+        const d = points.reduce((acc, pt, idx) => {
+            return idx === 0 ? `M ${pt.x},${pt.y}` : `${acc} L ${pt.x},${pt.y}`;
+        }, '');
+
+        pathEl.setAttribute('d', d);
+
+        if (dotEl && points.length > 0) {
+            const lastPt = points[points.length - 1];
+            dotEl.setAttribute('cx', String(lastPt.x));
+            dotEl.setAttribute('cy', String(lastPt.y));
+        }
+    }
+
     function loadHistory() {
         if (!historyBody) return;
         fetch('/api/time/history')
@@ -3357,6 +3508,17 @@ function initTiempo() {
                     historyBody.innerHTML = '<tr><td colspan="10" style="text-align:center; color: var(--text-muted); padding: 14px;">Sin registros anteriores aún.</td></tr>';
                     return;
                 }
+
+                // Tufte Sparklines para tendencias de los últimos 7 días
+                const recent7 = list.slice(0, 7).reverse();
+                const pausasData = recent7.map(d => d.pausa ? (d.pausa / 60) : 0);
+                const streetData = recent7.map(d => d.calle ? (d.calle / 60) : 0);
+                const sleepData = recent7.map(d => (d.sleep_hours !== null && d.sleep_hours !== undefined) ? Number(d.sleep_hours) : 0);
+
+                renderTufteSparkline('sparkline-pausas-path', 'sparkline-pausas-dot', pausasData);
+                renderTufteSparkline('sparkline-street-path', 'sparkline-street-dot', streetData);
+                renderTufteSparkline('sparkline-sleep-path', 'sparkline-sleep-dot', sleepData);
+
                 historyBody.innerHTML = list.map(item => {
                     const slpBadge = item.sleep_hours ? (item.sleep_hours >= 7 ? 'badge-emerald' : (item.sleep_hours >= 6 ? 'badge-amber' : 'badge-rose')) : '';
                     let diagColor = '#38bdf8';

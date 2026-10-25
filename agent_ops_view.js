@@ -179,11 +179,15 @@ async function handleActionDecision(actionId, decisionType) {
         const data = await res.json();
         if (!res.ok || !data.success) throw new Error(data.error || 'Error al procesar acción');
 
-        showAgentNotification(`Acción ${actionId} marcada como ${data.new_status}`, 'success');
+        let undoHtml = '';
+        if (decisionType === 'approve' || decisionType === 'reject') {
+            undoHtml = ` <a href="javascript:void(0)" onclick="handleActionDecision('${actionId}', 'review')" style="color: #38bdf8; text-decoration: underline; margin-left: 8px; font-weight: bold;">[Deshacer]</a>`;
+        }
+        showAgentNotification(`Acción ${actionId} marcada como ${data.new_status}.${undoHtml}`, 'success');
         // Recargar datos
         loadAgentActions();
     } catch (err) {
-        alert('Error: ' + err.message);
+        showAgentNotification('Error: ' + err.message, 'error');
         if (cardEl) {
             cardEl.style.opacity = '1';
             cardEl.style.pointerEvents = 'auto';
@@ -212,7 +216,7 @@ async function triggerManualScan() {
             }
         }, 2200);
     } catch (err) {
-        alert('Error iniciando escaneo: ' + err.message);
+        showAgentNotification('Error iniciando escaneo: ' + err.message, 'error');
         if (btn) {
             btn.disabled = false;
             btn.innerHTML = `⚡ Escanear Ahora`;
@@ -222,12 +226,15 @@ async function triggerManualScan() {
 
 function showAgentNotification(msg, type = 'info') {
     const toastContainer = document.getElementById('toast-container');
-    if (!toastContainer) return;
+    if (!toastContainer) {
+        if (typeof showToast === 'function') showToast(msg, type);
+        return;
+    }
     const toast = document.createElement('div');
     toast.className = `agent-toast toast-${type}`;
-    toast.textContent = msg;
+    toast.innerHTML = msg;
     toastContainer.appendChild(toast);
-    setTimeout(() => toast.remove(), 4000);
+    setTimeout(() => toast.remove(), 4500);
 }
 
 function escapeHtml(str) {
