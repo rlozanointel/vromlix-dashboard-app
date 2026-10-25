@@ -422,10 +422,30 @@
                 <!-- RESUMEN DIARIO DE MÉTRICAS (4 CARDS DE ALTA DENSIDAD ANALÍTICA) -->
                 <div class="tiempo-stats-grid">
                     <div class="tiempo-stat-card border-work">
-                        <div class="stat-header">
+                        <div class="stat-header" style="display: flex; justify-content: space-between; align-items: center;">
                             <span class="stat-title">Foco Hoy</span>
+                            <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">Meta: 6h</span>
                         </div>
                         <div class="stat-value" id="stat-net-work">0m</div>
+                        
+                        <!-- Stephen Few Bullet Graph: Rendimiento vs Meta diaria -->
+                        <div class="bullet-graph-container" title="Progreso de Foco vs Meta diaria (6h)">
+                            <div class="bullet-track">
+                                <div class="bullet-range range-poor" style="width: 31.25%;" title="Bajo (< 2.5h)"></div>
+                                <div class="bullet-range range-satisfactory" style="width: 31.25%;" title="Aceptable (2.5h - 5h)"></div>
+                                <div class="bullet-range range-optimal" style="width: 37.5%;" title="Óptimo (5h - 8h+)"></div>
+                                <div class="bullet-measure" id="bullet-work-measure" style="width: 0%;"></div>
+                                <div class="bullet-target" id="bullet-work-target" style="left: 75%;" title="Meta: 6h"></div>
+                            </div>
+                            <div class="bullet-axis-labels">
+                                <span>0h</span>
+                                <span>2.5h</span>
+                                <span>5h</span>
+                                <span style="font-weight: 700; color: var(--text-primary);">6h (Meta)</span>
+                                <span>8h</span>
+                            </div>
+                        </div>
+
                         <div class="stat-sub" id="stat-work-efficiency">Eficiencia: 0% • Ratio F/O: --</div>
                     </div>
 

@@ -287,16 +287,40 @@ function renderYouTubeSummaryCard(v) {
     const tldrHtml = (v.tldr || []).map(line => `<li>${line}</li>`).join('');
     const kpHtml = (v.key_points || []).map(line => `<li>${line}</li>`).join('');
 
-    const chaptersHtml = (v.chapters || []).map(ch => {
-        const sec = ch.sec || 0;
-        const tsUrl = `https://www.youtube.com/watch?v=${v.video_id}&t=${sec}s`;
-        const titleTooltip = ch.ts ? `Ir al minuto ${ch.ts} en YouTube` : 'Abrir este momento en YouTube';
-        return `
-            <a href="${tsUrl}" target="_blank" rel="noopener" class="yt-chapter-pill" title="${titleTooltip}">
-                <span class="yt-ch-title">${ch.title}</span>
-            </a>
-        `;
-    }).join('');
+    // Renderizado progresivo de capítulos (Tufte / Shneiderman: máx 3 visibles, resto bajo acordeón)
+    let chaptersHtml = '';
+    const allChapters = v.chapters || [];
+    if (allChapters.length > 0) {
+        const renderPill = (ch) => {
+            const sec = ch.sec || 0;
+            const tsUrl = `https://www.youtube.com/watch?v=${v.video_id}&t=${sec}s`;
+            const titleTooltip = ch.ts ? `Ir al minuto ${ch.ts} en YouTube` : 'Abrir este momento en YouTube';
+            return `
+                <a href="${tsUrl}" target="_blank" rel="noopener" class="yt-chapter-pill" title="${titleTooltip}">
+                    <span class="yt-ch-title">${ch.title}</span>
+                </a>
+            `;
+        };
+
+        if (allChapters.length <= 4) {
+            chaptersHtml = allChapters.map(renderPill).join('');
+        } else {
+            const primary = allChapters.slice(0, 3).map(renderPill).join('');
+            const remaining = allChapters.slice(3).map(renderPill).join('');
+            chaptersHtml = `
+                ${primary}
+                <details class="yt-chapters-details">
+                    <summary class="yt-chapters-toggle">
+                        <span>+${allChapters.length - 3} momentos más</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </summary>
+                    <div class="yt-chapters-collapsed-grid">
+                        ${remaining}
+                    </div>
+                </details>
+            `;
+        }
+    }
 
     // Tooltip no intrusivo con el segundo exacto de publicación (si existe)
     let dateTooltip = `Publicado: ${v.upload_date || ''}`;
@@ -312,13 +336,18 @@ function renderYouTubeSummaryCard(v) {
         </a>
     ` : '';
 
+    // Veredicto diferencial (Tufte: Eliminar badge si es solo texto redundante invariante)
+    const verdictBadgeHtml = (v.verdict_badge && v.verdict_badge !== '🔥 Resumen Ejecutivo')
+        ? `<span class="yt-badge yt-badge-verdict">${v.verdict_badge}</span>`
+        : '';
+
     return `
         <article class="yt-summary-card ${isVisual ? 'yt-card-visual' : ''} ${isArchived ? 'yt-card-archived' : ''}" id="yt-card-${v.video_id}">
             <!-- CABECERA DE LA FICHA -->
             <div class="yt-card-top">
                 <div class="yt-badges-row">
                     <span class="yt-badge yt-badge-channel">${v.channel_name}</span>
-                    <span class="yt-badge yt-badge-verdict">${v.verdict_badge || '🔥 Resumen Ejecutivo'}</span>
+                    ${verdictBadgeHtml}
                     ${isArchived ? `<span class="yt-badge" style="background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3);">✅ Visto / Archivado</span>` : ''}
                 </div>
                 <div class="yt-meta-right">

@@ -57,6 +57,17 @@ function initMainNavigation() {
         });
     });
 
+    // Global Ergonomic Keyboard Shortcuts (Alt + 1..4 para cambio instantáneo de macro-área)
+    window.switchDashboardView = switchView;
+    document.addEventListener('keydown', (e) => {
+        if (e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+            if (e.key === '1') { e.preventDefault(); switchView('view-principal'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            else if (e.key === '2') { e.preventDefault(); switchView('view-tiempo'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            else if (e.key === '3') { e.preventDefault(); switchView('view-youtube'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            else if (e.key === '4') { e.preventDefault(); switchView('view-agente-ops'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        }
+    });
+
     const hashView = window.location.hash.replace('#', '');
     if (hashView && document.getElementById(hashView)) {
         switchView(hashView);
@@ -2969,6 +2980,7 @@ function initTiempo() {
 
     // Stat Elements
     const statNetWork = document.getElementById('stat-net-work');
+    const bulletWorkMeasure = document.getElementById('bullet-work-measure');
     const statWorkEff = document.getElementById('stat-work-efficiency');
     const statTotalPauses = document.getElementById('stat-total-pauses');
     const statPauseCount = document.getElementById('stat-pause-count');
@@ -3161,6 +3173,13 @@ function initTiempo() {
         currentServerState = state;
 
         if (statNetWork) statNetWork.textContent = state.net_work_formatted || '0m';
+        if (bulletWorkMeasure) {
+            const workSec = state.net_work_seconds || 0;
+            const scaleMaxSec = 8 * 3600; // Escala máxima de 8 horas de foco
+            const pct = Math.min(100, Math.max(0, Math.round((workSec / scaleMaxSec) * 100)));
+            bulletWorkMeasure.style.width = `${pct}%`;
+            bulletWorkMeasure.title = `Foco acumulado: ${Math.round(workSec / 3600 * 10) / 10}h / Meta: 6h (${pct}% de la escala)`;
+        }
         if (statWorkEff) {
             const foRatio = state.focus_ocio_ratio ? `${state.focus_ocio_ratio}x` : '--';
             statWorkEff.textContent = `Eficiencia: ${state.efficiency_pct || 0}% • Ratio F/O: ${foRatio}`;

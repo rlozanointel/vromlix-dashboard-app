@@ -8,38 +8,63 @@
    DESIGN TOKENS & SYSTEM VARIABLES (LIGHT MODE DEFAULT)
    ========================================== */
 :root {
-    /* Color Scheme - Light Mode (Default) */
-    --bg-page: #f1f5f9; /* Slate 100 - Da contraste tangible al lienzo frente a las tarjetas blancas */
-    --bg-card: #ffffff;
-    --bg-card-hover: #ffffff;
-    --bg-subtle: #f8fafc; /* Slate 50 */
-    --bg-input: #ffffff;
+    /* Color Scheme - Light Mode (OKLCH Perceptual Tokens with Hex Fallbacks) */
+    --bg-page: oklch(0.965 0.012 250); /* Slate 100 equivalent */
+    --bg-card: oklch(1 0 0); /* Pure White */
+    --bg-card-hover: oklch(0.99 0.005 250);
+    --bg-subtle: oklch(0.985 0.005 250); /* Slate 50 equivalent */
+    --bg-input: oklch(1 0 0);
     
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
+    --text-primary: oklch(0.18 0.02 260); /* Slate 900 */
+    --text-secondary: oklch(0.35 0.03 260); /* Slate 700 */
+    --text-muted: oklch(0.55 0.03 250); /* Slate 500 */
     
-    --border-color: #e2e8f0;
-    --border-hover: #cbd5e1;
+    --border-color: oklch(0.91 0.01 250); /* Slate 200 */
+    --border-hover: oklch(0.84 0.015 250); /* Slate 300 */
     
-    /* Google Brand Accents (Light Mode) */
-    --accent-primary: #1a73e8; /* Google Blue */
-    --accent-primary-bg: #e8f0fe;
-    --accent-secondary: #6f42c1; /* Executive Purple */
-    --accent-success: #137333; /* Google Green */
-    --accent-success-bg: #e6f4ea;
-    --accent-warning: #b45309; /* Warm Amber */
-    --accent-warning-bg: #fef3c7;
-    --accent-danger: #d93025; /* Google Red */
-    --accent-danger-bg: #fce8e6;
+    /* Google Brand Accents in OKLCH Perceptual Uniform Space */
+    --accent-primary: oklch(0.56 0.19 255); /* Google Blue */
+    --accent-primary-bg: oklch(0.95 0.03 255);
+    --accent-secondary: oklch(0.48 0.18 300); /* Executive Purple */
+    --accent-success: oklch(0.55 0.16 145); /* Google Green */
+    --accent-success-bg: oklch(0.95 0.04 145);
+    --accent-warning: oklch(0.60 0.15 75); /* Warm Amber */
+    --accent-warning-bg: oklch(0.96 0.04 75);
+    --accent-danger: oklch(0.55 0.20 25); /* Google Red */
+    --accent-danger-bg: oklch(0.95 0.04 25);
 
     /* Gradients & Layered Depth Shadows */
-    --grad-text: linear-gradient(135deg, #1a73e8, #6f42c1);
+    --grad-text: linear-gradient(135deg, oklch(0.56 0.19 255), oklch(0.48 0.18 300));
     --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 8px 24px -4px rgba(15, 23, 42, 0.08);
     --shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 16px 32px -4px rgba(15, 23, 42, 0.12);
 
-    /* Fonts & Radii */
+    /* Fibonacci 8pt Spacing Grid */
+    --space-3xs: 2px;
+    --space-2xs: 4px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+
+    /* Minor Third (1.200) Modular Typographic Scale */
     --font-sans: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-size-xs: 0.694rem;
+    --font-size-sm: 0.833rem;
+    --font-size-base: 1rem;
+    --font-size-md: 1.200rem;
+    --font-size-lg: 1.440rem;
+    --font-size-xl: 1.728rem;
+    --font-size-2xl: 2.074rem;
+
+    /* Harmonic Golden Ratio Proportions */
+    --phi: 1.618;
+    --phi-major: 61.8%;
+    --phi-minor: 38.2%;
+
+    /* Radii & Transitions */
     --radius-lg: 14px;
     --radius-md: 8px;
     --radius-sm: 6px;
@@ -49,36 +74,36 @@
 }
 
 /* ==========================================
-   AUTO DARK MODE ADAPTATION (PREFERS-COLOR-SCHEME)
+   AUTO DARK MODE ADAPTATION (OKLCH PERCEPTUAL UNIFORM)
    ========================================== */
 @media (prefers-color-scheme: dark) {
     :root {
         /* Color Scheme - Dark Mode */
-        --bg-page: #0f172a;
-        --bg-card: #1e293b;
-        --bg-card-hover: #243347;
-        --bg-subtle: #1e293b;
-        --bg-input: #0f172a;
+        --bg-page: oklch(0.18 0.02 260);
+        --bg-card: oklch(0.24 0.025 260);
+        --bg-card-hover: oklch(0.28 0.03 260);
+        --bg-subtle: oklch(0.22 0.02 260);
+        --bg-input: oklch(0.18 0.02 260);
         
-        --text-primary: #f8fafc;
-        --text-secondary: #cbd5e1;
-        --text-muted: #94a3b8;
+        --text-primary: oklch(0.97 0.005 250);
+        --text-secondary: oklch(0.82 0.015 250);
+        --text-muted: oklch(0.65 0.02 250);
         
-        --border-color: #334155;
-        --border-hover: #475569;
+        --border-color: oklch(0.30 0.02 260);
+        --border-hover: oklch(0.38 0.025 260);
         
-        /* Google Brand Accents (Dark Mode) */
-        --accent-primary: #8ab4f8; /* Google Light Blue */
-        --accent-primary-bg: rgba(138, 180, 248, 0.15);
-        --accent-secondary: #c58af9;
-        --accent-success: #81c995; /* Google Light Green */
-        --accent-success-bg: rgba(129, 201, 149, 0.15);
-        --accent-warning: #fde047;
-        --accent-warning-bg: rgba(253, 224, 71, 0.15);
-        --accent-danger: #f28b82; /* Google Light Red */
-        --accent-danger-bg: rgba(242, 139, 130, 0.15);
+        /* Google Brand Accents (Dark Mode in OKLCH) */
+        --accent-primary: oklch(0.75 0.13 250);
+        --accent-primary-bg: oklch(0.30 0.06 250 / 0.35);
+        --accent-secondary: oklch(0.78 0.14 300);
+        --accent-success: oklch(0.78 0.14 145);
+        --accent-success-bg: oklch(0.30 0.06 145 / 0.35);
+        --accent-warning: oklch(0.85 0.14 85);
+        --accent-warning-bg: oklch(0.35 0.06 85 / 0.35);
+        --accent-danger: oklch(0.75 0.16 25);
+        --accent-danger-bg: oklch(0.30 0.06 25 / 0.35);
 
-        --grad-text: linear-gradient(135deg, #8ab4f8, #c58af9);
+        --grad-text: linear-gradient(135deg, oklch(0.75 0.13 250), oklch(0.78 0.14 300));
         --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.25);
         --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
@@ -203,7 +228,7 @@ body {
     font-weight: 500;
 }
 
-/* Binary Clock Styling */
+/* Binary Clock Styling (Ambient Perception: Low flicker during deep work, interactive on hover) */
 .binary-clock-wrapper {
     display: flex;
     flex-direction: column;
@@ -213,6 +238,13 @@ body {
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    opacity: 0.55;
+    transition: opacity var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.binary-clock-wrapper:hover {
+    opacity: 1;
+    box-shadow: var(--shadow-card);
 }
 
 .binary-row {
@@ -402,6 +434,21 @@ body {
 .scrollable-content {
     max-height: 440px;
     overflow-y: auto;
+}
+
+/* ==========================================
+   HARMONIC GOLDEN RATIO (Φ 61.8% / 38.2%) UTILITIES
+   ========================================== */
+.phi-grid-container {
+    display: grid;
+    grid-template-columns: 1.618fr 1fr;
+    gap: var(--space-lg);
+}
+
+@media (max-width: 1200px) {
+    .phi-grid-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ==========================================
@@ -3108,7 +3155,7 @@ summary {
 }
 
 .yt-video-title {
-    font-size: 1.16rem;
+    font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.35;
     margin-bottom: 8px;
@@ -3201,6 +3248,43 @@ summary {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+}
+
+.yt-chapters-details {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.yt-chapters-toggle {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    user-select: none;
+    transition: background-color var(--transition-fast);
+}
+
+.yt-chapters-toggle:hover {
+    background: var(--accent-primary-bg);
+}
+
+.yt-chapters-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.yt-chapters-collapsed-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-color);
 }
 
 .yt-chapter-pill {
@@ -5731,6 +5815,87 @@ summary {
 .stat-sub {
     font-size: 0.8rem;
     color: var(--text-muted);
+}
+
+/* ==========================================
+   STEPHEN FEW BULLET GRAPH STYLES
+   ========================================== */
+.bullet-graph-container {
+    margin: 8px 0 10px 0;
+    width: 100%;
+}
+
+.bullet-track {
+    position: relative;
+    height: 14px;
+    background: var(--bg-page);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+}
+
+.bullet-range {
+    height: 100%;
+    transition: background-color var(--transition-normal);
+}
+
+.bullet-range.range-poor {
+    background: oklch(0.92 0.03 250);
+}
+
+.bullet-range.range-satisfactory {
+    background: oklch(0.86 0.04 250);
+}
+
+.bullet-range.range-optimal {
+    background: oklch(0.80 0.05 250);
+}
+
+@media (prefers-color-scheme: dark) {
+    .bullet-range.range-poor {
+        background: oklch(0.26 0.02 260);
+    }
+    .bullet-range.range-satisfactory {
+        background: oklch(0.32 0.03 260);
+    }
+    .bullet-range.range-optimal {
+        background: oklch(0.38 0.04 260);
+    }
+}
+
+.bullet-measure {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    bottom: 3px;
+    background: var(--accent-primary);
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    box-shadow: 0 0 4px rgba(26, 115, 232, 0.3);
+}
+
+.bullet-target {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--text-primary);
+    z-index: 3;
+    border-radius: 1px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.bullet-axis-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-top: 3px;
+    letter-spacing: -0.2px;
 }
 
 /* Breakdown Lists */
