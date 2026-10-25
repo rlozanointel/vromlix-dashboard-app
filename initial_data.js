@@ -161,6 +161,15 @@ window.INITIAL_DASHBOARD_DATA = {
       "antigravity": [
         {
           "time": "",
+          "title": "Conferencia",
+          "details": "",
+          "action_items": "",
+          "completed": false,
+          "category": "fe",
+          "is_focus": false
+        },
+        {
+          "time": "",
           "title": "Postulaciones",
           "details": "Lista de vacantes y postulaciones en seguimiento",
           "action_items": "Enviar CV a:\n• LinkedIn Hermano kheri\nPasar cv a datos",
@@ -310,6 +319,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt21285562/"
     },
     {
+      "Official Title": "Klara and the Sun",
+      "Spanish Title": "Klara y el sol",
+      "Genres": "Science Fiction, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-10-21",
+      "IMDb Rating": 5.423,
+      "Vromlix Score": 54.2,
+      "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
+      "IMDb Link": "https://www.imdb.com/title/tt14371256/"
+    },
+    {
       "Official Title": "Horizon: An American Saga - Chapter 2",
       "Spanish Title": "Horizonte: Una saga americana - Capítulo 2",
       "Genres": "Western, Drama",
@@ -321,24 +341,13 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27665778/"
     },
     {
-      "Official Title": "Klara and the Sun",
-      "Spanish Title": "Klara y el sol",
-      "Genres": "Science Fiction, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-10-21",
-      "IMDb Rating": 6.071,
-      "Vromlix Score": 60.7,
-      "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
-      "IMDb Link": "https://www.imdb.com/title/tt14371256/"
-    },
-    {
       "Official Title": "The Uprising",
       "Spanish Title": "El levantamiento",
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.919,
-      "Vromlix Score": 62.4,
+      "IMDb Rating": 7.9,
+      "Vromlix Score": 62.3,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -359,7 +368,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.5,
+      "IMDb Rating": 7.495,
       "Vromlix Score": 63.5,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
@@ -389,11 +398,11 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "Animals",
       "Spanish Title": null,
-      "Genres": "Thriller, Drama",
+      "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.952,
-      "Vromlix Score": 69.5,
+      "IMDb Rating": 6.968,
+      "Vromlix Score": 69.7,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -502,8 +511,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-07-23",
-      "IMDb Rating": 8.116,
-      "Vromlix Score": 81.2,
+      "IMDb Rating": 8.133,
+      "Vromlix Score": 81.3,
       "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
       "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
@@ -515,11 +524,11 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-06-13",
       "IMDb Rating": 7.6,
       "Vromlix Score": 81.7,
-      "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbeth Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbeth's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
+      "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbet Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbet's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
       "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
-      "Official Title": "La bola negra",
+      "Official Title": "LA BOLA NEGRA",
       "Spanish Title": "La bola negra",
       "Genres": "Drama, War",
       "Release Year": "2026",
@@ -550,17 +559,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 84.7,
       "Plot Summary": "In the 19th century, a drunken applejack salesman must go from zero to hero and become North America's greatest fur trapper by defeating hundreds of beavers.",
       "IMDb Link": "https://www.imdb.com/title/tt12818328/"
-    },
-    {
-      "Official Title": "Wildwood",
-      "Spanish Title": null,
-      "Genres": "Animation, Adventure, Fantasy",
-      "Release Year": "2026",
-      "Release Date": "2026-10-19",
-      "IMDb Rating": 8.543,
-      "Vromlix Score": 85.4,
-      "Plot Summary": "Prue and her classmate Curtis are drawn into a magical forest filled with enchanted creatures, loyal allies, and formidable adversaries as they embark on a desperate quest to rescue Prue's abducted baby brother from a murder of crows led by a mysterious woman named Alexandra.",
-      "IMDb Link": "https://www.imdb.com/title/tt2056785/"
     },
     {
       "Official Title": "Fatherland",
@@ -616,6 +614,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 87.3,
       "Plot Summary": "When disillusioned Swedish knight Antonius Block returns home from the Crusades to find his country in the grips of the Black Death, he challenges Death to a chess match for his life. Tormented by the belief that God does not exist, Block sets off on a journey, meeting up with traveling players Jof and his wife, Mia, and becoming determined to evade Death long enough to commit one redemptive act while he still lives.",
       "IMDb Link": "https://www.imdb.com/title/tt0050976/"
+    },
+    {
+      "Official Title": "Wildwood",
+      "Spanish Title": null,
+      "Genres": "Animation, Adventure, Fantasy",
+      "Release Year": "2026",
+      "Release Date": "2026-10-19",
+      "IMDb Rating": 8.763,
+      "Vromlix Score": 87.6,
+      "Plot Summary": "Prue and her classmate Curtis are drawn into a magical forest filled with enchanted creatures, loyal allies, and formidable adversaries as they embark on a desperate quest to rescue Prue's abducted baby brother from a murder of crows led by a mysterious woman named Alexandra.",
+      "IMDb Link": "https://www.imdb.com/title/tt2056785/"
     },
     {
       "Official Title": "Minotaur",
@@ -1271,5 +1280,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-24 20:45:41"
+  "last_updated": "2026-10-25 10:31:35"
 };
