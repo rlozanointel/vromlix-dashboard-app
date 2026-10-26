@@ -3702,43 +3702,74 @@ function initTiempo() {
         }
     });
 
-    window.handleAudioFileSelected = function(fileInput) {
+    window.handleAudioFileSelected = async function(fileInput) {
         if (!fileInput.files || !fileInput.files[0]) return;
         const file = fileInput.files[0];
         const statusLabel = document.getElementById('audio-upload-status');
+
+        const CHUNK_SIZE = 5 * 1024 * 1024; // 5 MB por fragmento (compatible con Cloudflare y WebView)
+        const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+        const uploadId = 'up_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+        const totalMB = (file.size / (1024 * 1024)).toFixed(1);
+
         if (statusLabel) {
-            statusLabel.textContent = `⏳ Subiendo "${file.name}" (${(file.size / (1024 * 1024)).toFixed(1)} MB)...`;
+            statusLabel.textContent = `⏳ Preparando "${file.name}" (${totalMB} MB)...`;
             statusLabel.style.color = 'var(--accent-warning)';
         }
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const base64Audio = e.target.result;
-            fetch('/api/audio/upload', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    filename: file.name,
-                    audio_base64: base64Audio
-                })
-            })
-            .then(res => res.json())
-            .then(resp => {
-                if (resp.success) {
-                    if (statusLabel) {
-                        statusLabel.textContent = `✅ Guardado en VROMLIX_DATA/audio_recordings listo para Whisper`;
-                        statusLabel.style.color = 'var(--accent-success)';
-                    }
-                    showToast(`Grabación recibida: ${file.name}`);
-                } else {
-                    if (statusLabel) statusLabel.textContent = `❌ Error: ${resp.error}`;
+        try {
+            for (let i = 0; i < totalChunks; i++) {
+                const start = i * CHUNK_SIZE;
+                const end = Math.min(file.size, start + CHUNK_SIZE);
+                const chunkBlob = file.slice(start, end);
+
+                const percent = Math.round((i / totalChunks) * 100);
+                const currentMB = (start / (1024 * 1024)).toFixed(1);
+                if (statusLabel) {
+                    statusLabel.textContent = `⏳ Subiendo: ${percent}% (${currentMB}/${totalMB} MB) • Parte ${i + 1}/${totalChunks}...`;
                 }
-            })
-            .catch(err => {
-                if (statusLabel) statusLabel.textContent = `❌ Error al subir: ${err.message}`;
-            });
-        };
-        reader.readAsDataURL(file);
+
+                const query = new URLSearchParams({
+                    upload_id: uploadId,
+                    filename: file.name,
+                    chunk_index: i.toString(),
+                    total_chunks: totalChunks.toString(),
+                    total_size: file.size.toString()
+                });
+
+                const res = await fetch(`/api/audio/upload_chunk?${query.toString()}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/octet-stream'
+                    },
+                    body: chunkBlob
+                });
+
+                if (!res.ok) {
+                    throw new Error(`Error en servidor (HTTP ${res.status}: ${res.statusText})`);
+                }
+
+                const data = await res.json();
+                if (!data.success) {
+                    throw new Error(data.error || 'Error procesando fragmento en servidor');
+                }
+            }
+
+            if (statusLabel) {
+                statusLabel.textContent = `✅ Audio recibido (${totalMB} MB). Transcribiendo en segundo plano con Gemini/Whisper...`;
+                statusLabel.style.color = 'var(--accent-success)';
+            }
+            showToast(`Grabación recibida (${totalMB} MB). Transcribiendo...`);
+        } catch (err) {
+            console.error('Error subiendo audio en fragmentos:', err);
+            if (statusLabel) {
+                statusLabel.textContent = `❌ Error al subir: ${err.message}`;
+                statusLabel.style.color = 'var(--accent-danger, #ef4444)';
+            }
+            showToast(`Error al subir: ${err.message}`, 'error');
+        } finally {
+            fileInput.value = '';
+        }
     };
 
     // Auto-ticking interval (1s)

@@ -376,6 +376,7 @@
                                     </button>
                                     <div id="ocio-presets-menu" class="calle-menu-dropdown hidden">
                                         <button onclick="window.cambiarFaseTiempo('ocio', 'YouTube')">YouTube</button>
+                                        <button onclick="window.cambiarFaseTiempo('ocio', 'TikTok')">TikTok</button>
                                         <button onclick="window.cambiarFaseTiempo('ocio', 'Película')">Película</button>
                                         <button onclick="window.cambiarFaseTiempo('ocio', 'General')">General</button>
                                     </div>
@@ -596,7 +597,7 @@
                         <div class="tiempo-accordion-body">
                             <div class="recorder-guide-box">
                                 <div class="upload-audio-zone" id="upload-audio-zone">
-                                    <input type="file" id="audio-file-input" accept="audio/*,.m4a,.ogg,.opus,.mp3,.wav,*/*" style="display: none;" onchange="window.handleAudioFileSelected(this)">
+                                    <input type="file" id="audio-file-input" accept="audio/*" style="display: none;" onchange="window.handleAudioFileSelected(this)">
                                     <button class="btn-primary" style="padding: 10px 20px; font-size: 0.95rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;" onclick="document.getElementById('audio-file-input').click()">
                                         📁 Subir Audio de Reunión (.m4a / .opus)
                                     </button>
@@ -2877,7 +2878,7 @@
 
     <script src="initial_data.js"></script>
     <script src="auth_gate.js"></script>
-    <script src="app.js?v=20261024_1555"></script>
+    <script src="app.js?v=20261025_1845"></script>
     <script src="agent_ops_view.js"></script>
     <script src="youtube_view.js?v=20261024_1705"></script>
     <script src="mormon_view.js?v=20261024_1400"></script>
