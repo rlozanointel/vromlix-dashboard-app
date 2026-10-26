@@ -3255,6 +3255,7 @@ function initTiempo() {
         'calle': { title: 'Calle', class: 'phase-calle', color: '#ea580c', sub: 'Salida' },
         'ocio': { title: 'Ocio', class: 'phase-ocio', color: '#ef4444', sub: 'Videos y entretenimiento' },
         'espiritual': { title: 'Mormón', class: 'phase-espiritual', color: '#38bdf8', sub: 'Lectura y reflexión' },
+        'lavar': { title: 'Lavar', class: 'phase-lavar', color: '#0ea5e9', sub: 'Lavar ropa y pendientes' },
         'dormir': { title: 'Dormir', class: 'phase-dormir', color: '#6366f1', sub: 'Sueño nocturno' },
         'detenido': { title: 'Detenido', class: 'phase-detenido', color: 'var(--text-muted)', sub: 'Reloj parado' }
     };
@@ -3411,7 +3412,7 @@ function initTiempo() {
         let targetId = `btn-phase-${phase}`;
         if (phase === 'foco' || phase === 'trabajo') targetId = 'btn-phase-trabajo';
         if (phase === 'parar' || phase === 'detener') targetId = 'btn-phase-detener';
-        if (['cocinar', 'comida', 'bano', 'descanso', 'espiritual'].includes(phase)) targetId = 'btn-group-rutinas';
+        if (['cocinar', 'comida', 'bano', 'descanso', 'espiritual', 'lavar'].includes(phase)) targetId = 'btn-group-rutinas';
         const targetBtn = document.getElementById(targetId);
         if (targetBtn) targetBtn.classList.add('active-phase');
     }
@@ -3521,7 +3522,7 @@ function initTiempo() {
         } else if (currentIntervalFilter === 'otros') {
             filtered = list.filter(item => {
                 const p = (item.phase || '').toLowerCase();
-                return p === 'comida' || p === 'cocinar' || p === 'bano' || p === 'descanso' || p === 'ocio' || p === 'espiritual';
+                return p === 'comida' || p === 'cocinar' || p === 'bano' || p === 'descanso' || p === 'ocio' || p === 'espiritual' || p === 'lavar';
             });
         }
 

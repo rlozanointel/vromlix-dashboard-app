@@ -692,6 +692,31 @@ function hideMarkWatchedToast() {
     }
 }
 
+function smoothScrollToCard(cardIndex = 0, fallbackY = null) {
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            const container = document.getElementById('yt-cards-container');
+            if (!container) return;
+            const cards = container.querySelectorAll('.yt-summary-card');
+            const target = cards[cardIndex] || cards[cards.length - 1];
+            if (target) {
+                const rect = target.getBoundingClientRect();
+                // 85px de holgura para la barra superior fija (.main-nav-bar) + margen estético
+                const targetY = Math.max(0, window.scrollY + rect.top - 85);
+                window.scrollTo({
+                    top: targetY,
+                    behavior: 'smooth'
+                });
+            } else if (fallbackY !== null) {
+                window.scrollTo({
+                    top: fallbackY,
+                    behavior: 'smooth'
+                });
+            }
+        }, 15);
+    });
+}
+
 async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
     if (actionType === 'watched' && markWatchedUrl) {
         try {
@@ -702,13 +727,23 @@ async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
     }
 
     const cardEl = document.getElementById(`yt-card-${videoId}`);
+    let cardIndex = 0;
+    let fallbackY = null;
+
     if (cardEl) {
-        cardEl.style.transition = 'all 0.28s ease';
+        const container = document.getElementById('yt-cards-container');
+        if (container) {
+            const allCards = Array.from(container.querySelectorAll('.yt-summary-card'));
+            const foundIdx = allCards.indexOf(cardEl);
+            if (foundIdx !== -1) cardIndex = foundIdx;
+        }
+        fallbackY = Math.max(0, window.scrollY + cardEl.getBoundingClientRect().top - 85);
+        cardEl.style.transition = 'all 0.28s cubic-bezier(0.4, 0, 0.2, 1)';
         cardEl.style.opacity = '0';
         cardEl.style.transform = 'translateY(-8px) scale(0.98)';
     }
 
-    // Actualización inmediata de la cola local (deslizar el video #11 hacia la pantalla)
+    // Actualización inmediata de la cola local (deslizar el siguiente video al lugar del visto)
     if (actionType === 'watched' || actionType === 'dismiss') {
         setTimeout(() => {
             ytUnreadCache = ytUnreadCache.filter(item => item.video_id !== videoId);
@@ -719,6 +754,9 @@ async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
             const badgeUnread = document.getElementById('yt-metric-unread');
             const pillUnread = document.getElementById('yt-pill-unread-count');
             const navBadge = document.getElementById('nav-yt-badge');
+            const badgeArchived = document.getElementById('yt-metric-archived');
+            const pillHistory = document.getElementById('yt-pill-history-count');
+
             const count = ytUnreadCache.length;
             if (badgeUnread) badgeUnread.textContent = count;
             if (pillUnread) pillUnread.textContent = count;
@@ -726,7 +764,14 @@ async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
                 navBadge.textContent = count;
                 navBadge.style.display = count > 0 ? 'inline-flex' : 'none';
             }
+            if (actionType === 'watched' && badgeArchived) {
+                const currentArchived = parseInt(badgeArchived.textContent, 10) || 0;
+                badgeArchived.textContent = currentArchived + 1;
+                if (pillHistory) pillHistory.textContent = currentArchived + 1;
+            }
+
             renderYouTubeView();
+            smoothScrollToCard(cardIndex, fallbackY);
         }, 150);
     }
 
@@ -738,10 +783,6 @@ async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
         });
         const data = await res.json();
         if (!res.ok || !data.success) throw new Error(data.error || 'Error al actualizar ficha');
-
-        setTimeout(() => {
-            loadYouTubeSummaries();
-        }, 300);
     } catch (err) {
         if (typeof showToast === 'function') {
             showToast(err.message, 'error');
@@ -752,6 +793,9 @@ async function handleYouTubeCardAction(videoId, actionType, markWatchedUrl) {
             cardEl.style.opacity = '1';
             cardEl.style.transform = 'none';
         }
+        setTimeout(() => {
+            loadYouTubeSummaries();
+        }, 300);
     }
 }
 
