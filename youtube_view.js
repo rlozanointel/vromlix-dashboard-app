@@ -341,6 +341,11 @@ function renderYouTubeSummaryCard(v) {
         ? `<span class="yt-badge yt-badge-verdict">${v.verdict_badge}</span>`
         : '';
 
+    // Estimación ergonómica de tiempo de lectura (Tufte / Bringhurst: ~190 ppm)
+    const allSummaryWords = [...(v.tldr || []), ...(v.key_points || [])].join(' ');
+    const wordCount = allSummaryWords.trim().split(/\s+/).filter(Boolean).length;
+    const readingMins = Math.max(1, Math.ceil(wordCount / 190));
+
     return `
         <article class="yt-summary-card ${isVisual ? 'yt-card-visual' : ''} ${isArchived ? 'yt-card-archived' : ''}" id="yt-card-${v.video_id}">
             <!-- CABECERA DE LA FICHA -->
@@ -351,6 +356,7 @@ function renderYouTubeSummaryCard(v) {
                     ${isArchived ? `<span class="yt-badge" style="background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3);">✅ Visto / Archivado</span>` : ''}
                 </div>
                 <div class="yt-meta-right">
+                    <span class="yt-reading-pill" title="Estimado a ~190 palabras por minuto (${wordCount} palabras de síntesis)">📖 ${readingMins} min lectura</span>
                     <span class="yt-duration-pill">⏱️ ${v.duration_str}</span>
                     <span class="yt-date-pill" title="${dateTooltip}">📅 ${v.upload_date || ''}</span>
                 </div>

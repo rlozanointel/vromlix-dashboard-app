@@ -8,6 +8,7 @@
 
     let currentSessionFilter = 'all';
     let currentCallingFilter = 'all';
+    let currentSpeakerFilter = 'all';
     let currentSearchQuery = '';
     let isConfFavFilterActive = false;
 
@@ -20,6 +21,7 @@
 
     function init() {
         initSubnavSwitcher();
+        populateSpeakerDropdown();
         renderConfTalks();
         setupConfEventListeners();
     }
@@ -78,6 +80,10 @@
             }
             // Filtro por llamamiento
             if (currentCallingFilter !== 'all' && talk.authGroup !== currentCallingFilter) {
+                return false;
+            }
+            // Filtro por orador específico
+            if (currentSpeakerFilter !== 'all' && talk.speaker !== currentSpeakerFilter) {
                 return false;
             }
             // Filtro por texto de búsqueda
@@ -324,17 +330,38 @@
                 renderConfTalks();
             });
         });
+
+        // Dropdown de filtro por orador
+        const speakerSelect = document.getElementById('conf-speaker-select');
+        if (speakerSelect) {
+            speakerSelect.addEventListener('change', (e) => {
+                currentSpeakerFilter = e.target.value;
+                renderConfTalks();
+            });
+        }
+    }
+
+    function populateSpeakerDropdown() {
+        const select = document.getElementById('conf-speaker-select');
+        if (!select) return;
+        const allTalks = window.CONFERENCIA_DATA || [];
+        const speakers = [...new Set(allTalks.map(t => t.speaker).filter(Boolean))].sort();
+        select.innerHTML = '<option value="all">🎙️ Todos los oradores</option>' +
+            speakers.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
     }
 
     window.clearAllConfFilters = function() {
         currentSearchQuery = '';
         currentSessionFilter = 'all';
         currentCallingFilter = 'all';
+        currentSpeakerFilter = 'all';
 
         const searchInput = document.getElementById('conf-search-input');
         const clearBtn = document.getElementById('conf-clear-search-btn');
+        const speakerSelect = document.getElementById('conf-speaker-select');
         if (searchInput) searchInput.value = '';
         if (clearBtn) clearBtn.style.display = 'none';
+        if (speakerSelect) speakerSelect.value = 'all';
 
         document.querySelectorAll('.conf-filter-pill').forEach(p => {
             p.classList.toggle('active', p.getAttribute('data-session') === 'all');

@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261024_1555">
+    <link rel="stylesheet" href="style.css?v=20261025_2145">
 </head>
 <body>
     <div class="dashboard-container">
@@ -875,15 +875,23 @@
                                 </div>
                             </div>
 
-                            <!-- FILTRO DE LLAMAMIENTO -->
-                            <div class="conf-filter-pills-row conf-calling-row">
-                                <span class="conf-filter-label">Líderes:</span>
-                                <div class="conf-filter-scroll">
-                                    <button class="conf-calling-pill active" data-calling="all">Todos</button>
-                                    <button class="conf-calling-pill" data-calling="presidencia">👑 Primera Presidencia</button>
-                                    <button class="conf-calling-pill" data-calling="apostoles">⚡ Doce Apóstoles</button>
-                                    <button class="conf-calling-pill" data-calling="mujeres">🌸 Líderes de Mujeres & Niños</button>
-                                    <button class="conf-calling-pill" data-calling="setentas">🤝 Setentas & Obispado</button>
+                            <!-- FILTRO DE LLAMAMIENTO Y ORADOR -->
+                            <div class="conf-filter-pills-row conf-calling-row" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <span class="conf-filter-label">Líderes:</span>
+                                    <div class="conf-filter-scroll">
+                                        <button class="conf-calling-pill active" data-calling="all">Todos</button>
+                                        <button class="conf-calling-pill" data-calling="presidencia">👑 Primera Presidencia</button>
+                                        <button class="conf-calling-pill" data-calling="apostoles">⚡ Doce Apóstoles</button>
+                                        <button class="conf-calling-pill" data-calling="mujeres">🌸 Mujeres & Niños</button>
+                                        <button class="conf-calling-pill" data-calling="setentas">🤝 Setentas & Obispado</button>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 6px; margin-left: auto;">
+                                    <span class="conf-filter-label" style="font-size: 0.78rem;">Orador:</span>
+                                    <select id="conf-speaker-select" class="conf-speaker-dropdown" style="padding: 4px 10px; border-radius: 6px; background: var(--bg-subtle); border: 1px solid var(--border-color); color: var(--text-primary); font-size: 0.8rem; cursor: pointer;">
+                                        <option value="all">🎙️ Todos los oradores</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -972,18 +980,22 @@
                     <div class="card-header">
                         <div class="header-title-group">
                             <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                            <h2>Chats de Antigravity (Clic para copiar ID)</h2>
+                            <h2 id="chats-header-title">Chats de Antigravity (Historial Completo & Archivados)</h2>
                         </div>
                         <div class="header-action-group" style="display: flex; gap: 8px; align-items: center;">
                             <div class="search-box">
-                                <input type="text" id="chat-search-input" placeholder="Buscar en los 60+ chats (ej: playlist, serie, script)...">
+                                <input type="text" id="chat-search-input" placeholder="Buscar en todos los chats (ej: playlist, script, SAT)...">
                             </div>
                             <button id="refresh-chats-btn" class="btn-icon" title="Actualizar lista de chats">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 11-.57-8.38l5.67-5.67"/></svg>
                             </button>
                         </div>
                     </div>
-                    <div class="card-content scrollable-content" style="max-height: 400px;">
+                    <!-- CHIPS RÁPIDOS DE DOMINIO Y ARCHIVADOS -->
+                    <div class="chats-domain-filters" id="chats-domain-filters">
+                        <!-- Loaded dynamically with real-time counters -->
+                    </div>
+                    <div class="card-content scrollable-content" style="max-height: 480px;">
                         <div id="chats-container" class="chats-list">
                             <!-- Loaded dynamically -->
                         </div>
@@ -2878,12 +2890,12 @@
 
     <script src="initial_data.js"></script>
     <script src="auth_gate.js"></script>
-    <script src="app.js?v=20261025_1845"></script>
+    <script src="app.js?v=20261025_2145"></script>
     <script src="agent_ops_view.js"></script>
-    <script src="youtube_view.js?v=20261024_1705"></script>
+    <script src="youtube_view.js?v=20261025_2145"></script>
     <script src="mormon_view.js?v=20261024_1400"></script>
     <script src="conferencia_data.js?v=20261024_1400"></script>
-    <script src="conferencia_view.js?v=20261024_1400"></script>
+    <script src="conferencia_view.js?v=20261025_2145"></script>
     <script src="pitch_view.js"></script>
     <script>
         if ('serviceWorker' in navigator) {

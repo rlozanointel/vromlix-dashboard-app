@@ -2101,21 +2101,76 @@ function initChats() {
     const container = document.getElementById('chats-container');
     const refreshBtn = document.getElementById('refresh-chats-btn');
     const searchInput = document.getElementById('chat-search-input');
+    const headerTitle = document.getElementById('chats-header-title');
+    const filterContainer = document.getElementById('chats-domain-filters');
     let allChats = [];
+    let activeDomain = 'all';
+
+    const DOMAINS_CONFIG = [
+        { id: 'all', label: 'Todos' },
+        { id: 'dev', label: '💻 Dev & IA', regex: /\b(dev|python|script|agent|agente|código|code|github|sqlite|gemini|vps|pm2|server|api|dashboard|linux|ubuntu|docker|fix|error|bash|terminal|html|css|js|web|transcrip|micrófono|audio|xml|json|browser|reloj|video|ffmpeg|git|ublacklist|automatiz|túnel|scraping|skills|plugins|pines|localhost)\b/i },
+        { id: 'turismo', label: '🚐 Merakirai & Turismo', regex: /\b(merakirai|turismo|viaje|viajes|sectur|buap|xochimilco|chiapas|oaxaca|tour|paquete|cotiza|van|itinerario|alma)\b/i },
+        { id: 'fe', label: '🏛️ Fe & LDS', regex: /\b(iglesia|lds|oración|oraciones|sacramental|conferencia|autosuficiencia|resiliencia|doctrina|evangelio|mormón|clase|taller|élderes|sud)\b/i },
+        { id: 'genealogia', label: '📜 Genealogía', regex: /\b(genealogía|mochitlán|guerrero|familysearch|árbol|antepasados|parroquia|bautismo|defunción|paleografía|partida)\b/i },
+        { id: 'carrera', label: '💼 Carrera & Finanzas', regex: /\b(cv|curriculum|entrevista|empleo|remoto|sat|fiscal|factura|finanzas|power bi|excel|olinia|english4kids|candidatura|reclutamiento|salario|impuesto|afore|inglés|english)\b/i },
+        { id: 'cultura', label: '🎬 Cine & Cultura', regex: /\b(película|películas|serie|series|imdb|cine|física|cuántica|nba|celtics|música|spotify|cerati|apeiron|novela|libro|poema)\b/i },
+        { id: 'vida', label: '🌱 Vida & Hábitos', regex: /\b(salud|bienestar|al-anon|alateen|avena|receta|personal|perfil|limpieza|hábito|psicol|dormir|sueño|mutual|jessica)\b/i },
+        { id: 'archived', label: '📦 Archivados' }
+    ];
+
+    function classifyChat(chat) {
+        const text = ((chat.title || '') + ' ' + (chat.full_text || '')).toLowerCase();
+        for (const d of DOMAINS_CONFIG) {
+            if (d.regex && d.regex.test(text)) {
+                return { id: d.id, label: d.label };
+            }
+        }
+        return { id: 'dev', label: '💻 Dev & Sistema' };
+    }
+
+    function renderFilterChips() {
+        if (!filterContainer) return;
+        filterContainer.innerHTML = '';
+
+        DOMAINS_CONFIG.forEach(d => {
+            let count = 0;
+            if (d.id === 'all') {
+                count = allChats.length;
+            } else if (d.id === 'archived') {
+                count = allChats.filter(c => c.archived).length;
+            } else {
+                count = allChats.filter(c => !c.archived && classifyChat(c).id === d.id).length;
+            }
+
+            const chip = document.createElement('button');
+            chip.className = `chat-domain-chip ${activeDomain === d.id ? 'active' : ''}`;
+            chip.textContent = `${d.label} (${count})`;
+            chip.addEventListener('click', () => {
+                activeDomain = d.id;
+                renderFilterChips();
+                const q = searchInput ? searchInput.value.trim() : '';
+                filterChats(q);
+            });
+            filterContainer.appendChild(chip);
+        });
+    }
 
     function renderChats(chatsToRender, query = '') {
         container.innerHTML = '';
         if (chatsToRender.length === 0) {
-            container.innerHTML = `<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 12px;">No se encontraron chats que coincidan con "${query}".</div>`;
+            container.innerHTML = `<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 16px; text-align: center;">No se encontraron chats que coincidan con "${escapeHTML(query)}" en esta categoría.</div>`;
             return;
         }
 
         chatsToRender.forEach(chat => {
+            const domainInfo = classifyChat(chat);
+            const isArchived = Boolean(chat.archived);
+            const isPinned = Boolean(chat.pinned);
+
             const item = document.createElement('div');
-            item.className = 'chat-item';
+            item.className = `chat-item ${isArchived ? 'is-archived' : ''}`;
             item.title = `Haz clic para copiar el ID de esta conversación:\n${chat.id}`;
-            
-            // Build snippet preview
+
             let snippetHTML = '';
             if (query && chat.full_text) {
                 const idx = chat.full_text.toLowerCase().indexOf(query.toLowerCase());
@@ -2125,27 +2180,68 @@ function initChats() {
                     let snippet = chat.full_text.substring(start, end);
                     if (start > 0) snippet = '...' + snippet;
                     if (end < chat.full_text.length) snippet += '...';
-                    
+
                     const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
                     const highlightedSnippet = snippet.replace(regex, '<mark style="background: rgba(255, 215, 0, 0.35); color: #fff; border-radius: 3px; padding: 0 2px;">$1</mark>');
                     snippetHTML = `<div class="chat-snippet" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; font-style: italic;">"${highlightedSnippet}"</div>`;
                 }
             } else if (chat.full_text) {
                 const preview = chat.full_text.substring(0, 140) + '...';
-                snippetHTML = `<div class="chat-snippet" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; font-style: italic;">"${preview}"</div>`;
+                snippetHTML = `<div class="chat-snippet" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; font-style: italic;">"${escapeHTML(preview)}"</div>`;
             }
 
             item.innerHTML = `
-                <div class="chat-info" style="flex: 1;">
-                    <div class="chat-title" title="${chat.title}">${chat.title}</div>
-                    <div class="chat-meta">ID: <code>${chat.id.substring(0, 8)}...</code> | ${chat.date}</div>
+                <div class="chat-info" style="flex: 1; min-width: 0;">
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <span class="chat-title" style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">${escapeHTML(chat.title)}</span>
+                    </div>
+                    <div class="chat-badges-row">
+                        ${isPinned ? '<span class="chat-badge chat-badge-pinned">📌 Fijado</span>' : ''}
+                        ${isArchived ? '<span class="chat-badge chat-badge-archived">📦 Archivado</span>' : ''}
+                        <span class="chat-badge chat-badge-domain">${domainInfo.label}</span>
+                        <span style="font-size: 0.72rem; color: var(--text-muted);">📅 ${chat.date}</span>
+                        <span style="font-size: 0.72rem; color: var(--text-muted); font-family: monospace;">ID: ${chat.id.substring(0, 8)}...</span>
+                    </div>
                     ${snippetHTML}
                 </div>
-                <div class="chat-copy-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                    <button class="chat-archive-action-btn" title="${isArchived ? 'Desarchivar conversación' : 'Mover a archivados'}">
+                        <span>${isArchived ? '📂 Desarchivar' : '📦 Archivar'}</span>
+                    </button>
+                    <div class="chat-copy-icon" title="Copiar ID completo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </div>
                 </div>
             `;
-            
+
+            // Toggle Archive Action
+            const archiveBtn = item.querySelector('.chat-archive-action-btn');
+            if (archiveBtn) {
+                archiveBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const newStatus = !isArchived;
+                    fetch('/api/conversations/archive', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: chat.id, archived: newStatus })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            chat.archived = newStatus;
+                            showToast(newStatus ? '📦 Conversación archivada' : '📂 Conversación desarchivada', 'success');
+                            renderFilterChips();
+                            filterChats(searchInput ? searchInput.value.trim() : '');
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error toggling archive:', err);
+                        showToast('Error al archivar conversación', 'error');
+                    });
+                });
+            }
+
+            // Copy ID on click item
             item.addEventListener('click', () => {
                 navigator.clipboard.writeText(chat.id)
                     .then(() => {
@@ -2156,14 +2252,38 @@ function initChats() {
                         showToast("Error al copiar ID", "error");
                     });
             });
-            
+
             container.appendChild(item);
         });
     }
 
+    function filterChats(query) {
+        let filtered = allChats;
+
+        // Filtro por dominio o archivado
+        if (activeDomain === 'archived') {
+            filtered = filtered.filter(c => Boolean(c.archived));
+        } else if (activeDomain !== 'all') {
+            filtered = filtered.filter(c => !c.archived && classifyChat(c).id === activeDomain);
+        }
+
+        // Filtro por búsqueda de texto
+        if (query) {
+            const q = query.toLowerCase();
+            filtered = filtered.filter(chat => {
+                const inTitle = (chat.title || '').toLowerCase().includes(q);
+                const inId = (chat.id || '').toLowerCase().includes(q);
+                const inText = (chat.full_text || '').toLowerCase().includes(q);
+                return inTitle || inId || inText;
+            });
+        }
+
+        renderChats(filtered, query);
+    }
+
     function loadChats() {
-        container.innerHTML = '<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 10px;">Cargando historial de los 60+ chats...</div>';
-        
+        container.innerHTML = '<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 14px;">Cargando historial de los 180+ chats (incluyendo archivados)...</div>';
+
         fetch('/api/conversations')
             .then(res => res.json())
             .then(data => {
@@ -2171,8 +2291,12 @@ function initChats() {
                     container.innerHTML = `<div style="color: var(--accent-warning); font-size: 0.85rem; padding: 10px;">${data.error}</div>`;
                     return;
                 }
-                
+
                 allChats = data.conversations || [];
+                if (headerTitle) {
+                    headerTitle.textContent = `Chats de Antigravity (${allChats.length} chats, incluye archivados)`;
+                }
+                renderFilterChips();
                 const currentQuery = searchInput ? searchInput.value.trim() : '';
                 filterChats(currentQuery);
             })
@@ -2180,21 +2304,6 @@ function initChats() {
                 console.error("Error loading chats:", err);
                 container.innerHTML = '<div style="color: var(--accent-danger); font-size: 0.85rem; padding: 10px;">Error al conectar con la API de chats.</div>';
             });
-    }
-
-    function filterChats(query) {
-        if (!query) {
-            renderChats(allChats);
-            return;
-        }
-        const q = query.toLowerCase();
-        const filtered = allChats.filter(chat => {
-            const inTitle = (chat.title || '').toLowerCase().includes(q);
-            const inId = (chat.id || '').toLowerCase().includes(q);
-            const inText = (chat.full_text || '').toLowerCase().includes(q);
-            return inTitle || inId || inText;
-        });
-        renderChats(filtered, query);
     }
 
     if (searchInput) {
@@ -2206,7 +2315,7 @@ function initChats() {
     if (refreshBtn) {
         refreshBtn.addEventListener('click', loadChats);
     }
-    
+
     loadChats();
 }
 
@@ -2245,7 +2354,30 @@ function initClasses() {
         }
 
         const parsedHTML = parseClassMarkdown(classObj.body);
-        contentContainer.innerHTML = `<div class="class-notes-grid">${parsedHTML}</div>`;
+        const headerHTML = `
+            <div class="class-notes-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 8px;">
+                <div style="font-weight: 700; font-size: 1.05rem; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+                    <span>📚</span>
+                    <span>${escapeHTML(classObj.title)}</span>
+                </div>
+                <button id="btn-pulpito-clase" class="btn-pulpito-action" style="padding: 6px 12px; font-size: 0.82rem; font-weight: 600; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    <span>Modo Púlpito</span>
+                </button>
+            </div>
+        `;
+        contentContainer.innerHTML = `${headerHTML}<div class="class-notes-grid">${parsedHTML}</div>`;
+
+        const btnPulpito = contentContainer.querySelector('#btn-pulpito-clase');
+        if (btnPulpito) {
+            btnPulpito.addEventListener('click', () => {
+                if (typeof window.openPulpitoGeneral === 'function') {
+                    window.openPulpitoGeneral(classObj.title, classObj.body, '', 'Clase de Resiliencia / LDS');
+                } else {
+                    showToast("Modo Púlpito no disponible en este momento", "warning");
+                }
+            });
+        }
     }
 
     function parseClassMarkdown(text) {
@@ -3575,6 +3707,60 @@ function initTiempo() {
         if (rutinasMenu) rutinasMenu.classList.add('hidden');
 
         const cleanPhase = (phase === 'parar' || phase === 'detener') ? 'detener' : phase;
+
+        // Salvaguarda contra pulsación accidental (Ley de Fitts / Prevención de Errores)
+        if (cleanPhase === 'detener' && currentServerState && currentServerState.active_interval) {
+            const btnStop = document.getElementById('btn-phase-detener');
+            if (btnStop && !window._timeStopConfirming) {
+                window._timeStopConfirming = true;
+                const origHtml = btnStop.innerHTML;
+                btnStop.innerHTML = `
+                    <span class="btn-hero-icon" style="color: #f59e0b;">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+                    </span>
+                    <div class="btn-hero-info">
+                        <span class="btn-hero-title" style="color: #f59e0b; font-size: 0.75rem;">¿CONFIRMAR?</span>
+                    </div>
+                `;
+                btnStop.style.borderColor = '#f59e0b';
+                btnStop.style.boxShadow = '0 0 12px rgba(245, 158, 11, 0.4)';
+
+                if (typeof showToast === 'function') {
+                    showToast("⚠️ Pulsa de nuevo para confirmar parada", "warning");
+                }
+
+                window._timeStopTimer = setTimeout(() => {
+                    window._timeStopConfirming = false;
+                    if (btnStop) {
+                        btnStop.innerHTML = origHtml;
+                        btnStop.style.borderColor = '';
+                        btnStop.style.boxShadow = '';
+                    }
+                }, 3500);
+
+                return;
+            }
+        }
+
+        // Reset estado de confirmación de parada si se completó o fue otra fase
+        if (window._timeStopTimer) {
+            clearTimeout(window._timeStopTimer);
+            window._timeStopTimer = null;
+        }
+        window._timeStopConfirming = false;
+        const btnStopReset = document.getElementById('btn-phase-detener');
+        if (btnStopReset) {
+            btnStopReset.style.borderColor = '';
+            btnStopReset.style.boxShadow = '';
+            btnStopReset.innerHTML = `
+                <span class="btn-hero-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+                </span>
+                <div class="btn-hero-info">
+                    <span class="btn-hero-title">PARAR</span>
+                </div>
+            `;
+        }
 
         // Optimistic UI state
         if (currentServerState) {
