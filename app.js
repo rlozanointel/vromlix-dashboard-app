@@ -2101,6 +2101,8 @@ function initChats() {
     const container = document.getElementById('chats-container');
     const refreshBtn = document.getElementById('refresh-chats-btn');
     const searchInput = document.getElementById('chat-search-input');
+    const scopeSelect = document.getElementById('chat-search-scope');
+    const countBadge = document.getElementById('chat-search-count-badge');
     const headerTitle = document.getElementById('chats-header-title');
     const filterContainer = document.getElementById('chats-domain-filters');
     let allChats = [];
@@ -2119,13 +2121,139 @@ function initChats() {
     ];
 
     function classifyChat(chat) {
-        const text = ((chat.title || '') + ' ' + (chat.full_text || '')).toLowerCase();
+        const text = ((chat.title || '') + ' ' + (chat.user_text || '') + ' ' + (chat.full_text || '')).toLowerCase();
         for (const d of DOMAINS_CONFIG) {
             if (d.regex && d.regex.test(text)) {
                 return { id: d.id, label: d.label };
             }
         }
         return { id: 'dev', label: '💻 Dev & Sistema' };
+    }
+
+    // Constructor de Regex con límites alfanuméricos estrictos (Lookaround) para evitar falsos positivos
+    // (Ej: 'api' coincidirá con 'api,', 'api.', '(API)', 'API_KEY', pero NUNCA con 'capítulo', 'apicultor', 'terapia')
+    function buildTermRegex(term, globalMode = false) {
+        const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const flags = globalMode ? 'gi' : 'i';
+        if (term.length <= 4) {
+            return new RegExp(`(?<=^|[^a-záéíóúüñ0-9])(${escaped})(?=$|[^a-záéíóúüñ0-9])`, flags);
+        }
+        return new RegExp(`(${escaped})`, flags);
+    }
+
+    function highlightTerm(text, term) {
+        if (!text || !term) return escapeHTML(text || '');
+        const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const escapedText = escapeHTML(text);
+        if (term.length <= 4) {
+            const re = new RegExp(`(?<=^|[^a-záéíóúüñ0-9])(${escaped})(?=$|[^a-záéíóúüñ0-9])`, 'gi');
+            return escapedText.replace(re, '<mark style="background: rgba(0, 240, 255, 0.25); color: #00f0ff; border-radius: 3px; padding: 0 3px; font-weight: 700;">$1</mark>');
+        } else {
+            const re = new RegExp(`(${escaped})`, 'gi');
+            return escapedText.replace(re, '<mark style="background: rgba(0, 240, 255, 0.25); color: #00f0ff; border-radius: 3px; padding: 0 3px; font-weight: 700;">$1</mark>');
+        }
+    }
+
+    function extractSmartSnippet(chat, rawQuery) {
+        if (!rawQuery) {
+            if (chat.first_prompt) {
+                return `<div class="chat-snippet" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; font-style: italic;">👤 "${escapeHTML(chat.first_prompt)}..."</div>`;
+            }
+            return '';
+        }
+
+        const terms = rawQuery.trim().split(/\s+/).filter(Boolean);
+        if (terms.length === 0) return '';
+        const primaryTerm = terms[0];
+
+        // 1. Prioridad: Buscar en lo que tú preguntaste (USER_INPUT)
+        if (chat.user_text) {
+            const userRegex = buildTermRegex(primaryTerm);
+            const match = userRegex.exec(chat.user_text);
+            if (match) {
+                const matchIndex = match.index;
+                const start = Math.max(0, matchIndex - 45);
+                const end = Math.min(chat.user_text.length, matchIndex + primaryTerm.length + 80);
+                let snippet = chat.user_text.substring(start, end).replace(/\s+/g, ' ');
+                if (start > 0) snippet = '...' + snippet;
+                if (end < chat.user_text.length) snippet += '...';
+                return `<div class="chat-snippet" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; line-height: 1.4;"><span style="color: var(--accent-primary); font-weight: 700;">👤 Pregunta:</span> "${highlightTerm(snippet, primaryTerm)}"</div>`;
+            }
+        }
+
+        // 2. Prioridad: Buscar en la respuesta explicativa del asistente
+        if (chat.assistant_text) {
+            const asstRegex = buildTermRegex(primaryTerm);
+            const match = asstRegex.exec(chat.assistant_text);
+            if (match) {
+                const matchIndex = match.index;
+                const start = Math.max(0, matchIndex - 45);
+                const end = Math.min(chat.assistant_text.length, matchIndex + primaryTerm.length + 80);
+                let snippet = chat.assistant_text.substring(start, end).replace(/\s+/g, ' ');
+                if (start > 0) snippet = '...' + snippet;
+                if (end < chat.assistant_text.length) snippet += '...';
+                return `<div class="chat-snippet" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; line-height: 1.4;"><span style="color: var(--accent-secondary); font-weight: 700;">🤖 Respuesta:</span> "${highlightTerm(snippet, primaryTerm)}"</div>`;
+            }
+        }
+
+        // 3. Coincidencia en el Título
+        const titleRegex = buildTermRegex(primaryTerm);
+        if (chat.title && titleRegex.test(chat.title)) {
+            return `<div class="chat-snippet" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; line-height: 1.4;"><span style="color: #10b981; font-weight: 700;">🏷️ Título:</span> Coincidencia exacta en el tema del chat.</div>`;
+        }
+
+        return '';
+    }
+
+    function evaluateChatMatch(chat, rawQuery, scope = 'all') {
+        if (!rawQuery) return { matched: true, score: 0 };
+
+        const terms = rawQuery.trim().split(/\s+/).filter(Boolean);
+        if (terms.length === 0) return { matched: true, score: 0 };
+
+        let totalScore = 0;
+        const searchTitle = (scope === 'all' || scope === 'title');
+        const searchUser = (scope === 'all' || scope === 'user');
+        const searchAsst = (scope === 'all');
+
+        for (const term of terms) {
+            const regex = buildTermRegex(term);
+            let termMatched = false;
+
+            // 1. Match en Título
+            if (searchTitle && chat.title && regex.test(chat.title)) {
+                termMatched = true;
+                totalScore += 160;
+            }
+
+            // 2. Match en preguntas del Usuario (Mayor señal)
+            if (searchUser && chat.user_text && regex.test(chat.user_text)) {
+                termMatched = true;
+                totalScore += 80;
+                const matches = (chat.user_text.match(buildTermRegex(term, true)) || []).length;
+                totalScore += Math.min(matches * 15, 120);
+            }
+
+            // 3. Match en texto del Asistente
+            if (searchAsst && chat.assistant_text && regex.test(chat.assistant_text)) {
+                termMatched = true;
+                totalScore += 30;
+                const matches = (chat.assistant_text.match(buildTermRegex(term, true)) || []).length;
+                totalScore += Math.min(matches * 8, 80);
+            }
+
+            // 4. Match por ID
+            if (chat.id && chat.id.toLowerCase().includes(term.toLowerCase())) {
+                termMatched = true;
+                totalScore += 50;
+            }
+
+            if (!termMatched) {
+                return { matched: false, score: 0 };
+            }
+        }
+
+        return { matched: true, score: totalScore };
     }
 
     function renderFilterChips() {
@@ -2158,7 +2286,7 @@ function initChats() {
     function renderChats(chatsToRender, query = '') {
         container.innerHTML = '';
         if (chatsToRender.length === 0) {
-            container.innerHTML = `<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 16px; text-align: center;">No se encontraron chats que coincidan con "${escapeHTML(query)}" en esta categoría.</div>`;
+            container.innerHTML = `<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 20px; text-align: center;">No se encontraron chats que coincidan con "<strong>${escapeHTML(query)}</strong>" bajo los filtros seleccionados.</div>`;
             return;
         }
 
@@ -2171,29 +2299,12 @@ function initChats() {
             item.className = `chat-item ${isArchived ? 'is-archived' : ''}`;
             item.title = `Haz clic para copiar el ID de esta conversación:\n${chat.id}`;
 
-            let snippetHTML = '';
-            if (query && chat.full_text) {
-                const idx = chat.full_text.toLowerCase().indexOf(query.toLowerCase());
-                if (idx !== -1) {
-                    const start = Math.max(0, idx - 40);
-                    const end = Math.min(chat.full_text.length, idx + query.length + 60);
-                    let snippet = chat.full_text.substring(start, end);
-                    if (start > 0) snippet = '...' + snippet;
-                    if (end < chat.full_text.length) snippet += '...';
-
-                    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                    const highlightedSnippet = snippet.replace(regex, '<mark style="background: rgba(255, 215, 0, 0.35); color: #fff; border-radius: 3px; padding: 0 2px;">$1</mark>');
-                    snippetHTML = `<div class="chat-snippet" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; font-style: italic;">"${highlightedSnippet}"</div>`;
-                }
-            } else if (chat.full_text) {
-                const preview = chat.full_text.substring(0, 140) + '...';
-                snippetHTML = `<div class="chat-snippet" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; font-style: italic;">"${escapeHTML(preview)}"</div>`;
-            }
+            const snippetHTML = extractSmartSnippet(chat, query);
 
             item.innerHTML = `
                 <div class="chat-info" style="flex: 1; min-width: 0;">
                     <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                        <span class="chat-title" style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">${escapeHTML(chat.title)}</span>
+                        <span class="chat-title" style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">${highlightTerm(chat.title, query)}</span>
                     </div>
                     <div class="chat-badges-row">
                         ${isPinned ? '<span class="chat-badge chat-badge-pinned">📌 Fijado</span>' : ''}
@@ -2259,6 +2370,7 @@ function initChats() {
 
     function filterChats(query) {
         let filtered = allChats;
+        const scope = scopeSelect ? scopeSelect.value : 'all';
 
         // Filtro por dominio o archivado
         if (activeDomain === 'archived') {
@@ -2267,22 +2379,50 @@ function initChats() {
             filtered = filtered.filter(c => !c.archived && classifyChat(c).id === activeDomain);
         }
 
-        // Filtro por búsqueda de texto
+        // Filtro por búsqueda de texto con límites de palabra y ranking de relevancia
         if (query) {
-            const q = query.toLowerCase();
-            filtered = filtered.filter(chat => {
-                const inTitle = (chat.title || '').toLowerCase().includes(q);
-                const inId = (chat.id || '').toLowerCase().includes(q);
-                const inText = (chat.full_text || '').toLowerCase().includes(q);
-                return inTitle || inId || inText;
+            const scoredList = [];
+            filtered.forEach(chat => {
+                const res = evaluateChatMatch(chat, query, scope);
+                if (res.matched) {
+                    scoredList.push({ chat, score: res.score });
+                }
             });
+
+            // Ordenar por: Pinned primero -> Score descendente -> Fecha (mtime) descendente
+            scoredList.sort((a, b) => {
+                const pinA = Boolean(a.chat.pinned);
+                const pinB = Boolean(b.chat.pinned);
+                if (pinA !== pinB) return pinB ? 1 : -1;
+                if (b.score !== a.score) return b.score - a.score;
+                return (b.chat.mtime || 0) - (a.chat.mtime || 0);
+            });
+
+            filtered = scoredList.map(item => item.chat);
+
+            if (countBadge) {
+                countBadge.textContent = `${filtered.length} coincidencia${filtered.length === 1 ? '' : 's'}`;
+                countBadge.style.display = 'inline-block';
+            }
+        } else {
+            // Sin búsqueda activa: Pinned primero -> Fecha descendente
+            filtered.sort((a, b) => {
+                const pinA = Boolean(a.pinned);
+                const pinB = Boolean(b.pinned);
+                if (pinA !== pinB) return pinB ? 1 : -1;
+                return (b.mtime || 0) - (a.mtime || 0);
+            });
+
+            if (countBadge) {
+                countBadge.style.display = 'none';
+            }
         }
 
         renderChats(filtered, query);
     }
 
     function loadChats() {
-        container.innerHTML = '<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 14px;">Cargando historial de los 180+ chats (incluyendo archivados)...</div>';
+        container.innerHTML = '<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 14px;">Cargando historial de los 180+ chats (limpio y optimizado)...</div>';
 
         fetch('/api/conversations')
             .then(res => res.json())
@@ -2309,6 +2449,13 @@ function initChats() {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             filterChats(e.target.value.trim());
+        });
+    }
+
+    if (scopeSelect) {
+        scopeSelect.addEventListener('change', () => {
+            const currentQuery = searchInput ? searchInput.value.trim() : '';
+            filterChats(currentQuery);
         });
     }
 
