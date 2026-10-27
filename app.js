@@ -2375,7 +2375,9 @@ function initChats() {
         // Filtro por dominio o archivado
         if (activeDomain === 'archived') {
             filtered = filtered.filter(c => Boolean(c.archived));
-        } else if (activeDomain !== 'all') {
+        } else if (activeDomain === 'all') {
+            filtered = filtered.filter(c => !c.archived);
+        } else {
             filtered = filtered.filter(c => !c.archived && classifyChat(c).id === activeDomain);
         }
 
