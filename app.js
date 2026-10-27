@@ -2391,11 +2391,14 @@ function initChats() {
                 }
             });
 
-            // Ordenar por: Pinned primero -> Score descendente -> Fecha (mtime) descendente
+            // Ordenar por: Pinned primero (por pin_rank) -> Score descendente -> Fecha real (mtime) descendente
             scoredList.sort((a, b) => {
                 const pinA = Boolean(a.chat.pinned);
                 const pinB = Boolean(b.chat.pinned);
                 if (pinA !== pinB) return pinB ? 1 : -1;
+                if (pinA && pinB && a.score === b.score) {
+                    return (a.chat.pin_rank ?? 9999) - (b.chat.pin_rank ?? 9999);
+                }
                 if (b.score !== a.score) return b.score - a.score;
                 return (b.chat.mtime || 0) - (a.chat.mtime || 0);
             });
@@ -2407,11 +2410,14 @@ function initChats() {
                 countBadge.style.display = 'inline-block';
             }
         } else {
-            // Sin búsqueda activa: Pinned primero -> Fecha descendente
+            // Sin búsqueda activa: Pinned primero (por pin_rank de Antigravity) -> Fecha real descendente
             filtered.sort((a, b) => {
                 const pinA = Boolean(a.pinned);
                 const pinB = Boolean(b.pinned);
                 if (pinA !== pinB) return pinB ? 1 : -1;
+                if (pinA && pinB) {
+                    return (a.pin_rank ?? 9999) - (b.pin_rank ?? 9999);
+                }
                 return (b.mtime || 0) - (a.mtime || 0);
             });
 
