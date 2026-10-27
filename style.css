@@ -5674,6 +5674,15 @@ summary {
 }
 
 @media (max-width: 540px) {
+    .tiempo-hero-header {
+        gap: 10px;
+    }
+    .tiempo-header-actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     .tiempo-secondary-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 6px;

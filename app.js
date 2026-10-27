@@ -3492,7 +3492,10 @@ function initTiempo() {
         const phaseKey = (active.phase || '').toLowerCase();
         const cfg = PHASE_CONFIG[phaseKey] || PHASE_CONFIG['foco'];
 
-        const displayTitle = active.subtag ? `${cfg.title} (${active.subtag})` : cfg.title;
+        const ignoredSubtags = ['deep_work', 'deepwork', '5min', 'general', 'noche'];
+        const displayTitle = (active.subtag && !ignoredSubtags.includes(active.subtag.toLowerCase())) 
+            ? `${cfg.title} (${active.subtag})` 
+            : cfg.title;
         if (activeBadge) {
             activeBadge.textContent = displayTitle;
             activeBadge.className = `phase-badge ${cfg.class}`;

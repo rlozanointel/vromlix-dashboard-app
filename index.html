@@ -269,13 +269,13 @@
                             </div>
                         </div>
                         <div class="tiempo-header-actions">
+                            <div class="tiempo-phase-badge-wrapper">
+                                <span id="active-phase-badge" class="phase-badge phase-detenido">Detenido</span>
+                            </div>
                             <button id="btn-toggle-sleep" class="btn-sleep-toggle" onclick="window.toggleDormirDespertar()" title="Conmutar descanso nocturno / despertar">
                                 <span class="sleep-toggle-icon">🌙</span>
                                 <span class="sleep-toggle-label">Dormir</span>
                             </button>
-                            <div class="tiempo-phase-badge-wrapper">
-                                <span id="active-phase-badge" class="phase-badge phase-detenido">Detenido</span>
-                            </div>
                         </div>
                     </div>
 
@@ -291,8 +291,8 @@
                             <div class="pomodoro-progress-bar-container" title="Meta de Enfoque Continuo: 25 a 45 minutos">
                                 <div class="pomodoro-milestones">
                                     <span class="milestone m-start">0m</span>
-                                    <span class="milestone m-pomodoro">25m (Pausa sugerida)</span>
-                                    <span class="milestone m-deepwork">45m (Límite Deep Work)</span>
+                                    <span class="milestone m-pomodoro">25m (Pausa)</span>
+                                    <span class="milestone m-deepwork">45m (Límite)</span>
                                 </div>
                                 <div class="pomodoro-track">
                                     <div id="pomodoro-fill" class="pomodoro-fill" style="width: 0%;"></div>
@@ -305,7 +305,7 @@
 
                         <!-- NIVEL 1: CONTROLES PRINCIPALES (EJECUTIVOS & MINIMALISTAS) -->
                         <div class="tiempo-primary-controls">
-                            <button id="btn-phase-trabajo" class="btn-tiempo-hero btn-hero-work" onclick="window.cambiarFaseTiempo('foco', 'deep_work')">
+                            <button id="btn-phase-trabajo" class="btn-tiempo-hero btn-hero-work" onclick="window.cambiarFaseTiempo('foco')">
                                 <span class="btn-hero-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                                 </span>
@@ -314,7 +314,7 @@
                                 </div>
                             </button>
 
-                            <button id="btn-phase-pausa" class="btn-tiempo-hero btn-hero-pause" onclick="window.cambiarFaseTiempo('pausa', '5min')">
+                            <button id="btn-phase-pausa" class="btn-tiempo-hero btn-hero-pause" onclick="window.cambiarFaseTiempo('pausa')">
                                 <span class="btn-hero-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
                                 </span>
