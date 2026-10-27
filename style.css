@@ -5200,6 +5200,62 @@ summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.tiempo-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-sleep-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    color: #c7d2fe;
+    transition: all var(--transition-fast);
+    user-select: none;
+}
+
+.btn-sleep-toggle:hover {
+    background: rgba(99, 102, 241, 0.22);
+    border-color: #818cf8;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+}
+
+.btn-sleep-toggle.sleeping {
+    background: rgba(245, 158, 11, 0.18);
+    border-color: #f59e0b;
+    color: #fef3c7;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.28);
+}
+
+.btn-sleep-toggle.sleeping:hover {
+    background: rgba(245, 158, 11, 0.28);
+    border-color: #fbbf24;
+    color: #ffffff;
+}
+
+.sleep-toggle-icon {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+.sleep-toggle-label {
+    line-height: 1;
 }
 
 .phase-badge {
@@ -5519,7 +5575,7 @@ summary {
 
 .tiempo-secondary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
 }
 
@@ -5619,93 +5675,41 @@ summary {
 
 @media (max-width: 540px) {
     .tiempo-secondary-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 6px;
+        width: 100%;
+        box-sizing: border-box;
     }
     .btn-tiempo-subaction {
-        padding: 9px 6px;
-        font-size: 0.8rem;
-        gap: 6px;
+        flex-direction: column;
+        gap: 4px;
+        padding: 8px 4px;
+        min-height: auto;
+        font-size: 0.78rem;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
     }
     .subaction-icon-box {
-        width: 38px;
-        height: 28px;
+        width: 28px;
+        height: 24px;
+        border-radius: 6px;
+        background: transparent;
+        border: none;
     }
     .subaction-icon-box svg {
-        width: 19px;
+        width: 18px;
         height: 18px;
     }
-    .calle-menu-dropdown {
-        left: 0;
-        right: 0;
-        min-width: 100%;
+    .subaction-label {
+        font-size: 0.76rem;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         max-width: 100%;
     }
 }
-
-/* ==========================================
-   NIVEL 3: TIRA DE CONTROL DE SUEÑO
-   ========================================== */
-.tiempo-sleep-strip {
-    margin-top: 16px;
-    padding: 14px 18px;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(30, 27, 75, 0.2) 100%);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 14px;
-}
-
-.sleep-strip-text {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.sleep-strip-icon {
-    font-size: 1.6rem;
-}
-
-.sleep-strip-title {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #c7d2fe;
-}
-
-.sleep-strip-subtitle {
-    font-size: 0.8rem;
-    color: #a5b4fc;
-}
-
-.sleep-strip-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.btn-sleep-action {
-    padding: 9px 16px;
-    border-radius: var(--radius-md);
-    font-weight: 700;
-    font-size: 0.88rem;
-    cursor: pointer;
-    border: none;
-    transition: all var(--transition-fast);
-}
-
-.btn-sleep-night {
-    background: #4338ca;
-    color: #ffffff;
-}
-.btn-sleep-night:hover { background: #4f46e5; box-shadow: 0 0 12px rgba(99, 102, 241, 0.4); }
-
-.btn-sleep-morning {
-    background: #eab308;
-    color: #000000;
-}
-.btn-sleep-morning:hover { background: #facc15; box-shadow: 0 0 12px rgba(234, 179, 8, 0.4); }
 
 /* ==========================================
    ACORDEONES COLAPSABLES (ORDEN VISUAL)
@@ -5832,8 +5836,6 @@ summary {
 .calle-menu-dropdown {
     position: absolute;
     top: calc(100% + 6px);
-    left: 0;
-    width: 230px;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
@@ -5842,6 +5844,25 @@ summary {
     padding: 8px 0;
     display: flex;
     flex-direction: column;
+    min-width: 170px;
+    max-width: calc(100vw - 32px);
+    box-sizing: border-box;
+}
+
+#rutinas-presets-menu {
+    left: 0;
+    right: auto;
+}
+
+#ocio-presets-menu {
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+}
+
+#calle-presets-menu {
+    right: 0;
+    left: auto;
 }
 
 .calle-menu-header {

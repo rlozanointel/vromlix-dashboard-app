@@ -3565,6 +3565,20 @@ function initTiempo() {
         if (['cocinar', 'comida', 'bano', 'descanso', 'espiritual', 'lavar', 'casa'].includes(phase)) targetId = 'btn-group-rutinas';
         const targetBtn = document.getElementById(targetId);
         if (targetBtn) targetBtn.classList.add('active-phase');
+
+        // Sincronizar estado visual del interruptor unificado Dormir / Despertar
+        const sleepToggleBtn = document.getElementById('btn-toggle-sleep');
+        if (sleepToggleBtn) {
+            if (phase === 'dormir') {
+                sleepToggleBtn.classList.add('sleeping');
+                sleepToggleBtn.innerHTML = '<span class="sleep-toggle-icon">☀️</span><span class="sleep-toggle-label">Despertar</span>';
+                sleepToggleBtn.title = 'Marcar despertar y registrar descanso nocturno';
+            } else {
+                sleepToggleBtn.classList.remove('sleeping');
+                sleepToggleBtn.innerHTML = '<span class="sleep-toggle-icon">🌙</span><span class="sleep-toggle-label">Dormir</span>';
+                sleepToggleBtn.title = 'Marcar inicio de descanso nocturno';
+            }
+        }
     }
 
     function renderStats(state) {
@@ -3982,6 +3996,16 @@ function initTiempo() {
             window.cambiarFaseTiempo('detener', '', 'Despertar');
             showToast("Buenos días. Reloj detenido.");
         });
+    };
+
+    window.toggleDormirDespertar = function() {
+        const active = currentServerState && currentServerState.active_interval;
+        const isSleeping = active && active.phase === 'dormir';
+        if (isSleeping) {
+            window.marcarDespertar();
+        } else {
+            window.marcarDormir();
+        }
     };
 
     window.toggleRutinasMenu = function(e) {
