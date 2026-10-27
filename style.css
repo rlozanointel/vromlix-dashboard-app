@@ -5247,6 +5247,18 @@ summary {
     border: 1px solid #38bdf8;
 }
 
+.phase-lavar {
+    background: rgba(14, 165, 233, 0.15);
+    color: #0ea5e9;
+    border: 1px solid #0ea5e9;
+}
+
+.phase-casa {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid #10b981;
+}
+
 .phase-dormir {
     background: rgba(99, 102, 241, 0.15);
     color: #6366f1;

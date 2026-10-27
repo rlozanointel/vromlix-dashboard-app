@@ -310,24 +310,13 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "The Dog Stars",
       "Spanish Title": "Las estrellas del perro",
-      "Genres": "Drama, Thriller, Adventure",
+      "Genres": "Thriller, Adventure, Science Fiction",
       "Release Year": "2026",
       "Release Date": "2026-08-26",
       "IMDb Rating": 6.5,
       "Vromlix Score": 51.7,
       "Plot Summary": "After the world's population has been ravaged by a pandemic, a man lives a lonesome existence in a Colorado airplane hangar with his dog and a dour gunman he has befriended. When a mysterious transmission comes through on the radio while he’s flying his old Cessna, it sparks a hunt for the provenance of the sound.",
       "IMDb Link": "https://www.imdb.com/title/tt21285562/"
-    },
-    {
-      "Official Title": "Klara and the Sun",
-      "Spanish Title": "Klara y el sol",
-      "Genres": "Science Fiction, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-10-21",
-      "IMDb Rating": 5.464,
-      "Vromlix Score": 54.6,
-      "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
-      "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
     {
       "Official Title": "Horizon: An American Saga - Chapter 2",
@@ -341,12 +330,23 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27665778/"
     },
     {
+      "Official Title": "Klara and the Sun",
+      "Spanish Title": "Klara y el sol",
+      "Genres": "Science Fiction, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-10-21",
+      "IMDb Rating": 5.7,
+      "Vromlix Score": 57,
+      "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
+      "IMDb Link": "https://www.imdb.com/title/tt14371256/"
+    },
+    {
       "Official Title": "The Uprising",
       "Spanish Title": "El levantamiento",
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.9,
+      "IMDb Rating": 7.885,
       "Vromlix Score": 62.3,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
@@ -390,7 +390,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.966,
+      "IMDb Rating": 6.973,
       "Vromlix Score": 69.7,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
@@ -434,8 +434,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama, Comedy",
       "Release Year": "2024",
       "Release Date": "2024-12-11",
-      "IMDb Rating": 7.313,
-      "Vromlix Score": 73.1,
+      "IMDb Rating": 7.3,
+      "Vromlix Score": 73,
       "Plot Summary": "Socorro is a lawyer obsessed with finding the soldier who killed her brother during the 1968 Tlatelolco massacre. When she receives a crucial clue about the soldier’s whereabouts fifty years after her brother’s death, Socorro embarks on a reckless mission for revenge.",
       "IMDb Link": "https://www.imdb.com/title/tt31113406/"
     },
@@ -500,8 +500,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-07-23",
-      "IMDb Rating": 8.148,
-      "Vromlix Score": 81.5,
+      "IMDb Rating": 8.1,
+      "Vromlix Score": 81,
       "Plot Summary": "Manuel's life is upended when Esmeralda, his lost love from 15 years ago, calls unexpectedly. Despite being set to marry another, he rediscovers Esmeralda, and they realize their love transcends time.",
       "IMDb Link": "https://www.imdb.com/title/tt30332656/"
     },
@@ -548,6 +548,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 84.7,
       "Plot Summary": "In the 19th century, a drunken applejack salesman must go from zero to hero and become North America's greatest fur trapper by defeating hundreds of beavers.",
       "IMDb Link": "https://www.imdb.com/title/tt12818328/"
+    },
+    {
+      "Official Title": "Wildwood",
+      "Spanish Title": null,
+      "Genres": "Animation, Adventure, Fantasy",
+      "Release Year": "2026",
+      "Release Date": "2026-10-19",
+      "IMDb Rating": 8.599,
+      "Vromlix Score": 86,
+      "Plot Summary": "Prue and her classmate Curtis are drawn into a magical forest filled with enchanted creatures, loyal allies, and formidable adversaries as they embark on a desperate quest to rescue Prue's abducted baby brother from a murder of crows led by a mysterious woman named Alexandra.",
+      "IMDb Link": "https://www.imdb.com/title/tt2056785/"
     },
     {
       "Official Title": "Fatherland",
@@ -614,17 +625,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 88,
       "Plot Summary": "When Gleb, a successful company director, finds himself under siege from mounting corporate pressures, an increasingly unstable world, and the discovery of his wife's affair, the collapse of his carefully ordered life accelerates toward violence.",
       "IMDb Link": "https://www.imdb.com/title/tt37118301/"
-    },
-    {
-      "Official Title": "Wildwood",
-      "Spanish Title": null,
-      "Genres": "Animation, Adventure, Fantasy",
-      "Release Year": "2026",
-      "Release Date": "2026-10-19",
-      "IMDb Rating": 8.852,
-      "Vromlix Score": 88.5,
-      "Plot Summary": "Prue and her classmate Curtis are drawn into a magical forest filled with enchanted creatures, loyal allies, and formidable adversaries as they embark on a desperate quest to rescue Prue's abducted baby brother from a murder of crows led by a mysterious woman named Alexandra.",
-      "IMDb Link": "https://www.imdb.com/title/tt2056785/"
     },
     {
       "Official Title": "The Odyssey",
@@ -1102,14 +1102,14 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27497448/"
     },
     {
-      "Official Title": "Peaky Blinders",
+      "Official Title": "Peaky Blinders season 1",
       "Spanish Title": "Peaky Blinders",
       "Current Season": 0,
       "Current Episode": 0,
       "Show Status": "Ended",
       "Watch Status": "Unstarted",
       "Vromlix Score": 87,
-      "Plot Summary": "A gangster family epic set in 1919 Birmingham, England and centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby, who means to move up in the world.",
+      "Plot Summary": "Peaky Blinders is a British historical crime drama television series created by Steven Knight. Set in Birmingham, it follows the exploits of the Peaky Blinders crime gang in the direct aftermath of the First World War. The fictional gang is loosely based on an urban youth gang active in the city from the 1880s to the 1920s.",
       "IMDb Link": "https://www.imdb.com/title/tt2442560/"
     },
     {
@@ -1258,5 +1258,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-26 19:19:34"
+  "last_updated": "2026-10-27 12:52:18"
 };
