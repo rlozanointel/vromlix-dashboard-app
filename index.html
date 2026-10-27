@@ -268,8 +268,14 @@
                                 <h2>Control de Tiempo</h2>
                             </div>
                         </div>
-                        <div class="tiempo-phase-badge-wrapper">
-                            <span id="active-phase-badge" class="phase-badge phase-detenido">Detenido</span>
+                        <div class="tiempo-header-actions">
+                            <button id="btn-toggle-sleep" class="btn-sleep-toggle" onclick="window.toggleDormirDespertar()" title="Conmutar descanso nocturno / despertar">
+                                <span class="sleep-toggle-icon">🌙</span>
+                                <span class="sleep-toggle-label">Dormir</span>
+                            </button>
+                            <div class="tiempo-phase-badge-wrapper">
+                                <span id="active-phase-badge" class="phase-badge phase-detenido">Detenido</span>
+                            </div>
                         </div>
                     </div>
 
@@ -350,13 +356,12 @@
                                         <span class="subaction-label">Rutinas ▾</span>
                                     </button>
                                     <div id="rutinas-presets-menu" class="calle-menu-dropdown hidden">
-                                        <button onclick="window.cambiarFaseTiempo('casa', 'Casa')">Casa</button>
-                                        <button onclick="window.cambiarFaseTiempo('cocinar', 'Cocinar')">Cocinar</button>
                                         <button onclick="window.cambiarFaseTiempo('comida', 'Comer')">Comer</button>
-                                        <button onclick="window.cambiarFaseTiempo('lavar', 'Lavar')">Lavar</button>
+                                        <button onclick="window.cambiarFaseTiempo('cocinar', 'Cocinar')">Cocinar</button>
                                         <button onclick="window.cambiarFaseTiempo('bano', 'Baño')">Baño</button>
                                         <button onclick="window.cambiarFaseTiempo('descanso', 'Siesta')">Siesta</button>
                                         <button onclick="window.cambiarFaseTiempo('espiritual', 'Mormón')">Mormón</button>
+                                        <button onclick="window.cambiarFaseTiempo('casa', 'Casa')">Casa</button>
                                     </div>
                                 </div>
 
@@ -397,61 +402,16 @@
                                     <div id="calle-presets-menu" class="calle-menu-dropdown hidden">
                                         <button onclick="window.cambiarFaseTiempo('calle', 'Tienda')">Tienda</button>
                                         <button onclick="window.cambiarFaseTiempo('calle', 'Xilotzingo')">Xilotzingo</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Dentista')">Dentista</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Hna. Alma')">Hna. Alma</button>
-                                        <button onclick="window.cambiarFaseTiempo('calle', 'Psicólogo')">Psicólogo</button>
                                         <button onclick="window.cambiarFaseTiempo('calle', 'Capilla')">Capilla</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Hna. Alma')">Hna. Alma</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Dentista')">Dentista</button>
+                                        <button onclick="window.cambiarFaseTiempo('calle', 'Psicólogo')">Psicólogo</button>
                                         <button onclick="window.cambiarFaseTiempo('calle', 'General')">General</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- NIVEL 3: CONTROL DE SUEÑO Y DESCANSO -->
-                        <div class="tiempo-sleep-strip">
-                            <div class="sleep-strip-text">
-                                <div>
-                                    <div class="sleep-strip-title">Descanso Nocturno</div>
-                                    <div class="sleep-strip-subtitle" id="stat-sleep-quality">Registro de horas de sueño</div>
-                                </div>
-                            </div>
-                            <div class="sleep-strip-actions">
-                                <button id="btn-phase-dormir" class="btn-sleep-action btn-sleep-night" onclick="window.marcarDormir()">
-                                    Dormir
-                                </button>
-                                <button id="btn-phase-despertar" class="btn-sleep-action btn-sleep-morning" onclick="window.marcarDespertar()">
-                                    Despertar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ACCESO RÁPIDO: MÚSICA & FOCUS PARA PROGRAMACIÓN Y PROMPTS (1-CLIC YT MUSIC) -->
-                <div class="tiempo-focus-audio-bar" id="focus-audio-drawer">
-                    <div class="focus-audio-header">
-                        <div class="focus-audio-title">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-                            <span>🎧 Audio de Foco Rápido</span>
-                        </div>
-                        <span class="focus-audio-hint">Lanzar sesión acústica para bloques de foco</span>
-                    </div>
-                    <div class="focus-audio-chips">
-                        <button class="btn-focus-track" onclick="window.openYtMusic('Synthwave for Coding')" title="Ritmo continuo a 120 BPM sin vocales">
-                            🐍 Synthwave Python (120 BPM)
-                        </button>
-                        <button class="btn-focus-track" onclick="window.openYtMusic('Cyberpunk 2077 Instrumental Radio')" title="Texturas electrónicas futuristas">
-                            ⚡ Cyberpunk Radio (Prompts)
-                        </button>
-                        <button class="btn-focus-track" onclick="window.openYtMusic('Deep Work Instrumental Rock')" title="Energía y tracción instrumental">
-                            🎸 Rock Instrumental
-                        </button>
-                        <button class="btn-focus-track" onclick="window.openYtMusic('Binaural Beats Alpha Waves Study')" title="Ondas Alfa para lectura y calma profunda">
-                            🧘 Ondas Alfa / Calma
-                        </button>
-                        <button class="btn-focus-track btn-track-all" onclick="if(window.switchDashboardView){window.switchDashboardView('view-carisma');} if(window.filterCarisma){window.filterCarisma('musica');}" title="Ver catálogo completo de audios">
-                            📂 Ver Catálogo ➔
-                        </button>
                     </div>
                 </div>
 
