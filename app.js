@@ -2286,7 +2286,47 @@ function initChats() {
     function renderChats(chatsToRender, query = '') {
         container.innerHTML = '';
         if (chatsToRender.length === 0) {
-            container.innerHTML = `<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 20px; text-align: center;">No se encontraron chats que coincidan con "<strong>${escapeHTML(query)}</strong>" bajo los filtros seleccionados.</div>`;
+            // Si hay búsqueda activa pero estamos en una categoría que no tiene coincidencias
+            if (query && activeDomain !== 'all') {
+                const scope = scopeSelect ? scopeSelect.value : 'all';
+                const globalMatches = allChats.filter(c => !c.archived && evaluateChatMatch(c, query, scope).matched);
+                if (globalMatches.length > 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 30px 20px; color: var(--text-secondary);">
+                            <div style="font-size: 0.95rem; margin-bottom: 6px;">No hay resultados para "<strong>${escapeHTML(query)}</strong>" en esta categoría.</div>
+                            <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">Pero encontramos <strong>${globalMatches.length} coincidencia${globalMatches.length === 1 ? '' : 's'}</strong> en la bandeja principal ("Todos").</div>
+                            <button id="switch-to-all-search-btn" class="chat-domain-chip active" style="margin: 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 0.85rem; cursor: pointer; border-radius: 20px;">
+                                🔍 Ver ${globalMatches.length} coincidencia${globalMatches.length === 1 ? '' : 's'} en "Todos"
+                            </button>
+                        </div>
+                    `;
+                    const switchBtn = document.getElementById('switch-to-all-search-btn');
+                    if (switchBtn) {
+                        switchBtn.addEventListener('click', () => {
+                            activeDomain = 'all';
+                            renderFilterChips();
+                            filterChats(query);
+                        });
+                    }
+                    return;
+                }
+            }
+
+            // Si estamos en la pestaña de archivados y no hay chats archivados
+            if (activeDomain === 'archived' && !query) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                        <div style="font-size: 2.2rem; margin-bottom: 10px;">📦</div>
+                        <div style="font-size: 1rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">No tienes chats archivados actualmente</div>
+                        <div style="font-size: 0.82rem; max-width: 440px; margin: 0 auto; line-height: 1.5; color: var(--text-muted);">
+                            Para archivar una conversación y limpiar tu bandeja principal, haz clic en el botón <strong>"📦 Archivar"</strong> en cualquiera de tus chats. Podrás consultarla o desarchivarla aquí en cualquier momento con un solo clic.
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 25px 20px; text-align: center;">No se encontraron chats que coincidan con "<strong>${escapeHTML(query)}</strong>" bajo los filtros seleccionados.</div>`;
             return;
         }
 
