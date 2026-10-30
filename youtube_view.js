@@ -43,9 +43,12 @@ function initYouTubeView() {
 
     const cardUnread = document.getElementById('yt-metric-card-unread');
     const cardArchived = document.getElementById('yt-metric-card-archived');
+    const cardChannels = document.getElementById('yt-metric-card-channels');
+
     if (cardUnread) {
         cardUnread.addEventListener('click', () => {
             ytViewMode = 'unread';
+            if (ytCurrentFilter === 'channels_list') ytCurrentFilter = 'all';
             ytUnreadLimit = 10;
             updateViewModeUI();
             renderYouTubeView();
@@ -54,7 +57,19 @@ function initYouTubeView() {
     if (cardArchived) {
         cardArchived.addEventListener('click', () => {
             ytViewMode = 'history';
+            if (ytCurrentFilter === 'channels_list') ytCurrentFilter = 'all';
             ytHistoryLimit = 10;
+            updateViewModeUI();
+            renderYouTubeView();
+        });
+    }
+    if (cardChannels) {
+        cardChannels.addEventListener('click', () => {
+            if (ytCurrentFilter === 'channels_list') {
+                ytCurrentFilter = 'all';
+            } else {
+                ytCurrentFilter = 'channels_list';
+            }
             updateViewModeUI();
             renderYouTubeView();
         });
@@ -84,26 +99,33 @@ function initYouTubeView() {
             ytCurrentFilter = btn.getAttribute('data-yt-filter') || 'all';
             ytUnreadLimit = 10;
             ytHistoryLimit = 10;
+            updateViewModeUI();
             renderYouTubeView();
         });
     });
 }
 
 function updateViewModeUI() {
-    const tabUnread = document.getElementById('yt-tab-unread');
-    const tabHistory = document.getElementById('yt-tab-history');
-    if (tabUnread && tabHistory) {
-        if (ytViewMode === 'unread') {
-            tabUnread.style.background = 'var(--primary-color, #3b82f6)';
-            tabUnread.style.color = '#fff';
-            tabHistory.style.background = 'transparent';
-            tabHistory.style.color = 'var(--text-secondary)';
-        } else {
-            tabHistory.style.background = 'var(--primary-color, #3b82f6)';
-            tabHistory.style.color = '#fff';
-            tabUnread.style.background = 'transparent';
-            tabUnread.style.color = 'var(--text-secondary)';
-        }
+    const cardUnread = document.getElementById('yt-metric-card-unread');
+    const cardArchived = document.getElementById('yt-metric-card-archived');
+    const cardChannels = document.getElementById('yt-metric-card-channels');
+
+    [cardUnread, cardArchived, cardChannels].forEach(el => {
+        if (el) el.classList.remove('active-metric-card');
+    });
+
+    if (ytCurrentFilter === 'channels_list') {
+        if (cardChannels) cardChannels.classList.add('active-metric-card');
+        document.querySelectorAll('.yt-filter-chip').forEach(b => b.classList.remove('active'));
+    } else if (ytViewMode === 'unread') {
+        if (cardUnread) cardUnread.classList.add('active-metric-card');
+        // Asegurar que chip activo se mantenga
+        const activeChip = document.querySelector(`.yt-filter-chip[data-yt-filter="${ytCurrentFilter}"]`);
+        if (activeChip) activeChip.classList.add('active');
+    } else {
+        if (cardArchived) cardArchived.classList.add('active-metric-card');
+        const activeChip = document.querySelector(`.yt-filter-chip[data-yt-filter="${ytCurrentFilter}"]`);
+        if (activeChip) activeChip.classList.add('active');
     }
 }
 
@@ -123,19 +145,16 @@ async function loadYouTubeSummaries() {
 
         const unreadCount = stats.unread_count ?? ytUnreadCache.length;
         const archivedCount = stats.archived_count ?? 0;
+        const channelsCount = stats.channels_count ?? (ytChannelsCache.length || 20);
 
         const badgeUnread = document.getElementById('yt-metric-unread');
         const badgeArchived = document.getElementById('yt-metric-archived');
         const badgeChannels = document.getElementById('yt-metric-channels');
         const navBadge = document.getElementById('nav-yt-badge');
-        const pillUnread = document.getElementById('yt-pill-unread-count');
-        const pillHistory = document.getElementById('yt-pill-history-count');
 
         if (badgeUnread) badgeUnread.textContent = unreadCount;
         if (badgeArchived) badgeArchived.textContent = archivedCount;
-        if (badgeChannels) badgeChannels.textContent = stats.channels_count ?? 17;
-        if (pillUnread) pillUnread.textContent = unreadCount;
-        if (pillHistory) pillHistory.textContent = archivedCount;
+        if (badgeChannels) badgeChannels.textContent = channelsCount;
 
         if (navBadge) {
             navBadge.textContent = unreadCount;
@@ -481,6 +500,9 @@ function renderMonitoredChannelsGrid() {
                     <h3 style="margin-bottom: 4px; color: var(--text-primary);">📡 Canales & Playlists Monitoreadas (${ytChannelsCache.length} Activos)</h3>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Corte diario: 10:00 AM (CDMX) · Videos normales y en vivos · Sin Shorts</p>
                 </div>
+                <button class="btn-secondary" onclick="ytCurrentFilter='all'; updateViewModeUI(); renderYouTubeView();" style="padding: 7px 14px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                    ← Volver a los Videos
+                </button>
             </div>
 
             <!-- BUSCADOR PARA AGREGAR NUEVO CANAL O PLAYLIST -->
@@ -854,17 +876,21 @@ async function summarizeCustomYouTubeUrl(url) {
 
 async function triggerYouTubeChannelScan() {
     const btn = document.getElementById('yt-trigger-scan-btn');
+    const totalChannels = (ytChannelsCache && ytChannelsCache.length) ? ytChannelsCache.length : 20;
     if (btn) {
         btn.disabled = true;
-        btn.innerHTML = '⏳ Revisando 17 canales...';
+        btn.innerHTML = `⏳ Revisando ${totalChannels} canales...`;
     }
     try {
+        if (typeof showToast === 'function') {
+            showToast(`⏳ Escaneando ${totalChannels} canales en segundo plano...`, 'info');
+        }
         const res = await fetch('/api/youtube/trigger-scan', { method: 'POST' });
         const data = await res.json();
         if (typeof showAgentNotification === 'function') {
-            showAgentNotification(data.message || 'Escaneo iniciado en segundo plano', 'info');
+            showAgentNotification(data.message || `Escaneo de ${totalChannels} canales iniciado`, 'info');
         } else if (typeof showToast === 'function') {
-            showToast('Escaneo iniciado en segundo plano', 'info');
+            showToast(data.message || `Escaneo de ${totalChannels} canales iniciado`, 'info');
         }
         setTimeout(() => {
             loadYouTubeSummaries();
@@ -963,6 +989,9 @@ async function openObsidianNote(vaultPath) {
         const data = await res.json();
         if (!res.ok || !data.success) {
             throw new Error(data.error || 'No se pudo abrir la nota');
+        }
+        if (typeof showToast === 'function') {
+            showToast('✅ Nota abierta en Obsidian', 'success');
         }
     } catch (err) {
         console.warn('Fallback abriendo nota:', err);

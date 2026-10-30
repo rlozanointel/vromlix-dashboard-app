@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261030_1320">
+    <link rel="stylesheet" href="style.css?v=20261030_1615">
 </head>
 <body>
     <div class="dashboard-container">
@@ -1951,26 +1951,26 @@
                 </div>
 
                 <div class="card-content">
-                    <!-- MÉTRICAS DE LA BANDEJA -->
+                    <!-- MÉTRICAS DE LA BANDEJA (SELECTORES PRINCIPALES DE VISTA) -->
                     <div class="agent-metrics-row">
-                        <div class="agent-metric-card" id="yt-metric-card-unread" style="cursor: pointer;" title="Ver solo pendientes">
+                        <div class="agent-metric-card interactive-metric active-metric-card" id="yt-metric-card-unread" title="Ver videos pendientes por leer">
                             <div class="agent-metric-icon">📥</div>
                             <div class="agent-metric-info">
                                 <span class="agent-metric-val" id="yt-metric-unread">0</span>
                                 <span class="agent-metric-lbl">Por Leer en Bandeja</span>
                             </div>
                         </div>
-                        <div class="agent-metric-card" id="yt-metric-card-archived" style="cursor: pointer;" title="Ver historial completo">
+                        <div class="agent-metric-card interactive-metric" id="yt-metric-card-archived" title="Ver historial de videos archivados y vistos">
                             <div class="agent-metric-icon">🧠</div>
                             <div class="agent-metric-info">
                                 <span class="agent-metric-val" id="yt-metric-archived">0</span>
                                 <span class="agent-metric-lbl">Archivados / Vistos</span>
                             </div>
                         </div>
-                        <div class="agent-metric-card">
+                        <div class="agent-metric-card interactive-metric" id="yt-metric-card-channels" title="Ver y gestionar canales monitoreados">
                             <div class="agent-metric-icon">📡</div>
                             <div class="agent-metric-info">
-                                <span class="agent-metric-val" id="yt-metric-channels">17</span>
+                                <span class="agent-metric-val" id="yt-metric-channels">20</span>
                                 <span class="agent-metric-lbl">Canales Monitoreados</span>
                             </div>
                         </div>
@@ -1983,7 +1983,7 @@
                         </div>
                     </div>
 
-                    <!-- BARRA DE FILTROS + BUSCADOR + RESUMIDOR MANUAL DE URL -->
+                    <!-- BARRA ÚNICA: CATEGORÍAS + BUSCADOR EN VIVO + RESUMIDOR DE URL -->
                     <div class="yt-toolbar-row">
                         <div class="yt-filter-chips">
                             <button class="yt-filter-chip active" data-yt-filter="all">Todos</button>
@@ -1991,29 +1991,19 @@
                             <button class="yt-filter-chip" data-yt-filter="politica">🌍 Noticias</button>
                             <button class="yt-filter-chip" data-yt-filter="ciencia">🔬 Ciencia</button>
                             <button class="yt-filter-chip" data-yt-filter="visual">🏛️ Historia</button>
-                            <button class="yt-filter-chip" data-yt-filter="channels_list">📡 Ver 17 Canales</button>
                         </div>
 
+                        <!-- Buscador en vivo integrado en la misma fila -->
+                        <div style="position: relative; flex: 1; min-width: 220px; max-width: 380px;">
+                            <input type="text" id="yt-search-input" placeholder="🔍 Filtrar por título, canal o concepto..." style="width: 100%; padding: 8px 14px 8px 32px; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-primary); font-size: 0.85rem;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); opacity: 0.5; pointer-events: none; font-size: 0.85rem;">🔍</span>
+                        </div>
+
+                        <!-- Resumidor Rápido de URL -->
                         <div class="yt-quick-url-box">
-                            <input type="text" id="yt-custom-url-input" class="yt-quick-url-input" placeholder="Pegar cualquier link de YouTube para resumir y archivar...">
-                            <button id="yt-summarize-url-btn" class="btn-primary" style="padding: 8px 14px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; white-space: nowrap;">
+                            <input type="text" id="yt-custom-url-input" class="yt-quick-url-input" placeholder="Pegar cualquier link de YouTube...">
+                            <button id="yt-summarize-url-btn" class="btn-primary" style="padding: 8px 14px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; white-space: nowrap; font-size: 0.85rem;">
                                 ⚡ Resumir
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- SEGUNDA FILA: BUSCADOR EN VIVO Y SELECTOR DE BANDEJA/HISTORIAL -->
-                    <div style="display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap;">
-                        <div style="position: relative; flex: 1; min-width: 260px; max-width: 480px;">
-                            <input type="text" id="yt-search-input" placeholder="🔍 Filtrar por título, canal o concepto clave..." style="width: 100%; padding: 8px 14px 8px 32px; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-primary); font-size: 0.9rem;">
-                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); opacity: 0.5; pointer-events: none;">🔍</span>
-                        </div>
-                        <div style="display: flex; gap: 6px; background: var(--bg-surface); padding: 4px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-                            <button id="yt-tab-unread" class="btn-sm active-tab-pill" style="padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 0.85rem;" title="Mostrar únicamente videos no leídos">
-                                📥 Pendientes (<span id="yt-pill-unread-count">0</span>)
-                            </button>
-                            <button id="yt-tab-history" class="btn-sm" style="padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: var(--text-secondary); font-size: 0.85rem;" title="Mostrar historial de videos archivados y vistos">
-                                📚 Historial (<span id="yt-pill-history-count">0</span>)
                             </button>
                         </div>
                     </div>
@@ -2912,7 +2902,7 @@
     <script src="auth_gate.js"></script>
     <script src="app.js?v=20261030_1250"></script>
     <script src="agent_ops_view.js"></script>
-    <script src="youtube_view.js?v=20261030_1320"></script>
+    <script src="youtube_view.js?v=20261030_1615"></script>
     <script src="mormon_view.js?v=20261024_1400"></script>
     <script src="conferencia_data.js?v=20261024_1400"></script>
     <script src="conferencia_view.js?v=20261025_2145"></script>
