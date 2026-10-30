@@ -3795,6 +3795,7 @@ function initTiempo() {
             const startStr = item.start_iso ? item.start_iso.substring(11, 16) : '';
             const endStr = item.end_iso ? item.end_iso.substring(11, 16) : (item.is_active ? 'En curso ⏳' : '');
             const dur = formatShortSecs(item.duration_seconds || 0);
+            const safeItem = JSON.stringify(item).replace(/"/g, '&quot;');
             return `
                 <div class="tiempo-breakdown-item" style="border-left: 3px solid ${cfg.color};">
                     <div>
@@ -3802,18 +3803,320 @@ function initTiempo() {
                         ${item.subtag ? `<span style="color: #cbd5e1; font-size: 0.88rem; margin-left: 6px;">• ${escapeHTML(item.subtag)}</span>` : ''}
                         <span class="breakdown-range" style="margin-left: 10px; color: #94a3b8; font-size: 0.84rem;">(${startStr} ➔ ${endStr})</span>
                     </div>
-                    <div style="display:flex; align-items:center; gap:10px;">
+                    <div style="display:flex; align-items:center; gap:6px;">
                         <span class="breakdown-dur" style="background: rgba(255,255,255,0.06); color: ${cfg.color}; font-weight:700;">${dur}</span>
-                        <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id})" title="Eliminar este registro de prueba">🗑️ Borrar</button>
+                        <button class="tiempo-action-btn tiempo-split-btn" onclick="window.abrirModalDividirIntervalo(${safeItem})" title="Dividir este intervalo en dos actividades">✂️</button>
+                        <button class="tiempo-action-btn tiempo-edit-btn" onclick="window.abrirModalEditarIntervalo(${safeItem})" title="Editar hora o fase">✏️</button>
+                        <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id})" title="Eliminar este registro">🗑️</button>
                     </div>
                 </div>
             `;
         }).reverse().join('');
     }
 
+    // ==========================================
+    // OFFLINE QUEUE & LOCAL-FIRST RESILIENCE
+    // ==========================================
+    function getOfflineQueue() {
+        try {
+            return JSON.parse(localStorage.getItem('vromlix_offline_queue') || '[]');
+        } catch(e) {
+            return [];
+        }
+    }
+
+    function saveOfflineQueue(q) {
+        try {
+            localStorage.setItem('vromlix_offline_queue', JSON.stringify(q));
+        } catch(e) {}
+    }
+
+    function enqueueOfflineAction(actionObj) {
+        const q = getOfflineQueue();
+        q.push(actionObj);
+        saveOfflineQueue(q);
+        updateSyncBadge(false, q.length);
+    }
+
+    function flushOfflineQueue() {
+        const q = getOfflineQueue();
+        if (!q || q.length === 0) return;
+
+        fetch('/api/time/sync', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ events: q })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data && data.success) {
+                localStorage.removeItem('vromlix_offline_queue');
+                if (data.state) {
+                    renderStats(data.state);
+                    updateLiveTimerUI();
+                    loadHistory();
+                }
+                updateSyncBadge(true, 0);
+                showToast(`🟢 ${data.synced_count || q.length} acciones sincronizadas con tu laptop.`);
+            }
+        })
+        .catch(err => {
+            updateSyncBadge(false, q.length);
+        });
+    }
+
+    window.addEventListener('online', flushOfflineQueue);
+
+    // ==========================================
+    // MODALES DE DIVIDIR, EDITAR Y VER DÍAS
+    // ==========================================
+    window.cerrarModalTiempo = function() {
+        const modal = document.getElementById('tiempo-active-modal');
+        if (modal) modal.remove();
+    };
+
+    window.abrirModalDividirIntervalo = function(item) {
+        window.cerrarModalTiempo();
+        const startStr = item.start_iso ? item.start_iso.substring(11, 16) : '00:00';
+        const endStr = item.end_iso ? item.end_iso.substring(11, 16) : '23:59';
+        const dateStr = item.session_date || (item.start_iso ? item.start_iso.substring(0, 10) : '');
+
+        const modal = document.createElement('div');
+        modal.id = 'tiempo-active-modal';
+        modal.className = 'tiempo-modal-overlay';
+        modal.innerHTML = `
+            <div class="tiempo-modal-card">
+                <div class="tiempo-modal-title">
+                    <span>✂️ Dividir Intervalo</span>
+                    <button class="tiempo-modal-close-btn" onclick="window.cerrarModalTiempo()">✕</button>
+                </div>
+                <div style="font-size:0.85rem; color:#94a3b8; margin-bottom:14px; background:rgba(255,255,255,0.04); padding:10px; border-radius:8px;">
+                    <div><b>Fase actual:</b> <span style="color:#38bdf8;">${item.phase.toUpperCase()}</span> (${item.subtag || 'General'})</div>
+                    <div><b>Rango:</b> ${startStr} ➔ ${endStr} (${formatShortSecs(item.duration_seconds || 0)})</div>
+                </div>
+                <div class="tiempo-modal-field">
+                    <label>Hora de División (entre ${startStr} y ${endStr}):</label>
+                    <input type="time" id="split-time-input" value="${startStr}" required>
+                </div>
+                <div class="tiempo-modal-field">
+                    <label>Nueva Fase (para la 2ª mitad):</label>
+                    <select id="split-new-phase">
+                        <option value="calle" ${item.phase === 'calle' ? 'selected' : ''}>Calle (Transporte, Espera, Citas)</option>
+                        <option value="trabajo">Trabajo / Foco</option>
+                        <option value="pausa">Pausa</option>
+                        <option value="comida">Comida (Comer)</option>
+                        <option value="cocinar">Cocinar</option>
+                        <option value="lavar">Lavar</option>
+                        <option value="casa">Casa</option>
+                        <option value="bano">Baño</option>
+                        <option value="ocio">Ocio (YouTube, Película, TikTok)</option>
+                        <option value="espiritual">Espiritual (Mormón)</option>
+                        <option value="descanso">Descanso / Siesta</option>
+                    </select>
+                </div>
+                <div class="tiempo-modal-field">
+                    <label>Subetiqueta (ej. Transporte, Espera / Zócalo, Psicólogo):</label>
+                    <input type="text" id="split-new-subtag" placeholder="ej. Transporte, Psicólogo, Zócalo" value="">
+                </div>
+                <div class="tiempo-modal-field">
+                    <label>Nota opcional:</label>
+                    <input type="text" id="split-new-note" placeholder="Detalle de la actividad" value="">
+                </div>
+                <div class="tiempo-modal-actions">
+                    <button class="tiempo-modal-btn-cancel" onclick="window.cerrarModalTiempo()">Cancelar</button>
+                    <button class="tiempo-modal-btn-primary" onclick="window.ejecutarDivisionIntervalo(${item.id}, '${dateStr}')">✂️ Dividir Ahora</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    };
+
+    window.ejecutarDivisionIntervalo = function(id, dateStr) {
+        const splitTime = document.getElementById('split-time-input').value;
+        const newPhase = document.getElementById('split-new-phase').value;
+        const newSubtag = document.getElementById('split-new-subtag').value.trim();
+        const newNote = document.getElementById('split-new-note').value.trim();
+
+        if (!splitTime) {
+            alert("Por favor indica la hora de división.");
+            return;
+        }
+
+        const splitIso = `${dateStr}T${splitTime}:00-06:00`;
+        const payload = { id, split_iso: splitIso, new_phase: newPhase, new_subtag: newSubtag, new_note: newNote };
+
+        fetch('/api/time/split', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.state) {
+                renderStats(data.state);
+                updateLiveTimerUI();
+                loadHistory();
+                window.cerrarModalTiempo();
+                showToast("✂️ Intervalo dividido exitosamente.");
+            } else if (data.error) {
+                alert(data.error);
+            }
+        })
+        .catch(err => {
+            enqueueOfflineAction({ action: 'split', ...payload });
+            window.cerrarModalTiempo();
+            showToast("✂️ División guardada localmente (se sincronizará al conectar).");
+        });
+    };
+
+    window.abrirModalEditarIntervalo = function(item) {
+        window.cerrarModalTiempo();
+        const startStr = item.start_iso ? item.start_iso.substring(11, 16) : '00:00';
+        const endStr = item.end_iso ? item.end_iso.substring(11, 16) : '';
+        const dateStr = item.session_date || (item.start_iso ? item.start_iso.substring(0, 10) : '');
+
+        const modal = document.createElement('div');
+        modal.id = 'tiempo-active-modal';
+        modal.className = 'tiempo-modal-overlay';
+        modal.innerHTML = `
+            <div class="tiempo-modal-card">
+                <div class="tiempo-modal-title">
+                    <span>✏️ Editar Intervalo #${item.id}</span>
+                    <button class="tiempo-modal-close-btn" onclick="window.cerrarModalTiempo()">✕</button>
+                </div>
+                <div class="tiempo-modal-field">
+                    <label>Fase:</label>
+                    <select id="edit-phase">
+                        <option value="calle" ${item.phase === 'calle' ? 'selected' : ''}>Calle</option>
+                        <option value="trabajo" ${(item.phase === 'trabajo' || item.phase === 'foco') ? 'selected' : ''}>Trabajo / Foco</option>
+                        <option value="pausa" ${item.phase === 'pausa' ? 'selected' : ''}>Pausa</option>
+                        <option value="comida" ${item.phase === 'comida' ? 'selected' : ''}>Comida</option>
+                        <option value="cocinar" ${item.phase === 'cocinar' ? 'selected' : ''}>Cocinar</option>
+                        <option value="lavar" ${item.phase === 'lavar' ? 'selected' : ''}>Lavar</option>
+                        <option value="casa" ${item.phase === 'casa' ? 'selected' : ''}>Casa</option>
+                        <option value="bano" ${item.phase === 'bano' ? 'selected' : ''}>Baño</option>
+                        <option value="ocio" ${item.phase === 'ocio' ? 'selected' : ''}>Ocio</option>
+                        <option value="espiritual" ${item.phase === 'espiritual' ? 'selected' : ''}>Espiritual</option>
+                        <option value="dormir" ${item.phase === 'dormir' ? 'selected' : ''}>Dormir</option>
+                        <option value="descanso" ${item.phase === 'descanso' ? 'selected' : ''}>Descanso / Siesta</option>
+                    </select>
+                </div>
+                <div class="tiempo-modal-field">
+                    <label>Subetiqueta:</label>
+                    <input type="text" id="edit-subtag" value="${escapeHTML(item.subtag || '')}">
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <div class="tiempo-modal-field" style="flex:1;">
+                        <label>Hora Inicio:</label>
+                        <input type="time" id="edit-start-time" value="${startStr}">
+                    </div>
+                    <div class="tiempo-modal-field" style="flex:1;">
+                        <label>Hora Fin:</label>
+                        <input type="time" id="edit-end-time" value="${endStr}">
+                    </div>
+                </div>
+                <div class="tiempo-modal-field">
+                    <label>Nota:</label>
+                    <input type="text" id="edit-note" value="${escapeHTML(item.note || '')}">
+                </div>
+                <div class="tiempo-modal-actions">
+                    <button class="tiempo-modal-btn-cancel" onclick="window.cerrarModalTiempo()">Cancelar</button>
+                    <button class="tiempo-modal-btn-primary" onclick="window.ejecutarEdicionIntervalo(${item.id}, '${dateStr}')">💾 Guardar Cambios</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    };
+
+    window.ejecutarEdicionIntervalo = function(id, dateStr) {
+        const phase = document.getElementById('edit-phase').value;
+        const subtag = document.getElementById('edit-subtag').value.trim();
+        const startTime = document.getElementById('edit-start-time').value;
+        const endTime = document.getElementById('edit-end-time').value;
+        const note = document.getElementById('edit-note').value.trim();
+
+        const startIso = startTime ? `${dateStr}T${startTime}:00-06:00` : undefined;
+        const endIso = endTime ? `${dateStr}T${endTime}:00-06:00` : undefined;
+
+        const payload = { id, phase, subtag, start_iso: startIso, end_iso: endIso, note };
+
+        fetch('/api/time/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.state) {
+                renderStats(data.state);
+                updateLiveTimerUI();
+                loadHistory();
+                window.cerrarModalTiempo();
+                showToast("✏️ Intervalo actualizado correctamente.");
+            } else if (data.error) {
+                alert(data.error);
+            }
+        })
+        .catch(err => {
+            enqueueOfflineAction({ action: 'update', ...payload });
+            window.cerrarModalTiempo();
+            showToast("✏️ Modificación guardada localmente (se sincronizará al conectar).");
+        });
+    };
+
+    window.verIntervalosDia = function(dateStr) {
+        window.cerrarModalTiempo();
+        fetch(`/api/time/day?date=${dateStr}`)
+            .then(res => res.json())
+            .then(data => {
+                const list = data.intervals || [];
+                const modal = document.createElement('div');
+                modal.id = 'tiempo-active-modal';
+                modal.className = 'tiempo-modal-overlay';
+                modal.innerHTML = `
+                    <div class="tiempo-modal-card" style="max-width: 600px; max-height: 85vh; display: flex; flex-direction: column;">
+                        <div class="tiempo-modal-title">
+                            <span>📅 Intervalos del ${dateStr}</span>
+                            <button class="tiempo-modal-close-btn" onclick="window.cerrarModalTiempo()">✕</button>
+                        </div>
+                        <div style="overflow-y: auto; flex: 1; padding-right: 4px; display: flex; flex-direction: column; gap: 8px;">
+                            ${list.length === 0 ? '<div style="color:#94a3b8; text-align:center; padding:20px;">Sin intervalos registrados en este día.</div>' : list.map(item => {
+                                const p = (item.phase || '').toLowerCase();
+                                const cfg = PHASE_CONFIG[p] || { title: p.toUpperCase(), color: '#9ca3af' };
+                                const s = item.start_iso ? item.start_iso.substring(11, 16) : '';
+                                const e = item.end_iso ? item.end_iso.substring(11, 16) : (item.is_active ? 'En curso' : '');
+                                const safeItem = JSON.stringify(item).replace(/"/g, '&quot;');
+                                return `
+                                    <div style="background: rgba(255,255,255,0.03); border-left: 3px solid ${cfg.color}; border-radius: 6px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <span style="color:${cfg.color}; font-weight:700;">${cfg.title}</span>
+                                            ${item.subtag ? `<span style="color:#e2e8f0; font-size:0.85rem; margin-left:6px;">• ${escapeHTML(item.subtag)}</span>` : ''}
+                                            <div style="color:#94a3b8; font-size:0.8rem; margin-top:2px;">${s} ➔ ${e} (${formatShortSecs(item.duration_seconds || 0)}) ${item.note ? `[${escapeHTML(item.note)}]` : ''}</div>
+                                        </div>
+                                        <div style="display:flex; gap:4px;">
+                                            <button class="tiempo-action-btn tiempo-split-btn" onclick="window.abrirModalDividirIntervalo(${safeItem})" title="Dividir">✂️</button>
+                                            <button class="tiempo-action-btn tiempo-edit-btn" onclick="window.abrirModalEditarIntervalo(${safeItem})" title="Editar">✏️</button>
+                                            <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id}); window.cerrarModalTiempo();" title="Borrar">🗑️</button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        <div class="tiempo-modal-actions" style="margin-top: 14px;">
+                            <button class="tiempo-modal-btn-cancel" onclick="window.cerrarModalTiempo()">Cerrar</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            })
+            .catch(() => {
+                showToast("Error cargando intervalos del día.");
+            });
+    };
+
     window.eliminarIntervalo = function(id) {
         if (!id) return;
-        if (!confirm("¿Eliminar este registro de tiempo? (Ideal para limpiar pruebas)")) return;
+        if (!confirm("¿Eliminar este registro de tiempo?")) return;
         fetch('/api/time/delete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -3825,11 +4128,12 @@ function initTiempo() {
                 renderStats(data.state);
                 updateLiveTimerUI();
                 loadHistory();
-                showToast("🗑️ Registro de prueba eliminado.");
+                showToast("🗑️ Registro eliminado.");
             }
         })
         .catch(err => {
-            showToast("Error eliminando registro.");
+            enqueueOfflineAction({ action: 'delete', id });
+            showToast("🗑️ Eliminación guardada localmente.");
         });
     };
 
@@ -3924,7 +4228,7 @@ function initTiempo() {
 
                     return `
                         <tr>
-                            <td><b>${item.date}</b></td>
+                            <td style="cursor:pointer;" onclick="window.verIntervalosDia('${item.date}')" title="Ver y editar actividades detalladas de este día"><b style="color:var(--accent-primary, #38bdf8); text-decoration: underline dotted;">${item.date} 📅</b></td>
                             <td>${item.sleep_hours ? `<span class="badge ${slpBadge}" style="font-weight:700;">${item.sleep_hours}h</span>` : '--'}</td>
                             <td><span style="color:#10b981; font-weight:700;">${item.trabajo_formatted || formatShortSecs(item.trabajo)}</span></td>
                             <td><span style="color:${effColor}; font-weight:600;">${item.efficiency_pct || 0}%</span></td>
@@ -3941,18 +4245,22 @@ function initTiempo() {
             .catch(() => {});
     }
 
-    function updateSyncBadge(isOnline) {
+    function updateSyncBadge(isOnline, pendingCount = null) {
         const syncBadge = document.getElementById('sync-status-indicator');
-        if (syncBadge) {
-            if (isOnline) {
-                syncBadge.textContent = '🟢 Sync';
-                syncBadge.className = 'sync-indicator sync-online';
-                syncBadge.title = 'Conectado y sincronizado con tu laptop';
-            } else {
-                syncBadge.textContent = '🟠 Offline';
-                syncBadge.className = 'sync-indicator sync-offline';
-                syncBadge.title = 'Modo local autónomo (se sincronizará al conectar)';
-            }
+        if (!syncBadge) return;
+        const qLen = pendingCount !== null ? pendingCount : getOfflineQueue().length;
+        if (isOnline && qLen === 0) {
+            syncBadge.textContent = '🟢 Sync';
+            syncBadge.className = 'sync-indicator sync-online';
+            syncBadge.title = 'Conectado y sincronizado con tu laptop';
+        } else if (qLen > 0) {
+            syncBadge.textContent = `🟠 Offline (${qLen} pend)`;
+            syncBadge.className = 'sync-indicator sync-offline';
+            syncBadge.title = `${qLen} cambios guardados localmente; se sincronizarán al conectar`;
+        } else {
+            syncBadge.textContent = '⚪ Local';
+            syncBadge.className = 'sync-indicator sync-offline';
+            syncBadge.title = 'Modo local autónomo (sin conexión)';
         }
     }
 
@@ -4021,6 +4329,9 @@ function initTiempo() {
             `;
         }
 
+        const clientIso = new Date().toISOString();
+        const clientEpoch = Date.now() / 1000.0;
+
         // Optimistic UI state
         if (currentServerState) {
             if (cleanPhase === 'detener') {
@@ -4029,8 +4340,8 @@ function initTiempo() {
                 currentServerState.active_interval = {
                     phase: cleanPhase === 'foco' ? 'trabajo' : cleanPhase,
                     subtag: subtag,
-                    start_epoch: Date.now() / 1000.0,
-                    start_iso: new Date().toISOString()
+                    start_epoch: clientEpoch,
+                    start_iso: clientIso
                 };
             }
             updateLiveTimerUI();
@@ -4039,13 +4350,14 @@ function initTiempo() {
         fetch('/api/time/lap', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phase: cleanPhase, subtag, note })
+            body: JSON.stringify({ phase: cleanPhase, subtag, note, client_iso: clientIso, client_epoch: clientEpoch })
         })
         .then(res => res.json())
         .then(data => {
             if (data.state) {
                 renderStats(data.state);
                 updateLiveTimerUI();
+                updateSyncBadge(true);
                 if (cleanPhase === 'foco' || cleanPhase === 'trabajo') {
                     showToast("SOY UN GENERADOR IMPARABLE DE RIQUEZA Y VALOR");
                 } else if (cleanPhase === 'detener') {
@@ -4056,13 +4368,22 @@ function initTiempo() {
             }
         })
         .catch(err => {
+            enqueueOfflineAction({
+                action: 'lap',
+                phase: cleanPhase,
+                subtag,
+                note,
+                client_iso: clientIso,
+                client_epoch: clientEpoch
+            });
             if (cleanPhase === 'foco' || cleanPhase === 'trabajo') {
-                showToast("SOY UN GENERADOR IMPARABLE DE RIQUEZA Y VALOR");
+                showToast("SOY UN GENERADOR IMPARABLE DE RIQUEZA Y VALOR (Local)");
             } else {
-                showToast(`Fase activada localmente: ${subtag || cleanPhase.toUpperCase()}`);
+                showToast(`⚡ Guardado local: ${subtag || cleanPhase.toUpperCase()} (se sincronizará al conectar)`);
             }
             updateSyncBadge(false);
         });
+    };
     };
 
     window.marcarDormir = function() {
