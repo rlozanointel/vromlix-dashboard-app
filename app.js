@@ -247,7 +247,7 @@ function initWeather() {
         if (tempEl) tempEl.textContent = `${temp}°C`;
         if (humEl) humEl.textContent = `💧 ${hum}%`;
         if (rainEl) {
-            rainEl.textContent = `☔ ${rainProb}% (1-2h)`;
+            rainEl.textContent = `☔ ${rainProb}%`;
             if (rainProb >= 40) {
                 rainEl.className = 'weather-rain rain-warning';
                 rainEl.title = `Alerta: Alta probabilidad de lluvia (${rainProb}%) en Puebla para las siguientes 1-2 horas`;
