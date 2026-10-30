@@ -192,6 +192,11 @@ button, .btn, .nav-tab-btn, .weekly-input, a {
         font-size: 0.85rem;
         text-align: center;
     }
+    .header-status-line {
+        justify-content: center;
+        gap: 6px;
+        font-size: 0.85rem;
+    }
     .dashboard-container {
         padding: 12px;
     }
@@ -5315,8 +5320,7 @@ summary {
 }
 
 .status-dot {
-    color: var(--text-muted);
-    opacity: 0.6;
+    display: none !important;
 }
 
 .weather-badge {
@@ -5877,6 +5881,22 @@ summary {
 }
 
 @media (max-width: 540px) {
+    .header-status-line {
+        gap: 5px;
+        font-size: 0.80rem;
+    }
+    .weather-badge {
+        padding: 2px 7px;
+        font-size: 0.78rem;
+    }
+    .apk-download-badge, .sync-indicator {
+        padding: 2px 7px;
+        font-size: 0.76rem;
+    }
+    .btn-lock-terminal {
+        padding: 3px 6px;
+        font-size: 0.78rem;
+    }
     .tiempo-hero-header {
         gap: 10px;
     }
@@ -6441,9 +6461,7 @@ summary {
 }
 
 .pitch-briefing-divider {
-    color: var(--border-hover);
-    user-select: none;
-    font-size: 0.9rem;
+    display: none !important;
 }
 
 .pitch-toolbar {
