@@ -92,9 +92,11 @@
       }
 
       list.innerHTML = waChats.map(chat => {
+        const isGrp = isGroup(chat.jid);
         const name = chat.name || chat.jid.split('@')[0];
-        const grp = isGroup(chat.jid) ? '👥 ' : '';
-        const preview = fmtText({ type: null, text: chat.lastMessageText }) || '';
+        const grp = isGrp ? '👥 ' : '';
+        const senderPrefix = (isGrp && chat.lastMessageSender) ? `${chat.lastMessageSender}: ` : '';
+        const preview = senderPrefix + (fmtText({ type: null, text: chat.lastMessageText }) || '');
         const time = fmt(chat.lastMessageTimestamp);
         const ini = initial(name);
         const jidSafe = encodeURIComponent(chat.jid);
@@ -151,15 +153,15 @@
       list.innerHTML = msgs.map(msg => {
         const isMe = !!msg.isFromMe;
         const cls = isMe ? 'wa-msg-from-me' : 'wa-msg-from-them';
-        const senderLine = (!isMe && !isGroup(msg.jid)) ? '' :
-          (!isMe ? `<div class="wa-msg-sender">${escHtml(msg.pushName || '')}</div>` : '');
+        const senderName = msg.pushName && msg.pushName !== 'Desconocido' ? msg.pushName : 'Remitente';
+        const senderLine = !isMe ? `<div class="wa-msg-sender">👤 ${escHtml(senderName)}</div>` : '';
         const text = fmtText(msg);
         const time = fmt(msg.timestamp);
         const typeTag = (msg.type && msg.type !== 'text') ? '' : '';
         return `
           <div class="wa-msg-bubble ${cls}">
             ${senderLine}
-            <div>${escHtml(text)}${typeTag}</div>
+            <div class="wa-msg-text-content">${escHtml(text)}${typeTag}</div>
             <div class="wa-msg-time">${time}</div>
           </div>`;
       }).join('');

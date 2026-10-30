@@ -269,3 +269,8 @@ function escapeHtml(str) {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
 }
+
+window.loadAgentActions = loadAgentActions;
+// Actualizar alertas del agente en segundo plano cada 30 segundos
+setInterval(loadAgentActions, 30000);
+

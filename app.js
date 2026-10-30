@@ -4384,7 +4384,6 @@ function initTiempo() {
             updateSyncBadge(false);
         });
     };
-    };
 
     window.marcarDormir = function() {
         if (!confirm("¿Marcar inicio de descanso nocturno?")) return;
