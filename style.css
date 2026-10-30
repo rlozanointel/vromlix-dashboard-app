@@ -3066,6 +3066,92 @@ summary {
 }
 
 /* ==========================================
+   BANNER DE ATENCIÓN REQUERIDA (HIGH AUTHORITY & ERGONÓMICO)
+   ========================================== */
+.dashboard-attention-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.08));
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.08);
+    animation: fadeInDown 0.3s ease;
+}
+
+.attention-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.attention-banner-icon {
+    font-size: 1.4rem;
+}
+
+.attention-banner-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.attention-banner-text strong {
+    font-size: 0.95rem;
+    color: #f87171;
+    font-weight: 700;
+}
+
+.attention-banner-text span {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+}
+
+.attention-banner-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-attention-action {
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.btn-attention-review {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.btn-attention-review:hover {
+    background: #ef4444;
+    transform: translateY(-1px);
+}
+
+.btn-attention-dismiss {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1rem;
+    padding: 4px 8px;
+}
+
+.btn-attention-dismiss:hover {
+    color: var(--text-primary);
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
    PESTAÑA: YOUTUBE (EXECUTIVE DIGEST & 2ND BRAIN)
    ========================================== */
 .nav-badge-pill {

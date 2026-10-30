@@ -38,6 +38,29 @@ async function loadAgentActions() {
         if (badgeActiveChats) badgeActiveChats.textContent = stats.active_chats ?? '-';
         if (badgeAuto) badgeAuto.textContent = stats.auto_executed ?? '-';
 
+        // Sincronizar Badge en Barra de Navegación y Banner en Vista Principal
+        const navAgenteBadge = document.getElementById('nav-agente-badge');
+        const attentionBanner = document.getElementById('dashboard-attention-banner');
+        const pendingCount = stats.pending_count ?? pending.length;
+
+        if (pendingCount > 0) {
+            if (navAgenteBadge) {
+                navAgenteBadge.textContent = pendingCount;
+                navAgenteBadge.style.display = 'inline-flex';
+            }
+            if (attentionBanner) {
+                const topItem = pending[0];
+                const titleEl = document.getElementById('attention-banner-title');
+                const descEl = document.getElementById('attention-banner-desc');
+                if (titleEl) titleEl.textContent = topItem.title || 'Atención Requerida';
+                if (descEl) descEl.textContent = `${pendingCount} elemento(s) pendiente(s) de revisión en el sistema.`;
+                attentionBanner.style.display = 'flex';
+            }
+        } else {
+            if (navAgenteBadge) navAgenteBadge.style.display = 'none';
+            if (attentionBanner) attentionBanner.style.display = 'none';
+        }
+
         // Render Pendientes
         if (pending.length === 0) {
             pendingContainer.innerHTML = `

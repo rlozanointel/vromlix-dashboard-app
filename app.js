@@ -77,6 +77,19 @@ function initMainNavigation() {
     }
 }
 
+// Handlers para el Banner de Atención Requerida
+window.vromlixGoToAgenteOps = function() {
+    if (typeof window.switchDashboardView === 'function') {
+        window.switchDashboardView('view-agente-ops');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+};
+
+window.vromlixDismissAttentionBanner = function() {
+    const banner = document.getElementById('dashboard-attention-banner');
+    if (banner) banner.style.display = 'none';
+};
+
 // ==========================================
 // UTILITIES & NOTIFICATIONS
 // ==========================================

@@ -143,6 +143,7 @@
                     <button class="nav-tab-btn" data-view="view-agente-ops" title="Operaciones Autónomas y Watermarks">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4.93 10.93a2 2 0 0 1 2.83 0l1.41 1.41a2 2 0 0 1-2.83 2.83l-1.41-1.41a2 2 0 0 1 0-2.83zm14.14 0a2 2 0 0 1 0 2.83l-1.41 1.41a2 2 0 0 1-2.83-2.83l1.41-1.41a2 2 0 0 1 2.83 0zM12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-8 6a8 8 0 0 1 16 0H4z"/></svg>
                         <span>Agente</span>
+                        <span id="nav-agente-badge" class="nav-badge-pill" style="display: none; background: rgba(239, 68, 68, 0.18); color: #ef4444; border-color: rgba(239, 68, 68, 0.35);">0</span>
                     </button>
                 </div>
             </div>
@@ -153,6 +154,21 @@
             
             <!-- VISTA 1: PRINCIPAL -->
             <div id="view-principal" class="dashboard-view active">
+                <!-- BANNER DE ATENCIÓN REQUERIDA (SOLO VISIBLE ANTE FALLOS O ACCIONES PENDIENTES) -->
+                <div id="dashboard-attention-banner" class="dashboard-attention-banner" style="display: none;">
+                    <div class="attention-banner-content">
+                        <span class="attention-banner-icon">⚠️</span>
+                        <div class="attention-banner-text">
+                            <strong id="attention-banner-title">Atención Requerida</strong>
+                            <span id="attention-banner-desc">Hay elementos del sistema que requieren tu revisión.</span>
+                        </div>
+                    </div>
+                    <div class="attention-banner-actions">
+                        <button class="btn-attention-action btn-attention-review" onclick="window.vromlixGoToAgenteOps()">🔍 Revisar en Agente</button>
+                        <button class="btn-attention-action btn-attention-dismiss" onclick="window.vromlixDismissAttentionBanner()" title="Ocultar aviso">✕</button>
+                    </div>
+                </div>
+
                 <!-- PLANIFICADOR SEMANAL -->
                 <section class="weekly-section-full">
                     <div class="section-card weekly-planner-card">
