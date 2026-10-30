@@ -991,6 +991,10 @@
                                 <option value="user">👤 Solo mis preguntas</option>
                                 <option value="title">🏷️ Solo títulos</option>
                             </select>
+                            <select id="chat-search-sort" class="chat-search-scope" style="padding: 6px 10px; font-size: 0.8rem; background: var(--bg-page); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none; cursor: pointer;">
+                                <option value="date" selected>📅 Más recientes primero</option>
+                                <option value="relevance">🎯 Mayor coincidencia</option>
+                            </select>
                             <button id="refresh-chats-btn" class="btn-icon" title="Actualizar lista de chats">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 11-.57-8.38l5.67-5.67"/></svg>
                             </button>
@@ -2894,7 +2898,7 @@
 
     <script src="initial_data.js"></script>
     <script src="auth_gate.js"></script>
-    <script src="app.js?v=20261028_0015"></script>
+    <script src="app.js?v=20261030_1250"></script>
     <script src="agent_ops_view.js"></script>
     <script src="youtube_view.js?v=20261026_1115"></script>
     <script src="mormon_view.js?v=20261024_1400"></script>

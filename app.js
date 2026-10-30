@@ -2102,6 +2102,7 @@ function initChats() {
     const refreshBtn = document.getElementById('refresh-chats-btn');
     const searchInput = document.getElementById('chat-search-input');
     const scopeSelect = document.getElementById('chat-search-scope');
+    const sortSelect = document.getElementById('chat-search-sort');
     const countBadge = document.getElementById('chat-search-count-badge');
     const headerTitle = document.getElementById('chats-header-title');
     const filterContainer = document.getElementById('chats-domain-filters');
@@ -2110,14 +2111,15 @@ function initChats() {
 
     const DOMAINS_CONFIG = [
         { id: 'all', label: 'Todos' },
+        { id: 'active', label: '🟢 Activos' },
+        { id: 'archived', label: '📦 Archivados' },
         { id: 'dev', label: '💻 Dev & IA', regex: /\b(dev|python|script|agent|agente|código|code|github|sqlite|gemini|vps|pm2|server|api|dashboard|linux|ubuntu|docker|fix|error|bash|terminal|html|css|js|web|transcrip|micrófono|audio|xml|json|browser|reloj|video|ffmpeg|git|ublacklist|automatiz|túnel|scraping|skills|plugins|pines|localhost)\b/i },
         { id: 'turismo', label: '🚐 Merakirai & Turismo', regex: /\b(merakirai|turismo|viaje|viajes|sectur|buap|xochimilco|chiapas|oaxaca|tour|paquete|cotiza|van|itinerario|alma)\b/i },
         { id: 'fe', label: '🏛️ Fe & LDS', regex: /\b(iglesia|lds|oración|oraciones|sacramental|conferencia|autosuficiencia|resiliencia|doctrina|evangelio|mormón|clase|taller|élderes|sud)\b/i },
         { id: 'genealogia', label: '📜 Genealogía', regex: /\b(genealogía|mochitlán|guerrero|familysearch|árbol|antepasados|parroquia|bautismo|defunción|paleografía|partida)\b/i },
         { id: 'carrera', label: '💼 Carrera & Finanzas', regex: /\b(cv|curriculum|entrevista|empleo|remoto|sat|fiscal|factura|finanzas|power bi|excel|olinia|english4kids|candidatura|reclutamiento|salario|impuesto|afore|inglés|english)\b/i },
         { id: 'cultura', label: '🎬 Cine & Cultura', regex: /\b(película|películas|serie|series|imdb|cine|física|cuántica|nba|celtics|música|spotify|cerati|apeiron|novela|libro|poema)\b/i },
-        { id: 'vida', label: '🌱 Vida & Hábitos', regex: /\b(salud|bienestar|al-anon|alateen|avena|receta|personal|perfil|limpieza|hábito|psicol|dormir|sueño|mutual|jessica)\b/i },
-        { id: 'archived', label: '📦 Archivados' }
+        { id: 'vida', label: '🌱 Vida & Hábitos', regex: /\b(salud|bienestar|al-anon|alateen|avena|receta|personal|perfil|limpieza|hábito|psicol|dormir|sueño|mutual|jessica)\b/i }
     ];
 
     function classifyChat(chat) {
@@ -2264,10 +2266,12 @@ function initChats() {
             let count = 0;
             if (d.id === 'all') {
                 count = allChats.length;
+            } else if (d.id === 'active') {
+                count = allChats.filter(c => !c.archived).length;
             } else if (d.id === 'archived') {
-                count = allChats.filter(c => c.archived).length;
+                count = allChats.filter(c => Boolean(c.archived)).length;
             } else {
-                count = allChats.filter(c => !c.archived && classifyChat(c).id === d.id).length;
+                count = allChats.filter(c => classifyChat(c).id === d.id).length;
             }
 
             const chip = document.createElement('button');
@@ -2289,7 +2293,7 @@ function initChats() {
             // Si hay búsqueda activa pero estamos en una categoría que no tiene coincidencias
             if (query && activeDomain !== 'all') {
                 const scope = scopeSelect ? scopeSelect.value : 'all';
-                const globalMatches = allChats.filter(c => !c.archived && evaluateChatMatch(c, query, scope).matched);
+                const globalMatches = allChats.filter(c => evaluateChatMatch(c, query, scope).matched);
                 if (globalMatches.length > 0) {
                     container.innerHTML = `
                         <div style="text-align: center; padding: 30px 20px; color: var(--text-secondary);">
@@ -2319,7 +2323,21 @@ function initChats() {
                         <div style="font-size: 2.2rem; margin-bottom: 10px;">📦</div>
                         <div style="font-size: 1rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">No tienes chats archivados actualmente</div>
                         <div style="font-size: 0.82rem; max-width: 440px; margin: 0 auto; line-height: 1.5; color: var(--text-muted);">
-                            Para archivar una conversación y limpiar tu bandeja principal, haz clic en el botón <strong>"📦 Archivar"</strong> en cualquiera de tus chats. Podrás consultarla o desarchivarla aquí en cualquier momento con un solo clic.
+                            Para archivar una conversación y limpiar tu bandeja de activos, haz clic en el botón <strong>"📦 Archivar"</strong> en cualquiera de tus chats. Podrás consultarla o desarchivarla aquí en cualquier momento con un solo clic.
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Si estamos en la pestaña de activos y no hay chats activos
+            if (activeDomain === 'active' && !query) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                        <div style="font-size: 2.2rem; margin-bottom: 10px;">🟢</div>
+                        <div style="font-size: 1rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">No tienes chats activos actualmente</div>
+                        <div style="font-size: 0.82rem; max-width: 440px; margin: 0 auto; line-height: 1.5; color: var(--text-muted);">
+                            Todos tus chats se encuentran en <strong>"📦 Archivados"</strong>. Puedes desarchivar cualquiera haciendo clic en <strong>"📂 Desarchivar"</strong>.
                         </div>
                     </div>
                 `;
@@ -2411,17 +2429,21 @@ function initChats() {
     function filterChats(query) {
         let filtered = allChats;
         const scope = scopeSelect ? scopeSelect.value : 'all';
+        const sortMode = sortSelect ? sortSelect.value : 'date';
 
         // Filtro por dominio o archivado
-        if (activeDomain === 'archived') {
-            filtered = filtered.filter(c => Boolean(c.archived));
-        } else if (activeDomain === 'all') {
-            filtered = filtered.filter(c => !c.archived);
+        if (activeDomain === 'all') {
+            filtered = allChats; // Muestra absolutamente TODOS los chats (activos + archivados juntos)
+        } else if (activeDomain === 'active') {
+            filtered = allChats.filter(c => !c.archived); // Solo activos
+        } else if (activeDomain === 'archived') {
+            filtered = allChats.filter(c => Boolean(c.archived)); // Solo archivados
         } else {
-            filtered = filtered.filter(c => !c.archived && classifyChat(c).id === activeDomain);
+            // Categoría temática: muestra todos los chats pertenecientes a esa categoría
+            filtered = allChats.filter(c => classifyChat(c).id === activeDomain);
         }
 
-        // Filtro por búsqueda de texto con límites de palabra y ranking de relevancia
+        // Filtro por búsqueda de texto con límites de palabra y orden cronológico
         if (query) {
             const scoredList = [];
             filtered.forEach(chat => {
@@ -2431,15 +2453,18 @@ function initChats() {
                 }
             });
 
-            // Ordenar por: Pinned primero (por pin_rank) -> Score descendente -> Fecha real (mtime) descendente
+            // Ordenar: Pinned primero (por pin_rank) -> Si 'relevance' por score, por defecto 'date' (CRONOLÓGICO ESTRICTO)
             scoredList.sort((a, b) => {
                 const pinA = Boolean(a.chat.pinned);
                 const pinB = Boolean(b.chat.pinned);
                 if (pinA !== pinB) return pinB ? 1 : -1;
-                if (pinA && pinB && a.score === b.score) {
+                if (pinA && pinB) {
                     return (a.chat.pin_rank ?? 9999) - (b.chat.pin_rank ?? 9999);
                 }
-                if (b.score !== a.score) return b.score - a.score;
+                if (sortMode === 'relevance') {
+                    if (b.score !== a.score) return b.score - a.score;
+                }
+                // ORDEN CRONOLÓGICO: Más reciente primero
                 return (b.chat.mtime || 0) - (a.chat.mtime || 0);
             });
 
@@ -2502,6 +2527,13 @@ function initChats() {
 
     if (scopeSelect) {
         scopeSelect.addEventListener('change', () => {
+            const currentQuery = searchInput ? searchInput.value.trim() : '';
+            filterChats(currentQuery);
+        });
+    }
+
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
             const currentQuery = searchInput ? searchInput.value.trim() : '';
             filterChats(currentQuery);
         });
