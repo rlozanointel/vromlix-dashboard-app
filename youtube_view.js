@@ -330,10 +330,9 @@ function renderYouTubeSummaryCard(v) {
     }
 
     const noteBtnHtml = v.vault_path ? `
-        <a href="/api/open-note?path=${encodeURIComponent(v.vault_path)}" target="_blank" rel="noopener" class="yt-btn yt-btn-note" title="Segundo Cerebro: ${v.vault_path}">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            <span>Abrir en .md</span>
-        </a>
+        <button class="yt-btn yt-btn-note yt-btn-icon-only" onclick="openObsidianNote('${v.vault_path.replace(/'/g, "\\'")}')" data-tooltip="Abrir en Obsidian (.md)" aria-label="Abrir en Obsidian">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </button>
     ` : '';
 
     // Veredicto diferencial (Tufte: Eliminar badge si es solo texto redundante invariante)
@@ -392,35 +391,39 @@ function renderYouTubeSummaryCard(v) {
                 </div>
             ` : ''}
 
-            <!-- BARRA DE ACCIONES -->
+            <!-- BARRA DE ACCIONES ERGONÓMICA COMPACTA -->
             <div class="yt-actions-footer">
                 ${!isArchived ? `
-                    <button class="yt-btn yt-btn-watched" onclick="handleYouTubeCardAction('${v.video_id}', 'watched', '${v.url_mark_watched}')" title="Abre los últimos 8 segundos en YouTube para registrar como visto en tus suscripciones y quita la ficha de esta bandeja">
-                        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span>✅ Marcar Visto</span>
+                    <button class="yt-btn yt-btn-watched yt-btn-icon-only" onclick="handleYouTubeCardAction('${v.video_id}', 'watched', '${v.url_mark_watched}')" data-tooltip="Marcar Visto (últimos 8s)" aria-label="Marcar Visto">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     </button>
 
-                    <a href="${v.url_video}" target="_blank" rel="noopener" class="yt-btn yt-btn-open" title="Solo abrir el video en YouTube desde el inicio sin borrar esta ficha">
-                        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        <span>Abrir en YouTube</span>
+                    <a href="${v.url_video}" target="_blank" rel="noopener" class="yt-btn yt-btn-open yt-btn-icon-only" data-tooltip="Abrir en YouTube" aria-label="Abrir en YouTube">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
                     </a>
+
+                    <button class="yt-btn yt-btn-copy yt-btn-icon-only" onclick="copyYouTubeLink('${v.video_id}', this)" data-tooltip="Copiar enlace (youtu.be)" aria-label="Copiar enlace">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    </button>
 
                     ${noteBtnHtml}
 
-                    <button class="yt-btn yt-btn-dismiss" onclick="handleYouTubeCardAction('${v.video_id}', 'dismiss', '')" title="Solo quitar la ficha de esta bandeja sin abrir YouTube (el respaldo .md permanece en tu Segundo Cerebro)">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-                        <span>Solo Quitar</span>
+                    <button class="yt-btn yt-btn-dismiss yt-btn-icon-only" onclick="handleYouTubeCardAction('${v.video_id}', 'dismiss', '')" data-tooltip="Solo quitar de pendientes" data-tooltip-pos="left" aria-label="Solo quitar">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
                     </button>
                 ` : `
-                    <a href="${v.url_video}" target="_blank" rel="noopener" class="yt-btn yt-btn-open" title="Abrir el video en YouTube">
-                        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        <span>Ver en YouTube</span>
+                    <a href="${v.url_video}" target="_blank" rel="noopener" class="yt-btn yt-btn-open yt-btn-icon-only" data-tooltip="Abrir en YouTube" aria-label="Abrir en YouTube">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
                     </a>
+
+                    <button class="yt-btn yt-btn-copy yt-btn-icon-only" onclick="copyYouTubeLink('${v.video_id}', this)" data-tooltip="Copiar enlace (youtu.be)" aria-label="Copiar enlace">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    </button>
 
                     ${noteBtnHtml}
 
-                    <button class="yt-btn yt-btn-dismiss" onclick="handleReactivateCard('${v.video_id}')" title="Mover nuevamente a la bandeja de pendientes">
-                        <span>📥 Regresar a Pendientes</span>
+                    <button class="yt-btn yt-btn-reactivate yt-btn-icon-only" onclick="handleReactivateCard('${v.video_id}')" data-tooltip="Regresar a pendientes" data-tooltip-pos="left" aria-label="Regresar a pendientes">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h10a5 5 0 0 1 5 5v2"/><polyline points="7 6 3 10 7 14"/></svg>
                     </button>
                 `}
             </div>
@@ -903,6 +906,67 @@ async function handleReactivateCard(videoId) {
         } else {
             console.error('Error:', err);
         }
+    }
+}
+
+async function copyYouTubeLink(videoId, btnEl) {
+    if (!videoId) return;
+    const shareUrl = `https://youtu.be/${videoId}`;
+    try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(shareUrl);
+        } else {
+            const ta = document.createElement('textarea');
+            ta.value = shareUrl;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+        }
+
+        if (typeof showToast === 'function') {
+            showToast('📋 Enlace de YouTube copiado al portapapeles', 'success');
+        }
+
+        if (btnEl) {
+            btnEl.classList.add('copied');
+            const originalTooltip = btnEl.getAttribute('data-tooltip') || 'Copiar enlace';
+            btnEl.setAttribute('data-tooltip', '¡Copiado!');
+            const originalHtml = btnEl.innerHTML;
+            btnEl.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+            setTimeout(() => {
+                btnEl.classList.remove('copied');
+                btnEl.setAttribute('data-tooltip', originalTooltip);
+                btnEl.innerHTML = originalHtml;
+            }, 1800);
+        }
+    } catch (err) {
+        console.error('Error copiando link:', err);
+        if (typeof showToast === 'function') {
+            showToast('No se pudo copiar el enlace', 'error');
+        }
+    }
+}
+
+async function openObsidianNote(vaultPath) {
+    if (!vaultPath) {
+        if (typeof showToast === 'function') showToast('No hay nota asociada a este video', 'error');
+        return;
+    }
+    try {
+        if (typeof showToast === 'function') {
+            showToast('🧠 Abriendo nota en Obsidian...', 'info');
+        }
+        const res = await fetch(`/api/open-note?path=${encodeURIComponent(vaultPath)}&format=json`);
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+            throw new Error(data.error || 'No se pudo abrir la nota');
+        }
+    } catch (err) {
+        console.warn('Fallback abriendo nota:', err);
+        window.location.href = `obsidian://open?path=${encodeURIComponent(vaultPath)}`;
     }
 }
 

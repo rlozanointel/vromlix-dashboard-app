@@ -3566,6 +3566,123 @@ summary {
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
+.yt-btn-copy {
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.yt-btn-copy:hover {
+    background: #8b5cf6;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.35);
+}
+
+.yt-btn-copy.copied {
+    background: #10b981 !important;
+    color: #ffffff !important;
+    border-color: #059669 !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
+}
+
+.yt-btn-reactivate {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+    border-color: rgba(16, 185, 129, 0.3);
+    margin-left: auto;
+}
+
+.yt-btn-reactivate:hover {
+    background: #059669;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+/* BOTONES ULTRA-COMPACTOS ERGONÓMICOS */
+.yt-btn-icon-only {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* TOOLTIPS FLOTANTES DE ALTA PRECISIÓN */
+.yt-actions-footer [data-tooltip] {
+    position: relative;
+}
+
+.yt-actions-footer [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 9px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    padding: 6px 10px;
+    background: rgba(15, 23, 42, 0.96);
+    color: #f8fafc;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    white-space: nowrap;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1), transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.yt-actions-footer [data-tooltip]::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    border-width: 5px 5px 0 5px;
+    border-style: solid;
+    border-color: rgba(15, 23, 42, 0.96) transparent transparent transparent;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1), transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.yt-actions-footer [data-tooltip]:hover::after,
+.yt-actions-footer [data-tooltip]:hover::before,
+.yt-actions-footer [data-tooltip]:focus-visible::after,
+.yt-actions-footer [data-tooltip]:focus-visible::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Alineación para botón de la derecha */
+.yt-actions-footer [data-tooltip-pos="left"]::after {
+    left: auto;
+    right: 0;
+    transform: translateY(4px);
+}
+.yt-actions-footer [data-tooltip-pos="left"]::before {
+    left: auto;
+    right: 14px;
+    transform: translateY(4px);
+}
+.yt-actions-footer [data-tooltip-pos="left"]:hover::after,
+.yt-actions-footer [data-tooltip-pos="left"]:hover::before {
+    transform: translateY(0);
+}
+
 /* TOAST ELEGANTE PARA AUTO-MARCADO DE YOUTUBE */
 .yt-mark-toast {
     position: fixed;
