@@ -3805,9 +3805,9 @@ function initTiempo() {
                     </div>
                     <div style="display:flex; align-items:center; gap:6px;">
                         <span class="breakdown-dur" style="background: rgba(255,255,255,0.06); color: ${cfg.color}; font-weight:700;">${dur}</span>
-                        <button class="tiempo-action-btn tiempo-split-btn" onclick="window.abrirModalDividirIntervalo(${safeItem})" title="Dividir este intervalo en dos actividades">✂️</button>
-                        <button class="tiempo-action-btn tiempo-edit-btn" onclick="window.abrirModalEditarIntervalo(${safeItem})" title="Editar hora o fase">✏️</button>
-                        <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id})" title="Eliminar este registro">🗑️</button>
+                        <button class="tiempo-action-btn tiempo-split-btn" onclick="window.abrirModalDividirIntervalo(${safeItem})" title="Dividir este intervalo en dos actividades">Dividir</button>
+                        <button class="tiempo-action-btn tiempo-edit-btn" onclick="window.abrirModalEditarIntervalo(${safeItem})" title="Editar hora o fase">Editar</button>
+                        <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id})" title="Eliminar este registro">Borrar</button>
                     </div>
                 </div>
             `;
@@ -4093,10 +4093,10 @@ function initTiempo() {
                                             ${item.subtag ? `<span style="color:#e2e8f0; font-size:0.85rem; margin-left:6px;">• ${escapeHTML(item.subtag)}</span>` : ''}
                                             <div style="color:#94a3b8; font-size:0.8rem; margin-top:2px;">${s} ➔ ${e} (${formatShortSecs(item.duration_seconds || 0)}) ${item.note ? `[${escapeHTML(item.note)}]` : ''}</div>
                                         </div>
-                                        <div style="display:flex; gap:4px;">
-                                            <button class="tiempo-action-btn tiempo-split-btn" onclick="window.abrirModalDividirIntervalo(${safeItem})" title="Dividir">✂️</button>
-                                            <button class="tiempo-action-btn tiempo-edit-btn" onclick="window.abrirModalEditarIntervalo(${safeItem})" title="Editar">✏️</button>
-                                            <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id}); window.cerrarModalTiempo();" title="Borrar">🗑️</button>
+                                        <div style="display:flex; gap:6px;">
+                                            <button class="tiempo-action-btn tiempo-split-btn" onclick="window.abrirModalDividirIntervalo(${safeItem})" title="Dividir">Dividir</button>
+                                            <button class="tiempo-action-btn tiempo-edit-btn" onclick="window.abrirModalEditarIntervalo(${safeItem})" title="Editar">Editar</button>
+                                            <button class="tiempo-delete-btn" onclick="window.eliminarIntervalo(${item.id}); window.cerrarModalTiempo();" title="Borrar">Borrar</button>
                                         </div>
                                     </div>
                                 `;
@@ -4228,7 +4228,7 @@ function initTiempo() {
 
                     return `
                         <tr>
-                            <td style="cursor:pointer;" onclick="window.verIntervalosDia('${item.date}')" title="Ver y editar actividades detalladas de este día"><b style="color:var(--accent-primary, #38bdf8); text-decoration: underline dotted;">${item.date} 📅</b></td>
+                            <td style="cursor:pointer;" onclick="window.verIntervalosDia('${item.date}')" title="Ver y editar actividades detalladas de este día"><b style="color:var(--accent-primary, #38bdf8); text-decoration: underline dotted;">${item.date}</b></td>
                             <td>${item.sleep_hours ? `<span class="badge ${slpBadge}" style="font-weight:700;">${item.sleep_hours}h</span>` : '--'}</td>
                             <td><span style="color:#10b981; font-weight:700;">${item.trabajo_formatted || formatShortSecs(item.trabajo)}</span></td>
                             <td><span style="color:${effColor}; font-weight:600;">${item.efficiency_pct || 0}%</span></td>
