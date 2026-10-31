@@ -349,9 +349,9 @@ function renderYouTubeSummaryCard(v) {
     }
 
     const noteBtnHtml = v.vault_path ? `
-        <button class="yt-btn yt-btn-note yt-btn-icon-only" onclick="openObsidianNote('${v.vault_path.replace(/'/g, "\\'")}')" data-tooltip="Abrir en Obsidian (.md)" aria-label="Abrir en Obsidian">
+        <a href="/api/open-note?path=${encodeURIComponent(v.vault_path)}" target="_blank" rel="noopener" class="yt-btn yt-btn-note yt-btn-icon-only" onclick="openObsidianNote(event, '${v.vault_path.replace(/'/g, "\\'")}')" data-tooltip="Abrir en Obsidian (.md)" aria-label="Abrir en Obsidian">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        </button>
+        </a>
     ` : '';
 
     // Veredicto diferencial (Tufte: Eliminar badge si es solo texto redundante invariante)
@@ -976,7 +976,8 @@ async function copyYouTubeLink(videoId, btnEl) {
     }
 }
 
-async function openObsidianNote(vaultPath) {
+async function openObsidianNote(evt, vaultPath) {
+    if (evt && evt.preventDefault) evt.preventDefault();
     if (!vaultPath) {
         if (typeof showToast === 'function') showToast('No hay nota asociada a este video', 'error');
         return;
@@ -995,7 +996,7 @@ async function openObsidianNote(vaultPath) {
         }
     } catch (err) {
         console.warn('Fallback abriendo nota:', err);
-        window.location.href = `obsidian://open?path=${encodeURIComponent(vaultPath)}`;
+        window.open(`/api/open-note?path=${encodeURIComponent(vaultPath)}`, '_blank');
     }
 }
 
