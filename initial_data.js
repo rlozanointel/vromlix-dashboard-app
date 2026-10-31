@@ -132,8 +132,8 @@ window.INITIAL_DASHBOARD_DATA = {
         {
           "time": "13:00",
           "title": "Escuela Dominical / Quórum",
-          "details": "Segunda hora de clases en la Capilla.",
-          "action_items": "Revisar lectura de quórum",
+          "details": "Segunda hora de clases en la Capilla (Barrio Valsequillo).",
+          "action_items": "📖 DISCURSO DEL DOMINGO: 'Un ayuno más elevado y más santo' — Élder Ulisses Soares (Conferencia General Octubre 2026)\n🔗 https://www.churchofjesuschrist.org/study/general-conference/2026/10/17soares?lang=spa\n\n💡 PRINCIPIOS CLAVE:\n* El ayuno no es abstinencia física pasiva ni hambre ritual de 24 horas; es consagración del corazón unida a una ofrenda voluntaria.\n* Promesa apostólica (Isaías 58): Desata las ligaduras de impiedad, rompe cadenas de opresión y disipa el desánimo.\n* Transforma la fatiga y la incertidumbre terrenal en fortaleza espiritual y paz en el hogar.\n\n💬 COMENTARIO PREPARADO PARA COMPARTIR EN CLASE:\n'El ayuno alcanza su nivel más elevado y santo cuando deja de ser un sacrificio pasivo y se convierte en una acción de fe voluntaria. Citando a Isaías, el Élder Soares nos enseña que el verdadero ayuno desata las ligaduras de impiedad y rompe todo yugo. En momentos donde enfrentamos fatiga mental, incertidumbre laboral o pesadez en el hogar, el ayuno acompañado de una ofrenda sincera nos permite hacer a un lado nuestras propias limitaciones para que el poder sanador y la perspectiva del Salvador tomen el control. No ayunamos para cambiar la voluntad de Dios, sino para alinear la nuestra con la de Él y recibir la fortaleza que de otro modo no tendríamos.'\n\n---\nRevisar lectura de quórum",
           "completed": false
         },
         {
@@ -155,26 +155,17 @@ window.INITIAL_DASHBOARD_DATA = {
         {
           "time": "",
           "title": "WhatsApp",
-          "details": "",
-          "action_items": "*Descargar todas las conversaciones que fueron realizadas antes del 31 de octubre y despues de",
+          "details": "Automatización de Mensajería, Anti-Revoke y Respaldos",
+          "action_items": "* Filtrar 'status@broadcast' en el daemon de WhatsApp para silenciar notificaciones de estados de contactos.\n* Respaldar y exportar conversaciones clave antes y después del 31 de octubre.\n\n---\n*Descargar todas las conversaciones que fueron realizadas antes del 31 de octubre y despues de",
           "completed": false,
-          "category": "fe",
+          "category": "tech",
           "is_focus": false
         },
         {
           "time": "",
           "title": "Doña Isa",
           "details": "Casera - Acuerdos de convivencia y pendientes del hogar",
-          "action_items": "* Tenis: Recoger los tenis disponibles que ofreció regalar (de su hijo)\n* Pollo: Pedirle su apoyo para cocinar un pollo la siguiente semana\n* Pomada: Pedirle que me devuelva mi pomada para el dolor\n* Convivencia: Comentarle con amabilidad y firmeza que no nos gustan las presiones\n* Lavar ropa: Coordinar turnos de uso del área de lavado",
-          "completed": false,
-          "category": "fe",
-          "is_focus": false
-        },
-        {
-          "time": "",
-          "title": "Conferencia",
-          "details": "",
-          "action_items": "",
+          "action_items": "* Recoger los tenis disponibles que ofreció regalar (de su hijo).\n* Pedir su apoyo para cocinar pollo la siguiente semana.\n* Solicitar devolución de pomada para el dolor.\n* Coordinar turnos fijos de uso del área de lavado.\n* Mantener comunicación firme y respetuosa sobre acuerdos del hogar.\n\n---\n* Tenis: Recoger los tenis disponibles que ofreció regalar (de su hijo)\n* Pollo: Pedirle su apoyo para cocinar un pollo la siguiente semana\n* Pomada: Pedirle que me devuelva mi pomada para el dolor\n* Convivencia: Comentarle con amabilidad y firmeza que no nos gustan las presiones\n* Lavar ropa: Coordinar turnos de uso del área de lavado",
           "completed": false,
           "category": "fe",
           "is_focus": false
@@ -182,89 +173,109 @@ window.INITIAL_DASHBOARD_DATA = {
         {
           "time": "",
           "title": "Postulaciones",
-          "details": "Lista de vacantes y postulaciones en seguimiento",
-          "action_items": "Enviar CV a:\n• LinkedIn Hermano kheri\nPasar cv a datos",
+          "details": "Lista de vacantes, CV y prospección laboral en seguimiento",
+          "action_items": "* Enviar CV actualizado al perfil de LinkedIn del Hermano Kheri.\n* Estructurar historial laboral y certificaciones en formato de base de datos.\n* Monitorear vacantes remotas compatibles en el CRM laboral (Capital One, etc.).\n\n---\nEnviar CV a:\n• LinkedIn Hermano kheri\nPasar cv a datos",
           "completed": false,
+          "category": "carrera",
           "is_focus": false
         },
         {
           "time": "",
-          "title": "NexoConable",
-          "details": "",
-          "action_items": "* Agregar las otras funcionalidades que tengo en mis documentos\n* Aplicar lo que dice video https://youtu.be/cVGHg4Vd9uM?si=5O3RFuSa9-XM5QsL\n* Ver opción de dentista, o quinas ser una app para varios casos\n* Cambiar nombre y subir a subdominio",
+          "title": "NexoContable",
+          "details": "Plataforma SaaS Contable & Fiscal Mexicana",
+          "action_items": "* 🚨 URGENTE SUPABASE (5 días): Ingresar a supabase.com/dashboard/project/wsligissaaaxkxjztpiw con rlozano.intel@gmail.com y pulsar 'Restore' para evitar congelación definitiva.\n* Integrar módulos y funcionalidades pendientes guardadas en documentos locales.\n* Analizar arquitectura del video de referencia sobre automatización contable.\n* Evaluar versión adaptada para consultorios dentales o solución multi-caso.\n* Configurar despliegue oficial en subdominio comercial.\n\n---\n* Agregar las otras funcionalidades que tengo en mis documentos\n* Aplicar lo que dice video https://youtu.be/cVGHg4Vd9uM?si=5O3RFuSa9-XM5QsL\n* Ver opción de dentista, o quinas ser una app para varios casos\n* Cambiar nombre y subir a subdominio",
           "completed": false,
+          "category": "negocios",
           "is_focus": false
         },
         {
           "time": "",
-          "title": "Chrome",
-          "details": "Gestión de Cuentas, Planes Gratuitos y Antigravity Pro",
-          "action_items": "* VÍA 1 (Prioridad): Probar activación de Google AI Pro / Antigravity con la cuenta rogerman617915 (rog617915@gmail.com)\n* Contestar ticket de SheerID (Subhadeep Manna en rog617915@gmail.com) subiendo captura/comprobante de estudios para 1 año gratis de Pro\n* Probar cuentas académicas de respaldo (UVP, UNED y BYU Pathway)\n* VÍA 2: Autenticar Google Gemini CLI vía OAuth para 1,000 req/día gratis en terminal\n* Limpiar y auditar bandejas de correo",
+          "title": "Acceso IA & Antigravity Pro",
+          "details": "Gestión de Cuentas Google, Planes Gratuitos y Membresía Pro",
+          "action_items": "* Comprobar activación de Google AI Pro en cuenta rogerman617915 (rog617915@gmail.com).\n* Subir captura/comprobante de estudios en ticket de SheerID (Subhadeep Manna) para obtener 1 año gratis de Pro.\n* Verificar credenciales y acceso a cuentas académicas de respaldo (UVP, UNED y BYU Pathway).\n* Auditar y depurar bandejas de correo secundarias.\n\n---\n* VÍA 1 (Prioridad): Probar activación de Google AI Pro / Antigravity con la cuenta rogerman617915 (rog617915@gmail.com)\n* Contestar ticket de SheerID (Subhadeep Manna en rog617915@gmail.com) subiendo captura/comprobante de estudios para 1 año gratis de Pro\n* Probar cuentas académicas de respaldo (UVP, UNED y BYU Pathway)\n* VÍA 2: Autenticar Google Gemini CLI vía OAuth para 1,000 req/día gratis en terminal\n* Limpiar y auditar bandejas de correo",
           "completed": false,
+          "category": "tech",
           "is_focus": false
         },
         {
           "time": "",
           "title": "Playeras",
-          "details": "",
-          "action_items": "* Integrar venta de playeras en subdominio\n* Frases: alma 5. nefi dime e ire. 3 nefi 15 9",
+          "details": "E-Commerce de Indumentaria Doctrinal e Inspiracional",
+          "action_items": "* Diseñar catálogo inicial con frases seleccionadas (Alma 5, Nefi 'Iré y haré', 3 Nefi 15:9).\n* Configurar pasarela de pagos y catálogo en subdominio comercial.\n\n---\n* Integrar venta de playeras en subdominio\n* Frases: alma 5. nefi dime e ire. 3 nefi 15 9",
           "completed": false,
+          "category": "negocios",
           "is_focus": false
         },
         {
           "time": "",
-          "title": "Negocios",
-          "details": "",
-          "action_items": "* Comunicar con sobrino\n* Revisar todos los negocios y comenzar a ejecutarlos\n* Revisar paginas de google maps y airbnb\n* Se me ocurre, que quizas invitar a los hermanos a publicitarse con nosotros y ya si quieren su pagina tendria costo extra\n\n\nCasos de uso de alto retorno de inversión (ROI): Se identifican seis categorías clave con impacto empresarial medible: soporte al cliente (ej. CLA gestiona 2.3M chats/mes), voz y pedidos (ej. Donatose aumentó conversiones al 71%), automatización de flujos de trabajo (ej. Otter.ai ahorra >4h/semana al 62% de usuarios), investigación y datos (ej. Clay ofrece 2-3x mejor cobertura), operaciones de TI (ej. PagerDuty logra 70% de reducción de ruido), y código y contenido (ej. Code Rabbit acelera la entrega de código en un 86%).\n\nPara construir un agente útil, se debe buscar puntos de dolor en mercados en crecimiento que sean tediosos, lentos, costosos o propensos a errores. Luego, aplicar las ventajas clave de la IA: disponibilidad 24/7, bajo costo, mayor velocidad, escalabilidad y personalización.\n\n\n\nhttps://youtu.be/W_wW6AFrqQo?si=DPXy_DqrB1KOKzeF",
+          "title": "Incubadora & Prospección",
+          "details": "Nuevas Vías de Ingresos, Alianzas y Servicios Digitales",
+          "action_items": "* Llamar al sobrino de Hna. Alma para ofrecer diseño y desarrollo de su página web.\n* Evaluar nicho y formato para apertura de canal temático en YouTube.\n* Prospectar negocios locales en Google Maps y Airbnb para ofrecer servicios de digitalización y presencia online.\n* Analizar propuesta para que miembros locales se publiciten con nosotros (con costo extra por página dedicada).\n\n---\n* Comunicar con sobrino\n* Revisar todos los negocios y comenzar a ejecutarlos\n* Revisar paginas de google maps y airbnb\n* Se me ocurre, que quizas invitar a los hermanos a publicitarse con nosotros y ya si quieren su pagina tendria costo extra\n\nCasos de uso de alto retorno de inversión (ROI): Se identifican seis categorías clave con impacto empresarial medible: soporte al cliente (ej. CLA gestiona 2.3M chats/mes), voz y pedidos (ej. Donatose aumentó conversiones al 71%), automatización de flujos de trabajo (ej. Otter.ai ahorra >4h/semana al 62% de usuarios), investigación y datos (ej. Clay ofrece 2-3x mejor cobertura), operaciones de TI (ej. PagerDuty logra 70% de reducción de ruido), y código y contenido (ej. Code Rabbit acelera la entrega de código en un 86%).\n\nPara construir un agente útil, se debe buscar puntos de dolor en mercados en crecimiento que sean tediosos, lentos, costosos o propensos a errores. Luego, aplicar las ventajas clave de la IA: disponibilidad 24/7, bajo costo, mayor velocidad, escalabilidad y personalización.\n\nhttps://youtu.be/W_wW6AFrqQo?si=DPXy_DqrB1KOKzeF",
           "completed": false,
+          "category": "negocios",
           "is_focus": false
         },
         {
           "time": "",
           "title": "Dashboard",
-          "details": "",
-          "action_items": "Volver a revisar que mas documentar\nVolver a revisar mejoras\n\n* Revisar agente nocturno\n* Revisar lo de ministrar\n* Revisar la app de ingles",
+          "details": "Mejoras en Plataforma Localhost 8080, PWA y Widgets",
+          "action_items": "* Atenuar el banner de atención en Main para que las alertas de Agente no invadan el flujo diario.\n* Optimizar módulo de ministración y seguimiento eclesiástico.\n* Evaluar mejoras en la interfaz de práctica de inglés.\n* Auditar la bitácora de ejecución del agente nocturno.\n\n---\nVolver a revisar que mas documentar\nVolver a revisar mejoras\n\n* Revisar agente nocturno\n* Revisar lo de ministrar\n* Revisar la app de ingles",
           "completed": false,
+          "category": "tech",
           "is_focus": false
         },
         {
           "time": "",
           "title": "Publicidad",
-          "details": "",
-          "action_items": "* Api Elevenlabs\n* Probar voz diego\n* Username\n* Publicar (ver mejor horario y dia)\n* Crear cuenta de tiktok\n* Activado elevenlabs para hacer pruebas\n* Crear video de lanzamiento\n* Considerar bytedance",
+          "details": "Campaña Audiovisual, Redes Sociales y Voces IA (Chats ElevenLabs & Estrategia)",
+          "action_items": "* Conectar y validar API de ElevenLabs con la voz clonada/seleccionada de Diego.\n* Registrar cuenta oficial en TikTok y asegurar el nombre de usuario corporativo.\n* Determinar calendario y horario óptimo para el video de lanzamiento.\n* Producir el video oficial de lanzamiento de la campaña.\n* Evaluar integración y formatos para ByteDance / TikTok Ads.\n\n---\n* Api Elevenlabs\n* Probar voz diego\n* Username\n* Publicar (ver mejor horario y dia)\n* Crear cuenta de tiktok\n* Activado elevenlabs para hacer pruebas\n* Crear video de lanzamiento\n* Considerar bytedance",
           "completed": false,
+          "category": "negocios",
           "is_focus": true
         },
         {
           "time": "",
           "title": "Hermana Alma",
-          "details": "Temas por platicar, revisar y acordar con la Hna. Alma Luis (Viajes La Ruta del Águila & Estudio de Belleza)",
-          "action_items": "* STRIPE vs SPEI BANCO AZTECA: Explicarle que para activar pagos con tarjeta en línea (Stripe), por ley fiscal mexicana Stripe solicita RFC, e.firma/Constancia Fiscal e INE del titular y retiene/reporta impuestos. Por ello, dejamos deshabilitado Stripe en la página por ahora y dejamos activo al 100% su apartado directo por SPEI a Banco Azteca (CLABE 127180012120460272 - Alma Luis). Si más adelante ella decide poner su RFC/INE, lo reactivamos en 1 clic.\n* REVISTA PDF EDITORIAL DE LUJO: Mostrarle el PDF 'Catalogo_Editorial_La_Ruta_Del_Aguila_2026.pdf' (después de revisarlo yo primero) para que nos dé su visto bueno antes de enviarlo a clientes y suscriptores.\n* DESGLOSE DE LOS 19 SERVICIOS Y CORTES DE ALUMNA: Mostrarle cómo quedaron los 19 precios oficiales (con 'Desde'), el desglose de qué incluye cada servicio y el banner de cortes gratis con alumna supervisada (Lun, Mié y Vie de 4 a 5 PM) para ver si desea ajustar algún detalle.\n* TIENDA DE PRODUCTOS LENDAN: Mostrarle la nueva tienda (tienda.html) con los 7 videos de Lendan y preguntarle si quiere mostrar precios fijos por producto o dejarlo en cotización por WhatsApp.\n* QR EN ESPEJOS DEL SALÓN: Imprimir y colocar los códigos QR en los espejos del Estudio de Belleza hacia mera-kirai.com, estetica.html y el Letrero 3D (ra.html).",
+          "details": "Acuerdos y Coordinación Comercial (Viajes La Ruta del Águila & Estudio de Belleza)",
+          "action_items": "* Consultar preferencia entre precios fijos de productos Lendan en tienda.html o cotización vía WhatsApp.\n* Mostrar desglose final de los 19 servicios y banner de cortes supervisados con alumna (Lun, Mié, Vie 4-5 PM).\n* Validar colocación de códigos QR en espejos del salón físico hacia mera-kirai.com y ra.html.\n* Explicar esquema SPEI Banco Azteca directo y mantener Stripe inactivo por trámites fiscales.\n* Revisar el PDF 'Catalogo_Editorial_La_Ruta_Del_Aguila_2026.pdf' antes de difundirlo.\n\n---\n* STRIPE vs SPEI BANCO AZTECA: Explicarle que para activar pagos con tarjeta en línea (Stripe), por ley fiscal mexicana Stripe solicita RFC, e.firma/Constancia Fiscal e INE del titular y retiene/reporta impuestos. Por ello, dejamos deshabilitado Stripe en la página por ahora y dejamos activo al 100% su apartado directo por SPEI a Banco Azteca (CLABE 127180012120460272 - Alma Luis). Si más adelante ella decide poner su RFC/INE, lo reactivamos en 1 clic.\n* REVISTA PDF EDITORIAL DE LUJO: Mostrarle el PDF 'Catalogo_Editorial_La_Ruta_Del_Aguila_2026.pdf' (después de revisarlo yo primero) para que nos dé su visto bueno antes de enviarlo a clientes y suscriptores.\n* DESGLOSE DE LOS 19 SERVICIOS Y CORTES DE ALUMNA: Mostrarle cómo quedaron los 19 precios oficiales (con 'Desde'), el desglose de qué incluye cada servicio y el banner de cortes gratis con alumna supervisada (Lun, Mié y Vie de 4 a 5 PM) para ver si desea ajustar algún detalle.\n* TIENDA DE PRODUCTOS LENDAN: Mostrarle la nueva tienda (tienda.html) con los 7 videos de Lendan y preguntarle si quiere mostrar precios fijos por producto o dejarlo en cotización por WhatsApp.\n* QR EN ESPEJOS DEL SALÓN: Imprimir y colocar los códigos QR en los espejos del Estudio de Belleza hacia mera-kirai.com, estetica.html y el Letrero 3D (ra.html).",
           "completed": false,
+          "category": "negocios",
           "is_focus": true
         },
         {
           "time": "",
           "title": "Mera Kirai",
-          "details": "Plataforma Web (mera-kirai.com, estetica.html, tienda.html, ra.html)",
-          "action_items": "✅ LISTO (30 Oct 2026):\n* Corregido botón Cotizar IA en catálogo (laptop y móvil)\n* Sellos diagonales AGOTADO / AGOTADOS en Expo Beauty Show y La Llorona Xochimilco\n* Actualizadas fechas de salidas a Noviembre-Diciembre 2026 y palabra 'Desde' en precios\n* Cuenta SPEI Banco Azteca real (127180012120460272) conectada y Stripe deshabilitado temporalmente\n* Estudio de Belleza Imagen y Estilo 'Alma' actualizado: 'Más de 30 años nos respaldan', ', etc.', 19 servicios con desglose, 4 paquetes en video, bono 10% en viajes y cortes gratis con alumna\n* Creada Tienda Lendan (tienda.html) con los 7 videos\n* Generado PDF Editorial de Lujo (Catalogo_Editorial_La_Ruta_Del_Aguila_2026.pdf)\n\nPENDIENTES OPERATIVOS CUANDO SE VENDA UN CONCIERTO:\n* Comprar Kit Viajero (snacks, aguas, gafete conmemorativo) y verificar póliza de seguro de pasajeros de la unidad rentada\n* Revisar expansión a eventos en GDL y provincia",
+          "details": "Plataforma Web y Operaciones Turísticas (mera-kirai.com)",
+          "action_items": "* Solicitar al chat de Viajes Alma que revise el Reel publicitario y valide retención/llamado a la acción.\n* Preparar Kit Viajero (snacks, aguas, gafetes conmemorativos) en cuanto se confirme la primera venta de concierto.\n* Verificar póliza de seguro de viajero vigente con la empresa de transporte rentada.\n* Evaluar rutas y expansión a conciertos en Guadalajara y provincia.\n\n---\n✅ LISTO (30 Oct 2026):\n* Corregido botón Cotizar IA en catálogo (laptop y móvil)\n* Sellos diagonales AGOTADO / AGOTADOS en Expo Beauty Show y La Llorona Xochimilco\n* Actualizadas fechas de salidas a Noviembre-Diciembre 2026 y palabra 'Desde' en precios\n* Cuenta SPEI Banco Azteca real (127180012120460272) conectada y Stripe deshabilitado temporalmente\n* Estudio de Belleza Imagen y Estilo 'Alma' actualizado: 'Más de 30 años nos respaldan', ', etc.', 19 servicios con desglose, 4 paquetes en video, bono 10% en viajes y cortes gratis con alumna\n* Creada Tienda Lendan (tienda.html) con los 7 videos\n* Generado PDF Editorial de Lujo (Catalogo_Editorial_La_Ruta_Del_Aguila_2026.pdf)\n\nPENDIENTES OPERATIVOS CUANDO SE VENDA UN CONCIERTO:\n* Comprar Kit Viajero (snacks, aguas, gafete conmemorativo) y verificar póliza de seguro de pasajeros de la unidad rentada\n* Revisar expansión a eventos en GDL y provincia",
           "completed": false,
+          "category": "negocios",
           "is_focus": true
         },
         {
           "time": "",
           "title": "Vault conocimiento",
-          "details": "",
-          "action_items": "* Revisar el vault de conocimiento, como esta organizado, si alguna carpeta la ocupan dos\n* Ver si podemos integrar cosas de docs, ya que me parecen que siguen el mismo principio",
+          "details": "Segundo Cerebro (Obsidian) y Repositorio Documental Central",
+          "action_items": "* Preservar VROMLIX_CORE/05_docs como almacén operativo de backend (datos que consume server.py como tasks.json y whiteboard.md).\n* Mantener Vault_Conocimiento como bóveda pura de Obsidian para notas atómicas (01_NOTAS) y transcripciones de audio (02_GRABACIONES).\n* Diseñar política de enlaces cruzados en Obsidian para evitar duplicidad o colisión entre carpetas.\n\n---\n* Revisar el vault de conocimiento, como esta organizado, si alguna carpeta la ocupan dos\n* Ver si podemos integrar cosas de docs, ya que me parecen que siguen el mismo principio",
           "completed": false,
+          "category": "tech",
           "is_focus": false
         },
         {
           "time": "",
-          "title": "Lectura YT y LDS",
-          "details": "",
-          "action_items": "* Leer resumenes de youtube\n* Leer LDS hasta alma",
+          "title": "Tiempo & Reloj Móvil",
+          "details": "Ajustes Técnicos y Reconciliación de Registros (Chat 1b5b108f)",
+          "action_items": "* Corregir desfase de zona horaria en el endpoint/móvil: Se guardan registros en UTC en vez de hora México (-6h), causando distorsiones (despertar a las 16:36 en vez de 10:36 AM).\n* Reconciliar registro de descanso nocturno: Faltó asentar la noche del viernes 30 al sábado 31 en sleep_logs (generó un bloque forzado de 550 min en time_intervals).\n* Crear índice maestro de audios (MOC_Grabaciones.md) en Vault_Conocimiento/02_GRABACIONES/ con metadatos de autor, tema y fecha para agrupar notas sueltas.",
           "completed": false,
+          "category": "tech",
+          "is_focus": false
+        },
+        {
+          "time": "",
+          "title": "Gobernanza & Ecosistema Skills",
+          "details": "Delimitación de la Pestaña Agente y Directrices para Chats de AntiGravity",
+          "action_items": "* Establecer en la documentación de skills que la pestaña Agente es exclusiva para salud técnica (scripts, crontab, dependencias rotas, logs).\n* Prohibir que los chats generen propuestas de Agente para proyectos personales; todo proyecto y meta debe canalizarse a Main (tasks.json).\n* Atenuar el banner de atención en Main para que no interrumpa visualmente el pizarrón diario.",
+          "completed": false,
+          "category": "tech",
           "is_focus": false
         }
       ]
@@ -1255,5 +1266,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-10-31 12:39:48"
+  "last_updated": "2026-10-31 16:12:48"
 };
