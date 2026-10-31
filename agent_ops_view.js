@@ -95,7 +95,9 @@ function renderActionCard(act, isPending) {
         'SKILL': '⚡ Skill',
         'SCRIPT_TOOL': '🛠️ Script / Herramienta',
         'ORGANIZATION': '📁 Organización',
-        'ROUTINE': '⚙️ Rutina'
+        'ROUTINE': '⚙️ Rutina',
+        'OPS_ALERT': '🚨 Alerta Operativa',
+        'SYSTEM_UPDATE': '📦 Actualización Sistema'
     };
     const catLabel = catIcons[act.category] || act.category || 'Acción';
 
