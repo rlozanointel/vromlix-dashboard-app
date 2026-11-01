@@ -765,7 +765,7 @@ function initTasks() {
             case "carrera":
                 return { label: "🎯 Carrera & CV", class: "cat-career" };
             case "fe":
-                return { label: "🏛️ Fe & Misión", class: "cat-faith" };
+                return { label: "🏛️ Fe & Hogar", class: "cat-faith" };
             case "tech":
             default:
                 return { label: "🛠️ Tech / Ops", class: "cat-tech" };
@@ -862,7 +862,7 @@ function initTasks() {
             { id: "negocios", label: "Negocios & Emprendimiento", icon: "💼", class: "cat-biz", placeholder: "+ Añadir a Negocios..." },
             { id: "carrera", label: "Carrera & CV", icon: "🎯", class: "cat-career", placeholder: "+ Añadir a Carrera..." },
             { id: "tech", label: "Tech & Ops", icon: "🛠️", class: "cat-tech", placeholder: "+ Añadir a Tech..." },
-            { id: "fe", label: "Fe, Misión & Familia", icon: "🏛️", class: "cat-faith", placeholder: "+ Añadir a Fe..." }
+            { id: "fe", label: "Fe, Familia & Hogar", icon: "🏛️", class: "cat-faith", placeholder: "+ Añadir a Fe..." }
         ];
 
         // Categories to display based on pill filter
