@@ -253,6 +253,23 @@
                         </div>
 
                         <div class="card-content">
+                            <!-- QUICK CAPTURE INTELIGENTE (VOZ + TEXTO) -->
+                            <div class="quick-capture-container" id="quick-capture-container">
+                                <div class="quick-capture-bar">
+                                    <button type="button" class="quick-mic-btn" id="btn-quick-mic" title="Dictar por voz (Español México)">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                                    </button>
+                                    <input type="text" id="quick-capture-input" class="quick-capture-input" placeholder="🎙️ Captura rápida (Voz o Texto): 'Pedir pomada a Doña Isa' o 'Buscar lyrics de Queen'..." autocomplete="off">
+                                    <button type="button" class="quick-send-btn" id="btn-quick-send" title="Guardar pendiente o meta (Enter)">
+                                        <span>Capturar</span>
+                                        <kbd>↵</kbd>
+                                    </button>
+                                </div>
+                                <div class="quick-mic-status hidden" id="quick-mic-status">
+                                    <span class="mic-dot"></span> <span id="quick-mic-text">Escuchando... Di tu pendiente o nueva meta</span>
+                                </div>
+                            </div>
+
                             <!-- BENTO GRID DE PROYECTOS -->
                             <div class="projects-bento-grid" id="projects-bento-grid">
                                 <!-- Tarjetas Bento inyectadas dinámicamente -->

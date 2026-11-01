@@ -7398,6 +7398,155 @@ summary {
     background: rgba(245, 158, 11, 0.12);
 }
 
+/* =============================================================
+   QUICK CAPTURE INTELIGENTE (VOZ & TEXTO)
+   ============================================================= */
+.quick-capture-container {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.quick-capture-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 6px 8px 6px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all var(--transition-fast);
+}
+
+.quick-capture-bar:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.quick-mic-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-page);
+    color: var(--text-secondary);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+}
+
+.quick-mic-btn:hover {
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    transform: scale(1.05);
+}
+
+.quick-mic-btn.listening {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #ef4444;
+    animation: micPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes micPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+        transform: scale(1.08);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+        transform: scale(1);
+    }
+}
+
+.quick-capture-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    font-family: var(--font-sans);
+    padding: 8px 4px;
+    outline: none;
+}
+
+.quick-capture-input::placeholder {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.quick-send-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 8px 14px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+}
+
+.quick-send-btn:hover {
+    background: var(--accent-primary-hover, #4f46e5);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+}
+
+.quick-send-btn kbd {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 0.72rem;
+    font-family: inherit;
+    font-weight: 700;
+}
+
+.quick-mic-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    color: #ef4444;
+    font-weight: 600;
+    background: rgba(239, 68, 68, 0.08);
+    border-radius: var(--radius-sm);
+    width: fit-content;
+}
+
+.quick-mic-status.hidden {
+    display: none;
+}
+
+.mic-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+    display: inline-block;
+    animation: micBlink 0.8s infinite alternate;
+}
+
+@keyframes micBlink {
+    0% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
 /* 4-COLUMN MACRO-AREA DECK */
 .projects-bento-grid {
     display: grid;

@@ -807,6 +807,150 @@ function initTasks() {
         showToast(`Proyecto "${title}" añadido con éxito`, 'success');
     };
 
+    // ==========================================
+    // QUICK CAPTURE INTELIGENTE (VOZ & TEXTO)
+    // ==========================================
+    let isSpeechRecording = false;
+    let speechRecognitionInstance = null;
+
+    window.executeQuickCapture = function(rawText) {
+        const input = document.getElementById('quick-capture-input');
+        const text = (typeof rawText === 'string' ? rawText : (input ? input.value : "")).trim();
+        if (!text) {
+            if (input) input.focus();
+            return;
+        }
+
+        const btnSend = document.getElementById('btn-quick-send');
+        if (btnSend) {
+            btnSend.disabled = true;
+            btnSend.innerHTML = `<span>Procesando...</span>`;
+        }
+
+        fetch('/api/quick-capture', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: text })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (btnSend) {
+                btnSend.disabled = false;
+                btnSend.innerHTML = `<span>Capturar</span><kbd>↵</kbd>`;
+            }
+            if (data.success) {
+                if (input) input.value = '';
+                if (data.tasks) {
+                    tasksState = data.tasks;
+                    try {
+                        localStorage.setItem('vromlix_tasks', JSON.stringify(tasksState));
+                    } catch(e) {}
+                    renderWeeklyTasks();
+                    renderProjects();
+                }
+                showToast(data.message || 'Pendiente registrado', 'success');
+            } else {
+                showToast(data.error || 'Error al capturar', 'danger');
+            }
+        })
+        .catch(err => {
+            console.error("Error en quick-capture:", err);
+            if (btnSend) {
+                btnSend.disabled = false;
+                btnSend.innerHTML = `<span>Capturar</span><kbd>↵</kbd>`;
+            }
+            showToast('Error de red al registrar captura rápida', 'danger');
+        });
+    };
+
+    function initQuickCaptureWidget() {
+        const input = document.getElementById('quick-capture-input');
+        const btnSend = document.getElementById('btn-quick-send');
+        const btnMic = document.getElementById('btn-quick-mic');
+        const statusBox = document.getElementById('quick-mic-status');
+        const statusText = document.getElementById('quick-mic-text');
+
+        if (input && !input.dataset.bound) {
+            input.dataset.bound = 'true';
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    window.executeQuickCapture();
+                }
+            });
+        }
+
+        if (btnSend && !btnSend.dataset.bound) {
+            btnSend.dataset.bound = 'true';
+            btnSend.addEventListener('click', () => {
+                window.executeQuickCapture();
+            });
+        }
+
+        if (btnMic && !btnMic.dataset.bound) {
+            btnMic.dataset.bound = 'true';
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (!SpeechRec) {
+                btnMic.addEventListener('click', () => {
+                    showToast('Dictado por voz requiere Google Chrome o Chromium. Puedes escribir en la barra.', 'info');
+                    if (input) input.focus();
+                });
+            } else {
+                speechRecognitionInstance = new SpeechRec();
+                speechRecognitionInstance.lang = 'es-MX';
+                speechRecognitionInstance.interimResults = false;
+                speechRecognitionInstance.maxAlternatives = 1;
+
+                speechRecognitionInstance.onstart = () => {
+                    isSpeechRecording = true;
+                    btnMic.classList.add('listening');
+                    if (statusBox) statusBox.classList.remove('hidden');
+                    if (statusText) statusText.textContent = 'Escuchando... Di tu pendiente o nueva meta';
+                };
+
+                speechRecognitionInstance.onresult = (event) => {
+                    if (event.results && event.results.length > 0) {
+                        const transcript = event.results[0][0].transcript;
+                        if (input) input.value = transcript;
+                        window.executeQuickCapture(transcript);
+                    }
+                };
+
+                speechRecognitionInstance.onerror = (event) => {
+                    console.warn("Speech recognition error:", event.error);
+                    isSpeechRecording = false;
+                    btnMic.classList.remove('listening');
+                    if (statusBox) statusBox.classList.add('hidden');
+                    if (event.error !== 'no-speech') {
+                        showToast(`Micro: ${event.error}`, 'danger');
+                    }
+                };
+
+                speechRecognitionInstance.onend = () => {
+                    isSpeechRecording = false;
+                    btnMic.classList.remove('listening');
+                    if (statusBox) statusBox.classList.add('hidden');
+                };
+
+                btnMic.addEventListener('click', () => {
+                    if (isSpeechRecording) {
+                        speechRecognitionInstance.stop();
+                    } else {
+                        try {
+                            speechRecognitionInstance.start();
+                        } catch(e) {
+                            console.warn("Recognition already started or permission blocked:", e);
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    // Llamar al inicializador de Quick Capture al cargar
+    setTimeout(initQuickCaptureWidget, 100);
+
     window.toggleExtraActions = function(index) {
         const el = document.getElementById(`proj-extra-${index}`);
         const btn = document.getElementById(`proj-btn-toggle-${index}`);
@@ -816,6 +960,7 @@ function initTasks() {
     };
 
     function renderProjects() {
+        initQuickCaptureWidget();
         const grid = document.getElementById("projects-bento-grid");
         if (!grid) return;
         grid.innerHTML = "";
