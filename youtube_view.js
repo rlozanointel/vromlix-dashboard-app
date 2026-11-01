@@ -977,14 +977,17 @@ async function copyYouTubeLink(videoId, btnEl) {
 }
 
 async function openObsidianNote(evt, vaultPath) {
-    if (evt && evt.preventDefault) evt.preventDefault();
+    if (evt) {
+        if (evt.preventDefault) evt.preventDefault();
+        if (evt.stopPropagation) evt.stopPropagation();
+    }
     if (!vaultPath) {
         if (typeof showToast === 'function') showToast('No hay nota asociada a este video', 'error');
         return;
     }
     try {
         if (typeof showToast === 'function') {
-            showToast('🧠 Abriendo nota en Obsidian...', 'info');
+            showToast('🧠 Abriendo nota en Obsidian...', 'info', 2000);
         }
         const res = await fetch(`/api/open-note?path=${encodeURIComponent(vaultPath)}&format=json`);
         const data = await res.json();
@@ -992,7 +995,7 @@ async function openObsidianNote(evt, vaultPath) {
             throw new Error(data.error || 'No se pudo abrir la nota');
         }
         if (typeof showToast === 'function') {
-            showToast('✅ Nota abierta en Obsidian', 'success');
+            showToast('✅ Nota abierta en Obsidian', 'success', 3000);
         }
     } catch (err) {
         console.warn('Fallback abriendo nota:', err);
