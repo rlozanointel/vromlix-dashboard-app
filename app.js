@@ -752,23 +752,23 @@ function initTasks() {
     function getProjectCategory(item) {
         if (item.category) return item.category;
         const t = (item.title || "").toLowerCase();
-        if (t.includes("mera kirai") || t.includes("nexo") || t.includes("playera") || t.includes("negocio") || t.includes("publicidad")) return "negocios";
-        if (t.includes("postula") || t.includes("cv") || t.includes("empleo") || t.includes("kheri")) return "carrera";
-        if (t.includes("elder") || t.includes("family") || t.includes("lds") || t.includes("lectura")) return "fe";
+        if (t.includes("mera kirai") || t.includes("playera") || t.includes("publicidad") || t.includes("alma")) return "negocios";
+        if (t.includes("nexo") || t.includes("postula") || t.includes("cv") || t.includes("empleo") || t.includes("kheri") || t.includes("incuba") || t.includes("prospec")) return "carrera";
+        if (t.includes("obispo") || t.includes("stalin") || t.includes("isa") || t.includes("elder") || t.includes("apoyo") || t.includes("ministra") || t.includes("fe") || t.includes("barrio")) return "fe";
         return "tech";
     }
 
     function getCategoryMeta(cat) {
         switch(cat) {
             case "negocios":
-                return { label: "💼 Negocios", class: "cat-biz" };
+                return { label: "🚀 Marcas & Difusión", class: "cat-biz" };
             case "carrera":
-                return { label: "🎯 Carrera & CV", class: "cat-career" };
+                return { label: "💼 Software & Nuevos Negocios", class: "cat-career" };
             case "fe":
-                return { label: "🏛️ Fe & Hogar", class: "cat-faith" };
+                return { label: "🏛️ Personas, Hogar & Fe", class: "cat-faith" };
             case "tech":
             default:
-                return { label: "🛠️ Tech / Ops", class: "cat-tech" };
+                return { label: "🛠️ Sistemas & Ecosistema Tech", class: "cat-tech" };
         }
     }
 
@@ -859,10 +859,10 @@ function initTasks() {
 
         // Define 4 Macro-Area Categories
         const CATEGORIES = [
-            { id: "negocios", label: "Negocios & Emprendimiento", icon: "💼", class: "cat-biz", placeholder: "+ Añadir a Negocios..." },
-            { id: "carrera", label: "Carrera & CV", icon: "🎯", class: "cat-career", placeholder: "+ Añadir a Carrera..." },
-            { id: "tech", label: "Tech & Ops", icon: "🛠️", class: "cat-tech", placeholder: "+ Añadir a Tech..." },
-            { id: "fe", label: "Fe, Familia & Hogar", icon: "🏛️", class: "cat-faith", placeholder: "+ Añadir a Fe..." }
+            { id: "negocios", label: "Marcas & Difusión", icon: "🚀", class: "cat-biz", placeholder: "+ Añadir a Marcas..." },
+            { id: "carrera", label: "Software & Nuevos Negocios", icon: "💼", class: "cat-career", placeholder: "+ Añadir a Software..." },
+            { id: "tech", label: "Sistemas & Ecosistema Tech", icon: "🛠️", class: "cat-tech", placeholder: "+ Añadir a Tech..." },
+            { id: "fe", label: "Personas, Hogar & Fe", icon: "🏛️", class: "cat-faith", placeholder: "+ Añadir a Personas..." }
         ];
 
         // Categories to display based on pill filter
