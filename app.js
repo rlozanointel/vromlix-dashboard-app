@@ -1459,6 +1459,18 @@ function initTasks() {
             `;
             cardBody.appendChild(nextActionBox);
 
+            // Reclamo visual banner if present in action_items
+            if ((proj.action_items || "").includes("⚠️ RECLAMO")) {
+                const reclamoBox = document.createElement("div");
+                reclamoBox.className = "proj-reclamo-banner";
+                reclamoBox.innerHTML = `<span>⚠️ Reclamo al Chat registrado (Toca para leer)</span>`;
+                reclamoBox.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    openTaskModal("antigravity", origIdx);
+                });
+                cardBody.appendChild(reclamoBox);
+            }
+
             if (rawLines.length > 1) {
                 const extraBox = document.createElement("div");
                 extraBox.className = "proj-extra-actions-box hidden";
@@ -1468,7 +1480,16 @@ function initTasks() {
                 extraList.className = "proj-extra-list";
                 rawLines.slice(1).forEach(itemLine => {
                     const li = document.createElement("li");
-                    li.textContent = itemLine.replace(/^[\*\•\-\s]+/, "");
+                    const cleanText = itemLine.replace(/^[\*\•\-\s]+/, "");
+                    if (cleanText.includes("⚠️ RECLAMO")) {
+                        li.className = "item-reclamo-highlight";
+                        li.innerHTML = `<strong>${escapeHTML(cleanText)}</strong>`;
+                    } else if (cleanText.includes("📋 MENSAJE")) {
+                        li.className = "item-msg-highlight";
+                        li.innerHTML = `<strong>${escapeHTML(cleanText)}</strong>`;
+                    } else {
+                        li.textContent = cleanText;
+                    }
                     extraList.appendChild(li);
                 });
                 extraBox.appendChild(extraList);
@@ -1572,6 +1593,13 @@ function initTasks() {
             countPill.className = "compact-count-pill";
             countPill.textContent = `${rawLines.length} pend.`;
             rightBox.appendChild(countPill);
+        }
+
+        if ((proj.action_items || "").includes("⚠️ RECLAMO")) {
+            const reclamoPill = document.createElement("span");
+            reclamoPill.className = "compact-reclamo-pill";
+            reclamoPill.textContent = "⚠️ Reclamo";
+            rightBox.appendChild(reclamoPill);
         }
 
         const starBtn = document.createElement("button");

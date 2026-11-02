@@ -10376,3 +10376,57 @@ summary {
     line-height: 1.4;
 }
 
+/* =============================================================
+   RECLAMO & MSG HIGHLIGHT BADGES EN TARJETAS DE PROYECTO
+   ============================================================= */
+.proj-reclamo-banner {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #ef4444;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: all var(--transition-fast);
+}
+
+.proj-reclamo-banner:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
+}
+
+.compact-reclamo-pill {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #ef4444;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+.item-reclamo-highlight {
+    background: rgba(239, 68, 68, 0.08);
+    border-left: 3px solid #ef4444;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: #f87171 !important;
+    margin-bottom: 4px;
+}
+
+.item-msg-highlight {
+    background: rgba(99, 102, 241, 0.08);
+    border-left: 3px solid #6366f1;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: #a5b4fc !important;
+    margin-bottom: 4px;
+}
+
+
