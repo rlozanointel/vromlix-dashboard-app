@@ -413,7 +413,7 @@ function renderYouTubeSummaryCard(v) {
             <!-- BARRA DE ACCIONES ERGONÓMICA COMPACTA -->
             <div class="yt-actions-footer">
                 ${!isArchived ? `
-                    <button class="yt-btn yt-btn-watched yt-btn-icon-only" onclick="handleYouTubeCardAction('${v.video_id}', 'watched', '${v.url_mark_watched}')" data-tooltip="Marcar Visto (últimos 8s)" aria-label="Marcar Visto">
+                    <button class="yt-btn yt-btn-watched yt-btn-icon-only" onclick="handleYouTubeCardAction('${v.video_id}', 'watched', '${v.url_mark_watched}')" data-tooltip="Marcar Visto (100% en historial)" aria-label="Marcar Visto">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     </button>
 
@@ -689,7 +689,7 @@ function showMarkWatchedToast(seconds = 4) {
         <div style="display: flex; flex-direction: column; gap: 2px;">
             <div style="font-weight: 600; color: #f1f5f9;">Pestaña enviada a un lado</div>
             <div style="font-size: 0.8rem; color: #94a3b8;">
-                Sincronizando últimos 8s en YouTube en segundo plano...
+                Sincronizando 100% en historial de YouTube en segundo plano...
             </div>
         </div>
         <button class="yt-toast-btn-dismiss" title="Cerrar aviso" onclick="hideMarkWatchedToast()">✕</button>
