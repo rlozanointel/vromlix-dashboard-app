@@ -1730,7 +1730,32 @@ function initMedia() {
     const toggleHiddenBtn = document.getElementById('toggle-hidden-media-btn');
     const moviesFilterContainer = document.getElementById('movies-filter-container');
 
-    let hiddenTitles = JSON.parse(localStorage.getItem('hiddenMediaTitles') || '[]');
+    const pendingHiddenTitles = [
+        'The Odyssey',
+        'Yellow Letters',
+        'Fatherland',
+        'Fjord',
+        'Horizon: An American Saga - Chapter 2',
+        'Salvation'
+    ];
+    let storedHidden = JSON.parse(localStorage.getItem('hiddenMediaTitles') || 'null');
+    let hiddenTitles;
+    if (storedHidden === null) {
+        hiddenTitles = [...pendingHiddenTitles];
+        localStorage.setItem('hiddenMediaTitles', JSON.stringify(hiddenTitles));
+    } else {
+        let updated = false;
+        pendingHiddenTitles.forEach(t => {
+            if (!storedHidden.includes(t)) {
+                storedHidden.push(t);
+                updated = true;
+            }
+        });
+        hiddenTitles = storedHidden;
+        if (updated) {
+            localStorage.setItem('hiddenMediaTitles', JSON.stringify(hiddenTitles));
+        }
+    }
     let showHidden = false;
     let showRecent = localStorage.getItem('showRecent') !== 'false';
     let mediaData = { movies: [], series: [] };
@@ -1856,11 +1881,42 @@ function initMedia() {
         return releaseYear || 'N/A';
     }
 
-    function getAvailabilityStatus(releaseDate, releaseYear) {
+    function getAvailabilityStatus(releaseDate, releaseYear, futureReleaseInfo, officialTitle) {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        const currentYear = today.getFullYear();
 
+        // 1. Prioridad: Future Release Info (VOD / Digital target date o Pausa de estudio)
+        if (futureReleaseInfo && typeof futureReleaseInfo === 'string') {
+            const friLower = futureReleaseInfo.toLowerCase();
+            if (friLower.includes('pausada') || friLower.includes('cancelad') || friLower.includes('enlatada')) {
+                return 'futuro';
+            }
+            const dateMatch = futureReleaseInfo.match(/(\d{4}-\d{2}-\d{2})/);
+            if (dateMatch) {
+                const vodParts = dateMatch[1].split('-');
+                const vodDate = new Date(parseInt(vodParts[0], 10), parseInt(vodParts[1], 10) - 1, parseInt(vodParts[2], 10));
+                // +5 días de colchón para ripeo y subtítulos en español (Regla Rogelio)
+                vodDate.setDate(vodDate.getDate() + 5);
+                vodDate.setHours(0, 0, 0, 0);
+                if (today < vodDate) {
+                    return 'futuro';
+                }
+            }
+        }
+
+        // 2. Determinar ventana de días según el tipo de película (Calibración Rogelio)
+        const tLower = (officialTitle || '').toLowerCase();
+        let thresholdDays = 125; // Estrenos comerciales estándar (120 + 5 días)
+
+        // Películas de autor de festivales (Cannes, Berlín, Venecia, MUBI, Neon)
+        const festivalTitles = ['fjord', 'fatherland', 'patria', 'yellow letters', 'gelbe briefe', 'salvation', 'kurtuluş', 'kurtulus'];
+        if (festivalTitles.some(f => tLower.includes(f))) {
+            thresholdDays = 185; // Festivales internacionales: 180 + 5 días
+        } else if (tLower.includes('odyssey') || tLower.includes('odisea')) {
+            thresholdDays = 135; // Blockbuster con ventana extendida Nolan: 130 + 5 días
+        }
+
+        // 3. Evaluar Release Date exacta
         const parsedDate = parseReleaseDate(releaseDate);
         if (parsedDate) {
             parsedDate.setHours(0, 0, 0, 0);
@@ -1869,27 +1925,25 @@ function initMedia() {
             }
             const diffTime = today - parsedDate;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            if (diffDays < 90) {
+            if (diffDays < thresholdDays) {
                 return 'reciente';
             } else {
                 return 'disponible';
             }
         }
 
-        // Fallback to release year
+        // 4. Fallback por año (Solución definitiva para proyectos futuros sin fecha exacta)
         const parsedYear = parseReleaseYear(releaseYear);
         if (parsedYear !== null) {
-            if (parsedYear > currentYear) {
+            // Películas modernas (2020 en adelante) sin fecha exacta NO están estrenadas (ej. Horizon 3, Otro día sin mexicanos)
+            if (parsedYear >= 2020) {
                 return 'futuro';
-            } else if (parsedYear === currentYear) {
-                // If it is the current year and date is missing, treat as futuro
-                return 'futuro';
-            } else {
-                return 'disponible';
             }
+            // Películas clásicas históricas anteriores a 2020 (ej. 1954, 1960, 1969)
+            return 'disponible';
         }
 
-        // Default for missing data (e.g. Creed IV)
+        // Por defecto: si no hay datos de estreno, es futuro
         return 'futuro';
     }
 
@@ -1905,9 +1959,10 @@ function initMedia() {
             const title = movie['Official Title'] || 'Título Desconocido';
             const year = movie['Release Year'] || 'N/A';
             const releaseDate = movie['Release Date'] || '';
+            const futureInfo = movie['Future Release Info'] || '';
             const isHidden = hiddenTitles.includes(title);
 
-            const status = getAvailabilityStatus(releaseDate, year);
+            const status = getAvailabilityStatus(releaseDate, year, futureInfo, title);
 
             // Futuro: nunca se muestran
             if (status === 'futuro') {
