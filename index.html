@@ -2907,6 +2907,39 @@
                     </button>
                 </div>
             </div>
+    <!-- WIDGET FLOTANTE DE CAPTURA RÁPIDA (ACCESIBLE DESDE CUALQUIER PESTAÑA / ALT+N) -->
+    <div class="floating-widget-wrapper" id="floating-widget-wrapper">
+        <button type="button" class="floating-capture-fab" id="btn-floating-capture-fab" title="Widget de Captura Rápida (Alt+N)">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span class="fab-pulse"></span>
+        </button>
+
+        <div class="floating-widget-modal hidden" id="floating-widget-modal">
+            <div class="floating-widget-header">
+                <div class="floating-widget-title">
+                    <span class="widget-icon">💡</span>
+                    <span>WIDGET DE NOTAS & METAS</span>
+                </div>
+                <div class="floating-widget-actions">
+                    <span class="widget-shortcut-badge">Alt + N</span>
+                    <button type="button" class="widget-close-btn" id="btn-close-floating-widget" title="Cerrar widget (Esc)">✕</button>
+                </div>
+            </div>
+            <div class="floating-widget-body">
+                <div class="widget-input-row">
+                    <button type="button" class="widget-mic-btn" id="btn-floating-mic" title="Dictar por voz">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    </button>
+                    <input type="text" id="floating-widget-input" class="widget-input" placeholder="Escribe o dicta: 'Pedir pomada a Doña Isa'..." autocomplete="off">
+                    <button type="button" class="widget-submit-btn" id="btn-floating-send">Capturar ↵</button>
+                </div>
+                <div class="widget-mic-status hidden" id="floating-mic-status">
+                    <span class="mic-dot"></span> <span>Escuchando... Di tu pendiente o meta</span>
+                </div>
+                <div class="widget-tips">
+                    <span>⚡ Clasifica en automático a tarjetas existentes o crea una nueva con su categoría.</span>
+                </div>
+            </div>
         </div>
     </div>
 

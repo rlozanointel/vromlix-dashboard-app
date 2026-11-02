@@ -946,6 +946,139 @@ function initTasks() {
                 });
             }
         }
+
+        // ── WIDGET FLOTANTE (FAB, MODAL HUD & ALT+N) ──────────
+        const btnFab = document.getElementById('btn-floating-capture-fab');
+        const modal = document.getElementById('floating-widget-modal');
+        const btnClose = document.getElementById('btn-close-floating-widget');
+        const floatingInput = document.getElementById('floating-widget-input');
+        const floatingSend = document.getElementById('btn-floating-send');
+        const floatingMic = document.getElementById('btn-floating-mic');
+        const floatingMicStatus = document.getElementById('floating-mic-status');
+
+        function toggleFloatingWidget(open) {
+            if (!modal) return;
+            const willOpen = open !== undefined ? open : modal.classList.contains('hidden');
+            if (willOpen) {
+                modal.classList.remove('hidden');
+                setTimeout(() => { if (floatingInput) floatingInput.focus(); }, 50);
+            } else {
+                modal.classList.add('hidden');
+                if (floatingMic && floatingMic.classList.contains('listening') && speechRecognitionInstance) {
+                    speechRecognitionInstance.stop();
+                }
+            }
+        }
+
+        window.toggleFloatingQuickWidget = toggleFloatingWidget;
+
+        if (btnFab && !btnFab.dataset.bound) {
+            btnFab.dataset.bound = 'true';
+            btnFab.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleFloatingWidget();
+            });
+        }
+
+        if (btnClose && !btnClose.dataset.bound) {
+            btnClose.dataset.bound = 'true';
+            btnClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleFloatingWidget(false);
+            });
+        }
+
+        if (floatingSend && !floatingSend.dataset.bound) {
+            floatingSend.dataset.bound = 'true';
+            floatingSend.addEventListener('click', () => {
+                const text = floatingInput ? floatingInput.value.trim() : "";
+                if (text) {
+                    window.executeQuickCapture(text);
+                    if (floatingInput) floatingInput.value = '';
+                    toggleFloatingWidget(false);
+                }
+            });
+        }
+
+        if (floatingInput && !floatingInput.dataset.bound) {
+            floatingInput.dataset.bound = 'true';
+            floatingInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    const text = floatingInput.value.trim();
+                    if (text) {
+                        window.executeQuickCapture(text);
+                        floatingInput.value = '';
+                        toggleFloatingWidget(false);
+                    }
+                } else if (e.key === 'Escape') {
+                    toggleFloatingWidget(false);
+                }
+            });
+        }
+
+        // Global Alt+N shortcut to trigger Floating Quick Capture anywhere
+        if (!window._floatingWidgetShortcutBound) {
+            window._floatingWidgetShortcutBound = true;
+            document.addEventListener('keydown', (e) => {
+                if (e.altKey && (e.key === 'n' || e.key === 'N')) {
+                    e.preventDefault();
+                    toggleFloatingWidget();
+                } else if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+                    toggleFloatingWidget(false);
+                }
+            });
+        }
+
+        // Speech recognition for floating widget mic
+        if (floatingMic && !floatingMic.dataset.bound) {
+            floatingMic.dataset.bound = 'true';
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (!SpeechRec) {
+                floatingMic.addEventListener('click', () => {
+                    showToast('Dictado por voz requiere Google Chrome o Chromium.', 'info');
+                    if (floatingInput) floatingInput.focus();
+                });
+            } else {
+                let floatingRec = new SpeechRec();
+                floatingRec.lang = 'es-MX';
+                floatingRec.interimResults = false;
+                floatingRec.maxAlternatives = 1;
+
+                floatingRec.onstart = () => {
+                    floatingMic.classList.add('listening');
+                    if (floatingMicStatus) floatingMicStatus.classList.remove('hidden');
+                };
+
+                floatingRec.onresult = (event) => {
+                    if (event.results && event.results.length > 0) {
+                        const transcript = event.results[0][0].transcript;
+                        if (floatingInput) floatingInput.value = transcript;
+                        window.executeQuickCapture(transcript);
+                        toggleFloatingWidget(false);
+                    }
+                };
+
+                floatingRec.onerror = () => {
+                    floatingMic.classList.remove('listening');
+                    if (floatingMicStatus) floatingMicStatus.classList.add('hidden');
+                };
+
+                floatingRec.onend = () => {
+                    floatingMic.classList.remove('listening');
+                    if (floatingMicStatus) floatingMicStatus.classList.add('hidden');
+                };
+
+                floatingMic.addEventListener('click', () => {
+                    if (floatingMic.classList.contains('listening')) {
+                        floatingRec.stop();
+                    } else {
+                        try { floatingRec.start(); } catch(e) {}
+                    }
+                });
+            }
+        }
     }
 
     // Llamar al inicializador de Quick Capture al cargar
