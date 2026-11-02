@@ -4,7 +4,7 @@
 // @version      9.0
 // @description  Finalización infalible 100% en historial: Calidad mínima 144p, silencio total, salto al final y detección garantizada del evento Ended
 // @author       Vromlix Core
-// @match        https://www.youtube.com*
+// @match        https://www.youtube.com/watch*
 // @grant        window.close
 // @grant        unsafeWindow
 // @run-at       document-start
