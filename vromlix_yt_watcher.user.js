@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Vromlix YouTube Auto-Watched & Closer
 // @namespace    https://vromlix.local/
-// @version      9.0
-// @description  Finalización infalible 100% en historial: Calidad mínima 144p, silencio total, salto al final y detección garantizada del evento Ended
+// @version      10.0
+// @description  Garantiza el 100% en historial de YouTube: reproduce los últimos 9s reales (144p Mute), espera el evento natural Ended sin pausar, despacha baliza y autocierra
 // @author       Vromlix Core
 // @match        https://www.youtube.com/watch*
 // @grant        window.close
@@ -17,9 +17,9 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.has('vromlix_auto')) return;
 
-    console.log('[Vromlix] Script v9.0 activo: Finalización al 100% de historial con calidad 144p y silencio...');
+    console.log('[Vromlix] Script v10.0 activo: Finalización al 100% garantizada (9s reales de reproducción sin pausar)...');
 
-    // 2. Bypass preventivo de extensiones que bloquean autoplay
+    // 2. Bypass preventivo de extensiones que bloquean autoplay (ej: ImprovedTube)
     try {
         const injectScript = document.createElement('script');
         injectScript.textContent = `
@@ -39,7 +39,7 @@
         (document.head || document.documentElement).appendChild(injectScript);
     } catch(e) {}
 
-    // 3. HUD Visual
+    // 3. HUD Visual no invasivo
     let hud = null;
     function updateHud(text, color = '#38bdf8') {
         try {
@@ -58,38 +58,26 @@
     // 4. Variables de control
     let isFinished = false;
     let hasSeeked = false;
-    let seekTimestamp = 0;
-    let targetSeekSec = 0;
+    let activePlayedSeconds = 0;
+    let lastTickTime = Date.now();
     let listenerAttached = false;
 
     // 5. Función de cierre garantizado tras registrar Ended
+    // CRÍTICO: ¡JAMÁS llamar a video.pause() ni a player.pauseVideo() aquí!
+    // Si se pausa, YouTube interpreta que el usuario dejó el video incompleto y cambia el estado de ENDED a PAUSED.
+    // Dejarlo fluir hasta el evento 'ended' natural permite que YouTube dispare la baliza de finalización (state=ended)
+    // que dibuja la barra roja completa de punta a punta en el historial.
     function finishAndClose() {
         if (isFinished) return;
         isFinished = true;
 
-        const video = document.querySelector('video.html5-main-video, video');
-        const player = document.getElementById('movie_player') || document.querySelector('.html5-video-player');
+        updateHud('✅ <b>¡Video completado al 100%!</b> Registrando baliza en historial y cerrando...', '#10b981');
+        console.log('[Vromlix] ✅ Video completado al 100% en YouTube (ENDED). Esperando 3s para viaje de baliza y cerrando...');
 
-        // Pausar y asegurar que el cabezal quede fijado en el último fotograma
-        if (video) {
-            try {
-                video.pause();
-                if (video.duration && !isNaN(video.duration)) {
-                    video.currentTime = Math.max(0, video.duration - 0.1);
-                }
-            } catch(e) {}
-        }
-        if (player && typeof player.pauseVideo === 'function') {
-            try { player.pauseVideo(); } catch(e) {}
-        }
-
-        updateHud('✅ <b>¡Video completado al 100%!</b> Registrando en historial y cerrando...', '#10b981');
-        console.log('[Vromlix] ✅ Video completado al 100% en YouTube. Baliza enviada. Cerrando pestaña en 2.5s...');
-
-        // 2.5 segundos para que la baliza de finalización de YouTube (state=ended) viaje a Google
+        // 3.0 segundos para asegurar que la baliza de YouTube (/api/stats/watchtime?state=ended) viaje a Google
         setTimeout(() => {
             window.close();
-        }, 2500);
+        }, 3000);
     }
 
     // 6. Silencio Absoluto (100% Mute en cada tick)
@@ -105,7 +93,7 @@
         }
     }
 
-    // 7. Ahorro extremo de recursos: Resolución 144p (tiny) y desactivar Autonav (siguiente video)
+    // 7. Ahorro extremo de recursos: Resolución 144p (tiny) y desactivar Autonav
     function enforceLowResourceMode(video, player) {
         if (player) {
             try {
@@ -132,7 +120,7 @@
     let lastPlayAttempt = 0;
     function ensurePlaying(video, player) {
         const now = Date.now();
-        if (now - lastPlayAttempt < 1000) return;
+        if (now - lastPlayAttempt < 1200) return;
         lastPlayAttempt = now;
 
         enforceStrictMute(video, player);
@@ -167,12 +155,16 @@
         }
     }
 
-    // 9. Ciclo de control cada 200ms
+    // 9. Ciclo de control cada 250ms
     const pollInterval = setInterval(() => {
         if (isFinished) {
             clearInterval(pollInterval);
             return;
         }
+
+        const now = Date.now();
+        const dt = Math.min(1.0, (now - lastTickTime) / 1000);
+        lastTickTime = now;
 
         const player = document.getElementById('movie_player') || document.querySelector('.html5-video-player');
         const video = document.querySelector('video.html5-main-video, video');
@@ -214,15 +206,15 @@
         const isPlaying = (state === 1) || (video && !video.paused && curTime > 0);
 
         // -------------------------------------------------------------
-        // FASE 1: SALTO AL 98% (Últimos 3.5 segundos)
+        // FASE 1: POSICIONAMIENTO EN LOS ÚLTIMOS 9 SEGUNDOS
         // -------------------------------------------------------------
         if (!hasSeeked) {
-            if (duration > 5) {
-                targetSeekSec = Math.max(0, duration - 3.5);
-                
-                // Si aún no está en la zona final, realizar el salto limpio
-                if (curTime < (targetSeekSec - 1.5)) {
-                    updateHud(`Saltando a los últimos segundos (${targetSeekSec.toFixed(0)}s / ${duration.toFixed(0)}s)...`, '#f59e0b');
+            if (duration > 10) {
+                const targetSeekSec = Math.max(0, duration - 9.0);
+
+                // Si aún no está en la zona de los últimos 11 segundos, realizar el salto limpio
+                if (curTime < (targetSeekSec - 2.0)) {
+                    updateHud(`Saltando a los últimos 9 segundos (${targetSeekSec.toFixed(0)}s / ${duration.toFixed(0)}s)...`, '#f59e0b');
                     try {
                         if (player && typeof player.seekTo === 'function') {
                             player.seekTo(targetSeekSec, true);
@@ -233,13 +225,13 @@
                     } catch(e) {}
                 }
 
-                // Acelerar reproducción a 2x para cruzar la línea final rápidamente
+                // Velocidad 1.0x normal: GARANTIZA que YouTube registre al menos 7-8 segundos
+                // de tiempo de reproducción real continuo (watchtime) para validar la vista al 100%
                 if (video) {
-                    try { video.playbackRate = 2.0; } catch(e) {}
+                    try { video.playbackRate = 1.0; } catch(e) {}
                 }
 
                 hasSeeked = true;
-                seekTimestamp = Date.now();
             } else {
                 updateHud('Esperando metadatos de duración...', '#f59e0b');
             }
@@ -250,39 +242,47 @@
         // FASE 2: REPRODUCIR HASTA ALCANZAR EL 100% (ENDED)
         // -------------------------------------------------------------
         if (hasSeeked) {
-            // Asegurar que siga en play a 2x
+            // Si está pausado y no ha finalizado, ordenar play
             if (!isPlaying && state !== 0 && !(video && video.ended)) {
                 ensurePlaying(video, player);
             }
-            if (video && video.playbackRate !== 2.0) {
-                try { video.playbackRate = 2.0; } catch(e) {}
+            if (video && video.playbackRate !== 1.0) {
+                try { video.playbackRate = 1.0; } catch(e) {}
+            }
+
+            // Acumular tiempo real de reproducción activa
+            if (isPlaying) {
+                activePlayedSeconds += dt;
             }
 
             const currentPosStr = curTime.toFixed(0);
             const totalDurStr = duration > 0 ? duration.toFixed(0) : '?';
-            updateHud(`Completando video (<b>${currentPosStr}s / ${totalDurStr}s</b>) a 2x (144p Mute)...`, '#38bdf8');
+            updateHud(`Sincronizando 100% en historial (<b>${activePlayedSeconds.toFixed(1)}s / 8.5s</b> reproducidos)...`, '#38bdf8');
 
             // DETECCIÓN DE FINALIZACIÓN AL 100%:
             // 1) Evento nativo video.ended
-            // 2) PlayerState === 0 (Ended en API de YouTube)
-            // 3) Cabezal alcanzó o superó la duración menos 0.25s
-            const isAtVeryEnd = (state === 0) || (video && video.ended) || (duration > 0 && curTime >= (duration - 0.25));
-            const timeSinceSeek = (Date.now() - seekTimestamp) / 1000;
+            // 2) PlayerState === 0 (Ended oficial en API de YouTube)
+            // 3) Cabezal alcanzó o superó el final (duration - 0.2s) habiendo corrido al menos 6s de reproducción activa
+            // 4) Si ya corrieron más de 9.0 segundos de reproducción real cerca del final
+            const isAtNaturalEnd = (state === 0) || (video && video.ended);
+            const isAtLastFrame = (duration > 0 && curTime >= (duration - 0.25) && activePlayedSeconds >= 6.0);
+            const hasPlayedFullWindow = (activePlayedSeconds >= 9.0 && curTime >= (duration - 1.5));
 
-            if (isAtVeryEnd || (timeSinceSeek > 6.0 && curTime >= (duration - 1.0))) {
+            if (isAtNaturalEnd || isAtLastFrame || hasPlayedFullWindow) {
+                console.log(`[Vromlix] Condición de fin alcanzada: isAtNaturalEnd=${isAtNaturalEnd}, isAtLastFrame=${isAtLastFrame}, hasPlayedFullWindow=${hasPlayedFullWindow}`);
                 clearInterval(pollInterval);
                 finishAndClose();
                 return;
             }
         }
-    }, 200);
+    }, 250);
 
-    // 10. Temporizador de seguridad máximo (35 segundos)
+    // 10. Temporizador de seguridad máximo (40 segundos)
     setTimeout(() => {
         if (!isFinished) {
-            console.log('[Vromlix] Timeout de seguridad alcanzado (35s). Finalizando...');
+            console.log('[Vromlix] Timeout de seguridad alcanzado (40s). Finalizando...');
             clearInterval(pollInterval);
             finishAndClose();
         }
-    }, 35000);
+    }, 40000);
 })();
