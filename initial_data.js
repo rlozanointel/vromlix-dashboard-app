@@ -143,7 +143,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "title": "Mera Kirai",
           "details": "Plataforma Web y Operaciones Turísticas (mera-kirai.com)",
           "action_items": "* Solicitar al chat de Viajes Alma que revise el Reel publicitario y valide retención/llamado a la acción.\n* Preparar Kit Viajero (snacks, aguas, gafetes conmemorativos) en cuanto se confirme la primera venta de concierto.\n* Verificar póliza de seguro de viajero vigente con la empresa de transporte rentada.\n* Evaluar rutas y expansión a conciertos en Guadalajara y provincia.\n\n📋 MENSAJE LISTO PARA COPIAR AL CHAT DE VIAJES ALMA:\n\"Hola, respecto a las operaciones de Merakirai:\n1. Revisemos el Reel publicitario de conciertos en CDMX y validemos si el llamado a la acción (WhatsApp y cotizador web) está optimizado.\n2. Mantener confirmadas las fechas de Noviembre-Diciembre 2026 en el catálogo.\n3. Armar la lista de insumos del Kit Viajero para tenerla lista ante la primera reservación de pasajes.\"\n\n⚠️ RECLAMO PARA EL CHAT PRESENTACIÓN ALMA (5891de1f):\n\"En la sesión anterior sobreescribiste la tarjeta de Mera Kirai borrando arbitrariamente las notas originales que yo había armado (el flujo detallado del botón de WhatsApp con sus dos pasos front-end/recepción, la lista de tareas operativas y los pendientes de estética). Hiciste algo muy mal al borrar mi contenido. Ya restauré todo ese bloque valioso; explica por qué lo borraste y en lo sucesivo respeta estrictamente no eliminar información preexistente en tasks.json.\"\n\n---\n✅ LISTO (30 Oct 2026):\n* Corregido botón Cotizar IA en catálogo (laptop y móvil)\n* Sellos diagonales AGOTADO / AGOTADOS en Expo Beauty Show y La Llorona Xochimilco\n* Actualizadas fechas de salidas a Noviembre-Diciembre 2026 y palabra 'Desde' en precios\n* Cuenta SPEI Banco Azteca real (127180012120460272) conectada y Stripe deshabilitado temporalmente\n* Estudio de Belleza Imagen y Estilo 'Alma' actualizado: 'Más de 30 años nos respaldan', ', etc.', 19 servicios con desglose, 4 paquetes en video, bono 10% en viajes y cortes gratis con alumna\n* Creada Tienda Lendan (tienda.html) con los 7 videos\n* Generado PDF Editorial de Lujo (Catalogo_Editorial_La_Ruta_Del_Aguila_2026.pdf)\n\nPENDIENTES OPERATIVOS CUANDO SE VENDA UN CONCIERTO:\n* Comprar Kit Viajero (snacks, aguas, gafete conmemorativo) y verificar póliza de seguro de pasajeros de la unidad rentada\n* Revisar expansión a eventos en GDL y provincia\n\n📌 BLOQUE ORIGINAL RESTAURADO (RECUPERADO DE GIT HISTÓRICO):\n* Revisar imágenes\n* Botón de cotizar IA\n* Colocar fecha de Xochimilco\n* Quitar evento de estilismo\n* Agregar Clabe a Stripe\n* Agregar palabra desde a los precios\n* Generar el PDF de catalogo como revista\n* Integrar venta de productos\n* Agregar las imágenes de publicidad del salon\n* Optimizar para visualizar en celular (3 cosas del otro chat)\n* Revision General\n* Agregar etc. en la presentación del salon, mas de 30 años.\n* Revisar para eventos en GDL y provincia\n* Colocar agotado a Xochimilco\n* ejercicio de cuestionar cada elemento\n* Ocupar dashboad local\n\nBotón Whatsapp:\n\"Para la integración de Whatsapp en la web, el flujo debe ser:\n1. En la Web (Front-end):\n   - Colocar el botón o icono flotante con enlace directo en formato:\n     https://wa.me/521XXXXXXXXXX?text=Hola,%20me%20interesa%20apartar%20el%20viaje%20a%20[DESTINO]%20para%20[N]_personas\n   - El mensaje debe llevar el destino y número de personas prellenado para que el usuario solo tenga que dar 'Enviar' sin escribir desde cero.\n\n2. En la Recepción (WhatsApp Business / Agente):\n   - Al dar clic, el usuario abre WhatsApp directamente con ese mensaje ya redactado.\n   - Si se usa WhatsApp Business, la respuesta rápida o mensaje de bienvenida automático recibe ese contexto exacto y entrega los datos de apartado (00 MXN), itinerario y opciones de pago (SPEI/OXXO).\"\n\nHermana:\n* Agregar Alma\n* Crear para la Ruta del Águila\n* Documentar todo\n* Poner QR en espejos de estética\n* Enviar los precios y secciones de cortes",
-          "completed": false,
+          "completed": true,
           "category": "negocios",
           "is_focus": true
         },
@@ -300,24 +300,13 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "Artificial",
       "Spanish Title": "Artificial",
-      "Genres": "Comedy, Drama",
+      "Genres": "Comedy, Drama, Horror",
       "Release Year": "2026",
       "Release Date": "2026-12-25",
       "IMDb Rating": 0.0,
       "Vromlix Score": 47.5,
-      "Plot Summary": "The story of OpenAI CEO Sam Altman, centred on his controversial firing and re-hiring in November 2023, a movement led by co-founder Ilya Sutskever.",
+      "Plot Summary": "In November 2023, amidst the height of a global AI boom, OpenAI co-founder Ilya Sutskever teamed with the company board to make one of the defining decisions that has drastically reshaped the company as we know it, the firing of current CEO Sam Altman. This controversial decision would lead to immense backlash, ultimately resulting in Altman's return five days later.",
       "IMDb Link": "https://www.imdb.com/title/tt37171180/"
-    },
-    {
-      "Official Title": "Godzilla Minus Zero",
-      "Spanish Title": "Godzilla Minus Zero",
-      "Genres": "Science Fiction, Horror, Action",
-      "Release Year": "2026",
-      "Release Date": "2026-11-03",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": 48.5,
-      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
-      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
     },
     {
       "Official Title": "Un mal partido",
@@ -333,24 +322,13 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "The Dog Stars",
       "Spanish Title": "Las estrellas del perro",
-      "Genres": "Action, Thriller, Science Fiction, Family",
+      "Genres": "Action, Thriller, Science Fiction",
       "Release Year": "2026",
       "Release Date": "2026-08-26",
       "IMDb Rating": 6.5,
       "Vromlix Score": 51.7,
       "Plot Summary": "After the world's population has been ravaged by a pandemic, a man lives a lonesome existence in a Colorado airplane hangar with his dog and a dour gunman he has befriended. When a mysterious transmission comes through on the radio while he’s flying his old Cessna, it sparks a hunt for the provenance of the sound.",
       "IMDb Link": "https://www.imdb.com/title/tt21285562/"
-    },
-    {
-      "Official Title": "Klara and the Sun",
-      "Spanish Title": "Klara y el sol",
-      "Genres": "Science Fiction, Drama",
-      "Release Year": "2026",
-      "Release Date": "2026-10-21",
-      "IMDb Rating": 5.6,
-      "Vromlix Score": 56,
-      "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
-      "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
     {
       "Official Title": "Horizon: An American Saga - Chapter 2",
@@ -364,13 +342,35 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27665778/"
     },
     {
+      "Official Title": "Klara and the Sun",
+      "Spanish Title": "Klara y el sol",
+      "Genres": "Science Fiction, Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-10-21",
+      "IMDb Rating": 5.9,
+      "Vromlix Score": 59,
+      "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
+      "IMDb Link": "https://www.imdb.com/title/tt14371256/"
+    },
+    {
+      "Official Title": "Apocalypse Z: New World",
+      "Spanish Title": "Apocalipsis Z: Nuevo Mundo",
+      "Genres": "Action, Thriller, Horror",
+      "Release Year": "2026",
+      "Release Date": "2026-10-09",
+      "IMDb Rating": 6.013,
+      "Vromlix Score": 60.1,
+      "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
+      "IMDb Link": "https://www.imdb.com/title/tt37522541/"
+    },
+    {
       "Official Title": "The Uprising",
       "Spanish Title": "El levantamiento",
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.89,
-      "Vromlix Score": 62.3,
+      "IMDb Rating": 7.844,
+      "Vromlix Score": 62.1,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -391,7 +391,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.5,
+      "IMDb Rating": 7.498,
       "Vromlix Score": 63.5,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
@@ -419,6 +419,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt40630780/"
     },
     {
+      "Official Title": "Animals",
+      "Spanish Title": null,
+      "Genres": "Thriller, Drama, Action, Crime",
+      "Release Year": "2026",
+      "Release Date": "2026-10-09",
+      "IMDb Rating": 6.964,
+      "Vromlix Score": 69.6,
+      "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
+      "IMDb Link": "https://www.imdb.com/title/tt31049299/"
+    },
+    {
       "Official Title": "Salvation",
       "Spanish Title": "Salvación",
       "Genres": "Drama, Mystery",
@@ -430,24 +441,13 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt36472181/"
     },
     {
-      "Official Title": "Animals",
-      "Spanish Title": null,
-      "Genres": "Thriller, Drama, Action, Crime",
-      "Release Year": "2026",
-      "Release Date": "2026-10-09",
-      "IMDb Rating": 7.0,
-      "Vromlix Score": 70,
-      "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
-      "IMDb Link": "https://www.imdb.com/title/tt31049299/"
-    },
-    {
       "Official Title": "Yellow Letters",
       "Spanish Title": "Cartas amarillas",
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-03-05",
-      "IMDb Rating": 7.2,
-      "Vromlix Score": 72,
+      "IMDb Rating": 7.1,
+      "Vromlix Score": 71,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
@@ -514,7 +514,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-06-13",
       "IMDb Rating": 7.6,
       "Vromlix Score": 81.7,
-      "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbet Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbet's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
+      "Plot Summary": "After moving from Romania to a remote Norwegian village to rebuild their lives, a family finds hope in their welcoming neighbors, but their fragile new beginning is threatened when their young daughter arrives at school covered in bruises.",
       "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
@@ -531,7 +531,7 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "Coyote vs. Acme",
       "Spanish Title": "Coyote vs. Acme",
-      "Genres": "Comedy, Adventure, Family",
+      "Genres": "Comedy, Adventure, Family, Animation",
       "Release Year": "2026",
       "Release Date": "2026-08-20",
       "IMDb Rating": 7.6,
@@ -549,17 +549,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 84.7,
       "Plot Summary": "In the 19th century, a drunken applejack salesman must go from zero to hero and become North America's greatest fur trapper by defeating hundreds of beavers.",
       "IMDb Link": "https://www.imdb.com/title/tt12818328/"
-    },
-    {
-      "Official Title": "Wildwood",
-      "Spanish Title": null,
-      "Genres": "Animation, Adventure, Fantasy",
-      "Release Year": "2026",
-      "Release Date": "2026-10-19",
-      "IMDb Rating": 8.619,
-      "Vromlix Score": 86.2,
-      "Plot Summary": "Prue and her classmate Curtis are drawn into a magical forest filled with enchanted creatures, loyal allies, and formidable adversaries as they embark on a desperate quest to rescue Prue's abducted baby brother from a murder of crows led by a mysterious woman named Alexandra.",
-      "IMDb Link": "https://www.imdb.com/title/tt2056785/"
     },
     {
       "Official Title": "Fatherland",
@@ -582,6 +571,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 87.3,
       "Plot Summary": "When disillusioned Swedish knight Antonius Block returns home from the Crusades to find his country in the grips of the Black Death, he challenges Death to a chess match for his life. Tormented by the belief that God does not exist, Block sets off on a journey, meeting up with traveling players Jof and his wife, Mia, and becoming determined to evade Death long enough to commit one redemptive act while he still lives.",
       "IMDb Link": "https://www.imdb.com/title/tt0050976/"
+    },
+    {
+      "Official Title": "Wildwood",
+      "Spanish Title": null,
+      "Genres": "Animation, Adventure, Fantasy",
+      "Release Year": "2026",
+      "Release Date": "2026-10-19",
+      "IMDb Rating": 8.7,
+      "Vromlix Score": 87.5,
+      "Plot Summary": "After her baby brother is abducted by a murder of crows, headstrong teenager Prue McKeel launches a desperate rescue mission into the Impassable Wilderness, an enchanted forest hidden just beyond Portland, Oregon. Joined by her hapless but loyal classmate Curtis Mehlberg, Prue navigates a world of talking animals, bandits, and powerful figures driven by grief and ambition. As the pair is drawn into a conflict threatening the balance of the forest itself, Prue must discover the strength and belief she never knew she possessed.",
+      "IMDb Link": "https://www.imdb.com/title/tt2056785/"
     },
     {
       "Official Title": "Minotaur",
@@ -670,6 +670,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 92,
       "Plot Summary": "Former petty criminal Ali la Pointe becomes a commander of the Algerian Front de Liberation Nationale, directing a guerilla insurgency against the colonial French occupation. Paratrooper commander Colonel Phillippe Mathieu, a veteran of World War II and the First Indochina War, is sent to Algeria to reinforce efforts to squelch the uprisings.",
       "IMDb Link": "https://www.imdb.com/title/tt0058946/"
+    },
+    {
+      "Official Title": "Godzilla Minus Zero",
+      "Spanish Title": "Godzilla Minus Zero",
+      "Genres": "Science Fiction, Horror, Action",
+      "Release Year": "2026",
+      "Release Date": "2026-11-03",
+      "IMDb Rating": 9.5,
+      "Vromlix Score": 96,
+      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
+      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
     },
     {
       "Official Title": "Another Day Without a Mexican",
@@ -802,17 +813,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": null,
       "Plot Summary": "The sun is about to be destroyed, and humans have built huge thrusters on the surface of the earth to find a new home. However, the road to the universe is full of dangers. In order to save the earth, young people from the wandering earth era stepped forward for the third time and started a life-and-death battle against time.",
       "IMDb Link": "https://www.imdb.com/title/tt32174149/"
-    },
-    {
-      "Official Title": "Apocalypse Z: New World",
-      "Spanish Title": "Apocalipsis Z: Nuevo Mundo",
-      "Genres": "Horror, Thriller",
-      "Release Year": "2026",
-      "Release Date": "2026-10-09",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": null,
-      "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
-      "IMDb Link": "https://www.imdb.com/title/tt37522541/"
     },
     {
       "Official Title": "Another Day Without a Mexican",
@@ -1015,14 +1015,14 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt3230854/"
     },
     {
-      "Official Title": "The Rehearsal",
+      "Official Title": "The Rehearsal Season 1",
       "Spanish Title": "El ensayo",
       "Current Season": 0,
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
       "Vromlix Score": 85,
-      "Plot Summary": "With a construction crew, a legion of actors, and seemingly unlimited resources, Nathan Fielder allows ordinary people to prepare for life's biggest moments by \"rehearsing\" them in carefully crafted simulations of his own design. When a single misstep could shatter your entire world, why leave life to chance?",
+      "Plot Summary": "Nathan Fielder gives people a chance to rehearse for their own lives in a world where nothing ever works out as expected.",
       "IMDb Link": "https://www.imdb.com/title/tt10802170/"
     },
     {
@@ -1226,5 +1226,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-02 23:21:20"
+  "last_updated": "2026-11-03 12:16:44"
 };
