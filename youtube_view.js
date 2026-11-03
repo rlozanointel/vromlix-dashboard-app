@@ -11,6 +11,45 @@ let ytAllCache = [];
 let ytChannelsCache = [];
 let ytUnreadLimit = 10;
 let ytHistoryLimit = 10;
+let ytChannelsSort = 'default'; // 'default', 'alpha', 'recent'
+let ytScanPollTimer = null;
+
+function setChannelsSort(mode) {
+    ytChannelsSort = mode;
+    renderYouTubeView();
+}
+
+function updateYouTubeScanStatusUI(status) {
+    const pill = document.getElementById('yt-scan-status-pill');
+    const dot = document.getElementById('yt-scan-status-dot');
+    const text = document.getElementById('yt-scan-status-text');
+    const scanBtn = document.getElementById('yt-trigger-scan-btn');
+    if (!pill || !dot || !text) return;
+
+    if (status && status.is_scanning) {
+        pill.style.background = 'rgba(245, 158, 11, 0.14)';
+        pill.style.color = '#f59e0b';
+        pill.style.borderColor = 'rgba(245, 158, 11, 0.35)';
+        dot.style.background = '#f59e0b';
+        dot.style.animation = 'statusDotPulse 1.4s ease-in-out infinite';
+        text.textContent = 'Escaneando...';
+        if (scanBtn) {
+            scanBtn.disabled = true;
+            scanBtn.innerHTML = '⏳ Escaneando...';
+        }
+    } else {
+        pill.style.background = 'rgba(16, 185, 129, 0.12)';
+        pill.style.color = '#10b981';
+        pill.style.borderColor = 'rgba(16, 185, 129, 0.25)';
+        dot.style.background = '#10b981';
+        dot.style.animation = 'none';
+        text.textContent = (status && status.status_text) ? status.status_text : ((status && status.completed_time) ? `Al día · ${status.completed_time}` : 'Al día');
+        if (scanBtn) {
+            scanBtn.disabled = false;
+            scanBtn.innerHTML = '🔄 Escanear';
+        }
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     initYouTubeView();
@@ -142,6 +181,9 @@ async function loadYouTubeSummaries() {
         ytAllCache = data.all_summaries || [];
         ytChannelsCache = data.channels || [];
         const stats = data.stats || {};
+        if (data.scan_status) {
+            updateYouTubeScanStatusUI(data.scan_status);
+        }
 
         const unreadCount = stats.unread_count ?? ytUnreadCache.length;
         const archivedCount = stats.archived_count ?? 0;
@@ -452,16 +494,28 @@ function renderYouTubeSummaryCard(v) {
 
 function renderMonitoredChannelsGrid() {
     const modeBadges = {
-        'MODO_A_ENTREVISTA': '🎙️ Entrevista / Ciencia (5-7 Ideas)',
-        'MODO_B_MULTITEMA': '📰 Multi-Tema / Noticias (Todos los Bloques)',
-        'MODO_C_VISUAL': '🖼️ Visual / Historia (Con Alerta Visual)'
+        'MODO_A_ENTREVISTA': '🎙️ Entrevista',
+        'MODO_B_MULTITEMA': '📰 Noticias',
+        'MODO_C_VISUAL': '🖼️ Visual'
     };
 
-    const cards = ytChannelsCache.map((ch, idx) => {
+    let sortedChannels = [...ytChannelsCache];
+    if (ytChannelsSort === 'alpha') {
+        sortedChannels.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'es', { sensitivity: 'base' }));
+    } else if (ytChannelsSort === 'recent') {
+        sortedChannels.sort((a, b) => {
+            const dA = a.created_at || '';
+            const dB = b.created_at || '';
+            if (dA && dB) return dB.localeCompare(dA);
+            return (b.rowid || 0) - (a.rowid || 0);
+        });
+    }
+
+    const cards = sortedChannels.map((ch, idx) => {
         const isPlaylist = (ch.handle || '').startsWith('playlist:');
         const plId = isPlaylist ? ch.handle.replace('playlist:', '') : '';
         const chUrl = isPlaylist ? `https://www.youtube.com/playlist?list=${plId}` : `https://www.youtube.com/${ch.handle}`;
-        const displayBadge = isPlaylist ? '📋 Playlist de Temporada' : (modeBadges[ch.mode] || ch.mode);
+        const displayBadge = isPlaylist ? '📋 Playlist' : (modeBadges[ch.mode] || ch.mode);
         const handleLabel = isPlaylist ? '📋 Playlist' : ch.handle;
 
         return `
@@ -495,28 +549,37 @@ function renderMonitoredChannelsGrid() {
 
     return `
         <div class="yt-channels-panel">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
-                <div>
-                    <h3 style="margin-bottom: 4px; color: var(--text-primary);">📡 Canales & Playlists Monitoreadas (${ytChannelsCache.length} Activos)</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Corte diario: 10:00 AM (CDMX) · Videos normales y en vivos · Sin Shorts</p>
-                </div>
-                <button class="btn-secondary" onclick="ytCurrentFilter='all'; updateViewModeUI(); renderYouTubeView();" style="padding: 7px 14px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;">
-                    ← Volver a los Videos
-                </button>
-            </div>
-
-            <!-- BUSCADOR PARA AGREGAR NUEVO CANAL O PLAYLIST -->
-            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 22px;">
-                <label style="display: block; font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">
-                    ➕ Agregar Canal o Playlist (Escribe el nombre, @handle, o pega el enlace de la playlist):
-                </label>
-                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <input type="text" id="yt-channel-search-input" class="yt-quick-url-input" style="flex: 1; min-width: 250px;" placeholder="Ej: Platzi, QuantumFracture, @nombre, o enlace de Playlist de temporada..." onkeydown="if(event.key==='Enter') searchNewYouTubeChannel();">
-                    <button id="yt-search-channel-btn" class="btn-primary" style="padding: 9px 18px; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; white-space: nowrap;" onclick="searchNewYouTubeChannel();">
-                        🔍 Buscar
+            <!-- BARRA UNIFICADA EN UNA SOLA FILA: VOLVER + TOTAL + ORDENAR + BUSCADOR COMPACTO -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 7px 12px;">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <button class="btn-secondary" onclick="ytCurrentFilter='all'; updateViewModeUI(); renderYouTubeView();" style="padding: 5px 11px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; font-size: 0.80rem;" title="Volver a los videos">
+                        ← Videos
                     </button>
+                    <span style="font-weight: 700; font-size: 0.84rem; color: var(--text-primary); display: flex; align-items: center; gap: 4px; padding-right: 6px; border-right: 1px solid var(--border-color);">
+                        📡 <span>${ytChannelsCache.length} canales</span>
+                    </span>
+                    <div style="display: inline-flex; align-items: center; gap: 2px;">
+                        <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 600; margin-right: 2px;">Orden:</span>
+                        <button class="btn-secondary" onclick="setChannelsSort('default')" style="padding: 3px 8px; font-size: 0.76rem; border-radius: var(--radius-sm); font-weight: ${ytChannelsSort === 'default' ? '700' : '500'}; background: ${ytChannelsSort === 'default' ? 'var(--accent-primary)' : 'transparent'}; color: ${ytChannelsSort === 'default' ? '#fff' : 'var(--text-secondary)'}; border: 1px solid ${ytChannelsSort === 'default' ? 'var(--accent-primary)' : 'var(--border-color)'}; cursor: pointer;" title="Orden de configuración original">
+                            Original
+                        </button>
+                        <button class="btn-secondary" onclick="setChannelsSort('alpha')" style="padding: 3px 8px; font-size: 0.76rem; border-radius: var(--radius-sm); font-weight: ${ytChannelsSort === 'alpha' ? '700' : '500'}; background: ${ytChannelsSort === 'alpha' ? 'var(--accent-primary)' : 'transparent'}; color: ${ytChannelsSort === 'alpha' ? '#fff' : 'var(--text-secondary)'}; border: 1px solid ${ytChannelsSort === 'alpha' ? 'var(--accent-primary)' : 'var(--border-color)'}; cursor: pointer;" title="Orden alfabético A-Z">
+                            A-Z
+                        </button>
+                        <button class="btn-secondary" onclick="setChannelsSort('recent')" style="padding: 3px 8px; font-size: 0.76rem; border-radius: var(--radius-sm); font-weight: ${ytChannelsSort === 'recent' ? '700' : '500'}; background: ${ytChannelsSort === 'recent' ? 'var(--accent-primary)' : 'transparent'}; color: ${ytChannelsSort === 'recent' ? '#fff' : 'var(--text-secondary)'}; border: 1px solid ${ytChannelsSort === 'recent' ? 'var(--accent-primary)' : 'var(--border-color)'}; cursor: pointer;" title="Canales agregados recientemente primero">
+                            Recientes
+                        </button>
+                    </div>
                 </div>
-                <div id="yt-search-results-container" style="margin-top: 14px; display: none;"></div>
+
+                <!-- BUSCADOR COMPACTO EN LA MISMA LÍNEA -->
+                <div style="display: flex; align-items: center; gap: 6px; position: relative; min-width: 250px; max-width: 360px; flex: 1;">
+                    <input type="text" id="yt-channel-search-input" class="yt-quick-url-input" style="padding: 4px 10px; font-size: 0.80rem; height: 30px; width: 100%; border-radius: var(--radius-md);" placeholder="➕ Canal (@handle, nombre o URL)..." onkeydown="if(event.key==='Enter') searchNewYouTubeChannel();">
+                    <button id="yt-search-channel-btn" class="btn-primary" style="padding: 4px 11px; height: 30px; border-radius: var(--radius-md); font-size: 0.80rem; font-weight: 600; cursor: pointer; white-space: nowrap;" onclick="searchNewYouTubeChannel();">
+                        Buscar
+                    </button>
+                    <div id="yt-search-results-container" style="position: absolute; top: 35px; right: 0; width: 100%; min-width: 310px; max-height: 380px; overflow-y: auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); box-shadow: 0 10px 28px rgba(0,0,0,0.45); z-index: 100; display: none; padding: 10px;"></div>
+                </div>
             </div>
 
             <!-- GRILLA DE CANALES ACTIVOS -->
@@ -538,11 +601,11 @@ async function searchNewYouTubeChannel() {
 
     if (btn) {
         btn.disabled = true;
-        btn.textContent = '⏳ Buscando...';
+        btn.textContent = '⏳ ...';
     }
 
     container.style.display = 'block';
-    container.innerHTML = `<div style="font-size: 0.88rem; color: var(--text-muted); padding: 8px 0;">🔍 Buscando "${query}" en YouTube...</div>`;
+    container.innerHTML = `<div style="font-size: 0.85rem; color: var(--text-muted); padding: 8px 0;">🔍 Buscando "${query}" en YouTube...</div>`;
 
     try {
         const res = await fetch('/api/youtube/channels/search', {
@@ -554,36 +617,43 @@ async function searchNewYouTubeChannel() {
         const candidates = data.candidates || [];
 
         if (candidates.length === 0) {
-            container.innerHTML = `<div style="font-size: 0.88rem; color: var(--accent-warning); padding: 8px 0;">⚠️ No se encontraron canales para "${query}". Intenta escribir el @handle exacto o su enlace.</div>`;
+            container.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 0.82rem; color: var(--accent-warning);">⚠️ Sin resultados</span>
+                    <button onclick="document.getElementById('yt-search-results-container').style.display='none'" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.95rem;">✕</button>
+                </div>
+                <div style="font-size: 0.80rem; color: var(--text-muted);">Prueba con el @handle o URL exacta del canal.</div>
+            `;
             return;
         }
 
         const itemsHtml = candidates.map(c => `
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 8px;">
-                <div>
-                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">${c.name}</div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted);">
-                        <b>${c.handle}</b> ${c.sample_title ? `· Último video: <i>"${c.sample_title}"</i>` : ''}
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 6px; gap: 8px;">
+                <div style="min-width: 0; flex: 1;">
+                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${c.name}</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        <b>${c.handle}</b> ${c.sample_title ? `· "${c.sample_title}"` : ''}
                     </div>
                 </div>
-                <button class="btn-primary" style="padding: 6px 14px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-md); cursor: pointer;" onclick="addMonitoredChannel('${c.handle}', '${c.name.replace(/'/g, "\\'")}')">
-                    ➕ Agregar Canal
+                <button class="btn-primary" style="padding: 4px 10px; font-size: 0.78rem; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; white-space: nowrap;" onclick="addMonitoredChannel('${c.handle}', '${c.name.replace(/'/g, "\\'")}')">
+                    + Agregar
                 </button>
             </div>
         `).join('');
 
         container.innerHTML = `
-            <div style="margin-top: 6px;">
-                <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-primary); margin-bottom: 8px;">¿Cuál de estos canales deseas monitorear?</div>
-                ${itemsHtml}
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">
+                <span style="font-size: 0.80rem; font-weight: 700; color: var(--accent-primary);">Canales encontrados:</span>
+                <button onclick="document.getElementById('yt-search-results-container').style.display='none'" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.95rem; padding: 0 4px;" title="Cerrar">✕</button>
             </div>
+            ${itemsHtml}
         `;
     } catch (err) {
-        container.innerHTML = `<div style="color: var(--accent-danger); font-size: 0.88rem;">Error buscando: ${err.message}</div>`;
+        container.innerHTML = `<div style="color: var(--accent-danger); font-size: 0.82rem;">Error buscando: ${err.message}</div>`;
     } finally {
         if (btn) {
             btn.disabled = false;
-            btn.textContent = '🔍 Buscar Canal';
+            btn.textContent = 'Buscar';
         }
     }
 }
@@ -597,6 +667,11 @@ async function addMonitoredChannel(handle, name) {
         });
         const data = await res.json();
         if (!res.ok || !data.success) throw new Error(data.error || 'Error al agregar');
+
+        const container = document.getElementById('yt-search-results-container');
+        if (container) container.style.display = 'none';
+        const input = document.getElementById('yt-channel-search-input');
+        if (input) input.value = '';
 
         if (typeof showAgentNotification === 'function') {
             showAgentNotification(`Canal ${name} agregado con éxito`, 'success');
@@ -875,40 +950,50 @@ async function summarizeCustomYouTubeUrl(url) {
 }
 
 async function triggerYouTubeChannelScan() {
-    const btn = document.getElementById('yt-trigger-scan-btn');
     const totalChannels = (ytChannelsCache && ytChannelsCache.length) ? ytChannelsCache.length : 20;
-    if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = `⏳ Revisando ${totalChannels} canales...`;
-    }
+    updateYouTubeScanStatusUI({ is_scanning: true });
+
     try {
         if (typeof showToast === 'function') {
             showToast(`⏳ Escaneando ${totalChannels} canales en segundo plano...`, 'info');
         }
         const res = await fetch('/api/youtube/trigger-scan', { method: 'POST' });
         const data = await res.json();
-        if (typeof showAgentNotification === 'function') {
-            showAgentNotification(data.message || `Escaneo de ${totalChannels} canales iniciado`, 'info');
-        } else if (typeof showToast === 'function') {
-            showToast(data.message || `Escaneo de ${totalChannels} canales iniciado`, 'info');
-        }
-        setTimeout(() => {
-            loadYouTubeSummaries();
-            if (btn) {
-                btn.disabled = false;
-                btn.innerHTML = '🔄 Buscar Nuevos Ahora';
+
+        // Polling no bloqueante en segundo plano (revisa cada 5s sin congelar la pantalla)
+        if (ytScanPollTimer) clearInterval(ytScanPollTimer);
+        ytScanPollTimer = setInterval(async () => {
+            try {
+                const sRes = await fetch('/api/youtube/scan-status');
+                if (!sRes.ok) return;
+                const status = await sRes.json();
+                if (!status.is_scanning) {
+                    clearInterval(ytScanPollTimer);
+                    ytScanPollTimer = null;
+                    updateYouTubeScanStatusUI(status);
+                    loadYouTubeSummaries();
+                    const newCount = status.new_videos_count || 0;
+                    const timeLabel = status.completed_time ? ` (${status.completed_time})` : '';
+                    const msg = newCount > 0 
+                        ? `✅ Escaneo completado: ${newCount} videos nuevos${timeLabel}` 
+                        : `✅ Todo al día: sin videos pendientes${timeLabel}`;
+                    if (typeof showToast === 'function') {
+                        showToast(msg, 'success');
+                    }
+                } else {
+                    updateYouTubeScanStatusUI(status);
+                }
+            } catch (pollErr) {
+                console.warn('Error verificando estado de escaneo:', pollErr);
             }
-        }, 4000);
+        }, 5000);
     } catch (err) {
         if (typeof showToast === 'function') {
             showToast(err.message, 'error');
         } else {
             console.error('Error:', err);
         }
-        if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = '🔄 Buscar Nuevos Ahora';
-        }
+        updateYouTubeScanStatusUI({ is_scanning: false, status_text: 'Error en escaneo' });
     }
 }
 
