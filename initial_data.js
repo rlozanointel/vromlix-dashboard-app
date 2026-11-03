@@ -195,7 +195,7 @@ window.INITIAL_DASHBOARD_DATA = {
         },
         {
           "time": "",
-          "title": "Acceso IA & Antigravity Pro",
+          "title": "Antigratvity gratis",
           "details": "Gestión de Cuentas Google, Planes Gratuitos y Membresía Pro",
           "action_items": "* Comprobar activación de Google AI Pro en cuenta rog617915@gmail.com, ingresar al correo quue me envieron y subir comprobante de estudios en ticket de SheerID para asegurar el año gratuito de Pro. Validar credenciales de acceso a cuentas académicas (UVP, UNED ), para ver cual de ellas me sirve para que me den el año gratis\n* Depurar y depurar bandejas de correo de todas mis cuuentas.\n* Continuar viendo como puedo crear mi propio antigravity\n\n⚠️ RECLAMO PARA EL CHAT ANTIGRAVITY GRATIS (1f2b4278):\n\"En la sesión anterior sobreescribiste y borraste mis notas originales de la tarjeta Chrome (* Probar cuentas pro uned/uvp, * Contestar correos sheerid, * Crear nuevo antigravity, * Limpiar correos) sin mi consentimiento. Es inaceptable eliminar información previa del usuario. Ya restauré mis notas; de ahora en adelante debes respetar las directrices y preservar siempre las notas existentes.\"",
           "completed": false,
@@ -1191,5 +1191,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-03 17:43:46"
+  "last_updated": "2026-11-03 17:44:29"
 };
