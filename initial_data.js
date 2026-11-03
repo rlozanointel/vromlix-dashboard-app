@@ -125,7 +125,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "13:30",
           "title": "Quórum de Élderes (1:30 PM)",
           "details": "Segunda hora de clases (1:30 PM - 2:15 PM). Salón de Quórum.",
-          "action_items": "📖 DISCURSO DEL DOMINGO: \"Un ayuno más elevado y más santo\" — Élder Ulisses Soares (Conferencia General Octubre 2026)\n🔗 https://www.churchofjesuschrist.org/study/general-conference/2026/10/17soares?lang=spa\n\n💡 IDEAS CLAVE:\n* El ayuno no es abstinencia física pasiva ni hambre ritual de 24 horas; es consagración del corazón unida a una ofrenda voluntaria.\n* Promesa apostólica (Isaías 58): Desata ligaduras de impiedad, rompe cadenas de opresión y disipa el desánimo laboral y familiar.\n* Transforma la fatiga y la incertidumbre terrenal en fortaleza espiritual y paz en el hogar.\n\n💬 COMENTARIO PREPARADO PARA COMPARTIR EN CLASE:\n\"El ayuno alcanza su nivel más elevado y santo cuando deja de ser un sacrificio pasivo y se convierte en una acción de fe voluntaria. Citando a Isaías, el Élder Soares nos enseña que el verdadero ayuno desata las ligaduras de impiedad y rompe todo yugo. En momentos donde enfrentamos fatiga mental, incertidumbre laboral o pesadez en el hogar, el ayuno acompañado de una ofrenda sincera nos permite hacer a un lado nuestras propias limitaciones para que el poder sanador y la perspectiva del Salvador tomen el control. No ayunamos para cambiar la voluntad de Dios, sino para alinear la nuestra con la de Él y recibir la fortaleza que de otro modo no tendríamos.\"\n\n---\nRevisar lectura de quórum",
+          "action_items": "",
           "completed": false
         }
       ],
@@ -1218,5 +1218,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-03 14:53:23"
+  "last_updated": "2026-11-03 14:58:05"
 };
