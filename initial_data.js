@@ -179,7 +179,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Tiempo & Reloj Móvil",
           "details": "Ajustes Técnicos y Reconciliación de Registros (Chat 1b5b108f)",
-          "action_items": "* Corregir desfase de zona horaria: El móvil/endpoint registra en UTC en lugar de Hora México (-6h), marcando despertares a las 16:36 en vez de 10:36 AM.\n* Reconciliar registro de descanso nocturno: Asentar en sleep_logs la noche del viernes 30 al sábado 31 (evitar intervalo forzado de 550 min).\n* Generar índice maestro MOC_Grabaciones.md en Vault_Conocimiento/02_GRABACIONES/.\n\n📋 MENSAJE LISTO PARA COPIAR AL CHAT DE TIEMPO / MÓVIL:\n\"Hola, tenemos 3 pendientes en el sistema de tiempo y reloj:\n1. Corregir el guardado de timestamps en vromlix_time_tracker.sqlite: se están insertando horas en UTC (+6h de desfase respecto a Puebla/México). Ajustar para que use hora local America/Mexico_City.\n2. Reconciliar la entrada faltante de descanso nocturno de la noche del 30 al 31 de octubre en la tabla sleep_logs.\n3. En Vault_Conocimiento/02_GRABACIONES/, generar el archivo índice MOC_Grabaciones.md agrupando audios por tema, fecha y autor.\"",
+          "action_items": "* No esta siendo funcional el widget, tengo muchos detalles, asi que borrare mis registros anteriores y registrare los nuevos para saber en donde tengo problemas de registro, por ejemplo, sigue sin funcionar cuuando mi computadora esta apagada o cuando no estoy conectado en internet\n* Generar archivo índice MOC_Grabaciones.md en Vault_Conocimiento/02_GRABACIONES/.",
           "completed": false,
           "category": "tech",
           "is_focus": true
@@ -1200,5 +1200,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-03 17:27:40"
+  "last_updated": "2026-11-03 17:31:57"
 };
