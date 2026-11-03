@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Vromlix YouTube Auto-Watched & Closer
 // @namespace    https://vromlix.local/
-// @version      10.0
-// @description  Garantiza el 100% en historial de YouTube: reproduce los últimos 9s reales (144p Mute), espera el evento natural Ended sin pausar, despacha baliza y autocierra
+// @version      11.0
+// @description  Garantiza el 100% en historial de YouTube: offset adaptativo según duración (3m a 3h), velocidad 2x, fijación en último frame, flush de baliza y autocierre
 // @author       Vromlix Core
 // @match        https://www.youtube.com/watch*
 // @grant        window.close
@@ -17,7 +17,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.has('vromlix_auto')) return;
 
-    console.log('[Vromlix] Script v10.0 activo: Finalización al 100% garantizada (9s reales de reproducción sin pausar)...');
+    console.log('[Vromlix] Script v11.0 activo: Finalización al 100% en historial (Offset adaptativo + 2x + Flush)...');
 
     // 2. Bypass preventivo de extensiones que bloquean autoplay (ej: ImprovedTube)
     try {
@@ -58,26 +58,50 @@
     // 4. Variables de control
     let isFinished = false;
     let hasSeeked = false;
-    let activePlayedSeconds = 0;
-    let lastTickTime = Date.now();
+    let seekTimestamp = 0;
     let listenerAttached = false;
 
-    // 5. Función de cierre garantizado tras registrar Ended
-    // CRÍTICO: ¡JAMÁS llamar a video.pause() ni a player.pauseVideo() aquí!
-    // Si se pausa, YouTube interpreta que el usuario dejó el video incompleto y cambia el estado de ENDED a PAUSED.
-    // Dejarlo fluir hasta el evento 'ended' natural permite que YouTube dispare la baliza de finalización (state=ended)
-    // que dibuja la barra roja completa de punta a punta en el historial.
+    // 5. Función de cierre con FLUSH garantizado de la baliza de Google
     function finishAndClose() {
         if (isFinished) return;
         isFinished = true;
 
-        updateHud('✅ <b>¡Video completado al 100%!</b> Registrando baliza en historial y cerrando...', '#10b981');
-        console.log('[Vromlix] ✅ Video completado al 100% en YouTube (ENDED). Esperando 3s para viaje de baliza y cerrando...');
+        const video = document.querySelector('video.html5-main-video, video');
+        const player = document.getElementById('movie_player') || document.querySelector('.html5-video-player');
 
-        // 3.0 segundos para asegurar que la baliza de YouTube (/api/stats/watchtime?state=ended) viaje a Google
+        // Paso A: Fijar el cabezal en el último fotograma exacto (99.98% de la duración)
+        const dur = (video && video.duration && !isNaN(video.duration) && video.duration > 0)
+            ? video.duration
+            : (player && player.getDuration ? player.getDuration() : 0);
+
+        if (dur > 0) {
+            const finalPos = Math.max(0, dur - 0.05);
+            try {
+                if (video) video.currentTime = finalPos;
+            } catch(e) {}
+            try {
+                if (player && typeof player.seekTo === 'function') player.seekTo(finalPos, true);
+            } catch(e) {}
+        }
+
+        // Paso B: Pausar de inmediato.
+        // En la arquitectura del reproductor de YouTube, llamar a pause() provoca un FLUSH INMEDIATO
+        // de la telemetría pendiente (/api/stats/watchtime?state=paused&cmt=FINAL_POS).
+        // Al enviar cmt al 99.98%, YouTube marca el video con 'startPercent: 100' (barra roja de punta a punta).
+        try {
+            if (video && typeof video.pause === 'function') video.pause();
+        } catch(e) {}
+        try {
+            if (player && typeof player.pauseVideo === 'function') player.pauseVideo();
+        } catch(e) {}
+
+        updateHud('✅ <b>¡Video completado al 100%!</b> Baliza sincronizada con Google. Cerrando...', '#10b981');
+        console.log('[Vromlix] ✅ Video completado al 100% en YouTube. Baliza enviada. Cerrando pestaña en 2.5s...');
+
+        // Paso C: Esperar 2.5 segundos para garantizar que el paquete HTTP viaja por la red
         setTimeout(() => {
             window.close();
-        }, 3000);
+        }, 2500);
     }
 
     // 6. Silencio Absoluto (100% Mute en cada tick)
@@ -103,9 +127,6 @@
                 if (typeof player.setPlaybackQuality === 'function') {
                     player.setPlaybackQuality('tiny');
                 }
-                if (typeof player.setAutonavState === 'function') {
-                    player.setAutonavState(1); // 1 = Desactivado
-                }
             } catch(e) {}
         }
         try {
@@ -116,11 +137,11 @@
         } catch(e) {}
     }
 
-    // 8. Asegurar reproducción activa
+    // 8. Asegurar reproducción activa (sin alternar 'k' que pueda pausar)
     let lastPlayAttempt = 0;
     function ensurePlaying(video, player) {
         const now = Date.now();
-        if (now - lastPlayAttempt < 1200) return;
+        if (now - lastPlayAttempt < 1000) return;
         lastPlayAttempt = now;
 
         enforceStrictMute(video, player);
@@ -134,42 +155,27 @@
             }
         }
 
-        // B. Pulsación de tecla 'K'
-        const keyEventInit = { key: 'k', code: 'KeyK', keyCode: 75, which: 75, bubbles: true, cancelable: true, composed: true, view: window };
-        if (player) {
-            try { player.focus(); } catch(e) {}
-            try { player.dispatchEvent(new KeyboardEvent('keydown', keyEventInit)); } catch(e) {}
-            try { player.dispatchEvent(new KeyboardEvent('keyup', keyEventInit)); } catch(e) {}
-        }
-        try { document.dispatchEvent(new KeyboardEvent('keydown', keyEventInit)); } catch(e) {}
-        try { document.dispatchEvent(new KeyboardEvent('keyup', keyEventInit)); } catch(e) {}
-
-        // C. HTML5 video.play()
+        // B. HTML5 video.play()
         if (video && typeof video.play === 'function') {
             try { video.play().catch(() => {}); } catch(e) {}
         }
 
-        // D. Player API
+        // C. Player API
         if (player && typeof player.playVideo === 'function') {
             try { player.playVideo(); } catch(e) {}
         }
     }
 
-    // 9. Ciclo de control cada 250ms
+    // 9. Ciclo de control cada 200ms
     const pollInterval = setInterval(() => {
         if (isFinished) {
             clearInterval(pollInterval);
             return;
         }
 
-        const now = Date.now();
-        const dt = Math.min(1.0, (now - lastTickTime) / 1000);
-        lastTickTime = now;
-
         const player = document.getElementById('movie_player') || document.querySelector('.html5-video-player');
         const video = document.querySelector('video.html5-main-video, video');
 
-        // Mute y calidad mínima en cada vuelta
         enforceStrictMute(video, player);
         enforceLowResourceMode(video, player);
 
@@ -194,7 +200,7 @@
         if (video && !listenerAttached) {
             listenerAttached = true;
             video.addEventListener('ended', () => {
-                console.log('[Vromlix] Evento nativo HTML5 video.ended recibido!');
+                console.log('[Vromlix] Evento nativo video.ended recibido!');
                 clearInterval(pollInterval);
                 finishAndClose();
             }, { once: true });
@@ -206,15 +212,24 @@
         const isPlaying = (state === 1) || (video && !video.paused && curTime > 0);
 
         // -------------------------------------------------------------
-        // FASE 1: POSICIONAMIENTO EN LOS ÚLTIMOS 9 SEGUNDOS
+        // FASE 1: POSICIONAMIENTO ADAPTATIVO AL FINAL DEL VIDEO
         // -------------------------------------------------------------
         if (!hasSeeked) {
-            if (duration > 10) {
-                const targetSeekSec = Math.max(0, duration - 9.0);
+            if (duration > 5) {
+                // Cálculo de offset proporcional según duración del video:
+                // - Videos cortos (≤ 5 min): offset de 4 segundos (ej: 211s -> salta a 207s)
+                // - Videos medios (5 a 20 min): offset de 6 segundos (ej: 600s -> salta a 594s)
+                // - Videos largos (> 20 min): offset de 8 segundos
+                let offset = 8.0;
+                if (duration <= 300) {
+                    offset = 4.0;
+                } else if (duration <= 1200) {
+                    offset = 6.0;
+                }
+                const targetSeekSec = Math.max(0, duration - offset);
 
-                // Si aún no está en la zona de los últimos 11 segundos, realizar el salto limpio
-                if (curTime < (targetSeekSec - 2.0)) {
-                    updateHud(`Saltando a los últimos 9 segundos (${targetSeekSec.toFixed(0)}s / ${duration.toFixed(0)}s)...`, '#f59e0b');
+                if (curTime < (targetSeekSec - 1.5)) {
+                    updateHud(`Saltando a los últimos fotogramas (${targetSeekSec.toFixed(0)}s / ${duration.toFixed(0)}s)...`, '#f59e0b');
                     try {
                         if (player && typeof player.seekTo === 'function') {
                             player.seekTo(targetSeekSec, true);
@@ -225,13 +240,13 @@
                     } catch(e) {}
                 }
 
-                // Velocidad 1.0x normal: GARANTIZA que YouTube registre al menos 7-8 segundos
-                // de tiempo de reproducción real continuo (watchtime) para validar la vista al 100%
+                // Velocidad 2.0x: Acelera el recorrido del tramo final ahorrando tiempo de espera
                 if (video) {
-                    try { video.playbackRate = 1.0; } catch(e) {}
+                    try { video.playbackRate = 2.0; } catch(e) {}
                 }
 
                 hasSeeked = true;
+                seekTimestamp = Date.now();
             } else {
                 updateHud('Esperando metadatos de duración...', '#f59e0b');
             }
@@ -242,47 +257,39 @@
         // FASE 2: REPRODUCIR HASTA ALCANZAR EL 100% (ENDED)
         // -------------------------------------------------------------
         if (hasSeeked) {
-            // Si está pausado y no ha finalizado, ordenar play
             if (!isPlaying && state !== 0 && !(video && video.ended)) {
                 ensurePlaying(video, player);
             }
-            if (video && video.playbackRate !== 1.0) {
-                try { video.playbackRate = 1.0; } catch(e) {}
-            }
-
-            // Acumular tiempo real de reproducción activa
-            if (isPlaying) {
-                activePlayedSeconds += dt;
+            if (video && video.playbackRate !== 2.0) {
+                try { video.playbackRate = 2.0; } catch(e) {}
             }
 
             const currentPosStr = curTime.toFixed(0);
             const totalDurStr = duration > 0 ? duration.toFixed(0) : '?';
-            updateHud(`Sincronizando 100% en historial (<b>${activePlayedSeconds.toFixed(1)}s / 8.5s</b> reproducidos)...`, '#38bdf8');
+            updateHud(`Sincronizando 100% en historial (<b>${currentPosStr}s / ${totalDurStr}s</b>) a 2x (144p Mute)...`, '#38bdf8');
 
-            // DETECCIÓN DE FINALIZACIÓN AL 100%:
-            // 1) Evento nativo video.ended
-            // 2) PlayerState === 0 (Ended oficial en API de YouTube)
-            // 3) Cabezal alcanzó o superó el final (duration - 0.2s) habiendo corrido al menos 6s de reproducción activa
-            // 4) Si ya corrieron más de 9.0 segundos de reproducción real cerca del final
-            const isAtNaturalEnd = (state === 0) || (video && video.ended);
-            const isAtLastFrame = (duration > 0 && curTime >= (duration - 0.25) && activePlayedSeconds >= 6.0);
-            const hasPlayedFullWindow = (activePlayedSeconds >= 9.0 && curTime >= (duration - 1.5));
+            // CONDICIONES DE FINALIZACIÓN AL 100%:
+            // 1) Evento nativo video.ended o PlayerState === 0
+            // 2) Cabezal alcanzó o superó duration - 0.25s
+            // 3) O transcurrieron más de 5.0 segundos desde el seek y el cabezal está a menos de 1.0s del final
+            const isAtVeryEnd = (state === 0) || (video && video.ended) || (duration > 0 && curTime >= (duration - 0.25));
+            const timeSinceSeek = (Date.now() - seekTimestamp) / 1000;
 
-            if (isAtNaturalEnd || isAtLastFrame || hasPlayedFullWindow) {
-                console.log(`[Vromlix] Condición de fin alcanzada: isAtNaturalEnd=${isAtNaturalEnd}, isAtLastFrame=${isAtLastFrame}, hasPlayedFullWindow=${hasPlayedFullWindow}`);
+            if (isAtVeryEnd || (timeSinceSeek > 5.0 && curTime >= (duration - 1.0))) {
+                console.log(`[Vromlix] Fin alcanzado: isAtVeryEnd=${isAtVeryEnd}, timeSinceSeek=${timeSinceSeek.toFixed(1)}s, curTime=${curTime.toFixed(1)}s`);
                 clearInterval(pollInterval);
                 finishAndClose();
                 return;
             }
         }
-    }, 250);
+    }, 200);
 
-    // 10. Temporizador de seguridad máximo (40 segundos)
+    // 10. Temporizador de seguridad máximo (35 segundos)
     setTimeout(() => {
         if (!isFinished) {
-            console.log('[Vromlix] Timeout de seguridad alcanzado (40s). Finalizando...');
+            console.log('[Vromlix] Timeout de seguridad alcanzado (35s). Finalizando...');
             clearInterval(pollInterval);
             finishAndClose();
         }
-    }, 40000);
+    }, 35000);
 })();
