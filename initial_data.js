@@ -204,9 +204,9 @@ window.INITIAL_DASHBOARD_DATA = {
         },
         {
           "time": "",
-          "title": "Gobernanza & Ecosistema Skills",
+          "title": "Skills",
           "details": "Delimitación de la Pestaña Agente y Directrices para Chats de AntiGravity",
-          "action_items": "* Establecer protocolo de gobernanza: Regla estricta de 'Cero Pérdida' en tasks.json (ningún chat puede borrar notas de usuario ni sobreescribir tareas existentes).\n* Delimitar formalmente la pestaña Agente: Exclusiva para salud técnica (scripts, crontab, dependencias rotas, logs, PM2). Prohibir crear propuestas de Agente para proyectos personales.\n* Auditar que ningún chat genere banners de atención invasivos en Main para asuntos no críticos.\n* Actualizar las 35 skills en SKILL.md para documentar las reglas de uso del localhost:8080 (pestañas Main y Agente).\n\n📋 MENSAJE LISTO PARA COPIAR AL CHAT DE ECOSISTEMA SKILLS:\n\"Hola, requerimos actualizar la documentación de las skills del sistema para formalizar el protocolo obligatorio de localhost:8080:\n1. Regla 'Cero Pérdida' en tasks.json: Ningún agente puede borrar notas del usuario. Toda adición va al inicio con viñetas de acción y lo previo se preserva intacto bajo '---'.\n2. Separación Agente vs Main: Agente es solo salud técnica (PM2, bases sqlite, crontab). Toda tarea de proyectos va a Main.\n3. Documentar en SKILL.md de gobernanza y auditoría para que ningún chat vuelva a corromper las tarjetas.\"",
+          "action_items": "* Aplicar regla estricta de 'Cero Pérdida' en tasks.json (prohibido sobreescribir o borrar notas del usuario).\n* Revisar pestaña Agente een que se uutilizara, y prohibir en los demas casoos\n* Actualizar archivos SKILL.md con las directrices operativas de localhost:8080, para incluir cosas de las pestañas main y agente",
           "completed": false,
           "category": "tech",
           "is_focus": false
@@ -1191,5 +1191,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-03 17:40:05"
+  "last_updated": "2026-11-03 17:43:46"
 };
