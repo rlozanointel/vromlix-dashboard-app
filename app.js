@@ -906,14 +906,21 @@ function initTasks() {
                     isSpeechRecording = true;
                     btnMic.classList.add('listening');
                     if (statusBox) statusBox.classList.remove('hidden');
-                    if (statusText) statusText.textContent = 'Escuchando... Di tu pendiente o nueva meta';
+                    if (statusText) statusText.textContent = 'Escuchando... Di tu idea o pendiente (no se enviará hasta que des clic)';
                 };
 
                 speechRecognitionInstance.onresult = (event) => {
                     if (event.results && event.results.length > 0) {
                         const transcript = event.results[0][0].transcript;
-                        if (input) input.value = transcript;
-                        window.executeQuickCapture(transcript);
+                        if (input) {
+                            input.value = input.value && input.value.trim().length > 0
+                                ? input.value.trim() + ' ' + transcript
+                                : transcript;
+                            input.focus();
+                        }
+                        if (typeof showToast === 'function') {
+                            showToast('Voz transcrita. Revisa el texto y da clic en Capturar o Enter para enviar.', 'info');
+                        }
                     }
                 };
 
@@ -1048,15 +1055,24 @@ function initTasks() {
 
                 floatingRec.onstart = () => {
                     floatingMic.classList.add('listening');
-                    if (floatingMicStatus) floatingMicStatus.classList.remove('hidden');
+                    if (floatingMicStatus) {
+                        floatingMicStatus.textContent = 'Escuchando... (no se enviará hasta presionar Enviar)';
+                        floatingMicStatus.classList.remove('hidden');
+                    }
                 };
 
                 floatingRec.onresult = (event) => {
                     if (event.results && event.results.length > 0) {
                         const transcript = event.results[0][0].transcript;
-                        if (floatingInput) floatingInput.value = transcript;
-                        window.executeQuickCapture(transcript);
-                        toggleFloatingWidget(false);
+                        if (floatingInput) {
+                            floatingInput.value = floatingInput.value && floatingInput.value.trim().length > 0
+                                ? floatingInput.value.trim() + ' ' + transcript
+                                : transcript;
+                            floatingInput.focus();
+                        }
+                        if (typeof showToast === 'function') {
+                            showToast('Voz transcrita al cuadro. Revisa y presiona Enviar cuando estés listo.', 'info');
+                        }
                     }
                 };
 
