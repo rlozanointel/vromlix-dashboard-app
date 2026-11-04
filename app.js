@@ -808,10 +808,8 @@ function initTasks() {
     };
 
     // ==========================================
-    // QUICK CAPTURE INTELIGENTE (VOZ & TEXTO)
+    // QUICK CAPTURE INTELIGENTE (TEXTO)
     // ==========================================
-    let isSpeechRecording = false;
-    let speechRecognitionInstance = null;
 
     window.executeQuickCapture = function(rawText) {
         const input = document.getElementById('quick-capture-input');
@@ -866,9 +864,6 @@ function initTasks() {
     function initQuickCaptureWidget() {
         const input = document.getElementById('quick-capture-input');
         const btnSend = document.getElementById('btn-quick-send');
-        const btnMic = document.getElementById('btn-quick-mic');
-        const statusBox = document.getElementById('quick-mic-status');
-        const statusText = document.getElementById('quick-mic-text');
 
         if (input && !input.dataset.bound) {
             input.dataset.bound = 'true';
@@ -887,81 +882,12 @@ function initTasks() {
             });
         }
 
-        if (btnMic && !btnMic.dataset.bound) {
-            btnMic.dataset.bound = 'true';
-            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-            if (!SpeechRec) {
-                btnMic.addEventListener('click', () => {
-                    showToast('Dictado por voz requiere Google Chrome o Chromium. Puedes escribir en la barra.', 'info');
-                    if (input) input.focus();
-                });
-            } else {
-                speechRecognitionInstance = new SpeechRec();
-                speechRecognitionInstance.lang = 'es-MX';
-                speechRecognitionInstance.interimResults = false;
-                speechRecognitionInstance.maxAlternatives = 1;
-
-                speechRecognitionInstance.onstart = () => {
-                    isSpeechRecording = true;
-                    btnMic.classList.add('listening');
-                    if (statusBox) statusBox.classList.remove('hidden');
-                    if (statusText) statusText.textContent = 'Escuchando... Di tu idea o pendiente (no se enviará hasta que des clic)';
-                };
-
-                speechRecognitionInstance.onresult = (event) => {
-                    if (event.results && event.results.length > 0) {
-                        const transcript = event.results[0][0].transcript;
-                        if (input) {
-                            input.value = input.value && input.value.trim().length > 0
-                                ? input.value.trim() + ' ' + transcript
-                                : transcript;
-                            input.focus();
-                        }
-                        if (typeof showToast === 'function') {
-                            showToast('Voz transcrita. Revisa el texto y da clic en Capturar o Enter para enviar.', 'info');
-                        }
-                    }
-                };
-
-                speechRecognitionInstance.onerror = (event) => {
-                    console.warn("Speech recognition error:", event.error);
-                    isSpeechRecording = false;
-                    btnMic.classList.remove('listening');
-                    if (statusBox) statusBox.classList.add('hidden');
-                    if (event.error !== 'no-speech') {
-                        showToast(`Micro: ${event.error}`, 'danger');
-                    }
-                };
-
-                speechRecognitionInstance.onend = () => {
-                    isSpeechRecording = false;
-                    btnMic.classList.remove('listening');
-                    if (statusBox) statusBox.classList.add('hidden');
-                };
-
-                btnMic.addEventListener('click', () => {
-                    if (isSpeechRecording) {
-                        speechRecognitionInstance.stop();
-                    } else {
-                        try {
-                            speechRecognitionInstance.start();
-                        } catch(e) {
-                            console.warn("Recognition already started or permission blocked:", e);
-                        }
-                    }
-                });
-            }
-        }
-
         // ── WIDGET FLOTANTE (FAB, MODAL HUD & ALT+N) ──────────
         const btnFab = document.getElementById('btn-floating-capture-fab');
         const modal = document.getElementById('floating-widget-modal');
         const btnClose = document.getElementById('btn-close-floating-widget');
         const floatingInput = document.getElementById('floating-widget-input');
         const floatingSend = document.getElementById('btn-floating-send');
-        const floatingMic = document.getElementById('btn-floating-mic');
-        const floatingMicStatus = document.getElementById('floating-mic-status');
 
         function toggleFloatingWidget(open) {
             if (!modal) return;
@@ -971,9 +897,6 @@ function initTasks() {
                 setTimeout(() => { if (floatingInput) floatingInput.focus(); }, 50);
             } else {
                 modal.classList.add('hidden');
-                if (floatingMic && floatingMic.classList.contains('listening') && speechRecognitionInstance) {
-                    speechRecognitionInstance.stop();
-                }
             }
         }
 
@@ -1035,65 +958,6 @@ function initTasks() {
                     toggleFloatingWidget(false);
                 }
             });
-        }
-
-        // Speech recognition for floating widget mic
-        if (floatingMic && !floatingMic.dataset.bound) {
-            floatingMic.dataset.bound = 'true';
-            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-            if (!SpeechRec) {
-                floatingMic.addEventListener('click', () => {
-                    showToast('Dictado por voz requiere Google Chrome o Chromium.', 'info');
-                    if (floatingInput) floatingInput.focus();
-                });
-            } else {
-                let floatingRec = new SpeechRec();
-                floatingRec.lang = 'es-MX';
-                floatingRec.interimResults = false;
-                floatingRec.maxAlternatives = 1;
-
-                floatingRec.onstart = () => {
-                    floatingMic.classList.add('listening');
-                    if (floatingMicStatus) {
-                        floatingMicStatus.textContent = 'Escuchando... (no se enviará hasta presionar Enviar)';
-                        floatingMicStatus.classList.remove('hidden');
-                    }
-                };
-
-                floatingRec.onresult = (event) => {
-                    if (event.results && event.results.length > 0) {
-                        const transcript = event.results[0][0].transcript;
-                        if (floatingInput) {
-                            floatingInput.value = floatingInput.value && floatingInput.value.trim().length > 0
-                                ? floatingInput.value.trim() + ' ' + transcript
-                                : transcript;
-                            floatingInput.focus();
-                        }
-                        if (typeof showToast === 'function') {
-                            showToast('Voz transcrita al cuadro. Revisa y presiona Enviar cuando estés listo.', 'info');
-                        }
-                    }
-                };
-
-                floatingRec.onerror = () => {
-                    floatingMic.classList.remove('listening');
-                    if (floatingMicStatus) floatingMicStatus.classList.add('hidden');
-                };
-
-                floatingRec.onend = () => {
-                    floatingMic.classList.remove('listening');
-                    if (floatingMicStatus) floatingMicStatus.classList.add('hidden');
-                };
-
-                floatingMic.addEventListener('click', () => {
-                    if (floatingMic.classList.contains('listening')) {
-                        floatingRec.stop();
-                    } else {
-                        try { floatingRec.start(); } catch(e) {}
-                    }
-                });
-            }
         }
     }
 
