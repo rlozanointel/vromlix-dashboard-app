@@ -242,7 +242,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Liderazgo de Barrio (Obispo & Stalin)",
           "details": "Entrevistas eclesiásticas, recomendación patriarcal y acuerdos de trabajo",
-          "action_items": "* Comunicar el mensaje o pendiente correspondiente al obispo o liderazgo\n* Hablar con el Obispo sobre el asunto pendiente\n* Dar seguimiento a entrevista de recomendación para la Bendición Patriarcal (Obispo y Patriarca Martínez).\n* Consultar al Pdte. Stalin Mijail sobre opciones de trabajo con Don Alfredo.\n\n💰 Compromisos Financieros y Diezmo:\n* Entregar diezmo programado: $340 el primer domingo de diciembre y $300 el primer domingo de enero (cubre los $3,000 de AFORE, $200 de trabajo con Pdte. Stalin, $200 de Hna. Alma y los $6,000 totales de la página web; primer semana de noviembre ya se dieron $300).\n* Devolver préstamo de $265 al Pdte. Stalin (gastos de comida y agua) en cuanto se reciba el segundo pago de la página web de Hna. Alma.",
+          "action_items": "* Dar seguimiento a entrevista de recomendación para la Bendición Patriarcal (Obispo y Patriarca Martínez).\n* Consultar al Pdte. Stalin Mijail sobre opciones de trabajo con Don Alfredo.\n\n💰 Compromisos Financieros y Diezmo:\n* Entregar diezmo programado: $340 el primer domingo de diciembre y $300 el primer domingo de enero (cubre los $3,000 de AFORE, $200 de trabajo con Pdte. Stalin, $200 de Hna. Alma y los $6,000 totales de la página web; primer semana de noviembre ya se dieron $300).\n* Devolver préstamo de $265 al Pdte. Stalin (gastos de comida y agua) en cuanto se reciba el segundo pago de la página web de Hna. Alma.",
           "completed": false,
           "category": "fe",
           "is_focus": true
@@ -261,15 +261,6 @@ window.INITIAL_DASHBOARD_DATA = {
           "title": "Elders",
           "details": "Coordinación con Misioneros y Asignaciones Dominicales",
           "action_items": "* Consultar con los élderes misioneros el estatus del bautismo de Jacob y fechas de próximos bautismos.\n* Coordinar con los élderes para sentarse junto a nuevos conversos o miembros que requieran acompañamiento el domingo.",
-          "completed": false,
-          "category": "fe",
-          "is_focus": false
-        },
-        {
-          "time": "",
-          "title": "Pendientes de Comunicación y Mensajes",
-          "details": "Nota incompleta sobre un mensaje o llamada pendiente de realizar.",
-          "action_items": "* Enviar mensaje o llamada pendiente\n* Enviar mensaje pendiente a la persona correspondiente\n* Enviar mensaje o comunicación pendiente\n* Definir el destinatario y el mensaje pendiente por comunicar",
           "completed": false,
           "category": "fe",
           "is_focus": false
@@ -1218,5 +1209,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-03 19:49:43"
+  "last_updated": "2026-11-03 22:24:36"
 };
