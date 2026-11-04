@@ -224,7 +224,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Liderazgo de Barrio (Obispo & Stalin)",
           "details": "Entrevistas eclesiásticas, recomendación patriarcal y acuerdos de trabajo",
-          "action_items": "* Dar seguimineto a entrevista de recomendación para la Bendición Patriarcal, con el obispo y Patriarca Martínez\n* Consultar al Pdte. Stalin Mijail sobre opciones de trabajo con Don Alfredo y devolver préstamo.",
+          "action_items": "* Dar seguimineto a entrevista de recomendación para la Bendición Patriarcal, con el obispo y Patriarca Martínez\n* Consultar al Pdte. Stalin Mijail sobre opciones de trabajo con Don Alfredo y devolver préstamo.\n\ndiezmo, dare 340 la primer domingo de diciembre y luego 300 en primer domingo de enero, con ello, ya tendre cubierto los 3 mil que recibi de afore de arboles, 200 de trabajo con hermano stanlin, 200 de hermana alma, los 3 mil de la pagina web con hermana alma que me dio y los tres mil adcionales que me dara en quince dias. la primer semana de noviembre ya di 300 de diezmo\n\na hermano stalin, segun recuerdo son 265 que le debo, pero eso se lo dare cuando reciba la segunda parte de mi pago de la hermana alma. esos 265 fueron prestamo del hermano, para comida, agua y otras cosas.",
           "completed": false,
           "category": "fe",
           "is_focus": true
@@ -1191,5 +1191,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-03 17:54:15"
+  "last_updated": "2026-11-03 18:00:23"
 };
