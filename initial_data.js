@@ -224,7 +224,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Skills",
           "details": "Delimitación de la Pestaña Agente y Directrices para Chats de AntiGravity",
-          "action_items": "* Aplicar regla estricta de 'Cero Pérdida' en tasks.json (prohibido sobreescribir o borrar notas del usuario).\n* Delimitar formalmente la pestaña Agente: exclusiva para salud técnica del sistema (scripts, bases de datos, PM2).\n* Documentar en SKILL.md el flujo rápido de creación de páginas web con analítica de datos en tiempo real (analizar transcripción de WhatsApp Video 2026-10-26 en Descargas para generar plantillas optimizadas para móvil).\n* Integrar directrices técnicas de Dashboard Ecosystems y YouTube Dashboard:\n  - Regla de aislamiento: Prohibir tareas pesadas de scraping o transcripción en el hilo principal sin pasar por colas o PM2.\n  - Persistencia PWA: Garantizar sincronización en GitHub Pages sin sobreescribir memoria local cuando el móvil esté offline.\n  - Filtro en listeners: Mantener silenciados eventos irrelevantes (ej. status@broadcast) para no saturar SQLite.",
+          "action_items": "* Aplicar regla estricta de 'Cero Pérdida' en tasks.json (prohibido sobreescribir o borrar notas del usuario).\n* Delimitar formalmente la pestaña Agente: exclusiva para salud técnica del sistema (scripts, bases de datos, PM2).\n* Documentar en SKILL.md el flujo rápido de creación de páginas web con analítica de datos en tiempo real (analizar transcripción de WhatsApp Video 2026-10-26 en Descargas para generar plantillas optimizadas para móvil).\n* Integrar directrices técnicas de Dashboard Ecosystems y YouTube Dashboard:\n  - Regla de aislamiento: Prohibir tareas pesadas de scraping o transcripción en el hilo principal sin pasar por colas o PM2.\n  - Persistencia PWA: Garantizar sincronización en GitHub Pages sin sobreescribir memoria local cuando el móvil esté offline.\n  - Filtro en listeners: Mantener silenciados eventos irrelevantes (ej. status@broadcast) para no saturar SQLite.\n* Documentar de chat de straming peliculas, en caso de que haya algo que documentar",
           "completed": false,
           "category": "tech",
           "is_focus": false
@@ -369,17 +369,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
     },
     {
-      "Official Title": "Aniara",
-      "Spanish Title": null,
-      "Genres": "Science Fiction, Drama",
-      "Release Year": "2019",
-      "Release Date": "2019-02-01",
-      "IMDb Rating": 6.3,
-      "Vromlix Score": 64.7,
-      "Plot Summary": "A ship carrying settlers to a new home on Mars after Earth is rendered uninhabitable is knocked off-course, causing the passengers to consider their place in the universe.",
-      "IMDb Link": "https://www.imdb.com/title/tt7589524/"
-    },
-    {
       "Official Title": "Motherf*ckers",
       "Spanish Title": null,
       "Genres": "Drama, Comedy",
@@ -400,17 +389,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 69.7,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
-    },
-    {
-      "Official Title": "Salvation",
-      "Spanish Title": "Salvación",
-      "Genres": "Drama, Mystery",
-      "Release Year": "2026",
-      "Release Date": "2026-03-06",
-      "IMDb Rating": 7.0,
-      "Vromlix Score": 70,
-      "Plot Summary": "In a remote village, an exiled clan returns, reviving a decades-old land feud. Seized by divine visions, Mesut challenges his brother’s leadership to save his people. Will this new path bring salvation or tragedy?",
-      "IMDb Link": "https://www.imdb.com/title/tt36472181/"
     },
     {
       "Official Title": "Yellow Letters",
@@ -844,17 +822,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt31589662/"
     },
     {
-      "Official Title": "Surviving Mormonism with Heather Gay",
-      "Spanish Title": "Sobreviviendo al mormonismo con Heather Gay",
-      "Current Season": 0,
-      "Current Episode": 0,
-      "Show Status": "Ended",
-      "Watch Status": "Unstarted",
-      "Vromlix Score": 72,
-      "Plot Summary": "Heather Gay explores the secrets and sins behind the Mormon church, fracturing the church's seemingly perfect veneer to expose the secrets that have been kept behind closed doors. Heather has impactful conversations with abuse survivors, ex-Mormons and former LDS church leaders.",
-      "IMDb Link": "https://www.imdb.com/title/tt38748836/"
-    },
-    {
       "Official Title": "Lupin",
       "Spanish Title": null,
       "Current Season": 2,
@@ -1209,5 +1176,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-05 08:05:13"
+  "last_updated": "2026-11-05 19:00:39"
 };
