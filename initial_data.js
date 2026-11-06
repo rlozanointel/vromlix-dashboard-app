@@ -134,7 +134,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Pendientes",
           "details": "",
-          "action_items": "* Escribir en mi pizarron mera kirai\n* Paleo  y el otro chat\n* Transcribir sesion de psicologia",
+          "action_items": "* Escribir en mi pizarron mera kirai\n* Paleo  y el otro chat\n* Transcribir sesion de psicologia\nLin",
           "completed": false,
           "category": "negocios",
           "is_focus": true
@@ -328,8 +328,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-21",
-      "IMDb Rating": 5.9,
-      "Vromlix Score": 59,
+      "IMDb Rating": 6.0,
+      "Vromlix Score": 60,
       "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
@@ -339,8 +339,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Thriller, Horror",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.175,
-      "Vromlix Score": 61.8,
+      "IMDb Rating": 6.094,
+      "Vromlix Score": 60.9,
       "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
       "IMDb Link": "https://www.imdb.com/title/tt37522541/"
     },
@@ -350,8 +350,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.833,
-      "Vromlix Score": 62.1,
+      "IMDb Rating": 7.8,
+      "Vromlix Score": 62,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -394,8 +394,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.969,
-      "Vromlix Score": 69.7,
+      "IMDb Rating": 6.946,
+      "Vromlix Score": 69.5,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -510,6 +510,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt12818328/"
     },
     {
+      "Official Title": "I Play Rocky",
+      "Spanish Title": "Yo juego a Rocky",
+      "Genres": "Drama, History",
+      "Release Year": "2026",
+      "Release Date": "2026-11-06",
+      "IMDb Rating": 8.714,
+      "Vromlix Score": 85.6,
+      "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
+      "IMDb Link": "https://www.imdb.com/title/tt11995650/"
+    },
+    {
       "Official Title": "Fatherland",
       "Spanish Title": "Patria",
       "Genres": "Drama, History",
@@ -519,17 +530,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 86.3,
       "Plot Summary": "In 1949, German writer Thomas Mann and his daughter Erika embark on a road trip across a Germany in ruins, from US-dominated Frankfurt to Soviet-controlled Weimar.",
       "IMDb Link": "https://www.imdb.com/title/tt37304295/"
-    },
-    {
-      "Official Title": "I Play Rocky",
-      "Spanish Title": "Yo juego a Rocky",
-      "Genres": "Drama, History",
-      "Release Year": "2026",
-      "Release Date": "2026-11-06",
-      "IMDb Rating": 9.0,
-      "Vromlix Score": 87,
-      "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
-      "IMDb Link": "https://www.imdb.com/title/tt11995650/"
     },
     {
       "Official Title": "The Seventh Seal",
@@ -550,7 +550,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-10-19",
       "IMDb Rating": 8.7,
       "Vromlix Score": 87.5,
-      "Plot Summary": "After her baby brother is abducted by a murder of crows, headstrong teenager Prue McKeel launches a desperate rescue mission into the Impassable Wilderness, an enchanted forest hidden just beyond Portland, Oregon. Joined by her hapless but loyal classmate Curtis Mehlberg, Prue navigates a world of talking animals, bandits, and powerful figures driven by grief and ambition. As the pair is drawn into a conflict threatening the balance of the forest itself, Prue must discover the strength and belief she never knew she possessed.",
+      "Plot Summary": "Prue and her classmate Curtis are drawn into a magical forest filled with enchanted creatures, loyal allies, and formidable adversaries as they embark on a desperate quest to rescue Prue's abducted baby brother from a murder of crows led by a mysterious woman named Alexandra.",
       "IMDb Link": "https://www.imdb.com/title/tt2056785/"
     },
     {
@@ -598,6 +598,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt0053779/"
     },
     {
+      "Official Title": "Godzilla Minus Zero",
+      "Spanish Title": "Godzilla Minus Zero",
+      "Genres": "Science Fiction, Horror, Action",
+      "Release Year": "2026",
+      "Release Date": "2026-11-03",
+      "IMDb Rating": 8.297,
+      "Vromlix Score": 90,
+      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
+      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
+    },
+    {
       "Official Title": "On the Waterfront",
       "Spanish Title": "Nido de ratas",
       "Genres": "Crime, Drama, Romance",
@@ -640,17 +651,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 92,
       "Plot Summary": "Former petty criminal Ali la Pointe becomes a commander of the Algerian Front de Liberation Nationale, directing a guerilla insurgency against the colonial French occupation. Paratrooper commander Colonel Phillippe Mathieu, a veteran of World War II and the First Indochina War, is sent to Algeria to reinforce efforts to squelch the uprisings.",
       "IMDb Link": "https://www.imdb.com/title/tt0058946/"
-    },
-    {
-      "Official Title": "Godzilla Minus Zero",
-      "Spanish Title": "Godzilla Minus Zero",
-      "Genres": "Science Fiction, Horror, Action",
-      "Release Year": "2026",
-      "Release Date": "2026-11-03",
-      "IMDb Rating": 8.846,
-      "Vromlix Score": 92.7,
-      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
-      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
     },
     {
       "Official Title": "Another Day Without a Mexican",
@@ -1185,5 +1185,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-05 19:20:23"
+  "last_updated": "2026-11-06 09:44:17"
 };
