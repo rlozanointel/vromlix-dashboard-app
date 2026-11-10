@@ -197,7 +197,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Negocios",
           "details": "Lanzamiento de Proyectos Digitales, SaaS Fiscal, E-Commerce y Alianzas",
-          "action_items": "💼 Vromlix Fiscal (NexoContable):\n* Consultar documento maestro de arquitectura y roadmap: propuesta_vromlix_fiscal_ideas.md y otros documentos locales\n* Formalizar cambio de nombre a \"Vromlix Fiscal\" y dar seguimiento con Janeth.\n* Evaluar módulos clave del SAT (clasificador masivo de XMLs, conciliación bancaria y versión para dentistas).\n* Desplegar demo en subdominio comercial.\n\n🤝 Alianzas y Clientes Potenciales:\n* Marcar a mi primo Efra para dar seguimiento a la página web con su amigo.\n* Proponer al Hno. Agustín desarrollo web integral: e-commerce para venta nacional de la fórmula química de baterías y panel de cámaras para sus sucursales.\n* Llamar al sobrino de Hna. Alma para ofrecer desarrollo de su sitio web.\n\n🌐 Servicios Digitales y Prospección Local:\n* Ofrecer creación de páginas web con analítica de datos en tiempo real (visión artificial/métricas de negocio para locales).\n* Prospectar comercios en Google Maps y Airbnb para venta o actualización de páginas web.\n* Invitar a miembros locales a promocionarse en nuestro portal (página web dedicada con costo extra).\n\n👕 Playeras Doctrinales (E-Commerce):\n* Diseñar catálogo inicial con citas clave (Alma 5, 2 Nefi \"Iré y haré\", 3 Nefi 15:9).\n* Confirmar proveedor de impresión bajo demanda (Printify) y configurar pasarela en subdominio comercial.\n\n📦 Nuevos Modelos & Medios:\n* Evaluar modelo de Dropshipping asistido con IA (selección de nicho, proveedores y pauta en TikTok Ads).\n* Definir temática y formato para apertura de canal en YouTube.\n\nEn general, revisar los videos:\nhttps://youtu.be/cVGHg4Vd9uM?si=5O3RFuSa9-XM5QsL \nhttps://youtu.be/JEZyQYbB55Y\nhttps://youtu.be/6zb99U-_43M\nhttps://youtu.be/W_wW6AFrqQo?si=DPXy_DqrB1KOKzeF\nAgregar otros videos que tengo en tiktok\n\nTambien revisar y evaluar todos los otros negoocios que tengo en mis docuuemntos. Considerar sus ROI de cada negocio, necesidades locales y otros detalles. \n\nCasos de uso de alto retorno de inversión (ROI): Se identifican seis categorías clave con impacto empresarial medible: soporte al cliente (ej. CLA gestiona 2.3M chats/mes), voz y pedidos (ej. Donatose aumentó conversiones al 71%), automatización de flujos de trabajo (ej. Otter.ai ahorra >4h/semana al 62% de usuarios), investigación y datos (ej. Clay ofrece 2-3x mejor cobertura), operaciones de TI (ej. PagerDuty logra 70% de reducción de ruido), y código y contenido (ej. Code Rabbit acelera la entrega de código en un 86%).\n\nPara construir un agente útil, se debe buscar puntos de dolor en mercados en crecimiento que sean tediosos, lentos, costosos o propensos a errores. Luego, aplicar las ventajas clave de la IA: disponibilidad 24/7, bajo costo, mayor velocidad, escalabilidad y personalización.",
+          "action_items": "💼 Vromlix Fiscal (NexoContable):\n* Consultar documento maestro de arquitectura y roadmap: propuesta_vromlix_fiscal_ideas.md y otros documentos locales\n* Formalizar cambio de nombre a \"Vromlix Fiscal\" y dar seguimiento con Janeth.\n* Evaluar módulos clave del SAT (clasificador masivo de XMLs, conciliación bancaria y versión para dentistas).\n* Desplegar demo en subdominio comercial.\n\n🤝 Alianzas y Clientes Potenciales:\n* Marcar a mi primo Efra para dar seguimiento a la página web con su amigo.\n* Proponer al Hno. Agustín desarrollo web integral: e-commerce para venta nacional de la fórmula química de baterías y panel de cámaras para sus sucursales.\n* Llamar al sobrino de Hna. Alma para ofrecer desarrollo de su sitio web.\n\n🌐 Servicios Digitales y Prospección Local:\n* Ofrecer creación de páginas web con analítica de datos en tiempo real (visión artificial/métricas de negocio para locales).\n* Prospectar comercios en Google Maps y Airbnb para venta o actualización de páginas web.\n* Invitar a miembros locales a promocionarse en nuestro portal (página web dedicada con costo extra).\n\n👕 Playeras Doctrinales (E-Commerce):\n* Diseñar catálogo inicial con citas clave (Alma 5, 2 Nefi \"Iré y haré\", 3 Nefi 15:9).\n* Confirmar proveedor de impresión bajo demanda (Printify) y configurar pasarela en subdominio comercial.\n\n📦 Nuevos Modelos & Medios:\n* Evaluar modelo de Dropshipping asistido con IA (selección de nicho, proveedores y pauta en TikTok Ads).\n* Definir temática y formato para apertura de canal en YouTube.\n\nEn general, revisar los videos:\nhttps://youtu.be/cVGHg4Vd9uM?si=5O3RFuSa9-XM5QsL \nhttps://youtu.be/JEZyQYbB55Y\nhttps://youtu.be/6zb99U-_43M\nhttps://youtu.be/W_wW6AFrqQo?si=DPXy_DqrB1KOKzeF\nAgregar otros videos que tengo en tiktok\n\nTambien revisar y evaluar todos los otros negoocios que tengo en mis docuuemntos. Considerar sus ROI de cada negocio, necesidades locales y otros detalles. \n\nCasos de uso de alto retorno de inversión (ROI): Se identifican seis categorías clave con impacto empresarial medible: soporte al cliente (ej. CLA gestiona 2.3M chats/mes), voz y pedidos (ej. Donatose aumentó conversiones al 71%), automatización de flujos de trabajo (ej. Otter.ai ahorra >4h/semana al 62% de usuarios), investigación y datos (ej. Clay ofrece 2-3x mejor cobertura), operaciones de TI (ej. PagerDuty logra 70% de reducción de ruido), y código y contenido (ej. Code Rabbit acelera la entrega de código en un 86%).\n\nPara construir un agente útil, se debe buscar puntos de dolor en mercados en crecimiento que sean tediosos, lentos, costosos o propensos a errores. Luego, aplicar las ventajas clave de la IA: disponibilidad 24/7, bajo costo, mayor velocidad, escalabilidad y personalización.\n\nLos servicios digitales más rentables deben generar valor directo para las empresas: Para alcanzar $10,000 al mes, se deben ofrecer servicios que hagan ganar más dinero, ahorren tiempo o reduzcan costos a los negocios. Ejemplos incluyen identidad de marca, automatización con IA, gestión de acuerdos, edición de video y creación de embudos de venta.",
           "completed": false,
           "category": "carrera",
           "is_focus": true
@@ -337,8 +337,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-21",
-      "IMDb Rating": 6.0,
-      "Vromlix Score": 60,
+      "IMDb Rating": 6.1,
+      "Vromlix Score": 61,
       "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
@@ -348,8 +348,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Thriller, Horror",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.144,
-      "Vromlix Score": 61.4,
+      "IMDb Rating": 6.172,
+      "Vromlix Score": 61.7,
       "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
       "IMDb Link": "https://www.imdb.com/title/tt37522541/"
     },
@@ -359,8 +359,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.821,
-      "Vromlix Score": 62.1,
+      "IMDb Rating": 7.8,
+      "Vromlix Score": 62,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -403,8 +403,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.937,
-      "Vromlix Score": 69.4,
+      "IMDb Rating": 6.908,
+      "Vromlix Score": 69.1,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -486,7 +486,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
-      "Official Title": "LA BOLA NEGRA",
+      "Official Title": "La Bola Negra",
       "Spanish Title": "La bola negra",
       "Genres": "Drama, War",
       "Release Year": "2026",
@@ -535,8 +535,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-11-06",
-      "IMDb Rating": 8.875,
-      "Vromlix Score": 86.4,
+      "IMDb Rating": 9.0,
+      "Vromlix Score": 87,
       "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
       "IMDb Link": "https://www.imdb.com/title/tt11995650/"
     },
@@ -574,6 +574,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt37118301/"
     },
     {
+      "Official Title": "Godzilla Minus Zero",
+      "Spanish Title": "Godzilla Minus Zero",
+      "Genres": "Science Fiction, Horror, Action",
+      "Release Year": "2026",
+      "Release Date": "2026-11-03",
+      "IMDb Rating": 7.959,
+      "Vromlix Score": 88.3,
+      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
+      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
+    },
+    {
       "Official Title": "The Odyssey",
       "Spanish Title": "La odisea",
       "Genres": "Adventure, Action, Fantasy",
@@ -583,17 +594,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 88.7,
       "Plot Summary": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point.",
       "IMDb Link": "https://www.imdb.com/title/tt33764258/"
-    },
-    {
-      "Official Title": "Godzilla Minus Zero",
-      "Spanish Title": "Godzilla Minus Zero",
-      "Genres": "Science Fiction, Horror, Action",
-      "Release Year": "2026",
-      "Release Date": "2026-11-03",
-      "IMDb Rating": 8.1,
-      "Vromlix Score": 89,
-      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
-      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
     },
     {
       "Official Title": "8½",
@@ -743,7 +743,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Spanish Title": "Los Fockers",
       "Genres": "Comedy, Romance",
       "Release Year": "2026",
-      "Release Date": "2026-11-25",
+      "Release Date": "2026-11-21",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
       "Plot Summary": "Henry, son of Greg and Pam Focker, faces family chaos when he decides to marry a strong-willed woman who appears to be his complete mismatch.",
@@ -812,7 +812,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-11-25",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
-      "Plot Summary": "Based on the life of Milton Hershey, founder of the iconic Hershey chocolate company.  Milton's grit and determination to conquer the world of candy-making propel him from bankruptcy to monumental success, and the love of his life, Kitty, helps him build a legacy sweeter than any candy bar. But when Kitty falls ill, Milton’s wild optimism teeters on the edge of destruction, and she sparks an even bolder dream: to leave their fortune in the hands of America’s children in need.",
+      "Plot Summary": "Based on the life of Milton Hershey, founder of the iconic Hershey chocolate company. Milton's grit and determination to conquer the world of candy-making propel him from bankruptcy to monumental success, and the love of his life, Kitty, helps him build a legacy sweeter than any candy bar. But when Kitty falls ill, Milton’s wild optimism teeters on the edge of destruction, and she sparks an even bolder dream: to leave their fortune in the hands of America’s children in need.",
       "IMDb Link": "https://www.imdb.com/title/tt17055444/"
     },
     {
@@ -983,14 +983,14 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt3230854/"
     },
     {
-      "Official Title": "The Rehearsal Season 1",
+      "Official Title": "The Rehearsal",
       "Spanish Title": "El ensayo",
       "Current Season": 0,
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
       "Vromlix Score": 85,
-      "Plot Summary": "Nathan Fielder gives people a chance to rehearse for their own lives in a world where nothing ever works out as expected.",
+      "Plot Summary": "With a construction crew, a legion of actors, and seemingly unlimited resources, Nathan Fielder allows ordinary people to prepare for life's biggest moments by \"rehearsing\" them in carefully crafted simulations of his own design. When a single misstep could shatter your entire world, why leave life to chance?",
       "IMDb Link": "https://www.imdb.com/title/tt10802170/"
     },
     {
@@ -1078,7 +1078,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
       "Vromlix Score": 87,
-      "Plot Summary": "Two of the biggest stars in Major League Hockey are bound by ambition, rivalry, and a magnetic pull neither of them fully understands. What begins as a secret fling between two fresh faced rookies evolves into a years-long journey of love, denial, and self-discovery. Over the next eight years, as they chase glory on the ice, they struggle to navigate their feelings for each other. Torn between the sport they live for and the love they can’t ignore, they must decide if there’s room in their fiercely competitive world for something as fragile – and powerful – as real love.",
+      "Plot Summary": "Two rival hockey stars at the top of their game face an unexpected challenge when they develop feelings for each other, complicating their careers and the sport's expectations.",
       "IMDb Link": "https://www.imdb.com/title/tt35495073/"
     },
     {
@@ -1194,5 +1194,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-09 21:51:23"
+  "last_updated": "2026-11-10 09:16:32"
 };
