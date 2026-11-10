@@ -170,7 +170,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Mera Kirai",
           "details": "Plataforma Web y Operaciones Turísticas (mera-kirai.com)",
-          "action_items": "* Evaluar nuevas rutas y logística de viajes para conciertos en Guadalajara y provincia.\n* Revisar personalmente las fotografías de viajes para la plataforma web.\n\n\nPsicología del gasto en experiencias: Las compras físicas generan felicidad media en la anticipación y baja en el 'después'. Las experiencias (viajes, eventos) generan felicidad alta en todas las fases, ya que los recuerdos se revalorizan al ser contados, a diferencia de los objetos que se vuelven obsoletos.",
+          "action_items": "* Evaluar nuevas rutas y logística de viajes para conciertos en Guadalajara y provincia.\n* Revisar personalmente las fotografías de viajes para la plataforma web.\n\nhttps://youtu.be/2NFQ4-6MzuU\n\nPsicología del gasto en experiencias: Las compras físicas generan felicidad media en la anticipación y baja en el 'después'. Las experiencias (viajes, eventos) generan felicidad alta en todas las fases, ya que los recuerdos se revalorizan al ser contados, a diferencia de los objetos que se vuelven obsoletos.",
           "completed": false,
           "category": "negocios",
           "is_focus": true
@@ -1194,5 +1194,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-10 09:39:11"
+  "last_updated": "2026-11-10 09:48:53"
 };
