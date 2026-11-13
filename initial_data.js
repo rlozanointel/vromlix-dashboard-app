@@ -152,7 +152,7 @@ window.INITIAL_DASHBOARD_DATA = {
           "time": "",
           "title": "Pendientes",
           "details": "",
-          "action_items": "* Escribir en mi pizarron mera kirai\n* Paleo  y el otro chat\n* Transcribir sesion de psicologia\n* Linkedin\n* Tramitar imss bienestar\n* Tramitar constancia fiscal, efirma,  Contraseña Portal SAT (CIEC / Contraseña Web), Contraseña Clave Privada, Certificado digital (.cer) y Clave privada (.key)",
+          "action_items": "* Escribir en mi pizarron mera kirai\n* Paleo  y el otro chat\n* Transcribir sesion de psicologia\n* Linkedin\n* Tramitar imss bienestar\n* Tramitar constancia fiscal, efirma,  Contraseña Portal SAT (CIEC / Contraseña Web), Contraseña Clave Privada, Certificado digital (.cer) y Clave privada (.key)\n* Revisar todas las api",
           "completed": false,
           "category": "negocios",
           "is_focus": true
@@ -346,21 +346,10 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-21",
-      "IMDb Rating": 6.1,
-      "Vromlix Score": 61,
+      "IMDb Rating": 6.094,
+      "Vromlix Score": 60.9,
       "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
-    },
-    {
-      "Official Title": "Apocalypse Z: New World",
-      "Spanish Title": "Apocalipsis Z: Nuevo Mundo",
-      "Genres": "Action, Thriller, Horror",
-      "Release Year": "2026",
-      "Release Date": "2026-10-09",
-      "IMDb Rating": 6.181,
-      "Vromlix Score": 61.8,
-      "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
-      "IMDb Link": "https://www.imdb.com/title/tt37522541/"
     },
     {
       "Official Title": "The Uprising",
@@ -368,10 +357,21 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.791,
+      "IMDb Rating": 7.787,
       "Vromlix Score": 62,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
+    },
+    {
+      "Official Title": "Apocalypse Z: New World",
+      "Spanish Title": "Apocalipsis Z: Nuevo Mundo",
+      "Genres": "Action, Thriller, Horror",
+      "Release Year": "2026",
+      "Release Date": "2026-10-09",
+      "IMDb Rating": 6.228,
+      "Vromlix Score": 62.3,
+      "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
+      "IMDb Link": "https://www.imdb.com/title/tt37522541/"
     },
     {
       "Official Title": "Man Overboard!",
@@ -412,8 +412,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.897,
-      "Vromlix Score": 69,
+      "IMDb Rating": 6.882,
+      "Vromlix Score": 68.8,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -423,8 +423,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-03-05",
-      "IMDb Rating": 7.1,
-      "Vromlix Score": 71,
+      "IMDb Rating": 7.0,
+      "Vromlix Score": 70,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
@@ -491,7 +491,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-06-13",
       "IMDb Rating": 7.6,
       "Vromlix Score": 81.7,
-      "Plot Summary": "Following the deaths of Mihai's parents, Mihai and Lisbet Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbet's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
+      "Plot Summary": "When a devout Romanian family resettles in a small Norwegian town, they become the subject of public scandal when their daughter shows up to school with unexplained bruises. As allegations of abuse emerge, they are swept up in an investigation that blurs the line between concern and prejudice.",
       "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
@@ -528,17 +528,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt12818328/"
     },
     {
-      "Official Title": "I Play Rocky",
-      "Spanish Title": "Yo juego a Rocky",
-      "Genres": "Drama, History",
-      "Release Year": "2026",
-      "Release Date": "2026-11-06",
-      "IMDb Rating": 8.767,
-      "Vromlix Score": 85.8,
-      "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
-      "IMDb Link": "https://www.imdb.com/title/tt11995650/"
-    },
-    {
       "Official Title": "Fatherland",
       "Spanish Title": "Patria",
       "Genres": "Drama, History",
@@ -548,6 +537,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 86.3,
       "Plot Summary": "In 1949, German writer Thomas Mann and his daughter Erika embark on a road trip across a Germany in ruins, from US-dominated Frankfurt to Soviet-controlled Weimar.",
       "IMDb Link": "https://www.imdb.com/title/tt37304295/"
+    },
+    {
+      "Official Title": "I Play Rocky",
+      "Spanish Title": "Yo juego a Rocky",
+      "Genres": "Drama, History",
+      "Release Year": "2026",
+      "Release Date": "2026-11-06",
+      "IMDb Rating": 8.9,
+      "Vromlix Score": 86.5,
+      "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
+      "IMDb Link": "https://www.imdb.com/title/tt11995650/"
     },
     {
       "Official Title": "The Seventh Seal",
@@ -566,7 +566,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Horror, Action",
       "Release Year": "2026",
       "Release Date": "2026-11-03",
-      "IMDb Rating": 7.772,
+      "IMDb Rating": 7.774,
       "Vromlix Score": 87.4,
       "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
       "IMDb Link": "https://www.imdb.com/title/tt34384661/"
@@ -574,7 +574,7 @@ window.INITIAL_DASHBOARD_DATA = {
     {
       "Official Title": "Wildwood",
       "Spanish Title": null,
-      "Genres": "Animation, Adventure, Fantasy",
+      "Genres": "Animation, Fantasy, Adventure, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-19",
       "IMDb Rating": 8.7,
@@ -900,7 +900,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Show Status": "Ended",
       "Watch Status": "Unstarted",
       "Vromlix Score": 82,
-      "Plot Summary": "After recovering from his injures, Christopher Smith is forced to join a black ops squad and eliminate parasites that have taken over human bodies around the world.",
+      "Plot Summary": "The continuing story of Peacemaker, a vainglorious superhero/supervillain who believes in peace at any cost — no matter how many people he has to kill. After a miraculous recovery from his duel with Bloodsport, Peacemaker soon discovers that his freedom comes at a price.",
       "IMDb Link": "https://www.imdb.com/title/tt13146488/"
     },
     {
@@ -1087,7 +1087,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
       "Vromlix Score": 87,
-      "Plot Summary": "Two rival hockey stars at the top of their game face an unexpected challenge when they develop feelings for each other, complicating their careers and the sport's expectations.",
+      "Plot Summary": "Two of the biggest stars in Major League Hockey are bound by ambition, rivalry, and a magnetic pull neither of them fully understands. What begins as a secret fling between two fresh faced rookies evolves into a years-long journey of love, denial, and self-discovery. Over the next eight years, as they chase glory on the ice, they struggle to navigate their feelings for each other. Torn between the sport they live for and the love they can’t ignore, they must decide if there’s room in their fiercely competitive world for something as fragile – and powerful – as real love.",
       "IMDb Link": "https://www.imdb.com/title/tt35495073/"
     },
     {
@@ -1203,5 +1203,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-11 22:07:58"
+  "last_updated": "2026-11-13 13:31:03"
 };
