@@ -223,6 +223,7 @@
   function startWaPolling() {
     // Initial load
     window.waLoadChats();
+    window.waRefreshCallRecorder();
 
     // Poll every 60 seconds
     waPollInterval = setInterval(() => {
@@ -233,8 +234,212 @@
         // Refresh chats list silently
         window.waLoadChats();
       }
+      window.waRefreshCallRecorder();
     }, 60000);
   }
+
+  /* -------- Call Recorder (Linux PipeWire + Firefox) -------- */
+  let waRecState = { recording: false, auto_watch: false, elapsed_sec: 0 };
+  let waRecTimerInterval = null;
+  let waRecElapsedLocal = 0;
+
+  function fmtDuration(sec) {
+    const s = Math.max(0, Math.floor(sec || 0));
+    const m = String(Math.floor(s / 60)).padStart(2, '0');
+    const r = String(s % 60).padStart(2, '0');
+    return `${m}:${r}`;
+  }
+
+  function fmtBytes(bytes) {
+    if (!bytes) return '0 KB';
+    if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  }
+
+  function renderRecorderControls(data) {
+    waRecState = data || waRecState;
+    const recBtn = document.getElementById('btn-wa-record-call');
+    const recLabel = document.getElementById('wa-record-btn-label');
+    const autoBtn = document.getElementById('btn-wa-auto-watch');
+
+    if (recBtn && recLabel) {
+      if (waRecState.recording) {
+        waRecElapsedLocal = waRecState.elapsed_sec || 0;
+        recBtn.classList.add('is-recording');
+        recLabel.textContent = `⏹️ Detener (${fmtDuration(waRecElapsedLocal)})`;
+        if (!waRecTimerInterval) {
+          waRecTimerInterval = setInterval(() => {
+            waRecElapsedLocal += 1;
+            const lbl = document.getElementById('wa-record-btn-label');
+            if (lbl && waRecState.recording) {
+              lbl.textContent = `⏹️ Detener (${fmtDuration(waRecElapsedLocal)})`;
+            }
+          }, 1000);
+        }
+      } else {
+        recBtn.classList.remove('is-recording');
+        recLabel.textContent = '🎙️ Grabar Llamada';
+        if (waRecTimerInterval) {
+          clearInterval(waRecTimerInterval);
+          waRecTimerInterval = null;
+        }
+      }
+    }
+
+    if (autoBtn) {
+      if (waRecState.auto_watch) {
+        autoBtn.classList.add('is-active');
+        autoBtn.textContent = '🤖 Auto-Firefox: ON';
+      } else {
+        autoBtn.classList.remove('is-active');
+        autoBtn.textContent = '🤖 Auto-Firefox: OFF';
+      }
+    }
+  }
+
+  function renderRecordingsList(recordings) {
+    const list = document.getElementById('wa-recordings-list');
+    const countBadge = document.getElementById('wa-recordings-count');
+    if (countBadge) countBadge.textContent = String((recordings || []).length);
+    if (!list) return;
+
+    if (!recordings || recordings.length === 0) {
+      list.innerHTML = '<div class="wa-loading-msg">Aún no hay llamadas grabadas desde Linux.</div>';
+      return;
+    }
+
+    list.innerHTML = recordings.map(rec => {
+      const fnEnc = encodeURIComponent(rec.filename);
+      const fnEsc = escHtml(rec.filename);
+      const statusHtml = rec.transcribed
+        ? '<span class="wa-rec-badge wa-rec-ok">✅ Transcrito</span>'
+        : '<span class="wa-rec-badge wa-rec-pending">⏳ En proceso / Sin nota</span>';
+      const obsLink = rec.note_path
+        ? `<a class="wa-rec-action-btn" href="/api/open-note?path=${encodeURIComponent(rec.note_path)}" target="_blank" title="Abrir nota en Obsidian">🧠 Obsidian</a>`
+        : '';
+      return `
+        <div class="wa-rec-item">
+          <div class="wa-rec-meta">
+            <div class="wa-rec-name">${rec.is_call ? '📞' : '🎙️'} ${fnEsc}</div>
+            <div class="wa-rec-sub">${fmt(rec.mtime)} · ${fmtBytes(rec.size_bytes)} · ${statusHtml}</div>
+          </div>
+          <div class="wa-rec-controls">
+            <audio class="wa-rec-audio" controls preload="none" src="/api/whatsapp/call-audio?file=${fnEnc}"></audio>
+            <button type="button" class="wa-rec-action-btn" onclick="window.waViewTranscript('${fnEnc}')">📝 Texto</button>
+            ${obsLink}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  window.waRefreshCallRecorder = async function () {
+    try {
+      const r = await fetch('/api/whatsapp/call-recorder/status');
+      const d = await r.json();
+      renderRecorderControls(d);
+      renderRecordingsList(d.recordings || []);
+    } catch (e) {
+      // Silent
+    }
+  };
+
+  window.waToggleCallRecording = async function () {
+    const btn = document.getElementById('btn-wa-record-call');
+    if (btn) btn.disabled = true;
+    try {
+      if (waRecState.recording) {
+        const r = await fetch('/api/whatsapp/call-recorder/stop', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        const d = await r.json();
+        if (d.success) {
+          showWaToast(`Llamada guardada (${d.filename}). Transcribiendo en segundo plano...`);
+          const drawer = document.getElementById('wa-recordings-drawer');
+          if (drawer) drawer.open = true;
+          // Refresh again after transcription likely completes
+          setTimeout(window.waRefreshCallRecorder, 8000);
+          setTimeout(window.waRefreshCallRecorder, 20000);
+        } else {
+          showWaToast(d.error || 'Error deteniendo grabación');
+        }
+      } else {
+        const contact = waActiveContactName ? waActiveContactName.replace(/^👥\s*/, '') : '';
+        const r = await fetch('/api/whatsapp/call-recorder/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contact })
+        });
+        const d = await r.json();
+        if (d.success) {
+          showWaToast('Grabando llamada (ambas voces). Usa audífonos para evitar eco.');
+        } else {
+          showWaToast(d.error || 'No se pudo iniciar la grabación');
+        }
+      }
+    } catch (e) {
+      showWaToast('Error comunicando con grabador: ' + e.message);
+    } finally {
+      if (btn) btn.disabled = false;
+      await window.waRefreshCallRecorder();
+    }
+  };
+
+  window.waToggleAutoWatch = async function () {
+    const next = !waRecState.auto_watch;
+    try {
+      const r = await fetch('/api/whatsapp/call-recorder/auto-watch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ enabled: next })
+      });
+      const d = await r.json();
+      if (d.success) {
+        showWaToast(d.auto_watch
+          ? 'Auto-grabación de llamadas en Firefox ACTIVADA.'
+          : 'Auto-grabación de llamadas en Firefox desactivada.');
+      }
+      await window.waRefreshCallRecorder();
+    } catch (e) {
+      showWaToast('Error cambiando Auto-Firefox: ' + e.message);
+    }
+  };
+
+  window.waViewTranscript = async function (fnEncoded) {
+    const fn = decodeURIComponent(fnEncoded);
+    const viewer = document.getElementById('wa-transcript-viewer');
+    const titleEl = document.getElementById('wa-transcript-title');
+    const textEl = document.getElementById('wa-transcript-text');
+    const obsEl = document.getElementById('wa-transcript-obsidian-link');
+    if (!viewer || !textEl) return;
+
+    titleEl.textContent = `📝 ${fn}`;
+    textEl.textContent = 'Cargando transcripción...';
+    viewer.style.display = '';
+    if (obsEl) obsEl.style.display = 'none';
+
+    try {
+      const r = await fetch(`/api/whatsapp/call-note?file=${fnEncoded}`);
+      const d = await r.json();
+      if (d.transcribed) {
+        textEl.textContent = d.content || '(Nota vacía)';
+        if (obsEl && d.note_path) {
+          obsEl.href = `/api/open-note?path=${encodeURIComponent(d.note_path)}`;
+          obsEl.style.display = '';
+        }
+      } else {
+        textEl.textContent = '⏳ La transcripción aún está procesándose o no se encontró nota en Obsidian todavía. Intenta de nuevo en unos segundos.';
+      }
+    } catch (e) {
+      textEl.textContent = 'Error cargando transcripción: ' + e.message;
+    }
+  };
+
+  window.waCloseTranscript = function () {
+    const viewer = document.getElementById('wa-transcript-viewer');
+    if (viewer) viewer.style.display = 'none';
+  };
 
   /* -------- Init on DOMContentLoaded -------- */
   if (document.readyState === 'loading') {
