@@ -333,8 +333,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Thriller, Science Fiction",
       "Release Year": "2026",
       "Release Date": "2026-08-26",
-      "IMDb Rating": 6.5,
-      "Vromlix Score": 51.7,
+      "IMDb Rating": 6.2,
+      "Vromlix Score": 50.7,
       "Plot Summary": "After the world's population has been ravaged by a pandemic, a man lives a lonesome existence in a Colorado airplane hangar with his dog and a dour gunman he has befriended. When a mysterious transmission comes through on the radio while he’s flying his old Cessna, it sparks a hunt for the provenance of the sound.",
       "IMDb Link": "https://www.imdb.com/title/tt21285562/"
     },
@@ -355,21 +355,10 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-21",
-      "IMDb Rating": 6.094,
-      "Vromlix Score": 60.9,
+      "IMDb Rating": 6.121,
+      "Vromlix Score": 61.2,
       "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
-    },
-    {
-      "Official Title": "The Uprising",
-      "Spanish Title": "El levantamiento",
-      "Genres": "Action, Drama, History",
-      "Release Year": "2026",
-      "Release Date": "2026-09-10",
-      "IMDb Rating": 7.764,
-      "Vromlix Score": 61.9,
-      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
-      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
     {
       "Official Title": "Apocalypse Z: New World",
@@ -377,10 +366,21 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Thriller, Horror",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.197,
-      "Vromlix Score": 62,
+      "IMDb Rating": 6.133,
+      "Vromlix Score": 61.3,
       "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
       "IMDb Link": "https://www.imdb.com/title/tt37522541/"
+    },
+    {
+      "Official Title": "The Uprising",
+      "Spanish Title": "El levantamiento",
+      "Genres": "Action, Drama, History",
+      "Release Year": "2026",
+      "Release Date": "2026-09-10",
+      "IMDb Rating": 7.752,
+      "Vromlix Score": 61.8,
+      "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
+      "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
     {
       "Official Title": "Man Overboard!",
@@ -399,7 +399,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.488,
+      "IMDb Rating": 7.481,
       "Vromlix Score": 63.4,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
@@ -421,8 +421,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.877,
-      "Vromlix Score": 68.8,
+      "IMDb Rating": 6.871,
+      "Vromlix Score": 68.7,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -436,6 +436,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 70,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
+    },
+    {
+      "Official Title": "V for Vendetta",
+      "Spanish Title": null,
+      "Genres": "Action, Thriller, Science Fiction",
+      "Release Year": "2006",
+      "Release Date": "2006-02-23",
+      "IMDb Rating": 8.1,
+      "Vromlix Score": 72,
+      "Plot Summary": "In a world in which Great Britain has become a fascist state, a masked vigilante known only as “V” conducts guerrilla warfare against the oppressive British government. When V rescues a young woman from the secret police, he finds in her an ally with whom he can continue his fight to free the people of Britain.",
+      "IMDb Link": "https://www.imdb.com/title/tt0434409/"
     },
     {
       "Official Title": "We Shall Not Be Moved",
@@ -493,6 +504,39 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt28254159/"
     },
     {
+      "Official Title": "Red Dawn",
+      "Spanish Title": null,
+      "Genres": "Drama, Thriller, History",
+      "Release Year": "1990",
+      "Release Date": "1990-10-18",
+      "IMDb Rating": 8.0,
+      "Vromlix Score": 80,
+      "Plot Summary": "On October 2, 1968, a student uprising descends into violence after the Mexican government begins to use lethal force against the protesters.",
+      "IMDb Link": "https://www.imdb.com/title/tt0098214/"
+    },
+    {
+      "Official Title": "Twelve Monkeys",
+      "Spanish Title": null,
+      "Genres": "Science Fiction, Thriller, Mystery",
+      "Release Year": "1995",
+      "Release Date": "1995-12-29",
+      "IMDb Rating": 8.0,
+      "Vromlix Score": 81,
+      "Plot Summary": "In the year 2035, convict James Cole reluctantly volunteers to be sent back in time to discover the origin of a deadly virus that wiped out nearly all of the earth's population and forced the survivors into underground communities. But when Cole is mistakenly sent to 1990 instead of 1996, he's arrested and locked up in a mental hospital. There he meets psychiatrist Dr. Kathryn Railly and the son of a famous virus expert who may hold the key to the Army of the 12 Monkeys; thought to be responsible for unleashing the killer disease.",
+      "IMDb Link": "https://www.imdb.com/title/tt0114746/"
+    },
+    {
+      "Official Title": "The Devil's Backbone",
+      "Spanish Title": null,
+      "Genres": "Fantasy, Drama, Horror, Thriller",
+      "Release Year": "2001",
+      "Release Date": "2001-04-20",
+      "IMDb Rating": 7.3,
+      "Vromlix Score": 81.3,
+      "Plot Summary": "Spain, 1939. In the last days of the Spanish Civil War, the young Carlos arrives at the Santa Lucía orphanage, where he will make friends and enemies as he follows the quiet footsteps of a mysterious presence eager for revenge.",
+      "IMDb Link": "https://www.imdb.com/title/tt0256009/"
+    },
+    {
       "Official Title": "Fjord",
       "Spanish Title": "Fjord",
       "Genres": "Drama",
@@ -504,6 +548,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt35410859/"
     },
     {
+      "Official Title": "Coyote vs. Acme",
+      "Spanish Title": "Coyote vs. Acme",
+      "Genres": "Comedy, Adventure, Family, Animation",
+      "Release Year": "2026",
+      "Release Date": "2026-08-20",
+      "IMDb Rating": 7.3,
+      "Vromlix Score": 82,
+      "Plot Summary": "After Acme products fail him one too many times in his dogged pursuit of the Roadrunner, Wile E. Coyote decides to hire a billboard lawyer to sue the Acme Corporation.",
+      "IMDb Link": "https://www.imdb.com/title/tt1756855/"
+    },
+    {
       "Official Title": "La Bola Negra",
       "Spanish Title": "La bola negra",
       "Genres": "Drama, War",
@@ -513,17 +568,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 82.7,
       "Plot Summary": "The intertwined lives of three men in three different eras, three lives intimately linked by sexuality and desire, pain, and legacy.",
       "IMDb Link": "https://www.imdb.com/title/tt35511966/"
-    },
-    {
-      "Official Title": "Coyote vs. Acme",
-      "Spanish Title": "Coyote vs. Acme",
-      "Genres": "Comedy, Adventure, Family, Animation",
-      "Release Year": "2026",
-      "Release Date": "2026-08-20",
-      "IMDb Rating": 7.6,
-      "Vromlix Score": 83,
-      "Plot Summary": "After Acme products fail him one too many times in his dogged pursuit of the Roadrunner, Wile E. Coyote decides to hire a billboard lawyer to sue the Acme Corporation.",
-      "IMDb Link": "https://www.imdb.com/title/tt1756855/"
     },
     {
       "Official Title": "Hundreds of Beavers",
@@ -542,10 +586,21 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-11-06",
-      "IMDb Rating": 8.833,
-      "Vromlix Score": 86.2,
+      "IMDb Rating": 8.567,
+      "Vromlix Score": 84.8,
       "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
       "IMDb Link": "https://www.imdb.com/title/tt11995650/"
+    },
+    {
+      "Official Title": "The Voice of Hind Rajab",
+      "Spanish Title": null,
+      "Genres": "Drama, History",
+      "Release Year": "2025",
+      "Release Date": "2025-09-10",
+      "IMDb Rating": 8.2,
+      "Vromlix Score": 85.3,
+      "Plot Summary": "January 29, 2024. Red Crescent volunteers receive an emergency call. A five-year old girl is trapped in a car under fire in Gaza, pleading for rescue. While trying to keep her on the line, they do everything they can to get an ambulance to her. Her name was Hind Rajab.",
+      "IMDb Link": "https://www.imdb.com/title/tt36943034/"
     },
     {
       "Official Title": "Fatherland",
@@ -559,6 +614,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt37304295/"
     },
     {
+      "Official Title": "Godzilla Minus Zero",
+      "Spanish Title": "Godzilla Minus Zero",
+      "Genres": "Science Fiction, Horror, Action",
+      "Release Year": "2026",
+      "Release Date": "2026-11-03",
+      "IMDb Rating": 7.723,
+      "Vromlix Score": 87.1,
+      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
+      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
+    },
+    {
       "Official Title": "The Seventh Seal",
       "Spanish Title": "El séptimo sello",
       "Genres": "Fantasy, Drama",
@@ -568,17 +634,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 87.3,
       "Plot Summary": "When disillusioned Swedish knight Antonius Block returns home from the Crusades to find his country in the grips of the Black Death, he challenges Death to a chess match for his life. Tormented by the belief that God does not exist, Block sets off on a journey, meeting up with traveling players Jof and his wife, Mia, and becoming determined to evade Death long enough to commit one redemptive act while he still lives.",
       "IMDb Link": "https://www.imdb.com/title/tt0050976/"
-    },
-    {
-      "Official Title": "Godzilla Minus Zero",
-      "Spanish Title": "Godzilla Minus Zero",
-      "Genres": "Science Fiction, Horror, Action",
-      "Release Year": "2026",
-      "Release Date": "2026-11-03",
-      "IMDb Rating": 7.753,
-      "Vromlix Score": 87.3,
-      "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
-      "IMDb Link": "https://www.imdb.com/title/tt34384661/"
     },
     {
       "Official Title": "Wildwood",
@@ -601,6 +656,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 88,
       "Plot Summary": "When Gleb, a successful company director, finds himself under siege from mounting corporate pressures, an increasingly unstable world, and the discovery of his wife's affair, the collapse of his carefully ordered life accelerates toward violence.",
       "IMDb Link": "https://www.imdb.com/title/tt37118301/"
+    },
+    {
+      "Official Title": "The Great Dictator",
+      "Spanish Title": null,
+      "Genres": "Comedy, War",
+      "Release Year": "1940",
+      "Release Date": "1940-10-15",
+      "IMDb Rating": 8.4,
+      "Vromlix Score": 88,
+      "Plot Summary": "Dictator Adenoid Hynkel tries to expand his empire while a poor Jewish barber tries to avoid persecution from Hynkel's regime.",
+      "IMDb Link": "https://www.imdb.com/title/tt0032553/"
     },
     {
       "Official Title": "The Odyssey",
@@ -636,17 +702,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt0053779/"
     },
     {
-      "Official Title": "The Hunger Games: Sunrise on the Reaping",
-      "Spanish Title": "Los juegos del hambre: Amanecer en la cosecha",
-      "Genres": "Science Fiction, Action, Adventure",
-      "Release Year": "2026",
-      "Release Date": "2026-11-18",
-      "IMDb Rating": 9.0,
-      "Vromlix Score": 90,
-      "Plot Summary": "Return to the world of Panem 24 years before the events of The Hunger Games, starting on the morning of the reaping of the 50th Hunger Games, also known as the Second Quarter Quell.",
-      "IMDb Link": "https://www.imdb.com/title/tt32558705/"
-    },
-    {
       "Official Title": "On the Waterfront",
       "Spanish Title": "Nido de ratas",
       "Genres": "Crime, Drama, Romance",
@@ -680,6 +735,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt34386754/"
     },
     {
+      "Official Title": "Pan's Labyrinth",
+      "Spanish Title": null,
+      "Genres": "Fantasy, Drama, War",
+      "Release Year": "2006",
+      "Release Date": "2006-10-11",
+      "IMDb Rating": 8.2,
+      "Vromlix Score": 91.7,
+      "Plot Summary": "In post–civil war Spain, 10-year-old Ofelia moves with her pregnant mother to live under the control of her cruel stepfather. Drawn into a mysterious labyrinth, she meets a faun who reveals that she may be a lost princess from an underground kingdom. To return to her true father, she must complete a series of surreal and perilous tasks that blur the line between reality and fantasy.",
+      "IMDb Link": "https://www.imdb.com/title/tt0457430/"
+    },
+    {
       "Official Title": "The Battle of Algiers",
       "Spanish Title": "La batalla de Argel",
       "Genres": "Drama, War, History",
@@ -689,6 +755,28 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 92,
       "Plot Summary": "Former petty criminal Ali la Pointe becomes a commander of the Algerian Front de Liberation Nationale, directing a guerilla insurgency against the colonial French occupation. Paratrooper commander Colonel Phillippe Mathieu, a veteran of World War II and the First Indochina War, is sent to Algeria to reinforce efforts to squelch the uprisings.",
       "IMDb Link": "https://www.imdb.com/title/tt0058946/"
+    },
+    {
+      "Official Title": "Battleship Potemkin",
+      "Spanish Title": null,
+      "Genres": "Drama, History, War",
+      "Release Year": "1925",
+      "Release Date": "1925-12-24",
+      "IMDb Rating": 7.9,
+      "Vromlix Score": 92,
+      "Plot Summary": "In the midst of the Russian Revolution of 1905, the crew of the battleship Potemkin revolt against the brutal, tyrannical regime of the vessel's officers. The resulting street demonstration in Odessa brings on a police massacre.",
+      "IMDb Link": "https://www.imdb.com/title/tt0015648/"
+    },
+    {
+      "Official Title": "The Hunger Games: Sunrise on the Reaping",
+      "Spanish Title": "Los juegos del hambre: Amanecer en la cosecha",
+      "Genres": "Science Fiction, Action, Adventure",
+      "Release Year": "2026",
+      "Release Date": "2026-11-18",
+      "IMDb Rating": 9.357,
+      "Vromlix Score": 93.6,
+      "Plot Summary": "Return to the world of Panem 24 years before the events of The Hunger Games, starting on the morning of the reaping of the 50th Hunger Games, also known as the Second Quarter Quell.",
+      "IMDb Link": "https://www.imdb.com/title/tt32558705/"
     },
     {
       "Official Title": "Another Day Without a Mexican",
@@ -764,7 +852,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Release Date": "2026-11-21",
       "IMDb Rating": 0.0,
       "Vromlix Score": null,
-      "Plot Summary": "Henry, son of Greg and Pam Focker, faces family chaos when he decides to marry a strong-willed woman who appears to be his complete mismatch.",
+      "Plot Summary": "Henry, son of Greg and Pam Focker, aims to marry Olivia, a strong-willed former hostage negotiator who appears to be his complete mismatch. To Greg's shock, stepdad Jack Byrnes takes a liking to Olivia, and her unprecedented rise into his Circle of Trust sparks chaos in the family before Jack's 80th birthday party.",
       "IMDb Link": "https://www.imdb.com/title/tt34966140/"
     },
     {
@@ -869,6 +957,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt2531336/"
     },
     {
+      "Official Title": "La que se avecina",
+      "Spanish Title": null,
+      "Current Season": 16,
+      "Current Episode": 8,
+      "Show Status": "Returning Series",
+      "Watch Status": "On Hold",
+      "Vromlix Score": 76,
+      "Plot Summary": "La que se avecina is a Spanish television comedy created by Alberto Caballero, Laura Caballero and Daniel Deorador. The TV-series focusing around the inhabitants of Mirador de Montepinar, a fictional building located on the outskirts of a big city. Both its storylines and cast are heavily based on Aquí no hay quien viva, which ended when Telecinco bought Miramón Mendi, the series production company.\n\nThe episodes debuted on the Telecinco network, and were later rerun by the same network as well as cable/satellite channels FactoríaDeFicción and Paramount Comedy. The series debuted in 22 April 2007 and became popular thanks to its funny characters, witty script, use of catchphrases and capacity to integrate and poke fun at contemporary issues; the program presents a caustic satire of many of the 'types' found in Spanish society.\n\nThe name of the show involves wordplay, as \"vecina\" is the Spanish word for neighbour.",
+      "IMDb Link": "https://www.imdb.com/title/tt0922037/"
+    },
+    {
       "Official Title": "Taco Chronicles",
       "Spanish Title": "Las crónicas del taco",
       "Current Season": 2,
@@ -955,6 +1054,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 83,
       "Plot Summary": "In 1970, the Brazilian national team took the field with big dreams and an even bigger challenge: to become the first three-time world champions.",
       "IMDb Link": "https://www.imdb.com/title/tt37041010/"
+    },
+    {
+      "Official Title": "O Conto da Aia",
+      "Spanish Title": null,
+      "Current Season": 0,
+      "Current Episode": 0,
+      "Show Status": "Ended",
+      "Watch Status": "Unstarted",
+      "Vromlix Score": 83,
+      "Plot Summary": "Set in a dystopian future, a woman is forced to live as a concubine under a fundamentalist theocratic dictatorship.",
+      "IMDb Link": "https://www.imdb.com/title/tt5834204/"
     },
     {
       "Official Title": "Formula 1: Drive to Survive",
@@ -1212,5 +1322,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-15 00:37:01"
+  "last_updated": "2026-11-16 17:03:15"
 };
