@@ -10517,4 +10517,222 @@ summary {
     50% { opacity: 0.35; transform: scale(0.85); }
 }
 
+/* =============================================================
+   SUB-NAVEGACIÓN ADAPTATIVA (INGLÉS & HERRAMIENTAS) + PITCH DRAWER
+   ============================================================= */
+.adaptive-subnav-bar {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+}
+
+.adaptive-subnav-bar .mormon-subnav-btn {
+    color: var(--text-secondary);
+}
+
+.adaptive-subnav-bar .mormon-subnav-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-subtle);
+}
+
+.adaptive-subnav-bar .mormon-subnav-btn.active {
+    background: var(--accent-primary-bg);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    box-shadow: 0 2px 10px rgba(26, 115, 232, 0.14);
+}
+
+.adaptive-subnav-bar .mormon-subnav-btn.active .subnav-pill-badge {
+    background: var(--accent-primary);
+    color: #ffffff;
+}
+
+.adaptive-subnav-bar .subnav-pill-badge {
+    background: var(--bg-subtle);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+.subview-panel-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cajón Ejecutivo de Pitch en Main */
+.pitch-main-drawer-section {
+    width: 100%;
+}
+
+.main-pitch-drawer {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+}
+
+.main-pitch-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 20px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    background: var(--bg-card);
+    transition: background var(--transition-fast);
+}
+
+.main-pitch-summary::-webkit-details-marker {
+    display: none;
+}
+
+.main-pitch-summary:hover {
+    background: var(--bg-subtle);
+}
+
+.main-pitch-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.main-pitch-summary-title {
+    font-family: 'Outfit', var(--font-sans);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.main-pitch-summary-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.main-pitch-summary-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.main-pitch-body {
+    padding: 16px 20px 24px 20px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-page);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Puntos Rápidos (Cheat Sheet 60s) */
+.pitch-cheatsheet-card {
+    background: var(--bg-card);
+    border: 1px solid var(--accent-primary);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-card);
+}
+
+.pitch-cheatsheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pitch-cheatsheet-header h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.pitch-cheatsheet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+}
+
+.pitch-cheat-pill-card {
+    background: var(--bg-page);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pitch-cheat-pill-card.is-highlight {
+    border-color: var(--accent-success);
+    background: var(--accent-success-bg);
+}
+
+.pitch-cheat-label {
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--accent-primary);
+}
+
+.pitch-cheat-pill-card.is-highlight .pitch-cheat-label {
+    color: var(--accent-success);
+}
+
+.pitch-cheat-text {
+    font-size: 0.85rem;
+    line-height: 1.48;
+    color: var(--text-primary);
+}
+
+.pitch-full-details-accordion {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    overflow: hidden;
+}
+
+.pitch-full-details-accordion > summary {
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    background: var(--bg-subtle);
+    user-select: none;
+}
+
+.pitch-full-details-accordion > .pitch-container {
+    padding: 16px;
+}
+
+/* Sub-tab mobile adjustments */
+@media (max-width: 768px) {
+    .adaptive-subnav-bar {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .adaptive-subnav-bar .mormon-subnav-btn {
+        min-width: calc(50% - 6px);
+        padding: 10px 12px;
+        font-size: 0.86rem;
+    }
+    .main-pitch-summary {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
 

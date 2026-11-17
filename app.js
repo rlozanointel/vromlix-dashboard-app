@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initChats();
     initPrompts();
     initTranslator();
+    initSubnavTabs();
 });
 
 // ==========================================
@@ -57,16 +58,7 @@ function initMainNavigation() {
         });
     });
 
-    // Global Ergonomic Keyboard Shortcuts (Alt + 1..4 para cambio instantáneo de macro-área)
     window.switchDashboardView = switchView;
-    document.addEventListener('keydown', (e) => {
-        if (e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
-            if (e.key === '1') { e.preventDefault(); switchView('view-principal'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-            else if (e.key === '2') { e.preventDefault(); switchView('view-tiempo'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-            else if (e.key === '3') { e.preventDefault(); switchView('view-youtube'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-            else if (e.key === '4') { e.preventDefault(); switchView('view-agente-ops'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        }
-    });
 
     const hashView = window.location.hash.replace('#', '');
     if (hashView && document.getElementById(hashView)) {
@@ -74,6 +66,8 @@ function initMainNavigation() {
         window.scrollTo({ top: 0, behavior: 'instant' });
     } else if (document.getElementById(savedView)) {
         switchView(savedView);
+    } else {
+        switchView('view-principal');
     }
 }
 
@@ -2800,16 +2794,115 @@ function initChats() {
     loadChats();
 }
 
+function activateSubtabGroup(config, activeKey, saveState = true) {
+    Object.entries(config.panels).forEach(([key, panelId]) => {
+        const panel = document.getElementById(panelId);
+        const btn = document.getElementById(config.buttons[key]);
+        const isActive = key === activeKey;
+        if (panel) panel.style.display = isActive ? '' : 'none';
+        if (btn) btn.classList.toggle('active', isActive);
+    });
+    if (saveState) localStorage.setItem(config.storageKey, activeKey);
+}
+
+const INGLES_SUBTABS = {
+    storageKey: 'vromlix_ingles_subview',
+    defaultKey: 'traductor',
+    panels: {
+        traductor: 'subview-ingles-traductor',
+        clases: 'subview-ingles-clases',
+        hamlet: 'subview-ingles-hamlet'
+    },
+    buttons: {
+        traductor: 'btn-subview-ingles-traductor',
+        clases: 'btn-subview-ingles-clases',
+        hamlet: 'btn-subview-ingles-hamlet'
+    }
+};
+
+const HERRAMIENTAS_SUBTABS = {
+    storageKey: 'vromlix_tools_subview',
+    defaultKey: 'chats',
+    panels: {
+        chats: 'subview-tools-chats',
+        prompts: 'subview-tools-prompts',
+        psicologia: 'subview-tools-psicologia'
+    },
+    buttons: {
+        chats: 'btn-subview-tools-chats',
+        prompts: 'btn-subview-tools-prompts',
+        psicologia: 'btn-subview-tools-psicologia'
+    }
+};
+
+window.switchInglesSubview = function(subKey, saveState = true) {
+    const key = INGLES_SUBTABS.panels[subKey] ? subKey : INGLES_SUBTABS.defaultKey;
+    activateSubtabGroup(INGLES_SUBTABS, key, saveState);
+};
+
+window.switchHerramientasSubview = function(subKey, saveState = true) {
+    const key = HERRAMIENTAS_SUBTABS.panels[subKey] ? subKey : HERRAMIENTAS_SUBTABS.defaultKey;
+    activateSubtabGroup(HERRAMIENTAS_SUBTABS, key, saveState);
+};
+
+function initSubnavTabs() {
+    window.switchInglesSubview(localStorage.getItem(INGLES_SUBTABS.storageKey) || INGLES_SUBTABS.defaultKey, false);
+    window.switchHerramientasSubview(localStorage.getItem(HERRAMIENTAS_SUBTABS.storageKey) || HERRAMIENTAS_SUBTABS.defaultKey, false);
+}
+
 // ==========================================
 // CLASSES & CHURCH NOTES ENGINE
 // ==========================================
 function initClasses() {
     const tabsContainer = document.getElementById('dashboard-class-tabs');
     const contentContainer = document.getElementById('class-notes-container');
+    const englishContainer = document.getElementById('english-connect-container');
+    const psicologiaContainer = document.getElementById('psicologia-notes-container');
     let classesList = [];
     let activeClassIdx = 0;
 
+    function normalizeClassTitle(title) {
+        return (title || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function renderMarkdownClassSection(targetContainer, classObj, emptyMsg, pulpitoSubtitle) {
+        if (!targetContainer) return;
+        targetContainer.innerHTML = '';
+        if (!classObj) {
+            targetContainer.innerHTML = `<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 10px;">${escapeHTML(emptyMsg)}</div>`;
+            return;
+        }
+
+        const parsedHTML = parseClassMarkdown(classObj.body);
+        const btnId = `btn-pulpito-${normalizeClassTitle(classObj.title).replace(/[^a-z0-9]+/g, '-')}`;
+        const headerHTML = `
+            <div class="class-notes-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 8px;">
+                <div style="font-weight: 700; font-size: 1.05rem; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+                    <span>📚</span>
+                    <span>${escapeHTML(classObj.title)}</span>
+                </div>
+                <button id="${btnId}" class="btn-pulpito-action" style="padding: 6px 12px; font-size: 0.82rem; font-weight: 600; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    <span>Modo Púlpito</span>
+                </button>
+            </div>
+        `;
+        targetContainer.innerHTML = `${headerHTML}<div class="class-notes-grid">${parsedHTML}</div>`;
+
+        const btnPulpito = targetContainer.querySelector(`#${btnId}`);
+        if (btnPulpito) {
+            btnPulpito.addEventListener('click', () => {
+                if (typeof window.openPulpitoGeneral === 'function') {
+                    window.openPulpitoGeneral(classObj.title, classObj.body, '', pulpitoSubtitle);
+                } else {
+                    showToast("Modo Púlpito no disponible en este momento", "warning");
+                }
+            });
+        }
+    }
+
     function renderTabs() {
+        if (!tabsContainer) return;
         tabsContainer.innerHTML = '';
         classesList.forEach((cls, idx) => {
             const btn = document.createElement('button');
@@ -2827,38 +2920,37 @@ function initClasses() {
     }
 
     function renderContent() {
-        contentContainer.innerHTML = '';
-        const classObj = classesList[activeClassIdx];
-        if (!classObj) {
-            contentContainer.innerHTML = '<div style="color: hsl(220, 15%, 50%); font-size: 0.85rem; padding: 10px;">No hay apuntes disponibles.</div>';
-            return;
-        }
+        renderMarkdownClassSection(
+            contentContainer,
+            classesList[activeClassIdx],
+            'No hay apuntes disponibles.',
+            'Clase de Resiliencia / LDS'
+        );
+    }
 
-        const parsedHTML = parseClassMarkdown(classObj.body);
-        const headerHTML = `
-            <div class="class-notes-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 8px;">
-                <div style="font-weight: 700; font-size: 1.05rem; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
-                    <span>📚</span>
-                    <span>${escapeHTML(classObj.title)}</span>
-                </div>
-                <button id="btn-pulpito-clase" class="btn-pulpito-action" style="padding: 6px 12px; font-size: 0.82rem; font-weight: 600; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
-                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                    <span>Modo Púlpito</span>
-                </button>
-            </div>
-        `;
-        contentContainer.innerHTML = `${headerHTML}<div class="class-notes-grid">${parsedHTML}</div>`;
+    function distributeClasses(allClasses) {
+        const churchOnly = [];
+        let englishCls = null;
+        let psychCls = null;
 
-        const btnPulpito = contentContainer.querySelector('#btn-pulpito-clase');
-        if (btnPulpito) {
-            btnPulpito.addEventListener('click', () => {
-                if (typeof window.openPulpitoGeneral === 'function') {
-                    window.openPulpitoGeneral(classObj.title, classObj.body, '', 'Clase de Resiliencia / LDS');
-                } else {
-                    showToast("Modo Púlpito no disponible en este momento", "warning");
-                }
-            });
-        }
+        (allClasses || []).forEach(cls => {
+            const norm = normalizeClassTitle(cls.title);
+            if (norm === 'ingles') {
+                englishCls = cls;
+            } else if (norm === 'psicologia') {
+                psychCls = cls;
+            } else {
+                churchOnly.push(cls);
+            }
+        });
+
+        classesList = churchOnly;
+        if (activeClassIdx >= classesList.length) activeClassIdx = 0;
+
+        renderTabs();
+        renderContent();
+        renderMarkdownClassSection(englishContainer, englishCls, 'Sin apuntes de EnglishConnect en clases_iglesia.md.', 'EnglishConnect • Apuntes');
+        renderMarkdownClassSection(psicologiaContainer, psychCls, 'Sin apuntes de Psicología en clases_iglesia.md.', 'Psicología BUAP • Apuntes');
     }
 
     function parseClassMarkdown(text) {
@@ -2908,17 +3000,13 @@ function initClasses() {
         fetch('/api/classes')
             .then(res => res.json())
             .then(data => {
-                classesList = data.classes || [];
-                renderTabs();
-                renderContent();
+                distributeClasses(data.classes || []);
             })
             .catch(err => {
                 console.warn("API de clases no disponible, usando respaldo PWA:", err);
                 if (window.INITIAL_DASHBOARD_DATA && window.INITIAL_DASHBOARD_DATA.classes) {
-                    classesList = window.INITIAL_DASHBOARD_DATA.classes;
-                    renderTabs();
-                    renderContent();
-                } else {
+                    distributeClasses(window.INITIAL_DASHBOARD_DATA.classes);
+                } else if (contentContainer) {
                     contentContainer.innerHTML = '<div style="color: var(--accent-danger); font-size: 0.85rem; padding: 10px;">Error al cargar las clases desde clases_iglesia.md</div>';
                 }
             });
@@ -3067,167 +3155,7 @@ function initPrompts() {
 }
 
 
-// =============================================================
-// CARISMA & COMUNICACION INTERACTIVE MODULE (VANESSA VAN EDWARDS)
-// =============================================================
-
-function copyPhrase(btn, text) {
-    if (!navigator.clipboard) {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-    } else {
-        navigator.clipboard.writeText(text);
-    }
-
-    // Visual feedback on button
-    if (btn) {
-        const originalHTML = btn.innerHTML;
-        btn.classList.add('copied');
-        btn.innerHTML = '✓ ¡Copiado!';
-        setTimeout(() => {
-            btn.classList.remove('copied');
-            btn.innerHTML = originalHTML;
-        }, 2000);
-    }
-
-    // Toast notification if toast function exists
-    if (typeof showToast === 'function') {
-        showToast('¡Frase copiada al portapapeles!');
-    }
-}
-
-function copyMusicQuery(btn, query) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(query);
-    }
-    if (btn) {
-        const originalHTML = btn.innerHTML;
-        btn.classList.add('copied');
-        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> ¡Copiado!`;
-        setTimeout(() => {
-            btn.classList.remove('copied');
-            btn.innerHTML = originalHTML;
-        }, 2000);
-    }
-    if (typeof showToast === 'function') {
-        showToast(`Copiado para YouTube Music: "${query}"`, 'success');
-    }
-}
-
-function openYtMusic(query) {
-    const url = 'https://music.youtube.com/search?q=' + encodeURIComponent(query);
-    window.open(url, '_blank');
-}
-window.openYtMusic = openYtMusic;
-
-function initCarismaModule() {
-    const searchInput = document.getElementById('carisma-search-input');
-    const chipBtns = document.querySelectorAll('.carisma-chip');
-    const cards = document.querySelectorAll('.carisma-card');
-    const sectionTitles = document.querySelectorAll('.carisma-section-title');
-    const sparklesContainer = document.querySelector('.carisma-sparkles-container');
-    const archetypesGrid = document.querySelector('.archetypes-grid');
-    const exitCard = document.querySelector('.graceful-exit-card');
-    const monologoWrapper = document.querySelector('.monologo-interactive-wrapper');
-
-    let currentFilter = 'all';
-    let searchQuery = '';
-
-    function filterContent() {
-        cards.forEach(card => {
-            const cat = card.getAttribute('data-cat');
-            const keywords = (card.getAttribute('data-keywords') || '') + ' ' + card.innerText.toLowerCase();
-            const matchesCat = (currentFilter === 'all' || currentFilter === cat);
-            const matchesSearch = (!searchQuery || keywords.toLowerCase().includes(searchQuery));
-
-            if (matchesCat && matchesSearch) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-
-        // Filter sections
-        sectionTitles.forEach(title => {
-            const cat = title.getAttribute('data-cat');
-            if (currentFilter === 'all' || currentFilter === cat) {
-                title.style.display = 'block';
-            } else {
-                title.style.display = 'none';
-            }
-        });
-
-        if (sparklesContainer) sparklesContainer.style.display = (currentFilter === 'all' || currentFilter === 'chispas') ? 'flex' : 'none';
-        if (archetypesGrid) archetypesGrid.style.display = (currentFilter === 'all' || currentFilter === 'arquetipos') ? 'grid' : 'none';
-        if (exitCard) exitCard.style.display = (currentFilter === 'all' || currentFilter === 'salidas') ? 'block' : 'none';
-        if (monologoWrapper) monologoWrapper.style.display = (currentFilter === 'all' || currentFilter === 'monologos') ? 'flex' : 'none';
-    }
-
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value.toLowerCase().trim();
-            filterContent();
-        });
-    }
-
-    chipBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            chipBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFilter = btn.getAttribute('data-filter');
-            filterContent();
-        });
-    });
-
-    window.filterCarisma = function(cat) {
-        chipBtns.forEach(b => {
-            const matches = b.getAttribute('data-filter') === cat;
-            b.classList.toggle('active', matches);
-        });
-        currentFilter = cat;
-        filterContent();
-    };
-
-    generateExitFormula();
-}
-
-function generateExitFormula() {
-    const select = document.getElementById('exit-context-select');
-    const outputBox = document.getElementById('exit-output-box');
-    if (!select || !outputBox) return;
-
-    const ctx = select.value;
-    let text = '';
-
-    if (ctx === 'cita') {
-        text = `<b>1. Señal Futura (Future Cue):</b> "¿Tienes planes divertidos o algún proyecto chévere para este fin de semana?"<br><br>
-<b>2. Cumplido & Salida:</b> "¡Suena genial! Espero que te vaya increíble con eso. Me dio muchísimo gusto conectar contigo, se me pasó el tiempo volando. Voy a pedir la cuenta / saludar a un amigo, pero me quedé con ganas de escuchar más sobre [tema divertido]. Pásame tu contacto y seguimos la charla luego."<br><br>
-<i>🎙️ Tono de voz: Caída vocal suave al despedirte, sonrisa sincera y un paso atrás relajado.</i>`;
-    } else if (ctx === 'fiesta') {
-        text = `<b>1. Señal Futura (Future Cue):</b> "¿Vas a estar en el viaje/evento del próximo mes o tienes planes el finde?"<br><br>
-<b>2. Cumplido & Salida:</b> "¡Excelente! Espero que la pases increíble. Me dio mucho gusto platicar contigo, voy por un vaso de agua antes de que se llene la barra. ¡Que disfrutes mucho la noche!"<br><br>
-<i>🎙️ Tono de voz: Alegre, contacto visual cálido de despedida.</i>`;
-    } else if (ctx === 'trabajo') {
-        text = `<b>1. Señal Futura (Future Cue):</b> "¿En qué proyecto o conferencia te veremos trabajando el próximo mes?"<br><br>
-<b>2. Cumplido & Salida:</b> "Te deseo todo el éxito con eso. Fue un verdadero placer conectar contigo; voy a saludar a un colega que acaba de llegar. ¡Seguimos en contacto por LinkedIn!"<br><br>
-<i>🎙️ Tono de voz: Firme, profesional y estructurado.</i>`;
-    }
-
-    outputBox.innerHTML = text;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    initCarismaModule();
-});
-
-// Run init in case DOMContentLoaded already fired
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    initCarismaModule();
-}
+// Carisma & Música/Focus migrados a Obsidian: 05_docs/41_Psicologia_y_Mente/GUIA_Carisma_y_Comunicacion_Vanessa_Van_Edwards.md
 
 
 
