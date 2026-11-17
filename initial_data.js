@@ -70,7 +70,15 @@ window.INITIAL_DASHBOARD_DATA = {
   "tasks": {
     "today": [],
     "weekly": {
-      "lunes": [],
+      "lunes": [
+        {
+          "time": "",
+          "title": "Consulta",
+          "details": "",
+          "action_items": "",
+          "completed": false
+        }
+      ],
       "martes": [
         {
           "time": "11:00",
@@ -388,8 +396,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Thriller, Horror",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.133,
-      "Vromlix Score": 61.3,
+      "IMDb Rating": 6.163,
+      "Vromlix Score": 61.6,
       "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
       "IMDb Link": "https://www.imdb.com/title/tt37522541/"
     },
@@ -399,7 +407,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.752,
+      "IMDb Rating": 7.744,
       "Vromlix Score": 61.8,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
@@ -443,8 +451,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.871,
-      "Vromlix Score": 68.7,
+      "IMDb Rating": 6.862,
+      "Vromlix Score": 68.6,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -592,6 +600,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt35511966/"
     },
     {
+      "Official Title": "I Play Rocky",
+      "Spanish Title": "Yo juego a Rocky",
+      "Genres": "Drama, History",
+      "Release Year": "2026",
+      "Release Date": "2026-11-06",
+      "IMDb Rating": 8.5,
+      "Vromlix Score": 84.5,
+      "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
+      "IMDb Link": "https://www.imdb.com/title/tt11995650/"
+    },
+    {
       "Official Title": "Hundreds of Beavers",
       "Spanish Title": null,
       "Genres": "Comedy, Adventure",
@@ -601,17 +620,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 84.7,
       "Plot Summary": "In the 19th century, a drunken applejack salesman must go from zero to hero and become North America's greatest fur trapper by defeating hundreds of beavers.",
       "IMDb Link": "https://www.imdb.com/title/tt12818328/"
-    },
-    {
-      "Official Title": "I Play Rocky",
-      "Spanish Title": "Yo juego a Rocky",
-      "Genres": "Drama, History",
-      "Release Year": "2026",
-      "Release Date": "2026-11-06",
-      "IMDb Rating": 8.567,
-      "Vromlix Score": 84.8,
-      "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
-      "IMDb Link": "https://www.imdb.com/title/tt11995650/"
     },
     {
       "Official Title": "The Voice of Hind Rajab",
@@ -641,8 +649,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Horror, Action",
       "Release Year": "2026",
       "Release Date": "2026-11-03",
-      "IMDb Rating": 7.723,
-      "Vromlix Score": 87.1,
+      "IMDb Rating": 7.7,
+      "Vromlix Score": 87,
       "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
       "IMDb Link": "https://www.imdb.com/title/tt34384661/"
     },
@@ -795,8 +803,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Action, Adventure",
       "Release Year": "2026",
       "Release Date": "2026-11-18",
-      "IMDb Rating": 9.357,
-      "Vromlix Score": 93.6,
+      "IMDb Rating": 9.3,
+      "Vromlix Score": 93,
       "Plot Summary": "Return to the world of Panem 24 years before the events of The Hunger Games, starting on the morning of the reaping of the 50th Hunger Games, also known as the Second Quarter Quell.",
       "IMDb Link": "https://www.imdb.com/title/tt32558705/"
     },
@@ -1344,5 +1352,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-16 19:36:01"
+  "last_updated": "2026-11-17 13:57:02"
 };
