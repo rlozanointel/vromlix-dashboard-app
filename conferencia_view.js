@@ -27,43 +27,51 @@
     }
 
     // -------------------------------------------------------------
-    // 1. SELECTOR DE SUB-PESTAÑA (Clases & Oraciones / Escrituras / Conferencia)
+    // 1. SELECTOR DE SUB-PESTAÑA (Oraciones / Clases / Escrituras / Conferencia)
     // -------------------------------------------------------------
     function initSubnavSwitcher() {
+        const hasOracionesPanel = Boolean(document.getElementById('subview-iglesia-oraciones'));
         const hasIglesiaPanel = Boolean(document.getElementById('subview-iglesia-clases'));
-        const storageKey = hasIglesiaPanel ? 'vromlix_iglesia_subview' : 'vromlix_mormon_subview';
-        const defaultTab = hasIglesiaPanel ? 'clases' : 'escrituras';
+        const storageKey = (hasOracionesPanel || hasIglesiaPanel) ? 'vromlix_iglesia_subview' : 'vromlix_mormon_subview';
+        const defaultTab = hasOracionesPanel ? 'oraciones' : (hasIglesiaPanel ? 'clases' : 'escrituras');
         const savedView = localStorage.getItem(storageKey) || defaultTab;
         window.switchMormonSubview(savedView, false);
     }
 
     window.switchMormonSubview = function(subviewId, saveState = true) {
+        const oracionesPanel = document.getElementById('subview-iglesia-oraciones');
         const iglesiaPanel = document.getElementById('subview-iglesia-clases');
         const escriturasPanel = document.getElementById('subview-escrituras');
         const conferenciaPanel = document.getElementById('subview-conferencia');
+        const btnOraciones = document.getElementById('btn-subview-iglesia-oraciones');
         const btnIglesia = document.getElementById('btn-subview-iglesia-clases');
         const btnEscrituras = document.getElementById('btn-subview-escrituras');
         const btnConferencia = document.getElementById('btn-subview-conferencia');
 
         if (!escriturasPanel || !conferenciaPanel) return;
 
+        const hasOraciones = Boolean(oracionesPanel);
         const hasIglesia = Boolean(iglesiaPanel);
-        let activeTab = subviewId;
-        if (activeTab === 'clases' && !hasIglesia) activeTab = 'escrituras';
-        if (activeTab !== 'clases' && activeTab !== 'escrituras' && activeTab !== 'conferencia') {
-            activeTab = hasIglesia ? 'clases' : 'escrituras';
-        }
+        const validTabs = ['escrituras', 'conferencia'];
+        if (hasOraciones) validTabs.push('oraciones');
+        if (hasIglesia) validTabs.push('clases');
 
+        let activeTab = validTabs.includes(subviewId)
+            ? subviewId
+            : (hasOraciones ? 'oraciones' : (hasIglesia ? 'clases' : 'escrituras'));
+
+        if (oracionesPanel) oracionesPanel.style.display = activeTab === 'oraciones' ? 'block' : 'none';
         if (iglesiaPanel) iglesiaPanel.style.display = activeTab === 'clases' ? 'block' : 'none';
         escriturasPanel.style.display = activeTab === 'escrituras' ? 'block' : 'none';
         conferenciaPanel.style.display = activeTab === 'conferencia' ? 'block' : 'none';
 
+        if (btnOraciones) btnOraciones.classList.toggle('active', activeTab === 'oraciones');
         if (btnIglesia) btnIglesia.classList.toggle('active', activeTab === 'clases');
         if (btnEscrituras) btnEscrituras.classList.toggle('active', activeTab === 'escrituras');
         if (btnConferencia) btnConferencia.classList.toggle('active', activeTab === 'conferencia');
 
         if (saveState) {
-            const storageKey = hasIglesia ? 'vromlix_iglesia_subview' : 'vromlix_mormon_subview';
+            const storageKey = (hasOraciones || hasIglesia) ? 'vromlix_iglesia_subview' : 'vromlix_mormon_subview';
             localStorage.setItem(storageKey, activeTab);
         }
     };

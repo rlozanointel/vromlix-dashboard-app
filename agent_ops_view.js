@@ -33,10 +33,13 @@ async function loadAgentActions() {
         const pending = data.pending || [];
         const history = data.history || [];
         const stats = data.stats || {};
+        const health = data.system_health || {};
 
         if (badgePending) badgePending.textContent = stats.pending_count ?? pending.length;
         if (badgeActiveChats) badgeActiveChats.textContent = stats.active_chats ?? '-';
         if (badgeAuto) badgeAuto.textContent = stats.auto_executed ?? '-';
+
+        renderSystemHealthBar(health);
 
         // Sincronizar Badge en Barra de Navegación y Banner en Vista Principal
         const navAgenteBadge = document.getElementById('nav-agente-badge');
@@ -66,8 +69,8 @@ async function loadAgentActions() {
             pendingContainer.innerHTML = `
                 <div class="agent-empty-state">
                     <div class="empty-icon">🛡️</div>
-                    <h3>Bandeja de Aprobaciones al Día</h3>
-                    <p>No hay acciones pendientes de autorización. Todas las propuestas del árbitro han sido resueltas.</p>
+                    <h3>Bandeja al Día</h3>
+                    <p>No hay alertas ni propuestas pendientes de revisión.</p>
                 </div>
             `;
         } else {
@@ -89,6 +92,43 @@ async function loadAgentActions() {
     }
 }
 
+function renderSystemHealthBar(health) {
+    const bar = document.getElementById('agent-system-health-bar');
+    if (!bar) return;
+
+    const pm2List = Array.isArray(health.pm2) ? health.pm2 : [];
+    const pool = health.api_pool;
+    const lastLog = health.last_log;
+
+    const pm2Pills = pm2List.map(p => {
+        const isUp = p.status === 'online';
+        const dotColor = isUp ? '#22c55e' : '#64748b';
+        return `<span class="agent-health-pill ${isUp ? 'is-online' : 'is-stopped'}" title="Reinicios: ${p.restarts} · RAM: ${p.mem_mb} MB">
+            <span class="agent-health-dot" style="background:${dotColor};"></span>
+            <strong>${escapeHtml(p.name)}</strong>
+            <span class="agent-health-meta">${isUp ? `${p.mem_mb} MB` : p.status}</span>
+        </span>`;
+    }).join('');
+
+    const apiHtml = pool
+        ? `<span class="agent-health-pill is-info" title="Última auditoría: ${escapeHtml(pool.timestamp || '')}">
+            🔑 Gemini APIs: <strong>${pool.active_count}/${pool.total_keys}</strong> activas
+           </span>`
+        : '';
+
+    const logHtml = lastLog
+        ? `<div class="agent-health-lastlog">🕒 Último evento nocturno: <code>${escapeHtml(lastLog.action_type || '')}</code> — ${escapeHtml((lastLog.message || '').slice(0, 120))}</div>`
+        : '';
+
+    bar.innerHTML = `
+        <div class="agent-health-pills-row">
+            ${pm2Pills || '<span class="agent-health-pill">PM2 no consultable</span>'}
+            ${apiHtml}
+        </div>
+        ${logHtml}
+    `;
+}
+
 function renderActionCard(act, isPending) {
     const catIcons = {
         'IDENTITY': '👤 Identidad',
@@ -97,11 +137,13 @@ function renderActionCard(act, isPending) {
         'ORGANIZATION': '📁 Organización',
         'ROUTINE': '⚙️ Rutina',
         'OPS_ALERT': '🚨 Alerta Operativa',
-        'SYSTEM_UPDATE': '📦 Actualización Sistema'
+        'SYSTEM_UPDATE': '📦 Actualización Sistema',
+        'MODEL_UPGRADE': '🚀 Nuevo Modelo Gemini'
     };
     const catLabel = catIcons[act.category] || act.category || 'Acción';
 
     const riskBadges = {
+        'LOW': '<span class="agent-badge badge-routine">🟢 Bajo</span>',
         'ROUTINE_AUTO': '<span class="agent-badge badge-routine">🟢 Rutina Auto</span>',
         'MEDIUM': '<span class="agent-badge badge-medium">🟡 Riesgo Medio</span>',
         'HIGH_CANONICAL': '<span class="agent-badge badge-canonical">🔴 Canónico / Identidad</span>',
@@ -110,9 +152,11 @@ function renderActionCard(act, isPending) {
     const riskBadge = riskBadges[act.risk_level] || `<span class="agent-badge">${act.risk_level || ''}</span>`;
 
     const statusBadges = {
-        'PENDING': '<span class="status-badge badge-pending">⏳ Esperando Aprobación</span>',
-        'APPROVED': '<span class="status-badge badge-approved">✅ Aprobado</span>',
-        'REJECTED': '<span class="status-badge badge-rejected">❌ Rechazado</span>',
+        'PENDING': '<span class="status-badge badge-pending">⏳ Pendiente</span>',
+        'PENDING_APPROVAL': '<span class="status-badge badge-pending">⏳ Informativo / Revisar</span>',
+        'APPROVED': '<span class="status-badge badge-approved">✅ Aprobado (en cola)</span>',
+        'COMPLETED': '<span class="status-badge badge-approved">✓ Resuelto</span>',
+        'REJECTED': '<span class="status-badge badge-rejected">❌ Descartado</span>',
         'EXPLAIN_REQUESTED': '<span class="status-badge badge-explain">💡 Explicación Solicitada</span>',
         'UNDER_REVIEW': '<span class="status-badge badge-review">🔍 En Revisión</span>',
         'AUTO_EXECUTED': '<span class="status-badge badge-auto">⚡ Auto-Ejecutado</span>',
@@ -123,6 +167,58 @@ function renderActionCard(act, isPending) {
     const dateStr = act.updated_at ? new Date(act.updated_at).toLocaleString('es-MX', { dateStyle: 'short', timeStyle: 'short' }) : '';
     const diffBlock = act.diff_or_code ? `<pre class="agent-code-block"><code>${escapeHtml(act.diff_or_code)}</code></pre>` : '';
     const feedbackBlock = act.user_feedback ? `<div class="agent-feedback-preview"><b>Tu nota:</b> ${escapeHtml(act.user_feedback)}</div>` : '';
+
+    const isManualAlert = ['SYSTEM_UPDATE', 'MODEL_UPGRADE', 'OPS_ALERT'].includes(act.category);
+    let controlsHtml = '';
+    if (isPending) {
+        if (isManualAlert) {
+            const copyCmdBtn = act.diff_or_code
+                ? `<button class="btn-agent-action btn-explain" onclick="window.copyAgentCommand('${act.id}')" title="Copiar comando al portapapeles">📋 Copiar Comando</button>`
+                : '';
+            const verifyAptBtn = act.category === 'SYSTEM_UPDATE'
+                ? `<button class="btn-agent-action btn-review" onclick="handleActionDecision('${act.id}', 'verify_updates')" title="Comprobar si aún hay paquetes pendientes en apt">🔄 Verificar apt</button>`
+                : '';
+            controlsHtml = `
+                <div class="agent-card-controls">
+                    <div class="agent-feedback-input-wrapper">
+                        <input type="text" id="feedback-${act.id}" class="agent-feedback-input" placeholder="Nota opcional (ej: actualizado manualmente)...">
+                    </div>
+                    <div class="agent-btn-group">
+                        ${copyCmdBtn}
+                        ${verifyAptBtn}
+                        <button class="btn-agent-action btn-approve" onclick="handleActionDecision('${act.id}', 'complete')" title="Marcar esta alerta como ya atendida">
+                            ✓ Marcar Resuelto
+                        </button>
+                        <button class="btn-agent-action btn-reject" onclick="handleActionDecision('${act.id}', 'reject')" title="Descartar aviso">
+                            ❌ Descartar
+                        </button>
+                    </div>
+                </div>
+            `;
+        } else {
+            controlsHtml = `
+                <div class="agent-card-controls">
+                    <div class="agent-feedback-input-wrapper">
+                        <input type="text" id="feedback-${act.id}" class="agent-feedback-input" placeholder="Comentario o instrucción adicional (opcional)...">
+                    </div>
+                    <div class="agent-btn-group">
+                        <button class="btn-agent-action btn-approve" onclick="handleActionDecision('${act.id}', 'approve')" title="Guardar aprobación para la próxima corrida de agent_nightly_ops">
+                            ✅ Aprobar
+                        </button>
+                        <button class="btn-agent-action btn-reject" onclick="handleActionDecision('${act.id}', 'reject')" title="Rechazar propuesta">
+                            ❌ Rechazar
+                        </button>
+                        <button class="btn-agent-action btn-explain" onclick="handleActionDecision('${act.id}', 'explain')" title="Pedir más detalle">
+                            💡 Explicar Mejor
+                        </button>
+                        <button class="btn-agent-action btn-review" onclick="handleActionDecision('${act.id}', 'review')" title="Dejar en revisión">
+                            🔍 En Revisión
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    }
 
     return `
         <div class="agent-action-card ${isPending ? 'card-pending' : 'card-history'}" id="card-${act.id}">
@@ -155,30 +251,22 @@ function renderActionCard(act, isPending) {
 
             ${feedbackBlock}
 
-            ${isPending ? `
-                <div class="agent-card-controls">
-                    <div class="agent-feedback-input-wrapper">
-                        <input type="text" id="feedback-${act.id}" class="agent-feedback-input" placeholder="Comentario o instrucción adicional (opcional)...">
-                    </div>
-                    <div class="agent-btn-group">
-                        <button class="btn-agent-action btn-approve" onclick="handleActionDecision('${act.id}', 'approve')" title="Autorizar ejecución inmediata">
-                            ✅ Aprobar
-                        </button>
-                        <button class="btn-agent-action btn-reject" onclick="handleActionDecision('${act.id}', 'reject')" title="Rechazar y aprender de la negativa">
-                            ❌ Rechazar
-                        </button>
-                        <button class="btn-agent-action btn-explain" onclick="handleActionDecision('${act.id}', 'explain')" title="Pedir que desglose o justifique mejor">
-                            💡 Explicar Mejor
-                        </button>
-                        <button class="btn-agent-action btn-review" onclick="handleActionDecision('${act.id}', 'review')" title="Marcar para revisión más profunda">
-                            🔍 Requiere Revisión
-                        </button>
-                    </div>
-                </div>
-            ` : ''}
+            ${controlsHtml}
         </div>
     `;
 }
+
+window.copyAgentCommand = function(actionId) {
+    const card = document.getElementById(`card-${actionId}`);
+    const codeEl = card ? card.querySelector('.agent-code-block code') : null;
+    if (!codeEl) return;
+    const text = codeEl.textContent.trim();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            showAgentNotification(`Comando copiado: ${text}`, 'info');
+        });
+    }
+};
 
 async function handleActionDecision(actionId, decisionType) {
     const feedbackInput = document.getElementById(`feedback-${actionId}`);
@@ -205,11 +293,13 @@ async function handleActionDecision(actionId, decisionType) {
         if (!res.ok || !data.success) throw new Error(data.error || 'Error al procesar acción');
 
         let undoHtml = '';
-        if (decisionType === 'approve' || decisionType === 'reject') {
+        if (decisionType === 'approve' || decisionType === 'reject' || decisionType === 'complete') {
             undoHtml = ` <a href="javascript:void(0)" onclick="handleActionDecision('${actionId}', 'review')" style="color: #38bdf8; text-decoration: underline; margin-left: 8px; font-weight: bold;">[Deshacer]</a>`;
         }
-        showAgentNotification(`Acción ${actionId} marcada como ${data.new_status}.${undoHtml}`, 'success');
-        // Recargar datos
+        const msgText = decisionType === 'verify_updates'
+            ? (data.new_status === 'COMPLETED' ? '✅ 0 actualizaciones pendientes: alerta cerrada.' : `ℹ️ Siguen pendientes paquetes (${data.title || ''}).`)
+            : `Acción ${actionId} marcada como ${data.new_status}.${undoHtml}`;
+        showAgentNotification(msgText, 'success');
         loadAgentActions();
     } catch (err) {
         showAgentNotification('Error: ' + err.message, 'error');
@@ -232,7 +322,6 @@ async function triggerManualScan() {
         const data = await res.json();
         showAgentNotification(data.message || 'Escaneo iniciado en segundo plano', 'info');
         
-        // Esperar 2 segundos y refrescar
         setTimeout(() => {
             loadAgentActions();
             if (btn) {

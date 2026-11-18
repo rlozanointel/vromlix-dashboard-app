@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261117_1830">
+    <link rel="stylesheet" href="style.css?v=20261117_1940">
 </head>
 <body>
     <div class="dashboard-container">
@@ -1422,10 +1422,18 @@
                             <!-- CAJÓN DE LLAMADAS GRABADAS Y TRANSCRIPCIONES -->
                             <details class="wa-recordings-drawer" id="wa-recordings-drawer">
                                 <summary class="wa-recordings-summary">
-                                    <span>🎙️ Llamadas y Grabaciones en Linux</span>
+                                    <span>🎙️ Grabaciones & Transcripciones (Celular + Linux)</span>
                                     <span class="wa-recordings-count" id="wa-recordings-count">0</span>
                                 </summary>
                                 <div class="wa-recordings-body">
+                                    <div class="wa-rec-toolbar">
+                                        <div class="wa-rec-chips">
+                                            <button type="button" class="wa-rec-chip active" data-rec-filter="all" onclick="window.waFilterRecordings('all')">Todas</button>
+                                            <button type="button" class="wa-rec-chip" data-rec-filter="calls" onclick="window.waFilterRecordings('calls')">📞 Llamadas Linux</button>
+                                            <button type="button" class="wa-rec-chip" data-rec-filter="uploads" onclick="window.waFilterRecordings('uploads')">🎙️ Celular</button>
+                                        </div>
+                                        <input type="text" id="wa-rec-search" class="wa-rec-search" placeholder="🔍 Filtrar por nombre o fecha..." oninput="window.waSearchRecordings(this.value)">
+                                    </div>
                                     <div id="wa-recordings-list" class="wa-recordings-list">
                                         <div class="wa-loading-msg">Cargando grabaciones...</div>
                                     </div>
@@ -1444,15 +1452,15 @@
                         </div>
                     </div>
                 </section>
-                <!-- GRABADORA DE REUNIONES & INGESTA AUDIO (FOSSIFY) -->
+                <!-- SUBIDA DIRECTA DE AUDIOS DEL CELULAR (VOICE RECORDER) -->
                 <section class="fossify-comms-section">
                     <div class="section-card">
                         <div class="card-header">
                             <div class="header-title-group">
                                 <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
                                 <div>
-                                    <h2>Grabadora Fossify & Subida de Audios</h2>
-                                    <p class="subtitle-text">Sube grabaciones largas (.m4a / .opus) para transcripción automática con Gemini/Whisper</p>
+                                    <h2>Subir Audios del Celular (Voice Recorder)</h2>
+                                    <p class="subtitle-text">Se guardan junto a las grabaciones de Linux para transcripción automática con Gemini/Whisper</p>
                                 </div>
                             </div>
                         </div>
@@ -1461,28 +1469,26 @@
                     <div class="upload-audio-zone" id="upload-audio-zone">
                         <input type="file" id="audio-file-input" accept="audio/*" style="display: none;" onchange="window.handleAudioFileSelected(this)">
                         <button class="btn-primary" style="padding: 10px 20px; font-size: 0.95rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;" onclick="document.getElementById('audio-file-input').click()">
-                            📁 Subir Audio de Reunión (.m4a / .opus)
+                            📁 Subir Audio (.m4a / .opus / .wav)
                         </button>
                         <span id="audio-upload-status" class="audio-status-label" style="margin-top: 6px;">Listo para procesar grabaciones de cualquier duración</span>
                     </div>
-                    <details class="fossify-tips-drawer" style="margin-top: 12px; font-size: 0.82rem; color: var(--text-muted);">
-                        <summary style="cursor: pointer; font-weight: 600;">💡 Recordatorio rápido de flujo móvil (Fossify & Telegram)</summary>
-                        <p style="margin-top: 6px; line-height: 1.5;">
-                            En celular: Grabar en <b>M4A</b> con Fossify (15MB/hora) ➔ Menú ⋮ ➔ <b>Compartir</b> ➔ Seleccionar <b>Bot de Telegram</b> para ingesta automática sin cables.
-                        </p>
-                    </details>
                 </div>
                         </div>
                     </div>
                 </section>
             </div>
 
-            <!-- VISTA 2: IGLESIA (CLASES, ORACIONES, LIBRO DE MORMÓN & CONFERENCIA) -->
+            <!-- VISTA 2: IGLESIA (ORACIONES, CLASES, LIBRO DE MORMÓN & CONFERENCIA) -->
             <div id="view-iglesia" class="dashboard-view">
                 <!-- BARRA SELECTORA DE SUB-PESTAÑAS DE IGLESIA -->
                 <div class="mormon-subnav-bar adaptive-subnav-bar">
-                    <button class="mormon-subnav-btn active" id="btn-subview-iglesia-clases" onclick="window.switchMormonSubview('clases')">
-                        <span>⛪ Clases & Oraciones</span>
+                    <button class="mormon-subnav-btn active" id="btn-subview-iglesia-oraciones" onclick="window.switchMormonSubview('oraciones')">
+                        <span>🙏 Oraciones</span>
+                        <span class="subnav-pill-badge">Copiar</span>
+                    </button>
+                    <button class="mormon-subnav-btn" id="btn-subview-iglesia-clases" onclick="window.switchMormonSubview('clases')">
+                        <span>📚 Clases</span>
                         <span class="subnav-pill-badge">Capilla</span>
                     </button>
                     <button class="mormon-subnav-btn" id="btn-subview-escrituras" onclick="window.switchMormonSubview('escrituras')">
@@ -1495,8 +1501,29 @@
                     </button>
                 </div>
 
-                <!-- SUB-PANEL 0: CLASES DE CAPILLA & ORACIONES SUD -->
-                <div id="subview-iglesia-clases" class="subview-panel-box">
+                <!-- SUB-PANEL 0A: ORACIONES SUD -->
+                <div id="subview-iglesia-oraciones" class="subview-panel-box">
+                <!-- ORACIONES SUD -->
+                <div class="section-card prayers-card">
+                    <div class="card-header">
+                        <div class="header-title-group">
+                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/><path d="M2 12h20"/></svg>
+                            <h2>Oraciones SUD (Clic para copiar)</h2>
+                        </div>
+                        <div class="search-box">
+                            <input type="text" id="prayer-search" placeholder="Buscar oración...">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div id="prayers-list" class="prayers-grid">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- SUB-PANEL 0B: CLASES DE CAPILLA -->
+                <div id="subview-iglesia-clases" class="subview-panel-box" style="display: none;">
                 <!-- CLASES Y APUNTES -->
                 <div class="section-card classes-card">
                     <div class="card-header">
@@ -1513,24 +1540,6 @@
                         </div>
                         <div id="class-notes-container" class="class-notes-grid">
                             <!-- Cards injected dynamically -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ORACIONES SUD -->
-                <div class="section-card prayers-card">
-                    <div class="card-header">
-                        <div class="header-title-group">
-                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/><path d="M2 12h20"/></svg>
-                            <h2>Oraciones SUD (Clic para copiar)</h2>
-                        </div>
-                        <div class="search-box">
-                            <input type="text" id="prayer-search" placeholder="Buscar oración...">
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div id="prayers-list" class="prayers-grid">
-                            <!-- Loaded dynamically -->
                         </div>
                     </div>
                 </div>
@@ -1855,11 +1864,11 @@
                 <div class="mormon-subnav-bar adaptive-subnav-bar">
                     <button class="mormon-subnav-btn active" id="btn-subview-tools-chats" onclick="window.switchHerramientasSubview('chats')">
                         <span>💬 Chats Antigravity</span>
-                        <span class="subnav-pill-badge">Historial</span>
+                        <span class="subnav-pill-badge">Buscador + ID</span>
                     </button>
                     <button class="mormon-subnav-btn" id="btn-subview-tools-prompts" onclick="window.switchHerramientasSubview('prompts')">
-                        <span>📋 Prompts Maestros</span>
-                        <span class="subnav-pill-badge">10 Dominios</span>
+                        <span>📋 Prompts (Pausado)</span>
+                        <span class="subnav-pill-badge">Archivo</span>
                     </button>
                 </div>
 
@@ -1908,7 +1917,10 @@
                     <div class="card-header">
                         <div class="header-title-group">
                             <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                            <h2>Prompts de Inicialización del Sistema (10 Dominios)</h2>
+                            <div>
+                                <h2>Prompts Maestros (Archivo / En Pausa)</h2>
+                                <p class="subtitle-text">Se conservan intactos como referencia; tu flujo activo hoy es abrir chats nuevos por tema y compartir ID.</p>
+                            </div>
                         </div>
                         <div class="header-action-group" style="display: flex; gap: 8px; align-items: center;">
                             <div class="search-box">
@@ -1926,24 +1938,24 @@
 
             </div>
 
-        <!-- VISTA: INGLÉS (TRADUCTOR, ENGLISHCONNECT & ORATORIA) -->
+        <!-- VISTA: INGLÉS (ORATORIA HAMLET, TRADUCTOR & NOTAS DE VIERNES) -->
         <div id="view-traductor" class="dashboard-view">
             <div class="mormon-subnav-bar adaptive-subnav-bar">
-                <button class="mormon-subnav-btn active" id="btn-subview-ingles-traductor" onclick="window.switchInglesSubview('traductor')">
+                <button class="mormon-subnav-btn active" id="btn-subview-ingles-hamlet" onclick="window.switchInglesSubview('hamlet')">
+                    <span>🎭 Oratoria: Hamlet</span>
+                    <span class="subnav-pill-badge">4 Partes</span>
+                </button>
+                <button class="mormon-subnav-btn" id="btn-subview-ingles-traductor" onclick="window.switchInglesSubview('traductor')">
                     <span>🌐 Traductor & Fonética</span>
                     <span class="subnav-pill-badge">EN ↔ ES</span>
                 </button>
                 <button class="mormon-subnav-btn" id="btn-subview-ingles-clases" onclick="window.switchInglesSubview('clases')">
-                    <span>📘 EnglishConnect</span>
+                    <span>📘 Notas de Viernes</span>
                     <span class="subnav-pill-badge">Capilla</span>
-                </button>
-                <button class="mormon-subnav-btn" id="btn-subview-ingles-hamlet" onclick="window.switchInglesSubview('hamlet')">
-                    <span>🎭 Oratoria: Hamlet</span>
-                    <span class="subnav-pill-badge">4 Partes</span>
                 </button>
             </div>
 
-            <div id="subview-ingles-traductor" class="subview-panel-box">
+            <div id="subview-ingles-traductor" class="subview-panel-box" style="display: none;">
             <div class="section-card translator-hero-card">
                 <div class="card-header">
                     <div class="header-title-group">
@@ -2066,8 +2078,8 @@
                         <div class="header-title-group">
                             <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
                             <div>
-                                <h2>EnglishConnect — Apuntes y Vocabulario</h2>
-                                <p class="subtitle-text">Notas de clase de inglés sincronizadas desde clases_iglesia.md</p>
+                                <h2>Clases Presenciales de Viernes (Capilla)</h2>
+                                <p class="subtitle-text">Apuntes del pizarrón con los élderes sincronizados desde clases_iglesia.md</p>
                             </div>
                         </div>
                     </div>
@@ -2079,7 +2091,7 @@
                 </div>
             </div>
 
-            <div id="subview-ingles-hamlet" class="subview-panel-box" style="display: none;">
+            <div id="subview-ingles-hamlet" class="subview-panel-box">
             <!-- SECCIÓN MONÓLOGO DE HAMLET -->
             <div class="carisma-section-title" data-cat="monologos">
                 <h3>🎭 Monólogo Maestro de Oratoria: Hamlet ("To be or not to be")</h3>
@@ -2331,9 +2343,9 @@
                             <path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4.93 10.93a2 2 0 0 1 2.83 0l1.41 1.41a2 2 0 0 1-2.83 2.83l-1.41-1.41a2 2 0 0 1 0-2.83zm14.14 0a2 2 0 0 1 0 2.83l-1.41 1.41a2 2 0 0 1-2.83-2.83l1.41-1.41a2 2 0 0 1 2.83 0zM12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-8 6a8 8 0 0 1 16 0H4z"/>
                         </svg>
                         <div>
-                            <h2>Centro de Operaciones & Auditoría Nocturna (06:00 AM)</h2>
+                            <h2>Centro de Operaciones & Monitor del Sistema (Cron 03:15 AM)</h2>
                             <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">
-                                Arbitraje de decisiones, memoria continua y aprobaciones de Rogerman.
+                                Telemetría PM2 / APIs Gemini, auditoría nocturna de chats y alertas honestas de sistema.
                             </p>
                         </div>
                     </div>
@@ -2351,7 +2363,7 @@
                             <div class="agent-metric-icon">⏳</div>
                             <div class="agent-metric-info">
                                 <span class="agent-metric-val" id="badge-agent-pending">0</span>
-                                <span class="agent-metric-lbl">Aprobaciones Pendientes</span>
+                                <span class="agent-metric-lbl">Pendientes de Revisión</span>
                             </div>
                         </div>
                         <div class="agent-metric-card">
@@ -2376,6 +2388,9 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- TELEMETRÍA EN VIVO: PM2, POOL GEMINI Y ÚLTIMO EVENTO -->
+                    <div id="agent-system-health-bar" class="agent-health-bar"></div>
 
                     <!-- BANDEJA DE PROPUESTAS PENDIENTES -->
                     <div style="margin-bottom: 32px;">
@@ -2659,19 +2674,29 @@
 
     <script src="initial_data.js"></script>
     <script src="auth_gate.js"></script>
-    <script src="app.js?v=20261117_1830"></script>
-    <script src="agent_ops_view.js"></script>
+    <script src="app.js?v=20261117_1940"></script>
+    <script src="agent_ops_view.js?v=20261117_1940"></script>
     <script src="youtube_view.js?v=20261030_2245"></script>
     <script src="mormon_view.js?v=20261117_1830"></script>
     <script src="conferencia_data.js?v=20261024_1400"></script>
-    <script src="conferencia_view.js?v=20261117_1830"></script>
+    <script src="conferencia_view.js?v=20261117_1940"></script>
     <script src="pitch_view.js"></script>
-    <script src="whatsapp_view.js?v=20261113_2325"></script>
+    <script src="whatsapp_view.js?v=20261117_1940"></script>
     <script>
         if ('serviceWorker' in navigator) {
+            const hadSwController = Boolean(navigator.serviceWorker.controller);
+            let swRefreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!hadSwController || swRefreshing) return;
+                swRefreshing = true;
+                window.location.reload();
+            });
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Service Worker registrado:', reg.scope))
+                    .then(reg => {
+                        console.log('Service Worker registrado:', reg.scope);
+                        reg.update().catch(() => {});
+                    })
                     .catch(err => console.log('Error registrando Service Worker:', err));
             });
         }

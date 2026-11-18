@@ -297,23 +297,42 @@
     }
   }
 
-  function renderRecordingsList(recordings) {
+  let waAllRecordings = [];
+  let waRecFilterType = 'all';
+  let waRecSearchQuery = '';
+
+  function applyRecordingsFilter() {
     const list = document.getElementById('wa-recordings-list');
     const countBadge = document.getElementById('wa-recordings-count');
-    if (countBadge) countBadge.textContent = String((recordings || []).length);
+    const all = waAllRecordings || [];
+    if (countBadge) countBadge.textContent = String(all.length);
     if (!list) return;
 
-    if (!recordings || recordings.length === 0) {
-      list.innerHTML = '<div class="wa-loading-msg">Aún no hay llamadas grabadas desde Linux.</div>';
+    const q = (waRecSearchQuery || '').trim().toLowerCase();
+    const filtered = all.filter(rec => {
+      if (waRecFilterType === 'calls' && !rec.is_call) return false;
+      if (waRecFilterType === 'uploads' && rec.is_call) return false;
+      if (q && !(rec.filename || '').toLowerCase().includes(q)) return false;
+      return true;
+    });
+
+    if (all.length === 0) {
+      list.innerHTML = '<div class="wa-loading-msg">Aún no hay grabaciones guardadas ni audios subidos.</div>';
       return;
     }
 
-    list.innerHTML = recordings.map(rec => {
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="wa-loading-msg">Ninguna grabación coincide con el filtro seleccionado.</div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(rec => {
       const fnEnc = encodeURIComponent(rec.filename);
       const fnEsc = escHtml(rec.filename);
       const statusHtml = rec.transcribed
         ? '<span class="wa-rec-badge wa-rec-ok">✅ Transcrito</span>'
         : '<span class="wa-rec-badge wa-rec-pending">⏳ En proceso / Sin nota</span>';
+      const sourceLabel = rec.is_call ? 'Llamada Linux' : 'Celular / Subido';
       const obsLink = rec.note_path
         ? `<a class="wa-rec-action-btn" href="/api/open-note?path=${encodeURIComponent(rec.note_path)}" target="_blank" title="Abrir nota en Obsidian">🧠 Obsidian</a>`
         : '';
@@ -321,7 +340,7 @@
         <div class="wa-rec-item">
           <div class="wa-rec-meta">
             <div class="wa-rec-name">${rec.is_call ? '📞' : '🎙️'} ${fnEsc}</div>
-            <div class="wa-rec-sub">${fmt(rec.mtime)} · ${fmtBytes(rec.size_bytes)} · ${statusHtml}</div>
+            <div class="wa-rec-sub">${sourceLabel} · ${fmt(rec.mtime)} · ${fmtBytes(rec.size_bytes)} · ${statusHtml}</div>
           </div>
           <div class="wa-rec-controls">
             <audio class="wa-rec-audio" controls preload="none" src="/api/whatsapp/call-audio?file=${fnEnc}"></audio>
@@ -330,6 +349,24 @@
           </div>
         </div>`;
     }).join('');
+  }
+
+  window.waFilterRecordings = function (filterType) {
+    waRecFilterType = filterType || 'all';
+    document.querySelectorAll('.wa-rec-chip').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-rec-filter') === waRecFilterType);
+    });
+    applyRecordingsFilter();
+  };
+
+  window.waSearchRecordings = function (query) {
+    waRecSearchQuery = query || '';
+    applyRecordingsFilter();
+  };
+
+  function renderRecordingsList(recordings) {
+    waAllRecordings = recordings || [];
+    applyRecordingsFilter();
   }
 
   window.waRefreshCallRecorder = async function () {

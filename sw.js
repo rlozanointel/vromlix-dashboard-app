@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vromlix-dashboard-v21';
+const CACHE_NAME = 'vromlix-dashboard-v22';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -10,7 +10,8 @@ const ASSETS_TO_CACHE = [
   './conferencia_data.js',
   './conferencia_view.js',
   './pitch_view.js',
-  './whatsapp_view.js'
+  './whatsapp_view.js',
+  './agent_ops_view.js'
 ];
 
 self.addEventListener('install', (event) => {

@@ -2807,7 +2807,7 @@ function activateSubtabGroup(config, activeKey, saveState = true) {
 
 const INGLES_SUBTABS = {
     storageKey: 'vromlix_ingles_subview',
-    defaultKey: 'traductor',
+    defaultKey: 'hamlet',
     panels: {
         traductor: 'subview-ingles-traductor',
         clases: 'subview-ingles-clases',
