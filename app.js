@@ -2763,7 +2763,7 @@ function initChats() {
             })
             .catch(err => {
                 console.error("Error loading chats:", err);
-                container.innerHTML = '<div style="color: var(--accent-danger); font-size: 0.85rem; padding: 10px;">Error al conectar con la API de chats.</div>';
+                container.innerHTML = `<div style="color: var(--accent-danger); font-size: 0.85rem; padding: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;"><span>Error al conectar con la API de chats (requiere servidor local activo).</span><button type="button" class="btn-xs-toggle active" onclick="document.getElementById('refresh-chats-btn').click()">↻ Reintentar</button></div>`;
             });
     }
 
@@ -2825,13 +2825,11 @@ const HERRAMIENTAS_SUBTABS = {
     defaultKey: 'chats',
     panels: {
         chats: 'subview-tools-chats',
-        prompts: 'subview-tools-prompts',
-        psicologia: 'subview-tools-psicologia'
+        prompts: 'subview-tools-prompts'
     },
     buttons: {
         chats: 'btn-subview-tools-chats',
-        prompts: 'btn-subview-tools-prompts',
-        psicologia: 'btn-subview-tools-psicologia'
+        prompts: 'btn-subview-tools-prompts'
     }
 };
 
@@ -2950,7 +2948,7 @@ function initClasses() {
         renderTabs();
         renderContent();
         renderMarkdownClassSection(englishContainer, englishCls, 'Sin apuntes de EnglishConnect en clases_iglesia.md.', 'EnglishConnect • Apuntes');
-        renderMarkdownClassSection(psicologiaContainer, psychCls, 'Sin apuntes de Psicología en clases_iglesia.md.', 'Psicología BUAP • Apuntes');
+        renderMarkdownClassSection(psicologiaContainer, psychCls, 'Sin bitácora de Psicología / Terapia en clases_iglesia.md.', 'Psicología & Terapia • Bitácora');
     }
 
     function parseClassMarkdown(text) {

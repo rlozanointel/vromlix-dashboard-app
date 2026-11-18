@@ -7942,7 +7942,8 @@
 
         window.addEventListener('scroll', () => {
             const currentTab = document.querySelector('.nav-tab-btn.active');
-            const isMormonActive = currentTab && currentTab.getAttribute('data-view') === 'view-mormon';
+            const activeView = currentTab ? currentTab.getAttribute('data-view') : '';
+            const isMormonActive = !currentTab || activeView === 'view-mormon' || activeView === 'view-iglesia';
 
             if (isMormonActive && window.scrollY > 350) {
                 btn.classList.add('visible');
@@ -8304,10 +8305,17 @@
 
             if (isEditing) return;
 
-            if (e.key === '/' || ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K'))) {
+            const navBtn = document.querySelector('.nav-tab-btn.active');
+            const inIglesiaOrPortal = !navBtn || navBtn.getAttribute('data-view') === 'view-iglesia' || navBtn.getAttribute('data-view') === 'view-mormon';
+            if (!inIglesiaOrPortal) return;
+
+            const escriturasPanel = document.getElementById('subview-escrituras');
+            const conferenciaPanel = document.getElementById('subview-conferencia');
+            const isMormonSubActive = (escriturasPanel && escriturasPanel.style.display !== 'none') || (conferenciaPanel && conferenciaPanel.style.display !== 'none');
+
+            if ((e.key === '/' || ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K'))) && isMormonSubActive) {
                 e.preventDefault();
-                const escriturasPanel = document.getElementById('subview-escrituras');
-                const isConf = escriturasPanel && escriturasPanel.style.display === 'none';
+                const isConf = conferenciaPanel && conferenciaPanel.style.display !== 'none';
                 const targetInput = isConf ? document.getElementById('conf-search-input') : document.getElementById('mormon-search-input');
                 if (targetInput) {
                     targetInput.focus();

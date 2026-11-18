@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vromlix-dashboard-v20';
+const CACHE_NAME = 'vromlix-dashboard-v21';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -39,6 +39,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  if (event.request.url.includes('/api/')) return;
   event.respondWith(
     fetch(event.request)
       .then((networkResponse) => {
