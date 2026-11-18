@@ -3010,7 +3010,139 @@ function initClasses() {
             });
     }
 
+    function initEnglishNotebook() {
+        const tagSelect = document.getElementById('english-note-tag');
+        const noteInput = document.getElementById('english-note-input');
+        const saveBtn = document.getElementById('english-note-save-btn');
+        const micBtn = document.getElementById('english-note-mic-btn');
+        const scanBtn = document.getElementById('english-scan-chats-btn');
+
+        async function saveEnglishNote(customSource) {
+            if (!noteInput) return;
+            const text = noteInput.value.trim();
+            if (!text) {
+                showToast('Escribe o dicta primero tu apunte de clase.', 'warning');
+                return;
+            }
+            if (saveBtn) saveBtn.disabled = true;
+            try {
+                const res = await fetch('/api/english/notes/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        text,
+                        tag: tagSelect ? tagSelect.value : 'Pizarrón',
+                        source: customSource || 'Libreta Digital'
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    noteInput.value = '';
+                    showToast('✅ Apunte guardado en Libreta + Obsidian (YAML)', 'success');
+                    fetchClasses();
+                } else {
+                    showToast(data.error || 'No se pudo guardar el apunte', 'error');
+                }
+            } catch (e) {
+                showToast('Error guardando apunte de inglés', 'error');
+            } finally {
+                if (saveBtn) saveBtn.disabled = false;
+            }
+        }
+
+        if (saveBtn) saveBtn.addEventListener('click', () => saveEnglishNote('Libreta Digital'));
+        if (noteInput) {
+            noteInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    saveEnglishNote('Libreta Digital');
+                }
+            });
+        }
+
+        if (scanBtn) {
+            scanBtn.addEventListener('click', async () => {
+                scanBtn.disabled = true;
+                scanBtn.textContent = '⏳ Buscando...';
+                try {
+                    const res = await fetch('/api/english/notes/scan-chats', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+                    const data = await res.json();
+                    showToast(`✅ Revisión lista: +${data.added || 0} idea(s) rescatadas de tus chats`, 'success');
+                    fetchClasses();
+                } catch (e) {
+                    showToast('Error revisando chats de Antigravity', 'error');
+                } finally {
+                    scanBtn.disabled = false;
+                    scanBtn.textContent = '🔍 Buscar Ideas en Chats';
+                }
+            });
+        }
+
+        let engRecorder = null;
+        let engChunks = [];
+        let engRecording = false;
+        if (micBtn) {
+            micBtn.addEventListener('click', () => {
+                if (engRecording && engRecorder) {
+                    engRecorder.stop();
+                    return;
+                }
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    showToast('Micrófono no disponible en este navegador.', 'warning');
+                    return;
+                }
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(stream => {
+                        engChunks = [];
+                        engRecorder = new MediaRecorder(stream);
+                        engRecorder.onstart = () => {
+                            engRecording = true;
+                            micBtn.classList.add('is-recording');
+                            micBtn.textContent = '⏹️ Detener';
+                        };
+                        engRecorder.ondataavailable = (ev) => {
+                            if (ev.data && ev.data.size > 0) engChunks.push(ev.data);
+                        };
+                        engRecorder.onstop = () => {
+                            engRecording = false;
+                            micBtn.classList.remove('is-recording');
+                            micBtn.textContent = '🎙️ Transcribiendo...';
+                            stream.getTracks().forEach(t => t.stop());
+                            const blob = new Blob(engChunks, { type: 'audio/webm' });
+                            const reader = new FileReader();
+                            reader.readAsDataURL(blob);
+                            reader.onloadend = () => {
+                                fetch('/api/transcribe', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ audio: reader.result, lang: 'es-MX' })
+                                })
+                                .then(r => r.json())
+                                .then(d => {
+                                    micBtn.textContent = '🎙️ Voz';
+                                    if (d.success && d.text && noteInput) {
+                                        noteInput.value = noteInput.value ? `${noteInput.value} ${d.text}` : d.text;
+                                        noteInput.focus();
+                                        showToast('🎙️ Voz transcrita: revisa y pulsa "+ Anotar"', 'info');
+                                    } else {
+                                        showToast(d.error || 'No se entendió el audio', 'warning');
+                                    }
+                                })
+                                .catch(() => {
+                                    micBtn.textContent = '🎙️ Voz';
+                                    showToast('Error transcribiendo audio', 'error');
+                                });
+                            };
+                        };
+                        engRecorder.start();
+                    })
+                    .catch(() => showToast('Permiso de micrófono denegado.', 'warning'));
+            });
+        }
+    }
+
     fetchClasses();
+    initEnglishNotebook();
 }
 
 // ==========================================

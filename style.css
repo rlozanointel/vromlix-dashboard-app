@@ -10863,6 +10863,59 @@ summary {
     color: var(--accent-primary);
 }
 
+/* =============================================================
+   LIBRETA DIGITAL DE INGLÉS & ESCRITURAS DE CLASES
+   ============================================================= */
+.english-notebook-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+}
+
+.english-notebook-input {
+    flex: 1;
+    min-width: 220px;
+    height: 38px;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.english-notebook-input:focus {
+    border-color: var(--accent-primary);
+}
+
+.english-mic-btn {
+    padding: 7px 12px;
+    height: 38px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+}
+
+.english-mic-btn.is-recording {
+    background: rgba(239, 68, 68, 0.16);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.church-scripture-pill {
+    font-family: inherit;
+    cursor: pointer;
+    background: var(--bg-card);
+}
+
 
 
 

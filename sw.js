@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vromlix-dashboard-v22';
+const CACHE_NAME = 'vromlix-dashboard-v23';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -9,6 +9,7 @@ const ASSETS_TO_CACHE = [
   './mormon_view.js',
   './conferencia_data.js',
   './conferencia_view.js',
+  './church_classes_view.js',
   './pitch_view.js',
   './whatsapp_view.js',
   './agent_ops_view.js'

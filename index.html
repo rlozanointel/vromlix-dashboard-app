@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261117_1940">
+    <link rel="stylesheet" href="style.css?v=20261117_2145">
 </head>
 <body>
     <div class="dashboard-container">
@@ -1489,7 +1489,7 @@
                     </button>
                     <button class="mormon-subnav-btn" id="btn-subview-iglesia-clases" onclick="window.switchMormonSubview('clases')">
                         <span>📚 Clases</span>
-                        <span class="subnav-pill-badge">Capilla</span>
+                        <span class="subnav-pill-badge" id="iglesia-clases-badge">Capilla</span>
                     </button>
                     <button class="mormon-subnav-btn" id="btn-subview-escrituras" onclick="window.switchMormonSubview('escrituras')">
                         <span>📖 Libro de Mormón</span>
@@ -1522,27 +1522,88 @@
                 </div>
                 </div>
 
-                <!-- SUB-PANEL 0B: CLASES DE CAPILLA -->
+                <!-- SUB-PANEL 0B: CLASES DE CAPILLA (AUTO-WHATSAPP ESTILO YOUTUBE) -->
                 <div id="subview-iglesia-clases" class="subview-panel-box" style="display: none;">
-                <!-- CLASES Y APUNTES -->
-                <div class="section-card classes-card">
-                    <div class="card-header">
-                        <div class="header-title-group">
-                            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
-                            <h2>Apuntes y Tareas de Clases</h2>
-                        </div>
-                    </div>
-                    <div class="card-content scrollable-content" style="max-height: 550px;">
-                        <div class="tab-selectors-container">
-                            <div class="tab-selectors" id="dashboard-class-tabs">
-                                <!-- Tabs injected dynamically -->
+                    <div class="section-card classes-card">
+                        <div class="card-header">
+                            <div class="header-title-group">
+                                <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+                                <div>
+                                    <h2>Clases Dominicales (Auto-WhatsApp)</h2>
+                                    <p class="subtitle-text">Fichas semanales estilo YouTube · <span id="church-target-sunday">Próximo domingo</span> · Se archivan en Obsidian al pasar el domingo</p>
+                                </div>
+                            </div>
+                            <div class="header-action-group">
+                                <button type="button" id="church-trigger-scan-btn" class="btn-primary" style="padding: 7px 14px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; font-size: 0.84rem;" title="Leer grupos de WhatsApp ahora">
+                                    🔄 Escanear WhatsApp
+                                </button>
                             </div>
                         </div>
-                        <div id="class-notes-container" class="class-notes-grid">
-                            <!-- Cards injected dynamically -->
+
+                        <div class="card-content">
+                            <!-- MÉTRICAS INTERACTIVAS ESTILO YOUTUBE -->
+                            <div class="agent-metrics-row" style="margin-bottom: 16px;">
+                                <div class="agent-metric-card interactive-metric active-metric-card" id="church-metric-card-unread" title="Clases activas para preparar este domingo">
+                                    <div class="agent-metric-icon">📥</div>
+                                    <div class="agent-metric-info">
+                                        <span class="agent-metric-val" id="church-metric-unread">0</span>
+                                        <span class="agent-metric-lbl">Para este Domingo</span>
+                                    </div>
+                                </div>
+                                <div class="agent-metric-card interactive-metric" id="church-metric-card-archived" title="Clases pasadas respaldadas en Obsidian">
+                                    <div class="agent-metric-icon">✅</div>
+                                    <div class="agent-metric-info">
+                                        <span class="agent-metric-val" id="church-metric-archived">0</span>
+                                        <span class="agent-metric-lbl">Vistas / Archivadas</span>
+                                    </div>
+                                </div>
+                                <div class="agent-metric-card interactive-metric" id="church-metric-card-groups" title="Agregar o pausar grupos de WhatsApp">
+                                    <div class="agent-metric-icon">📡</div>
+                                    <div class="agent-metric-info">
+                                        <span class="agent-metric-val" id="church-metric-groups">4</span>
+                                        <span class="agent-metric-lbl">Grupos Monitoreados</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FILTROS POR CLASE + BUSCADOR -->
+                            <div class="yt-toolbar-row" style="margin-bottom: 16px;">
+                                <div class="yt-filter-chips">
+                                    <button type="button" class="yt-filter-chip church-filter-chip active" data-church-filter="all">Todas</button>
+                                    <button type="button" class="yt-filter-chip church-filter-chip" data-church-filter="quorum">👔 Quórum</button>
+                                    <button type="button" class="yt-filter-chip church-filter-chip" data-church-filter="escuela_dominical">📖 Esc. Dominical</button>
+                                    <button type="button" class="yt-filter-chip church-filter-chip" data-church-filter="fundamentos">🌱 Fundamentos</button>
+                                    <button type="button" class="yt-filter-chip church-filter-chip" data-church-filter="resiliencia">✨ Resiliencia</button>
+                                </div>
+                                <div style="position: relative; flex: 1; min-width: 220px; max-width: 360px;">
+                                    <input type="text" id="church-search-input" placeholder="🔍 Filtrar clase, tema o escritura..." style="width: 100%; padding: 8px 14px 8px 32px; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-primary); font-size: 0.85rem;">
+                                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); opacity: 0.5; pointer-events: none; font-size: 0.85rem;">🔍</span>
+                                </div>
+                            </div>
+
+                            <!-- FICHAS DE CLASE -->
+                            <div id="church-cards-container">
+                                <!-- Inyectado dinámicamente por church_classes_view.js -->
+                            </div>
+
+                            <!-- RESPALDO HISTÓRICO EN CLASES_IGLESIA.MD -->
+                            <details class="executive-accordion" style="margin-top: 22px;">
+                                <summary class="executive-accordion-summary">
+                                    <div class="summary-left">
+                                        <span class="summary-icon">📜</span>
+                                        <span class="summary-title">Bitácora Histórica Anterior (clases_iglesia.md)</span>
+                                    </div>
+                                    <span class="summary-badge">Archivo</span>
+                                </summary>
+                                <div class="executive-accordion-content">
+                                    <div class="tab-selectors-container">
+                                        <div class="tab-selectors" id="dashboard-class-tabs"></div>
+                                    </div>
+                                    <div id="class-notes-container" class="class-notes-grid"></div>
+                                </div>
+                            </details>
                         </div>
                     </div>
-                </div>
                 </div>
 
                 <!-- SUB-PANEL 1: LIBRO DE MORMÓN (MNEMOTECNIA & MINISTRACIÓN) -->
@@ -2078,14 +2139,32 @@
                         <div class="header-title-group">
                             <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
                             <div>
-                                <h2>Clases Presenciales de Viernes (Capilla)</h2>
-                                <p class="subtitle-text">Apuntes del pizarrón con los élderes sincronizados desde clases_iglesia.md</p>
+                                <h2>Libreta Digital de Viernes (Capilla)</h2>
+                                <p class="subtitle-text">Apuntes por texto, nota de voz o chats de Antigravity · Sincronizado en Obsidian (YAML)</p>
                             </div>
                         </div>
+                        <div class="header-action-group" style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <a href="/api/open-note?path=%2Fmedia%2Frogerman%2F14befb81-4210-4134-a9a0-0ee76166e483%2FVault_Conocimiento%2F01_NOTAS%2FNotas_Ingles_Viernes_Capilla.md" target="_blank" class="btn-secondary" style="padding:6px 12px; font-size:0.80rem; font-weight:600; text-decoration:none; border-radius:var(--radius-md); border:1px solid var(--border-color); color:var(--text-secondary);">🧠 Obsidian</a>
+                            <button type="button" id="english-scan-chats-btn" class="btn-secondary" style="padding:6px 12px; font-size:0.80rem; font-weight:600; border-radius:var(--radius-md); border:1px solid var(--border-color); cursor:pointer;">🔍 Buscar Ideas en Chats</button>
+                        </div>
                     </div>
-                    <div class="card-content scrollable-content" style="max-height: 600px;">
-                        <div id="english-connect-container" class="class-notes-grid">
-                            <!-- Injected dynamically from /api/classes -->
+                    <div class="card-content">
+                        <!-- BARRA DE CAPTURA RÁPIDA EN LIBRETA DIGITAL -->
+                        <div class="english-notebook-toolbar">
+                            <select id="english-note-tag" class="translator-select" style="height:38px; font-size:0.82rem; padding:4px 10px;">
+                                <option value="Pizarrón">📌 Pizarrón</option>
+                                <option value="Pronunciación">🗣️ Pronunciación</option>
+                                <option value="Vocabulario">📘 Vocabulario</option>
+                                <option value="Duda / Frase">💡 Duda / Frase</option>
+                            </select>
+                            <input type="text" id="english-note-input" class="english-notebook-input" placeholder="Anota lo del pizarrón o dicta una idea por voz (ej: 'Look forward to' + verbo en -ing)..." autocomplete="off">
+                            <button type="button" id="english-note-mic-btn" class="btn-secondary english-mic-btn" title="Grabar nota de voz rápida">🎙️ Voz</button>
+                            <button type="button" id="english-note-save-btn" class="btn-primary" style="padding:8px 16px; font-size:0.84rem; font-weight:700; border-radius:var(--radius-md); cursor:pointer;">+ Anotar</button>
+                        </div>
+                        <div class="scrollable-content" style="max-height: 540px; margin-top: 14px;">
+                            <div id="english-connect-container" class="class-notes-grid">
+                                <!-- Injected dynamically from /api/classes -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2674,12 +2753,13 @@
 
     <script src="initial_data.js"></script>
     <script src="auth_gate.js"></script>
-    <script src="app.js?v=20261117_1940"></script>
+    <script src="app.js?v=20261117_2145"></script>
     <script src="agent_ops_view.js?v=20261117_1940"></script>
     <script src="youtube_view.js?v=20261030_2245"></script>
     <script src="mormon_view.js?v=20261117_1830"></script>
     <script src="conferencia_data.js?v=20261024_1400"></script>
     <script src="conferencia_view.js?v=20261117_1940"></script>
+    <script src="church_classes_view.js?v=20261117_2145"></script>
     <script src="pitch_view.js"></script>
     <script src="whatsapp_view.js?v=20261117_1940"></script>
     <script>
