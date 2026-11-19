@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gemini to Obsidian Auto-Exporter (Cero Pérdida)
 // @namespace    https://vromlix.local/
-// @version      4.2
+// @version      4.3
 // @description  Auto-scroll real hasta el turno #1 de Google Gemini, visor Markdown, interacciones numeradas y guardado directo sin duplicados en Obsidian 03_CHATS_GEMINI.
 // @author       Vromlix Core & Antigravity
 // @match        https://gemini.google.com/*
@@ -246,7 +246,15 @@
         const now = new Date();
         const dateStr = now.toISOString().split('T')[0];
         const timeStr = now.toTimeString().split(' ')[0].slice(0, 5);
-        const slug = title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').slice(0, 50) || 'chat';
+        const slug = title
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '')
+            .slice(0, 50) || 'chat';
 
         let userCount = 0;
         let modelCount = 0;
@@ -475,7 +483,7 @@
         iconSpan.textContent = '🛡️';
         const titleText = document.createElement('strong');
         titleText.style.cssText = 'color:#38bdf8;font-size:12px;letter-spacing:0.5px;';
-        titleText.textContent = 'OBSIDIAN EXPORTER v4.2';
+        titleText.textContent = 'OBSIDIAN EXPORTER v4.3';
         titleDiv.appendChild(iconSpan);
         titleDiv.appendChild(titleText);
 
