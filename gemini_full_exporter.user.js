@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name         Gemini to Obsidian Auto-Exporter (Cero Pérdida)
 // @namespace    https://vromlix.local/
-// @version      4.3
+// @version      4.4
 // @description  Auto-scroll real hasta el turno #1 de Google Gemini, visor Markdown, interacciones numeradas y guardado directo sin duplicados en Obsidian 03_CHATS_GEMINI.
 // @author       Vromlix Core & Antigravity
 // @match        https://gemini.google.com/*
+// @updateURL    http://localhost:8080/gemini_full_exporter.user.js
+// @downloadURL  http://localhost:8080/gemini_full_exporter.user.js
 // @grant        GM_xmlhttpRequest
 // @grant        GM_setClipboard
 // @connect      localhost
@@ -483,7 +485,7 @@
         iconSpan.textContent = '🛡️';
         const titleText = document.createElement('strong');
         titleText.style.cssText = 'color:#38bdf8;font-size:12px;letter-spacing:0.5px;';
-        titleText.textContent = 'OBSIDIAN EXPORTER v4.3';
+        titleText.textContent = 'OBSIDIAN EXPORTER v4.4';
         titleDiv.appendChild(iconSpan);
         titleDiv.appendChild(titleText);
 
@@ -498,7 +500,7 @@
         const statusBox = document.createElement('div');
         statusBox.id = 'gem-hud-status';
         statusBox.style.cssText = 'margin-bottom:10px;font-size:11px;color:#94a3b8;background:rgba(30,41,59,0.8);padding:8px 10px;border-radius:8px;border:1px solid rgba(56,189,248,0.2);word-break:break-word;';
-        statusBox.textContent = '🟢 Destino: 03_CHATS_GEMINI';
+        statusBox.textContent = '🟢 Listo para exportar';
         hud.appendChild(statusBox);
 
         const bodyBox = document.createElement('div');
@@ -631,7 +633,7 @@
         btnViewer.onclick = () => {
             const res = buildObsidianMarkdown();
             viewerTextarea.value = res.content;
-            viewerStats.textContent = `📊 ${res.filename} | ${res.interactionsCount} interacciones (${res.userCount} tuyas, ${res.modelCount} Gemini) | ${(res.content.length / 1024).toFixed(1)} KB | Inicio: "${res.firstPromptPreview}..."`;
+            viewerStats.textContent = `📊 ${res.filename} · ${res.interactionsCount} interacciones | Inicio: "${res.firstPromptPreview}..."`;
             viewerModal.style.display = 'flex';
             viewerTextarea.scrollTop = 0;
         };
@@ -649,7 +651,7 @@
                 await sleep(300);
 
                 const result = buildObsidianMarkdown();
-                setStatus(`💾 Guardando ${result.interactionsCount} interacciones (${(result.content.length / 1024).toFixed(1)} KB)...`, '#38bdf8');
+                setStatus(`💾 Guardando (${result.interactionsCount} int.)...`, '#38bdf8');
 
                 const saved = await saveToDashboardBridge({
                     title: result.title,
@@ -662,10 +664,10 @@
                 if (saved && saved.success) {
                     lastObsidianUri = saved.obsidian_uri || '';
                     btnOpenObs.style.display = 'block';
-                    setStatus(`🎉 ¡Obsidian 03_CHATS_GEMINI OK! (${result.interactionsCount} interacciones, ${(result.content.length / 1024).toFixed(1)} KB)`, '#10b981');
+                    setStatus(`🟢 OK · ${result.filename} (${result.interactionsCount} interacciones)`, '#10b981');
                 } else {
                     downloadBlob(result.content, result.filename);
-                    setStatus(`⚠️ Bridge apagado; descargado en Descargas (${result.interactionsCount} interacciones, ${(result.content.length / 1024).toFixed(1)} KB)`, '#f59e0b');
+                    setStatus(`⚠️ Descargado · ${result.filename} (${result.interactionsCount} interacciones)`, '#f59e0b');
                 }
             } catch (err) {
                 console.error('[Gemini Exporter] Error:', err);
@@ -679,7 +681,7 @@
             try {
                 const res = buildObsidianMarkdown();
                 copyTextSafe(res.content);
-                setStatus(`📋 ¡Copiado! (${res.interactionsCount} interacciones, ${(res.content.length / 1024).toFixed(1)} KB)`, '#10b981');
+                setStatus(`📋 Copiado (${res.interactionsCount} interacciones)`, '#10b981');
             } catch (e) {
                 setStatus(`❌ Error: ${e.message}`, '#ef4444');
             }

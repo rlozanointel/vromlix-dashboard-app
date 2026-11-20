@@ -673,10 +673,16 @@ async function addMonitoredChannel(handle, name) {
         const input = document.getElementById('yt-channel-search-input');
         if (input) input.value = '';
 
+        const chInfo = data.channel || {};
+        const catLabels = { entrevistas: 'IA & Tech', politica: 'Noticias', ciencia: 'Ciencia', visual: 'Historia/Cultura' };
+        const catLabel = catLabels[chInfo.category_ui] || chInfo.category_ui || 'IA & Tech';
+        const streamsTxt = chInfo.check_streams ? ' + En vivos' : '';
+        const msg = `Canal "${name}" agregado (${catLabel} · ${chInfo.mode || 'MODO_A_ENTREVISTA'}${streamsTxt})`;
+
         if (typeof showAgentNotification === 'function') {
-            showAgentNotification(`Canal ${name} agregado con éxito`, 'success');
+            showAgentNotification(msg, 'success');
         } else if (typeof showToast === 'function') {
-            showToast(`Canal "${name}" agregado al monitoreo`, 'success');
+            showToast(msg, 'success');
         }
         await loadYouTubeSummaries();
     } catch (err) {
