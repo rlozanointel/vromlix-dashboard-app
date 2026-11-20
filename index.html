@@ -2514,10 +2514,6 @@
                         </div>
                     </div>
                     <div class="header-action-group" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                        <div id="yt-scan-status-pill" class="yt-scan-status-pill" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.80rem; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25);" title="Estado del escaneo de canales">
-                            <span id="yt-scan-status-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
-                            <span id="yt-scan-status-text">Al día</span>
-                        </div>
                         <a href="/vromlix_yt_watcher.user.js?v=20261103_1415" target="_blank" class="btn-secondary" style="padding: 6px 12px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 5px; font-size: 0.82rem; border: 1px solid var(--border-color); color: var(--text-secondary);" title="Instalar/Actualizar script en Violentmonkey (v12.0 - Baliza Directa 100% Instantánea)">
                             ⚡ Script v12.0
                         </a>
@@ -2551,11 +2547,14 @@
                                 <span class="agent-metric-lbl">Canales Monitoreados</span>
                             </div>
                         </div>
-                        <div class="agent-metric-card">
+                        <div class="agent-metric-card" id="yt-metric-card-scan-status" style="border-color: rgba(16, 185, 129, 0.30); background: rgba(16, 185, 129, 0.06);" title="Estado y hora real del último escaneo de canales">
                             <div class="agent-metric-icon">🕙</div>
                             <div class="agent-metric-info">
-                                <span class="agent-metric-val" id="yt-metric-last-scan-val" style="color: #059669; font-size: 1.05rem; font-weight: 700;">—</span>
-                                <span class="agent-metric-lbl" id="yt-metric-last-scan-lbl">Último Escaneo</span>
+                                <span class="agent-metric-val" id="yt-metric-last-scan-val" style="color: #10b981; font-size: 1.05rem; font-weight: 700;">—</span>
+                                <span class="agent-metric-lbl" style="display: flex; align-items: center; gap: 6px;">
+                                    <span id="yt-scan-status-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block; flex-shrink: 0;"></span>
+                                    <span id="yt-metric-last-scan-lbl">Al día · Último Escaneo</span>
+                                </span>
                             </div>
                         </div>
                     </div>

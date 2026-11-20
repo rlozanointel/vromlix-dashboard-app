@@ -20,34 +20,43 @@ function setChannelsSort(mode) {
 }
 
 function updateYouTubeScanStatusUI(status) {
-    const pill = document.getElementById('yt-scan-status-pill');
+    const card = document.getElementById('yt-metric-card-scan-status');
     const dot = document.getElementById('yt-scan-status-dot');
-    const text = document.getElementById('yt-scan-status-text');
-    const scanBtn = document.getElementById('yt-trigger-scan-btn');
-    if (!pill || !dot || !text) return;
-
     const metricVal = document.getElementById('yt-metric-last-scan-val');
+    const metricLbl = document.getElementById('yt-metric-last-scan-lbl');
+    const scanBtn = document.getElementById('yt-trigger-scan-btn');
+    if (!metricVal) return;
 
     if (status && status.is_scanning) {
-        pill.style.background = 'rgba(245, 158, 11, 0.14)';
-        pill.style.color = '#f59e0b';
-        pill.style.borderColor = 'rgba(245, 158, 11, 0.35)';
-        dot.style.background = '#f59e0b';
-        dot.style.animation = 'statusDotPulse 1.4s ease-in-out infinite';
-        text.textContent = 'Escaneando...';
-        if (metricVal) metricVal.textContent = 'Escaneando...';
+        if (card) {
+            card.style.borderColor = 'rgba(245, 158, 11, 0.45)';
+            card.style.background = 'rgba(245, 158, 11, 0.10)';
+        }
+        if (dot) {
+            dot.style.background = '#f59e0b';
+            dot.style.animation = 'statusDotPulse 1.4s ease-in-out infinite';
+        }
+        metricVal.style.color = '#f59e0b';
+        metricVal.textContent = 'Escaneando...';
+        if (metricLbl) metricLbl.textContent = 'Buscando videos nuevos';
         if (scanBtn) {
             scanBtn.disabled = true;
             scanBtn.innerHTML = '⏳ Escaneando...';
         }
     } else {
-        pill.style.background = 'rgba(16, 185, 129, 0.12)';
-        pill.style.color = '#10b981';
-        pill.style.borderColor = 'rgba(16, 185, 129, 0.25)';
-        dot.style.background = '#10b981';
-        dot.style.animation = 'none';
-        text.textContent = (status && status.status_text) ? status.status_text : ((status && status.completed_time) ? `Al día · ${status.completed_time}` : 'Al día');
-        if (metricVal) metricVal.textContent = (status && status.completed_time) ? status.completed_time : 'Al día';
+        if (card) {
+            card.style.borderColor = 'rgba(16, 185, 129, 0.30)';
+            card.style.background = 'rgba(16, 185, 129, 0.06)';
+        }
+        if (dot) {
+            dot.style.background = '#10b981';
+            dot.style.animation = 'none';
+        }
+        metricVal.style.color = '#10b981';
+        const baseTime = (status && status.completed_time) ? status.completed_time : 'Al día';
+        const extra = (status && status.new_videos_count > 0) ? ` (+${status.new_videos_count})` : '';
+        metricVal.textContent = `${baseTime}${extra}`;
+        if (metricLbl) metricLbl.textContent = 'Al día · Último Escaneo';
         if (scanBtn) {
             scanBtn.disabled = false;
             scanBtn.innerHTML = '🔄 Escanear';
