@@ -26,6 +26,8 @@ function updateYouTubeScanStatusUI(status) {
     const scanBtn = document.getElementById('yt-trigger-scan-btn');
     if (!pill || !dot || !text) return;
 
+    const metricVal = document.getElementById('yt-metric-last-scan-val');
+
     if (status && status.is_scanning) {
         pill.style.background = 'rgba(245, 158, 11, 0.14)';
         pill.style.color = '#f59e0b';
@@ -33,6 +35,7 @@ function updateYouTubeScanStatusUI(status) {
         dot.style.background = '#f59e0b';
         dot.style.animation = 'statusDotPulse 1.4s ease-in-out infinite';
         text.textContent = 'Escaneando...';
+        if (metricVal) metricVal.textContent = 'Escaneando...';
         if (scanBtn) {
             scanBtn.disabled = true;
             scanBtn.innerHTML = '⏳ Escaneando...';
@@ -44,6 +47,7 @@ function updateYouTubeScanStatusUI(status) {
         dot.style.background = '#10b981';
         dot.style.animation = 'none';
         text.textContent = (status && status.status_text) ? status.status_text : ((status && status.completed_time) ? `Al día · ${status.completed_time}` : 'Al día');
+        if (metricVal) metricVal.textContent = (status && status.completed_time) ? status.completed_time : 'Al día';
         if (scanBtn) {
             scanBtn.disabled = false;
             scanBtn.innerHTML = '🔄 Escanear';
@@ -301,7 +305,7 @@ function renderYouTubeView() {
                 <div class="agent-empty-state">
                     <div class="empty-icon">🎬</div>
                     <h3>Bandeja de YouTube al Día</h3>
-                    <p>No tienes resúmenes pendientes en esta categoría. El próximo corte automático se ejecutará a las <b>10:00 AM (CDMX)</b>, o puedes pegar cualquier enlace arriba.</p>
+                    <p>No tienes resúmenes pendientes en esta categoría. Puedes pulsar <b>🔄 Escanear</b> o pegar cualquier enlace arriba.</p>
                 </div>
             `;
         } else {
