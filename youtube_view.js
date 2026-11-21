@@ -266,7 +266,7 @@ async function loadYouTubeSummaries() {
     if (!container) return;
 
     try {
-        const res = await fetch('/api/youtube/summaries');
+        const res = await fetch('/api/youtube/summaries', { cache: 'no-store' });
         if (!res.ok) throw new Error('No se pudo cargar /api/youtube/summaries');
         const data = await res.json();
 
@@ -613,8 +613,7 @@ function renderMonitoredChannelsGrid() {
 
         return `
         <div class="yt-channel-item" id="yt-channel-card-${ch.handle.replace(/[^a-zA-Z0-9]/g, '')}">
-            <div class="yt-ch-num">#${idx + 1}</div>
-            <div class="yt-ch-info">
+            <div class="yt-ch-info" style="min-width: 0;">
                 <div class="yt-ch-name">${ch.name}</div>
                 <div class="yt-ch-handle">
                     <a href="${chUrl}" target="_blank" rel="noopener" style="color: var(--accent-primary); text-decoration: none;">${handleLabel}</a> 
@@ -727,7 +726,18 @@ async function searchNewYouTubeChannel() {
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
 
-        const itemsHtml = candidates.map(c => `
+        const existingHandles = new Set(
+            (ytChannelsCache || []).map(ch => String(ch.handle || '').trim().toLowerCase())
+        );
+
+        const itemsHtml = candidates.map(c => {
+            const normHandle = String(c.handle || '').trim().toLowerCase();
+            const isAdded = existingHandles.has(normHandle);
+            const actionHtml = isAdded
+                ? `<span style="padding: 4px 10px; font-size: 0.78rem; font-weight: 600; border-radius: var(--radius-sm); background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.35); white-space: nowrap; cursor: default;">✓ Agregado</span>`
+                : `<button type="button" class="btn-primary yt-add-channel-btn" style="padding: 4px 10px; font-size: 0.78rem; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; white-space: nowrap;" data-handle="${_escAttr(c.handle)}" data-name="${_escAttr(c.name)}" onclick="addMonitoredChannel(this)">+ Agregar</button>`;
+
+            return `
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 6px; gap: 8px;">
                 <div style="min-width: 0; flex: 1;">
                     <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${_escAttr(c.name)}</div>
@@ -735,11 +745,9 @@ async function searchNewYouTubeChannel() {
                         <b>${_escAttr(c.handle)}</b> ${c.sample_title ? `· "${_escAttr(c.sample_title)}"` : ''}
                     </div>
                 </div>
-                <button type="button" class="btn-primary yt-add-channel-btn" style="padding: 4px 10px; font-size: 0.78rem; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; white-space: nowrap;" data-handle="${_escAttr(c.handle)}" data-name="${_escAttr(c.name)}" onclick="addMonitoredChannel(this)">
-                    + Agregar
-                </button>
-            </div>
-        `).join('');
+                ${actionHtml}
+            </div>`;
+        }).join('');
 
         container.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">
@@ -794,8 +802,21 @@ async function addMonitoredChannel(btnOrHandle, optName) {
         const streamsTxt = chInfo.check_streams ? ' + En vivos' : '';
         const msg = `✅ Canal "${name}" agregado (${catLabel} · ${chInfo.mode || 'MODO_A_ENTREVISTA'}${streamsTxt})`;
 
-        // Mostrar el canal recién agregado en primera posición (#1)
+        // Actualización optimista inmediata en memoria para reflejarse al instante en tiempo real
+        if (chInfo.handle) {
+            const normNew = String(chInfo.handle).trim().toLowerCase();
+            ytChannelsCache = [
+                chInfo,
+                ...(ytChannelsCache || []).filter(c => String(c.handle || '').trim().toLowerCase() !== normNew)
+            ];
+            const badgeChannels = document.getElementById('yt-metric-channels');
+            if (badgeChannels) badgeChannels.textContent = data.total ?? ytChannelsCache.length;
+        }
         ytChannelsSort = 'recent';
+        if (ytCurrentFilter === 'channels_list') {
+            renderYouTubeView();
+        }
+
         if (typeof showToast === 'function') {
             showToast(msg, 'success');
         } else if (typeof showAgentNotification === 'function') {
