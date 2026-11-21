@@ -720,15 +720,22 @@ async function searchNewYouTubeChannel() {
             return;
         }
 
+        const _escAttr = (s) => String(s || '')
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+
         const itemsHtml = candidates.map(c => `
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 6px; gap: 8px;">
                 <div style="min-width: 0; flex: 1;">
-                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${c.name}</div>
+                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${_escAttr(c.name)}</div>
                     <div style="font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        <b>${c.handle}</b> ${c.sample_title ? `· "${c.sample_title}"` : ''}
+                        <b>${_escAttr(c.handle)}</b> ${c.sample_title ? `· "${_escAttr(c.sample_title)}"` : ''}
                     </div>
                 </div>
-                <button class="btn-primary" style="padding: 4px 10px; font-size: 0.78rem; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; white-space: nowrap;" onclick="addMonitoredChannel('${c.handle}', '${c.name.replace(/'/g, "\\'")}')">
+                <button type="button" class="btn-primary yt-add-channel-btn" style="padding: 4px 10px; font-size: 0.78rem; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; white-space: nowrap;" data-handle="${_escAttr(c.handle)}" data-name="${_escAttr(c.name)}" onclick="addMonitoredChannel(this)">
                     + Agregar
                 </button>
             </div>
@@ -751,7 +758,22 @@ async function searchNewYouTubeChannel() {
     }
 }
 
-async function addMonitoredChannel(handle, name) {
+let ytAddingChannel = false;
+
+async function addMonitoredChannel(btnOrHandle, optName) {
+    if (ytAddingChannel) return;
+    const isBtn = btnOrHandle && typeof btnOrHandle === 'object' && btnOrHandle.dataset;
+    const btn = isBtn ? btnOrHandle : null;
+    const handle = isBtn ? btn.dataset.handle : btnOrHandle;
+    const name = isBtn ? btn.dataset.name : (optName || handle);
+    if (!handle) return;
+
+    ytAddingChannel = true;
+    if (btn) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Agregando...';
+    }
+
     try {
         const res = await fetch('/api/youtube/channels/add', {
             method: 'POST',
@@ -770,20 +792,28 @@ async function addMonitoredChannel(handle, name) {
         const catLabels = { entrevistas: 'IA & Tech', politica: 'Noticias', ciencia: 'Ciencia', visual: 'Historia/Cultura' };
         const catLabel = catLabels[chInfo.category_ui] || chInfo.category_ui || 'IA & Tech';
         const streamsTxt = chInfo.check_streams ? ' + En vivos' : '';
-        const msg = `Canal "${name}" agregado (${catLabel} · ${chInfo.mode || 'MODO_A_ENTREVISTA'}${streamsTxt})`;
+        const msg = `✅ Canal "${name}" agregado (${catLabel} · ${chInfo.mode || 'MODO_A_ENTREVISTA'}${streamsTxt})`;
 
-        if (typeof showAgentNotification === 'function') {
-            showAgentNotification(msg, 'success');
-        } else if (typeof showToast === 'function') {
+        // Mostrar el canal recién agregado en primera posición (#1)
+        ytChannelsSort = 'recent';
+        if (typeof showToast === 'function') {
             showToast(msg, 'success');
+        } else if (typeof showAgentNotification === 'function') {
+            showAgentNotification(msg, 'success');
         }
         await loadYouTubeSummaries();
     } catch (err) {
+        if (btn) {
+            btn.disabled = false;
+            btn.textContent = '+ Agregar';
+        }
         if (typeof showToast === 'function') {
             showToast(err.message, 'error');
         } else {
             console.error('Error:', err);
         }
+    } finally {
+        ytAddingChannel = false;
     }
 }
 
