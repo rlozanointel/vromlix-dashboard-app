@@ -2584,6 +2584,24 @@
                         </div>
                     </div>
 
+                    <!-- ALERTA DISCRETA DE AUDITORÍA (SOLO VISIBLE SI HAY FALLOS) -->
+                    <div id="yt-audit-alert-banner" style="display: none; margin-bottom: 14px; padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(245, 158, 11, 0.45); background: rgba(245, 158, 11, 0.08); align-items: flex-start; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 240px;">
+                            <div id="yt-audit-alert-title" style="font-weight: 700; font-size: 0.9rem; color: #f59e0b; margin-bottom: 6px;">
+                                ⚠️ Auditoría del escaneo
+                            </div>
+                            <ul id="yt-audit-alert-list" style="margin: 0; padding-left: 18px; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.45;"></ul>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                            <button id="yt-audit-copy-btn" class="btn-secondary" style="padding: 5px 10px; border-radius: var(--radius-md); font-size: 0.78rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border-color);" title="Copiar reporte para revisarlo en Antigravity">
+                                📋 Copiar
+                            </button>
+                            <button id="yt-audit-dismiss-btn" class="btn-secondary" style="padding: 5px 10px; border-radius: var(--radius-md); font-size: 0.78rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border-color);" title="Ocultar alerta una vez resuelta">
+                                ✓ Descartar
+                            </button>
+                        </div>
+                    </div>
+
                     <!-- LISTA DE FICHAS EJECUTIVAS -->
                     <div id="yt-cards-container">
                         <!-- Inyectado dinámicamente por youtube_view.js -->

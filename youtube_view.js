@@ -19,12 +19,17 @@ function setChannelsSort(mode) {
     renderYouTubeView();
 }
 
+let ytLastAuditWarnings = [];
+
 function updateYouTubeScanStatusUI(status) {
     const card = document.getElementById('yt-metric-card-scan-status');
     const dot = document.getElementById('yt-scan-status-dot');
     const metricVal = document.getElementById('yt-metric-last-scan-val');
     const metricLbl = document.getElementById('yt-metric-last-scan-lbl');
     const scanBtn = document.getElementById('yt-trigger-scan-btn');
+    const alertBanner = document.getElementById('yt-audit-alert-banner');
+    const alertTitle = document.getElementById('yt-audit-alert-title');
+    const alertList = document.getElementById('yt-audit-alert-list');
     if (!metricVal) return;
 
     if (status && status.is_scanning) {
@@ -43,6 +48,46 @@ function updateYouTubeScanStatusUI(status) {
             scanBtn.disabled = true;
             scanBtn.innerHTML = '⏳ Escaneando...';
         }
+        if (alertBanner) alertBanner.style.display = 'none';
+        return;
+    }
+
+    const baseTime = (status && status.completed_time) ? status.completed_time : 'Al día';
+    const extra = (status && status.new_videos_count > 0) ? ` (+${status.new_videos_count})` : '';
+    const warnings = (status && Array.isArray(status.audit_warnings)) ? status.audit_warnings : [];
+    ytLastAuditWarnings = warnings;
+
+    if (warnings.length > 0) {
+        if (card) {
+            card.style.borderColor = 'rgba(245, 158, 11, 0.45)';
+            card.style.background = 'rgba(245, 158, 11, 0.10)';
+        }
+        if (dot) {
+            dot.style.background = '#f59e0b';
+            dot.style.animation = 'none';
+        }
+        metricVal.style.color = '#f59e0b';
+        metricVal.textContent = `⚠️ ${warnings.length} alerta${warnings.length > 1 ? 's' : ''}`;
+        if (metricLbl) metricLbl.textContent = `${baseTime}${extra} · Revisar`;
+        if (alertBanner && alertList) {
+            if (alertTitle) {
+                alertTitle.textContent = `⚠️ Auditoría post-escaneo: ${warnings.length} alerta${warnings.length > 1 ? 's' : ''} detectada${warnings.length > 1 ? 's' : ''}`;
+            }
+            alertList.innerHTML = '';
+            const maxVisible = 6;
+            warnings.slice(0, maxVisible).forEach(msg => {
+                const li = document.createElement('li');
+                li.textContent = msg;
+                alertList.appendChild(li);
+            });
+            if (warnings.length > maxVisible) {
+                const liMore = document.createElement('li');
+                liMore.style.opacity = '0.8';
+                liMore.textContent = `... y ${warnings.length - maxVisible} alerta(s) más`;
+                alertList.appendChild(liMore);
+            }
+            alertBanner.style.display = 'flex';
+        }
     } else {
         if (card) {
             card.style.borderColor = 'rgba(16, 185, 129, 0.30)';
@@ -53,14 +98,40 @@ function updateYouTubeScanStatusUI(status) {
             dot.style.animation = 'none';
         }
         metricVal.style.color = '#10b981';
-        const baseTime = (status && status.completed_time) ? status.completed_time : 'Al día';
-        const extra = (status && status.new_videos_count > 0) ? ` (+${status.new_videos_count})` : '';
         metricVal.textContent = `${baseTime}${extra}`;
         if (metricLbl) metricLbl.textContent = 'Al día · Último Escaneo';
-        if (scanBtn) {
-            scanBtn.disabled = false;
-            scanBtn.innerHTML = '🔄 Escanear';
+        if (alertBanner) alertBanner.style.display = 'none';
+    }
+
+    if (scanBtn) {
+        scanBtn.disabled = false;
+        scanBtn.innerHTML = '🔄 Escanear';
+    }
+}
+
+async function dismissYouTubeAuditAlerts() {
+    try {
+        const res = await fetch('/api/youtube/dismiss-audit', { method: 'POST' });
+        if (!res.ok) throw new Error('No se pudo descartar la alerta');
+        const sRes = await fetch('/api/youtube/scan-status');
+        if (sRes.ok) {
+            const st = await sRes.json();
+            updateYouTubeScanStatusUI(st);
+        } else {
+            updateYouTubeScanStatusUI({ is_scanning: false, audit_warnings: [] });
         }
+    } catch (err) {
+        if (typeof showToast === 'function') showToast(err.message, 'error');
+    }
+}
+
+function copyYouTubeAuditAlerts() {
+    if (!ytLastAuditWarnings.length) return;
+    const text = `Alertas de auditoría YouTube (${ytLastAuditWarnings.length}):\n` + ytLastAuditWarnings.map(w => `- ${w}`).join('\n');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            if (typeof showToast === 'function') showToast('📋 Alertas copiadas al portapapeles', 'success');
+        }).catch(() => {});
     }
 }
 
@@ -74,6 +145,15 @@ function initYouTubeView() {
     const scanBtn = document.getElementById('yt-trigger-scan-btn');
     if (scanBtn) {
         scanBtn.addEventListener('click', triggerYouTubeChannelScan);
+    }
+
+    const auditCopyBtn = document.getElementById('yt-audit-copy-btn');
+    if (auditCopyBtn) {
+        auditCopyBtn.addEventListener('click', copyYouTubeAuditAlerts);
+    }
+    const auditDismissBtn = document.getElementById('yt-audit-dismiss-btn');
+    if (auditDismissBtn) {
+        auditDismissBtn.addEventListener('click', dismissYouTubeAuditAlerts);
     }
 
     const tabUnread = document.getElementById('yt-tab-unread');
@@ -992,12 +1072,15 @@ async function triggerYouTubeChannelScan() {
                     updateYouTubeScanStatusUI(status);
                     loadYouTubeSummaries();
                     const newCount = status.new_videos_count || 0;
+                    const warnCount = status.audit_warnings_count || 0;
                     const timeLabel = status.completed_time ? ` (${status.completed_time})` : '';
-                    const msg = newCount > 0 
-                        ? `✅ Escaneo completado: ${newCount} videos nuevos${timeLabel}` 
-                        : `✅ Todo al día: sin videos pendientes${timeLabel}`;
+                    const msg = warnCount > 0
+                        ? `⚠️ Escaneo terminado con ${warnCount} alerta(s) en auditoría${timeLabel}`
+                        : (newCount > 0
+                            ? `✅ Escaneo completado: ${newCount} videos nuevos${timeLabel}`
+                            : `✅ Todo al día: sin videos pendientes${timeLabel}`);
                     if (typeof showToast === 'function') {
-                        showToast(msg, 'success');
+                        showToast(msg, warnCount > 0 ? 'warning' : 'success');
                     }
                 } else {
                     updateYouTubeScanStatusUI(status);
