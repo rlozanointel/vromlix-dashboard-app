@@ -163,15 +163,6 @@ window.INITIAL_DASHBOARD_DATA = {
         },
         {
           "time": "",
-          "title": "Pendientes",
-          "details": "",
-          "action_items": "* Hacer cita de e.firma en el portal del SAT (incluye Contraseña Portal SAT / CIEC, Contraseña Clave Privada, Certificado .cer y Clave privada .key)\n* Revisar en Chrome acceso a cuenta de Ian Jalil\n* Llevar saco a tintorería\n* Lavandería: lavar cobijas, camisas blancas y pantalón de vestir\n* Pintar de negro mi gorra y mochila\n\n🌳 Dudas Familia & Contactos (ver Directorio_Maestro_Cumpleanos_Familia.md):\n* Rama paterna: cumpleaños de tía Martha y tío Javier Lozano Herrera; segundo apellido de tía Pina (Josefina Díaz G.) y Liz Lozano.\n* Rama materna: bebé de Olguita y Luis (nombre/fecha); hija menor de Jony (si nació tras la lista de Richy); confirmar Agustincito (09 oct), Elias/Mateo de Abi, y orden exacto Yoyis/Goyo/Lupe.\n* Hilario Uber (archivado con nota): si algún día vuelves a Los Cabos, revisar si puedes contactar/apoyar a su viuda.",
-          "completed": false,
-          "category": "negocios",
-          "is_focus": true
-        },
-        {
-          "time": "",
           "title": "Libro",
           "details": "Ideas adicionales para mi libro",
           "action_items": "* Estructurar el worldbuilding: Ciudades y estaciones orbitales conectadas a la Tierra mediante elevadores espaciales.\n* Definir el rol ecológico de la Tierra: Reserva natural protegida en recuperación vegetal y santuario silvestre.\n* Diseñar la logística de recursos: Descenso controlado por elevadores para minería estratégica/agua y minería en asteroides.\n* Redactar la sinopsis central del argumento",
@@ -1304,5 +1295,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-22 15:52:10"
+  "last_updated": "2026-11-22 17:39:15"
 };
