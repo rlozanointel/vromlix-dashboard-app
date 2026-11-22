@@ -310,17 +310,6 @@ window.INITIAL_DASHBOARD_DATA = {
   },
   "movies": [
     {
-      "Official Title": "Focker-in-Law",
-      "Spanish Title": "Los Fockers",
-      "Genres": "Comedy, Romance",
-      "Release Year": "2026",
-      "Release Date": "2026-11-21",
-      "IMDb Rating": 4.0,
-      "Vromlix Score": 40,
-      "Plot Summary": "Henry, son of Greg and Pam Focker, aims to marry Olivia, a strong-willed former hostage negotiator who appears to be his complete mismatch. To Greg's shock, stepdad Jack Byrnes takes a liking to Olivia, and her unprecedented rise into his Circle of Trust sparks chaos in the family before Jack's 80th birthday party.",
-      "IMDb Link": "https://www.imdb.com/title/tt34966140/"
-    },
-    {
       "Official Title": "Artificial",
       "Spanish Title": "Artificial",
       "Genres": "Comedy, Drama, History",
@@ -370,8 +359,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-21",
-      "IMDb Rating": 6.1,
-      "Vromlix Score": 61,
+      "IMDb Rating": 6.114,
+      "Vromlix Score": 61.1,
       "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
@@ -381,8 +370,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.73,
-      "Vromlix Score": 61.8,
+      "IMDb Rating": 7.712,
+      "Vromlix Score": 61.7,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -392,8 +381,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Thriller, Horror",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.205,
-      "Vromlix Score": 62,
+      "IMDb Rating": 6.181,
+      "Vromlix Score": 61.8,
       "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
       "IMDb Link": "https://www.imdb.com/title/tt37522541/"
     },
@@ -414,7 +403,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.501,
+      "IMDb Rating": 7.502,
       "Vromlix Score": 63.5,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
@@ -436,10 +425,21 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.856,
-      "Vromlix Score": 68.6,
+      "IMDb Rating": 6.85,
+      "Vromlix Score": 68.5,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
+    },
+    {
+      "Official Title": "Focker In-Law",
+      "Spanish Title": "Los Fockers",
+      "Genres": "Comedy, Romance",
+      "Release Year": "2026",
+      "Release Date": "2026-11-21",
+      "IMDb Rating": 7.0,
+      "Vromlix Score": 70,
+      "Plot Summary": "Henry, son of Greg and Pam Focker, aims to marry Olivia, a strong-willed former hostage negotiator who appears to be his complete mismatch. To Greg's shock, father-in-law Jack Byrnes takes a liking to Olivia, and her unprecedented rise into his Circle of Trust sparks chaos in the family before Jack's 80th birthday party.",
+      "IMDb Link": "https://www.imdb.com/title/tt34966140/"
     },
     {
       "Official Title": "Yellow Letters",
@@ -447,8 +447,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-03-05",
-      "IMDb Rating": 7.0,
-      "Vromlix Score": 70,
+      "IMDb Rating": 7.047,
+      "Vromlix Score": 70.5,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
@@ -475,17 +475,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt7526136/"
     },
     {
-      "Official Title": "The Hunger Games: Sunrise on the Reaping",
-      "Spanish Title": "Los juegos del hambre: Amanecer en la cosecha",
-      "Genres": "Science Fiction, Action, Adventure",
-      "Release Year": "2026",
-      "Release Date": "2026-11-18",
-      "IMDb Rating": 7.4,
-      "Vromlix Score": 74,
-      "Plot Summary": "Return to the world of Panem 24 years before the events of The Hunger Games, starting on the morning of the reaping of the 50th Hunger Games, also known as the Second Quarter Quell.",
-      "IMDb Link": "https://www.imdb.com/title/tt32558705/"
-    },
-    {
       "Official Title": "Burn!",
       "Spanish Title": "Queimada!",
       "Genres": "History, Drama, War",
@@ -495,6 +484,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 74.3,
       "Plot Summary": "The professional mercenary Sir William Walker instigates a slave revolt on the Caribbean island of Queimada in order to help improve the British sugar trade. Years later he is sent again to deal with the same rebels that he built up because they have seized too much power that now threatens British sugar interests.",
       "IMDb Link": "https://www.imdb.com/title/tt0064866/"
+    },
+    {
+      "Official Title": "The Hunger Games: Sunrise on the Reaping",
+      "Spanish Title": "Los juegos del hambre: Amanecer en la cosecha",
+      "Genres": "Science Fiction, Action, Adventure",
+      "Release Year": "2026",
+      "Release Date": "2026-11-18",
+      "IMDb Rating": 7.7,
+      "Vromlix Score": 77,
+      "Plot Summary": "Return to the world of Panem 24 years before Katniss Everdeen volunteers in her sister's place, commencing on the morning of the reaping of the 50th Hunger Games, also known as the Second Quarter Quell.",
+      "IMDb Link": "https://www.imdb.com/title/tt32558705/"
     },
     {
       "Official Title": "Thank You for Banking with Us",
@@ -567,7 +567,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Spanish Title": "La bola negra",
       "Genres": "Drama, War",
       "Release Year": "2026",
-      "Release Date": "2026-01-14",
+      "Release Date": "2026-09-25",
       "IMDb Rating": 7.0,
       "Vromlix Score": 82.7,
       "Plot Summary": "The intertwined lives of three men in three different eras, three lives intimately linked by sexuality and desire, pain, and legacy.",
@@ -579,8 +579,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-11-06",
-      "IMDb Rating": 8.51,
-      "Vromlix Score": 84.5,
+      "IMDb Rating": 8.4,
+      "Vromlix Score": 84,
       "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
       "IMDb Link": "https://www.imdb.com/title/tt11995650/"
     },
@@ -623,7 +623,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Horror, Action",
       "Release Year": "2026",
       "Release Date": "2026-11-03",
-      "IMDb Rating": 7.7,
+      "IMDb Rating": 7.694,
       "Vromlix Score": 87,
       "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
       "IMDb Link": "https://www.imdb.com/title/tt34384661/"
@@ -704,6 +704,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 90,
       "Plot Summary": "Episodic journey of journalist Marcello who struggles to find his place in the world, torn between the allure of Rome's elite social scene and the stifling domesticity offered by his girlfriend, all the while searching for a way to become a serious writer.",
       "IMDb Link": "https://www.imdb.com/title/tt0053779/"
+    },
+    {
+      "Official Title": "Hershey",
+      "Spanish Title": "Hershey",
+      "Genres": "Drama, History, Romance",
+      "Release Year": "2026",
+      "Release Date": "2026-11-25",
+      "IMDb Rating": 9.0,
+      "Vromlix Score": 90,
+      "Plot Summary": "Based on the life of Milton Hershey, founder of the iconic Hershey chocolate company. Milton's grit and determination to conquer the world of candy-making propel him from bankruptcy to monumental success, and the love of his life, Kitty, helps him build a legacy sweeter than any candy bar. But when Kitty falls ill, Milton’s wild optimism teeters on the edge of destruction, and she sparks an even bolder dream: to leave their fortune in the hands of America’s children in need.",
+      "IMDb Link": "https://www.imdb.com/title/tt17055444/"
     },
     {
       "Official Title": "On the Waterfront",
@@ -891,17 +902,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": null,
       "Plot Summary": null,
       "IMDb Link": "https://www.imdb.com/title/tt10868842/"
-    },
-    {
-      "Official Title": "Hershey",
-      "Spanish Title": "Hershey",
-      "Genres": "Drama, History, Romance",
-      "Release Year": "2026",
-      "Release Date": "2026-11-25",
-      "IMDb Rating": 0.0,
-      "Vromlix Score": null,
-      "Plot Summary": "Based on the life of Milton Hershey, founder of the iconic Hershey chocolate company. Milton's grit and determination to conquer the world of candy-making propel him from bankruptcy to monumental success, and the love of his life, Kitty, helps him build a legacy sweeter than any candy bar. But when Kitty falls ill, Milton’s wild optimism teeters on the edge of destruction, and she sparks an even bolder dream: to leave their fortune in the hands of America’s children in need.",
-      "IMDb Link": "https://www.imdb.com/title/tt17055444/"
     },
     {
       "Official Title": "Avengers: Doomsday",
@@ -1181,14 +1181,14 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt5555260/"
     },
     {
-      "Official Title": "Heated Rivalry",
+      "Official Title": "Heated Rivalry (Season 1)",
       "Spanish Title": "Rivalidad ardiente",
       "Current Season": 0,
       "Current Episode": 0,
       "Show Status": "Returning Series",
       "Watch Status": "Unstarted",
       "Vromlix Score": 87,
-      "Plot Summary": "Two of the biggest stars in Major League Hockey are bound by ambition, rivalry, and a magnetic pull neither of them fully understands. What begins as a secret fling between two fresh faced rookies evolves into a years-long journey of love, denial, and self-discovery. Over the next eight years, as they chase glory on the ice, they struggle to navigate their feelings for each other. Torn between the sport they live for and the love they can’t ignore, they must decide if there’s room in their fiercely competitive world for something as fragile – and powerful – as real love.",
+      "Plot Summary": "Two rival hockey stars at the top of their game face an unexpected challenge when they develop feelings for each other, complicating their careers and the sport's expectations.",
       "IMDb Link": "https://www.imdb.com/title/tt35495073/"
     },
     {
@@ -1304,5 +1304,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-22 01:40:06"
+  "last_updated": "2026-11-22 03:19:15"
 };
