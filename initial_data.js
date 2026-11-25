@@ -287,26 +287,26 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
     {
-      "Official Title": "Apocalypse Z: New World",
-      "Spanish Title": "Apocalipsis Z: Nuevo Mundo",
-      "Genres": "Action, Thriller, Horror",
-      "Release Year": "2026",
-      "Release Date": "2026-10-09",
-      "IMDb Rating": 6.172,
-      "Vromlix Score": 61.7,
-      "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
-      "IMDb Link": "https://www.imdb.com/title/tt37522541/"
-    },
-    {
       "Official Title": "The Uprising",
       "Spanish Title": "El levantamiento",
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.7,
+      "IMDb Rating": 7.697,
       "Vromlix Score": 61.7,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
+    },
+    {
+      "Official Title": "Apocalypse Z: New World",
+      "Spanish Title": "Apocalipsis Z: Nuevo Mundo",
+      "Genres": "Action, Thriller, Horror",
+      "Release Year": "2026",
+      "Release Date": "2026-10-09",
+      "IMDb Rating": 6.178,
+      "Vromlix Score": 61.8,
+      "Plot Summary": "The Canary Islands have become Europe’s last refuge following the outbreak of the TSJ virus. When a special mission sets out for the mainland in search of vital supplies, Roberto joins the team with questionable intentions. The dangerous operation turns into a desperate race for survival, and Roberto and his companions find themselves caught between hordes of infected and divided loyalties.",
+      "IMDb Link": "https://www.imdb.com/title/tt37522541/"
     },
     {
       "Official Title": "Man Overboard!",
@@ -325,7 +325,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Drama",
       "Release Year": "2026",
       "Release Date": "2026-09-28",
-      "IMDb Rating": 7.495,
+      "IMDb Rating": 7.496,
       "Vromlix Score": 63.5,
       "Plot Summary": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
       "IMDb Link": "https://www.imdb.com/title/tt31450459/"
@@ -369,8 +369,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.817,
-      "Vromlix Score": 68.2,
+      "IMDb Rating": 6.804,
+      "Vromlix Score": 68,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -380,8 +380,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-03-05",
-      "IMDb Rating": 7.047,
-      "Vromlix Score": 70.5,
+      "IMDb Rating": 7.0,
+      "Vromlix Score": 70,
       "Plot Summary": "The marriage of Derya and Aziz is under pressure after losing their jobs because of state arbitrariness and moving to Istanbul to live with Aziz's parents. They and their 13-year-old daughter Ezgi have to redefine their way of life.",
       "IMDb Link": "https://www.imdb.com/title/tt32888226/"
     },
@@ -419,6 +419,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt0064866/"
     },
     {
+      "Official Title": "Focker In-Law",
+      "Spanish Title": "Los Fockers",
+      "Genres": "Comedy, Romance",
+      "Release Year": "2026",
+      "Release Date": "2026-11-21",
+      "IMDb Rating": 7.6,
+      "Vromlix Score": 76,
+      "Plot Summary": "Henry, son of Greg and Pam Focker, aims to marry Olivia, a strong-willed former hostage negotiator who appears to be his complete mismatch. To Greg's shock, father-in-law Jack Byrnes takes a liking to Olivia, and her unprecedented rise into his Circle of Trust sparks chaos in the family before Jack's 80th birthday party.",
+      "IMDb Link": "https://www.imdb.com/title/tt34966140/"
+    },
+    {
       "Official Title": "Thank You for Banking with Us",
       "Spanish Title": "Gracias por operar con nosotros",
       "Genres": "Drama, Comedy",
@@ -428,17 +439,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 80,
       "Plot Summary": "After finding out that their father left a huge sum of money behind after his death, Mariam and Noura come up with an elaborate scheme to abscond with the money before their brother — who is legally entitled to half the inheritance — finds out about their father’s death.",
       "IMDb Link": "https://www.imdb.com/title/tt28254159/"
-    },
-    {
-      "Official Title": "Focker In-Law",
-      "Spanish Title": "Los Fockers",
-      "Genres": "Comedy, Romance",
-      "Release Year": "2026",
-      "Release Date": "2026-11-21",
-      "IMDb Rating": 8.0,
-      "Vromlix Score": 80,
-      "Plot Summary": "Henry, son of Greg and Pam Focker, aims to marry Olivia, a strong-willed former hostage negotiator who appears to be his complete mismatch. To Greg's shock, father-in-law Jack Byrnes takes a liking to Olivia, and her unprecedented rise into his Circle of Trust sparks chaos in the family before Jack's 80th birthday party.",
-      "IMDb Link": "https://www.imdb.com/title/tt34966140/"
     },
     {
       "Official Title": "Red Dawn",
@@ -512,7 +512,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-11-06",
-      "IMDb Rating": 8.399,
+      "IMDb Rating": 8.4,
       "Vromlix Score": 84,
       "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
       "IMDb Link": "https://www.imdb.com/title/tt11995650/"
@@ -556,8 +556,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Horror, Action",
       "Release Year": "2026",
       "Release Date": "2026-11-03",
-      "IMDb Rating": 7.673,
-      "Vromlix Score": 86.9,
+      "IMDb Rating": 7.664,
+      "Vromlix Score": 86.8,
       "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
       "IMDb Link": "https://www.imdb.com/title/tt34384661/"
     },
@@ -573,9 +573,20 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt0050976/"
     },
     {
+      "Official Title": "Hershey",
+      "Spanish Title": "Hershey",
+      "Genres": "Drama, History, Romance",
+      "Release Year": "2026",
+      "Release Date": "2026-11-25",
+      "IMDb Rating": 8.75,
+      "Vromlix Score": 87.5,
+      "Plot Summary": "Based on the life of Milton Hershey, founder of the iconic Hershey chocolate company. Milton's grit and determination to conquer the world of candy-making propel him from bankruptcy to monumental success, and the love of his life, Kitty, helps him build a legacy sweeter than any candy bar. But when Kitty falls ill, Milton’s wild optimism teeters on the edge of destruction, and she sparks an even bolder dream: to leave their fortune in the hands of America’s children in need.",
+      "IMDb Link": "https://www.imdb.com/title/tt17055444/"
+    },
+    {
       "Official Title": "Wildwood",
       "Spanish Title": null,
-      "Genres": "Animation, Adventure, Drama, Fantasy",
+      "Genres": "Animation, Adventure, Fantasy",
       "Release Year": "2026",
       "Release Date": "2026-10-22",
       "IMDb Rating": 8.7,
@@ -703,17 +714,6 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": 92,
       "Plot Summary": "In the midst of the Russian Revolution of 1905, the crew of the battleship Potemkin revolt against the brutal, tyrannical regime of the vessel's officers. The resulting street demonstration in Odessa brings on a police massacre.",
       "IMDb Link": "https://www.imdb.com/title/tt0015648/"
-    },
-    {
-      "Official Title": "Hershey",
-      "Spanish Title": "Hershey",
-      "Genres": "Drama, History, Romance",
-      "Release Year": "2026",
-      "Release Date": "2026-11-25",
-      "IMDb Rating": 9.333,
-      "Vromlix Score": 93.3,
-      "Plot Summary": "Based on the life of Milton Hershey, founder of the iconic Hershey chocolate company. Milton's grit and determination to conquer the world of candy-making propel him from bankruptcy to monumental success, and the love of his life, Kitty, helps him build a legacy sweeter than any candy bar. But when Kitty falls ill, Milton’s wild optimism teeters on the edge of destruction, and she sparks an even bolder dream: to leave their fortune in the hands of America’s children in need.",
-      "IMDb Link": "https://www.imdb.com/title/tt17055444/"
     },
     {
       "Official Title": "Another Day Without a Mexican",
@@ -1237,5 +1237,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-25 00:18:01"
+  "last_updated": "2026-11-25 03:16:24"
 };
