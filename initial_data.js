@@ -276,6 +276,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt27665778/"
     },
     {
+      "Official Title": "Twelve Moons",
+      "Spanish Title": null,
+      "Genres": "Drama",
+      "Release Year": "2026",
+      "Release Date": "2026-11-26",
+      "IMDb Rating": 5.7,
+      "Vromlix Score": 57,
+      "Plot Summary": "Sofia is 40, childless, with a neglectful marriage, and spiraling into chaos as her life unravels. With striking imagery and a raw central performance, the film is a haunting character study trapped in a social nightmare.",
+      "IMDb Link": "https://www.imdb.com/title/tt36590015/"
+    },
+    {
       "Official Title": "Klara and the Sun",
       "Spanish Title": "Klara y el sol",
       "Genres": "Science Fiction, Drama",
@@ -846,6 +857,17 @@ window.INITIAL_DASHBOARD_DATA = {
       "Vromlix Score": null,
       "Plot Summary": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
       "IMDb Link": "https://www.imdb.com/title/tt21357150/"
+    },
+    {
+      "Official Title": "Untitled Home Alone Film",
+      "Spanish Title": null,
+      "Genres": "Comedy",
+      "Release Year": "",
+      "Release Date": "",
+      "IMDb Rating": 0.0,
+      "Vromlix Score": null,
+      "Plot Summary": "Seventh film in the Home Alone franchise, and fourth focusing on Kevin McCallister. Plot TBA.",
+      "IMDb Link": "https://www.imdb.com/title/tt51629892/"
     }
   ],
   "series": [
@@ -1237,5 +1259,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-25 03:16:24"
+  "last_updated": "2026-11-26 00:09:09"
 };
