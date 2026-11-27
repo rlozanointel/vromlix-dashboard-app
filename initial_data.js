@@ -244,7 +244,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Un mal partido",
-      "Spanish Title": null,
+      "Spanish Title": "Un mal partido",
       "Genres": "Family, Comedy",
       "Release Year": "2026",
       "Release Date": "2026-10-08",
@@ -277,7 +277,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Twelve Moons",
-      "Spanish Title": null,
+      "Spanish Title": "Doce lunas",
       "Genres": "Drama",
       "Release Year": "2026",
       "Release Date": "2026-11-26",
@@ -343,7 +343,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Snowden",
-      "Spanish Title": null,
+      "Spanish Title": "Snowden",
       "Genres": "Drama, History, Crime, Thriller",
       "Release Year": "2016",
       "Release Date": "2016-09-15",
@@ -365,7 +365,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Motherf*ckers",
-      "Spanish Title": null,
+      "Spanish Title": "A Toda Madre",
       "Genres": "Drama, Comedy",
       "Release Year": "2026",
       "Release Date": "2026-09-17",
@@ -376,7 +376,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Animals",
-      "Spanish Title": null,
+      "Spanish Title": "Animales",
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
@@ -453,7 +453,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Red Dawn",
-      "Spanish Title": null,
+      "Spanish Title": "Rojo Amanecer",
       "Genres": "Drama, Thriller, History",
       "Release Year": "1990",
       "Release Date": "1990-10-18",
@@ -464,7 +464,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Twelve Monkeys",
-      "Spanish Title": null,
+      "Spanish Title": "12 monos",
       "Genres": "Science Fiction, Thriller, Mystery",
       "Release Year": "1995",
       "Release Date": "1995-12-29",
@@ -475,7 +475,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "The Devil's Backbone",
-      "Spanish Title": null,
+      "Spanish Title": "El espinazo del diablo",
       "Genres": "Fantasy, Drama, Horror, Thriller",
       "Release Year": "2001",
       "Release Date": "2001-04-20",
@@ -530,7 +530,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Hundreds of Beavers",
-      "Spanish Title": null,
+      "Spanish Title": "Cientos de castores",
       "Genres": "Comedy, Adventure",
       "Release Year": "2024",
       "Release Date": "2024-01-26",
@@ -541,7 +541,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "The Voice of Hind Rajab",
-      "Spanish Title": null,
+      "Spanish Title": "La voz de Hind Rajab",
       "Genres": "Drama, History",
       "Release Year": "2025",
       "Release Date": "2025-09-10",
@@ -596,7 +596,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Wildwood",
-      "Spanish Title": null,
+      "Spanish Title": "Wildwood: El bosque salvaje",
       "Genres": "Animation, Adventure, Fantasy",
       "Release Year": "2026",
       "Release Date": "2026-10-22",
@@ -618,7 +618,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "The Great Dictator",
-      "Spanish Title": null,
+      "Spanish Title": "El Gran Dictador",
       "Genres": "Comedy, War",
       "Release Year": "1940",
       "Release Date": "1940-10-15",
@@ -673,7 +673,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "NAZA",
-      "Spanish Title": null,
+      "Spanish Title": "NAZA",
       "Genres": "Documentary",
       "Release Year": "2026",
       "Release Date": "2026-09-25",
@@ -684,7 +684,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Once Upon a Time in the Middle East",
-      "Spanish Title": null,
+      "Spanish Title": "Érase una vez en Medio Oriente",
       "Genres": "Drama, War",
       "Release Year": "2026",
       "Release Date": "2026-08-08",
@@ -695,7 +695,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Pan's Labyrinth",
-      "Spanish Title": null,
+      "Spanish Title": "El laberinto del fauno",
       "Genres": "Fantasy, Drama, War",
       "Release Year": "2006",
       "Release Date": "2006-10-11",
@@ -717,7 +717,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Battleship Potemkin",
-      "Spanish Title": null,
+      "Spanish Title": "El acorazado Potemkin",
       "Genres": "Drama, History, War",
       "Release Year": "1925",
       "Release Date": "1925-12-24",
@@ -860,7 +860,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Untitled Home Alone Film",
-      "Spanish Title": null,
+      "Spanish Title": "Mi pobre angelito (Sin título)",
       "Genres": "Comedy",
       "Release Year": "",
       "Release Date": "",
@@ -873,7 +873,7 @@ window.INITIAL_DASHBOARD_DATA = {
   "series": [
     {
       "Official Title": "Georgie & Mandy's First Marriage",
-      "Spanish Title": null,
+      "Spanish Title": "Georgie y Mandy: Primer matrimonio",
       "Current Season": 2,
       "Current Episode": 8,
       "Show Status": "Returning Series",
@@ -884,7 +884,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "Lupin",
-      "Spanish Title": null,
+      "Spanish Title": "Lupin",
       "Current Season": 2,
       "Current Episode": 7,
       "Show Status": "Returning Series",
@@ -895,7 +895,7 @@ window.INITIAL_DASHBOARD_DATA = {
     },
     {
       "Official Title": "La que se avecina",
-      "Spanish Title": null,
+      "Spanish Title": "La que se avecina",
       "Current Season": 16,
       "Current Episode": 8,
       "Show Status": "Returning Series",
@@ -993,8 +993,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "IMDb Link": "https://www.imdb.com/title/tt37041010/"
     },
     {
-      "Official Title": "O Conto da Aia",
-      "Spanish Title": null,
+      "Official Title": "The Handmaid's Tale",
+      "Spanish Title": "El Cuento de La Criada",
       "Current Season": 0,
       "Current Episode": 0,
       "Show Status": "Ended",
@@ -1259,5 +1259,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-26 09:16:49"
+  "last_updated": "2026-11-26 19:55:19"
 };

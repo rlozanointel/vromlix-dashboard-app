@@ -1872,6 +1872,39 @@ function initMedia() {
         renderMedia();
     }
 
+    function copyMediaTitle(text) {
+        const fallbackCopy = () => {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            try {
+                const ok = document.execCommand('copy');
+                document.body.removeChild(ta);
+                if (ok) {
+                    showToast(`Título copiado: "${text}"`);
+                } else {
+                    showToast('Error al copiar título', 'error');
+                }
+            } catch (e) {
+                document.body.removeChild(ta);
+                console.error('Error al copiar título (fallback):', e);
+                showToast('Error al copiar título', 'error');
+            }
+        };
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`Título copiado: "${text}"`);
+            }).catch(() => fallbackCopy());
+        } else {
+            fallbackCopy();
+        }
+    }
+
     function renderMedia() {
         renderMovies(mediaData.movies);
         renderSeries(mediaData.series);
@@ -2052,34 +2085,30 @@ function initMedia() {
             }
 
             const imdbLink = movie['IMDb Link'] || '';
-            const spanishTitle = movie['Spanish Title'] || title;
-            const displayTitleHTML = (movie['Spanish Title'] && movie['Spanish Title'] !== title)
-                ? `${title} <span style="font-size: 0.78rem; font-weight: normal; opacity: 0.85; color: var(--accent-secondary);">(${movie['Spanish Title']})</span>`
-                : title;
+            const rawSpanish = (movie['Spanish Title'] || '').trim();
+            const spanishTitle = rawSpanish || title;
+            const displayTitleHTML = (rawSpanish && rawSpanish !== title)
+                ? `${escapeHTML(title)} <span style="font-size: 0.78rem; font-weight: normal; opacity: 0.85; color: var(--accent-secondary);">(${escapeHTML(rawSpanish)})</span>`
+                : escapeHTML(title);
 
             card.innerHTML = `
-                <div class="media-title" title="Haz clic para copiar en español: ${spanishTitle}">${displayTitleHTML}</div>
+                <div class="media-title" title="Haz clic para copiar en español: ${escapeHTML(spanishTitle)}">${displayTitleHTML}</div>
                 <div class="media-meta" style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 4px;">
                     <span class="media-tag" title="Fecha de estreno">${estreno}</span>
                     ${statusBadge}
-                    <span class="media-tag" style="max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="Género">${genre.split(',')[0]}</span>
+                    <span class="media-tag" style="max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="Género">${escapeHTML(genre.split(',')[0])}</span>
                 </div>
                 <div style="display: flex; justify-content: flex-end; align-items: center; margin-top: 4px;">
                     <div class="media-score">VS: <span>${score}</span></div>
                 </div>
-                ${plot ? `<div class="media-plot-overlay"><p>${plot}</p></div>` : ''}
+                ${plot ? `<div class="media-plot-overlay"><p>${escapeHTML(plot)}</p></div>` : ''}
             `;
             
             const movieTitleEl = card.querySelector('.media-title');
             if (movieTitleEl) {
                 movieTitleEl.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    navigator.clipboard.writeText(spanishTitle).then(() => {
-                        showToast(`Título copiado: "${spanishTitle}"`);
-                    }).catch(err => {
-                        console.error('Error al copiar título:', err);
-                        showToast('Error al copiar título', 'error');
-                    });
+                    copyMediaTitle(spanishTitle);
                 });
             }
 
@@ -2158,34 +2187,30 @@ function initMedia() {
                 toggleHideTitle(title);
             });
 
-            const spanishTitle = show['Spanish Title'] || title;
-            const displayTitleHTML = (show['Spanish Title'] && show['Spanish Title'] !== title)
-                ? `${title} <span style="font-size: 0.78rem; font-weight: normal; opacity: 0.85; color: var(--accent-secondary);">(${show['Spanish Title']})</span>`
-                : title;
+            const rawSpanish = (show['Spanish Title'] || '').trim();
+            const spanishTitle = rawSpanish || title;
+            const displayTitleHTML = (rawSpanish && rawSpanish !== title)
+                ? `${escapeHTML(title)} <span style="font-size: 0.78rem; font-weight: normal; opacity: 0.85; color: var(--accent-secondary);">(${escapeHTML(rawSpanish)})</span>`
+                : escapeHTML(title);
 
             card.innerHTML = `
-                <div class="media-title" title="Haz clic para copiar en español: ${spanishTitle}">${displayTitleHTML}</div>
+                <div class="media-title" title="Haz clic para copiar en español: ${escapeHTML(spanishTitle)}">${displayTitleHTML}</div>
                 <div class="media-meta" style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 4px;">
                     <span class="media-tag" style="color: var(--accent-primary);">Progreso: T${season} E${episode}</span>
-                    <span class="media-tag">${watchStatus}</span>
+                    <span class="media-tag">${escapeHTML(watchStatus)}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
-                    <div style="font-size: 0.7rem; color: hsl(220, 15%, 60%);">${showStatus}</div>
+                    <div style="font-size: 0.7rem; color: hsl(220, 15%, 60%);">${escapeHTML(showStatus)}</div>
                     <div class="media-score">VS: <span>${score}</span></div>
                 </div>
-                ${plot ? `<div class="media-plot-overlay"><p>${plot}</p></div>` : ''}
+                ${plot ? `<div class="media-plot-overlay"><p>${escapeHTML(plot)}</p></div>` : ''}
             `;
             
             const seriesTitleEl = card.querySelector('.media-title');
             if (seriesTitleEl) {
                 seriesTitleEl.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    navigator.clipboard.writeText(spanishTitle).then(() => {
-                        showToast(`Título copiado: "${spanishTitle}"`);
-                    }).catch(err => {
-                        console.error('Error al copiar título:', err);
-                        showToast('Error al copiar título', 'error');
-                    });
+                    copyMediaTitle(spanishTitle);
                 });
             }
 
