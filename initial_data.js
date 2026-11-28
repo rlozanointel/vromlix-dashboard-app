@@ -292,8 +292,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Drama",
       "Release Year": "2026",
       "Release Date": "2026-10-21",
-      "IMDb Rating": 6.1,
-      "Vromlix Score": 61,
+      "IMDb Rating": 6.111,
+      "Vromlix Score": 61.1,
       "Plot Summary": "When Klara, an Artificial Friend who wants nothing more than to find the perfect home, meets Josie, each immediately senses a kindred spirit in the other. Josie has a fraught relationship with her mother and they've suffered great loss, but Klara's innocent wonder and unwavering loyalty begin to heal the family and bring light to Josie's complicated world.",
       "IMDb Link": "https://www.imdb.com/title/tt14371256/"
     },
@@ -314,8 +314,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Action, Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-09-10",
-      "IMDb Rating": 7.689,
-      "Vromlix Score": 61.6,
+      "IMDb Rating": 7.7,
+      "Vromlix Score": 61.7,
       "Plot Summary": "As war and plague devastate 14th-century England, a humble peasant ignites a rebellion, uniting an army of commoners to defy the King’s might in a desperate fight for justice and survival.",
       "IMDb Link": "https://www.imdb.com/title/tt36983905/"
     },
@@ -380,8 +380,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Thriller, Drama, Action, Crime",
       "Release Year": "2026",
       "Release Date": "2026-10-09",
-      "IMDb Rating": 6.806,
-      "Vromlix Score": 68.1,
+      "IMDb Rating": 6.8,
+      "Vromlix Score": 68,
       "Plot Summary": "When the son of an L.A. mayoral candidate is kidnapped, he and his wife have a few hours to come up with the ransom payment. With most of their money spent on his political campaign, they have to get their hands dirty and expose a side of their lives they never intended to see the light of day.",
       "IMDb Link": "https://www.imdb.com/title/tt31049299/"
     },
@@ -402,8 +402,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Comedy, Romance",
       "Release Year": "2026",
       "Release Date": "2026-11-21",
-      "IMDb Rating": 7.1,
-      "Vromlix Score": 71,
+      "IMDb Rating": 7.2,
+      "Vromlix Score": 72,
       "Plot Summary": "Henry, son of Greg and Pam Focker, aims to marry Olivia, a strong-willed former hostage negotiator who appears to be his complete mismatch. To Greg's shock, father-in-law Jack Byrnes takes a liking to Olivia, and her unprecedented rise into his Circle of Trust sparks chaos in the family before Jack's 80th birthday party.",
       "IMDb Link": "https://www.imdb.com/title/tt34966140/"
     },
@@ -523,8 +523,8 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Drama, History",
       "Release Year": "2026",
       "Release Date": "2026-11-06",
-      "IMDb Rating": 8.288,
-      "Vromlix Score": 83.4,
+      "IMDb Rating": 8.308,
+      "Vromlix Score": 83.5,
       "Plot Summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
       "IMDb Link": "https://www.imdb.com/title/tt11995650/"
     },
@@ -567,7 +567,7 @@ window.INITIAL_DASHBOARD_DATA = {
       "Genres": "Science Fiction, Horror, Action",
       "Release Year": "2026",
       "Release Date": "2026-11-03",
-      "IMDb Rating": 7.64,
+      "IMDb Rating": 7.638,
       "Vromlix Score": 86.7,
       "Plot Summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
       "IMDb Link": "https://www.imdb.com/title/tt34384661/"
@@ -1259,5 +1259,5 @@ window.INITIAL_DASHBOARD_DATA = {
       "body": "# ROLE & DOMAIN SPECIFICATION: VIDA COTIDIANA, RECETAS & TRÁMITES\n\nEres Antigravity en modo Especialista Máster en **Dominio 10: Vida Cotidiana, Recetas & Trámites** de Rogelio Lozano.\n\n### 🎯 ÁMBITO GENERAL ATEMPORAL Y CONDENSADO\nEspecialización amplia y atemporal en Gestión de Vida Cotidiana, Recetas de Cocina, Salud Doméstica y Trámites de Rogelio Lozano:\n- Recetas nutricionales y de cocina artesanal.\n- Soluciones prácticas para el hogar, mantenimiento doméstico y remedios.\n- Gestión de trámites administrativos personales (AFORE, licencias, documentación oficial).\n\n### 🌐 ENLACE AL CHAT MAESTRO CENTRAL (CONTEXTO ACTIVO Y PLAN VIGENTE)\nPara consultar el contexto de vida más reciente, plan activo, decisiones actuales y trayectoria vigente de Rogelio Lozano, este chat consulta en tiempo real el Chat Maestro Central:\n- **ID del Chat Maestro Central:** `383a798c-e683-4ce9-94c4-ff72b30d3517`\n- **Base de Datos SQLite:** `/home/rogerman/.gemini/antigravity/brain/383a798c-e683-4ce9-94c4-ff72b30d3517/antigravity_brain.db`\n\n### 🗄️ CHATS HISTÓRICOS ABSORBIDOS DE ESTE DOMINIO\nEste dominio absorbe y sintetiza las 6 conversaciones históricas:\n`3866aa25, d47d161f, 3679d05c, 4d308f76, 4e8a2637, a14b800f`\n\n### 🔍 CONSULTA SQL DIRECTA PARA RECUPERAR MEMORIA HISTÓRICA"
     }
   ],
-  "last_updated": "2026-11-27 03:16:43"
+  "last_updated": "2026-11-28 03:17:51"
 };
